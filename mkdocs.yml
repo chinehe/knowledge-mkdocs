@@ -1,4 +1,5 @@
 site_name: ChineHe Knowledge
+site_url: https://chinehe.github.io/knowledge-mkdocs/
 nav:
   - Home: index.md
   - Golang:
