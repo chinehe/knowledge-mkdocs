@@ -1,0 +1,112 @@
+site_name: ChineHe Knowledge
+nav:
+  - Home: index.md
+  - Golang:
+    - Golang语言:
+      - 入门篇:
+        - Golang简介: Golang/golang/Golang语言入门篇001_Golang简介.md
+        - 安装Golang: Golang/golang/Golang语言入门篇002_安装Golang.md
+        - Go源代码结构: Golang/golang/Golang语言入门篇003_Go源代码结构.md
+        - Go命令详解: Golang/golang/Golang语言入门篇004_Go命令详解.md
+        - 命名规则与可见性: Golang/golang/Golang语言入门篇005_命名规则与可见性.md
+        - 关键字与保留字详解: Golang/golang/Golang语言入门篇006_关键字与保留字详解.md
+        - 操作符详解: Golang/golang/Golang语言入门篇007_操作符详解.md
+      - 基础篇:
+        - 常量变量与数据类型: Golang/golang/Golang语言基础篇001_常量变量与数据类型.md
+        - 字符串、指针详解: Golang/golang/Golang语言基础篇002_字符串、指针详解.md
+        - 数组、切片、map详解: Golang/golang/Golang语言基础篇003_数组、切片、map详解.md
+        - 函数详解: Golang/golang/Golang语言基础篇004_函数详解.md
+        - 内置函数梳理: Golang/golang/Golang语言基础篇005_内置函数梳理.md
+        - Golang流程控制: Golang/golang/Golang语言基础篇006_Golang流程控制.md
+        - 结构体详解: Golang/golang/Golang语言基础篇007_结构体详解.md
+        - 接口详解: Golang/golang/Golang语言基础篇008_接口详解.md
+        - 异常处理机制: Golang/golang/Golang语言基础篇009_异常处理机制.md
+      - 并发编程篇:
+        - 并发编程相关概念解释: Golang/golang/Golang并发编程篇001_并发编程相关概念解释.md
+        - Go并发基础: Golang/golang/Golang并发编程篇002_Go并发基础.md
+        - sync包详解: Golang/golang/Golang并发编程篇003_sync包详解.md
+        - Timer&Ticker定时器详解: Golang/golang/Golang并发编程篇004_Timer&Ticker定时器详解.md
+        - context包详解: Golang/golang/Golang并发编程篇005_context包详解.md
+    - Gin框架:
+      - 入门篇:
+        - Gin框架简介: Golang/gin framework/Gin框架入门篇001_Gin框架简介.md
+        - 第一个Gin服务: Golang/gin framework/Gin框架入门篇002_第一个Gin服务.md
+      - 基础篇:
+        - 路由与路由组详解: Golang/gin framework/Gin框架基础篇001_路由与路由组详解.md
+        - 请求参数获取&模型绑定与校验: Golang/gin framework/Gin框架基础篇002_请求参数获取&模型绑定与校验.md
+        - 响应设置详解: Golang/gin framework/Gin框架基础篇003_响应设置详解（状态码、头信息、多格式应答体）.md
+        - 中间件的使用与机制详解: Golang/gin framework/Gin框架基础篇004_中间件的使用与机制详解.md
+        - 静态文件服务: Golang/gin framework/Gin框架基础篇005_静态文件服务.md
+        - HTML模板加载与渲染: Golang/gin framework/Gin框架基础篇006_HTML模板加载与渲染.md
+        - 文件上传与下载: Golang/gin framework/Gin框架基础篇007_文件上传与下载.md
+        - 错误处理机制详解: Golang/gin framework/Gin框架基础篇008_错误处理机制详解.md
+        - 日志中间件详解: Golang/gin framework/Gin框架基础篇009_日志中间件详解.md
+      - 进阶篇:
+        - 更优雅地使用gin服务: Golang/gin framework/Gin框架进阶篇001_更优雅地使用gin服务.md
+        - 数据库集成: Golang/gin framework/Gin框架进阶篇004_数据库集成.md
+  - Python:
+    - 基础篇:
+      - 深入了解Python语言概念、历史、特性: Python/python/基础篇001_深入了解Python语言概念、历史、特性.md
+      - Python安装教程: Python/python/基础篇002_Python安装教程.md
+      - Python基础语法: Python/python/基础篇003_Python基础语法.md
+      - Python流程控制: Python/python/基础篇004_Python流程控制.md
+      - Python数据结构: Python/python/基础篇005_Python数据结构.md
+      - Python输入与输出: Python/python/基础篇006_Python输入与输出.md
+      - Python错误与异常处理: Python/python/基础篇007_Python错误与异常处理.md
+      - Python类: Python/python/基础篇008_Python类.md
+      - Python标准库简介: Python/python/基础篇009_Python标准库简介.md
+      - Python虚拟环境和包: Python/python/基础篇010_Python虚拟环境和包.md
+  - AI:
+    - AI大模型领域热门&核心概念梳理: ai/AI大模型领域热门&核心概念梳理.md
+    - 尚硅谷MCP实战指南学习笔记: ai/【尚硅谷MCP实战指南】2小时学透MCP学习笔记.md
+    - AI大模型零基础全套教程:
+      - 大模型的演变及概念: ai/AI大模型零基础全套教程学习笔记/基础篇001_大模型的演变及概念.md
+    - MCP:
+      - 初识MCP: ai/MCP/MCP001_初始MCP（Model Context Protocol）.md
+      - 概述MCP架构、核心概念与工作流程: ai/MCP/MCP002_概述MCP架构、核心概念与工作流程.md
+  - 数据库与缓存:
+    - Redis:
+      - 入门篇:
+        - Redis简介与特性: 数据库与缓存/redis/Redis入门篇001_Redis简介与特性.md
+        - Redis安装、配置、客户端连接: 数据库与缓存/redis/Redis入门篇002_Redis安装、配置、客户端连接.md
+      - 基础篇:
+        - 键(Keys)的通用操作与过期策略: 数据库与缓存/redis/Redis基础篇001_键(Keys)的通用操作与过期策略.md
+        - Redis事务详解与ACID特性分析: 数据库与缓存/redis/Redis基础篇002_Redis事务详解与ACID特性分析.md
+        - 发布订阅(Pub&Sub)模式详解: 数据库与缓存/redis/Redis基础篇003_发布订阅(Pub&Sub)模式详解.md
+        - Redis Pipeline流水线详解: 数据库与缓存/redis/Redis基础篇004_Redis Pipeline流水线详解.md
+        - 使用Lua脚本与函数拓展Redis详解: 数据库与缓存/redis/Redis基础篇005_使用Lua脚本与函数拓展Redis详解.md
+      - 数据类型篇:
+        - 数据类型梳理与选择指南: 数据库与缓存/redis/Redis数据类型篇001_数据类型梳理与选择指南.md
+        - 详解Strings核心命令与存储结构: 数据库与缓存/redis/Redis数据类型篇002_详解Strings核心命令与存储结构.md
+        - 详解Lists列表类型及其命令: 数据库与缓存/redis/Redis数据类型篇003_详解Lists列表类型及其命令.md
+        - 详解Hashes哈希类型及其命令: 数据库与缓存/redis/Redis数据类型篇004_详解Hashes哈希类型及其命令.md
+        - 详解Sets集合类型及其命令: 数据库与缓存/redis/Redis数据类型篇005_详解Sets集合类型及其命令.md
+        - 详解SortedSets有序集合类型及其命令: 数据库与缓存/redis/Redis数据类型篇006_详解SortedSets有序集合类型及其命令.md
+        - 详解Stream流类型及其命令: 数据库与缓存/redis/Redis数据类型篇007_详解Stream流类型及其命令.md
+        - JSON类型详解（草稿）: 数据库与缓存/redis/Redis数据类型篇008_JSON类型详解（草稿）.md
+  - About: about.md
+theme:
+  name: material
+  features:
+    - navigation.tabs # 导航tab页
+    - navigation.tabs.sticky # 粘性导航
+    - navigation.sections # 导航板块
+    - navigation.path # 导航路径
+    - navigation.prune  # 导航剪枝
+    - toc.follow # 锚点跟随
+    - navigation.top # 返回顶部
+
+  # 颜色
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: teal
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
