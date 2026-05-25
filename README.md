@@ -60,6 +60,18 @@ mkdocs build
 └── README.md           # 本文件
 ```
 
+## 部署
+
+本项目使用 GitHub Pages 托管，通过 `mkdocs gh-deploy` 命令一键部署。
+
+该命令会自动：
+
+1. 构建静态站点到 `site/` 目录
+2. 将构建产物推送到 `gh-pages` 分支
+3. GitHub Pages 自动从 `gh-pages` 分支提供服务
+
+> 如需绑定自定义域名，在 `docs/` 目录下创建 `CNAME` 文件，写入域名即可。
+
 ## 新增文档
 
 1. 在 `docs/` 对应目录下创建 `.md` 文件
