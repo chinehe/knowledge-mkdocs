@@ -89,7 +89,6 @@ theme:
   features:
     - navigation.tabs # 导航tab页
     - navigation.tabs.sticky # 粘性导航
-    - navigation.sections # 导航板块
     - navigation.path # 导航路径
     - navigation.prune  # 导航剪枝
     - toc.follow # 锚点跟随
