@@ -1,0 +1,3042 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+      
+      
+        <link rel="next" href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E7%BB%84%E3%80%81%E5%88%87%E7%89%87%E3%80%81map%E8%AF%A6%E8%A7%A3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>字符串、指针详解 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-string" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              字符串、指针详解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang语言
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang语言
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常量变量与数据类型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    字符串、指针详解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    字符串、指针详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 字符串(String)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 字符串(String)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 字符串的定义和特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 字符串的声明和初始化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. 字符串的声明和初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1. 显式声明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.2. 隐式声明（类型推断）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.3. 批量声明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 字符串的基本操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. 字符串的基本操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.1. 字符串连接
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.2. 字符串长度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.3. 字符串比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.4. 字符串索引和切片
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. 字符串与字节切片
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5. 字符串格式化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-builder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6. 字符串 Builder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-rune" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7. 字符串与 Rune
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.8. 字符串最佳实践
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pointer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 指针(Pointer)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 指针(Pointer)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 指针的概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 指针的声明和初始化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. 指针的声明和初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. 指针声明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. 获取变量地址
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. 指针的零值
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 指针的操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. 指针的操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. 解引用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. 指针比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 指针与函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. 指针与函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1. 值传递 vs 引用传递
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2. 返回指针
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. 指针与结构体
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6. 指针的指针
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7. 指针与数组、切片
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.7. 指针与数组、切片">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#271" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7.1. 数组指针
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#272" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7.2. 指针数组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#273" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7.3. 切片与指针
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8. 指针使用注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9. 指针最佳实践
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E7%BB%84%E3%80%81%E5%88%87%E7%89%87%E3%80%81map%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数组、切片、map详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87004_%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    函数详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87005_%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E6%A2%B3%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    内置函数梳理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87006_Golang%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang流程控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87007_%E7%BB%93%E6%9E%84%E4%BD%93%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    结构体详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87008_%E6%8E%A5%E5%8F%A3%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    接口详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87009_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    异常处理机制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87001_%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gin框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gin框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E8%BF%9B%E9%98%B6%E7%AF%87001_%E6%9B%B4%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8gin%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 字符串(String)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 字符串(String)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 字符串的定义和特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 字符串的声明和初始化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. 字符串的声明和初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1. 显式声明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.2. 隐式声明（类型推断）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.3. 批量声明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 字符串的基本操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. 字符串的基本操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.1. 字符串连接
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.2. 字符串长度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.3. 字符串比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#134" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3.4. 字符串索引和切片
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. 字符串与字节切片
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5. 字符串格式化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16-builder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6. 字符串 Builder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-rune" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7. 字符串与 Rune
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.8. 字符串最佳实践
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pointer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 指针(Pointer)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 指针(Pointer)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 指针的概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 指针的声明和初始化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. 指针的声明和初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. 指针声明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. 获取变量地址
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. 指针的零值
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 指针的操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. 指针的操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. 解引用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. 指针比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 指针与函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. 指针与函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1. 值传递 vs 引用传递
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2. 返回指针
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. 指针与结构体
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6. 指针的指针
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7. 指针与数组、切片
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.7. 指针与数组、切片">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#271" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7.1. 数组指针
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#272" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7.2. 指针数组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#273" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7.3. 切片与指针
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8. 指针使用注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9. 指针最佳实践
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang语言
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    基础篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>字符串、指针详解</h1>
+
+<p>字符串是不可变的字节序列，广泛用于文本处理；指针则是存储变量内存地址的变量，对于理解内存管理和实现高效程序至关重要。本文将详细介绍Go语言中字符串和指针的概念、使用方法及相关最佳实践。</p>
+<h2 id="1-string">1. 字符串(String)</h2>
+<h3 id="11">1.1. 字符串的定义和特性</h3>
+<p>字符串是Go语言中的基本数据类型之一，用于表示文本数据。在Go中，字符串是一个只读的字节切片，使用UTF-8编码来存储Unicode字符。</p>
+<blockquote>
+<p>Go语言中的字符串以原生数据类型出现，使用字符串就像使用其他原生数据类型<code>（int、bool、float32、float64 等）</code>一样。 Go 语言里的字符串的内部实现使用UTF-8编码。</p>
+</blockquote>
+<p>字符串的主要特性包括：
+- <strong>不可变性</strong>：字符串一旦创建就不能被修改，任何对字符串的修改实际上都是创建了一个新的字符串。
+- <strong>UTF-8编码</strong>：Go中的字符串使用UTF-8编码，可以正确处理各种语言的字符
+- <strong>字面量表示</strong>：可以用双引号或反引号来定义字符串</p>
+<pre><code class="language-go">// 双引号定义的字符串可以包含转义字符
+str1 := &quot;Hello, 世界&quot;
+str2 := &quot;Hello\nWorld&quot;  // 包含换行符
+
+// 反引号定义的原始字符串，保留所有字符原样
+str3 := `Hello,
+World`  // 保留换行符
+str4 := `C:\Program Files\Go`  // 不需要转义反斜杠
+</code></pre>
+<h3 id="12">1.2. 字符串的声明和初始化</h3>
+<p>在Go语言中，字符串可以通过多种方式进行声明和初始化：</p>
+<h4 id="121">1.2.1. 显式声明</h4>
+<pre><code class="language-go">// 声明字符串变量
+var str string
+fmt.Println(str)  // 输出空字符串 &quot;&quot;
+
+// 声明并初始化
+var str1 string = &quot;Hello&quot;
+</code></pre>
+<h4 id="122">1.2.2. 隐式声明（类型推断）</h4>
+<pre><code class="language-go">// 使用短变量声明
+str := &quot;Hello, Go&quot;
+str2 := `Hello, World`
+</code></pre>
+<h4 id="123">1.2.3. 批量声明</h4>
+<pre><code class="language-go">// 批量声明多个字符串变量
+var (
+    firstName string = &quot;张&quot;
+    lastName  string = &quot;三&quot;
+    fullName         = firstName + lastName  // 字符串连接
+)
+</code></pre>
+<h3 id="13">1.3. 字符串的基本操作</h3>
+<h4 id="131">1.3.1. 字符串连接</h4>
+<p>Go语言提供了多种字符串连接的方法：</p>
+<pre><code class="language-go">// 使用 + 操作符
+str1 := &quot;Hello&quot;
+str2 := &quot;World&quot;
+result := str1 + &quot; &quot; + str2  // &quot;Hello World&quot;
+
+// 使用 += 操作符
+str := &quot;Hello&quot;
+str += &quot; World&quot;  // &quot;Hello World&quot;
+
+// 使用 fmt.Sprintf
+name := &quot;张三&quot;
+age := 25
+intro := fmt.Sprintf(&quot;姓名：%s，年龄：%d&quot;, name, age)
+</code></pre>
+<h4 id="132">1.3.2. 字符串长度</h4>
+<pre><code class="language-go">// len函数返回字节数
+str := &quot;Hello, 世界&quot;
+fmt.Println(len(str))  // 输出：13（英文字符1字节，中文字符3字节）
+
+// 使用utf8.RuneCountInString获取字符数
+import &quot;unicode/utf8&quot;
+fmt.Println(utf8.RuneCountInString(str))  // 输出：9
+</code></pre>
+<h4 id="133">1.3.3. 字符串比较</h4>
+<pre><code class="language-go">str1 := &quot;Hello&quot;
+str2 := &quot;World&quot;
+str3 := &quot;Hello&quot;
+
+// 使用 == 和 !=
+fmt.Println(str1 == str2)  // false
+fmt.Println(str1 == str3)  // true
+
+// 使用比较操作符
+fmt.Println(str1 &lt; str2)   // true（按字典序比较）
+</code></pre>
+<h4 id="134">1.3.4. 字符串索引和切片</h4>
+<pre><code class="language-go">str := &quot;Hello, Go&quot;
+
+// 索引访问（按字节）
+fmt.Println(str[0])    // 72（H的ASCII码）
+fmt.Println(string(str[0]))  // &quot;H&quot;
+
+// 切片操作
+fmt.Println(str[0:5])  // &quot;Hello&quot;
+fmt.Println(str[7:])   // &quot;Go&quot;
+fmt.Println(str[:5])   // &quot;Hello&quot;
+</code></pre>
+<h3 id="14">1.4. 字符串与字节切片</h3>
+<p>在Go语言中，字符串和字节切片（[]byte）之间可以相互转换：</p>
+<pre><code class="language-go">// 字符串转字节切片
+str := &quot;Hello&quot;
+bytes := []byte(str)
+fmt.Println(bytes)  // [72 101 108 108 111]
+
+// 字节切片转字符串
+bytes = []byte{72, 101, 108, 108, 111}
+str = string(bytes)
+fmt.Println(str)    // &quot;Hello&quot;
+
+// 注意：这种转换会产生新的数据副本
+</code></pre>
+<h3 id="15">1.5. 字符串格式化</h3>
+<p>Go语言提供了强大的字符串格式化功能：</p>
+<pre><code class="language-go">import &quot;fmt&quot;
+
+name := &quot;张三&quot;
+age := 25
+score := 95.5
+
+// Printf 格式化输出
+fmt.Printf(&quot;姓名：%s，年龄：%d，成绩：%.1f\n&quot;, name, age, score)
+
+// Sprintf 格式化为字符串
+info := fmt.Sprintf(&quot;姓名：%s，年龄：%d，成绩：%.1f&quot;, name, age, score)
+fmt.Println(info)
+
+// 常用格式化动词：
+// %s  字符串
+// %d  十进制整数
+// %f  浮点数
+// %.2f 保留两位小数的浮点数
+// %t  布尔值
+// %v  默认格式
+// %#v Go语法格式
+// %T  类型
+</code></pre>
+<h3 id="16-builder">1.6. 字符串 Builder</h3>
+<p>对于大量的字符串拼接操作，使用strings.Builder更高效：</p>
+<pre><code class="language-go">import &quot;strings&quot;
+
+var builder strings.Builder
+
+// 写入字符串
+builder.WriteString(&quot;Hello&quot;)
+builder.WriteString(&quot; &quot;)
+builder.WriteString(&quot;World&quot;)
+
+// 获取最终字符串
+result := builder.String()
+fmt.Println(result)  // &quot;Hello World&quot;
+
+// 重置Builder
+builder.Reset()
+
+// 写入其他类型
+builder.WriteByte('H')
+builder.WriteRune('好')
+builder.Write([]byte(&quot; World&quot;))
+
+result = builder.String()
+fmt.Println(result)  // &quot;H好 World&quot;
+</code></pre>
+<h3 id="17-rune">1.7. 字符串与 Rune</h3>
+<p>在处理Unicode字符时，需要理解rune类型：</p>
+<pre><code class="language-go">// string类型表示UTF-8编码的字节序列
+str := &quot;Hello, 世界&quot;
+
+// range遍历字符串会得到rune（Unicode码点）
+for i, r := range str {
+    fmt.Printf(&quot;位置%d: %c\n&quot;, i, r)
+}
+
+// 将字符串转换为rune切片
+runes := []rune(str)
+fmt.Println(len(runes))  // 9（字符数）
+
+// 访问特定字符
+fmt.Printf(&quot;%c\n&quot;, runes[7])  // 世
+
+// 截取包含中文的字符串
+substr := string(runes[7:9])  // &quot;世界&quot;
+</code></pre>
+<h3 id="18">1.8. 字符串最佳实践</h3>
+<ol>
+<li><strong>大量字符串拼接使用strings.Builder</strong></li>
+</ol>
+<pre><code class="language-go">var builder strings.Builder
+for i := 0; i &lt; 1000; i++ {
+    builder.WriteString(fmt.Sprintf(&quot;Item %d &quot;, i))
+}
+result := builder.String()
+</code></pre>
+<ol>
+<li><strong>避免频繁的字符串连接操作</strong></li>
+</ol>
+<pre><code class="language-go">// 不推荐：效率低
+var result string
+for _, item := range items {
+    result += item
+}
+
+// 推荐：使用strings.Join
+result := strings.Join(items, &quot;&quot;)
+</code></pre>
+<ol>
+<li><strong>正确处理UTF-8字符</strong></li>
+</ol>
+<pre><code class="language-go">// 正确获取字符数
+charCount := utf8.RuneCountInString(str)
+
+// 正确截取包含中文的字符串
+runes := []rune(str)
+substr := string(runes[start:end])
+</code></pre>
+<ol>
+<li><strong>字符串比较使用标准库函数</strong></li>
+</ol>
+<pre><code class="language-go">import &quot;strings&quot;
+
+// 忽略大小写比较
+equal := strings.EqualFold(&quot;Hello&quot;, &quot;HELLO&quot;)  // true
+
+// 前缀和后缀检查
+hasPrefix := strings.HasPrefix(str, &quot;Hello&quot;)
+hasSuffix := strings.HasSuffix(str, &quot;World&quot;)
+</code></pre>
+<h2 id="2-pointer">2. 指针(Pointer)</h2>
+<h3 id="21">2.1. 指针的概念</h3>
+<p>指针是存储另一个变量内存地址的变量。在Go语言中，指针提供了一种间接访问和修改变量值的方式。</p>
+<p>指针的主要用途包括：
+- 避免大对象的复制开销
+- 在函数间共享和修改数据
+- 动态分配内存</p>
+<h3 id="22">2.2. 指针的声明和初始化</h3>
+<h4 id="221">2.2.1. 指针声明</h4>
+<pre><code class="language-go">// 声明指针变量
+var ptr *int        // 声明指向int类型的指针
+var ptr2 *string    // 声明指向string类型的指针
+</code></pre>
+<h4 id="222">2.2.2. 获取变量地址</h4>
+<p>使用&amp;操作符获取变量的内存地址：</p>
+<pre><code class="language-go">num := 42
+ptr := &amp;num         // 获取num的地址
+
+fmt.Println(ptr)    // 输出地址，如：0xc000014080
+fmt.Println(*ptr)   // 输出42（解引用）
+</code></pre>
+<h4 id="223">2.2.3. 指针的零值</h4>
+<p>未初始化的指针值为nil：</p>
+<pre><code class="language-go">var ptr *int
+fmt.Println(ptr)    // &lt;nil&gt;
+
+// 对nil指针解引用会导致运行时恐慌
+// fmt.Println(*ptr)   // panic: runtime error
+</code></pre>
+<h3 id="23">2.3. 指针的操作</h3>
+<h4 id="231">2.3.1. 解引用</h4>
+<p>使用*操作符访问指针指向的值：</p>
+<pre><code class="language-go">num := 42
+ptr := &amp;num
+
+// 读取指针指向的值
+value := *ptr
+fmt.Println(value)  // 42
+
+// 修改指针指向的值
+*ptr = 100
+fmt.Println(num)    // 100
+</code></pre>
+<h4 id="232">2.3.2. 指针比较</h4>
+<pre><code class="language-go">a := 10
+b := 10
+ptr1 := &amp;a
+ptr2 := &amp;b
+ptr3 := &amp;a
+
+fmt.Println(ptr1 == ptr2)  // false（不同变量的地址）
+fmt.Println(ptr1 == ptr3)  // true（相同变量的地址）
+fmt.Println(*ptr1 == *ptr2) // true（相同值）
+</code></pre>
+<h3 id="24">2.4. 指针与函数</h3>
+<p>指针在函数参数传递中非常重要，可以实现引用传递：</p>
+<h4 id="241-vs">2.4.1. 值传递 vs 引用传递</h4>
+<pre><code class="language-go">// 值传递（不会修改原值）
+func incrementValue(num int) {
+    num++
+}
+
+// 指针传递（会修改原值）
+func incrementPointer(num *int) {
+    (*num)++
+    // 或者
+    // *num++
+}
+
+func main() {
+    value := 10
+
+    incrementValue(value)
+    fmt.Println(value)  // 10（未改变）
+
+    incrementPointer(&amp;value)
+    fmt.Println(value)  // 11（已改变）
+}
+</code></pre>
+<h4 id="242">2.4.2. 返回指针</h4>
+<pre><code class="language-go">// 返回局部变量的地址是安全的（Go会自动处理）
+func createPointer() *int {
+    value := 42
+    return &amp;value
+}
+
+func main() {
+    ptr := createPointer()
+    fmt.Println(*ptr)  // 42
+}
+</code></pre>
+<h3 id="25">2.5. 指针与结构体</h3>
+<p>结构体是指针使用最常见的场景之一：</p>
+<pre><code class="language-go">type Person struct {
+    Name string
+    Age  int
+}
+
+func main() {
+    // 创建结构体实例
+    person := Person{Name: &quot;张三&quot;, Age: 25}
+
+    // 获取结构体指针
+    ptr := &amp;person
+
+    // 通过指针访问字段（两种方式）
+    fmt.Println((*ptr).Name)  // &quot;张三&quot;
+    fmt.Println(ptr.Name)     // &quot;张三&quot;（简化写法）
+
+    // 通过指针修改字段
+    ptr.Age = 30
+    fmt.Println(person.Age)   // 30
+}
+</code></pre>
+<h3 id="26">2.6. 指针的指针</h3>
+<p>Go语言支持指向指针的指针：</p>
+<pre><code class="language-go">num := 42
+ptr := &amp;num        // 指向num的指针
+pptr := &amp;ptr       // 指向ptr的指针
+
+fmt.Println(num)   // 42
+fmt.Println(*ptr)  // 42
+fmt.Println(**pptr) // 42
+
+// 修改值
+**pptr = 100
+fmt.Println(num)   // 100
+</code></pre>
+<h3 id="27">2.7. 指针与数组、切片</h3>
+<h4 id="271">2.7.1. 数组指针</h4>
+<pre><code class="language-go">// 创建数组
+arr := [3]int{1, 2, 3}
+
+// 获取数组指针
+arrPtr := &amp;arr
+
+// 通过数组指针访问元素
+fmt.Println((*arrPtr)[0])  // 1
+fmt.Println(arrPtr[0])     // 1（简化写法）
+
+// 修改数组元素
+(*arrPtr)[0] = 10
+fmt.Println(arr[0])        // 10
+</code></pre>
+<h4 id="272">2.7.2. 指针数组</h4>
+<pre><code class="language-go">a, b, c := 1, 2, 3
+// 创建指针数组
+ptrArr := [3]*int{&amp;a, &amp;b, &amp;c}
+
+// 访问指针数组中的元素
+fmt.Println(*ptrArr[0])    // 1
+fmt.Println(*ptrArr[1])    // 2
+
+// 修改原变量
+*ptrArr[0] = 10
+fmt.Println(a)             // 10
+</code></pre>
+<h4 id="273">2.7.3. 切片与指针</h4>
+<p>切片本身就是一个引用类型，包含了指向底层数组的指针：</p>
+<pre><code class="language-go">arr := [3]int{1, 2, 3}
+slice := arr[:]            // 创建切片
+
+// 修改切片会影响原数组
+slice[0] = 10
+fmt.Println(arr[0])        // 10
+
+// 切片指针
+slicePtr := &amp;slice
+fmt.Println(*slicePtr)     // [10 2 3]
+</code></pre>
+<h3 id="28">2.8. 指针使用注意事项</h3>
+<ol>
+<li><strong>空指针检查</strong></li>
+</ol>
+<pre><code class="language-go">func safeDereference(ptr *int) {
+    if ptr != nil {
+        fmt.Println(*ptr)
+    } else {
+        fmt.Println(&quot;指针为空&quot;)
+    }
+}
+</code></pre>
+<ol>
+<li><strong>避免悬空指针</strong></li>
+</ol>
+<pre><code class="language-go">// 错误示例（虽然在Go中不太常见，但仍需注意）
+func badExample() *int {
+    num := 42
+    return &amp;num  // 在某些语言中这会是悬空指针，但在Go中是安全的
+}
+</code></pre>
+<ol>
+<li><strong>指针算术</strong></li>
+</ol>
+<pre><code class="language-go">// Go不支持指针算术，这与其他语言不同
+// 以下代码无法编译
+/*
+ptr := &amp;num
+ptr++  // 错误：无效操作
+*/
+</code></pre>
+<h3 id="29">2.9. 指针最佳实践</h3>
+<ol>
+<li><strong>明确何时使用指针</strong></li>
+</ol>
+<pre><code class="language-go">// 大结构体使用指针避免复制
+type BigStruct struct {
+    Data [1000]int
+}
+
+func processBigStruct(bs *BigStruct) {
+    // 处理逻辑
+}
+</code></pre>
+<ol>
+<li><strong>接口与指针</strong></li>
+</ol>
+<pre><code class="language-go">type Writer interface {
+    Write([]byte) (int, error)
+}
+
+type File struct {
+    name string
+}
+
+// 实现接口时，通常使用指针接收者
+func (f *File) Write(data []byte) (int, error) {
+    // 实现
+    return len(data), nil
+}
+</code></pre>
+<ol>
+<li><strong>方法接收者的选择</strong></li>
+</ol>
+<pre><code class="language-go">type Counter struct {
+    count int
+}
+
+// 需要修改接收者的值时，使用指针接收者
+func (c *Counter) Increment() {
+    c.count++
+}
+
+// 只读操作时，可以使用值接收者
+func (c Counter) GetCount() int {
+    return c.count
+}
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

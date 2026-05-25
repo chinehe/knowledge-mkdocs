@@ -1,0 +1,2700 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87002_%E8%AF%A6%E8%A7%A3Strings%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/">
+      
+      
+        <link rel="next" href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87004_%E8%AF%A6%E8%A7%A3Hashes%E5%93%88%E5%B8%8C%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>详解Lists列表类型及其命令 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              详解Lists列表类型及其命令
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库与缓存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87001_%E9%94%AE%28Keys%29%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C%E4%B8%8E%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_3" id="__nav_5_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据类型篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87001_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型梳理与选择指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87002_%E8%AF%A6%E8%A7%A3Strings%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Strings核心命令与存储结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Lists列表类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Lists列表类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 类型概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 列表命令详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 列表命令详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 梳理命令列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 基础操作命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. 基础操作命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. PUSH元素
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.1. PUSH元素">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2211-lpush" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.1. LPUSH命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2212-lpushx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.2. LPUSHX命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2213-rpush" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.3. RPUSH命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2214-rpushx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.4. RPUSHX命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-pop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. POP元素
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.2. POP元素">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2221-lpop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.1. LPOP命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2222-lmpop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.2. LMPOP命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2223-rpop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.3. RPOP命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. 移动元素
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.3. 移动元素">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2231-lmove" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3.1. LMOVE 命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4. 访问元素
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.4. 访问元素">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2241-lpos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4.1. LPOS命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2242-lindex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4.2. LINDEX命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2243-lrange" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4.3. LRANGE命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5. 其他基础命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.5. 其他基础命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2251-llen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5.1. LLEN命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2252-lrem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5.2. LREM命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2253-lset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5.3. LSET命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2254-ltrim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5.4. LTRIM命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2255-linsert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5.5. LINSERT命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 阻塞式操作命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. 阻塞式操作命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. 关于阻塞式操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. 命令列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87004_%E8%AF%A6%E8%A7%A3Hashes%E5%93%88%E5%B8%8C%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Hashes哈希类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87005_%E8%AF%A6%E8%A7%A3Sets%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Sets集合类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87006_%E8%AF%A6%E8%A7%A3SortedSets%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解SortedSets有序集合类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87007_%E8%AF%A6%E8%A7%A3Stream%E6%B5%81%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Stream流类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87008_JSON%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3%EF%BC%88%E8%8D%89%E7%A8%BF%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON类型详解（草稿）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 类型概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 列表命令详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 列表命令详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 梳理命令列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 基础操作命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. 基础操作命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. PUSH元素
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.1. PUSH元素">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2211-lpush" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.1. LPUSH命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2212-lpushx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.2. LPUSHX命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2213-rpush" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.3. RPUSH命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2214-rpushx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1.4. RPUSHX命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-pop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. POP元素
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.2. POP元素">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2221-lpop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.1. LPOP命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2222-lmpop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.2. LMPOP命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2223-rpop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2.3. RPOP命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. 移动元素
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.3. 移动元素">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2231-lmove" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3.1. LMOVE 命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4. 访问元素
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.4. 访问元素">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2241-lpos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4.1. LPOS命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2242-lindex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4.2. LINDEX命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2243-lrange" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4.3. LRANGE命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5. 其他基础命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.5. 其他基础命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2251-llen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5.1. LLEN命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2252-lrem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5.2. LREM命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2253-lset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5.3. LSET命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2254-ltrim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5.4. LTRIM命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2255-linsert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5.5. LINSERT命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 阻塞式操作命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. 阻塞式操作命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. 关于阻塞式操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. 命令列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据库与缓存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Redis
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87001_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据类型篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>详解Lists列表类型及其命令</h1>
+
+<p>Redis 列表数据类型是简单的字符串链表，常用于实现栈和队列。</p>
+<p>本文介绍列表数据类型的基础概念、主要特性、常用命令等内容。</p>
+<h2 id="1">1. 类型概述</h2>
+<p>参考官方文档：<a href="https://redis.io/docs/latest/develop/data-types/lists/">Redis Lists</a></p>
+<p>Redis Lists列表是字符串值的链表。</p>
+<p>列表类型常用于：</p>
+<ol>
+<li>实现栈和队列。</li>
+<li>为后台工作系统构建队列管理。</li>
+</ol>
+<p>Redis Lists是简单的字符串列表，按照插入顺序排序。你可以从列表的<strong>两端</strong>添加元素（左边或右边），也可以从列表中获取、删除或操作元素。</p>
+<blockquote>
+<p>可以将Redis Lists想象成排队买票的队列。新来的人（元素）可以从队尾加入（RPUSH），也可以从队头加入（LPUSH）；办理完业务的人可以从队头离开（LPOP），也可以从队尾离开（RPOP）。这种灵活性使得Lists非常适合实现各种队列和栈结构。</p>
+</blockquote>
+<hr />
+<p><strong>核心特性：</strong></p>
+<ul>
+<li><strong>结构</strong>：简单字符串值的链表。</li>
+<li><strong>长度限制</strong>：最大长度为 2^32 - 1（4,294,967,295）个元素。</li>
+<li><strong>操作性能</strong>：</li>
+<li>访问头和尾元素的性能很高，为O(1)。</li>
+<li>
+<p>操作列表元素的命令通常为O(n)，比如<code>LINDEX</code>、<code>LINSERT</code>、<code>LSET</code>命令。执行这些命令是需要注意性能问题，特别是处理大型列表时。</p>
+</li>
+<li>
+<p><strong>底层实现：</strong>在元素数量较少时使用ziplist（压缩列表），元素数量较多时使用linkedlist（链表）</p>
+</li>
+</ul>
+<blockquote>
+<p>Redis 3.2版本后，Lists的底层实现改为quicklist，它是ziplist和linkedlist的结合体，既保留了ziplist的内存效率，又具备linkedlist的插入删除效率。</p>
+</blockquote>
+<hr />
+<p><strong>底层实现：</strong></p>
+<p>关于Redis列表的底层实现，可以参考这篇文档：参考官方文档：<a href="https://cloud.tencent.com/developer/article/2343211">Redis数据结构：List类型全面解析</a></p>
+<h2 id="2">2. 列表命令详解</h2>
+<p>Redis List数据类型的全部命令，可以查看官方文档：<a href="https://redis.io/docs/latest/commands/?group=list">Redis List Commands</a></p>
+<h3 id="21">2.1. 梳理命令列表</h3>
+<p>List相关的命令很多，但可以根据其功能按照多种方方式分类。</p>
+<p><strong>按照操作方向分：</strong></p>
+<p>可以分成左侧操作命令和右侧操作命令（命令中的<code>L</code>和<code>R</code>），对应操作元素的方向。比如LPUSH命令，从左侧向列表中添加元素；RPUSH命令则是从右侧向列表中添加元素。</p>
+<p><strong>按照是否阻塞分：</strong></p>
+<p>命令第一个字符是<code>B</code>的命令，表示阻塞命令，在有可用元素之前，该命令会被阻塞。比如BLPOP命令会被阻塞，直到列表中有元素可用。</p>
+<p><strong>命令列表：</strong></p>
+<ul>
+<li><strong>基础命令</strong></li>
+<li><strong>PUSH元素</strong><ul>
+<li><code>LPUSH</code>：向列表中添加一个或多个元素。</li>
+<li><code>LPUSHX</code>：向列表中添加一个或多个元素，只有列表存在时才执行。</li>
+<li><code>RPUSH</code>：向列表中添加一个或多个元素。</li>
+<li><code>RPUSHX</code>：向列表中添加一个或多个元素，只有列表存在时才执行。</li>
+</ul>
+</li>
+<li><strong>POP元素</strong><ul>
+<li><code>LPOP</code>：从列表中弹出第一个元素。</li>
+<li><code>LMPOP</code>：从多个列表中弹出第一个元素。</li>
+<li><code>RPOP</code>：弹出列表的最后一个元素。</li>
+</ul>
+</li>
+<li><strong>移动元素</strong><ul>
+<li><code>LMOVE</code>：从列表中弹出一个元素，推送到另一个列表，并返回该元素。</li>
+<li><code>RPOPLPUSH</code>：从列表中弹出最后一个元素元素，推送到另一个列表，并返回该元素。（已弃用）</li>
+</ul>
+</li>
+<li><strong>访问元素</strong><ul>
+<li><code>LPOS</code>：返回列表中匹配元素的索引。</li>
+<li><code>LINDEX</code>：通过索引返回列表中元素。</li>
+<li><code>LRANGE</code>：获取列表中指定范围的元素。</li>
+</ul>
+</li>
+<li><strong>其他基础命令</strong><ul>
+<li><code>LLEN</code>：获取列表的长度。</li>
+<li><code>LREM</code>：从列表中移除元素。</li>
+<li><code>LSET</code>：设置列表中指定索引的元素值。</li>
+<li><code>LTRIM</code>：从列表两端移除元素。</li>
+<li><code>LINSERT</code>：在一个元素的前面或后面插入一个元素。</li>
+</ul>
+</li>
+<li><strong>阻塞命令</strong></li>
+<li><code>BLMOVE</code>：从列表中弹出一个元素，推送到另一个列表，并返回该元素。</li>
+<li><code>BLMPOP</code>：从多个列表中弹出第一个元素。</li>
+<li><code>BLPOP</code>：从列表中弹出（删除并返回）第一个元素。</li>
+<li><code>BRPOP</code>：从列表中弹出最后一个元素。</li>
+<li><code>BRPOPLPUSH</code>：从列表中弹出第一个元素，推送到另一个列表，并返回该元素。（已弃用）</li>
+</ul>
+<h3 id="22">2.2. 基础操作命令</h3>
+<h4 id="221-push">2.2.1. PUSH元素</h4>
+<p>PUSH元素命令用于向列表中添加元素。</p>
+<hr />
+<h5 id="2211-lpush">2.2.1.1. LPUSH命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LPUSH key element [element ...]
+</code></pre>
+<p>从左侧向列表中添加一个或多个元素。</p>
+<blockquote>
+<p>从 Redis 2.4.0 版本开始接受多个<code>element</code>参数。</p>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; LPUSH mylist &quot;world&quot;
+(integer) 1
+redis&gt; LPUSH mylist &quot;hello&quot;
+(integer) 2
+redis&gt; LRANGE mylist 0 -1
+1) &quot;hello&quot;
+2) &quot;world&quot;
+</code></pre>
+<hr />
+<h5 id="2212-lpushx">2.2.1.2. LPUSHX命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LPUSHX key element [element ...]
+</code></pre>
+<p>从左侧向列表中添加一个或多个元素，只有列表存在时才执行。</p>
+<blockquote>
+<p>从 Redis 4.0.0 版本开始接受多个<code>element</code>参数。</p>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; LPUSH mylist &quot;World&quot;
+(integer) 1
+redis&gt; LPUSHX mylist &quot;Hello&quot;
+(integer) 2
+redis&gt; LPUSHX myotherlist &quot;Hello&quot;
+(integer) 0
+redis&gt; LRANGE mylist 0 -1
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+redis&gt; LRANGE myotherlist 0 -1
+(empty array)
+redis&gt; 
+</code></pre>
+<hr />
+<h5 id="2213-rpush">2.2.1.3. RPUSH命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">RPUSH key element [element ...]
+</code></pre>
+<p>从右侧向列表中添加一个或多个元素。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;hello&quot;
+(integer) 1
+redis&gt; RPUSH mylist &quot;world&quot;
+(integer) 2
+redis&gt; LRANGE mylist 0 -1
+1) &quot;hello&quot;
+2) &quot;world&quot;
+</code></pre>
+<hr />
+<h5 id="2214-rpushx">2.2.1.4. RPUSHX命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">RPUSHX key element [element ...]
+</code></pre>
+<p>从右侧向列表中添加一个或多个元素，只有列表存在时才执行。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;Hello&quot;
+(integer) 1
+redis&gt; RPUSHX mylist &quot;World&quot;
+(integer) 2
+redis&gt; RPUSHX myotherlist &quot;World&quot;
+(integer) 0
+redis&gt; LRANGE mylist 0 -1
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+redis&gt; LRANGE myotherlist 0 -1
+(empty array)
+redis&gt; 
+</code></pre>
+<h4 id="222-pop">2.2.2. POP元素</h4>
+<p>POP元素命令用于从列表中弹出元素。</p>
+<blockquote>
+<p>所谓弹出：移除并返回元素。</p>
+</blockquote>
+<hr />
+<h5 id="2221-lpop">2.2.2.1. LPOP命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LPOP key [count]
+</code></pre>
+<p>从列表中弹出第一个元素（也就是左侧第一个元素）。</p>
+<p>可选参数<code>count</code>用于指定要弹出的元素数量，默认为1。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot; &quot;two&quot; &quot;three&quot; &quot;four&quot; &quot;five&quot;
+(integer) 5
+redis&gt; LPOP mylist
+&quot;one&quot;
+redis&gt; LPOP mylist 2
+1) &quot;two&quot;
+2) &quot;three&quot;
+redis&gt; LRANGE mylist 0 -1
+1) &quot;four&quot;
+2) &quot;five&quot;
+</code></pre>
+<hr />
+<h5 id="2222-lmpop">2.2.2.2. LMPOP命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LMPOP numkeys key [key ...] &lt;LEFT | RIGHT&gt; [COUNT count]
+</code></pre>
+<p>从多个列表中弹出第一个元素。元素会根据传递的列表参数，从第一个非空列表的左侧或右侧弹出。弹出元素的数量小于等于非空列表长度和计数参数（默认为1）。</p>
+<ul>
+<li>numkeys 参数用于指定key的数量。</li>
+<li><code>&lt;LEFT | RIGHT&gt;</code> 参数用于控制弹出的方向，默认为LEFT。</li>
+<li><code>COUNT count</code> 参数用于指定弹出的元素数量。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; LMPOP 2 non1 non2 LEFT COUNT 10
+(nil)
+redis&gt; LPUSH mylist &quot;one&quot; &quot;two&quot; &quot;three&quot; &quot;four&quot; &quot;five&quot;
+(integer) 5
+redis&gt; LMPOP 1 mylist LEFT
+1) &quot;mylist&quot;
+2) 1) &quot;five&quot;
+redis&gt; LRANGE mylist 0 -1
+1) &quot;four&quot;
+2) &quot;three&quot;
+3) &quot;two&quot;
+4) &quot;one&quot;
+redis&gt; LMPOP 1 mylist RIGHT COUNT 10
+1) &quot;mylist&quot;
+2) 1) &quot;one&quot;
+   2) &quot;two&quot;
+   3) &quot;three&quot;
+   4) &quot;four&quot;
+redis&gt; LPUSH mylist &quot;one&quot; &quot;two&quot; &quot;three&quot; &quot;four&quot; &quot;five&quot;
+(integer) 5
+redis&gt; LPUSH mylist2 &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;
+(integer) 5
+redis&gt; LMPOP 2 mylist mylist2 right count 3
+1) &quot;mylist&quot;
+2) 1) &quot;one&quot;
+   2) &quot;two&quot;
+   3) &quot;three&quot;
+redis&gt; LRANGE mylist 0 -1
+1) &quot;five&quot;
+2) &quot;four&quot;
+redis&gt; LMPOP 2 mylist mylist2 right count 5
+1) &quot;mylist&quot;
+2) 1) &quot;four&quot;
+   2) &quot;five&quot;
+redis&gt; LMPOP 2 mylist mylist2 right count 10
+1) &quot;mylist2&quot;
+2) 1) &quot;a&quot;
+   2) &quot;b&quot;
+   3) &quot;c&quot;
+   4) &quot;d&quot;
+   5) &quot;e&quot;
+redis&gt; EXISTS mylist mylist2
+(integer) 0
+redis&gt;
+</code></pre>
+<hr />
+<h5 id="2223-rpop">2.2.2.3. RPOP命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">RPOP key [count]
+</code></pre>
+<p>弹出列表的最后一个元素（也就是右侧第一个元素）。</p>
+<p>可选参数<code>count</code>用于指定要弹出的元素数量，默认为1。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot; &quot;two&quot; &quot;three&quot; &quot;four&quot; &quot;five&quot;
+(integer) 5
+redis&gt; RPOP mylist
+&quot;five&quot;
+redis&gt; RPOP mylist 2
+1) &quot;four&quot;
+2) &quot;three&quot;
+redis&gt; LRANGE mylist 0 -1
+1) &quot;one&quot;
+2) &quot;two&quot;
+</code></pre>
+<h4 id="223">2.2.3. 移动元素</h4>
+<p>移动元素命令，从一个列表中弹出元素，并PUSH到另一个列表，最后返回该元素。</p>
+<ul>
+<li><code>LMOVE</code>：从列表中弹出一个元素，推送到另一个列表，并返回该元素。</li>
+<li><code>RPOPLPUSH</code>：从列表中弹出最后一个元素元素，推送到另一个列表，并返回该元素。（已弃用）</li>
+</ul>
+<hr />
+<h5 id="2231-lmove">2.2.3.1. LMOVE 命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LMOVE source destination &lt;LEFT | RIGHT&gt; &lt;LEFT | RIGHT&gt;
+</code></pre>
+<ul>
+<li>source 参数：源列表</li>
+<li>destination 参数：目标列表</li>
+<li><code>&lt;LEFT | RIGHT&gt;</code>参数：</li>
+<li>第一个<code>&lt;LEFT | RIGHT&gt;</code>参数表示源列表的左侧/右侧。</li>
+<li>第二个<code>&lt;LEFT | RIGHT&gt;</code>参数表示目标列表的左侧/右侧。</li>
+</ul>
+<p>LMOVE命令原子地从原列表的指定侧弹出元素，PUSH到目标列表的指定侧，并返回该元素。</p>
+<ul>
+<li>如果源不存在，则不执行操作，返回nil。</li>
+<li>如果源列表和目标列表相同，操作等同于从列表的指定侧移动到第二个指定侧。可将其视为列表旋转命令（如果两个指定侧不一样），或视为无操作（如果两个指定侧一样）。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot;
+(integer) 1
+redis&gt; RPUSH mylist &quot;two&quot;
+(integer) 2
+redis&gt; RPUSH mylist &quot;three&quot;
+(integer) 3
+redis&gt; LMOVE mylist myotherlist RIGHT LEFT
+&quot;three&quot;
+redis&gt; LMOVE mylist myotherlist LEFT RIGHT
+&quot;one&quot;
+redis&gt; LRANGE mylist 0 -1
+1) &quot;two&quot;
+redis&gt; LRANGE myotherlist 0 -1
+1) &quot;three&quot;
+2) &quot;one&quot;
+redis&gt;
+</code></pre>
+<h4 id="224">2.2.4. 访问元素</h4>
+<p>访问元素的命令，用于获取列表元素信息：</p>
+<ul>
+<li><code>LPOS</code>：返回列表中匹配元素的索引。</li>
+<li><code>LINDEX</code>：通过索引返回列表中元素。</li>
+<li><code>LRANGE</code>：获取列表中指定范围的元素。</li>
+</ul>
+<hr />
+<h5 id="2241-lpos">2.2.4.1. LPOS命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LPOS key element [RANK rank] [COUNT num-matches] [MAXLEN len]
+</code></pre>
+<p>该命令返回列表中指定元素的索引。</p>
+<p>默认情况下，会从头到尾扫描整个列表，寻找第一个匹配的元素。如果找到该元素，则返回其索引（以0开始）。如果没有找到，就返回nil。</p>
+<pre><code class="language-shell">## 默认示例
+&gt; RPUSH mylist a b c 1 2 3 c c
+&gt; LPOS mylist c
+2
+</code></pre>
+<p><strong>可选参数 RANK</strong>：</p>
+<p>RANK参数指定第一个要返回元素的等级，以防有多个匹配。为1表示返回第一个匹配，为2表示返回第二个匹配，以此类推。</p>
+<p>示例：</p>
+<pre><code class="language-shell">## RANK 参数示例
+&gt; RPUSH mylist a b c 1 2 3 c c
+&gt; LPOS mylist c RANK 2
+6
+</code></pre>
+<p>RANK参数如果为负数，则表示从尾部向头部反向搜索。</p>
+<p>示例：</p>
+<pre><code class="language-shell">## RANK 参数示例
+&gt; RPUSH mylist a b c 1 2 3 c c
+&gt; LPOS mylist c RANK -1
+7
+</code></pre>
+<p><strong>可选参数COUNT：</strong></p>
+<p>有时我们不仅要返回第 N 个匹配元素，还要返回所有前 N 个匹配元素的位置。这可以通过 <code>COUNT</code> 选项实现。</p>
+<pre><code class="language-shell">## 示例1
+&gt; RPUSH mylist a b c 1 2 3 c c
+&gt; LPOS mylist c COUNT 2
+[2,6]
+</code></pre>
+<p>我们可以结合 <code>COUNT</code> 和 <code>RANK</code>:</p>
+<pre><code class="language-shell">## 示例2
+&gt; RPUSH mylist a b c 1 2 3 c c
+&gt; LPOS mylist c RANK -1 COUNT 2
+[7,6]
+</code></pre>
+<p>当使用 <code>COUNT</code> 时，可以指定 0 作为匹配数量，以此告诉命令我们希望所有匹配以索引数组的形式返回。这比给出很大的 <code>COUNT</code> 选项更好，因为它更通用。</p>
+<pre><code class="language-shell">&gt; LPOS mylist c COUNT 0
+[2,6,7]
+</code></pre>
+<p>当使用 <code>COUNT</code> 且未找到匹配时，返回一个空数组。但当未使用 <code>COUNT</code> 且无匹配时，命令返回<code>为零</code>。</p>
+<p><strong>可选参数MAXLEN：</strong></p>
+<p>这个参数有助于限制命令的最大复杂度。当我们觉得很快就能找到目标值，又不想花费太多时间来确保他不匹配时，这很有用。</p>
+<p>当使用 <code>MAXLEN</code> 时，可以指定 0 作为最大比较次数，以此告诉命令我们希望无限次比较。这比给出非常大的 <code>MAXLEN</code> 选项更好，因为它更通用。</p>
+<hr />
+<h5 id="2242-lindex">2.2.4.2. LINDEX命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LINDEX key index
+</code></pre>
+<p>获取列表中指定索引的元素，索引从0开始计算。</p>
+<ul>
+<li>如果index为负数，标识从列表尾部开始计算，如-1表示倒数第一个元素。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; LPUSH mylist &quot;World&quot;
+(integer) 1
+redis&gt; LPUSH mylist &quot;Hello&quot;
+(integer) 2
+redis&gt; LINDEX mylist 0
+&quot;Hello&quot;
+redis&gt; LINDEX mylist -1
+&quot;World&quot;
+redis&gt; LINDEX mylist 3
+(nil)
+redis&gt;
+</code></pre>
+<hr />
+<h5 id="2243-lrange">2.2.4.3. LRANGE命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LRANGE key start stop
+</code></pre>
+<p>返回列表中从start到stop范围的元素。偏移量从0开始计算；如果为负数表示从后往前计算，-1表示倒数第一个元素。</p>
+<blockquote>
+<p>超出范围的索引不会产生错误。如果 <code>start</code> 大于 列表的末尾，则返回一个空列表。如果<code>stop</code>比列表的实际末尾大，Redis 会把它当作列表的最后一个元素来处理。</p>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot;
+(integer) 1
+redis&gt; RPUSH mylist &quot;two&quot;
+(integer) 2
+redis&gt; RPUSH mylist &quot;three&quot;
+(integer) 3
+redis&gt; LRANGE mylist 0 0
+1) &quot;one&quot;
+redis&gt; LRANGE mylist -3 2
+1) &quot;one&quot;
+2) &quot;two&quot;
+3) &quot;three&quot;
+redis&gt; LRANGE mylist -100 100
+1) &quot;one&quot;
+2) &quot;two&quot;
+3) &quot;three&quot;
+redis&gt; LRANGE mylist 5 10
+(empty array)
+</code></pre>
+<h4 id="225">2.2.5. 其他基础命令</h4>
+<p>还有其他的基础命令如下：</p>
+<ul>
+<li><code>LLEN</code>：获取列表的长度。</li>
+<li><code>LREM</code>：从列表中移除元素。</li>
+<li><code>LSET</code>：设置列表中指定索引的元素值。</li>
+<li><code>LTRIM</code>：从列表两端移除元素。</li>
+<li><code>LINSERT</code>：在一个元素的前面或后面插入一个元素。</li>
+</ul>
+<hr />
+<h5 id="2251-llen">2.2.5.1. LLEN命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LLEN key
+</code></pre>
+<p>返回列表的长度。</p>
+<ul>
+<li>如果列表不存在，则返回0.</li>
+<li>如果对应值不是列表，则返回错误。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; LPUSH mylist &quot;World&quot;
+(integer) 1
+redis&gt; LPUSH mylist &quot;Hello&quot;
+(integer) 2
+redis&gt; LLEN mylist
+(integer) 2
+</code></pre>
+<hr />
+<h5 id="2252-lrem">2.2.5.2. LREM命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LREM key count element
+</code></pre>
+<p>从列表中移除指定的元素。count参数用于指定移除的个数：</p>
+<ul>
+<li>count大于0：从头到尾顺序移除。</li>
+<li>count小于0：从尾到头倒序移除。</li>
+<li>count等于0：移除所有等于指定值的元素。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;hello&quot;
+(integer) 1
+redis&gt; RPUSH mylist &quot;hello&quot;
+(integer) 2
+redis&gt; RPUSH mylist &quot;foo&quot;
+(integer) 3
+redis&gt; RPUSH mylist &quot;hello&quot;
+(integer) 4
+redis&gt; LREM mylist -2 &quot;hello&quot;
+(integer) 2
+redis&gt; LRANGE mylist 0 -1
+1) &quot;hello&quot;
+2) &quot;foo&quot;
+redis&gt;
+</code></pre>
+<hr />
+<h5 id="2253-lset">2.2.5.3. LSET命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LSET key index element
+</code></pre>
+<p>将列表中指定索引的元素设置为指定的值，对于超出范围的索引会。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot;
+(integer) 1
+redis&gt; RPUSH mylist &quot;two&quot;
+(integer) 2
+redis&gt; RPUSH mylist &quot;three&quot;
+(integer) 3
+redis&gt; LSET mylist 0 &quot;four&quot;
+&quot;OK&quot;
+redis&gt; LSET mylist -2 &quot;five&quot;
+&quot;OK&quot;
+redis&gt; LRANGE mylist 0 -1
+1) &quot;four&quot;
+2) &quot;five&quot;
+3) &quot;three&quot;
+redis&gt;
+</code></pre>
+<hr />
+<h5 id="2254-ltrim">2.2.5.4. LTRIM命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LTRIM key start stop
+</code></pre>
+<p>修剪列表，使其只包含指定范围的元素。偏移量从0开始计算，如果为负数表示逆序。</p>
+<p>偏移量超出列表范围时不会报错：</p>
+<ul>
+<li>如果start大于end，或者start大于列表范围，将返回一个空列表（移除所有）。</li>
+<li>如果end大于列表范围，将被当成列表末尾处理。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot;
+(integer) 1
+redis&gt; RPUSH mylist &quot;two&quot;
+(integer) 2
+redis&gt; RPUSH mylist &quot;three&quot;
+(integer) 3
+redis&gt; LTRIM mylist 1 -1
+&quot;OK&quot;
+redis&gt; LRANGE mylist 0 -1
+1) &quot;two&quot;
+2) &quot;three&quot;
+redis&gt;
+</code></pre>
+<hr />
+<h5 id="2255-linsert">2.2.5.5. LINSERT命令</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">LINSERT key &lt;BEFORE | AFTER&gt; pivot element
+</code></pre>
+<p>在列表中pivot值的前面或后面（<code>&lt;BEFORE | AFTER&gt;</code>）插入指定的元素:</p>
+<ul>
+<li>如果列表不存在，不执行操作。</li>
+<li>如果列表存在，但是不包含pivot值，返回错误。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;Hello&quot;
+(integer) 1
+redis&gt; RPUSH mylist &quot;World&quot;
+(integer) 2
+redis&gt; LINSERT mylist BEFORE &quot;World&quot; &quot;There&quot;
+(integer) 3
+redis&gt; LRANGE mylist 0 -1
+1) &quot;Hello&quot;
+2) &quot;There&quot;
+3) &quot;World&quot;
+redis&gt;
+</code></pre>
+<h3 id="23">2.3. 阻塞式操作命令</h3>
+<h4 id="231">2.3.1. 关于阻塞式操作</h4>
+<p>列表的阻塞式操作，使其非常适合用于实现队列。通常作为进程间通信系统的构建模块。下面我们简单介绍何为阻塞式操作。</p>
+<p>想象一下，你要用列表来实现一个简单的生产者/消费者模式，这很简单：</p>
+<ul>
+<li>生产者进程：使用LPUSH命令将消息（元素）推入消息列表。</li>
+<li>消费者进程：使用RPOP命令从消息列表中获取消息。</li>
+</ul>
+<p>那么问题来了，消费者并不知道消息列表中有无数据。所以它只能每隔一段时间取一次数据，如果取到了就处理数据，没有取到数据就不执行处理。这种方式叫做：<strong>轮询</strong>。</p>
+<p>显然，轮询方式会强制Redis和客户端处理一些无效的命令，这会浪费一定的性能。另外轮询机制小，消费者获取消息也不是实时的，消息延迟取决于轮询间隔。</p>
+<p>针对上述的问题，Redis提供了阻塞式操作命令。当源列表为空时，这些阻塞式操作命令会阻塞，直到超时或新元素到达才会返回给调用者。</p>
+<h4 id="232">2.3.2. 命令列表</h4>
+<p>一个阻塞式操作命令是某个基础命令的变体，其功能与对应的基础命令相同，但多了<strong>阻塞</strong>。</p>
+<p>命令列表如下：</p>
+<ul>
+<li><code>BLMOVE</code>：LMOVE命令的变体（官方文档：<a href="https://redis.io/docs/latest/commands/blmove/">BLMOVE</a>）</li>
+<li><code>BLMPOP</code>：LMPOP命令的变体（官方文档：<a href="https://redis.io/docs/latest/commands/blmpop/">BLMPOP</a>）。</li>
+<li><code>BLPOP</code>：LPOP命令的变体（官方文档：<a href="https://redis.io/docs/latest/commands/blpop/">BLPOP</a>）。</li>
+<li><code>BRPOP</code>：RPOP命令的变体（官方文档：<a href="https://redis.io/docs/latest/commands/brpop/">BRPOP</a>）。</li>
+<li><code>BRPOPLPUSH</code>：RPOPLPUSH命令的变体。（已弃用）</li>
+</ul>
+<blockquote>
+<p>本文就不去为每个阻塞操作编写讲解啰～可以参考对应的基础命令章节，一般会多一个timeout参数用于指定超时时间。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

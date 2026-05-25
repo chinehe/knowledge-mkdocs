@@ -1,0 +1,2325 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87001_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/">
+      
+      
+        <link rel="next" href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87003_%E8%AF%A6%E8%A7%A3Lists%E5%88%97%E8%A1%A8%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>详解Strings核心命令与存储结构 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              详解Strings核心命令与存储结构
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库与缓存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87001_%E9%94%AE%28Keys%29%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C%E4%B8%8E%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_3" id="__nav_5_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据类型篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87001_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型梳理与选择指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Strings核心命令与存储结构
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Strings核心命令与存储结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 基础知识
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 相关命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 相关命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 命令列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 获取/设置字符串值的命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. 获取/设置字符串值的命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. 设置字符串值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. 获取字符串值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. 批量操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4. 子串操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5. 其他命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 计数器管理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 按位运算（略）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 内部实现原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 内部实现原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-sds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 SDS 结构解析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 与 C 字符串的对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 内存管理机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87003_%E8%AF%A6%E8%A7%A3Lists%E5%88%97%E8%A1%A8%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Lists列表类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87004_%E8%AF%A6%E8%A7%A3Hashes%E5%93%88%E5%B8%8C%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Hashes哈希类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87005_%E8%AF%A6%E8%A7%A3Sets%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Sets集合类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87006_%E8%AF%A6%E8%A7%A3SortedSets%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解SortedSets有序集合类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87007_%E8%AF%A6%E8%A7%A3Stream%E6%B5%81%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Stream流类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87008_JSON%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3%EF%BC%88%E8%8D%89%E7%A8%BF%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON类型详解（草稿）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 基础知识
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 相关命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 相关命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 命令列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 获取/设置字符串值的命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. 获取/设置字符串值的命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. 设置字符串值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. 获取字符串值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. 批量操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4. 子串操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5. 其他命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 计数器管理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 按位运算（略）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 内部实现原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 内部实现原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-sds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 SDS 结构解析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 与 C 字符串的对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 内存管理机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据库与缓存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Redis
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87001_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据类型篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>详解Strings核心命令与存储结构</h1>
+
+<p>本文详细介绍Redis 字符串类型，包括字符串类型的基础知识、常用命令、内部实现原理。</p>
+<h2 id="1">1. 基础知识</h2>
+<p>参考官方文档：<a href="https://redis.io/docs/latest/develop/data-types/strings/">Redis Strings</a></p>
+<p>Redis 字符串存储字节序列，包括文本、序列化对象和二进制数组。</p>
+<blockquote>
+<p>字符串类型的值可以是各种字符串（包括二进制数据），比如你可以jpeg图片存储在一个字符串类型的值里。</p>
+</blockquote>
+<p>字符串是Redis中最简单的类型，通常用于缓存，也可以用于实现计数器和执行按位操作。</p>
+<p><strong>存储限制与特性：</strong></p>
+<ul>
+<li><strong>最大容量</strong>：512 MB</li>
+<li><strong>二进制安全</strong>：可存储任意二进制数据（区别于 C 字符串的 <code>\0</code> 终止）</li>
+<li><strong>高效操作</strong>：获取字符串长度 <code>O(1)</code> 时间复杂度（通过预存长度字段实现）</li>
+</ul>
+<h2 id="2">2. 相关命令</h2>
+<p>Redis 字符串命令列表参考官方文档：<a href="https://redis.io/docs/latest/commands/?group=string">Redis Strings Command</a></p>
+<h3 id="21">2.1. 命令列表</h3>
+<p>根据命令功能的不同，可以将字符串相关的命令分成以下几类：</p>
+<ul>
+<li>
+<p><strong>获取/设置字符串值</strong>：用于设置/获取指定Key的值。</p>
+</li>
+<li>
+<p><strong>获取字符串值</strong></p>
+<ul>
+<li><code>GET</code>：获取指定键的值。如果键不存在，就返回nil。如果键值不是字符串类型，则会返回错误。</li>
+<li><code>GETDEL</code>：获取指定键的值，获取成功时同步删除该键。</li>
+<li><code>GETEX</code>：获取指定键的值，并可以选择设置其过期时间。</li>
+<li><code>GETSET</code>：原子性地为指定键设置新值，并返回键中存储的旧值（自 Redis 6.2.0 版本起，该命令被视为弃用。）</li>
+</ul>
+</li>
+<li>
+<p><strong>设置字符串值</strong></p>
+<ul>
+<li><code>PSETEX</code>：与SETEX相似，区别在于到期时间以毫秒为单位，而非秒数。（自 Redis 2.6.12 版本起，该命令被视为弃用。）</li>
+<li><code>SET</code>：为指定的键设置新值。如果键已存在，无论键值类型是什么，都会被覆盖。</li>
+<li><code>SETEX</code>：为指定的键设置新值，并为其设置指定秒数的过期时间。（自 Redis 2.6.12 版本起，该命令被视为弃用。）</li>
+<li><code>SETNX</code>：为指定的键设置新值。如果键已存在，则不执行任何操作。（自 Redis 2.6.12 版本起，该命令被视为弃用。）</li>
+</ul>
+</li>
+<li>
+<p><strong>批量操作</strong></p>
+<ul>
+<li><code>MGET</code>：获取指定的多个键的值。</li>
+<li><code>MSET</code>：为指定的多个键设置新值。</li>
+<li><code>MSETEX</code>：原子地指定的多个键设置新值，并且可以选择在一个操作中共享过期时间。</li>
+<li><code>MSETNX</code>：为指定的多个键设置新值，如果任意一个键已存在，则命令不会执行任何操作。</li>
+</ul>
+</li>
+<li>
+<p><strong>子串操作</strong></p>
+<ul>
+<li><code>APPEND</code>：在键值上追加字符串。如果键不存在就自动创建。</li>
+<li><code>SUBSTR</code>：获取指定键中存储字符串值的子串（通过偏移量指定范围）（自 Redis 2.0.0 版本起，该命令被视为弃用。）</li>
+<li><code>GETRANGE</code>：获取指定键中存储字符串值的子串（通过偏移量指定范围）。</li>
+<li><code>SETRANGE</code>：覆盖指定字符串键值的一部分（通过偏移量指定范围）。</li>
+</ul>
+</li>
+<li>
+<p><strong>其他</strong></p>
+<ul>
+<li><code>STRLEN</code>：获取指定字符串键值的长度。</li>
+<li><code>LCS</code>：实现了最长公共子序列算法。注意，这与最长的通用字符串算法不同，因为字符串中的匹配字符不必是连续的。</li>
+<li><code>DELEX</code>：基于值或哈希摘要比较，有条件地移除指定键。</li>
+<li><code>DIGEST</code>：获取指定键中存储值的哈希摘要（十六进制字符串）。键值必须是字符串类型。</li>
+</ul>
+</li>
+<li>
+<p><strong>计数器管理</strong>：将字符串类型用作计数器。</p>
+</li>
+<li>
+<p><code>INCR</code>：将键的整数值加一。如果键不存在，则使用0作为初始值。如果键值不是字符串类型，或者键值包含无法用整数表示的字符串，则会返回错误。</p>
+</li>
+<li><code>INCRBY</code>：将键的整数值加一个数字。如果键不存在，则使用0作为初始值。如果键值不是字符串类型，或者键值包含无法用整数表示的字符串，则会返回错误。</li>
+<li><code>INCRBYFLOAT</code>：将键的浮点型值加一个数字。如果键不存在，则使用0作为初始值。如果键值不是字符串类型，或者键值包含无法用双精度浮点数表示的字符串，则会返回错误。</li>
+<li><code>DECR</code>：将键的整数值减一。如果键不存在，则使用0作为初始值。</li>
+<li>
+<p><code>DECRBY</code>：将键的整数值减一个数字。如果键不存在，则使用0作为初始值。</p>
+</li>
+<li>
+<p><strong>按位运算</strong>：对字符串执行按位操作。</p>
+</li>
+</ul>
+<blockquote>
+<p>要对字符串进行按位作，请参见<a href="https://redis.io/docs/latest/develop/data-types/bitmaps/">位图数据类型</a>文档。</p>
+<p>本文不去讲解这部分，后续可能会写专门的博客讲解。</p>
+</blockquote>
+<h3 id="22">2.2. 获取/设置字符串值的命令</h3>
+<p>这一部分命令较多，本文会将这些按照功能分章节讲解。另外，对于上面已经标记弃用的命令，也不会进行详细讲解了。</p>
+<h4 id="221">2.2.1. 设置字符串值</h4>
+<p>上面提到了四个设置字符串值的命令：<code>PSETEX</code>、<code>SETEX</code>、<code>SETNX</code>、<code>SET</code>。</p>
+<p>其中前三个都已经被视为弃用，其功能都可以使用<code>SET</code>命令参数来实现，因此本文只讲解<code>SET</code>命令。</p>
+<p><strong>语法格式：</strong></p>
+<pre><code class="language-shell">SET key value 
+        [NX | XX | IFEQ ifeq-value | IFNE ifne-value | IFDEQ ifdeq-digest | IFDNE ifdne-digest]                 
+        [GET] 
+        [EX seconds | PX milliseconds | EXAT unix-time-seconds | PXAT unix-time-milliseconds | KEEPTTL]
+</code></pre>
+<blockquote>
+<p>这里可能需要解释一下如何理解这个语法格式：</p>
+<ol>
+<li>第一行这种单独写的命令和参数，是必须的。</li>
+<li>后面<code>[ ]</code>中的参数表示是可选的，可选的参数项以<code>|</code> 分割。</li>
+<li>同一个<code>[ ]</code>中的参数，只能选择0个或1个，不能选择多个。比如不能同时使用NX和XX参数。</li>
+<li>多个<code>[ ]</code>中的参数不会互相影响。比如可以同时使用NX和EX参数。</li>
+</ol>
+</blockquote>
+<p>SET命令将指定<code>key</code>存储的值设置为<code>value</code>。如果<code>key</code>已存在，无论其包含何种数据类型，都会被覆盖（过期时间也会被丢弃）。</p>
+<p><strong>可选参数解释：</strong></p>
+<ul>
+<li>设置的前提参数</li>
+<li>NX：只有在指定键不存在时才执行。</li>
+<li>XX：只有在指定键存在时才执行。</li>
+<li>IFEQ：只有在当前键值等于指定值时，才设置键值和过期时间。如果键不存在，也不会创建。</li>
+<li>IFNE：只有在当前键值不等于指定值时，才设置键值和过期时间。如果键不存在，则会创建。</li>
+<li>IFDEQ：只有在当前键值的哈希摘要等于指定值时，才设置键值和过期时间。如果键不存在，也不会创建。</li>
+<li>IFDNE：只有在当前键值的哈希摘要不等于指定值时，才设置键值和过期时间。如果键不存在，则会创建。</li>
+<li>GET：返回存储在 key 中的旧字符串，若 key 不存在则返回 nil。如果键存储的值不是字符串，则返回错误并中止 <code>SET</code>。</li>
+<li>过期时间参数：</li>
+<li>EX：设置指定的到期时间（秒）。</li>
+<li>PX：设置指定的到期时间（毫秒）。</li>
+<li>EXAT：设置密钥到期的Unix时间戳（秒）。</li>
+<li>PXAT：设置密钥到期的Unix时间戳（毫秒）。</li>
+<li>KEEPTTL：保持键原有的过期时间不变。</li>
+</ul>
+<p><strong>语法历史：</strong></p>
+<ul>
+<li>从 Redis 2.6.12 版本开始：增加了 <code>EX、``PX</code>、<code>NX</code> 和 <code>XX</code> 选项。</li>
+<li>从 Redis 6.0.0 版本开始：添加了 <code>KEEPTTL</code> 选项。</li>
+<li>从 Redis 6.2.0 版本开始：增加了 <code>GET</code>、<code>EXAT</code> 和 <code>PXAT</code> 选项。</li>
+<li>从 Redis 7.0.0 版本开始：允许 <code>NX</code> 和 <code>GET</code> 选项一起使用。</li>
+<li>从 Redis 8.4.0 版本开始：增加了 'IFEQ'、'IFNE'、'IFDEQ'、'IFDNE' 选项。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET mykey &quot;Hello&quot;
+&quot;OK&quot;
+redis&gt; GET mykey
+&quot;Hello&quot;
+redis&gt; SET anotherkey &quot;will expire in a minute&quot; EX 60
+&quot;OK&quot;
+redis&gt; 
+</code></pre>
+<h4 id="222">2.2.2. 获取字符串值</h4>
+<p>上面提到了四个获取字符串值的命令：<code>GET</code>、<code>GETDEL</code>、<code>GETEX</code>、<code>GETSET</code>。</p>
+<p>其中<code>GETSET</code>已经被视为弃用，本文将不做讲解。</p>
+<hr />
+<p><strong>GET 语法格式：</strong></p>
+<pre><code class="language-shell">GET key
+</code></pre>
+<p>GET命令获取指定<code>key</code>存储的字符串值。如果<code>key</code>不存在，返回nil；如果<code>key</code>存储的值不是字符串类型，则会返回错误。</p>
+<hr />
+<p><strong>GETDEL 语法格式：</strong></p>
+<pre><code class="language-shell">GETDEL key
+</code></pre>
+<p>与<code>GET</code>命令类似，但<code>GETDEL</code>会在获取成功时同步删除该键（当且仅当键值类型是字符串时）。</p>
+<hr />
+<p><strong>GETEX 语法格式：</strong></p>
+<pre><code class="language-shell">GETEX key 
+    [EX seconds | PX milliseconds | EXAT unix-time-seconds | PXAT unix-time-milliseconds | PERSIST]
+</code></pre>
+<p>与<code>GET</code>命令类似，但<code>GETEX</code>可以选择在获取成功时，为该键设置过期时间。</p>
+<p>可选参数如下：</p>
+<ul>
+<li>过期时间设置</li>
+<li>EX：设置指定的到期时间（秒）。</li>
+<li>PX：设置指定的到期时间（毫秒）。</li>
+<li>EXAT：设置密钥到期的Unix时间戳（秒）。</li>
+<li>PXAT：设置密钥到期的Unix时间戳（毫秒）。</li>
+<li>PERSIST：移除密钥的过期时间。</li>
+</ul>
+<h4 id="223">2.2.3. 批量操作</h4>
+<p>批量操作命令允许一次操作多个键，非常便捷且高效！</p>
+<hr />
+<p><strong>MGET 语法格式:</strong></p>
+<pre><code class="language-shell">MGET key [key ...]
+</code></pre>
+<p><code>MGET</code>命令一次获取多个指定<code>key</code>所存储的字符串值。</p>
+<p>如果指定的<code>key</code>列表中，存在key不存在或对应键值不是字符串类型的请求，则对应的应答会是nil，而不会报错。因此该命令不会执行失败。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET key1 &quot;Hello&quot;
+&quot;OK&quot;
+redis&gt; SET key2 &quot;World&quot;
+&quot;OK&quot;
+redis&gt; MGET key1 key2 nonexisting
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+3) (nil)
+redis&gt;
+</code></pre>
+<hr />
+<p><strong>MSET 语法格式:</strong></p>
+<pre><code class="language-shell">MSET key value [key value ...]
+</code></pre>
+<p><code>MSET</code>命令一次性设置多个指定<code>key</code>所存储的字符串值，它会使用新值替换旧值，就像普通SET命令一样。</p>
+<p>MSET命令是原子的，所以其中指定的键是同时设置的。对客户端来说，不存在部分更新的情况。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; MSET key1 &quot;Hello&quot; key2 &quot;World&quot;
+&quot;OK&quot;
+redis&gt; GET key1
+&quot;Hello&quot;
+redis&gt; GET key2
+&quot;World&quot;
+</code></pre>
+<hr />
+<p><strong>MSETEX 语法格式:</strong></p>
+<pre><code class="language-shell">MSETEX numkeys key value 
+    [key value ...] 
+    [NX | XX] 
+    [EX seconds | PX milliseconds | EXAT unix-time-seconds | PXAT unix-time-milliseconds | KEEPTTL]
+</code></pre>
+<p><code>MSETEX</code>命令与<code>MSET</code>命令类似，但提供了额外的可选参数，用于指定设置操作的前提条件和键的过期时间。</p>
+<ul>
+<li>
+<p>必填参数中的<code>numkeys</code>表示键值对的个数。</p>
+</li>
+<li>
+<p><code>MSETEX</code>命令的可选参数与<code>SET</code>命令的可选参数，含义基本相同，这里不再赘述。需要注意的是，<code>MSETEX</code>命令的可选参数配置会应用到所有指定的key上。</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>特别注意：</strong> NX和XX参数是针对所有指定键的，也就是说所有指定的键都不存在（NX） /或者都存在（XX）时才执行。</p>
+</blockquote>
+<hr />
+<p><strong>MSETNX 语法格式:</strong></p>
+<pre><code class="language-shell">MSETNX key value [key value ...]
+</code></pre>
+<p><code>MSETNX</code>命令与<code>MSET</code>命令类似，但多了一个执行条件：所有指定的键都不存在时才执行操作。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; MSETNX key1 &quot;Hello&quot; key2 &quot;there&quot;
+(integer) 1
+redis&gt; MSETNX key2 &quot;new&quot; key3 &quot;world&quot;
+(integer) 0
+redis&gt; MGET key1 key2 key3
+1) &quot;Hello&quot;
+2) &quot;there&quot;
+3) (nil)
+redis&gt;
+</code></pre>
+<h4 id="224">2.2.4. 子串操作</h4>
+<p>上面提到了<code>APPEND</code>、<code>SUBSTR</code>、<code>GETRANGE</code>、<code>SETRANGE</code>四个子串操作命令。</p>
+<p>其中<code>SUBSTR</code>已经被视为弃用，因此本文只讲解其他三个命令。</p>
+<hr />
+<p><strong>APPEND 语法格式：</strong></p>
+<pre><code class="language-shell">APPEND key value
+</code></pre>
+<p>APPEND命令在指定<code>key</code>存储的字符串键值后面追加字符串。如果key不存在，则会自动创建并将其初始值设置为空字符串（这种场景下功能根SET命令一样了）。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; EXISTS mykey
+(integer) 0
+redis&gt; APPEND mykey &quot;Hello&quot;
+(integer) 5
+redis&gt; APPEND mykey &quot; World&quot;
+(integer) 11
+redis&gt; GET mykey
+&quot;Hello World&quot;
+redis&gt; 
+</code></pre>
+<hr />
+<p><strong>GETRANGE 语法格式：</strong></p>
+<pre><code class="language-shell">GETRANGE key start end
+</code></pre>
+<p><code>GETRANGE</code>命令返回指定key所存储字符串键值的指定范围[start,end]子串。如果偏移量为负数，则表示从字符串末端开始的偏移，比如-1表示最后一个字符串，-2表示倒数第二个字符。</p>
+<p>当参数指定的偏移量超出了范围时，会自动将其限制为实际的字符串长度。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET mykey &quot;This is a string&quot;
+&quot;OK&quot;
+redis&gt; GETRANGE mykey 0 3
+&quot;This&quot;
+redis&gt; GETRANGE mykey -3 -1
+&quot;ing&quot;
+redis&gt; GETRANGE mykey 0 -1
+&quot;This is a string&quot;
+redis&gt; GETRANGE mykey 10 100
+&quot;string&quot;
+redis&gt; 
+</code></pre>
+<hr />
+<p><strong>SETRANGE 语法格式：</strong></p>
+<pre><code class="language-shell">SETRANGE key offset value
+</code></pre>
+<p><code>SETRANGE</code>命令从指定的偏移量开始，使用指定的值来覆盖指定key存储的字符串。</p>
+<p>如果偏移量大于当前字符串值的长度，则字符串会填充零字节到足够的长度。</p>
+<p>如果key不存在，则会被视为空字符串处理。该命令会确保持有一个足够大的字符串，能够在偏移量处设置值。</p>
+<p>基本示例：</p>
+<pre><code class="language-shell">redis&gt;  SET words &quot;hello world&quot;
+OK
+redis&gt;  SETRANGE words 6 redis
+(integer) 11
+redis&gt;  GET words
+&quot;hello redis&quot;
+redis&gt;  SETRANGE words 6 go
+(integer) 11
+redis&gt;  GET words
+&quot;hello godis&quot;
+redis&gt;  SETRANGE words 6 lalalalalalala
+(integer) 20
+redis&gt;  GET words
+&quot;hello lalalalalalala&quot;
+</code></pre>
+<p>零填充示例：</p>
+<pre><code class="language-shell">redis&gt; get words2 
+(nil) # words2 不存在
+redis&gt; setrange words2 6 world
+(integer) 11
+redis&gt; get words2
+&quot;\x00\x00\x00\x00\x00\x00world&quot;
+</code></pre>
+<h4 id="225">2.2.5. 其他命令</h4>
+<p><strong>STRLEN 语法格式：</strong></p>
+<pre><code class="language-shell">STRLEN key
+</code></pre>
+<p><code>STRLEN</code>命令用于获取指定键对应字符串值的长度（字节为单位）。如果键不存在或键值为空字符串，则返回0。该操作时间复杂度为<code>O(1)</code>，因为Redis的SDS（Simple Dynamic String）结构中直接存储了字符串长度。</p>
+<blockquote>
+<ul>
+<li>为什么Redis获取字符串长度是O(1)？因为Redis使用自定义的SDS结构，其中<code>len</code>字段记录了当前字符串长度，无需像C字符串那样遍历到\0字符才能确定长度。</li>
+<li>这使得<code>STRLEN</code>命令非常高效，即使面对大字符串也能快速响应。</li>
+</ul>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET mykey &quot;Hello World&quot;
+&quot;OK&quot;
+redis&gt; STRLEN mykey
+(integer) 11
+redis&gt; STRLEN nonexisting
+(integer) 0
+redis&gt; 
+</code></pre>
+<hr />
+<p><strong>LCS 语法格式：</strong></p>
+<pre><code class="language-shell">LCS key1 key2 [LEN] [IDX] [MINMATCHLEN len] [WITHMATCHLEN]
+</code></pre>
+<p><code>LCS</code>（Longest Common Subsequence）命令用于计算两个字符串之间的最长公共子序列。与最长公共子串不同，子序列中的字符不需要连续，只需保持相对顺序。</p>
+<p><strong>可选参数解释：</strong></p>
+<ul>
+<li><code>LEN</code>：只返回最长公共子序列的长度，而不返回具体的匹配内容。</li>
+<li><code>IDX</code>：返回匹配项在原字符串中的索引位置信息。</li>
+<li><code>MINMATCHLEN</code>：设置匹配片段的最小长度阈值。</li>
+<li><code>WITHMATCHLEN</code>：与<code>IDX</code>一起使用时，额外显示每个匹配块的长度。</li>
+</ul>
+<blockquote>
+<ul>
+<li>想象你有两个DNA序列，想找出它们之间最长的共同遗传片段，这些片段在两个序列中出现的顺序相同但不一定连续——这正是LCS要解决的问题。</li>
+<li>例如，字符串"ABCDGH"和"AEDFHR"的最长公共子序列为"ADH"，长度为3。</li>
+</ul>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET key1 &quot;ohmytext&quot;
+&quot;OK&quot;
+redis&gt; SET key2 &quot;mynewtext&quot;
+&quot;OK&quot;
+redis&gt; LCS key1 key2
+&quot;mytext&quot;
+redis&gt; LCS key1 key2 LEN
+(integer) 6
+redis&gt; 
+</code></pre>
+<hr />
+<p><strong>DELEX 语法格式：</strong></p>
+<pre><code class="language-shell">DELEX key [IFEQ ifeq-value | IFNE ifne-value | IFDEQ ifdeq-digest | IFDNE ifdne-digest]
+</code></pre>
+<p><code>DELEX</code>（Delete with Existence Check）命令基于条件判断来删除指定键。只有当满足指定条件时，才会执行删除操作。该命令提供了一种安全的删除机制，避免误删数据。</p>
+<p><strong>可选参数解释：</strong>
+- <code>IFEQ</code>：仅当键的当前值等于指定值时才删除。
+- <code>IFNE</code>：仅当键的当前值不等于指定值时才删除。
+- <code>IFDEQ</code>：仅当键的当前值的哈希摘要等于指定摘要时才删除。
+- <code>IFDNE</code>：仅当键的当前值的哈希摘要不等于指定摘要时才删除。</p>
+<blockquote>
+<ul>
+<li>可以将<code>DELEX</code>想象成一个智能保险柜，只有输入正确的密码（条件）才能取出（删除）里面的物品（键值）。</li>
+<li>这在分布式系统中特别有用，可以防止多个客户端同时修改同一资源时产生冲突。</li>
+</ul>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET mykey &quot;current_value&quot;
+&quot;OK&quot;
+redis&gt; DELEX mykey IFEQ &quot;wrong_value&quot;
+(nil)
+redis&gt; DELEX mykey IFEQ &quot;current_value&quot;
+&quot;current_value&quot;
+redis&gt; EXISTS mykey
+(integer) 0
+redis&gt; 
+</code></pre>
+<hr />
+<p><strong>DIGEST 语法格式：</strong></p>
+<pre><code class="language-shell">DIGEST key
+</code></pre>
+<p><code>DIGEST</code>命令用于获取指定键中存储值的哈希摘要（SHA1算法生成的40位十六进制字符串）。该命令主要用于快速比较两个键值是否相等，而无需传输完整的值内容。</p>
+<blockquote>
+<ul>
+<li>想象你要验证一份重要文件是否被篡改过，你可以计算它的“指纹”（哈希值），以后每次检查时只需比对指纹即可，无需逐字比对全文。</li>
+<li>Redis使用SHA1算法生成40位的十六进制字符串作为“指纹”，确保数据完整性校验的高效性。</li>
+</ul>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET mykey &quot;Hello World&quot;
+&quot;OK&quot;
+redis&gt; DIGEST mykey
+&quot;be65a15cd8f9c3ee5757c1c0b2aa493e28eb8d2a&quot;
+redis&gt; 
+</code></pre>
+<h3 id="23">2.3. 计数器管理</h3>
+<p>Redis 字符串类型支持将键值用作原子计数器，这些命令在键不存在时会自动初始化为0，非常适合实现页面访问计数、库存管理、限流器等场景。所有计数器操作都是原子的，即使在高并发环境下也能保证准确性。</p>
+<hr />
+<p><strong>INCR 语法格式：</strong></p>
+<pre><code class="language-shell">INCR key
+</code></pre>
+<p><code>INCR</code>命令将指定键的整数值加1。如果键不存在，Redis会将其初始值设为0后再执行加1操作。这是最简单的计数器实现方式，适用于每次递增1的场景。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET article:123:views 100
+&quot;OK&quot;
+redis&gt; INCR article:123:views
+(integer) 101
+redis&gt; GET article:123:views
+&quot;101&quot;
+</code></pre>
+<hr />
+<p><strong>INCRBY 语法格式：</strong></p>
+<pre><code class="language-shell">INCRBY key increment
+</code></pre>
+<p><code>INCRBY</code> 命令将指定键的整数值增加给定的增量值（increment）。如果键不存在，Redis会将其初始值设为0后再执行增量操作。这提供了比INCR更灵活的控制，适用于需要不同步长的计数场景。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET article:123:views 100
+&quot;OK&quot;
+redis&gt; INCRBY article:123:views 5
+(integer) 105
+redis&gt; GET article:123:views
+&quot;105&quot;
+</code></pre>
+<hr />
+<p><strong>INCRBYFLOAT 语法格式：</strong></p>
+<pre><code class="language-shell">INCRBYFLOAT key increment
+</code></pre>
+<p><code>INCRBYFLOAT</code> 命令将指定键的浮点数值增加给定的增量值（可以是整数或浮点数）。如果键不存在，Redis会将其初始值设为0后再执行增量操作。这是处理需要小数精度的计数场景的唯一选择。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET temperature 25.0
+&quot;OK&quot;
+redis&gt; INCRBYFLOAT temperature 0.5
+&quot;25.5&quot;
+redis&gt; INCRBYFLOAT temperature -1.2
+&quot;24.3&quot;
+</code></pre>
+<hr />
+<p><strong>DECR 语法格式：</strong></p>
+<pre><code class="language-shell">DECR key
+</code></pre>
+<p><code>DECR</code> 命令将指定键的整数值减1。如果键不存在，Redis会将其初始值设为0后再执行减1操作。这是最简单的递减计数器实现方式，适用于库存减少、倒计时等需要递减计数的场景。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET stock 100
+&quot;OK&quot;
+redis&gt; DECR stock
+(integer) 99
+redis&gt; GET stock
+&quot;99&quot;
+</code></pre>
+<hr />
+<p><strong>DECRBY 语法格式：</strong></p>
+<pre><code class="language-shell">DECRBY key decrement
+</code></pre>
+<p><code>DECRBY</code> 命令将指定键的整数值减少给定的减量值（decrement）。如果键不存在，Redis会将其初始值设为0后再执行减量操作。这提供了比DECR更灵活的控制，适用于需要不同步长的递减场景。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; SET stock 100
+&quot;OK&quot;
+redis&gt; DECRBY stock 5
+(integer) 95
+redis&gt; GET stock
+&quot;95&quot;
+</code></pre>
+<h3 id="24">2.4. 按位运算（略）</h3>
+<p>要对字符串进行按位作，请参见<a href="https://redis.io/docs/latest/develop/data-types/bitmaps/">位图数据类型</a>文档。</p>
+<p>本文不去讲解这部分，后续可能会写专门的博客讲解。</p>
+<h2 id="3">3. 内部实现原理</h2>
+<p>建议参考这篇文章：<a href="https://www.cnblogs.com/lonely-wolf/p/14261486.html">一个简单的字符串，为什么 Redis 要设计的如此特别 </a></p>
+<h3 id="31-sds">3.1 SDS 结构解析</h3>
+<p>Redis 使用 <strong>Simple Dynamic String (SDS)</strong> 替代 C 原生字符串，核心结构：</p>
+<pre><code class="language-c">struct __attribute__ ((__packed__)) sdshdr8 {
+    uint8_t len;     // 当前长度
+    uint8_t alloc;   // 分配的内存总量
+    uint8_t flags;   // 类型标识（8/16/32/64位）
+    char buf[];      // 柔性数组存储实际数据
+};
+
+</code></pre>
+<h3 id="32-c">3.2 与 C 字符串的对比</h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>C 字符串</th>
+<th>Redis SDS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>获取长度</td>
+<td><code>O(n)</code> 遍历</td>
+<td><code>O(1)</code> 直接读取 <code>len</code></td>
+</tr>
+<tr>
+<td>缓冲区溢出</td>
+<td>可能发生</td>
+<td>通过 <code>alloc</code> 预分配内存避免</td>
+</tr>
+<tr>
+<td>二进制安全</td>
+<td>不支持 <code>0</code></td>
+<td>完全支持任意二进制数据</td>
+</tr>
+<tr>
+<td>内存分配</td>
+<td>每次修改都可能 realloc</td>
+<td>空间预分配策略减少 realloc 次数</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-mermaid">graph LR
+    A[C字符串] --&gt;|需要遍历| B[获取长度 O（n）]
+    A --&gt;|无长度记录| C[缓冲区溢出风险]
+    C --&gt; D[程序崩溃]
+
+    E[SDS] --&gt;|存储len字段| F[获取长度 O（1）]
+    E --&gt;|alloc &gt; len| G[空间预分配]
+    G --&gt; H[减少内存分配次数]
+</code></pre>
+<h3 id="33">3.3 内存管理机制</h3>
+<ul>
+<li><strong>空间预分配</strong>：当字符串增长时，额外分配 1x~2x 空间</li>
+<li><strong>惰性释放</strong>：缩短字符串时不立即释放内存，供后续扩展使用</li>
+<li><strong>类型分级</strong>：根据字符串长度使用不同结构体（sdshdr5/8/16/32/64）</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

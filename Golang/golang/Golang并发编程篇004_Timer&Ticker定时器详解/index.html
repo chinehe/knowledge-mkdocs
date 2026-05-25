@@ -1,0 +1,2509 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87003_sync%E5%8C%85%E8%AF%A6%E8%A7%A3/">
+      
+      
+        <link rel="next" href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87005_context%E5%8C%85%E8%AF%A6%E8%A7%A3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Timer&Ticker定时器详解 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-golang" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Timer&Ticker定时器详解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang语言
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang语言
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    并发编程篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87001_%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程相关概念解释
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87002_Go%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Go并发基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87003_sync%E5%8C%85%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sync包详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timer&Ticker定时器详解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timer&Ticker定时器详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-golang" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Golang中的定时器
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Timer 单次定时器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Timer 单次定时器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 关于Timer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 初始化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. 初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-newtimer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. NewTimer 创建定时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-afterfunc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. AfterFunc 指定时间间隔后执行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-after" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. After 创建定时器只返回通道
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Timer的结构体方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. Timer的结构体方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. Stop 停止定时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. Reset 重置定时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 使用示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. 使用示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1. 使用Timer实现延时执行
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Ticker 周期定时器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Ticker 周期定时器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-ticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 关于Ticker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-tiker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 创建Tiker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-tiker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Tiker的结构体方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Tiker的结构体方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1. Stop 停止定时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.2. Reset 重置定时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. 使用示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4. 使用示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.1. 循环执行
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87005_context%E5%8C%85%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    context包详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gin框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gin框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E8%BF%9B%E9%98%B6%E7%AF%87001_%E6%9B%B4%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8gin%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-golang" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Golang中的定时器
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Timer 单次定时器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Timer 单次定时器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 关于Timer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 初始化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. 初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-newtimer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. NewTimer 创建定时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-afterfunc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. AfterFunc 指定时间间隔后执行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-after" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. After 创建定时器只返回通道
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Timer的结构体方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. Timer的结构体方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. Stop 停止定时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. Reset 重置定时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 使用示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. 使用示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1. 使用Timer实现延时执行
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-ticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Ticker 周期定时器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Ticker 周期定时器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-ticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 关于Ticker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-tiker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 创建Tiker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-tiker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Tiker的结构体方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. Tiker的结构体方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-stop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1. Stop 停止定时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.2. Reset 重置定时器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. 使用示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4. 使用示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.1. 循环执行
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang语言
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87001_%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    并发编程篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Timer&Ticker定时器详解</h1>
+
+<p>Golang定时器基于通道机制，与goroutine配合使用，提供了简介而强大的时间控制功能。</p>
+<h2 id="1-golang">1. Golang中的定时器</h2>
+<p>Golang中有两种类型的定时器：
+* Timer：单次触发的定时器，在指定时间后执行一次。</p>
+<blockquote>
+<p>Timer 用于延迟执行某个任务
+* Ticker：周期性触发的定时器，按照固定间隔重复执行。
+Ticker 用于间隔执行某个任务。</p>
+</blockquote>
+<p>不罗嗦了，我们直接开始看这两种定时器的具体定义和使用！</p>
+<h2 id="2-timer">2. Timer 单次定时器</h2>
+<h3 id="21-timer">2.1. 关于Timer</h3>
+<p>Timer结构体源码：</p>
+<pre><code class="language-go">type Timer struct {
+    C &lt;-chan Time
+    r runtimeTimer
+}
+</code></pre>
+<ul>
+<li>Timer代表了单个时间：当到达Timer指定的时间后，当前时间会被发送到<code>C &lt;-chan Time</code>通道上，除非Timer是由<code>AfterFunc</code>方法创建的。（后文会介绍）</li>
+<li>Timer必须由<code>NewTimer</code>或<code>AfterFunc</code>方法创建。</li>
+</ul>
+<h3 id="22">2.2. 初始化</h3>
+<p>Timer必须由<code>NewTimer</code>或<code>AfterFunc</code>方法创建。</p>
+<h4 id="221-newtimer">2.2.1. NewTimer 创建定时器</h4>
+<p>方法源码：</p>
+<pre><code class="language-go">func NewTimer(d Duration) *Timer {
+    c := make(chan Time, 1)
+    t := &amp;Timer{
+        C: c,
+        r: runtimeTimer{
+            when: when(d),
+            f:    sendTime,
+            arg:  c,
+        },
+    }
+    startTimer(&amp;t.r)
+    return t
+}
+</code></pre>
+<ul>
+<li><code>NewTimer</code>返回一个Timer，在经过指定的时间间隔<code>d Duration</code>后，Timer会将当前时间发送到其C通道上。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">log.Printf(&quot;starting...\n&quot;)
+
+t := time.NewTimer(time.Second * 2) // 创建两秒定时器
+&lt;-t.C // 等待定时器触发（两秒）
+
+log.Printf(&quot;after 2 sencond...\n&quot;)
+
+// 输出
+2025/11/21 10:58:11 starting...
+2025/11/21 10:58:13 after 2 sencond...
+</code></pre>
+<h4 id="222-afterfunc">2.2.2. AfterFunc 指定时间间隔后执行</h4>
+<p>方法源码：</p>
+<pre><code class="language-go">func AfterFunc(d Duration, f func()) *Timer {
+    t := &amp;Timer{
+        r: runtimeTimer{
+            when: when(d),
+            f:    goFunc,
+            arg:  f,
+        },
+    }
+    startTimer(&amp;t.r)
+    return t
+}
+</code></pre>
+<ul>
+<li><code>AfterFunc</code>方法在指定的时间间隔<code>d Duration</code>后，在自己的goroutine中自动调用指定的方法<code>f func()</code>。</li>
+<li><code>AfterFunc</code>方法返回的Timer可以用于取消调用（使用Stop方法）。</li>
+<li><code>AfterFunc</code>方法返回的Timer的C通道是nil的，禁止使用。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">log.Printf(&quot;starting...\n&quot;)
+
+time.AfterFunc(time.Second*2, func() { // 两秒后打印
+  log.Printf(&quot;after 2 senconds...&quot;)
+})
+
+time.Sleep(time.Second * 3) // 主协程等待3秒
+log.Printf(&quot;done&quot;)
+
+// 输出
+2025/11/21 11:06:11 starting...
+2025/11/21 11:06:13 after 2 senconds...
+2025/11/21 11:06:14 done
+</code></pre>
+<h4 id="223-after">2.2.3. After 创建定时器只返回通道</h4>
+<p>除了<code>NewTimer</code>和<code>AfterFunc</code>方法外，<code>After</code>方法可以创建定时器，但是After方法实际上是通过调用<code>NewTimer</code>方法创建的。看源码：</p>
+<pre><code class="language-go">func After(d Duration) &lt;-chan Time {
+    return NewTimer(d).C
+}
+</code></pre>
+<p>从源码可以看到，<code>After</code>方法调用<code>NewTime</code>r方法创建了一个Timer，<strong>但是只返回了Timer的C通道</strong>。</p>
+<blockquote>
+<p>这意味着在指定时间到达之前，调用者没有无法通过调用<code>Timer.Stop</code>方法来停止计时，垃圾收集器不会回收底层定时器。</p>
+<p>所以如果担心效率，请改用 NewTimer，并在不再需要定时器时调用 Timer.Stop</p>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-go">log.Printf(&quot;starting...\n&quot;)
+
+timerChan := time.After(time.Second * 2) // 创建2秒定时器（只返回通道）
+&lt;-timerChan // 等待定时器触发
+
+fmt.Println(&quot;after 2 seconds...&quot;)
+</code></pre>
+<h3 id="23-timer">2.3. Timer的结构体方法</h3>
+<h4 id="231-stop">2.3.1. Stop  停止定时器</h4>
+<p>源码：</p>
+<pre><code class="language-go">func (t *Timer) Stop() bool {
+    if t.r.f == nil {
+        panic(&quot;time: Stop called on uninitialized Timer&quot;)
+    }
+    return stopTimer(&amp;t.r)
+}
+</code></pre>
+<p>Stop方法用于停止定时器计时，从而防止定时器触发。
+* 如果调用Stop方法成功停止了定时器，方法返回true。如果定时器已经到期（触发过了）或者已经被Stop过了，返回false。
+* Stop方法不会关闭定时器的通道，以防止从通道错误地读取成功。
+* 为了确保调用Stop后定时器的通道是空的，可以检查Stop方法的返回值并排空通道：
+    <code>go
+    if !t.Stop() { // 如果Stop失败
+        &lt;-t.C // 排空通道
+    }</code>
+* 对于使用<code>AfterFunc(d, f)</code>创建的定时器，如果<code>t.Stop</code> 返回 false，则定时器已经到期，并且函数 f 已在其自己的 goroutine 中启动； Stop 不会等待 f 完成才返回。如果调用者需要知道 f 是否完成，它必须显式地与 f 协调。</p>
+<h4 id="222-reset">2.2.2. Reset 重置定时器</h4>
+<p>源码</p>
+<pre><code class="language-go">func (t *Timer) Reset(d Duration) bool {
+    if t.r.f == nil {
+        panic(&quot;time: Reset called on uninitialized Timer&quot;)
+    }
+    w := when(d)
+    return resetTimer(&amp;t.r, w)
+}
+</code></pre>
+<p>Reset方法将定时器的过期时间设置为新的，即当前时间过<code>d Duration</code>时间后.
+* 如果定时器已激活（had been active），将返回true。如果定时器已经到期或者已经被停止，方法返回false。注意这里返回的true和false并不代表是否Reset成功！！！看示例：
+    ```go
+    func main() {
+        timer := time.NewTimer(time.Second * 5) // 计时5秒</p>
+<pre><code>    time.Sleep(time.Second)
+    log.Println(timer.Stop()) // 一秒后停止计时 ：true
+
+    time.Sleep(time.Second)
+    log.Println(timer.Reset(time.Second * 5)) // 再过一秒后Reset成5秒：false
+
+    log.Println(&lt;-timer.C) // 输出的是重新Reset，5秒后的时间。
+}
+```
+可以看到，Reset时由于定时器已经被Stop，返回了false。实际上还是设置了新的过期时间为5秒。
+&gt; 请注意，不可能正确使用 Reset 的返回值，因为在耗尽通道和新定时器到期之间存在竞争条件。如上所述，应始终在已停止或过期的通道上调用重置。返回值的存在是为了保持与现有程序的兼容性。
+</code></pre>
+<ul>
+<li>对于<code>NewTimer</code>方法创建的Timer，调用Reset方法时，应该确保Timer是一个通道中没有值的已过期或已停止的定时器。如果通道不为空，接收方可能会收到两个结果：一个原本的，一个新的。</li>
+<li>如果程序已经从 t.C 接收到一个值，则知道定时器已到期并且通道已耗尽，因此可以直接使用 t.Reset。但是，如果程序尚未从 t.C 接收到值，则必须停止定时器，并且如果 Stop 报告定时器在停止之前已过期，则通道需要显式耗尽：
+    <code>go
+    if !t.Stop() {
+        &lt;-t.C
+    }
+    t.Reset(d)</code></li>
+<li>对于使用<code>AfterFunc(d, f)</code> 创建的定时器，Reset 要么重新安排 f 运行的时间（在这种情况下 Reset 返回 true），要么安排 f 再次运行（在这种情况下返回 false）。当 Reset 返回 false 时，Reset 既不会等待前一个 f 完成才返回，也不保证后续运行 f 的 goroutine 不会与前一个 goroutine 并发运行。如果调用者需要知道 f 的先前执行是否完成，它必须显式地与 f 协调。</li>
+</ul>
+<h3 id="24">2.4. 使用示例</h3>
+<h4 id="241-timer">2.4.1. 使用Timer实现延时执行</h4>
+<p>场景：在指定时间间隔后，开始执行指定任务。</p>
+<pre><code class="language-go">func main() {
+    // 创建一个5秒的定时器
+    timer := time.NewTimer(time.Second * 5)
+
+    // 起一个协程,5秒后执行domSomeThing方法
+    go func() {
+        &lt;-timer.C
+        doSomeThing()
+    }()
+
+    // 主线程继续执行其他的
+    // 这里睡眠等待子协程输出
+    time.Sleep(time.Second * 6)
+}
+
+func doSomeThing() {
+    log.Println(&quot;DO&quot;)
+}
+</code></pre>
+<p>上面的示例也可以将<code>NewTimer</code>替换成使用<code>After</code>方法：</p>
+<pre><code class="language-go">func main() {
+    // 创建一个5秒的定时器
+    c := time.After(time.Second * 5)
+
+    // 起一个协程,5秒后执行domSomeThing方法
+    go func() {
+        &lt;-c
+        doSomeThing()
+    }()
+
+    // 主线程继续执行其他的
+    // 这里睡眠等待子协程输出
+    time.Sleep(time.Second * 6)
+}
+
+func doSomeThing() {
+    log.Println(&quot;DO&quot;)
+}
+</code></pre>
+<p>当然，这里使用<code>AfterFunc方法</code>好像更加优雅</p>
+<pre><code class="language-go">func main() {
+    // AfterFunc方法将在5秒后执行doSomeThing方法
+    _ = time.AfterFunc(time.Second*5, doSomeThing)
+
+    // 主线程继续执行其他的
+    // 这里睡眠等待子协程输出
+    time.Sleep(time.Second * 6)
+}
+
+func doSomeThing() {
+    log.Println(&quot;DO&quot;)
+}
+````
+#### 2.4.2使用Timer实现超时控制
+场景：执行一个比较耗时的操作doSomeThing，如果执行耗时超过5秒，就打印超时日志。
+```go
+func main() {
+    // 定时器设置超时时间为4秒
+    timer := time.NewTimer(time.Second * 4)
+
+    // resultChan 用以接收返回结果
+    resultChan := make(chan int, 1)
+
+    // 起一个协程去执行耗时操作
+    go func() {
+        resultChan &lt;- doSomeThing() // 执行结果放入结果通道
+    }()
+
+    // 监听两个通道
+    select {
+    case &lt;-timer.C:
+        log.Println(&quot;doSomeThing timeout.&quot;)
+    case r := &lt;-resultChan:
+        log.Printf(&quot;doSomeThing got result:%d\n&quot;, r)
+    }
+
+    // 这里等2秒,等待子协程输出
+    time.Sleep(2 * time.Second)
+}
+
+func doSomeThing() int {
+    log.Println(&quot;doSomeThing start.&quot;)
+    time.Sleep(5 * time.Second) // 模拟耗时操作
+    log.Println(&quot;doSomeThing end.&quot;)
+    return 100
+}
+
+</code></pre>
+<p>输出结果：</p>
+<pre><code class="language-shell">2024/07/24 09:49:07 doSomeThing start.
+2024/07/24 09:49:11 doSomeThing timeout.
+2024/07/24 09:49:12 doSomeThing end.
+</code></pre>
+<h2 id="3-ticker">3. Ticker 周期定时器</h2>
+<h3 id="31-ticker">3.1. 关于Ticker</h3>
+<p>Ticker源码：</p>
+<pre><code class="language-go">type Ticker struct {
+    C &lt;-chan Time // The channel on which the ticks are delivered.
+    r runtimeTimer
+}
+</code></pre>
+<ul>
+<li>Ticker也持有一个C通道，每经过指定的时间间隔，Ticker就会向该通道上发送当前时间（时钟滴答声）。</li>
+<li>如果C通道的接收者不能及时取走通道上的数据（即接收者在新的时间到达时，还没有从通道取走上一次的时间），Ticker将调整时间间隔，或者废弃部分时间（时钟滴答声）：
+    <code>go
+    // sendTime does a non-blocking send of the current time on c.
+    func sendTime(c any, seq uintptr) {
+        select {
+        case c.(chan Time) &lt;- Now():
+        default:
+        }
+    }</code></li>
+</ul>
+<h3 id="32-tiker">3.2. 创建Tiker</h3>
+<p>创建Ticker只有<code>NewTicker</code>一个方法：</p>
+<pre><code class="language-go">func NewTicker(d Duration) *Ticker {
+    if d &lt;= 0 {
+        panic(&quot;non-positive interval for NewTicker&quot;)
+    }
+    // Give the channel a 1-element time buffer.
+    // If the client falls behind while reading, we drop ticks
+    // on the floor until the client catches up.
+    c := make(chan Time, 1)
+    t := &amp;Ticker{
+        C: c,
+        r: runtimeTimer{
+            when:   when(d),
+            period: int64(d),
+            f:      sendTime,
+            arg:    c,
+        },
+    }
+    startTimer(&amp;t.r)
+    return t
+}
+</code></pre>
+<ul>
+<li>时间间隔d必须大于0，否则将会panic。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">ticker := time.NewTicker(time.Second) // 创建周期为1秒的定时器
+for t := range ticker.C {
+  fmt.Printf(&quot;Tick at %s\n&quot;, t.Format(&quot;2006-01-02 15:04:05&quot;))
+}
+</code></pre>
+<h3 id="33-tiker">3.3. Tiker的结构体方法</h3>
+<h4 id="331-stop">3.3.1. Stop 停止定时器</h4>
+<pre><code class="language-go">func (t *Ticker) Stop() {
+    stopTimer(&amp;t.r)
+}
+</code></pre>
+<ul>
+<li>Stop方法停止Ticker，Stop后，不会再往C通道上发送当前时间（时钟滴答声）。</li>
+<li>Stop方法不会关闭C通道，以防止接收者读取到错误的应答。</li>
+</ul>
+<pre><code class="language-go">log.Println(&quot;Start...&quot;)
+
+ticker := time.NewTicker(time.Second) // 创建周期为1秒的定时器
+go func() { // 新协程，每次定时器触发时打印
+  for t := range ticker.C {
+    log.Printf(&quot;Tick at %s\n&quot;, t.Format(&quot;2006-01-02 15:04:05&quot;))
+  }
+}()
+
+&lt;-time.After(time.Second * 5) // 主协程定时五秒
+ticker.Stop() // 关闭周期定时器
+log.Println(&quot;Ticker stopped&quot;)
+
+time.Sleep(5 * time.Second) // 主协程等待五秒，观察程序行为
+log.Println(&quot;End...&quot;)
+
+// 输出
+2025/11/21 11:24:27 Start...
+2025/11/21 11:24:28 Tick at 2025-11-21 11:24:28
+2025/11/21 11:24:29 Tick at 2025-11-21 11:24:29
+2025/11/21 11:24:30 Tick at 2025-11-21 11:24:30
+2025/11/21 11:24:31 Tick at 2025-11-21 11:24:31
+2025/11/21 11:24:32 Tick at 2025-11-21 11:24:32
+2025/11/21 11:24:32 Ticker stopped
+2025/11/21 11:24:37 End...
+</code></pre>
+<h4 id="322-reset">3.2.2. Reset 重置定时器</h4>
+<pre><code class="language-go">func (t *Ticker) Reset(d Duration) {
+    if d &lt;= 0 {
+        panic(&quot;non-positive interval for Ticker.Reset&quot;)
+    }
+    if t.r.f == nil {
+        panic(&quot;time: Reset called on uninitialized Ticker&quot;)
+    }
+    modTimer(&amp;t.r, when(d), int64(d), t.r.f, t.r.arg, t.r.seq)
+}
+
+</code></pre>
+<ul>
+<li>Reset方法stop Ticker，并将其时间间隔设置成新的时间间隔。</li>
+<li>下一个（时钟滴答声）将在新的时间间隔后发送。</li>
+<li>新的时间间隔必须大于0，否则会panic。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">log.Println(&quot;Start...&quot;)
+
+ticker := time.NewTicker(time.Second) // 创建周期为一秒的周期定时器
+go func() { // 新协程：每次定时器触发时打印
+  for t := range ticker.C {
+    log.Printf(&quot;Tick at %s\n&quot;, t.Format(&quot;2006-01-02 15:04:05&quot;))
+  }
+}()
+
+&lt;-time.After(time.Second * 5) // 主协程定时五秒
+ticker.Reset(time.Second * 2) // 重置周期定时器的周期为2秒
+log.Println(&quot;Change to 2 seconds&quot;)
+
+time.Sleep(5 * time.Second) // 主协程等待五秒，观察程序输出
+log.Println(&quot;End...&quot;)
+
+// 输出
+2025/11/21 11:27:22 Start...
+2025/11/21 11:27:23 Tick at 2025-11-21 11:27:23
+2025/11/21 11:27:24 Tick at 2025-11-21 11:27:24
+2025/11/21 11:27:25 Tick at 2025-11-21 11:27:25
+2025/11/21 11:27:26 Tick at 2025-11-21 11:27:26
+2025/11/21 11:27:27 Tick at 2025-11-21 11:27:27
+2025/11/21 11:27:27 Change to 2 seconds
+2025/11/21 11:27:29 Tick at 2025-11-21 11:27:29
+2025/11/21 11:27:31 Tick at 2025-11-21 11:27:31
+2025/11/21 11:27:32 End...
+</code></pre>
+<h3 id="34">3.4. 使用示例</h3>
+<h4 id="341">3.4.1. 循环执行</h4>
+<p>场景：每过指定时间间隔，执行一次任务。</p>
+<pre><code class="language-go">func main() {
+    // 指定时间间隔为5秒
+    ticker := time.NewTicker(time.Second * 5)
+    for {
+        &lt;-ticker.C
+        // 每5秒执行一次
+        doSomeThing()
+    }
+}
+
+func doSomeThing() {
+    log.Println(&quot;doSomeThing start.&quot;)
+    time.Sleep(1 * time.Second) // 模拟耗时操作
+    log.Println(&quot;doSomeThing end.&quot;)
+}
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2588 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87007_%E7%BB%93%E6%9E%84%E4%BD%93%E8%AF%A6%E8%A7%A3/">
+      
+      
+        <link rel="next" href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87009_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>接口详解 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              接口详解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang语言
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang语言
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常量变量与数据类型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87002_%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E6%8C%87%E9%92%88%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    字符串、指针详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E7%BB%84%E3%80%81%E5%88%87%E7%89%87%E3%80%81map%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数组、切片、map详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87004_%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    函数详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87005_%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E6%A2%B3%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    内置函数梳理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87006_Golang%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang流程控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87007_%E7%BB%93%E6%9E%84%E4%BD%93%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    结构体详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    接口详解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    接口详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 声明接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 实现接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 空接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 使用接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 值/指针接收者的区别
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 内嵌（组合）接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 类型断言
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 类型选择
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 接口的最佳实践
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 接口的最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. 倾向于定义小接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 接受接口，返回结构体
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 接口作为函数参数实现解耦
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. 接口与结构体的组合使用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 接口值的内部结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87009_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    异常处理机制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87001_%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gin框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gin框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E8%BF%9B%E9%98%B6%E7%AF%87001_%E6%9B%B4%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8gin%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 声明接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 实现接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 空接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 使用接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 值/指针接收者的区别
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 内嵌（组合）接口
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 类型断言
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 类型选择
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 接口的最佳实践
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 接口的最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. 倾向于定义小接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 接受接口，返回结构体
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 接口作为函数参数实现解耦
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. 接口与结构体的组合使用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 接口值的内部结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang语言
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    基础篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>接口详解</h1>
+
+<p>接口（Interface）是Go语言中实现抽象和多态的核心机制，它定义了一组方法签名但不包含具体实现。通过接口，我们可以编写更加灵活和可扩展的代码，实现面向接口编程的设计原则。
+Go语言的接口设计独特，采用隐式实现的方式，类型只要实现了接口定义的所有方法就自动被认为实现了该接口，这种设计使得接口的使用更加灵活和简洁。本文将深入介绍接口的概念、声明方式、实现方法以及最佳实践，帮助读者掌握Go语言中这一重要特性。</p>
+<h2 id="1">1. 声明接口</h2>
+<p>接口（interface）是Go语言中一种非常重要的特性，它定义了一组方法的签名，但不包含具体实现。接口提供了一种抽象的方式来定义对象的行为。</p>
+<blockquote>
+<p>接口（interface）定义了一个对象的行为规范，只定义规范不实现，由具体的对象来实现规范的细节。</p>
+</blockquote>
+<p>声明一个接口的语法格式如下：</p>
+<pre><code class="language-go">type 接口名称 interface{
+    方法名称1(参数列表1) 返回值列表1
+    方法名称2(参数列表2) 返回值列表2
+    ...
+}
+</code></pre>
+<ul>
+<li>接口名：自定义的接口类型名。</li>
+</ul>
+<blockquote>
+<p>Go语言的接口在命名时，一般会在单词后面添加er，如有写操作的接口叫Writer，有字符串功能的接口叫Stringer等。</p>
+<p>接口名最好要能突出该接口的类型含义。</p>
+</blockquote>
+<ul>
+<li>
+<p>方法名：当方法名首字母是大写且这个接口类型名首字母也是大写时，这个方法可以被接口所在的包（package）之外的代码访问。</p>
+</li>
+<li>
+<p>参数列表、返回值列表：参数列表和返回值列表中的参数变量名可以省略。</p>
+</li>
+<li>
+<p>接口中没有数据属性。</p>
+</li>
+<li>
+<p>接口中只有方法声明，没有方法实现。</p>
+</li>
+<li>
+<p>接口中可以内嵌别的接口，表示拥有内嵌接口的全部方法。</p>
+</li>
+<li>
+<p>接口中可以嵌套匿名结构体，这是一种特殊情况。</p>
+</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">// 声明一个简单的接口
+type Writer interface {
+    Write([]byte) (int, error)
+}
+</code></pre>
+<pre><code class="language-go">// 声明一个包含多个方法的接口
+type ReadWriter interface {
+    Read([]byte) (int, error)
+    Write([]byte) (int, error)
+}
+</code></pre>
+<h2 id="2">2. 实现接口</h2>
+<p>Go语言的接口设计理念与其他面向对象语言有所不同，它更加灵活和隐式。在Go中，如果一个类型实现了接口定义的所有方法，那么就认为该类型实现了这个接口，无需显式声明。</p>
+<blockquote>
+<p>一个结构体可以同时实现多个接口，一个接口也可以被多个结构体实现。</p>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-go">// 这是接口
+type Sayer interface {
+    say()
+}
+
+// dog结构体
+type dog struct {
+}
+
+// dog结构体有Sayer接口的所有方法，则认为实现了Sayer接口
+func (d dog) say() {
+    fmt.Println(&quot;汪汪汪&quot;)
+}
+
+// cat结构体
+type cat struct {
+}
+
+// cat结构体有Sayer接口的所有方法，则认为实现了Sayer接口
+func (c cat) say() {
+    fmt.Println(&quot;喵喵喵&quot;)
+}
+
+// 测试方法，传入一个Sayer接口类型
+func Say(sayer Sayer) {
+    sayer.say()
+}
+
+func main() {
+    Say(cat{}) // 喵喵喵
+    Say(dog{}) // 汪汪汪
+}
+</code></pre>
+<h2 id="3">3. 空接口</h2>
+<p>空接口是指没有定义任何方法的接口。</p>
+<p>可以直接用<code>interface{}</code>和<code>any</code>来表示空接口：</p>
+<pre><code class="language-go">var a interface{} // 空接口类型的对象
+
+var b any // Go 1.18及以后版本推荐使用any关键字
+</code></pre>
+<p>当然，我们也可以自己写一个空接口类型：</p>
+<pre><code class="language-go">type Everything interface{}
+</code></pre>
+<p>空接口没有定义任何方法。而上面提到，在Go中，如果一个类型实现了接口定义的所有方法，那么就认为该类型实现了这个接口，无需显式声明。<strong>因此任何类型都实现了空接口，空接口类型的变量可以存储任意类型的变量。</strong></p>
+<h2 id="4">4. 使用接口</h2>
+<p>接口类型变量能够存储所有实现了该接口的类型的实例。</p>
+<pre><code class="language-Go">// 假设结构体A、B都实现了接口I,接口中有一个方法say()
+var i I // 接口变量
+a := A{}
+b := B{}
+i = a
+i.say()
+i = b
+i.say()
+</code></pre>
+<p>Go语言中所有类型都默认实现了空接口，所以空接口可以作为任何类型数据的容器 。</p>
+<pre><code class="language-Go">a := 1
+var i interface{} // 空接口变量i
+i = a
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-go">// 这是接口
+type Sayer interface {
+    say()
+}
+
+// dog结构体
+type dog struct {
+}
+
+// dog结构体有Sayer接口的所有方法，则认为实现了Sayer接口
+func (d dog) say() {
+    fmt.Println(&quot;汪汪汪&quot;)
+}
+
+// cat结构体
+type cat struct {
+}
+
+// cat结构体有Sayer接口的所有方法，则认为实现了Sayer接口
+func (c cat) say() {
+    fmt.Println(&quot;喵喵喵&quot;)
+}
+
+// 使用接口：传入一个Sayer接口类型
+func Say(sayer Sayer) {
+    sayer.say()
+}
+
+func main() {
+    Say(cat{}) // 喵喵喵
+    Say(dog{}) // 汪汪汪
+}
+</code></pre>
+<blockquote>
+<p>面向接口编程可以实现更加灵活和具备可扩展性的代码，这只是冰山一角～</p>
+</blockquote>
+<h2 id="5">5. 值/指针接收者的区别</h2>
+<p>在实现接口时，既可以使用值类型接收者，也可以使用指针类型接收者！</p>
+<blockquote>
+<p>甚至还可以混用，即一部分方法用值接收者方式实现、一部分方法用指针接收者方式实现！</p>
+</blockquote>
+<pre><code class="language-go">// 接口
+type Sayer interface {
+    Say() string
+    Hello() string
+}
+</code></pre>
+<pre><code class="language-go">type Cat struct {
+}
+
+// 使用值类型接收者实现接口
+func (c Cat) Say() string {
+    return &quot;meow&quot;
+}
+</code></pre>
+<pre><code class="language-go">type Cat struct {
+}
+
+// 使用指针类型接收者实现接口
+func (c *Cat) Say() string {
+    return &quot;meow&quot;
+}
+</code></pre>
+<p>这两种方式的区别在于：</p>
+<ul>
+<li>值接收者方式实现接口：既可以使用结构体对象，也可以使用结构体对象指针，来赋值给该接口类型的变量。</li>
+</ul>
+<blockquote>
+<p>因为Go语言中有对指针类型变量求值的语法糖</p>
+</blockquote>
+<p>```go
+  type Sayer interface {
+    Say() string
+  }</p>
+<p>type Cat struct {
+  }</p>
+<p>// 值类型接收者
+  func (c Cat) Say() string {
+    return "meow"
+  }</p>
+<p>func main() {
+    var c Sayer
+    c = &amp;Cat{}
+    println(c.Say()) // 正确</p>
+<pre><code>c = Cat{}
+println(c.Say()) // 正确
+</code></pre>
+<p>}
+  ```</p>
+<ul>
+<li>指针接收者方式实现接口：结构体对象指针可以赋值给该接口类型的变量。</li>
+</ul>
+<p>```go
+  type Sayer interface {
+    Say() string
+  }</p>
+<p>type Cat struct {
+  }</p>
+<p>// 指针类型接收者
+  func (c *Cat) Say() string {
+    return "meow"
+  }</p>
+<p>func main() {
+    var c Sayer
+    c = &amp;Cat{}
+    println(c.Say()) // 正确</p>
+<pre><code>c = Cat{} // 编译报错
+println(c.Say())
+</code></pre>
+<p>}
+  ```</p>
+<ul>
+<li>两种方式混用：只有结构体对象指针可以赋值给该接口类型的变量。</li>
+</ul>
+<p>```go</p>
+<p>type Sayer interface {
+    Say() string
+    Hello() string
+  }</p>
+<p>type Cat struct {
+  }</p>
+<p>// 混用：值类型接收者
+  func (c Cat) Say() string {
+    return "meow"
+  }</p>
+<p>// 混用：指针类型接收者
+  func (c *Cat) Hello() string {
+    return "hello"
+  }</p>
+<p>func main() {
+    var c Sayer
+    c = &amp;Cat{}
+    println(c.Say()) // 正确
+    println(c.Hello()) // 正确</p>
+<pre><code>c = Cat{} // 编译报错
+println(c.Say())
+println(c.Hello())
+</code></pre>
+<p>}
+  ```</p>
+<h2 id="6">6. 内嵌（组合）接口</h2>
+<p>接口和结构体声明时，都可以内嵌（组合）另一个接口：</p>
+<ul>
+<li><strong>结构体内嵌接口：</strong>结构体中可以内嵌匿名接口字段，表示实现了该接口。此时结构体可以不去显式实现接口的所有方法，而只需要显式实现结构体需要使用的方法即可。</li>
+<li><strong>接口内嵌另一个接口：</strong>表示组合另一个接口的功能（可以简单理解成复制了其内嵌接口的方法）。</li>
+</ul>
+<p><strong>结构体内嵌接口：</strong></p>
+<pre><code class="language-go">// 接口有两个方法
+type Sayer interface {
+    SayHello()
+    SayBye()
+}
+
+// 结构体内嵌接口
+type Person struct {
+    Sayer
+    Name string
+}
+
+// 只实现其中一个接口方法
+func (t *Person) SayHello() {
+    fmt.Println(&quot;hello&quot;)
+}
+
+func main() {
+    var p Sayer = &amp;Person{Name: &quot;tom&quot;} // 即使没有实现全部接口方法，由于内嵌接口，也是实现了接口
+    p.SayHello() // 能够正常调用
+    p.SayBye() // 调用没有实现的方法，编译通过，执行panic
+}
+</code></pre>
+<p>从上例可以看到：</p>
+<ul>
+<li>内嵌接口后，即使没有实现接口的全部方法，结构体可以当成内嵌的接口类型变量（即实现了接口）。</li>
+<li><strong>内嵌接口的方式实现接口后，只能调用实现了的房啊，否则会panic。</strong></li>
+</ul>
+<p><strong>接口内嵌另一个接口：</strong></p>
+<pre><code class="language-go">// 定义基础接口
+type Reader interface {
+    Read([]byte) (int, error)
+}
+
+type Writer interface {
+    Write([]byte) (int, error)
+}
+
+type Closer interface {
+    Close() error
+}
+
+// 组合接口
+type ReadWriter interface {
+    Reader
+    Writer
+}
+
+type ReadWriteCloser interface {
+    Reader
+    Writer
+    Closer
+}
+
+// 定义结构体
+type File struct {
+    name string
+}
+
+// 实现Reader接口
+func (f *File) Read(data []byte) (int, error) {
+    // 简化实现
+    copy(data, []byte(&quot;文件内容&quot;))
+    return len(data), nil
+}
+
+// 实现Writer接口
+func (f *File) Write(data []byte) (int, error) {
+    fmt.Printf(&quot;向文件 %s 写入数据: %s\n&quot;, f.name, string(data))
+    return len(data), nil
+}
+
+// 实现Closer接口
+func (f *File) Close() error {
+    fmt.Printf(&quot;关闭文件 %s\n&quot;, f.name)
+    return nil
+}
+
+// File自动实现了ReadWriter和ReadWriteCloser接口
+func main() {
+    file := &amp;File{name: &quot;test.txt&quot;}
+
+    var rw ReadWriter = file
+    rw.Write([]byte(&quot;Hello&quot;))
+
+    var rwc ReadWriteCloser = file
+    rwc.Close()
+}
+</code></pre>
+<p>从上例可以看到：</p>
+<ul>
+<li>接口组合另一个接口后，视同与接口定义了被组合接口的所有方法。</li>
+</ul>
+<h2 id="7">7. 类型断言</h2>
+<p>接口类型变量能够存储所有实现了该接口的类型的实例，那么我们应该如何知道这个变量存储的变量的具体类型呢？</p>
+<p>答案是使用类型断言，类型断言可以将接口类型的变量转换成其实际存储的类型。</p>
+<p>格式：</p>
+<pre><code class="language-go">// 安全的类型断言
+具体类型变量,成功标识符 := 接口类型变量.(具体类型)
+
+// 直接类型断言
+具体类型变量 := 接口类型变量.(具体类型)
+</code></pre>
+<ul>
+<li>安全的类型断言</li>
+<li>如果实际类型与括号中的具体类型相同，则将接口类型变量转换成具体类型，并且成功标识符为true。</li>
+<li>如果实际类型与括号中的具体类型不相同，则转换失败，具体类型变量被赋予零值，成功标识符为false。</li>
+<li>直接类型断言</li>
+<li>如果实际类型与括号中的具体类型相同，则将接口类型变量转换成具体类型。</li>
+<li>如果实际类型与括号中的具体类型不相同，则panic。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">//  接口类型变量
+var v interface{}
+v = 1000 // 具体类型为int
+
+// 安全的类型断言 - 成功场景
+i, ok := v.(int)
+if ok {
+  fmt.Printf(&quot;类型断言成功,i=%d\n&quot;, i)
+} else {
+  fmt.Printf(&quot;类型断言失败,i=%d\n&quot;, i)
+}
+
+// 安全的类型断言 - 失败场景
+s, ok := v.(string)
+if ok {
+  fmt.Printf(&quot;类型断言成功,s=%s\n&quot;, s)
+} else {
+  fmt.Printf(&quot;类型断言失败,s=%s\n&quot;, s)
+}
+
+// 直接类型断言 - 成功场景
+ii := v.(int)
+fmt.Printf(&quot;类型断言成功,ii=%d\n&quot;, ii)
+
+// 直接类型断言 - 失败场景
+ss := v.(string)
+fmt.Printf(&quot;类型断言成功,ss=%s\n&quot;, ss)
+</code></pre>
+<p>输出：</p>
+<pre><code class="language-go">// 实际输出：
+类型断言成功,i=1000
+类型断言失败,s=
+类型断言成功,ii=1000
+panic: interface conversion: interface {} is int, not string
+</code></pre>
+<h2 id="8">8. 类型选择</h2>
+<p>使用类型断言，可以将接口类型变量中存储的值转换成具体类型的值。</p>
+<p>而有时候，我们需要根据接口类型变量的具体类型，做不同的操作。如果全部使用类型断言去做，代码就会非常的难看且繁长。此时我们就可以使用类型选择这种语法来根据接口变量的具体类型执行不同的操作。</p>
+<p>语法格式：</p>
+<pre><code class="language-go">// 需要具体类型变量的值
+switch 具体类型变量 := 接口类型变量.(type) {
+  case 具体类型1:
+      // 业务逻辑
+  case 具体类型2:
+      // 业务逻辑
+  case 具体类型3:
+      // 业务逻辑
+  default:
+      // 业务逻辑
+  }
+
+// 不需要具体类型变量的值
+switch 接口类型变量.(type) {
+  case 具体类型1:
+      // 业务逻辑
+  case 具体类型2:
+      // 业务逻辑
+  case 具体类型3:
+      // 业务逻辑
+  default:
+      // 业务逻辑
+  }
+</code></pre>
+<ul>
+<li>case中的所有具体类型，都必须是实现了该接口的类型，否则会编译报错。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">func Print(v any) {
+    switch vv := v.(type) {
+    case int:
+        fmt.Printf(&quot;type: %s, value = %d\n&quot;, &quot;int&quot;, vv)
+    case string:
+        fmt.Printf(&quot;type: %s, value = %s\n&quot;, &quot;string&quot;, vv)
+    case byte:
+        fmt.Printf(&quot;type: %s, value = %v\n&quot;, &quot;byte&quot;, vv)
+    case bool:
+        fmt.Printf(&quot;type: %s, value = %t\n&quot;, &quot;bool&quot;, vv)
+    default:
+        fmt.Printf(&quot;type: %s, value = %v\n&quot;, &quot;unknown&quot;, vv)
+    }
+}
+
+func main() {
+    Print(1) // type: int, value = 1
+    Print(&quot;hello&quot;) // type: string, value = hello
+    Print(true) // type: bool, value = true
+    Print(byte(1)) // type: byte, value = 1
+    Print(1.1) // type: unknown, value = 1.1
+    Print(complex(1, 2)) // type: unknown, value = (1+2i)
+}
+</code></pre>
+<h2 id="9">9. 接口的最佳实践</h2>
+<h3 id="91">9.1. 倾向于定义小接口</h3>
+<p>Go语言倾向于定义小而专注的接口，这样更容易实现和组合：</p>
+<pre><code class="language-go">// 好的做法：小而专注的接口
+type Stringer interface {
+    String() string
+}
+
+type Reader interface {
+    Read([]byte) (int, error)
+}
+
+type Writer interface {
+    Write([]byte) (int, error)
+</code></pre>
+<h3 id="92">9.2. 接受接口，返回结构体</h3>
+<p>在设计函数时，倾向于接受接口参数，返回具体类型：</p>
+<pre><code class="language-go">// 接受接口作为参数
+func ProcessData(r Reader) []byte {
+    data := make([]byte, 1024)
+    r.Read(data)
+    return data
+}
+
+// 返回具体类型
+func NewFile(name string) *File {
+    return &amp;File{name: name}
+}
+</code></pre>
+<h3 id="93">9.3. 接口作为函数参数实现解耦</h3>
+<pre><code class="language-go">type Animal interface {
+    Speak() string
+}
+</code></pre>
+<pre><code class="language-go">type Dog struct{}
+func (d Dog) Speak() string {
+    return &quot;汪汪&quot;
+}
+
+type Cat struct{}
+func (c Cat) Speak() string {
+    return &quot;喵喵&quot;
+}
+
+// 使用接口作为函数参数实现解耦
+func MakeAnimalSpeak(a Animal) {
+    fmt.Println(a.Speak())
+}
+
+func main() {
+    dog := Dog{}
+    cat := Cat{}
+    MakeAnimalSpeak(dog) // 汪汪
+    MakeAnimalSpeak(cat) // 喵喵
+}
+</code></pre>
+<h3 id="94">9.4. 接口与结构体的组合使用</h3>
+<p>接口和结构体经常一起使用来实现面向对象的设计模式：</p>
+<pre><code class="language-go">// 定义接口
+type Shape interface {
+    Area() float64
+    Perimeter() float64
+}
+</code></pre>
+<pre><code class="language-go">// 定义结构体
+type Rectangle struct {
+    Width, Height float64
+}
+
+type Circle struct {
+    Radius float64
+}
+
+// 为结构体实现接口
+func (r Rectangle) Area() float64 {
+    return r.Width * r.Height
+}
+
+func (r Rectangle) Perimeter() float64 {
+    return 2 * (r.Width + r.Height)
+}
+
+func (c Circle) Area() float64 {
+    return math.Pi * c.Radius * c.Radius
+}
+
+func (c Circle) Perimeter() float64 {
+    return 2 * math.Pi * c.Radius
+}
+
+// 使用接口
+func PrintShapeInfo(s Shape) {
+    fmt.Printf(&quot;面积: %.2f, 周长: %.2f\n&quot;, s.Area(), s.Perimeter())
+}
+
+func main() {
+    rect := Rectangle{Width: 10, Height: 5}
+    circle := Circle{Radius: 3}
+
+    PrintShapeInfo(rect)
+    PrintShapeInfo(circle)
+}
+</code></pre>
+<h2 id="10">10. 接口值的内部结构</h2>
+<p>一个接口的值（简称接口值）是由一个具体类型和具体类型的值两部分组成的。这两部分分别称为接口的动态类型和动态值。
+1. 类型信息（动态类型）
+2. 值信息（动态值）</p>
+<p>示例：</p>
+<pre><code class="language-go">var w io.Writer
+w = os.Stdout
+w = new(bytes.Buffer)
+w = nil
+</code></pre>
+<p><img alt="image-20250925164925471" src="../../.public/image-20250925164925471.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,5413 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87003_Go%E6%BA%90%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84/">
+      
+      
+        <link rel="next" href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87005_%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%E4%B8%8E%E5%8F%AF%E8%A7%81%E6%80%A7/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Go命令详解 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-go" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Go命令详解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang语言
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang语言
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    入门篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87002_%E5%AE%89%E8%A3%85Golang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    安装Golang
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87003_Go%E6%BA%90%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Go源代码结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Go命令详解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Go命令详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Go命令概览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 基础命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 基础命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-go-version-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. go version - 查看版本信息
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. go version - 查看版本信息">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.2. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.3. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#214" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.4. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-go-env-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. go env - 管理环境变量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. go env - 管理环境变量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5. 常用环境变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#226" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.6. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-go-help-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. go help - 获取帮助信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-go-telemetry-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. go telemetry - 管理遥测数据
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. go telemetry - 管理遥测数据">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3. 遥测数据介绍
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#244" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.4. 模式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#245" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.5. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#246" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.6. 环境变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#247" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.7. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 项目构建命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 项目构建命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-go-build-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. go build - 编译源代码
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. go build - 编译源代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3. 主要参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.4. 常用构建标志
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#315" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.5. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#316" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.6. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-go-install-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. go install - 编译并安装包
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2. go install - 编译并安装包">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.3. 版本后缀处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#324" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.4. 模块模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#325" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.5. 标准库处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#326" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.6. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#327" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.7. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-go-run-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. go run - 编译并运行程序
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. go run - 编译并运行程序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.3. 版本后缀处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.4. 执行方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#335" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.5. 调试信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#336" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.6. 退出状态
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#337" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.7. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#338" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.8. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-go-clean-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. go clean - 清理编译文件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4. go clean - 清理编译文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#343" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#344" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#345" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 包管理命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 包管理命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-go-mod-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. go mod - 模块管理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1. go mod - 模块管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3. 子命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#414" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#415" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-go-get-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. go get - 获取包
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2. go get - 获取包">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#421" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#422" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#423" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#424" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#425" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-go-list-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. go list - 列出包或模块
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3. go list - 列出包或模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#434" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#435" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 代码生成和维护命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 代码生成和维护命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-go-fmt-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. go fmt - 格式化代码
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1. go fmt - 格式化代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#511" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#512" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#513" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#514" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#515" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-go-vet-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. go vet - 检查代码问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2. go vet - 检查代码问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#521" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#522" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#523" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#524" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#525" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-go-generate-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. go generate - 通过注释执行命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3. go generate - 通过注释执行命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#531" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#532" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#533" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.3. 指令格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#534" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.4. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#535" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.5. 环境变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#536" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.6. 命令别名
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#537" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.7. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#538" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.8. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 测试命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 测试命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-go-test-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. go test - 运行测试
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1. go test - 运行测试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#611" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#613" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.3. 测试模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#614" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.4. 测试缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#615" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.5. 代码检查
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#616" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.6. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#617" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.7. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#618" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.8. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 文档和工具命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 文档和工具命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-go-doc-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. go doc - 显示文档
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-go-tool-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. go tool - 调用底层工具
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 环境和配置命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 环境和配置命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-go-bug-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. go bug - 报告bug
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-go-fix-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. go fix - 更新旧代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 实用示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 实用示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. 创建新项目
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 添加外部依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 构建和部署
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87005_%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%E4%B8%8E%E5%8F%AF%E8%A7%81%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    命名规则与可见性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87006_%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%8E%E4%BF%9D%E7%95%99%E5%AD%97%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    关键字与保留字详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87007_%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    操作符详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87001_%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gin框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gin框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E8%BF%9B%E9%98%B6%E7%AF%87001_%E6%9B%B4%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8gin%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Go命令概览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 基础命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 基础命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-go-version-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. go version - 查看版本信息
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. go version - 查看版本信息">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.2. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.3. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#214" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.4. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-go-env-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. go env - 管理环境变量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. go env - 管理环境变量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5. 常用环境变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#226" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.6. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-go-help-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. go help - 获取帮助信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-go-telemetry-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. go telemetry - 管理遥测数据
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. go telemetry - 管理遥测数据">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3. 遥测数据介绍
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#244" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.4. 模式说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#245" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.5. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#246" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.6. 环境变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#247" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.7. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 项目构建命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 项目构建命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-go-build-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. go build - 编译源代码
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. go build - 编译源代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3. 主要参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.4. 常用构建标志
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#315" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.5. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#316" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.6. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-go-install-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. go install - 编译并安装包
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2. go install - 编译并安装包">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.3. 版本后缀处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#324" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.4. 模块模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#325" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.5. 标准库处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#326" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.6. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#327" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2.7. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-go-run-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. go run - 编译并运行程序
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. go run - 编译并运行程序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.3. 版本后缀处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.4. 执行方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#335" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.5. 调试信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#336" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.6. 退出状态
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#337" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.7. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#338" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.8. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-go-clean-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. go clean - 清理编译文件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4. go clean - 清理编译文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#343" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#344" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#345" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 包管理命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 包管理命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-go-mod-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. go mod - 模块管理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1. go mod - 模块管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3. 子命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#414" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#415" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-go-get-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. go get - 获取包
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2. go get - 获取包">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#421" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#422" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#423" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#424" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#425" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-go-list-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. go list - 列出包或模块
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3. go list - 列出包或模块">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#434" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#435" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 代码生成和维护命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 代码生成和维护命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-go-fmt-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. go fmt - 格式化代码
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1. go fmt - 格式化代码">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#511" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#512" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#513" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#514" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#515" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-go-vet-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. go vet - 检查代码问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2. go vet - 检查代码问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#521" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#522" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#523" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.3. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#524" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.4. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#525" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.5. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-go-generate-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. go generate - 通过注释执行命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3. go generate - 通过注释执行命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#531" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#532" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#533" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.3. 指令格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#534" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.4. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#535" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.5. 环境变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#536" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.6. 命令别名
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#537" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.7. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#538" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.8. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 测试命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 测试命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-go-test-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. go test - 运行测试
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.1. go test - 运行测试">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#611" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.1. 命令语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#612" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.2. 功能说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#613" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.3. 测试模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#614" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.4. 测试缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#615" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.5. 代码检查
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#616" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.6. 参数说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#617" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.7. 使用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#618" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1.8. 注意事项
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 文档和工具命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 文档和工具命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-go-doc-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. go doc - 显示文档
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-go-tool-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. go tool - 调用底层工具
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 环境和配置命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 环境和配置命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-go-bug-bug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. go bug - 报告bug
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-go-fix-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. go fix - 更新旧代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 实用示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 实用示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. 创建新项目
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 添加外部依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 构建和部署
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang语言
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    入门篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Go命令详解</h1>
+
+<p>前面章节中，我们在安装Golang后，使用<code>go version</code>命令来检查安装是否成功。</p>
+<p>我们可以使用<code>go</code>命令来执行各种操作，包括编译、运行、测试代码等。Go工具链提供了丰富的命令来帮助开发者高效地进行开发工作。本文将详细介绍Go语言的各种命令及其使用方法。</p>
+<h2 id="1-go">1. Go命令概览</h2>
+<p>要查看Go命令的帮助文档，可以在终端中执行以下命令：</p>
+<pre><code class="language-bash">go help # 查看所有可用的go命令，将显示Go工具链支持的所有命令列表
+go help &lt;command&gt; # 查看指定命令的帮助文档
+go help &lt;topic&gt; # 查看指定话题的帮助文档
+</code></pre>
+<p>go1.25.0版本<code>go help</code>命令输出如下：</p>
+<pre><code>Go is a tool for managing Go source code.
+
+Usage:
+
+    go &lt;command&gt; [arguments]
+
+The commands are:
+
+    bug         start a bug report
+    build       compile packages and dependencies
+    clean       remove object files and cached files
+    doc         show documentation for package or symbol
+    env         print Go environment information
+    fix         update packages to use new APIs
+    fmt         gofmt (reformat) package sources
+    generate    generate Go files by processing source
+    get         add dependencies to current module and install them
+    install     compile and install packages and dependencies
+    list        list packages or modules
+    mod         module maintenance
+    work        workspace maintenance
+    run         compile and run Go program
+    telemetry   manage telemetry data and settings
+    test        test packages
+    tool        run specified go tool
+    version     print Go version
+    vet         report likely mistakes in packages
+
+Use &quot;go help &lt;command&gt;&quot; for more information about a command.
+
+Additional help topics:
+
+    buildconstraint build constraints
+    buildjson       build -json encoding
+    buildmode       build modes
+    c               calling between Go and C
+    cache           build and test caching
+    environment     environment variables
+    filetype        file types
+    goauth          GOAUTH environment variable
+    go.mod          the go.mod file
+    gopath          GOPATH environment variable
+    goproxy         module proxy protocol
+    importpath      import path syntax
+    modules         modules, module versions, and more
+    module-auth     module authentication using go.sum
+    packages        package lists and patterns
+    private         configuration for downloading non-public code
+    testflag        testing flags
+    testfunc        testing functions
+    vcs             controlling version control with GOVCS
+
+Use &quot;go help &lt;topic&gt;&quot; for more information about that topic.
+</code></pre>
+<h2 id="2">2. 基础命令</h2>
+<h3 id="21-go-version-">2.1. go version - 查看版本信息</h3>
+<p>用于查看当前安装的Go版本，或者查看Go二进制文件的构建信息：</p>
+<pre><code class="language-bash">go version # 最常用命令，查看go版本
+</code></pre>
+<p>输出示例：</p>
+<pre><code>go version go1.21.0 darwin/amd64
+</code></pre>
+<h4 id="211">2.1.1. 命令语法</h4>
+<pre><code class="language-bash">go version [-m] [-v] [-json] [file ...]
+</code></pre>
+<h4 id="212">2.1.2. 参数说明</h4>
+<ul>
+<li><code>-m</code>: 打印每个文件内嵌的模块版本信息（如果可用）。在输出中，模块信息由版本行后面的多行组成，每行都以制表符开头。</li>
+<li><code>-v</code>: 在扫描目录时报告未识别的文件。</li>
+<li><code>-json</code>: 类似于-m，但以JSON格式输出runtime/debug.BuildInfo。如果指定了-json而没有-m，go version会报告错误。</li>
+</ul>
+<h4 id="213">2.1.3. 使用示例</h4>
+<pre><code class="language-bash">## 查看当前Go工具链的版本
+go version
+
+## 查看指定二进制文件的Go版本
+go version myapp
+
+## 查看二进制文件的模块版本信息
+go version -m myapp
+
+## 以JSON格式输出构建信息
+go version -m -json myapp
+
+## 查看目录下所有Go二进制文件的版本
+go version /path/to/bin
+
+## 查看目录下所有文件（包括未识别的文件）的版本信息
+go version -v /path/to/bin
+</code></pre>
+<h4 id="214">2.1.4. 注意事项</h4>
+<ul>
+<li>如果命令行上没有指定文件，则<code>go version</code>打印其自身的版本信息</li>
+<li>如果指定了目录名称，<code>go version</code>会递归遍历该目录，查找可识别的Go二进制文件并报告它们的版本</li>
+<li>默认情况下，<code>go version</code>在目录扫描期间不会报告未识别的文件，使用<code>-v</code>标志可以显示这些文件</li>
+<li>更多关于构建信息的信息，请参见：<code>go doc runtime/debug.BuildInfo</code></li>
+</ul>
+<h3 id="22-go-env-">2.2. go env - 管理环境变量</h3>
+<p>用于查看和设置Go环境变量：</p>
+<h4 id="221">2.2.1. 命令语法</h4>
+<pre><code class="language-bash">go env [-json] [-changed] [-u] [-w] [var ...]
+</code></pre>
+<h4 id="222">2.2.2. 功能说明</h4>
+<p>Env命令用于打印Go环境信息。默认情况下，env以shell脚本格式（在Windows上是批处理文件格式）打印信息。如果在参数中给出了一个或多个变量名，env会在单独的行上打印每个命名变量的值。</p>
+<h4 id="223">2.2.3. 参数说明</h4>
+<ul>
+<li><code>-json</code>: 以JSON格式而不是shell脚本格式打印环境信息</li>
+<li><code>-changed</code>: 仅打印那些有效值与在空环境中获得的默认值不同的设置，且这些设置之前没有使用过-w标志</li>
+<li><code>-u</code>: 需要一个或多个参数，并取消已使用'go env -w'设置的命名环境变量的默认设置</li>
+<li><code>-w</code>: 需要一个或多个NAME=VALUE形式的参数，并将命名环境变量的默认设置更改为给定值</li>
+</ul>
+<h4 id="224">2.2.4. 使用示例</h4>
+<pre><code class="language-bash">## 查看所有环境变量
+go env
+
+## 查看特定环境变量
+go env GOROOT
+go env GOPATH
+go env GOMODCACHE
+
+## 以JSON格式查看环境变量
+go env -json
+go env -json GOPATH GOROOT
+
+## 设置环境变量
+go env -w GOPROXY=https://goproxy.cn,direct
+go env -w GOPATH=$HOME/go
+go env -w GOBIN=$HOME/go/bin
+
+## 恢复环境变量默认值
+go env -u GOPROXY
+go env -u GOPATH GOBIN
+
+## 查看已更改的环境变量设置
+go env -changed
+</code></pre>
+<h4 id="225">2.2.5. 常用环境变量</h4>
+<p>Go有许多环境变量，以下是一些常用的环境变量：</p>
+<ul>
+<li><code>GOROOT</code>: Go的安装路径</li>
+<li><code>GOPATH</code>: Go的工作区路径（Go 1.11版本后使用Go Modules时可不设置）</li>
+<li><code>GOBIN</code>: 可执行文件的存放路径</li>
+<li><code>GOPROXY</code>: 模块代理地址</li>
+<li><code>GOMODCACHE</code>: 模块缓存目录</li>
+<li><code>GOOS</code>: 目标操作系统</li>
+<li><code>GOARCH</code>: 目标架构</li>
+<li><code>CGO_ENABLED</code>: 是否启用CGO</li>
+</ul>
+<h4 id="226">2.2.6. 注意事项</h4>
+<ul>
+<li>使用<code>go env -w</code>设置的环境变量会保存在配置文件中，持久生效</li>
+<li>使用<code>go env -u</code>可以恢复环境变量到默认值</li>
+<li>更多关于环境变量的信息，请参见：<code>go help environment</code></li>
+</ul>
+<h3 id="23-go-help-">2.3. go help - 获取帮助信息</h3>
+<p>用于获取特定命令或者话题的帮助信息：</p>
+<pre><code class="language-bash">## 获取go命令的总体帮助
+go help
+
+## 获取特定子命令的帮助
+go help build # 获取build命令的帮助
+go help run # 获取run命令的帮助
+go help test # 获取test命令的帮助
+
+## 获取特定话题的帮助
+go help gopath # 获取gopath话题的帮助
+go help packages # 获取packages话题的帮助
+go help environment # 获取environment话题的帮助
+</code></pre>
+<h3 id="24-go-telemetry-">2.4. go telemetry - 管理遥测数据</h3>
+<p>用于管理Go遥测数据和设置。</p>
+<h4 id="241">2.4.1. 命令语法</h4>
+<pre><code class="language-bash">go telemetry [off|local|on]
+</code></pre>
+<h4 id="242">2.4.2. 功能说明</h4>
+<p>Telemetry命令用于管理Go遥测数据和设置。遥测可以处于三种模式之一：off（关闭）、local（本地）或on（开启）。</p>
+<h4 id="243">2.4.3. 遥测数据介绍</h4>
+<p>Go遥测系统收集有关Go工具使用情况的匿名数据，以帮助Go团队改进工具链和相关工具。收集的数据包括：</p>
+<ol>
+<li><strong>使用统计</strong>: 收集有关Go命令使用频率的计数器数据，例如build、run、test等命令的使用情况</li>
+<li><strong>配置信息</strong>: 包括Go版本、操作系统、架构等基本信息，但不包含任何个人身份信息</li>
+<li><strong>功能使用情况</strong>: 了解哪些Go功能和特性被广泛使用，帮助团队确定开发优先级</li>
+<li><strong>性能数据</strong>: 收集工具性能指标，帮助优化Go工具链的性能</li>
+</ol>
+<p>遥测数据完全匿名，不会收集任何个人身份信息、项目代码或敏感数据。所有收集的数据仅用于改进Go工具链和相关工具。</p>
+<h4 id="244">2.4.4. 模式说明</h4>
+<ul>
+<li><strong>off模式</strong>: 当遥测处于off模式时，既不收集本地计数器数据，也不上传数据。</li>
+<li><strong>local模式</strong>: 当遥测处于local模式时，计数器数据会写入本地文件系统，但不会上传到远程服务器。</li>
+<li><strong>on模式</strong>: 当遥测处于on模式时，遥测数据会写入本地文件系统，并定期发送到https://telemetry.go.dev/。上传的数据用于帮助改进Go工具链和相关工具，并将作为公共数据集的一部分发布。</li>
+</ul>
+<h4 id="245">2.4.5. 使用示例</h4>
+<pre><code>## 查看当前遥测模式
+go telemetry
+
+## 禁用遥测上传，但保持本地数据收集
+go telemetry local
+
+## 启用数据收集和上传
+go telemetry on
+
+## 禁用数据收集和上传
+go telemetry off
+</code></pre>
+<h4 id="246">2.4.6. 环境变量</h4>
+<ul>
+<li><code>GOTELEMETRY</code>: 当前遥测模式的值，这是一个不可设置的go env变量</li>
+<li><code>GOTELEMETRYDIR</code>: 遥测数据写入的本地文件系统目录，这是一个不可设置的go env变量</li>
+</ul>
+<h4 id="247">2.4.7. 注意事项</h4>
+<ul>
+<li>遥测数据完全匿名，不包含任何个人身份信息或项目代码</li>
+<li>数据收集遵循Google隐私政策：https://policies.google.com/privacy</li>
+<li>用户可以随时通过命令控制遥测模式</li>
+<li>更多详细信息，请参见：https://telemetry.go.dev/privacy</li>
+<li>更多关于遥测的信息，请参见：https://go.dev/doc/telemetry</li>
+</ul>
+<h2 id="3">3. 项目构建命令</h2>
+<h3 id="31-go-build-">3.1. go build - 编译源代码</h3>
+<p>用于编译Go程序，生成可执行文件。</p>
+<h4 id="311">3.1.1. 命令语法</h4>
+<pre><code class="language-bash">go build [-o output] [build flags] [packages]
+</code></pre>
+<h4 id="312">3.1.2. 功能说明</h4>
+<p>Build命令编译由导入路径命名的包及其依赖项，但不安装结果。</p>
+<p>当编译包时，build会忽略以'_test.go'结尾的文件。</p>
+<p>当编译单个main包时，build将生成的可执行文件写入以包导入路径的最后一个非主版本组件命名的输出文件中。在Windows上会添加'.exe'后缀。
+例如：'go build example/sam'会生成'sam'或'sam.exe'；'go build example.com/foo/v2'会生成'foo'或'foo.exe'，而不是'v2.exe'。</p>
+<p>当从.go文件列表编译包时，可执行文件以第一个源文件命名。
+例如：'go build ed.go rx.go'会生成'ed'或'ed.exe'。</p>
+<p>当编译多个包或单个非main包时，build会编译包但丢弃生成的对象，仅作为检查包是否可以构建的手段。</p>
+<h4 id="313">3.1.3. 主要参数</h4>
+<ul>
+<li><code>-o output</code>: 强制build将生成的可执行文件或对象写入指定的输出文件或目录，而不是默认行为</li>
+</ul>
+<h4 id="314">3.1.4. 常用构建标志</h4>
+<ul>
+<li><code>-a</code>: 强制重新构建已经是最新的包</li>
+<li><code>-n</code>: 打印命令但不运行它们</li>
+<li><code>-v</code>: 打印编译的包名</li>
+<li><code>-x</code>: 打印命令</li>
+<li><code>-race</code>: 启用数据竞争检测（仅支持特定平台）</li>
+<li><code>-cover</code>: 启用代码覆盖率检测</li>
+<li><code>-work</code>: 打印临时工作目录的名称且在退出时不删除它</li>
+<li><code>-asmflags '[pattern=]arg list'</code>: 传递给每个go tool asm调用的参数</li>
+<li><code>-buildmode mode</code>: 使用的构建模式（参见'go help buildmode'）</li>
+<li><code>-compiler name</code>: 使用的编译器名称（gccgo或gc）</li>
+<li><code>-gcflags '[pattern=]arg list'</code>: 传递给每个go tool compile调用的参数</li>
+<li><code>-ldflags '[pattern=]arg list'</code>: 传递给每个go tool link调用的参数</li>
+<li><code>-tags tag,list</code>: 逗号分隔的附加构建标签列表</li>
+<li><code>-trimpath</code>: 从生成的可执行文件中删除所有文件系统路径</li>
+<li><code>-mod mode</code>: 模块下载模式（readonly、vendor或mod）</li>
+</ul>
+<h4 id="315">3.1.5. 使用示例</h4>
+<pre><code>## 编译当前目录下的main包
+go build
+
+## 编译指定包
+go build package_name
+
+## 编译并指定输出文件名
+go build -o myapp main.go
+
+## 编译时添加编译标签
+go build -tags tag_name
+
+## 编译时添加版本信息
+go build -ldflags &quot;-X main.version=1.0.0&quot;
+
+## 启用竞态检测
+go build -race
+
+## 启用代码覆盖率检测
+go build -cover
+
+## 打印编译过程中的命令
+go build -x
+
+## 强制重新构建所有包
+go build -a
+
+## 指定构建标签
+go build -tags &quot;linux,prod&quot;
+
+## 修剪路径信息
+go build -trimpath
+
+## 指定构建模式
+go build -buildmode=shared
+</code></pre>
+<h4 id="316">3.1.6. 注意事项</h4>
+<ul>
+<li>构建标志由build、clean、get、install、list、run和test命令共享</li>
+<li>更多关于指定包的信息，请参见'go help packages'</li>
+<li>更多关于包和二进制文件安装位置的信息，请运行'go help gopath'</li>
+<li>更多关于Go和C/C++之间调用的信息，请运行'go help c'</li>
+</ul>
+<h3 id="32-go-install-">3.2. go install - 编译并安装包</h3>
+<p>编译并安装由导入路径命名的包。</p>
+<h4 id="321">3.2.1. 命令语法</h4>
+<pre><code class="language-bash">go install [build flags] [packages]
+</code></pre>
+<h4 id="322">3.2.2. 功能说明</h4>
+<p>Install命令编译并安装由导入路径命名的包。</p>
+<p>可执行文件安装在GOBIN环境变量命名的目录中，默认为$GOPATH/bin或$HOME/go/bin（如果未设置GOPATH环境变量）。$GOROOT中的可执行文件安装在$GOROOT/bin或$GOTOOLDIR中，而不是$GOBIN。</p>
+<h4 id="323">3.2.3. 版本后缀处理</h4>
+<p>如果参数具有版本后缀（如@latest或@v1.0.0），"go install"会在模块感知模式下构建包，忽略当前目录或任何父目录中的go.mod文件（如果存在）。这对于安装可执行文件而不影响主模块的依赖关系很有用。</p>
+<p>使用版本后缀时，参数必须满足以下约束：</p>
+<ol>
+<li>参数必须是包路径或包模式（带"..."通配符），不能是标准包（如fmt）、元模式（std、cmd、all）或相对或绝对文件路径</li>
+<li>所有参数必须具有相同的版本后缀，不允许不同的查询，即使它们引用相同的版本</li>
+<li>所有参数必须引用同一模块中相同版本的包</li>
+<li>包路径参数必须引用main包，模式参数只会匹配main包</li>
+<li>没有模块被视为"主"模块</li>
+<li>任何模块中都不使用vendor目录</li>
+</ol>
+<h4 id="324">3.2.4. 模块模式</h4>
+<p>如果参数没有版本后缀，"go install"可能在模块感知模式或GOPATH模式下运行，具体取决于GO111MODULE环境变量和go.mod文件的存在。如果启用了模块感知模式，"go install"会在主模块的上下文中运行。</p>
+<p>禁用模块感知模式时，非主包安装在目录$GOPATH/pkg/$GOOS_$GOARCH中。启用模块感知模式时，非主包会被构建和缓存但不会被安装。</p>
+<h4 id="325">3.2.5. 标准库处理</h4>
+<p>在Go 1.20之前，标准库安装到$GOROOT/pkg/$GOOS_$GOARCH。
+从Go 1.20开始，标准库会被构建和缓存但不会被安装。
+设置GODEBUG=installgoroot=all可以恢复使用$GOROOT/pkg/$GOOS_$GOARCH。</p>
+<h4 id="326">3.2.6. 使用示例</h4>
+<pre><code>## 安装当前目录下的包
+go install
+
+## 安装指定路径的包
+go install path/to/package
+
+## 安装并指定版本
+go install github.com/user/package@latest
+
+## 安装特定版本
+go install github.com/user/package@v1.2.3
+
+## 安装多个包
+go install github.com/user/package1@latest github.com/user/package2@latest
+
+## 安装包并启用竞态检测
+go install -race github.com/user/package@latest
+
+## 安装包并指定构建标签
+go install -tags &quot;linux,prod&quot; github.com/user/package@latest
+</code></pre>
+<h4 id="327">3.2.7. 注意事项</h4>
+<ul>
+<li>更多关于构建标志的信息，请参见'go help build'</li>
+<li>更多关于指定包的信息，请参见'go help packages'</li>
+<li>使用版本后缀时，确保所有参数都引用同一模块中的包</li>
+<li>安装的可执行文件默认放在$GOBIN目录中</li>
+</ul>
+<h3 id="33-go-run-">3.3. go run - 编译并运行程序</h3>
+<p>编译并立即运行Go程序，不会生成可执行文件。</p>
+<h4 id="331">3.3.1. 命令语法</h4>
+<pre><code class="language-bash">go run [build flags] [-exec xprog] package [arguments...]
+</code></pre>
+<h4 id="332">3.3.2. 功能说明</h4>
+<p>Run命令编译并运行指定的主Go包。通常包被指定为单个目录中的.go源文件列表，但它也可以是导入路径、文件系统路径或匹配单个已知包的模式，如'go run .'或'go run my/cmd'。</p>
+<h4 id="333">3.3.3. 版本后缀处理</h4>
+<p>如果包参数具有版本后缀（如@latest或@v1.0.0），"go run"会在模块感知模式下构建程序，忽略当前目录或任何父目录中的go.mod文件（如果存在）。这对于运行程序而不影响主模块的依赖关系很有用。</p>
+<p>如果包参数没有版本后缀，"go run"可能在模块感知模式或GOPATH模式下运行，具体取决于GO111MODULE环境变量和go.mod文件的存在。如果启用了模块感知模式，"go run"会在主模块的上下文中运行。</p>
+<h4 id="334">3.3.4. 执行方式</h4>
+<p>默认情况下，'go run'直接运行编译后的二进制文件：'a.out arguments...'。</p>
+<p>如果给出了-exec标志，'go run'会使用xprog调用二进制文件：
+'xprog a.out arguments...'。</p>
+<p>如果未给出-exec标志，GOOS或GOARCH与系统默认值不同，并且在当前搜索路径上可以找到名为go_$GOOS_$GOARCH_exec的程序，'go run'会使用该程序调用二进制文件，例如'go_js_wasm_exec a.out arguments...'。这允许在模拟器或其他执行方法可用时执行交叉编译的程序。</p>
+<h4 id="335">3.3.5. 调试信息</h4>
+<p>默认情况下，'go run'编译二进制文件时不生成调试器使用的信息，以减少构建时间。要在二进制文件中包含调试器信息，请使用'go build'。</p>
+<h4 id="336">3.3.6. 退出状态</h4>
+<p>Run的退出状态不是编译后二进制文件的退出状态。</p>
+<h4 id="337">3.3.7. 使用示例</h4>
+<pre><code>## 运行程序
+go run main.go
+
+## 运行多个文件
+go run main.go utils.go
+
+## 运行时传递参数
+go run main.go arg1 arg2
+
+## 运行当前目录下的程序
+go run .
+
+## 运行指定路径的程序
+go run ./cmd/myapp
+
+## 运行特定版本的程序
+go run github.com/user/package@latest
+
+## 运行程序并启用竞态检测
+go run -race main.go
+
+## 运行程序并指定构建标签
+go run -tags &quot;linux,prod&quot; main.go
+
+## 运行程序并启用代码覆盖率检测
+go run -cover main.go
+
+## 使用指定程序执行编译后的二进制文件
+go run -exec mydebugger main.go
+</code></pre>
+<h4 id="338">3.3.8. 注意事项</h4>
+<ul>
+<li>更多关于构建标志的信息，请参见'go help build'</li>
+<li>更多关于指定包的信息，请参见'go help packages'</li>
+<li>使用版本后缀时，确保遵循相关约束条件</li>
+<li>go run不会生成可执行文件，适用于快速测试和运行程序</li>
+</ul>
+<h3 id="34-go-clean-">3.4. go clean - 清理编译文件</h3>
+<p>清理编译生成的文件。</p>
+<h4 id="341">3.4.1. 命令语法</h4>
+<pre><code>go clean [-i] [-r] [-cache] [-testcache] [-modcache] [-fuzzcache] [build flags] [packages]
+</code></pre>
+<h4 id="342">3.4.2. 功能说明</h4>
+<p>Clean命令从包源目录中删除对象文件。go命令在临时目录中构建大多数对象，因此go clean主要关注其他工具或手动调用go build留下的对象文件。</p>
+<p>如果给出了包参数或设置了-i或-r标志，clean会从与导入路径对应的每个源目录中删除以下文件：</p>
+<ul>
+<li><code>_obj/</code>：旧对象目录，来自Makefiles</li>
+<li><code>_test/</code>：旧测试目录，来自Makefiles</li>
+<li><code>_testmain.go</code>：旧gotest文件，来自Makefiles</li>
+<li><code>test.out</code>：旧测试日志，来自Makefiles</li>
+<li><code>build.out</code>：旧测试日志，来自Makefiles</li>
+<li><code>*.[568ao]</code>：对象文件，来自Makefiles</li>
+<li><code>DIR(.exe)</code>：来自go build</li>
+<li><code>DIR.test(.exe)</code>：来自go test -c</li>
+<li><code>MAINFILE(.exe)</code>：来自go build MAINFILE.go</li>
+<li><code>*.so</code>：来自SWIG</li>
+</ul>
+<p>在列表中，DIR代表目录的最终路径元素，MAINFILE是目录中任何Go源文件的基名，这些文件在构建包时不包含在内。</p>
+<h4 id="343">3.4.3. 参数说明</h4>
+<ul>
+<li><code>-i</code>：导致clean删除相应的已安装归档文件或二进制文件（即'go install'会创建的内容）</li>
+<li><code>-r</code>：导致clean递归应用于导入路径命名的包的所有依赖项</li>
+<li><code>-cache</code>：导致clean删除整个go构建缓存</li>
+<li><code>-testcache</code>：导致clean使go构建缓存中的所有测试结果过期</li>
+<li><code>-modcache</code>：导致clean删除整个模块下载缓存，包括版本化依赖项的解压源代码</li>
+<li><code>-fuzzcache</code>：导致clean删除存储在Go构建缓存中用于模糊测试的文件</li>
+<li><code>-n</code>：导致clean打印它将执行的删除命令，但不运行它们</li>
+<li><code>-x</code>：导致clean在执行删除命令时打印它们</li>
+</ul>
+<h4 id="344">3.4.4. 使用示例</h4>
+<pre><code>## 清理当前目录下的编译文件
+go clean
+
+## 清理并删除安装的包
+go clean -i
+
+## 删除编译时生成的模块缓存
+go clean -modcache
+
+## 递归清理所有依赖项
+go clean -r
+
+## 删除整个go构建缓存
+go clean -cache
+
+## 使所有测试结果过期
+go clean -testcache
+
+## 删除模糊测试缓存文件
+go clean -fuzzcache
+
+## 打印将要执行的命令但不实际执行
+go clean -n
+
+## 打印执行的删除命令
+go clean -x
+
+## 清理指定包
+go clean ./cmd/...
+</code></pre>
+<h4 id="345">3.4.5. 注意事项</h4>
+<ul>
+<li>模糊测试引擎缓存扩展代码覆盖率的文件，因此删除它们可能会降低模糊测试的效果，直到找到提供相同覆盖率的新输入</li>
+<li>存储在testdata目录中的文件与模糊测试缓存文件不同，clean不会删除这些文件</li>
+<li>更多关于构建标志的信息，请参见'go help build'</li>
+<li>更多关于指定包的信息，请参见'go help packages'</li>
+</ul>
+<h2 id="4">4. 包管理命令</h2>
+<h3 id="41-go-mod-">4.1. go mod - 模块管理</h3>
+<p>Go 1.11版本引入的模块管理工具。</p>
+<h4 id="411">4.1.1. 命令语法</h4>
+<pre><code>go mod &lt;command&gt; [arguments]
+</code></pre>
+<h4 id="412">4.1.2. 功能说明</h4>
+<p>Go mod提供对模块操作的访问。需要注意的是，对模块的支持内置于所有go命令中，而不仅仅是'go mod'。例如，日常的添加、删除、升级和降级依赖项应该使用'go get'。模块功能的概述请参见'go help modules'。</p>
+<h4 id="413">4.1.3. 子命令</h4>
+<ul>
+<li><code>download</code>：将模块下载到本地缓存</li>
+<li><code>edit</code>：从工具或脚本编辑go.mod</li>
+<li><code>graph</code>：打印模块需求图</li>
+<li><code>init</code>：在当前目录中初始化新模块</li>
+<li><code>tidy</code>：添加缺失的模块并删除未使用的模块</li>
+<li><code>vendor</code>：制作依赖项的供应商副本</li>
+<li><code>verify</code>：验证依赖项是否具有预期内容</li>
+<li><code>why</code>：解释为什么需要包或模块</li>
+</ul>
+<h4 id="414">4.1.4. 使用示例</h4>
+<pre><code>## 初始化新模块
+go mod init module_name
+
+## 下载依赖
+go mod download
+
+## 查看依赖列表
+go mod graph
+
+## 验证依赖
+go mod verify
+
+## 整理依赖
+go mod tidy
+
+## 查看为什么需要某个依赖
+go mod why package_name
+
+## 编辑go.mod文件
+go mod edit -require=example.com/module@v1.0.0
+
+## 生成vendor目录
+go mod vendor
+
+## 查看模块信息
+go mod download -json
+</code></pre>
+<h4 id="415">4.1.5. 注意事项</h4>
+<ul>
+<li>更多关于模块的信息，请参见：https://golang.org/ref/mod</li>
+</ul>
+<h3 id="42-go-get-">4.2. go get - 获取包</h3>
+<p>下载并安装指定的包，更新go.mod以要求这些版本，并将源代码下载到模块缓存中。</p>
+<h4 id="421">4.2.1. 命令语法</h4>
+<pre><code>go get [-t] [-u] [-tool] [build flags] [packages]
+</code></pre>
+<h4 id="422">4.2.2. 功能说明</h4>
+<p>Get将其命令行参数解析为特定模块版本的包，更新go.mod以要求这些版本，并将源代码下载到模块缓存中。</p>
+<p>在早期版本的Go中，'go get'用于构建和安装包。现在，'go get'专门用于调整go.mod中的依赖项。'go install'可用于构建和安装命令。当指定了版本时，'go install'在模块感知模式下运行，并忽略当前目录中的go.mod文件。</p>
+<h4 id="423">4.2.3. 参数说明</h4>
+<ul>
+<li><code>-t</code>：指示get考虑构建命令行上指定的包的测试所需的模块</li>
+<li><code>-u</code>：指示get更新提供命令行上命名的包的依赖项的模块，以在可用时使用更新的次要或补丁版本</li>
+<li><code>-u=patch</code>：也指示get更新依赖项，但将默认值更改为选择补丁版本</li>
+<li><code>-tool</code>：指示go为每个列出的包在go.mod中添加匹配的工具行。如果-tool与@none一起使用，则该行将被删除</li>
+<li><code>-x</code>：在执行时打印命令。这对于调试版本控制命令（当模块直接从存储库下载时）很有用</li>
+</ul>
+<h4 id="424">4.2.4. 使用示例</h4>
+<pre><code>## 添加依赖或将其升级到最新版本
+go get example.com/pkg
+
+## 升级或降级包到特定版本
+go get example.com/pkg@v1.2.3
+
+## 移除对模块的依赖并降级需要它的模块
+go get example.com/mod@none
+
+## 升级最低要求的Go版本到最新的发布版本
+go get go@latest
+
+## 升级Go工具链到当前Go工具链的最新补丁版本
+go get toolchain@patch
+
+## 升级依赖项
+go get -u example.com/pkg
+
+## 升级依赖项到补丁版本
+go get -u=patch example.com/pkg
+
+## 考虑测试依赖项
+go get -t example.com/pkg
+
+## 构建和安装特定版本的命令
+go install example.com/pkg@v1.2.3
+go install example.com/pkg@latest
+</code></pre>
+<h4 id="425">4.2.5. 注意事项</h4>
+<ul>
+<li>更多关于模块的信息，请参见：https://golang.org/ref/mod</li>
+<li>更多关于使用'go get'更新最低Go版本和建议的Go工具链的信息，请参见：https://go.dev/doc/toolchain</li>
+</ul>
+<h3 id="43-go-list-">4.3. go list - 列出包或模块</h3>
+<p>列出命名的包，每行一个。</p>
+<h4 id="431">4.3.1. 命令语法</h4>
+<pre><code>go list [-f format] [-json] [-m] [list flags] [build flags] [packages]
+</code></pre>
+<h4 id="432">4.3.2. 功能说明</h4>
+<p>List列出命名的包，每行一个。最常用的标志是-f和-json，它们控制为每个包打印的输出格式。其他列表标志控制更具体的细节。</p>
+<h4 id="433">4.3.3. 参数说明</h4>
+<ul>
+<li><code>-f</code>：为列表指定替代格式，使用包模板的语法。默认输出等效于-f '.ImportPath'</li>
+<li><code>-json</code>：使包数据以JSON格式打印，而不是使用模板格式</li>
+<li><code>-m</code>：导致list列出模块而不是包</li>
+<li><code>-deps</code>：导致list不仅迭代命名的包，还迭代它们的所有依赖项</li>
+<li><code>-e</code>：更改对错误包的处理</li>
+<li><code>-export</code>：导致list将Export字段设置为包含给定包的最新导出信息的文件名</li>
+<li><code>-find</code>：导致list识别命名的包但不解析它们的依赖项</li>
+<li><code>-test</code>：导致list不仅报告命名的包，还报告它们的测试二进制文件</li>
+<li><code>-compiled</code>：导致list将CompiledGoFiles设置为呈现给编译器的Go源文件</li>
+<li><code>-versions</code>：导致list将Module的Versions字段设置为该模块的所有已知版本的列表</li>
+<li><code>-retracted</code>：导致list报告有关已撤回模块版本的信息</li>
+<li><code>-u</code>：添加有关可用升级的信息</li>
+</ul>
+<h4 id="434">4.3.4. 使用示例</h4>
+<pre><code>## 列出当前目录下的所有包
+go list ./...
+
+## 列出所有依赖
+go list -m all
+
+## 以JSON格式显示模块信息
+go list -m -json all
+
+## 显示包的导入路径
+go list -f .ImportPath encoding/json
+
+## 显示包的目录
+go list -f .Dir encoding/json
+
+## 显示包的依赖项
+go list -f .Deps encoding/json
+
+## 显示包的导入
+go list -f .Imports encoding/json
+
+## 以JSON格式显示包信息
+go list -json encoding/json
+
+## 显示模块路径和版本信息
+go list -m -f .String all
+
+## 显示可用的模块升级
+go list -m -u all
+
+## 显示模块的所有版本
+go list -m -versions example.com/module
+
+## 显示已撤回的模块版本
+go list -m -retracted all
+</code></pre>
+<h4 id="435">4.3.5. 注意事项</h4>
+<ul>
+<li>更多关于指定包的信息，请参见'go help packages'</li>
+<li>更多关于模块的信息，请参见：https://golang.org/ref/mod</li>
+</ul>
+<h2 id="5">5. 代码生成和维护命令</h2>
+<h3 id="51-go-fmt-">5.1. go fmt - 格式化代码</h3>
+<p>格式化Go源代码文件。</p>
+<h4 id="511">5.1.1. 命令语法</h4>
+<pre><code class="language-bash">go fmt [-n] [-x] [packages]
+</code></pre>
+<h4 id="512">5.1.2. 功能说明</h4>
+<p>Fmt在导入路径命名的包上运行'gofmt -l -w'命令。它会打印被修改的文件名。</p>
+<h4 id="513">5.1.3. 参数说明</h4>
+<ul>
+<li><code>-n</code>：打印将要执行的命令</li>
+<li><code>-x</code>：在执行时打印命令</li>
+<li><code>-mod</code>：设置要使用的模块下载模式，值可以是readonly或vendor</li>
+</ul>
+<h4 id="514">5.1.4. 使用示例</h4>
+<pre><code class="language-bash">## 格式化当前目录下的所有Go文件
+go fmt ./...
+
+## 格式化指定文件
+go fmt main.go
+
+## 显示将要格式化的文件但不执行格式化
+go fmt -n ./...
+
+## 格式化时打印执行的命令
+go fmt -x ./...
+
+## 格式化指定包
+go fmt example.com/package
+</code></pre>
+<h4 id="515">5.1.5. 注意事项</h4>
+<ul>
+<li>要使用特定选项运行gofmt，请直接运行gofmt本身</li>
+<li>更多关于gofmt的信息，请参见'go doc cmd/gofmt'</li>
+<li>更多关于指定包的信息，请参见'go help packages'</li>
+</ul>
+<h3 id="52-go-vet-">5.2. go vet - 检查代码问题</h3>
+<p>检查Go源代码中可能存在的错误。</p>
+<h4 id="521">5.2.1. 命令语法</h4>
+<pre><code class="language-bash">go vet [build flags] [-vettool prog] [vet flags] [packages]
+</code></pre>
+<h4 id="522">5.2.2. 功能说明</h4>
+<p>Vet在导入路径命名的包上运行Go vet命令。</p>
+<h4 id="523">5.2.3. 参数说明</h4>
+<ul>
+<li><code>-vettool=prog</code>：选择具有替代或附加检查的不同分析工具</li>
+<li>构建标志：支持的构建标志包括控制包解析和执行的标志，如-C、-n、-x、-v、-tags和-toolexec</li>
+</ul>
+<h4 id="524">5.2.4. 使用示例</h4>
+<pre><code class="language-bash">## 检查当前目录下的代码
+go vet
+
+## 检查指定包
+go vet package_name
+
+## 检查所有包
+go vet ./...
+
+## 使用特定的检查工具
+go vet -vettool=$(which shadow)
+
+## 显示详细信息
+go vet -v ./...
+
+## 打印将要执行的命令
+go vet -n ./...
+
+## 打印执行的命令
+go vet -x ./...
+</code></pre>
+<h4 id="525">5.2.5. 注意事项</h4>
+<ul>
+<li>更多关于vet及其标志的信息，请参见'go doc cmd/vet'</li>
+<li>更多关于指定包的信息，请参见'go help packages'</li>
+<li>有关检查器列表及其标志，请参见'go tool vet help'</li>
+<li>有关特定检查器（如'printf'）的详细信息，请参见'go tool vet help printf'</li>
+<li>更多关于构建标志的信息，请参见'go help build'</li>
+</ul>
+<h3 id="53-go-generate-">5.3. go generate - 通过注释执行命令</h3>
+<p>通过源码中的注释执行命令生成代码。</p>
+<h4 id="531">5.3.1. 命令语法</h4>
+<pre><code>go generate [-run regexp] [-n] [-v] [-x] [build flags] [file.go... | packages]
+</code></pre>
+<h4 id="532">5.3.2. 功能说明</h4>
+<p>Generate运行现有文件中指令描述的命令。这些命令可以运行任何进程，但目的是创建或更新Go源文件。</p>
+<p>Go generate永远不会被go build、go test等自动运行，必须显式运行。</p>
+<h4 id="533">5.3.3. 指令格式</h4>
+<p>Go generate扫描文件中的指令，这些指令是以下形式的行：</p>
+<pre><code>//go:generate command argument...
+</code></pre>
+<p>注意：没有前导空格且"//go"中没有空格，其中command是要运行的生成器，对应于可以在本地运行的可执行文件。</p>
+<h4 id="534">5.3.4. 参数说明</h4>
+<ul>
+<li><code>-run=""</code>：如果非空，指定一个正则表达式来选择完整原始源文本（不包括任何尾随空格和最终换行符）匹配该表达式的指令</li>
+<li><code>-skip=""</code>：如果非空，指定一个正则表达式来抑制完整原始源文本（不包括任何尾随空格和最终换行符）匹配该表达式的指令</li>
+<li><code>-n</code>：打印将要执行的命令</li>
+<li><code>-v</code>：打印正在处理的包和文件名</li>
+<li><code>-x</code>：在执行时打印命令</li>
+</ul>
+<h4 id="535">5.3.5. 环境变量</h4>
+<p>Go generate在运行生成器时设置以下变量：</p>
+<ul>
+<li><code>$GOARCH</code>：执行架构（arm、amd604等）</li>
+<li><code>$GOOS</code>：执行操作系统（linux、windows等）</li>
+<li><code>$GOFILE</code>：文件的基本名称</li>
+<li><code>$GOLINE</code>：源文件中指令的行号</li>
+<li><code>$GOPACKAGE</code>：包含指令的文件的包名</li>
+<li><code>$GOROOT</code>：调用生成器的'go'命令的GOROOT目录，包含Go工具链和标准库</li>
+<li><code>$DOLLAR</code>：美元符号</li>
+<li><code>$PATH</code>：父进程的$PATH，$GOROOT/bin放在开头</li>
+</ul>
+<h4 id="536">5.3.6. 命令别名</h4>
+<p>可以使用以下形式的指令为源文件的其余部分指定命令别名：</p>
+<pre><code>//go:generate -command xxx args...
+</code></pre>
+<p>这指定字符串xxx代表由参数标识的命令。这可以用于创建别名或处理多字生成器。</p>
+<p>例如：</p>
+<pre><code>//go:generate -command foo go tool foo
+</code></pre>
+<p>指定命令"foo"代表生成器"go tool foo"。</p>
+<h4 id="537">5.3.7. 使用示例</h4>
+<pre><code>## 执行源码中的generate指令
+go generate
+
+## 执行指定包中的generate指令
+go generate package_name
+
+## 显示将要执行的命令但不执行
+go generate -n
+
+## 显示执行的命令
+go generate -x
+
+## 显示处理的包和文件
+go generate -v
+
+## 执行匹配正则表达式的指令
+go generate -run=&quot;stringer&quot;
+
+## 跳过匹配正则表达式的指令
+go generate -skip=&quot;stringer&quot;
+
+## 处理指定文件
+go generate main.go
+</code></pre>
+<h4 id="538">5.3.8. 注意事项</h4>
+<ul>
+<li>生成的源代码应该有一行匹配正则表达式<code>^// Code generated .* DO NOT EDIT\.$</code>，以表明代码是生成的</li>
+<li>该行必须出现在文件中第一个非注释、非空白文本之前</li>
+<li>如果任何生成器返回错误退出状态，"go generate"将跳过该包的所有进一步处理</li>
+<li>生成器在包的源目录中运行</li>
+<li>更多关于构建标志的信息，请参见'go help build'</li>
+<li>更多关于指定包的信息，请参见'go help packages'</li>
+</ul>
+<h2 id="6">6. 测试命令</h2>
+<h3 id="61-go-test-">6.1. go test - 运行测试</h3>
+<p>运行Go测试文件。</p>
+<h4 id="611">6.1.1. 命令语法</h4>
+<pre><code class="language-bash">go test [build/test flags] [packages] [build/test flags &amp; test binary flags]
+</code></pre>
+<h4 id="612">6.1.2. 功能说明</h4>
+<p>'Go test'自动化测试由导入路径命名的包。它以以下格式打印测试结果摘要：</p>
+<pre><code>ok   archive/tar   0.011s
+FAIL archive/zip   0.022s
+ok   compress/gzip 0.033s
+...
+</code></pre>
+<p>'Go test'会重新编译每个包以及任何文件名匹配文件模式"*_test.go"的文件。这些附加文件可以包含测试函数、基准函数、模糊测试和示例函数。</p>
+<h4 id="613">6.1.3. 测试模式</h4>
+<p>Go test在两种不同的模式下运行：</p>
+<ol>
+<li>
+<p><strong>本地目录模式</strong>：当go test在没有包参数的情况下调用时发生（例如，'go test'或'go test -v'）。在此模式下，go test编译当前目录中的包源和测试，然后运行生成的测试二进制文件。在此模式下，缓存（如下所述）被禁用。</p>
+</li>
+<li>
+<p><strong>包列表模式</strong>：当go test使用显式包参数调用时发生（例如'go test math'，'go test ./...'，甚至'go test .'）。在此模式下，go test编译并测试命令行上列出的每个包。</p>
+</li>
+</ol>
+<h4 id="614">6.1.4. 测试缓存</h4>
+<p>在包列表模式下，go test会缓存成功的包测试结果以避免不必要的重复运行测试。当测试结果可以从缓存中恢复时，go test将重新显示以前的输出而不是再次运行测试二进制文件。</p>
+<p>可缓存的测试标志包括：-benchtime, -coverprofile, -cpu, -failfast, -fullpath, -list, -outputdir, -parallel, -run, -short, -skip, -timeout 和 -v。</p>
+<p>要禁用测试缓存，可以使用除可缓存标志之外的任何测试标志或参数。显式禁用测试缓存的惯用方法是使用-count=1。</p>
+<h4 id="615">6.1.5. 代码检查</h4>
+<p>作为构建测试二进制文件的一部分，go test在包及其测试源文件上运行go vet以识别重大问题。如果go vet发现问题，go test会报告这些问题并且不运行测试二进制文件。</p>
+<h4 id="616">6.1.6. 参数说明</h4>
+<ul>
+<li><code>-args</code>：将命令行的其余部分（-args之后的所有内容）传递给测试二进制文件，不进行解释和更改</li>
+<li><code>-c</code>：将测试二进制文件编译到当前目录中的pkg.test，但不运行它</li>
+<li><code>-exec xprog</code>：使用xprog运行测试二进制文件</li>
+<li><code>-json</code>：将测试输出转换为适合自动化处理的JSON格式</li>
+<li><code>-o file</code>：将测试二进制文件编译到指定文件</li>
+</ul>
+<h4 id="617">6.1.7. 使用示例</h4>
+<pre><code>## 运行当前目录下的所有测试
+go test
+
+## 运行指定包的测试
+go test package_name
+
+## 运行测试并显示详细信息
+go test -v
+
+## 运行基准测试
+go test -bench=.
+
+## 运行覆盖率测试
+go test -cover
+
+## 生成覆盖率报告
+go test -coverprofile=coverage.out
+go tool cover -html=coverage.out
+
+## 禁用测试缓存
+go test -count=1
+
+## 运行特定测试函数
+go test -run TestFunctionName
+
+## 设置测试超时时间
+go test -timeout 30s
+
+## 并行运行测试
+go test -parallel 4
+
+## 运行短时间测试
+go test -short
+
+## 跳过特定测试
+go test -skip TestSkipped
+
+## 显示详细输出
+go test -v
+
+## 仅列出测试函数
+go test -list .
+
+## 生成测试二进制文件但不运行
+go test -c
+
+## 指定输出文件名
+go test -o mytest
+
+## 传递参数给测试二进制文件
+go test -args -testArg=value
+
+## 以JSON格式输出
+go test -json
+
+## 禁用vet检查
+go test -vet=off
+
+## 运行所有vet检查
+go test -vet=all
+</code></pre>
+<h4 id="618">6.1.8. 注意事项</h4>
+<ul>
+<li>测试文件名以"_"（包括"_test.go"）或"."开头的文件将被忽略</li>
+<li>go工具将忽略名为"testdata"的目录，使其可用于保存测试所需的辅助数据</li>
+<li>所有测试输出和摘要行都打印到go命令的标准输出</li>
+<li>更多关于构建标志的信息，请参见'go help build'</li>
+<li>更多关于指定包的信息，请参见'go help packages'</li>
+<li>更多关于测试函数的信息，请参见'go help testfunc'</li>
+<li>更多关于测试标志的信息，请参见'go help testflag'</li>
+</ul>
+<h2 id="7">7. 文档和工具命令</h2>
+<h3 id="71-go-doc-">7.1. go doc - 显示文档</h3>
+<p>显示Go程序实体的文档：</p>
+<pre><code class="language-bash">## 显示当前目录的文档
+go doc
+
+## 显示指定包的文档
+go doc package_name
+
+## 显示函数或类型的文档
+go doc package_name.function_name
+</code></pre>
+<h3 id="72-go-tool-">7.2. go tool - 调用底层工具</h3>
+<p>调用Go工具链中的底层工具：</p>
+<pre><code class="language-bash">## 查看可用的工具
+go tool
+
+## 使用pprof进行性能分析
+go tool pprof cpu.prof
+
+## 使用trace分析程序执行
+go tool trace trace.out
+
+## 查看汇编代码
+go tool compile -S main.go
+</code></pre>
+<h2 id="8">8. 环境和配置命令</h2>
+<h3 id="81-go-bug-bug">8.1. go bug - 报告bug</h3>
+<p>打开浏览器报告Go语言的bug：</p>
+<pre><code class="language-bash">go bug
+</code></pre>
+<h3 id="82-go-fix-">8.2. go fix - 更新旧代码</h3>
+<p>更新旧版本Go代码以适应新版本：</p>
+<pre><code class="language-bash">go fix
+</code></pre>
+<h2 id="9">9. 实用示例</h2>
+<h3 id="91">9.1. 创建新项目</h3>
+<pre><code class="language-bash">
+## 创建项目目录
+mkdir myproject
+cd myproject
+
+## 初始化Go模块
+go mod init myproject
+
+## 创建main.go文件
+cat &gt; main.go &lt;&lt; EOF
+package main
+
+import &quot;fmt&quot;
+
+func main() {
+    fmt.Println(&quot;Hello, World!&quot;)
+}
+EOF
+
+## 运行程序
+go run main.go
+</code></pre>
+<h3 id="92">9.2. 添加外部依赖</h3>
+<pre><code class="language-bash">## 添加Gin框架
+go get -u github.com/gin-gonic/gin
+
+## 整理依赖
+go mod tidy
+</code></pre>
+<h3 id="93">9.3. 构建和部署</h3>
+<pre><code class="language-bash">
+## 构建项目
+go build -o myapp main.go
+
+## 跨平台编译
+GOOS=linux GOARCH=amd64 go build -o myapp main.go
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

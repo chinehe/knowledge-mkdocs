@@ -1,0 +1,1839 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87002_Redis%E4%BA%8B%E5%8A%A1%E8%AF%A6%E8%A7%A3%E4%B8%8EACID%E7%89%B9%E6%80%A7%E5%88%86%E6%9E%90/">
+      
+      
+        <link rel="next" href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87004_Redis%20Pipeline%E6%B5%81%E6%B0%B4%E7%BA%BF%E8%AF%A6%E8%A7%A3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>发布订阅(Pub&Sub)模式详解 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-pubsub" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              发布订阅(Pub&Sub)模式详解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库与缓存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_2" id="__nav_5_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87001_%E9%94%AE%28Keys%29%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C%E4%B8%8E%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    键(Keys)的通用操作与过期策略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87002_Redis%E4%BA%8B%E5%8A%A1%E8%AF%A6%E8%A7%A3%E4%B8%8EACID%E7%89%B9%E6%80%A7%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis事务详解与ACID特性分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    发布订阅(Pub&Sub)模式详解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    发布订阅(Pub&Sub)模式详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-pubsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 关于Pub/Sub发布订阅
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-redis-pubsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Redis Pub/Sub的基础操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Redis Pub/Sub的基础操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 基础操作命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 操作示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 使用模式（pattern）订阅
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 使用模式（pattern）订阅">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 使用模式匹配
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 模式匹配的消息格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 如果同时匹配了多个呢？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-pubsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 分片 Pub/Sub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-redis-pubsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Redis Pub/Sub的一些特性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Redis Pub/Sub的一些特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-delivery-semantics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 消息传递语义Delivery semantics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 推送消息的格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 推送消息的范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文档
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87004_Redis%20Pipeline%E6%B5%81%E6%B0%B4%E7%BA%BF%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis Pipeline流水线详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87005_%E4%BD%BF%E7%94%A8Lua%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%87%BD%E6%95%B0%E6%8B%93%E5%B1%95Redis%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    使用Lua脚本与函数拓展Redis详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87001_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-pubsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 关于Pub/Sub发布订阅
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-redis-pubsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Redis Pub/Sub的基础操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Redis Pub/Sub的基础操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 基础操作命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 操作示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 使用模式（pattern）订阅
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 使用模式（pattern）订阅">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 使用模式匹配
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 模式匹配的消息格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 如果同时匹配了多个呢？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-pubsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 分片 Pub/Sub
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-redis-pubsub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Redis Pub/Sub的一些特性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Redis Pub/Sub的一些特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-delivery-semantics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 消息传递语义Delivery semantics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 推送消息的格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 推送消息的范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文档
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据库与缓存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Redis
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87001_%E9%94%AE%28Keys%29%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C%E4%B8%8E%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    基础篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>发布订阅(Pub&Sub)模式详解</h1>
+
+<p>@[TOC]</p>
+<h2 id="1-pubsub">1. 关于Pub/Sub发布订阅</h2>
+<p>在软件架构中，发布/订阅（Publish–subscribe pattern）指的是一种消息范式：
+1. 发布者向消息代理人发布主题(Topic)和消息。
+2. 订阅者向消息代理人订阅主题和接收消息。
+3. 消息代理人保存发布者、订阅者和主题之间的关系。当有新消息发布时，消息代理人将会把消息转发给相应的订阅者。</p>
+<p>发布-订阅系统具有低耦合、可扩展性好等优点。</p>
+<p>而Redis的内部设计非常适合于实现发布-订阅系统，因此，发布-订阅功能被当作Redis的一个热点功能被推出。在Redis系统中，发布者和订阅者都是Redis的客户端或者Redis应用程序，而消息代理人为Redis服务器。</p>
+<pre><code class="language-mermaid">graph LR
+pub1[发布者1]
+pub2[发布者2] 
+toc1[[主题1]]
+toc2[[主题2]]
+toc3[[主题3]]
+sub1[订阅者1]
+sub2[订阅者2]
+sub3[订阅者3]
+sub4[订阅者4]
+pub1 -.-&gt; toc1 -.-&gt; sub1
+toc1 -.-&gt; sub2
+pub2 -.-&gt; toc2 -.-&gt; sub3
+pub2 -.-&gt; toc3 -.-&gt; sub3
+toc3 -.-&gt; sub4 
+
+subgraph &quot;消息代理人—Redis&quot;
+    toc1
+    toc2
+    toc3
+end
+</code></pre>
+<h2 id="2-redis-pubsub">2. Redis Pub/Sub的基础操作</h2>
+<h3 id="21">2.1. 基础操作命令</h3>
+<p>Redis Pub/Sub基础操作的相关命令如下：
+* <code>PUBLISH channel message</code>：发布者发布消息到指定的频道
+* <code>SUBSCRIBE channel [channel ...]</code>：客户端订阅指定的频道。
+* <code>UNSUBSCRIBE [channel [channel ...]]</code>：客户端取消对给定频道的订阅，如果没有指定频道，表示取消对所有频道的订阅。</p>
+<h3 id="22">2.2. 操作示例</h3>
+<p>在示例中，我们需要实现如同所示的操作：</p>
+<pre><code class="language-mermaid">graph LR
+pub1[publisher 1]
+pub2[publisher 2] 
+toc1[[channel A]]
+toc2[[channel B]]
+toc3[[channel C]]
+sub1[subscriber 1]
+sub2[subscriber 2]
+sub3[subscriber 3]
+sub4[subscriber 4]
+pub1 -.-&gt; toc1
+pub1 -.-&gt; toc2
+pub2 -.-&gt; toc2
+pub2 -.-&gt; toc3
+toc1 -.-&gt; sub1
+toc1 -.-&gt; sub2
+toc2 -.-&gt; sub2
+toc2 -.-&gt; sub3
+toc3 -.-&gt; sub3
+toc3 -.-&gt; sub4
+</code></pre>
+<ol>
+<li>订阅者们订阅指定的频道(以2号订阅者为例)
+    <code>shell
+    127.0.0.1:6379&gt; subscribe channelA channelB
+    Reading messages... (press Ctrl-C to quit)
+    1) "subscribe"
+    2) "channelA"
+    3) (integer) 1
+    1) "subscribe"
+    2) "channelB"
+    3) (integer) 2</code></li>
+<li>发布者们发布消息到指定的频道（以发布者1为例）
+    <code>shell
+    127.0.0.1:6379&gt; publish channelA msg_1
+    (integer) 2
+    127.0.0.1:6379&gt; publish channelB msg_2
+    (integer) 2</code>
+    最终结果
+    <img alt="在这里插入图片描述" src="https://i-blog.csdnimg.cn/direct/73d06501108e495ab114a71a1046ac00.png" /></li>
+</ol>
+<h2 id="3-pattern">3. 使用模式（pattern）订阅</h2>
+<h3 id="31">3.1. 使用模式匹配</h3>
+<p>Redis Pub/Sub 支持使用glob 样式的模式匹配进行订阅，客户端使用模式匹配进行订阅后，所有发送到<code>频道名称与给定模式匹配</code>的频道上的消息，都会被客户端接收到。</p>
+<p>glob样式举例：
+*  <code>h?llo</code> subscribes to hello, hallo and hxllo
+* <code>h*llo</code> subscribes to hllo and heeeello
+* <code>h[ae]llo</code> subscribes to hello and hallo, but not hillo</p>
+<p>使用模式订阅涉及到这两个命令：
+* <code>PSUBSCRIBE pattern [pattern ...]</code>：让客户端订阅指定模式（pattern）的频道.
+* <code>PUNSUBSCRIBE [pattern [pattern ...]]</code>：取消客户端对给定模式的频道的订阅，如果没有给出，则取消订阅所有模式。</p>
+<p>操作示例：
+<img alt="在这里插入图片描述" src="https://i-blog.csdnimg.cn/direct/fe58dd0e0ae846f088ff6bc1930862c3.png" /></p>
+<h3 id="32">3.2. 模式匹配的消息格式</h3>
+<p>从示例中我们看到，使用模式匹配订阅的客户端，收到的消息格式是不一样的：
+* 消息类型为pmessage
+* 第二个元素是匹配的原始模式
+* 第三个元素是原始频道的名称
+* 最后一个元素是实际的消息</p>
+<h3 id="33">3.3. 如果同时匹配了多个呢？</h3>
+<p>按照上文说的，一个客户端可以订阅多个模式/频道，那么如果一个频道名称和多个模式/频道匹配呢？
+比如,一个客户端执行了下面的这两个订阅操作：</p>
+<pre><code class="language-shell">SUBSCRIBE foo
+PSUBSCRIBE * f*
+</code></pre>
+<p>这时，如果一条消息发送到通道 foo，客户端将收到三条消息：
+* 一条message消息
+* 一条匹配了模式<code>*</code>的pmessage消息
+* 一条匹配了模式<code>f*</code>的pmessage消息</p>
+<h2 id="4-pubsub">4. 分片 Pub/Sub</h2>
+<blockquote>
+<p>这部分就不详细介绍了，一般Redis Pub/Sub都是用在比较简单的系统里面，个人觉得应该很少人用到这部分内容。所以就贴一下官网原文做个简单介绍吧。</p>
+</blockquote>
+<p>从 Redis 7.0 开始，引入了分片的发布/订阅（sharded Pub/Sub）功能，其中分片的频道由与分配键到槽的相同算法来分配。分片消息必须发送到拥有被散列到的分片频道槽的节点。集群确保已发布的分片消息转发到分片中的所有节点，因此客户端可以通过连接到负责该槽的主节点或任何副本来订阅分片频道。SSUBSCRIBE、SUNSUBSCRIBE和SPUBLISH用于实现分片的发布/订阅。</p>
+<p>分片的发布/订阅有助于在集群模式下扩展发布/订阅的使用。它限制了消息的传播范围在集群的分片内。因此，与全局发布/订阅相比，通过集群总线传递的数据量受到限制，其中每条消息传播到集群中的每个节点。这使用户可以通过添加更多分片来水平扩展发布/订阅的使用。</p>
+<blockquote>
+<p>原文：From Redis 7.0, sharded Pub/Sub is introduced in which shard channels are assigned to slots by the same algorithm used to assign keys to slots. A shard message must be sent to a node that owns the slot the shard channel is hashed to. The cluster makes sure the published shard messages are forwarded to all nodes in the shard, so clients can subscribe to a shard channel by connecting to either the master responsible for the slot, or to any of its replicas. SSUBSCRIBE, SUNSUBSCRIBE and SPUBLISH are used to implement sharded Pub/Sub.</p>
+</blockquote>
+<p>Sharded Pub/Sub helps to scale the usage of Pub/Sub in cluster mode. It restricts the propagation of messages to be within the shard of a cluster. Hence, the amount of data passing through the cluster bus is limited in comparison to global Pub/Sub where each message propagates to each node in the cluster. This allows users to horizontally scale the Pub/Sub usage by adding more shards.</p>
+<h2 id="5-redis-pubsub">5. Redis Pub/Sub的一些特性</h2>
+<h3 id="51-delivery-semantics">5.1. 消息传递语义Delivery semantics</h3>
+<p>Redis Pub/Sub的消息传递语义为 <strong>at-most-once</strong>（最多一次）： 消息最多会被传递一次。一旦 Redis 服务器发送了消息，就不会再次发送。如果订阅者无法处理消息（例如，由于错误或网络断开），该消息将永远丢失。</p>
+<blockquote>
+<p>如果需要更强的传递保证，可以考虑使用Redis Streams流。流中的消息是持久化的，并支持 <strong>at-most-once</strong>至多一次和<strong>at-least-once</strong>至少一次的传递语义。Redis Streams提供了更灵活和可靠的消息传递机制，适用于对消息传递的可靠性要求更高的应用场景。</p>
+</blockquote>
+<h3 id="52">5.2. 推送消息的格式</h3>
+<p>推送的消息是一个包含三个元素的数组回复（array_reply），其中第一个元素是消息的类型，根据消息类型的不同，后面两个元素代表不同的含义：
+* subscribe：意味着我们成功订阅了回复中第二个元素给出的频道。第三个参数代表我们当前订阅的频道数量。
+    <code>shell
+    # 订阅频道
+    1) "subscribe"
+    2) "quene"
+    3) (integer) 1</code>
+* unsubscribe：意味着我们成功取消了回复中作为第二个元素给出的频道的订阅。第三个参数代表我们当前订阅的频道数量。当最后一个参数为零时，我们不再订阅任何频道，并且客户端可以发出任何类型的 Redis 命令，因为我们处于 Pub/Sub 状态之外。
+* message：一位置我们收到了另一个客户端发出的消息。第二个元素是原始通道的名称，第三个参数是实际的消息负载。
+    <code>shell
+    # 收到消息
+    1) "message"
+    2) "quene"
+    3) "11111"</code></p>
+<h3 id="53">5.3 推送消息的范围</h3>
+<p>Pub/Sub（发布/订阅）与键空间没有关系。它被设计为在任何层面都不会干扰键空间，包括数据库编号。Pub/Sub提供了一种独立于键空间操作的消息传递机制，用于实现消息的发布和订阅，与数据库的操作是独立的。</p>
+<blockquote>
+<p>Pub/Sub has no relation to the key space. It was made to not interfere with it on any level, including database numbers.</p>
+</blockquote>
+<p>比如：在db10上向频道channelA上发布消息，db0上订阅channelA的客户端也能收到消息。</p>
+<p>如果需要某种范围界定，可以通道前添加环境名称（testing、staging、product...）。</p>
+<h2 id="_1">参考文档</h2>
+<ul>
+<li><a href="https://redis.io/docs/interact/pubsub/">Redis官网 - Pub/Sub</a></li>
+<li><a href="https://www.littlewaterdrop.com/static/zh/cs/redis/pub-sub/index.html">发布-订阅系统(Publish/Subscribe System)</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2655 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87005_%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E6%A2%B3%E7%90%86/">
+      
+      
+        <link rel="next" href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87007_%E7%BB%93%E6%9E%84%E4%BD%93%E8%AF%A6%E8%A7%A3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Golang流程控制 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Golang流程控制
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang语言
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang语言
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常量变量与数据类型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87002_%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E6%8C%87%E9%92%88%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    字符串、指针详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E7%BB%84%E3%80%81%E5%88%87%E7%89%87%E3%80%81map%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数组、切片、map详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87004_%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    函数详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87005_%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%E6%A2%B3%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    内置函数梳理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang流程控制
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang流程控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 条件语句
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 条件语句">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. if语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 基本switch语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 类型switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-select" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. select语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 循环语句
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 循环语句">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. for语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-for-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. for-range循环
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 跳转语句
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 跳转语句">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-break" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. break
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. break">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1. 循环中使用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2. switch中使用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. continue语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-goto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. goto语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87007_%E7%BB%93%E6%9E%84%E4%BD%93%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    结构体详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87008_%E6%8E%A5%E5%8F%A3%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    接口详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87009_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    异常处理机制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87001_%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gin框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gin框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E8%BF%9B%E9%98%B6%E7%AF%87001_%E6%9B%B4%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8gin%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 条件语句
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 条件语句">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-if" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. if语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 基本switch语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 类型switch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-select" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. select语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 循环语句
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 循环语句">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. for语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-for-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. for-range循环
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 跳转语句
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 跳转语句">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-break" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. break
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. break">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1. 循环中使用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-switch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2. switch中使用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-continue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. continue语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-goto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. goto语句
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang语言
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    基础篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Golang流程控制</h1>
+
+<p>流程控制是任何编程语言的核心组成部分，它决定了程序的执行路径。Go语言提供了丰富的流程控制语句，包括条件语句、循环语句和跳转语句，帮助开发者精确控制程序的执行流程。</p>
+<h2 id="1">1. 条件语句</h2>
+<h3 id="11-if">1.1. if语句</h3>
+<p>Go语言中if条件语句的格式如下：</p>
+<pre><code class="language-go">if 布尔表达式1 {
+    // 布尔表达式1结果为true时执行
+} else if 布尔表达式2 {
+    // 布尔表达式1结果为false且布尔表达式2结果为true时执行
+}else{
+    // 前面的布尔表达式都为false时执行
+}
+</code></pre>
+<ul>
+<li><code>else if</code>子语句可能没有，也可能又多个。</li>
+<li><code>else</code>子语句可能没有，但不能有多个。</li>
+<li><code>if</code> 、 <code>else if</code> 、 <code>else</code>子语句执行体内部都可以嵌套if条件语句</li>
+</ul>
+<blockquote>
+<p>Go语言中不支持三目运算符!</p>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-go">// 基本if语句
+if x &gt; 0 {
+    fmt.Println(&quot;x是正数&quot;)
+}
+
+// if-else语句
+if x &gt; 0 {
+    fmt.Println(&quot;x是正数&quot;)
+} else {
+    fmt.Println(&quot;x不是正数&quot;)
+}
+
+// if-else if-else语句
+if x &gt; 0 {
+    fmt.Println(&quot;x是正数&quot;)
+} else if x &lt; 0 {
+    fmt.Println(&quot;x是负数&quot;)
+} else {
+    fmt.Println(&quot;x是零&quot;)
+}
+</code></pre>
+<p>Go语言的if语句支持在条件判断前执行初始化语句：</p>
+<pre><code class="language-go">// 在if语句中声明和初始化变量
+if x := computeValue(); x &gt; 10 {
+    fmt.Printf(&quot;计算结果%d大于10\n&quot;, x)
+} else {
+    fmt.Printf(&quot;计算结果%d不大于10\n&quot;, x)
+}
+
+// 注意：x的作用域仅限于if语句块内
+// fmt.Println(x)  // 错误：未定义
+
+// 文件操作示例
+if file, err := os.Open(&quot;test.txt&quot;); err != nil {
+    fmt.Println(&quot;打开文件失败:&quot;, err)
+} else {
+    defer file.Close()
+    // 处理文件...
+}
+</code></pre>
+<h3 id="12-switch">1.2. 基本switch语句</h3>
+<p>switch 语句用于基于不同条件执行不同动作，每一个 case 分支都是唯一的，从上直下逐一测试，直到匹配为止：</p>
+<p>格式：</p>
+<pre><code class="language-go">switch 外层表达式 {
+    case 内层表达式1:
+            // 内层执行体1
+    case 内层表达式2:
+            // 内层执行体2
+            fallthrough
+    case 内层表达式3,内层表达式4:
+            // 内层执行体3
+    default:
+            // 默认执行
+}
+</code></pre>
+<ul>
+<li>
+<p>外层表达式和内层表达式都可以是任意类型，但需要保证两者的结果是同一种类型。</p>
+</li>
+<li>
+<p>当外层表达式和内层表达式的结果一致时，执行对应的结构体。</p>
+</li>
+<li>
+<p>同一个case后面可以有多个内层表达式，用,分隔。这表示当后面的任意表达式满足时，执行对应的内层执行体。</p>
+</li>
+</ul>
+<blockquote>
+<p>上面的内层表达式3和内层表达式4，他们任意一个满足时，都会执行内层执行体3</p>
+</blockquote>
+<ul>
+<li>
+<p>外层表达式可以忽略（等于switch true{...}），此时内层表达式只能为布尔表达式。当内层布尔表达式为true时执行对应的执行体。</p>
+</li>
+<li>
+<p>与Java不同，Go语言中的某个内层执行体执行完成后，默认不执行下一个内层执行体，如果需要执行下一个执行体，需要添加fallthrough关键字。</p>
+</li>
+</ul>
+<blockquote>
+<p>上面的内层表达式1满足后，只会执行内层执行体1.</p>
+<p>内层表达式2满足后，会执行内层执行体2和内层执行体3.</p>
+</blockquote>
+<ul>
+<li>default下的默认执行体，在上面的所有case条件都不成立的时候执行。</li>
+</ul>
+<blockquote>
+<p>default可以省略。</p>
+</blockquote>
+<ul>
+<li>Go语言的switch语句支持在switch关键字后执行初始化语句。</li>
+</ul>
+<p><strong>示例：简单switch语句</strong></p>
+<pre><code class="language-go">// 基本switch语句
+grade := &quot;B&quot;
+switch grade {
+case &quot;A&quot;:
+    fmt.Println(&quot;优秀&quot;)
+case &quot;B&quot;:
+    fmt.Println(&quot;良好&quot;)
+case &quot;C&quot;:
+    fmt.Println(&quot;一般&quot;)
+default:
+    fmt.Println(&quot;不及格&quot;)
+}
+</code></pre>
+<p><strong>示例：表达式switch</strong></p>
+<pre><code class="language-go">// case后面可以跟表达式
+x := 5
+switch {
+case x &lt; 0:
+    fmt.Println(&quot;x是负数&quot;)
+case x &gt; 0 &amp;&amp; x &lt; 10:
+    fmt.Println(&quot;x是个位正数&quot;)
+case x &gt;= 10:
+    fmt.Println(&quot;x是两位或以上的正数&quot;)
+}
+
+// switch后面可以跟表达式
+x := 10
+y := 0
+switch x + y {
+case 0:
+  fmt.Println(&quot;0&quot;)
+case 10:
+  fmt.Println(&quot;10&quot;)
+default:
+  fmt.Println(&quot;default&quot;)
+}
+
+// switch后面甚至可以初始化变量
+x := 10
+y := 0
+switch r := x + y; r &gt;= 0 {
+case true:
+  fmt.Println(&quot;true&quot;)
+case false:
+  fmt.Println(&quot;false&quot;)
+default:
+  fmt.Println(&quot;default&quot;)
+}
+</code></pre>
+<p><strong>示例：多条件匹配</strong></p>
+<pre><code class="language-go">// 一个case可以匹配多个值
+ch := 'a'
+switch ch {
+case 'a', 'e', 'i', 'o', 'u':
+    fmt.Println(&quot;元音字母&quot;)
+case 'b', 'c', 'd', 'f', 'g':
+    fmt.Println(&quot;辅音字母&quot;)
+default:
+    fmt.Println(&quot;其他字符&quot;)
+}
+</code></pre>
+<p><strong>示例：fallthrough关键字</strong></p>
+<pre><code class="language-go">// fallthrough会执行下一个case，即使条件不满足
+x := 10
+switch x {
+case 10:
+    fmt.Println(&quot;等于10&quot;)
+    fallthrough  // 继续执行下一个case
+case 20:
+    fmt.Println(&quot;等于20或执行了fallthrough&quot;)
+case 30:
+    fmt.Println(&quot;等于30或执行了fallthrough&quot;)
+default:
+    fmt.Println(&quot;其他值&quot;)
+}
+// 输出：
+// 等于10
+// 等于20或执行了fallthrough
+</code></pre>
+<h3 id="13-switch">1.3. 类型switch</h3>
+<p>switch 语句还可以被用于 type-switch 来判断某个 interface 变量中实际存储的变量类型。</p>
+<blockquote>
+<p>typw-switch语句算是switch语句的一个变种</p>
+</blockquote>
+<p>语法格式：</p>
+<pre><code class="language-go">switch 接口变量.(type){
+    case 类型1:
+        // 执行体1
+    case 类型2:
+        // 执行体2
+    default:
+        // 默认执行体
+}
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-go">// 类型switch用于判断接口变量的具体类型
+func processValue(v interface{}) {
+    switch val := v.(type) {
+    case int:
+        fmt.Printf(&quot;整数: %d\n&quot;, val)
+    case string:
+        fmt.Printf(&quot;字符串: %s\n&quot;, val)
+    case bool:
+        fmt.Printf(&quot;布尔值: %t\n&quot;, val)
+    case nil:
+        fmt.Println(&quot;空值&quot;)
+    default:
+        fmt.Printf(&quot;未知类型: %T\n&quot;, val)
+    }
+}
+
+func main() {
+    processValue(42)
+    processValue(&quot;Hello&quot;)
+    processValue(true)
+    processValue(nil)
+}
+</code></pre>
+<h3 id="14-select">1.4. select语句</h3>
+<p>select 是Go中的一个控制结构，类似于用于通信的switch语句。每个case必须是一个通信操作，要么是发送要么是接收。 select 随机执行一个可运行的case。如果没有case可运行，它将阻塞，直到有case可运行。一个默认的子句应该总是可运行的。</p>
+<p>语法格式：</p>
+<pre><code class="language-go">select {
+    case communication clause  :
+       // statement(s)      
+    case communication clause  :
+       // statement(s)
+    /* 你可以定义任意数量的 case */
+    default : /* 可选 */
+       statement(s)
+}
+</code></pre>
+<ul>
+<li>每个case都必须是一个通信操作.</li>
+<li>如果任意某个通信操作可以进行，它就执行；其他被忽略。</li>
+<li>如果有多个case都可以运行，Select会随机公平地选出一个执行。其他不会执行。</li>
+<li>当没有任何通信操作可以执行时，如果有default子句，则执行该语句。如果没有default字句，select将阻塞，直到某个通信可以运行。</li>
+</ul>
+<blockquote>
+<p>在一个select语句中，Go会按顺序从头到尾评估每一个发送和接收的语句。</p>
+<p>如果其中的任意一个语句可以继续执行（即没有被阻塞），那么就从那些可以执行的语句中任意选择一条来使用。 如果没有任意一条语句可以执行（即所有的通道都被阻塞），那么有两种可能的情况：</p>
+<p>①如果给出了default语句，那么就会执行default的流程，同时程序的执行会从select语句后的语句中恢复。</p>
+<p>②如果没有default语句，那么select语句将被阻塞，直到至少有一个case可以进行下去。</p>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-go">// 基本select语句
+ch1 := make(chan string)
+ch2 := make(chan string)
+
+go func() {
+    time.Sleep(1 * time.Second)
+    ch1 &lt;- &quot;来自通道1的消息&quot;
+}()
+
+go func() {
+    time.Sleep(2 * time.Second)
+    ch2 &lt;- &quot;来自通道2的消息&quot;
+}()
+
+// select会选择第一个准备好的case执行
+select {
+case msg1 := &lt;-ch1:
+    fmt.Println(&quot;收到:&quot;, msg1)
+case msg2 := &lt;-ch2:
+    fmt.Println(&quot;收到:&quot;, msg2)
+case &lt;-time.After(3 * time.Second):
+    fmt.Println(&quot;超时&quot;)
+}
+</code></pre>
+<h2 id="2">2. 循环语句</h2>
+<h3 id="21-for">2.1. for语句</h3>
+<p>for循环是一个循环控制结构，可以循环循环执行指定次数或不限次数。</p>
+<p>语法格式如下：</p>
+<pre><code class="language-go">for 初始化子句;条件子句;后置子句{
+    // 执行体
+}
+</code></pre>
+<p>执行流程：</p>
+<ol>
+<li>执行初始化子句</li>
+<li>判断条件子句结果，如果为true继续执行，否则退出循环。</li>
+<li>执行执行体</li>
+<li>执行后置子句</li>
+<li>自动跳转到第2步。</li>
+</ol>
+<p>注意事项：</p>
+<ul>
+<li>初始化子句、条件子句、后置子句都可以为空。当初始化子句和后置子句都为空时，可以省略两个分号。</li>
+<li>初始化子句为空表示不执行初始化操作。</li>
+<li>后置子句为空表示不执行后置操作。</li>
+<li>条件子句为空默认为true。</li>
+<li>for循环可以嵌套使用。</li>
+</ul>
+<p><strong>示例：基本for循环</strong></p>
+<pre><code class="language-go">// 传统的for循环
+for i := 0; i &lt; 5; i++ {
+    fmt.Printf(&quot;循环次数: %d\n&quot;, i)
+}
+</code></pre>
+<p><strong>示例：while循环形式</strong></p>
+<pre><code class="language-go">// Go语言没有while关键字，但for可以实现相同效果
+i := 0
+for i &lt; 5 {
+    fmt.Printf(&quot;循环次数: %d\n&quot;, i)
+    i++
+}
+</code></pre>
+<p><strong>示例：无限循环</strong></p>
+<pre><code class="language-go">// 无限循环
+for {
+    fmt.Println(&quot;无限循环&quot;)
+    // 需要break或其他方式跳出循环
+    break  // 或者return、goto等
+}
+</code></pre>
+<h3 id="22-for-range">2.2. for-range循环</h3>
+<p>range关键字用于遍历数组、切片、映射、字符串和通道：</p>
+<ul>
+<li>遍历数组/切片</li>
+</ul>
+<p>```go
+  // 遍历数组或切片
+  numbers := []int{1, 2, 3, 4, 5}
+  for index, value := range numbers {
+      fmt.Printf("索引%d: 值%d\n", index, value)
+  }</p>
+<p>// 只获取索引
+  for i := range numbers {
+      fmt.Printf("索引: %d\n", i)
+  }</p>
+<p>// 只获取值
+  for _, value := range numbers {
+      fmt.Printf("值: %d\n", value)
+  }
+  ```</p>
+<ul>
+<li>遍历映射</li>
+</ul>
+<p>```go
+  // 遍历映射
+  scores := map[string]int{
+      "数学": 95,
+      "语文": 87,
+      "英语": 92,
+  }</p>
+<p>for subject, score := range scores {
+      fmt.Printf("%s: %d分\n", subject, score)
+  }
+  ```</p>
+<ul>
+<li>遍历字符串</li>
+</ul>
+<p><code>go
+  s := "Hello World"
+  for i, c := range s {
+    fmt.Printf("%d: %c\n", i, c)
+  }
+  for i := range s {
+    fmt.Printf("%d: %c\n", i, s[i])
+  }</code></p>
+<ul>
+<li>遍历通道</li>
+</ul>
+<p>```go
+  // 定义通道
+  c := make(chan int)</p>
+<p>// 启动一个单独的协程
+  go func() {
+  // 重复十次
+  for i := 0; i &lt; 10; i++ {
+    // 睡眠1秒
+    time.Sleep(time.Second)
+    // 往通道写入数据
+    c &lt;- i
+  }
+  // 关闭通道
+  close(c)
+  }()</p>
+<p>// 遍历读取通道数据
+  for i := range c {
+  fmt.Println(i)
+  }
+  ```</p>
+<h2 id="3">3. 跳转语句</h2>
+<h3 id="31-break">3.1. break</h3>
+<p>break关键字用于跳出当前循环语句或者switch语句。</p>
+<h4 id="311">3.1.1. 循环中使用</h4>
+<p>break关键字在循环体中使用，表示不执行后续操作，直接退出当前循环体。</p>
+<pre><code class="language-go">循环体{
+  // 前面的执行语句
+  break
+  // 后面的执行语句
+}
+</code></pre>
+<ul>
+<li>break关键字执行后，关键字后面的执行语句不会被执行。</li>
+<li>break关键字执行后，退出当前循环。</li>
+<li>如果break关键字在多重循环内，将退出的是break关键字所在的最内层循环。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">func main() {
+  a := []int{1, 2, 3, 4, 5}
+  for i := 0; i &lt; 5; i++ {
+      for j, v := range a {
+          fmt.Print(v)
+          if j == i {
+              break
+          }
+      }
+      fmt.Println()
+  }
+}
+// 结果:
+1
+12   
+123  
+1234 
+12345
+</code></pre>
+<p>break关键字还可以搭配标签使用，表示退出标签后面紧跟的循环。</p>
+<p>语法格式：</p>
+<pre><code class="language-go">标签名字:    
+循环1 {
+    // 前置语句1
+    循环2 {
+        // 前置语句2
+        break 标签名字
+        // 后置语句2
+    }
+    // 后置语句1
+}
+</code></pre>
+<ul>
+<li>
+<p>标签后面应该紧跟循环，不能再有其他语句。</p>
+</li>
+<li>
+<p>break关键字执行后，关键字后面的执行语句不会被执行。</p>
+</li>
+</ul>
+<blockquote>
+<p>如后置语句2、后置语句1</p>
+</blockquote>
+<ul>
+<li>break关键字执行后，退出标签后面紧跟的循环。</li>
+</ul>
+<h4 id="312-switch">3.1.2. switch中使用</h4>
+<p>break关键字在switch中使用，表示不执行后续操作，直接退出当前switch体。</p>
+<p>语法格式：</p>
+<pre><code class="language-go">switch语句{
+  case子句{
+      // 前面的执行语句
+      break
+      // 后面的执行语句
+  }
+}
+</code></pre>
+<ul>
+<li>break关键字执行后，关键字后面的执行语句不会被执行。</li>
+<li>break关键字执行后，退出当前switch。</li>
+<li>如果break关键字在多重switch内，将退出的是break关键字所在的最内层switch。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">func main() {
+  var a = 1
+  var b = 2
+  switch a {
+  case 1:
+      fmt.Println(11)
+      switch b {
+      case 2:
+          fmt.Println(21)
+          if b &gt; a {
+              break
+          }
+          fmt.Println(22)
+      }
+      fmt.Println(12)
+  }
+}
+// 结果
+11
+21
+12
+</code></pre>
+<p>break关键字还可以搭配标签使用，表示退出标签后面紧跟的switch。</p>
+<pre><code class="language-go">func main() {
+  var a = 1
+  var b = 2
+label:
+  switch a {
+  case 1:
+      fmt.Println(11)
+      switch b {
+      case 2:
+          fmt.Println(21)
+          if b &gt; a {
+              break label
+          }
+          fmt.Println(22)
+      }
+      fmt.Println(12)
+  }
+}
+// 结果
+11
+21
+</code></pre>
+<ul>
+<li>标签后面应该紧跟switch，不能再有其他语句。</li>
+<li>break关键字执行后，关键字后面的执行语句不会被执行。</li>
+<li>break关键字执行后，退出标签后面紧跟的switch。</li>
+</ul>
+<h3 id="32-continue">3.2. continue语句</h3>
+<p>continue关键字用于停止当前循环体的执行，转而执行下一次循环。</p>
+<p>语法格式：</p>
+<pre><code class="language-go">for 初始化子句;条件子句;后置子句{
+  // 执行体1
+  continue
+  // 执行体2
+}
+</code></pre>
+<ul>
+<li>
+<p>continue关键字只能在循环中使用。</p>
+</li>
+<li>
+<p>continue关键字执行后，关键字后面的执行体不会执行。</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>执行体2 不会被执行。</li>
+</ul>
+</blockquote>
+<ul>
+<li>如果continue关键字在多重循环体内，将作用在关键字所在的最内层循环。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">func main() {
+  a := []int{1, 2, 3}
+  for i := range a {
+      fmt.Print(i, &quot;-&gt;&quot;)
+      if i == 1 {
+          fmt.Println(&quot;XXX&quot;)
+          continue
+      }
+      fmt.Println(a[i])
+  }
+}
+// 结果
+0-&gt;1  
+1-&gt;XXX
+2-&gt;3  
+</code></pre>
+<p>continue关键字还可以搭配标签使用，表示作用于标签后面紧跟的循环。</p>
+<p>语法格式：</p>
+<pre><code class="language-go">标签名字:    
+  循环1 {
+      // 前置语句1
+      循环2 {
+          // 前置语句2
+          continue 标签名字
+          // 后置语句2
+      }
+      // 后置语句1
+  }
+</code></pre>
+<ul>
+<li>
+<p>标签后面应该紧跟循环，不能再有其他语句。</p>
+</li>
+<li>
+<p>continue关键字执行后，关键字后面的执行语句不会被执行。</p>
+</li>
+</ul>
+<blockquote>
+<p>如后置语句2、后置语句1</p>
+</blockquote>
+<ul>
+<li>continue关键字执行后，继续执行标签后面紧跟的循环。</li>
+</ul>
+<h3 id="33-goto">3.3. goto语句</h3>
+<p>Go语言保留了goto语句，但建议谨慎使用。</p>
+<p>goto必须搭配标签使用，表示跳转到标签所在的位置，并开始执行标签后的语句。</p>
+<p>示例：</p>
+<pre><code class="language-go">func main() {
+    a := []int{1, 2, 3}
+    count := 0
+tag:
+    for i := 0; i &lt; len(a); i++ {
+        fmt.Print(a[i])
+    }
+    fmt.Println()
+    count++
+    if count &lt; 3 {
+        goto tag
+    }
+}
+// 结果
+123
+123
+123
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

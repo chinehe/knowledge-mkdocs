@@ -1,0 +1,2351 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87007_%E8%AF%A6%E8%A7%A3Stream%E6%B5%81%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/">
+      
+      
+        <link rel="next" href="../../../about/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>JSON类型详解（草稿） - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-json" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              JSON类型详解（草稿）
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库与缓存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87001_%E9%94%AE%28Keys%29%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C%E4%B8%8E%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_3" id="__nav_5_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据类型篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87001_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型梳理与选择指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87002_%E8%AF%A6%E8%A7%A3Strings%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Strings核心命令与存储结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87003_%E8%AF%A6%E8%A7%A3Lists%E5%88%97%E8%A1%A8%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Lists列表类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87004_%E8%AF%A6%E8%A7%A3Hashes%E5%93%88%E5%B8%8C%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Hashes哈希类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87005_%E8%AF%A6%E8%A7%A3Sets%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Sets集合类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87006_%E8%AF%A6%E8%A7%A3SortedSets%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解SortedSets有序集合类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87007_%E8%AF%A6%E8%A7%A3Stream%E6%B5%81%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Stream流类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON类型详解（草稿）
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON类型详解（草稿）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. JSON概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-redis-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 安装Redis JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. JSON 路径语法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. JSON 路径语法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-jsonpath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. JSONPath 语法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. JSONPath 语法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.1. 概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.2. 语法表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.3. 示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.3. 示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2131-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.3.1. 创建示例JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2132" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.3.2. 访问示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 相关命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 相关命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 基本操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 基本操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-jsonset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.1 JSON.SET：创建/更新文档
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-jsonget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.2 JSON.GET：查询文档
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 数值操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 数值操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-jsonnumincrby" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1 JSON.NUMINCRBY：数值递增
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 字符串操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 字符串操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-jsonstrappend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1 JSON.STRAPPEND：字符串追加
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 数组操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 数组操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-jsonarrappend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1 JSON.ARRAPPEND：数组追加
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 对象操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 对象操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#251-jsonobjkeys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5.1 JSON.OBJKEYS：获取对象键列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 内部实现原理
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. JSON概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-redis-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 安装Redis JSON
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. JSON 路径语法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. JSON 路径语法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-jsonpath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. JSONPath 语法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1. JSONPath 语法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.1. 概述
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.2. 语法表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#213" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.3. 示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1.3. 示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2131-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.3.1. 创建示例JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2132" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.3.2. 访问示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 相关命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 相关命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 基本操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 基本操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#211-jsonset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.1 JSON.SET：创建/更新文档
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#212-jsonget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.2 JSON.GET：查询文档
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 数值操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 数值操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-jsonnumincrby" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1 JSON.NUMINCRBY：数值递增
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 字符串操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 字符串操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-jsonstrappend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1 JSON.STRAPPEND：字符串追加
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 数组操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 数组操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-jsonarrappend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1 JSON.ARRAPPEND：数组追加
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 对象操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 对象操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#251-jsonobjkeys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5.1 JSON.OBJKEYS：获取对象键列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 内部实现原理
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据库与缓存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Redis
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87001_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据类型篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>JSON类型详解（草稿）</h1>
+
+<h2 id="1-json">1. JSON概述</h2>
+<blockquote>
+<p>参考官方文档：<a href="https://redis.io/docs/latest/develop/data-types/json/">Data Type JSON</a></p>
+</blockquote>
+<p>RedisJSON 是 Redis 的官方扩展模块，为 Redis 提供了原生的 JSON 数据类型支持。与将 JSON 序列化为字符串存储的传统方式不同，RedisJSON 允许直接存储、查询和操作 JSON 文档。</p>
+<blockquote>
+<p>传递给命令的JSON值深度可达128。如果你向命令传递嵌套级别大于128的JSON值，命令会返回错误。</p>
+</blockquote>
+<p><strong>Redis JSON的主要特性如下：</strong></p>
+<ul>
+<li>对JSON标准的全面支持。</li>
+<li>提供了用于选择/更新文档中元素的JSONPath语法。</li>
+<li>文档以二进制数据形式存储在树状结构中，允许快速访问子元素。无需传输整个对象即可获取嵌套值，特别适合大型 JSON 文档。</li>
+<li>提供了所有JSON值类型的原子操作。</li>
+</ul>
+<p>可以将 RedisJSON 想象成一个智能文件系统：</p>
+<blockquote>
+<ul>
+<li><code>$</code> 路径符号就像文件系统的根目录 <code>/</code></li>
+<li><code>$.user.name</code> 路径如同访问 <code>/user/name</code> 文件</li>
+<li>修改单个字段就像编辑文件部分内容，无需重写整个文件</li>
+</ul>
+</blockquote>
+<h2 id="2-redis-json">2. 安装Redis JSON</h2>
+<p>Redis JSON 是一个 Redis 模块，需要单独安装和加载。</p>
+<p>这里演示如何以安装包方式安装Redis JSON：</p>
+<ol>
+<li>下载预编译包</li>
+</ol>
+<p>```shell
+   # 去安装目录
+   cd /usr/src</p>
+<p># 下载
+   wget https://redismodules.s3.amazonaws.com/rejson/rejson.Linux-rhel7-x86_64.2.4.7.zip
+   ```</p>
+<ol>
+<li>解压</li>
+</ol>
+<p><code>shell
+   unzip rejson.Linux-rhel7-x86_64.2.4.7.zip -d ./rejson2.4.7/</code></p>
+<ol>
+<li>查看内容</li>
+</ol>
+<p>```shell
+   cd rejson2.4.7 # 进入目录
+   ll # 查看目录文件</p>
+<p># 输出
+   -rw------- 1 root root    6951 4月  22 2023 module.json
+   -rwxr-xr-x 1 root root 4425368 4月  22 2023 rejson.so
+   ```</p>
+<ol>
+<li>将so文件放到目标文件夹</li>
+</ol>
+<p><code>shell
+   # 我这里将它放到配置文件所在目录
+   cp rejson.so /etc/redis/</code></p>
+<ol>
+<li>修改redis配置文件，配置Redis加载JSON模块</li>
+</ol>
+<p><code>shell
+   loadmodule /etc/redis/rejson.so</code></p>
+<ol>
+<li>
+<p>重启Redis服务</p>
+</li>
+<li>
+<p>验证，在redis客户端中执行module list命令</p>
+</li>
+</ol>
+<p><code>shell
+   127.0.0.1:6379&gt; module list
+   1) 1) "name"
+      2) "ReJSON"
+      3) "ver"
+      4) (integer) 20407
+      5) "path"
+      6) "/etc/redis/rejson.so"
+      7) "args"
+      8) (empty array)</code></p>
+<h2 id="3-json">3. JSON 路径语法</h2>
+<p>JSON Path语法用于访问JSON中的特定元素。</p>
+<p>由于没有JSON路径语法的标准，Redis基于常见的最佳实践，实现了自己的JSON路径语法。</p>
+<p>Redis JSON支持两种查询语法：</p>
+<ul>
+<li>JSON Path语法：RedisJSON v2.0 引入</li>
+<li>第一版遗留的路径语法：RedisJSON v1 引入</li>
+</ul>
+<p>Redis JSON根据路径查询的语句的第一个字符来判定使用哪种语法。如果第一个字符为<code>$</code>，则使用JSONPath语法，否则默认使用遗留路径语法。</p>
+<h3 id="21-jsonpath">2.1.  JSONPath 语法</h3>
+<h4 id="211">2.1.1. 概述</h4>
+<p>Redis JSON v2.0引入了JSONPath 语法，遵循了Goessner在他文章中描述的语法。</p>
+<blockquote>
+<p>文章链接：<a href="https://goessner.net/articles/JsonPath/">JsonPath</a></p>
+</blockquote>
+<p>JSONPath查询可以间接到JSON文档中的多个位置。在这种情况下，JSON命令会将操作应用到所有可能的位置。这相比传统的路径查询是一个重大改进，后者只在第一个路径上执行操作。</p>
+<p>新语法支持括号表示法，允许使用特殊字符串如<code>:</code>或者键中的空白字符。</p>
+<p>如果要在CLI查询中包含双引号，要用单引号包住JSONPath。例如：</p>
+<pre><code class="language-shell">JSON.GET store '$.inventory[&quot;mountain_bikes&quot;]'
+</code></pre>
+<hr />
+<h4 id="212">2.1.2. 语法表</h4>
+<p><strong>JSONPath 语法表：</strong></p>
+<table>
+<thead>
+<tr>
+<th>语法元素</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$</code></td>
+<td>最外层JSON元素的根结点。</td>
+</tr>
+<tr>
+<td><code>.</code>、<code>[]</code></td>
+<td>选择一个子元素</td>
+</tr>
+<tr>
+<td><code>..</code></td>
+<td>向下递归JSON文档</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>返回所有元素</td>
+</tr>
+<tr>
+<td><code>[]</code></td>
+<td>下标操作符，访问数组元素</td>
+</tr>
+<tr>
+<td><code>[,]</code></td>
+<td>选择多个元素</td>
+</tr>
+<tr>
+<td><code>[start:end:step]</code></td>
+<td>数组切片<br/>start、end、step为索引值<br/>索引值可以忽略，忽略时使用默认值。它们的默认值分别为：第一个字符、最后一个字符、1<br/><code>[*]</code>和<code>[:]</code>选择所有元素</td>
+</tr>
+<tr>
+<td><code>?()</code></td>
+<td>过滤JSON对象或数组。<br/>支持比较操作符号：<code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>=~</code><br/>支持位运算符：<code>&amp;&amp;</code>, <code>||</code><br/>支持括号：(<code>,</code>)</td>
+</tr>
+<tr>
+<td><code>()</code></td>
+<td>脚本表达式</td>
+</tr>
+<tr>
+<td><code>@</code></td>
+<td>当前元素，在过滤器和脚本表达式中使用</td>
+</tr>
+</tbody>
+</table>
+<h4 id="213">2.1.3. 示例</h4>
+<h5 id="2131-json">2.1.3.1. 创建示例JSON</h5>
+<p>假设我们要操作的JSON文档存储了商店库存中商品的详细信息，如下：</p>
+<pre><code class="language-json">{
+    &quot;inventory&quot;: {
+        &quot;mountain_bikes&quot;: [
+            {
+                &quot;id&quot;: &quot;bike:1&quot;,
+                &quot;model&quot;: &quot;Phoebe&quot;,
+                &quot;description&quot;: &quot;This is a mid-travel trail slayer that is a fantastic daily driver or one bike quiver. The Shimano Claris 8-speed groupset gives plenty of gear range to tackle hills and there\u2019s room for mudguards and a rack too.  This is the bike for the rider who wants trail manners with low fuss ownership.&quot;,
+                &quot;price&quot;: 1920,
+                &quot;specs&quot;: {&quot;material&quot;: &quot;carbon&quot;, &quot;weight&quot;: 13.1},
+                &quot;colors&quot;: [&quot;black&quot;, &quot;silver&quot;],
+            },
+            {
+                &quot;id&quot;: &quot;bike:2&quot;,
+                &quot;model&quot;: &quot;Quaoar&quot;,
+                &quot;description&quot;: &quot;Redesigned for the 2020 model year, this bike impressed our testers and is the best all-around trail bike we've ever tested. The Shimano gear system effectively does away with an external cassette, so is super low maintenance in terms of wear and tear. All in all it's an impressive package for the price, making it very competitive.&quot;,
+                &quot;price&quot;: 2072,
+                &quot;specs&quot;: {&quot;material&quot;: &quot;aluminium&quot;, &quot;weight&quot;: 7.9},
+                &quot;colors&quot;: [&quot;black&quot;, &quot;white&quot;],
+            },
+            {
+                &quot;id&quot;: &quot;bike:3&quot;,
+                &quot;model&quot;: &quot;Weywot&quot;,
+                &quot;description&quot;: &quot;This bike gives kids aged six years and older a durable and uberlight mountain bike for their first experience on tracks and easy cruising through forests and fields. A set of powerful Shimano hydraulic disc brakes provide ample stopping ability. If you're after a budget option, this is one of the best bikes you could get.&quot;,
+                &quot;price&quot;: 3264,
+                &quot;specs&quot;: {&quot;material&quot;: &quot;alloy&quot;, &quot;weight&quot;: 13.8},
+            },
+        ],
+        &quot;commuter_bikes&quot;: [
+            {
+                &quot;id&quot;: &quot;bike:4&quot;,
+                &quot;model&quot;: &quot;Salacia&quot;,
+                &quot;description&quot;: &quot;This bike is a great option for anyone who just wants a bike to get about on With a slick-shifting Claris gears from Shimano\u2019s, this is a bike which doesn\u2019t break the bank and delivers craved performance.  It\u2019s for the rider who wants both efficiency and capability.&quot;,
+                &quot;price&quot;: 1475,
+                &quot;specs&quot;: {&quot;material&quot;: &quot;aluminium&quot;, &quot;weight&quot;: 16.6},
+                &quot;colors&quot;: [&quot;black&quot;, &quot;silver&quot;],
+            },
+            {
+                &quot;id&quot;: &quot;bike:5&quot;,
+                &quot;model&quot;: &quot;Mimas&quot;,
+                &quot;description&quot;: &quot;A real joy to ride, this bike got very high scores in last years Bike of the year report. The carefully crafted 50-34 tooth chainset and 11-32 tooth cassette give an easy-on-the-legs bottom gear for climbing, and the high-quality Vittoria Zaffiro tires give balance and grip.It includes a low-step frame , our memory foam seat, bump-resistant shocks and conveniently placed thumb throttle. Put it all together and you get a bike that helps redefine what can be done for this price.&quot;,
+                &quot;price&quot;: 3941,
+                &quot;specs&quot;: {&quot;material&quot;: &quot;alloy&quot;, &quot;weight&quot;: 11.6},
+            },
+        ],
+    }
+}
+</code></pre>
+<p>在Redis CLI中使用如下的命令来创建它：</p>
+<pre><code class="language-shell">JSON.SET bikes:inventory $ '{ &quot;inventory&quot;: { &quot;mountain_bikes&quot;: [ { &quot;id&quot;: &quot;bike:1&quot;, &quot;model&quot;: &quot;Phoebe&quot;, &quot;description&quot;: &quot;This is a mid-travel trail slayer that is a fantastic daily driver or one bike quiver. The Shimano Claris 8-speed groupset gives plenty of gear range to tackle hills and there\'s room for mudguards and a rack too. This is the bike for the rider who wants trail manners with low fuss ownership.&quot;, &quot;price&quot;: 1920, &quot;specs&quot;: {&quot;material&quot;: &quot;carbon&quot;, &quot;weight&quot;: 13.1}, &quot;colors&quot;: [&quot;black&quot;, &quot;silver&quot;] }, { &quot;id&quot;: &quot;bike:2&quot;, &quot;model&quot;: &quot;Quaoar&quot;, &quot;description&quot;: &quot;Redesigned for the 2020 model year, this bike impressed our testers and is the best all-around trail bike we\'ve ever tested. The Shimano gear system effectively does away with an external cassette, so is super low maintenance in terms of wear and tear. All in all it\'s an impressive package for the price, making it very competitive.&quot;, &quot;price&quot;: 2072, &quot;specs&quot;: {&quot;material&quot;: &quot;aluminium&quot;, &quot;weight&quot;: 7.9}, &quot;colors&quot;: [&quot;black&quot;, &quot;white&quot;] }, { &quot;id&quot;: &quot;bike:3&quot;, &quot;model&quot;: &quot;Weywot&quot;, &quot;description&quot;: &quot;This bike gives kids aged six years and older a durable and uberlight mountain bike for their first experience on tracks and easy cruising through forests and fields. A set of powerful Shimano hydraulic disc brakes provide ample stopping ability. If you\'re after a budget option, this is one of the best bikes you could get.&quot;, &quot;price&quot;: 3264, &quot;specs&quot;: {&quot;material&quot;: &quot;alloy&quot;, &quot;weight&quot;: 13.8} } ], &quot;commuter_bikes&quot;: [ { &quot;id&quot;: &quot;bike:4&quot;, &quot;model&quot;: &quot;Salacia&quot;, &quot;description&quot;: &quot;This bike is a great option for anyone who just wants a bike to get about on With a slick-shifting Claris gears from Shimano\'s, this is a bike which doesn\'t break the bank and delivers craved performance. It\'s for the rider who wants both efficiency and capability.&quot;, &quot;price&quot;: 1475, &quot;specs&quot;: {&quot;material&quot;: &quot;aluminium&quot;, &quot;weight&quot;: 16.6}, &quot;colors&quot;: [&quot;black&quot;, &quot;silver&quot;] }, { &quot;id&quot;: &quot;bike:5&quot;, &quot;model&quot;: &quot;Mimas&quot;, &quot;description&quot;: &quot;A real joy to ride, this bike got very high scores in last years Bike of the year report. The carefully crafted 50-34 tooth chainset and 11-32 tooth cassette give an easy-on-the-legs bottom gear for climbing, and the high-quality Vittoria Zaffiro tires give balance and grip.It includes a low-step frame , our memory foam seat, bump-resistant shocks and conveniently placed thumb throttle. Put it all together and you get a bike that helps redefine what can be done for this price.&quot;, &quot;price&quot;: 3941, &quot;specs&quot;: {&quot;material&quot;: &quot;alloy&quot;, &quot;weight&quot;: 11.6} } ] }}'
+</code></pre>
+<h5 id="2132">2.1.3.2. 访问示例</h5>
+<p><strong>可以使用<code>*</code>操作符获取inventory的所有元素：</strong></p>
+<pre><code class="language-shell">JSON.GET bikes:inventory $.inventory.*
+&quot;[[{\&quot;id\&quot;:\&quot;bike:1\&quot;,\&quot;model\&quot;:\&quot;Phoebe\&quot;,\&quot;description\&quot;:\&quot;This is a mid-travel trail slayer...
+</code></pre>
+<hr />
+<h2 id="2">2. 相关命令</h2>
+<h3 id="21">2.1 基本操作</h3>
+<h4 id="211-jsonset">2.1.1 JSON.SET：创建/更新文档</h4>
+<p><strong>语法</strong>：</p>
+<pre><code>JSON.SET &lt;key&gt; &lt;path&gt; &lt;json&gt; [NX | XX]
+</code></pre>
+<p><strong>参数说明</strong>：
+- <code>key</code>：Redis 键名
+- <code>path</code>：JSONPath 路径（<code>$</code> 表示根节点）
+- <code>json</code>：有效的 JSON 值
+- <code>NX</code>：仅当路径不存在时设置
+- <code>XX</code>：仅当路径存在时设置</p>
+<p><strong>使用示例</strong>：</p>
+<pre><code class="language-bash">## 创建完整JSON文档
+JSON.SET user $ '{&quot;name&quot;:&quot;John&quot;, &quot;age&quot;:30, &quot;city&quot;:&quot;New York&quot;}'
+
+## 更新嵌套字段
+JSON.SET user $.age 31
+
+## 条件更新（仅当字段存在）
+JSON.SET user $.preferences.theme &quot;dark&quot; XX
+</code></pre>
+<blockquote>
+<p>💡 <strong>初学者小贴士</strong>
+当看到 <code>$.user.name</code> 这样的路径时，可以把 <code>$</code> 想象成 JSON 文档的“起点站”，
+后续的 <code>.user.name</code> 就是沿着“地铁线路”逐站查找，最终到达目标数据节点。</p>
+</blockquote>
+<h4 id="212-jsonget">2.1.2 JSON.GET：查询文档</h4>
+<p><strong>语法</strong>：</p>
+<pre><code>JSON.GET &lt;key&gt; [path]
+</code></pre>
+<p><strong>参数说明</strong>：
+- <code>path</code>：可选路径，省略时返回整个文档</p>
+<p><strong>使用示例</strong>：</p>
+<pre><code class="language-bash">## 获取完整文档
+JSON.GET user
+
+## 获取特定字段
+JSON.GET user $.name
+
+## 获取多个字段（数组形式）
+JSON.GET user $.name $.age
+</code></pre>
+<h3 id="22">2.2 数值操作</h3>
+<h4 id="221-jsonnumincrby">2.2.1 JSON.NUMINCRBY：数值递增</h4>
+<p><strong>语法</strong>：</p>
+<pre><code>JSON.NUMINCRBY &lt;key&gt; &lt;path&gt; &lt;number&gt;
+</code></pre>
+<p><strong>使用示例</strong>：</p>
+<pre><code class="language-bash">## 用户积分+10
+JSON.NUMINCRBY user $.points 10
+
+## 购物车商品数量+1
+JSON.NUMINCRBY cart $.items[0].quantity 1
+</code></pre>
+<h3 id="23">2.3 字符串操作</h3>
+<h4 id="231-jsonstrappend">2.3.1 JSON.STRAPPEND：字符串追加</h4>
+<p><strong>语法</strong>：</p>
+<pre><code>JSON.STRAPPEND &lt;key&gt; &lt;path&gt; &lt;string&gt;
+</code></pre>
+<p><strong>使用示例</strong>：</p>
+<pre><code class="language-bash">## 给用户描述追加内容
+JSON.STRAPPEND user $.bio &quot; - Redis enthusiast&quot;
+</code></pre>
+<h3 id="24">2.4 数组操作</h3>
+<h4 id="241-jsonarrappend">2.4.1 JSON.ARRAPPEND：数组追加</h4>
+<p><strong>语法</strong>：</p>
+<pre><code>JSON.ARRAPPEND &lt;key&gt; &lt;path&gt; &lt;json&gt; [json ...]
+</code></pre>
+<p><strong>使用示例</strong>：</p>
+<pre><code class="language-bash">## 添加新订单
+JSON.ARRAPPEND orders $.history '{&quot;id&quot;:101, &quot;amount&quot;:99.9}'
+
+## 一次追加多个元素
+JSON.ARRAPPEND user $.hobbies &quot;hiking&quot; &quot;photography&quot;
+</code></pre>
+<h3 id="25">2.5 对象操作</h3>
+<h4 id="251-jsonobjkeys">2.5.1 JSON.OBJKEYS：获取对象键列表</h4>
+<p><strong>语法</strong>：</p>
+<pre><code>JSON.OBJKEYS &lt;key&gt; &lt;path&gt;
+</code></pre>
+<p><strong>使用示例</strong>：</p>
+<pre><code class="language-bash">## 获取用户对象的所有字段名
+JSON.OBJKEYS user $
+## 返回 [&quot;name&quot;, &quot;age&quot;, &quot;city&quot;]
+</code></pre>
+<h2 id="3">3. 内部实现原理</h2>
+<p>RedisJSON 采用 <strong>二进制树结构</strong> 存储 JSON 文档，其核心设计特点：</p>
+<ol>
+<li><strong>内存优化</strong>：</li>
+<li>共享相同前缀的路径节点</li>
+<li>
+<p>原始数据类型直接存储（避免字符串转换开销）</p>
+</li>
+<li>
+<p><strong>快速访问</strong>：
+   <code>mermaid
+   graph TD
+     A[JSON Root] --&gt; B["$.user"]
+     A --&gt; C["$.settings"]
+     B --&gt; D["$.user.name"]
+     B --&gt; E["$.user.age"]
+     C --&gt; F["$.settings.theme"]</code>
+   通过树形结构实现 O(1) 复杂度的路径查找</p>
+</li>
+<li>
+<p><strong>原子更新机制</strong>：</p>
+</li>
+<li>修改操作直接在树节点上进行</li>
+<li>避免全量文档解析和序列化</li>
+</ol>
+<blockquote>
+<p>💡 <strong>初学者小贴士</strong>
+想象 JSON 文档是一棵圣诞树：
+- 树干是根节点 <code>$</code>
+- 树枝是各级路径（如 <code>.user</code>）
+- 装饰品是最终数据（如 <code>.name</code>）
+修改某个装饰品时，只需调整对应树枝，无需重装整棵树</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

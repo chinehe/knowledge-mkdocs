@@ -1,0 +1,3414 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/">
+      
+      
+        <link rel="next" href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87003_%E5%93%8D%E5%BA%94%E8%AE%BE%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%88%E7%8A%B6%E6%80%81%E7%A0%81%E3%80%81%E5%A4%B4%E4%BF%A1%E6%81%AF%E3%80%81%E5%A4%9A%E6%A0%BC%E5%BC%8F%E5%BA%94%E7%AD%94%E4%BD%93%EF%BC%89/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>请求参数获取&模型绑定与校验 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              请求参数获取&模型绑定与校验
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang语言
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang语言
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87001_%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gin框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gin框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    路由与路由组详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    请求参数获取&模型绑定与校验
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    请求参数获取&模型绑定与校验
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 从请求头中获取参数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 从Cookie中获取参数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 从Query字符串中获取参数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 从URL中获取参数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 从URL中获取参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 动态参数路由
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 获取路径参数的方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 从Body中获取参数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 从Body中获取参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 获取原始数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-formbody" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Form格式Body
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2. Form格式Body">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#521-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.1. Form表单数据获取方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#522" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.2. 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#523-multipart-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.3. Multipart Form数据处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 模型绑定
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 模型绑定">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 绑定Body数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. 区别与总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. 请求体格式与结构体Tag对照表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 模型校验
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87003_%E5%93%8D%E5%BA%94%E8%AE%BE%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%88%E7%8A%B6%E6%80%81%E7%A0%81%E3%80%81%E5%A4%B4%E4%BF%A1%E6%81%AF%E3%80%81%E5%A4%9A%E6%A0%BC%E5%BC%8F%E5%BA%94%E7%AD%94%E4%BD%93%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    响应设置详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87004_%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    中间件的使用与机制详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87005_%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    静态文件服务
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87006_HTML%E6%A8%A1%E6%9D%BF%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%B8%B2%E6%9F%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTML模板加载与渲染
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87007_%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    文件上传与下载
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87008_%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    错误处理机制详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87009_%E6%97%A5%E5%BF%97%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志中间件详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Gin%E6%A1%86%E6%9E%B6%E8%BF%9B%E9%98%B6%E7%AF%87001_%E6%9B%B4%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8gin%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 从请求头中获取参数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 从Cookie中获取参数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 从Query字符串中获取参数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 从URL中获取参数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 从URL中获取参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 动态参数路由
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 获取路径参数的方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 从Body中获取参数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 从Body中获取参数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 获取原始数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-formbody" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Form格式Body
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2. Form格式Body">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#521-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.1. Form表单数据获取方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#522" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.2. 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#523-multipart-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.3. Multipart Form数据处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 模型绑定
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 模型绑定">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 绑定Body数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. 区别与总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. 请求体格式与结构体Tag对照表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 模型校验
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Gin框架
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    基础篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>请求参数获取&模型绑定与校验</h1>
+
+<p>根据请求参数上送的形式，可以将参数获取分成以下几种类型：</p>
+<ul>
+<li>从请求头中获取参数</li>
+<li>从Cookie中获取参数</li>
+<li>从Query字符串中获取参数</li>
+<li>从URL中获取参数</li>
+<li>从Body中获取参数</li>
+</ul>
+<h2 id="1">1. 从请求头中获取参数</h2>
+<p><strong>从请求头中获取参数的方法有如下几种：</strong></p>
+<ul>
+<li><code>c.GetHeader</code>方法：获取指定请求头的单个值，如果一个请求头有多个值，默认返回第一个。</li>
+<li><code>c.Request.Header</code>方法：从上下文中拿到原Request并从请求头中取值。</li>
+<li><code>ShouldBindHeader</code>与<code>BindHeader</code>方法：绑定请求头信息到结构体。</li>
+</ul>
+<p><strong>假设我们的请求上送格式如下：</strong></p>
+<pre><code class="language-http">GET /param/header HTTP/1.1
+Host: 127.0.0.1:8080
+Roles: admin
+Roles: super
+Roles: developer
+User-Name: chinehe
+</code></pre>
+<p>其中<code>Roles</code>请求头对应多个值，<code>User-Name</code>请求头对应一个值。</p>
+<p><strong>则获取请求头参数的代码如下：</strong></p>
+<ul>
+<li><code>c.GetHeader</code>方法：</li>
+</ul>
+<p>```go
+  // 处理方法
+  func HeaderParam(c *gin.Context) {
+    roles := c.GetHeader("Roles")
+    userName := c.GetHeader("User-Name")
+    c.JSON(200, gin.H{
+        "roles":    roles,
+        "userName": userName,
+    })
+  }</p>
+<p>// 输出结果
+  {
+      "roles": "admin", // 当请求头对应多个值时，c.GetHeader只会返回第一个
+      "userName": "chinehe"
+  }
+  ```</p>
+<ul>
+<li>
+<p><code>c.Request.Header</code>方法：</p>
+</li>
+<li>
+<p><code>c.Request.Header.Get</code>方法：获取单个值</p>
+<p>```go
+// 处理方法
+func HeaderParam(c *gin.Context) {
+    header := c.Request.Header
+    roles := header.Get("Roles")
+    userName := header.Get("User-Name")
+    c.JSON(200, gin.H{
+        "roles":    roles,
+        "userName": userName,
+    })
+}</p>
+<p>// 输出结果
+{
+    "roles": "admin", // 当请求头对应多个值时，c.Request.Header.Get只会返回第一个
+    "userName": "chinehe"
+}
+```</p>
+</li>
+<li>
+<p><code>c.Request.Header.Values</code>方法：获取值数组</p>
+<p>```go
+// 处理方法
+func HeaderParam(c *gin.Context) {
+    header := c.Request.Header
+    roles := header.Values("Roles") // 获取单个值
+    userName := header.Get("User-Name") // 获取值数组
+    c.JSON(200, gin.H{
+        "roles":    roles,
+        "userName": userName,
+    })
+}</p>
+<p>// 输出
+{
+    "roles": [ // c.Request.Header.Values方法获取值数组
+        "admin",
+        "super",
+        "developer"
+    ],
+    "userName": "chinehe" // c.Request.Header.Get方法获取单个值
+}
+```</p>
+</li>
+<li>
+<p><code>ShouldBindHeader</code>方法</p>
+</li>
+</ul>
+<p><code>``go
+  // 处理方法
+  func HeaderParam(c *gin.Context) {
+    // 接收参数的结构体
+    // header tag标识请求头名称（大小写不敏感），json tag标识json序列化时的字段名称
+    headerInfo := struct {
+        Roles    []string</code>header:"roles" json:"roles"<code>UserName string</code>header:"user-name" json:"userName"`
+    }{}
+    err := c.ShouldBindHeader(&amp;headerInfo)
+    if err != nil {
+        c.JSON(400, gin.H{
+            "message": err.Error(),
+        })
+    }
+    c.JSON(200, headerInfo)
+  }</p>
+<p>// 输出结果
+  {
+      "roles": [
+          "admin",
+          "super",
+          "developer"
+      ],
+      "userName": [
+          "chinehe"
+      ]
+  }
+  ```</p>
+<ul>
+<li><code>BindHeader</code>：与<code>ShouldBindHeader</code>差不多，区别在于如果绑定参数出错，会中止请求并应答400。</li>
+</ul>
+<h2 id="2-cookie">2. 从Cookie中获取参数</h2>
+<p><strong>从请求头中获取参数的方法有如下几种：</strong></p>
+<ul>
+<li>
+<p><code>c.Cookie</code>方法：获取指定名称的单个Cookie值，如果不存在会报错。</p>
+</li>
+<li>
+<p>从<code>c.Request</code>中获取：</p>
+</li>
+<li>
+<p><code>c.Request.Cookies</code>：获取请求中给所有Cookie。</p>
+</li>
+<li>
+<p><code>c.Request.CookieNamed</code>：获取请求中指定名称的所有Cookie。</p>
+<blockquote>
+<p>HTTP Cookie 标准规范</p>
+<ul>
+<li>
+<p>RFC 6265 规范:</p>
+</li>
+<li>
+<p>在同一 Domain 和 Path 下，不应该存在多个同名的Cookie</p>
+</li>
+<li>
+<p>当服务器通过 Set-Cookie 设置同名Cookie时，新Cookie会覆盖旧Cookie</p>
+</li>
+<li>
+<p>浏览器行为:</p>
+</li>
+<li>
+<p>大多数现代浏览器会自动去重，只保留最后一个同名Cookie</p>
+</li>
+<li>即使手动设置多个同名Cookie，最终也只会有一个生效</li>
+</ul>
+<p>为什么Gin仍提供多值支持?</p>
+<p>尽管标准不推荐，但 CookiesNamed 的设计考虑了以下情况：</p>
+<ul>
+<li>兼容历史系统: 某些旧系统可能产生不符合规范的Cookie</li>
+<li>调试需求: 开发过程中可能需要检查所有接收到的Cookie数据</li>
+<li>扩展性: 为未来可能的规范变化预留接口</li>
+</ul>
+<p>所以虽然理论上不建议使用同名多值Cookie，但框架仍提供了相应的解析能力以应对各种边界情况。</p>
+</blockquote>
+</li>
+<li>
+<p><code>c.Request.Cookie</code></p>
+</li>
+<li>
+<p>直接从请求头中获取：Cookie本质上也不过是名为Cookie的请求头，我们自然可以直接从请求头中获取cookie信息。</p>
+</li>
+</ul>
+<p><strong>假设我们的请求上送格式如下：</strong></p>
+<pre><code class="language-http">GET /param/header HTTP/1.1
+Host: 127.0.0.1:8080
+Cookie: roles=admin,super,developer; username=john_doe
+</code></pre>
+<p>其中<code>roles</code>请求头对应多个值（以逗号分隔），<code>username</code>请求头对应一个值。</p>
+<p><strong>则获取cookie参数的示例代码如下：</strong></p>
+<ul>
+<li><code>c.Cookie</code>方法</li>
+</ul>
+<p>```go
+  func CookieParam(c *gin.Context) {
+    userName, _ := c.Cookie("username") // 忽略错误
+    roles, _ := c.Cookie("roles") // 忽略错误
+    c.JSON(200, gin.H{
+        "username": userName,
+        "roles":    roles,
+    })
+  }</p>
+<p>// 输出
+  {
+      "roles": "super,admin,develop",
+      "username": "chinehe"
+  }
+  ```</p>
+<ul>
+<li>
+<p>从<code>c.Request</code>中获取：</p>
+</li>
+<li>
+<p><code>c.Request.Cookies</code></p>
+<p>```go
+func CookieParam(c *gin.Context) {
+    req := c.Request
+    // 获取所有cookie
+    cookies := req.Cookies()</p>
+<pre><code>// 遍历获取cookie
+res := make(map[string]string)
+for _, cookie := range cookies {
+    res[cookie.Name] = cookie.Value
+}
+
+c.JSON(200, res)
+</code></pre>
+<p>}</p>
+<p>// 输出
+{
+    "roles": "super,admin,develop",
+    "username": "chinehe"
+}
+```</p>
+</li>
+<li>
+<p><code>c.Request.CookieNamed</code></p>
+<p>```go
+func CookieParam(c *gin.Context) {
+    req := c.Request</p>
+<pre><code>// 仅供演示用
+// 实际不要这么写哦
+userName := req.CookiesNamed("username")[0]
+roles := req.CookiesNamed("roles")[0]
+
+c.JSON(200, gin.H{
+    "username": userName,
+    "roles":    roles,
+})
+</code></pre>
+<p>}</p>
+<p>// 输出
+{
+    "roles": "super,admin,develop",
+    "username": "chinehe"
+}
+```</p>
+</li>
+<li>
+<p><code>c.Request.Cookie</code></p>
+<p>```go
+func CookieParam(c *gin.Context) {
+    req := c.Request</p>
+<pre><code>// 获取Cookie
+userNameCookie, _ := req.Cookie("username") // 忽略错误
+rolesCookie, _ := req.Cookie("roles") // 忽略错误
+
+c.JSON(200, gin.H{
+    "username": userNameCookie.Value, // 获取到的是*Cookie类型
+    "roles":    rolesCookie.Value, // 获取到的是*Cookie类型
+})
+</code></pre>
+<p>}</p>
+<p>// 输出
+{
+    "roles": "super,admin,develop",
+    "username": "chinehe"
+}
+```</p>
+</li>
+<li>
+<p>直接从请求头中获取：不常用，略。可以参考《从请求头中获取参数》章节。</p>
+</li>
+</ul>
+<h2 id="3-query">3. 从Query字符串中获取参数</h2>
+<p><strong>从Query字符串中获取参数的方式如下：</strong></p>
+<ul>
+<li>从上下文简单获取</li>
+<li><code>c.Query</code>方法：获取指定key的query参数值，如果有多个就返回第一个，如果不存在就返回空字符串。</li>
+<li><code>c.QueryArray</code>方法：获取指定key的query参数列表，如果不存在就返回空数组。</li>
+<li><code>c.QueryMap</code>方法：获取指定key的query参数Map，如果不存在就返回空Map。</li>
+<li><code>c.DefaultQuery</code>方法：获取指定key的query参数值，如果有多个就返回第一个，如果不存在就返回参数中的默认值。</li>
+<li><code>c.GetQuery方法：</code>方法：获取指定key的query参数值和参数是否存在的标识，如果有多个就返回第一个，如果不存在就返回空字符串和false。</li>
+<li><code>c.GetQueryArray</code>方法：获取指定key的query参数列表和参数是否存在的标识，如果不存在就返回空数组和false。</li>
+<li><code>c.GetQueryMap</code>方法：获取指定key的query参数Map和参数是否存在的标识，如果不存在就返回空Map和false。</li>
+<li>从上下文绑定到结构体</li>
+<li><code>c.BindQuery</code>方法：绑定query参数到结构体，如果出错就中止请求并返回400。</li>
+<li><code>c.ShouldBindQuery</code>方法：绑定query参数到结构体，方法会返回错误信息。</li>
+<li>直接从请求中获取</li>
+<li><code>c.Request.URL</code>：从URL属性中获取值</li>
+</ul>
+<p><strong>假设HTTP请求如下：</strong></p>
+<pre><code class="language-http">GET /param/query?username=chinehe&amp;roles=super&amp;roles=admin&amp;roles=develop&amp;info[age]=18&amp;info[nick]=CCCCC HTTP/1.1
+Host: 127.0.0.1:8080
+</code></pre>
+<p><strong>示例代码：</strong></p>
+<ul>
+<li>
+<p>从上下文简单获取</p>
+</li>
+<li>
+<p><code>c.Query</code>、<code>c.QueryArray</code>、<code>c.QueryMap</code> </p>
+<p>```go
+func QueryParam(c *gin.Context) {
+    userName := c.Query("username") // 获取字符串信息
+    roles := c.QueryArray("roles") // 获取字符串数组信息
+    info := c.QueryMap("info") // 获取map信息</p>
+<pre><code>c.JSON(200, gin.H{
+    "username": userName,
+    "roles":    roles,
+    "info":     info,
+})
+</code></pre>
+<p>}</p>
+<p>// 输出
+{
+    "info": {
+        "age": "18",
+        "nick": "CCCCC"
+    },
+    "roles": [
+        "super",
+        "admin",
+        "develop"
+    ],
+    "username": "chinehe"
+}
+```</p>
+</li>
+<li>
+<p><code>c.GetQuery</code>、<code>c.GetQueryArray</code>、<code>c.GetQueryMap</code></p>
+<p>```go 
+func QueryParam(c *gin.Context) {
+  // 演示代码都忽略返回的标识符
+    userName, _ := c.GetQuery("username") // 获取字符串信息
+    roles, _ := c.GetQueryArray("roles") // 获取字符串数组信息
+    info, _ := c.GetQueryMap("info") // 获取map信息</p>
+<pre><code>c.JSON(200, gin.H{
+    "username": userName,
+    "roles":    roles,
+    "info":     info,
+})
+</code></pre>
+<p>}</p>
+<p>// 输出
+{
+    "info": {
+        "age": "18",
+        "nick": "CCCCC"
+    },
+    "roles": [
+        "super",
+        "admin",
+        "develop"
+    ],
+    "username": "chinehe"
+}
+```</p>
+</li>
+<li>
+<p><code>c.DefaultQuery</code></p>
+<p>```go
+// 仅演示用
+func QueryParam(c *gin.Context) {
+  // 都以字符串参数的形式获取，并设置默认值
+    userName := c.DefaultQuery("username", "default-username")
+    roles := c.DefaultQuery("roles", "default-roles")
+    info := c.DefaultQuery("info", "default-info")</p>
+<pre><code>c.JSON(200, gin.H{
+    "username": userName,
+    "roles":    roles,
+    "info":     info,
+})
+</code></pre>
+<p>}
+// 输出
+{
+    "info": "default-info", // 由于参数中不存在info，采用了默认值
+    "roles": "super", // 参数值为数组，该方法自动返回了第一个值
+    "username": "chinehe" 
+}
+```</p>
+</li>
+<li>
+<p>从上下文绑定到结构体</p>
+</li>
+</ul>
+<blockquote>
+<p>结构体tag为form</p>
+</blockquote>
+<ul>
+<li>
+<p><code>c.BindQuery</code>方法</p>
+<p><code>``go
+func QueryParam(c *gin.Context) {
+    queryParam := struct {
+        UserName string</code>form:"username" json:"username"<code>Roles    []string</code>form:"roles" json:"roles"<code>Info     struct {
+            Age  int</code>form:"info[age]" json:"age"<code>// 俺也不知道为什么不支持json那种嵌套的写法
+            Nick string</code>form:"info[nick]" json:"nick"<code>}</code>json:"info"`
+    }{}
+    _ = c.BindQuery(&amp;queryParam)
+    c.JSON(200, queryParam)
+}</p>
+<p>// 输出
+{
+    "username": "chinehe",
+    "roles": [
+        "super",
+        "admin",
+        "develop"
+    ],
+    "info": {
+        "age": 18,
+        "nick": "CCCC"
+    }
+}
+```</p>
+</li>
+<li>
+<p><code>c.ShouldBindQuery</code>方法</p>
+<p><code>``go
+func QueryParam(c *gin.Context) {
+    queryParam := struct {
+        UserName string</code>form:"username" json:"username"<code>Roles    []string</code>form:"roles" json:"roles"<code>Info     struct {
+            Age  int</code>form:"info[age]" json:"age"<code>Nick string</code>form:"info[nick]" json:"nick"<code>}</code>json:"info"`
+    }{}
+    err := c.ShouldBindQuery(&amp;queryParam)
+    if err != nil {
+        c.JSON(400, gin.H{
+            "message": err.Error(),
+        })
+    }
+    c.JSON(200, queryParam)
+}</p>
+<p>// 输出
+{
+    "username": "chinehe",
+    "roles": [
+        "super",
+        "admin",
+        "develop"
+    ],
+    "info": {
+        "age": 18,
+        "nick": "CCCC"
+    }
+}
+```</p>
+</li>
+<li>
+<p>直接从请求中获取</p>
+</li>
+</ul>
+<p>```go
+  func QueryParam(c *gin.Context) {
+    rawQuery := c.Request.URL.RawQuery // 获取原始query字符串
+    values := c.Request.URL.Query() // 获取url.Values
+    c.JSON(200, gin.H{
+        "rawQuery": rawQuery,
+        "values":   values,
+    })
+  }</p>
+<p>// 输出
+  {
+      "rawQuery": "username=chinehe&amp;roles=super&amp;roles=admin&amp;roles=develop&amp;info[age]=18&amp;info[nick]=CCCC",
+      "values": {
+          "info[age]": [
+              "18"
+          ],
+          "info[nick]": [
+              "CCCC"
+          ],
+          "roles": [
+              "super",
+              "admin",
+              "develop"
+          ],
+          "username": [
+              "chinehe"
+          ]
+      }
+  }
+  ```</p>
+<h2 id="4-url">4. 从URL中获取参数</h2>
+<p>gin支持定义包含动态参数的路由路径～</p>
+<h3 id="41">4.1. 动态参数路由</h3>
+<p>gin支持以下方式的动态路由参数</p>
+<ul>
+<li>单个路径参数：匹配单个路径段，不包含<code>/。</code></li>
+</ul>
+<p><code>go
+  paramRouter.GET("/url/:username", handler.URLParam)</code></p>
+<ul>
+<li>多个路径参数：匹配多个单路径段，不包含<code>/</code>。</li>
+</ul>
+<p><code>go
+  paramRouter.GET("/url/:username/:userid", handler.URLParam)</code></p>
+<ul>
+<li>通配符参数：匹配剩余所有路径内容，包含<code>/</code>。通配符参数只允许在路由路径的末尾。</li>
+</ul>
+<p><code>go
+  paramRouter.GET("/url/path/*path", handler.URLParam)</code></p>
+<ul>
+<li>混合使用</li>
+</ul>
+<p><code>go
+  paramRouter.GET("/url/mix/:username/:userid/*path", handler.URLParam)</code></p>
+<h3 id="42">4.2. 获取路径参数的方式</h3>
+<p><strong>从URL中获取路径参数的方式如下：</strong></p>
+<ul>
+<li><code>c.Param</code>方法：获取指定名称的路径参数。</li>
+<li><code>c.Params</code>属性：所有路径参数，路径参数是有序的。</li>
+<li>遍历路径参数数组</li>
+<li><code>c.Params.Get</code>方法：返回指定名称的路径参数和一个是否存在的标识符。</li>
+<li><code>c.Params.ByName</code>方法：返回指定名称的路径参数，如果不存在返回空字符串。</li>
+<li><code>c.BindUri</code>方法：绑定query参数到结构体，如果出错就中止请求并返回400。</li>
+<li><code>c.ShouldBindUri</code>方法：绑定query参数到结构体，方法会返回错误信息。</li>
+</ul>
+<h3 id="43">4.3. 示例</h3>
+<p>下面的示例都使用相同的路由定义：</p>
+<pre><code class="language-go">// 下面的路由都使用了相同的处理器URLParam
+paramRouter.GET(&quot;/url/:username&quot;, handler.URLParam) // 一个路径参数
+paramRouter.GET(&quot;/url/:username/:userid&quot;, handler.URLParam) // 两个单路径参数
+paramRouter.GET(&quot;/url/path/*path&quot;, handler.URLParam) // 通配符参数
+paramRouter.GET(&quot;/url/mix/:username/:userid/*path&quot;, handler.URLParam) // 两个单路径参数+通配符参数
+</code></pre>
+<ul>
+<li><code>c.Param</code>方法</li>
+</ul>
+<p>```go
+  func URLParam(c *gin.Context) {
+    userName := c.Param("username")
+    userID := c.Param("userid")
+    path := c.Param("path")
+    c.JSON(200, gin.H{
+        "userName": userName,
+        "userID":   userID,
+        "path":     path,
+    })
+  }</p>
+<p>// 访问/url/chinehe
+  {
+      "path": "",
+      "userID": "",
+      "userName": "chinehe"
+  }</p>
+<p>// 访问/url/chinehe/001
+  {
+      "path": "",
+      "userID": "001",
+      "userName": "chinehe"
+  }
+  // 访问/url/path/mypath/path
+  {
+      "path": "/mypath/path",
+      "userID": "",
+      "userName": ""
+  }
+  // 访问/url/mix/chinehe/001/mypath/path
+  {
+      "path": "/mypath/path",
+      "userID": "001",
+      "userName": "chinehe"
+  }
+  ```</p>
+<ul>
+<li>
+<p><code>c.Params</code>属性</p>
+</li>
+<li>
+<p>遍历路径参数数组</p>
+<p>```go
+func URLParam(c *gin.Context) {
+    paramMap := make(map[string]string)
+    for _, param := range c.Params {
+        paramMap[param.Key] = param.Value
+    }
+    c.JSON(200, paramMap)
+}</p>
+<p>// 访问/url/chinehe
+{
+    "path": "",
+    "userid": "",
+    "username": "chinehe"
+}</p>
+<p>// 访问/url/chinehe/001
+{
+    "path": "",
+    "userid": "001",
+    "username": "chinehe"
+}
+// 访问/url/path/mypath/path
+{
+    "path": "/mypath/path",
+    "userid": "",
+    "username": ""
+}
+// 访问/url/mix/chinehe/001/mypath/path
+{
+    "path": "/mypath/path",
+    "userid": "001",
+    "username": "chinehe"
+}
+```</p>
+</li>
+<li>
+<p><code>c.Params.Get</code>方法</p>
+<p>```go
+func URLParam(c *gin.Context) {
+  // 忽略标识符
+    username, _ := c.Params.Get("username")
+    userid, _ := c.Params.Get("userid")
+    path, _ := c.Params.Get("path")
+    c.JSON(200, gin.H{
+        "userName": username,
+        "userID":   userid,
+        "path":     path,
+    })
+}</p>
+<p>// 访问/url/chinehe
+{
+    "path": "",
+    "userID": "",
+    "userName": "chinehe"
+}</p>
+<p>// 访问/url/chinehe/001
+{
+    "path": "",
+    "userID": "001",
+    "userName": "chinehe"
+}
+// 访问/url/path/mypath/path
+{
+    "path": "/mypath/path",
+    "userID": "",
+    "userName": ""
+}
+// 访问/url/mix/chinehe/001/mypath/path
+{
+    "path": "/mypath/path",
+    "userID": "001",
+    "userName": "chinehe"
+}
+```</p>
+</li>
+<li>
+<p><code>c.Params.ByName</code>方法</p>
+<p>```go
+func URLParam(c *gin.Context) {
+    username := c.Params.ByName("username")
+    userid := c.Params.ByName("userid")
+    path := c.Params.ByName("path")
+    c.JSON(200, gin.H{
+        "userName": username,
+        "userID":   userid,
+        "path":     path,
+    })
+}</p>
+<p>// 访问/url/chinehe
+{
+    "path": "",
+    "userID": "",
+    "userName": "chinehe"
+}</p>
+<p>// 访问/url/chinehe/001
+{
+    "path": "",
+    "userID": "001",
+    "userName": "chinehe"
+}
+// 访问/url/path/mypath/path
+{
+    "path": "/mypath/path",
+    "userID": "",
+    "userName": ""
+}
+// 访问/url/mix/chinehe/001/mypath/path
+{
+    "path": "/mypath/path",
+    "userID": "001",
+    "userName": "chinehe"
+}
+```</p>
+</li>
+<li>
+<p><code>c.ShouldBindUri</code>方法</p>
+</li>
+</ul>
+<p><code>``go
+  func URLParam(c *gin.Context) {
+    param := struct {
+        UserName string</code>uri:"username" json:"userName"<code>UserID   string</code>uri:"userid" json:"userID"<code>Path     string</code>uri:"path" json:"path"`
+    }{}
+    err := c.ShouldBindUri(&amp;param)
+    if err != nil {
+        c.JSON(400, gin.H{
+            "message": err.Error(),
+        })
+    }
+    c.JSON(200, param)
+  }</p>
+<p>// 访问/url/chinehe
+  {
+      "path": "",
+      "userID": "",
+      "userName": "chinehe"
+  }</p>
+<p>// 访问/url/chinehe/001
+  {
+      "path": "",
+      "userID": "001",
+      "userName": "chinehe"
+  }
+  // 访问/url/path/mypath/path
+  {
+      "path": "/mypath/path",
+      "userID": "",
+      "userName": ""
+  }
+  // 访问/url/mix/chinehe/001/mypath/path
+  {
+      "path": "/mypath/path",
+      "userID": "001",
+      "userName": "chinehe"
+  }
+  ```</p>
+<ul>
+<li><code>c.BindUri</code>方法：参考<code>c.ShouldBindUri</code>方法，略</li>
+</ul>
+<h2 id="5-body">5. 从Body中获取参数</h2>
+<h3 id="51">5.1. 获取原始数据</h3>
+<p>有如下两种方式可以获取Body中的原始数据：</p>
+<ul>
+<li><code>c.GetRawData</code>:获取请求原始数据</li>
+<li>直接从<code>c.Request.Body</code>读取</li>
+</ul>
+<p><strong>特别注意：请求的Body只能被读取一次，因此用上述方法读取请求体内容后，不能在使用任何方法从请求中读取请求体内容！</strong></p>
+<p><strong><code>c.GetRawData</code>示例：</strong></p>
+<pre><code class="language-go">func BodyParam(c *gin.Context) {
+  // c.GetRawData()方法获取请求原始数据
+    data, err := c.GetRawData()
+    if err != nil {
+        c.JSON(400, gin.H{
+            &quot;message&quot;: err.Error(),
+        })
+    }
+    c.JSON(200, gin.H{
+        &quot;data&quot;: string(data),
+    })
+}
+</code></pre>
+<p>测试请求：</p>
+<pre><code class="language-http">POST /param/body HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+Content-Length: 11
+
+Hello World
+</code></pre>
+<p>应答：</p>
+<pre><code class="language-json">{
+    &quot;data&quot;: &quot;Hello World&quot;
+}
+</code></pre>
+<p><strong>直接从<code>c.Request.Body</code>读取示例：</strong></p>
+<pre><code class="language-go">func BodyParam(c *gin.Context) {
+  // 使用io.ReadAll读取请求体内容
+    data, err := io.ReadAll(c.Request.Body)
+    if err != nil {
+        c.JSON(400, gin.H{
+            &quot;message&quot;: err.Error(),
+        })
+    }
+    c.JSON(200, gin.H{
+        &quot;data&quot;: string(data),
+    })
+}
+</code></pre>
+<p>测试请求：</p>
+<pre><code class="language-http">POST /param/body HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: text/plain
+Content-Length: 11
+
+Hello World
+</code></pre>
+<p>应答：</p>
+<pre><code class="language-json">{
+    &quot;data&quot;: &quot;Hello World&quot;
+}
+</code></pre>
+<h3 id="52-formbody">5.2. Form格式Body</h3>
+<p>除了前面介绍的各种参数获取方式以及通用的请求体绑定方法之外，Gin还专门提供了处理form表单格式数据的方法。Form表单是Web开发中最常见的数据提交方式之一，特别是在HTML表单提交、文件上传等场景中广泛使用。</p>
+<h4 id="521-form">5.2.1. Form表单数据获取方法</h4>
+<p>Gin提供了多种方法来获取form表单数据：</p>
+<ul>
+<li>从上下文简单获取</li>
+<li><code>c.PostForm</code>方法：获取指定key的form参数值，如果有多个就返回第一个，如果不存在就返回空字符串。</li>
+<li><code>c.PostFormArray</code>方法：获取指定key的form参数列表，如果不存在就返回空数组。</li>
+<li><code>c.PostFormMap</code>方法：获取指定key的form参数Map，如果不存在就返回空Map。</li>
+<li><code>c.DefaultPostForm</code>方法：获取指定key的form参数值，如果有多个就返回第一个，如果不存在就返回参数中的默认值。</li>
+<li><code>c.GetPostForm</code>方法：获取指定key的form参数值和参数是否存在的标识，如果有多个就返回第一个，如果不存在就返回空字符串和false。</li>
+<li><code>c.GetPostFormArray</code>方法：获取指定key的form参数列表和参数是否存在的标识，如果不存在就返回空数组和false。</li>
+<li>
+<p><code>c.GetPostFormMap</code>方法：获取指定key的form参数Map和参数是否存在的标识，如果不存在就返回空Map和false。</p>
+</li>
+<li>
+<p>从上下文绑定到结构体</p>
+</li>
+<li><code>c.Bind</code>方法：自动识别form格式并绑定form参数到结构体，如果出错就中止请求并返回400。</li>
+<li><code>c.ShouldBind</code>方法：自动识别form格式并绑定form参数到结构体，方法会返回错误信息。</li>
+<li><code>c.BindWith</code>方法：手动指定按照form格式解析请求体并绑定到结构体，如果出错就中止请求并返回400。（已弃用）</li>
+<li><code>c.MustBindWith</code>方法：手动指定按照form格式解析请求体并绑定到结构体，方法会返回错误信息。</li>
+<li><code>c.ShouldBindWith</code>方法：手动指定按照form格式解析请求体并绑定到结构体，方法会返回错误信息。</li>
+<li><code>c.ShouldBindBodyWith</code>方法：手动指定按照form格式解析请求体并绑定到结构体，会存储请求体数据以便重复使用，方法会返回错误信息。</li>
+</ul>
+<h4 id="522">5.2.2. 示例</h4>
+<p><strong>假设HTTP请求如下：</strong></p>
+<pre><code class="language-http">POST /param/form HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 58
+
+username=chinehe&amp;roles=super&amp;roles=admin&amp;roles=develop&amp;age=18
+</code></pre>
+<p><strong>示例代码：</strong></p>
+<ul>
+<li>从上下文简单获取</li>
+</ul>
+<p>```go
+  func FormParam(c *gin.Context) {
+      userName := c.PostForm("username")           // 获取字符串信息
+      roles := c.PostFormArray("roles")            // 获取字符串数组信息
+      age := c.DefaultPostForm("age", "unknown")   // 获取字符串信息，设置默认值</p>
+<pre><code>  c.JSON(200, gin.H{
+      "username": userName,
+      "roles":    roles,
+      "age":      age,
+  })
+</code></pre>
+<p>}</p>
+<p>// 输出
+  {
+      "age": "18",
+      "roles": [
+          "super",
+          "admin",
+          "develop"
+      ],
+      "username": "chinehe"
+  }
+  ```</p>
+<ul>
+<li>从上下文绑定到结构体</li>
+</ul>
+<blockquote>
+<p>结构体tag为form</p>
+</blockquote>
+<p><code>``go
+  type UserParam struct {
+      UserName string</code>form:"username" json:"username"<code>Roles    []string</code>form:"roles" json:"roles"<code>Age      int</code>form:"age" json:"age"`
+  }</p>
+<p>func FormParam(c *gin.Context) {
+      var userParam UserParam
+      // 自动识别Content-Type为application/x-www-form-urlencoded并绑定
+      if err := c.ShouldBind(&amp;userParam); err != nil {
+          c.JSON(400, gin.H{"error": err.Error()})
+          return
+      }</p>
+<pre><code>  c.JSON(200, userParam)
+</code></pre>
+<p>}</p>
+<p>// 输出
+  {
+      "age": 18,
+      "roles": [
+          "super",
+          "admin",
+          "develop"
+      ],
+      "username": "chinehe"
+  }
+  ```</p>
+<h4 id="523-multipart-form">5.2.3. Multipart Form数据处理</h4>
+<p>对于包含文件上传的multipart/form-data格式表单，Gin同样提供了专门的处理方法：</p>
+<ul>
+<li><code>c.MultipartForm()</code>方法：解析multipart表单，返回*multipart.Form对象</li>
+<li><code>c.FormFile()</code>方法：获取表单中的文件对象</li>
+<li><code>c.SaveUploadedFile()</code>方法：保存上传的文件到指定路径</li>
+</ul>
+<p><strong>文件上传示例：</strong></p>
+<pre><code class="language-http">POST /upload HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name=&quot;username&quot;
+
+chinehe
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name=&quot;avatar&quot;; filename=&quot;avatar.jpg&quot;
+Content-Type: image/jpeg
+
+(binary data)
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+</code></pre>
+<p><strong>处理文件上传的代码示例：</strong></p>
+<pre><code class="language-go">func UploadHandler(c *gin.Context) {
+    // 获取multipart表单
+    form, err := c.MultipartForm()
+    if err != nil {
+        c.JSON(400, gin.H{&quot;error&quot;: err.Error()})
+        return
+    }
+
+    // 获取表单中的非文件字段
+    username := form.Value[&quot;username&quot;][0]
+
+    // 获取上传的文件
+    files := form.File[&quot;avatar&quot;]
+
+    // 遍历所有上传的文件
+    for _, file := range files {
+        // 保存文件到指定路径
+        if err := c.SaveUploadedFile(file, &quot;./uploads/&quot;+file.Filename); err != nil {
+            c.JSON(500, gin.H{&quot;error&quot;: err.Error()})
+            return
+        }
+    }
+
+    c.JSON(200, gin.H{
+        &quot;message&quot;:  &quot;上传成功&quot;,
+        &quot;username&quot;: username,
+    })
+}
+</code></pre>
+<p><strong>简化版文件上传处理：</strong></p>
+<pre><code class="language-go">func SimpleUploadHandler(c *gin.Context) {
+    // 获取单个上传文件
+    file, err := c.FormFile(&quot;avatar&quot;)
+    if err != nil {
+        c.JSON(400, gin.H{&quot;error&quot;: err.Error()})
+        return
+    }
+
+    // 获取其他表单字段
+    username := c.PostForm(&quot;username&quot;)
+
+    // 保存文件
+    if err := c.SaveUploadedFile(file, &quot;./uploads/&quot;+file.Filename); err != nil {
+        c.JSON(500, gin.H{&quot;error&quot;: err.Error()})
+        return
+    }
+
+    c.JSON(200, gin.H{
+        &quot;message&quot;:  &quot;上传成功&quot;,
+        &quot;username&quot;: username,
+        &quot;filename&quot;: file.Filename,
+    })
+}
+</code></pre>
+<p><strong>文件上传注意事项</strong>：</p>
+<ul>
+<li>处理文件上传时需要设置合适的内存限制，防止恶意上传大文件导致内存溢出</li>
+<li>应当验证上传文件的类型和大小，确保安全性</li>
+<li>保存文件时应当生成唯一的文件名，避免文件名冲突</li>
+</ul>
+<h2 id="6">6. 模型绑定</h2>
+<h3 id="61-body">6.1. 绑定Body数据</h3>
+<p>gin提供了各种各样的方法来绑定请求体数据，支持多种请求体格式：</p>
+<ul>
+<li>Bind系列：绑定请求体参数到指定的结构体，<strong>如果出错，中止请求并应答400。</strong></li>
+<li>Bind：根据请求的HTTP Method和请求头中的<code>Content-Type</code>，自动选择按照哪种格式解析请求体。<ul>
+<li><code>c.Bind</code>方法</li>
+</ul>
+</li>
+<li>BindT：按照指定的格式解析请求体。<ul>
+<li><code>c.BindWith</code>方法（已弃用）：手动指定按照那种格式解析请求体，内置支持：json、msgpack、plain、protobuf、toml、xml、yaml。</li>
+<li><code>c.MustBindWith</code>方法：手动指定按照那种格式解析请求体，内置支持：json、msgpack、plain、protobuf、toml、xml、yaml。</li>
+<li><code>c.BindJSON</code>方法：以JSON格式解析请求体。</li>
+<li><code>c.BindPlain</code>方法：以原始格式解析请求体。（目标对象应该是字节数组或字符串）</li>
+<li><code>c.BindTOML</code>方法：以TOML格式解析请求体。</li>
+<li><code>c.BindXML</code>方法：以XML格式解析请求体。</li>
+<li><code>c.BindYAML</code>方法：以YAML格式解析请求体。</li>
+</ul>
+</li>
+<li>ShouldBind系列：绑定请求体参数到指定的结构体，<strong>如果出错，返回报错让程序员自行处理。</strong></li>
+<li>ShouldBind：根据请求的HTTP Method和请求头中的<code>Content-Type</code>，自动选择按照哪种格式解析请求体。<ul>
+<li><code>c.ShouldBind</code>方法</li>
+</ul>
+</li>
+<li>ShouldBindT：按照指定的格式解析请求体。<ul>
+<li><code>c.ShouldBindWith</code>方法：手动指定按照那种格式解析请求体，内置支持：json、msgpack、plain、protobuf、toml、xml、yaml。</li>
+<li><code>c.ShouldBindJSON</code>方法：以JSON格式解析请求体。</li>
+<li><code>c.ShouldBindPlain</code>方法：以原始格式解析请求体。（目标对象应该是字节数组或字符串）</li>
+<li><code>c.ShouldBindTOML</code>方法：以TOML格式解析请求体。</li>
+<li><code>c.ShouldBindXML</code>方法：以XML格式解析请求体。</li>
+<li><code>c.ShouldBindYAML</code>方法：以YAML格式解析请求体。</li>
+</ul>
+</li>
+<li>ShouldBindBodyWithT：与<code>ShouldBindT</code>类似，但是<strong>会在上下文中存储请求体数据，以便再次调用时重用</strong>。这些方法会在绑定之前读取请求体，因此如果你只会调用一次的话，建议使用<code>ShouldBindT</code>方法以获取更高的性能。<ul>
+<li><code>c.ShouldBindBodyWith</code>方法：手动指定按照那种格式解析请求体，内置支持：json、msgpack、plain、protobuf、toml、xml、yaml。</li>
+<li><code>c.ShouldBindBodyWithJSON</code>方法：以JSON格式解析请求体。</li>
+<li><code>c.ShouldBindBodyWithPlain</code>方法：以原始格式解析请求体。（目标对象应该是字节数组或字符串）</li>
+<li><code>c.ShouldBindBodyWithTOML</code>方法：以TOML格式解析请求体。</li>
+<li><code>c.ShouldBindBodyWithXML</code>方法：以XML格式解析请求体。</li>
+<li><code>c.ShouldBindBodyWithYAML</code>方法：以YAML格式解析请求体。</li>
+</ul>
+</li>
+</ul>
+<h3 id="62">6.2. 区别与总结</h3>
+<ul>
+<li>Bind系列与Should系列的方法，区别在于出错时的处理方式：</li>
+<li>Bind系列：中止请求，并应答400.</li>
+<li>ShouldBind系列：将错误交给调用者自行处理。</li>
+<li>Bind/ShouldBind与BindT/ShouldBindT系列方法，区别在于是否指定按照哪种格式解析请求体：</li>
+<li>Bind/ShouldBind系列：根据请求的HTTP Method和请求头中的<code>Content-Type</code>，自动选择按照哪种格式解析请求体。</li>
+<li>BindT/ShouldBindT系列：按照指定的格式解析请求体。</li>
+<li>ShouldBindT与ShouldBindBodyWithT系列方法，区别在于是否会在上下文中存储请求体数据：</li>
+<li>ShouldBindT系列：不会存储请求体数据，不能多次调用，性能较好。</li>
+<li>ShouldBindBodyWithT系列：会存储请求体数据，可以多次调用，性能较差。</li>
+</ul>
+<h3 id="63">6.3. 示例</h3>
+<p>在上述的所有绑定方法中，最常用的应该是<code>ShouldBind</code>方法或者<code>ShouldBindT</code>系列的方法。其他的方法自然有其对应的用处，开发者应该充分了解他们之间的区别并自行决定使用哪个方法.</p>
+<p><strong>示例演示使用<code>ShouldBind</code>方法自动处理JSON格式的请求体参数:</strong></p>
+<p><strong>代码：</strong></p>
+<pre><code class="language-go">// UserParam 演示用参数结构体
+type UserParam struct {
+    UserID   string    `json:&quot;userID&quot;`
+    UserName string    `json:&quot;userName&quot;`
+    Info     *UserInfo `json:&quot;info&quot;`
+}
+
+type UserInfo struct {
+    Age   int      `json:&quot;age&quot;`
+    Roles []string `json:&quot;roles&quot;`
+}
+
+// BodyParam 处理函数
+func BodyParam(c *gin.Context) {
+    param := new(UserParam)
+    err := c.ShouldBind(param)
+    if err != nil {
+        c.JSON(400, gin.H{
+            &quot;message&quot;: err.Error(),
+        })
+    }
+    c.JSON(200, param)
+}
+</code></pre>
+<p><strong>请求：</strong></p>
+<pre><code class="language-http">POST /param/body HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: application/json
+Content-Length: 130
+
+{
+    &quot;userID&quot;:&quot;001&quot;,
+    &quot;userName&quot;:&quot;chinehe&quot;,
+    &quot;info&quot;:{
+        &quot;age&quot;:18,
+        &quot;roles&quot;:[&quot;super&quot;,&quot;admin&quot;,&quot;develop&quot;]
+    }
+}
+</code></pre>
+<p><strong>结果：</strong></p>
+<pre><code class="language-json">{
+    &quot;userID&quot;: &quot;001&quot;,
+    &quot;userName&quot;: &quot;chinehe&quot;,
+    &quot;info&quot;: {
+        &quot;age&quot;: 18,
+        &quot;roles&quot;: [
+            &quot;super&quot;,
+            &quot;admin&quot;,
+            &quot;develop&quot;
+        ]
+    }
+}
+</code></pre>
+<h3 id="64-tag">6.4. 请求体格式与结构体Tag对照表</h3>
+<p>在使用Gin框架绑定请求体数据时，不同的数据格式需要使用不同的绑定方法和结构体tag。下表详细列出了各种请求体格式对应的绑定方法和结构体tag：</p>
+<table>
+<thead>
+<tr>
+<th>请求体格式</th>
+<th>Content-Type</th>
+<th>绑定方法</th>
+<th>结构体Tag</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JSON</td>
+<td>application/json</td>
+<td>ShouldBindJSON/MustBindWith</td>
+<td>json</td>
+<td>最常用的格式，适用于API接口</td>
+</tr>
+<tr>
+<td>XML</td>
+<td>application/xml</td>
+<td>ShouldBindXML/MustBindWith</td>
+<td>xml</td>
+<td>常用于企业级应用和SOAP服务</td>
+</tr>
+<tr>
+<td>YAML</td>
+<td>application/yaml</td>
+<td>ShouldBindYAML/MustBindWith</td>
+<td>yaml</td>
+<td>常用于配置文件，人类可读性强</td>
+</tr>
+<tr>
+<td>TOML</td>
+<td>application/toml</td>
+<td>ShouldBindTOML/MustBindWith</td>
+<td>toml</td>
+<td>新兴配置文件格式，简洁明了</td>
+</tr>
+<tr>
+<td>表单</td>
+<td>application/x-www-form-urlencoded</td>
+<td>ShouldBind/ShouldBindWith</td>
+<td>form</td>
+<td>HTML表单默认提交格式</td>
+</tr>
+<tr>
+<td>多部分表单</td>
+<td>multipart/form-data</td>
+<td>ShouldBind/ShouldBindWith</td>
+<td>form</td>
+<td>文件上传时使用</td>
+</tr>
+<tr>
+<td>纯文本-</td>
+<td>text/plain</td>
+<td>ShouldBindPlain/MustBindWith</td>
+<td>-</td>
+<td>原始字符串或字节数据</td>
+</tr>
+</tbody>
+</table>
+<p><strong>使用说明：</strong></p>
+<ol>
+<li><strong>自动绑定 vs 手动绑定</strong>：</li>
+<li><code>ShouldBind</code>系列方法会根据请求的Content-Type自动选择合适的绑定方法</li>
+<li>
+<p><code>ShouldBindWith</code>系列方法需要手动指定绑定方式，提供更多控制权</p>
+</li>
+<li>
+<p><strong>结构体Tag使用</strong>：</p>
+</li>
+<li>不同的数据格式需要使用对应的tag，如JSON使用<code>json</code>，XML使用<code>xml</code></li>
+<li><code>form</code> tag既适用于表单也适用于查询参数</li>
+<li>
+<p>某些格式如纯文本不需要特定tag</p>
+</li>
+<li>
+<p><strong>示例结构体定义：</strong></p>
+</li>
+</ol>
+<pre><code class="language-go">// 不同格式的数据绑定示例
+type User struct {
+    ID       int      `json:&quot;id&quot; xml:&quot;id&quot; form:&quot;id&quot; yaml:&quot;id&quot;`
+    Name     string   `json:&quot;name&quot; xml:&quot;name&quot; form:&quot;name&quot; yaml:&quot;name&quot;`
+    Email    string   `json:&quot;email&quot; xml:&quot;email&quot; form:&quot;email&quot; yaml:&quot;email&quot;`
+    IsActive bool     `json:&quot;is_active&quot; xml:&quot;is_active&quot; form:&quot;is_active&quot; yaml:&quot;is_active&quot;`
+    Roles    []string `json:&quot;roles,omitempty&quot; xml:&quot;roles&quot; form:&quot;roles&quot; yaml:&quot;roles&quot;`
+}
+</code></pre>
+<p>通过这个对照表，开发者可以根据需要选择合适的数据格式和绑定方法来处理请求体数据。</p>
+<h2 id="7">7. 模型校验</h2>
+<p>在模型绑定相关方法中，会在模型绑定完成后，自动执行模型校验。</p>
+<p>比如在JSON模型绑定的源码中：</p>
+<pre><code class="language-go">type jsonBinding struct{}
+
+func (jsonBinding) Name() string {
+    return &quot;json&quot;
+}
+
+func (jsonBinding) Bind(req *http.Request, obj any) error {
+    if req == nil || req.Body == nil {
+        return errors.New(&quot;invalid request&quot;)
+    }
+    return decodeJSON(req.Body, obj)
+}
+
+func (jsonBinding) BindBody(body []byte, obj any) error {
+    return decodeJSON(bytes.NewReader(body), obj)
+}
+
+func decodeJSON(r io.Reader, obj any) error {
+    decoder := json.API.NewDecoder(r)
+    if EnableDecoderUseNumber {
+        decoder.UseNumber()
+    }
+    if EnableDecoderDisallowUnknownFields {
+        decoder.DisallowUnknownFields()
+    }
+    if err := decoder.Decode(obj); err != nil {
+        return err
+    }
+
+  // 这里自动调用的模型校验方法
+    return validate(obj)
+}
+
+</code></pre>
+<p><strong>Gin使用 <a href="https://github.com/go-playground/validator">go-playground/validator/v10</a> 进行验证。 查看标签用法的全部<a href="https://pkg.go.dev/github.com/go-playground/validator/v10#hdr-Baked_In_Validators_and_Tags">文档</a>.</strong></p>
+<p>官方示例：</p>
+<pre><code class="language-go">// 绑定 JSON
+type Login struct {
+  User     string `json:&quot;user&quot; binding:&quot;required&quot;`
+  Password string `json:&quot;password&quot; binding:&quot;required&quot;`
+}
+
+func main() {
+  router := gin.Default()
+
+  // 绑定 JSON ({&quot;user&quot;: &quot;manu&quot;, &quot;password&quot;: &quot;123&quot;})
+  router.POST(&quot;/loginJSON&quot;, func(c *gin.Context) {
+    var json Login
+    if err := c.ShouldBindJSON(&amp;json); err != nil {
+      c.JSON(http.StatusBadRequest, gin.H{&quot;error&quot;: err.Error()})
+      return
+    }
+
+    if json.User != &quot;manu&quot; || json.Password != &quot;123&quot; {
+      c.JSON(http.StatusUnauthorized, gin.H{&quot;status&quot;: &quot;unauthorized&quot;})
+      return
+    }
+
+    c.JSON(http.StatusOK, gin.H{&quot;status&quot;: &quot;you are logged in&quot;})
+  })
+
+  // 监听并在 0.0.0.0:8080 上启动服务
+  router.Run(&quot;:8080&quot;)
+}
+</code></pre>
+<pre><code class="language-curl">$ curl -v -X POST \
+  http://localhost:8080/loginJSON \
+  -H 'content-type: application/json' \
+  -d '{ &quot;user&quot;: &quot;manu&quot; }'
+&gt; POST /loginJSON HTTP/1.1
+&gt; Host: localhost:8080
+&gt; User-Agent: curl/7.51.0
+&gt; Accept: */*
+&gt; content-type: application/json
+&gt; Content-Length: 18
+&gt;
+* upload completely sent off: 18 out of 18 bytes
+&lt; HTTP/1.1 400 Bad Request
+&lt; Content-Type: application/json; charset=utf-8
+&lt; Date: Fri, 04 Aug 2017 03:51:31 GMT
+&lt; Content-Length: 100
+&lt;
+{&quot;error&quot;:&quot;Key: 'Login.Password' Error:Field validation for 'Password' failed on the 'required' tag&quot;}
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

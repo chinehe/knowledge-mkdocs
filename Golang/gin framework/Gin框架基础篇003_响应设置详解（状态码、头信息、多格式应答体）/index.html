@@ -1,0 +1,2405 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96%26%E6%A8%A1%E5%9E%8B%E7%BB%91%E5%AE%9A%E4%B8%8E%E6%A0%A1%E9%AA%8C/">
+      
+      
+        <link rel="next" href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87004_%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>响应设置详解 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              响应设置详解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang语言
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang语言
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87001_%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gin框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gin框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    路由与路由组详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96%26%E6%A8%A1%E5%9E%8B%E7%BB%91%E5%AE%9A%E4%B8%8E%E6%A0%A1%E9%AA%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    请求参数获取&模型绑定与校验
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    响应设置详解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    响应设置详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 状态码
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 头信息
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 头信息">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-header" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 设置普通Header
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 设置Cookie
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 应答体
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 应答体">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 常用格式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. 常用格式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1. String
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2. JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-toml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3. TOML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314-xml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.4. XML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#315-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.5. YAML
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 设置字节数组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-reader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 从Reader流中读取数据返回
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. 下载文件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. 其他
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87004_%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    中间件的使用与机制详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87005_%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    静态文件服务
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87006_HTML%E6%A8%A1%E6%9D%BF%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%B8%B2%E6%9F%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTML模板加载与渲染
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87007_%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    文件上传与下载
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87008_%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    错误处理机制详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87009_%E6%97%A5%E5%BF%97%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志中间件详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Gin%E6%A1%86%E6%9E%B6%E8%BF%9B%E9%98%B6%E7%AF%87001_%E6%9B%B4%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8gin%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 状态码
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 头信息
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 头信息">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-header" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 设置普通Header
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 设置Cookie
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 应答体
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 应答体">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 常用格式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1. 常用格式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-string" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.1. String
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.2. JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-toml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.3. TOML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314-xml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.4. XML
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#315-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1.5. YAML
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 设置字节数组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-reader" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 从Reader流中读取数据返回
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. 下载文件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. 其他
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Gin框架
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    基础篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>响应设置详解</h1>
+
+<p>Gin框架中的Context为我们提供了多种多样的方法，来设置应答状态码、应答头信息、应答体消息！并且为了方便开发者，Gin框架提供了多种应答体格式的便捷处理方法，比如JSON、TOML、XML...</p>
+<h2 id="1">1. 状态码</h2>
+<p>Gin框架提供了<code>func (c *Context) Status(code int)</code>方法来设置应答的状态码。</p>
+<ul>
+<li>如果没有显式调用，那么默认会写入<code>http.statusOK</code>状态码。</li>
+</ul>
+<blockquote>
+<p>除了该方法外，很多Gin框架设置应答体的方法也会带有一个状态码参数，用于在设置应答体的同时设置应答码。后文会介绍～</p>
+</blockquote>
+<pre><code class="language-go">// 示例
+c.Status(http.StatusBadRequest)
+</code></pre>
+<h2 id="2">2. 头信息</h2>
+<h3 id="21-header">2.1. 设置普通Header</h3>
+<p>Gin框架提供了<code>func (c *Context) Header(key, value string)</code>方法来设置应答的请求头。</p>
+<ul>
+<li>底层调用<code>c.Writer.Header().Set(key, value)</code>设置请求头。</li>
+<li>如果参数value为空，则表示删除指定key请求头信息。</li>
+</ul>
+<pre><code class="language-go">// 示例
+    c.Header(&quot;ClientID&quot;, &quot;12345678&quot;)
+</code></pre>
+<h3 id="22-cookie">2.2. 设置Cookie</h3>
+<p>对于设置cookie这种常见场景，Gin框架提供了如下两个方法来方便我们设置cookie：</p>
+<ul>
+<li><code>func (c *Context) SetCookie(name, value string, maxAge int, path, domain string, secure, httpOnly bool)</code></li>
+<li><code>func (c *Context) SetCookieData(cookie *http.Cookie)</code></li>
+</ul>
+<pre><code class="language-go">// SetCookie 示例
+    c.SetCookie(&quot;token&quot;, &quot;12345678&quot;, 3600, &quot;/&quot;, &quot;hello.com&quot;, false, true)
+
+// SetCookieData示例
+c.SetCookieData(&amp;http.Cookie{
+        Name:     &quot;token&quot;,
+        Value:    url.QueryEscape(&quot;12345678&quot;),
+        MaxAge:   3600,
+        Path:     &quot;/&quot;,
+        Domain:   &quot;hello.com&quot;,
+        SameSite: http.SameSiteDefaultMode,
+        Secure:   false,
+        HttpOnly: true,
+    })
+</code></pre>
+<h2 id="3">3. 应答体</h2>
+<p>Gin框架针对不同的应答体格式，提供了对应的便捷方法供开发者使用～</p>
+<h3 id="31">3.1. 常用格式</h3>
+<p>Gin针对字符串、JSON、TOML、XML、YAML这些常用的应答体格式，提供了专门的便捷性方法：</p>
+<ul>
+<li>字符串</li>
+<li><code>func (c *Context) String(code int, format string, values ...any)</code></li>
+<li>JSON</li>
+<li><code>func (c *Context) AsciiJSON(code int, obj any)</code></li>
+<li><code>func (c *Context) IndentedJSON(code int, obj any)</code></li>
+<li><code>func (c *Context) JSON(code int, obj any)</code></li>
+<li><code>func (c *Context) JSONP(code int, obj any)</code></li>
+<li><code>func (c *Context) PureJSON(code int, obj any)</code></li>
+<li><code>func (c *Context) SecureJSON(code int, obj any)</code></li>
+<li>TOML</li>
+<li><code>func (c *Context) TOML(code int, obj any)</code></li>
+<li>XML</li>
+<li><code>func (c *Context) XML(code int, obj any)</code></li>
+<li>YAML</li>
+<li><code>func (c *Context) YAML(code int, obj any)</code></li>
+</ul>
+<h4 id="311-string">3.1.1. String</h4>
+<p><code>func (c *Context) String(code int, format string, values ...any)</code>方法向应答体中写入字符串格式的消息：</p>
+<ul>
+<li>code参数用于设置应答状态码。</li>
+<li>方法支持字符串格式化，底层使用的是<code>fmt</code>格式化包。</li>
+<li>如果没有设置<code>Content-Type</code>请求头，该方法会自动设置为<code>"text/plain; charset=utf-8"</code>.</li>
+</ul>
+<pre><code class="language-go">// 示例
+c.String(http.StatusOK, &quot;Hello World: %s&quot;, time.Now().Format(&quot;2006-01-02 15:04:05&quot;))
+</code></pre>
+<h4 id="312-json">3.1.2. JSON</h4>
+<p>JSON格式相关方法：</p>
+<ul>
+<li><code>func (c *Context) JSON(code int, obj any)</code></li>
+<li>以JSON格式序列化obj，然后将结果写入应答体，并设置设置Content-Type为<code>application/json; charset=utf-8</code>（如果没有设置的话）。</li>
+<li><code>func (c *Context) AsciiJSON(code int, obj any)</code></li>
+<li>与<code>JSON</code>方法相似，区别在于会将其中的unicode字符转换为ASCII字符。</li>
+<li><code>func (c *Context) IndentedJSON(code int, obj any)</code></li>
+<li>与<code>JSON</code>方法相似，区别在于会序列化成更方便阅读的JSON（带缩紧和结束行）。</li>
+<li><code>func (c *Context) JSONP(code int, obj any)</code></li>
+<li>与JSON方法相似，但会根据请求参数决定返回格式，支持JSONP跨域请求。</li>
+<li><code>func (c *Context) PureJSON(code int, obj any)</code></li>
+<li>与JSON方法类似，为纯净的JSON响应格式，不进行任何特殊的安全处理。</li>
+<li><code>func (c *Context) SecureJSON(code int, obj any)</code></li>
+<li>与JSON方法类似，为增强安全性的JSON响应格式，主要用于防止JSON劫持攻击</li>
+</ul>
+<p>示例：</p>
+<blockquote>
+<p>仅用于演示，正常不会这么写</p>
+</blockquote>
+<pre><code class="language-go">func TestJson(c *gin.Context) {
+    data := Data{
+        ID:       1,
+        Name:     &quot;hello&quot;,
+        LongName: &quot;abc123!@#你好&quot;,
+        Html:     &quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;,
+    }
+    c.JSON(http.StatusOK, data)
+    c.AsciiJSON(http.StatusOK, data)
+    c.IndentedJSON(http.StatusOK, data)
+    c.JSONP(http.StatusOK, data)
+    c.PureJSON(http.StatusOK, data)
+    c.SecureJSON(http.StatusOK, data)
+}
+</code></pre>
+<p>请求：</p>
+<pre><code class="language-http">GET /resp/json?callback=abc HTTP/1.1
+Host: 127.0.0.1:8080
+</code></pre>
+<p>输出：</p>
+<pre><code class="language-json">// JSON
+[{&quot;name&quot;:&quot;abc123!@#你好&quot;,&quot;html&quot;:&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;}]
+
+// AsciiJSON
+[{&quot;name&quot;:&quot;abc123!@#\u4f60\u597d&quot;,&quot;html&quot;:&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;}]
+
+// IndentedJSON
+[
+    {
+        &quot;name&quot;: &quot;abc123!@#你好&quot;,
+        &quot;html&quot;: &quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;
+    }
+]
+
+// JSONP
+abc([{&quot;name&quot;:&quot;abc123!@#你好&quot;,&quot;html&quot;:&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;}]);
+
+// PureJSON
+[{&quot;name&quot;:&quot;abc123!@#你好&quot;,&quot;html&quot;:&quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;}]
+
+// SecureJSON
+while(1);[{&quot;name&quot;:&quot;abc123!@#你好&quot;,&quot;html&quot;:&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;}]
+</code></pre>
+<h4 id="313-toml">3.1.3. TOML</h4>
+<p>Gin框架提供了<code>func (c *Context) TOML(code int, obj any)</code>方法来便于处理TOML格式应答。</p>
+<p>示例：</p>
+<pre><code class="language-go">func TestToml(c *gin.Context) {
+    data := struct {
+        Name string `toml:&quot;name&quot;`
+        Html string `toml:&quot;html&quot;`
+    }{
+        Name: &quot;abc123!@#你好&quot;,
+        Html: &quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;,
+    }
+    c.TOML(http.StatusOK, data)
+}
+</code></pre>
+<p>应答：</p>
+<pre><code class="language-toml">name = 'abc123!@#你好'
+html = '&lt;h1&gt;hello world&lt;/h1&gt;'
+</code></pre>
+<h4 id="314-xml">3.1.4. XML</h4>
+<p>Gin框架提供了<code>func (c *Context) XML(code int, obj any)</code>方法来便于处理XML格式应答。</p>
+<p>示例：</p>
+<pre><code class="language-go">// xml不支持匿名结构体
+type XmlData struct {
+    Name string `xml:&quot;name&quot;`
+    Html string `xml:&quot;html&quot;`
+}
+
+func TestXml(c *gin.Context) {
+    data := XmlData{
+        Name: &quot;abc123!@#你好&quot;,
+        Html: &quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;,
+    }
+    c.XML(http.StatusOK, data)
+}
+</code></pre>
+<p>应答：</p>
+<pre><code class="language-xml">&lt;XmlData&gt;&lt;name&gt;abc123!@#你好&lt;/name&gt;&lt;html&gt;&amp;lt;h1&amp;gt;hello world&amp;lt;/h1&amp;gt;&lt;/html&gt;&lt;/XmlData&gt;
+</code></pre>
+<h4 id="315-yaml">3.1.5. YAML</h4>
+<p>Gin框架提供了<code>func (c *Context) YAML(code int, obj any)</code>方法来便于处理YAML格式应答。</p>
+<p>示例：</p>
+<pre><code class="language-go">func TestYaml(c *gin.Context) {
+    data := struct {
+        Name string `yaml:&quot;name&quot;`
+        Html string `yaml:&quot;html&quot;`
+    }{
+        Name: &quot;abc123!@#你好&quot;,
+        Html: &quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;,
+    }
+    c.YAML(http.StatusOK, data)
+}
+</code></pre>
+<p>应答：</p>
+<pre><code class="language-yaml">name: &quot;abc123!@#你好&quot;
+html: &lt;h1&gt;hello world&lt;/h1&gt;
+</code></pre>
+<h3 id="32">3.2. 设置字节数组</h3>
+<p><code>func (c *Context) Data(code int, contentType string, data []byte)</code>方法用于直接向应答体中写入字节数组。</p>
+<ul>
+<li>code 参数指定状态码。</li>
+<li>contentType 指定Content-Type头信息</li>
+<li>data 数据</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">func TestBytes(c *gin.Context) {
+    c.Data(http.StatusOK, &quot;text/plain&quot;, []byte(&quot;hello world&quot;))
+}
+
+</code></pre>
+<p>应答：</p>
+<pre><code>hello world
+</code></pre>
+<h3 id="33-reader">3.3. 从Reader流中读取数据返回</h3>
+<p><code>func (c *Context) DataFromReader(code int, contentLength int64, contentType string, reader io.Reader, extraHeaders map[string]string)</code>方法用于直接从Reader中读取数据，然后向应答中写入读取到的数据。</p>
+<ul>
+<li>code 参数指定状态码。</li>
+<li>contentLength 用于设置Content-Length头信息</li>
+<li>contentType 指定Content-Type头信息</li>
+<li>reader 数据来源的流</li>
+<li>extraHeaders 指定其他的头信息</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">func TestReader(c *gin.Context) {
+    req, _ := http.NewRequest(&quot;GET&quot;, &quot;https://www.baidu.com&quot;, nil)
+    response, err := http.DefaultClient.Do(req)
+    if err != nil {
+        c.String(http.StatusInternalServerError, &quot;error&quot;)
+        return
+    }
+    c.DataFromReader(http.StatusOK, response.ContentLength, response.Header.Get(&quot;Content-Type&quot;), response.Body, nil)
+}
+</code></pre>
+<p>应答：</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/bdorz/baidu.min.css&gt;&lt;title&gt;百度一下，你就知道&lt;/title&gt;&lt;/head&gt; &lt;body link=#0000cc&gt; &lt;div id=wrapper&gt; &lt;div id=head&gt; &lt;div class=head_wrapper&gt; &lt;div class=s_form&gt; &lt;div class=s_form_wrapper&gt; &lt;div id=lg&gt; &lt;img hidefocus=true src=//www.baidu.com/img/bd_logo1.png width=270 height=129&gt; &lt;/div&gt; &lt;form id=form name=f action=//www.baidu.com/s class=fm&gt; &lt;input type=hidden name=bdorz_come value=1&gt; &lt;input type=hidden name=ie value=utf-8&gt; &lt;input type=hidden name=f value=8&gt; &lt;input type=hidden name=rsv_bp value=1&gt; &lt;input type=hidden name=rsv_idx value=1&gt; &lt;input type=hidden name=tn value=baidu&gt;&lt;span class=&quot;bg s_ipt_wr&quot;&gt;&lt;input id=kw name=wd class=s_ipt value maxlength=255 autocomplete=off autofocus=autofocus&gt;&lt;/span&gt;&lt;span class=&quot;bg s_btn_wr&quot;&gt;&lt;input type=submit id=su value=百度一下 class=&quot;bg s_btn&quot; autofocus&gt;&lt;/span&gt; &lt;/form&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=u1&gt; &lt;a href=http://news.baidu.com name=tj_trnews class=mnav&gt;新闻&lt;/a&gt; &lt;a href=https://www.hao123.com name=tj_trhao123 class=mnav&gt;hao123&lt;/a&gt; &lt;a href=http://map.baidu.com name=tj_trmap class=mnav&gt;地图&lt;/a&gt; &lt;a href=http://v.baidu.com name=tj_trvideo class=mnav&gt;视频&lt;/a&gt; &lt;a href=http://tieba.baidu.com name=tj_trtieba class=mnav&gt;贴吧&lt;/a&gt; &lt;noscript&gt; &lt;a href=http://www.baidu.com/bdorz/login.gif?login&amp;amp;tpl=mn&amp;amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb&gt;登录&lt;/a&gt; &lt;/noscript&gt; &lt;script&gt;document.write('&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u='+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ '&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;');
+                &lt;/script&gt; &lt;a href=//www.baidu.com/more/ name=tj_briicon class=bri style=&quot;display: block;&quot;&gt;更多产品&lt;/a&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=ftCon&gt; &lt;div id=ftConw&gt; &lt;p id=lh&gt; &lt;a href=http://home.baidu.com&gt;关于百度&lt;/a&gt; &lt;a href=http://ir.baidu.com&gt;About Baidu&lt;/a&gt; &lt;/p&gt; &lt;p id=cp&gt;&amp;copy;2017&amp;nbsp;Baidu&amp;nbsp;&lt;a href=http://www.baidu.com/duty/&gt;使用百度前必读&lt;/a&gt;&amp;nbsp; &lt;a href=http://jianyi.baidu.com/ class=cp-feedback&gt;意见反馈&lt;/a&gt;&amp;nbsp;京ICP证030173号&amp;nbsp; &lt;img src=//www.baidu.com/img/gs.gif&gt; &lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt;
+
+</code></pre>
+<h3 id="34">3.4. 下载文件</h3>
+<p>Gin 框架的 Context 提供了几个用于处理文件的方法，包括 File、FileAttachment 和 FileFromFS。下面详细介绍这些方法：</p>
+<ul>
+<li><code>func (c *Context) File(filepath string)</code></li>
+<li>功能：直接将指定路径的文件发给客户端</li>
+<li>用途：用于将本地文件作为 HTTP 响应发送</li>
+<li>特点：<ul>
+<li>直接使用操作系统的文件路径</li>
+<li>设置适当的 Content-Type 头部</li>
+<li>自动处理文件不存在的情况</li>
+</ul>
+</li>
+<li><code>func (c *Context) FileAttachment(filepath, filename string)</code></li>
+<li>功能：直接将指定路径的文件<strong>以附件的形式</strong>发给客户端，让浏览器下载文件。</li>
+<li>用途：用于浏览器下载服务器文件。</li>
+<li>特点：<ul>
+<li>在 Content-Disposition 头部设置 attachment，提示浏览器下载</li>
+<li>可以指定下载时的文件名，与服务器路径名可以不同</li>
+<li>同样会自动设置 Content-Type</li>
+</ul>
+</li>
+<li><code>func (c *Context) FileFromFS(filepath string, fs http.FileSystem)</code></li>
+<li>功能：从指定的文件系统中发送文件</li>
+<li>参数：<ul>
+<li>filepath：在文件系统中的路径</li>
+<li>fs：http.FileSystem 接口的实现</li>
+</ul>
+</li>
+<li>用途：<ul>
+<li>用于从自定义文件系统（如嵌入资源、内存文件系统等）提供文件</li>
+<li>适用于需要从非标准文件系统提供文件的场景</li>
+<li>可以用于提供嵌入到二进制文件中的静态资源</li>
+</ul>
+</li>
+</ul>
+<p>使用示例：</p>
+<pre><code class="language-go">// 直接发送服务器上的文件
+c.File(&quot;/path/to/file.txt&quot;)
+
+// 强制下载文件，下载时显示为 custom-name.txt
+c.FileAttachment(&quot;/path/to/server-file.txt&quot;, &quot;custom-name.txt&quot;)
+
+
+// 从自定义文件系统发送文件
+customFS := http.Dir(&quot;./static&quot;)
+c.FileFromFS(&quot;index.html&quot;, customFS)
+</code></pre>
+<p>这些方法为 Gin 应用提供了灵活的文件服务功能，可以根据不同需求选择合适的方法来提供文件服务。</p>
+<h3 id="35">3.5. 其他</h3>
+<p>Gin还提供了下面这些应答相关的方法，由于不太常用，此处不去详细讲解：</p>
+<blockquote>
+<p>当然，后续可也能在专门的博客中去单独讲解。</p>
+</blockquote>
+<ul>
+<li><code>func (c *Context) HTML(code int, name string, obj any)</code></li>
+<li>功能: 渲染 HTML 模板并返回给客户端</li>
+<li>参数:<ul>
+<li>code: HTTP 状态码</li>
+<li>name: 模板名称</li>
+<li>obj: 传递给模板的数据</li>
+</ul>
+</li>
+<li>
+<p>使用场景: Web 应用程序返回 HTML 页面，如网站页面、管理后台等</p>
+</li>
+<li>
+<p><code>func (c *Context) Negotiate(code int, config Negotiate)</code></p>
+</li>
+<li>功能: 根据客户端 Accept 头进行内容协商，返回适当格式的响应</li>
+<li>参数:<ul>
+<li>code: HTTP 状态码</li>
+<li>config: 包含不同响应格式配置的 Negotiate 结构体</li>
+</ul>
+</li>
+<li>使用场景: API 服务需要根据客户端请求支持多种响应格式（JSON、XML、HTML 等）</li>
+<li>
+<p>特点: 智能选择最适合客户端的响应格式</p>
+</li>
+<li>
+<p><code>func (c *Context) ProtoBuf(code int, obj any)</code></p>
+</li>
+<li>功能: 将数据序列化为 Protocol Buffers 格式并返回</li>
+<li>参数:<ul>
+<li>code: HTTP 状态码</li>
+<li>obj: 要序列化的数据对象</li>
+</ul>
+</li>
+<li>使用场景: 高性能 API 服务、微服务间通信、需要高效序列化的场景</li>
+<li>
+<p>优势: 比 JSON 更高效、体积更小</p>
+</li>
+<li>
+<p><code>func (c *Context) Render(code int, r render.Render)</code></p>
+</li>
+<li>功能: 使用指定的渲染器返回响应，是其他渲染方法的基础</li>
+<li>参数:<ul>
+<li>code: HTTP 状态码</li>
+<li>r: 实现了 render.Render 接口的渲染器</li>
+</ul>
+</li>
+<li>使用场景: 自定义响应格式、需要灵活控制响应内容的场景</li>
+<li>特点: 通用渲染方法，支持多种内置和自定义渲染器</li>
+<li><code>func (c *Context) SSEvent(name string, message any)</code></li>
+<li>功能: 发送 Server-Sent Events (SSE) 消息</li>
+<li>参数:<ul>
+<li>name: 事件名称</li>
+<li>message: 事件数据</li>
+</ul>
+</li>
+<li>使用场景: 实时数据推送、实时通知、实时更新等需要服务端向客户端推送数据的场景</li>
+<li>特点: 单向实时通信，客户端可接收服务端推送的事件</li>
+<li><code>func (c *Context) Stream(step func(w io.Writer) bool) bool</code></li>
+<li>功能: 流式传输响应数据，逐步向客户端发送数据</li>
+<li>参数:<ul>
+<li>step: 一个函数，接收 io.Writer，返回布尔值控制是否继续流式传输</li>
+</ul>
+</li>
+<li>使用场景: 大文件下载、实时日志输出、长时间运行的任务状态更新</li>
+<li>特点: 支持持续的数据传输，适合需要长时间保持连接的场景</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

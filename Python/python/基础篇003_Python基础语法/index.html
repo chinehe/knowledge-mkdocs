@@ -1,0 +1,7888 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../%E5%9F%BA%E7%A1%80%E7%AF%87002_Python%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">
+      
+      
+        <link rel="next" href="../%E5%9F%BA%E7%A1%80%E7%AF%87004_Python%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Python基础语法 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Python基础语法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深入了解Python语言概念、历史、特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87002_Python%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python安装教程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python基础语法
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python基础语法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 编码
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 标识符
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 标识符">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 关于标识符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 标识符命名规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 标识符命名规范
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. 最佳实践建议
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Python 保留关键字
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Python 保留关键字">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 查看所有关键字
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 35个关键字详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. 35个关键字详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1. 值关键字（3个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.2. 运算符关键字（5个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.3. 控制流关键字（8个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.4. 函数与类关键字（4个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#335-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.5. 异常处理关键字（4个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#336-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.6. 变量作用域（2个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#337-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.7. 模块与导入（3个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#338-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.8. 异步编程关键字（2个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#339-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.9. 其他关键字（4个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 注释
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 注释">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 单行注释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 多行注释（文档字符串 / 块注释）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 行与缩进
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 行与缩进">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-physical-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 物理行 (Physical Line)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-logical-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 逻辑行（Logical Line）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 缩进（Python的灵魂）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4. 空行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5. 总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Python 运算符
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Python 运算符">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 算术运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. 比较运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 赋值运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. 逻辑运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. 位运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6. 成员运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7. 身份运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#68" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8. 运算符优先级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Python 基本数据类型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Python 基本数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-numeric-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 数字类型 (Numeric Types)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1. 数字类型 (Numeric Types)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#711-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.1. 整数 (int)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#712-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.2. 浮点数 (float)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#713-complex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.3. 复数 (complex)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#714-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.4. 布尔类型 (bool)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-sequence-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 序列类型 (Sequence Types)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.2. 序列类型 (Sequence Types)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#721-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2.1. 字符串 (str)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#722-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2.2. 列表 (list)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#723-tuple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2.3. 元组 (tuple)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#724-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2.4. 范围 (range)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-mapping-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. 映射类型 (Mapping Type)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3. 映射类型 (Mapping Type)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#731-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3.1. 字典 (dict)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-set-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4. 集合类型 (Set Types)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.4. 集合类型 (Set Types)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#741-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4.1. 集合 (set)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#742-frozenset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4.2. 冻结集合 (frozenset)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5. 特殊类型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.5. 特殊类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#751-nonetype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5.1. NoneType
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#752-bytes-bytearray-memoryview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5.2. 字节类型 (bytes, bytearray, memoryview)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6. 类型转换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7. 可变与不可变类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#78" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.8. 数据类型总结表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 常量与变量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 常量与变量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 变量 (Variables)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.1. 变量 (Variables)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#811" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.1. 变量的概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#812" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.2. 变量命名规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#813" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.3. 变量赋值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#814" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.4. 变量作用域
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#815-type-hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.5. 变量类型提示 (Type Hints)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 常量 (Constants)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.2. 常量 (Constants)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#821" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2.1. 常量的概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#822" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2.2. 常量的特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#823" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2.3. 定义常量的最佳实践
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#824-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2.4. 常量 vs 变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#825" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2.5. 实际应用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. 变量和常量的内存管理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.3. 变量和常量的内存管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#831" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3.1. 引用计数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#832" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3.2. 小整数缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#833" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3.3. 字符串驻留
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4. 最佳实践
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.4. 最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#841" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4.1. 变量使用建议
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#842" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4.2. 常量使用建议
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5. 常见错误和陷阱
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.5. 常见错误和陷阱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#851" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5.1. 可变默认参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#852" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5.2. 全局变量滥用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#853" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5.3. 混淆可变和不可变类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#854" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5.4. 错误地使用常量
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#86" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6. 总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Python 源代码文件基本结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Python 源代码文件基本结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. Python 源文件的标准组成部分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 各部分详细说明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.2. 各部分详细说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#921-shebang-unixlinuxmac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.1. Shebang 行（仅 Unix/Linux/Mac）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#922" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.2. 编码声明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#923-module-docstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.3. 模块文档字符串（Module Docstring）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#924-imports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.4. 导入语句（Imports）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#925" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.5. 模块级常量和变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#926" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.6. 类定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#927" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.7. 函数定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#928" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.8. 主程序入口
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 完整的示例文件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.3. 完整的示例文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例 1：工具模块
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例 2：类模块
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. 代码组织和风格指南
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.4. 代码组织和风格指南">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#941" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4.1. 空行使用规范
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#942" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4.2. 导入语句的最佳实践
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#943" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4.3. 命名一致性和可见性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5. 常见错误和注意事项
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.5. 常见错误和注意事项">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#951" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.1. 导入相关错误
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#952" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.2. 文档字符串缺失
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#953" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.3. 主入口使用不当
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#96" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.6. 总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Python 项目基本文件目录结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Python 项目基本文件目录结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1. 简单项目结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2. 标准包结构（推荐）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2. 标准包结构（推荐）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.1. 各目录详细说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="目录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1022" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.2. 配置文件详解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1023" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.3. 项目配置文件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3. Web 应用项目结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3. Web 应用项目结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1031-flask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.1. Flask 应用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-django" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4. Django 项目结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#105" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5. 数据科学项目结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#106" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6. 包发布结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#107" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7. 虚拟环境和依赖管理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.7. 虚拟环境和依赖管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1071" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7.1. 创建虚拟环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1072-poetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7.2. 使用 poetry（现代推荐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#108" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8. 项目结构最佳实践
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8. 项目结构最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1081" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.1. 通用原则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1082" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.2. 不同规模项目的选择
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1083" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.3. 常见反模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#109" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9. 实际案例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.9. 实际案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        案例 1：Requests 库结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2flask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        案例 2：Flask 结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1010" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10. 总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87004_Python%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python流程控制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87005_Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python数据结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87006_Python%E8%BE%93%E5%85%A5%E4%B8%8E%E8%BE%93%E5%87%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python输入与输出
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87007_Python%E9%94%99%E8%AF%AF%E4%B8%8E%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python错误与异常处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87008_Python%E7%B1%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python类
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87009_Python%E6%A0%87%E5%87%86%E5%BA%93%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python标准库简介
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87010_Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python虚拟环境和包
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 编码
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 标识符
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 标识符">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 关于标识符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#21_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 标识符命名规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 标识符命名规范
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. 最佳实践建议
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Python 保留关键字
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Python 保留关键字">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 查看所有关键字
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 35个关键字详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3. 35个关键字详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.1. 值关键字（3个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.2. 运算符关键字（5个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.3. 控制流关键字（8个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.4. 函数与类关键字（4个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#335-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.5. 异常处理关键字（4个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#336-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.6. 变量作用域（2个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#337-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.7. 模块与导入（3个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#338-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.8. 异步编程关键字（2个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#339-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3.9. 其他关键字（4个）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 注释
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 注释">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 单行注释
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 多行注释（文档字符串 / 块注释）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 行与缩进
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 行与缩进">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-physical-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 物理行 (Physical Line)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-logical-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 逻辑行（Logical Line）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 缩进（Python的灵魂）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4. 空行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5. 总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Python 运算符
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Python 运算符">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 算术运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. 比较运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 赋值运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. 逻辑运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. 位运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6. 成员运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#67" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.7. 身份运算符
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#68" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.8. 运算符优先级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Python 基本数据类型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Python 基本数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-numeric-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 数字类型 (Numeric Types)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1. 数字类型 (Numeric Types)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#711-int" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.1. 整数 (int)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#712-float" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.2. 浮点数 (float)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#713-complex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.3. 复数 (complex)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#714-bool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1.4. 布尔类型 (bool)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-sequence-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 序列类型 (Sequence Types)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.2. 序列类型 (Sequence Types)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#721-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2.1. 字符串 (str)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#722-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2.2. 列表 (list)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#723-tuple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2.3. 元组 (tuple)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#724-range" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2.4. 范围 (range)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-mapping-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. 映射类型 (Mapping Type)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3. 映射类型 (Mapping Type)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#731-dict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3.1. 字典 (dict)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-set-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4. 集合类型 (Set Types)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.4. 集合类型 (Set Types)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#741-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4.1. 集合 (set)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#742-frozenset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4.2. 冻结集合 (frozenset)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5. 特殊类型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.5. 特殊类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#751-nonetype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5.1. NoneType
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#752-bytes-bytearray-memoryview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5.2. 字节类型 (bytes, bytearray, memoryview)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6. 类型转换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#77" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.7. 可变与不可变类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#78" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.8. 数据类型总结表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 常量与变量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 常量与变量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 变量 (Variables)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.1. 变量 (Variables)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#811" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.1. 变量的概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#812" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.2. 变量命名规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#813" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.3. 变量赋值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#814" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.4. 变量作用域
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#815-type-hints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1.5. 变量类型提示 (Type Hints)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 常量 (Constants)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.2. 常量 (Constants)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#821" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2.1. 常量的概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#822" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2.2. 常量的特性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#823" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2.3. 定义常量的最佳实践
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#824-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2.4. 常量 vs 变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#825" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2.5. 实际应用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. 变量和常量的内存管理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.3. 变量和常量的内存管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#831" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3.1. 引用计数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#832" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3.2. 小整数缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#833" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3.3. 字符串驻留
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4. 最佳实践
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.4. 最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#841" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4.1. 变量使用建议
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#842" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4.2. 常量使用建议
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5. 常见错误和陷阱
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.5. 常见错误和陷阱">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#851" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5.1. 可变默认参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#852" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5.2. 全局变量滥用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#853" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5.3. 混淆可变和不可变类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#854" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5.4. 错误地使用常量
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#86" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6. 总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Python 源代码文件基本结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Python 源代码文件基本结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. Python 源文件的标准组成部分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 各部分详细说明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.2. 各部分详细说明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#921-shebang-unixlinuxmac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.1. Shebang 行（仅 Unix/Linux/Mac）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#922" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.2. 编码声明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#923-module-docstring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.3. 模块文档字符串（Module Docstring）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#924-imports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.4. 导入语句（Imports）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#925" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.5. 模块级常量和变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#926" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.6. 类定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#927" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.7. 函数定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#928" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2.8. 主程序入口
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 完整的示例文件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.3. 完整的示例文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例 1：工具模块
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        示例 2：类模块
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. 代码组织和风格指南
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.4. 代码组织和风格指南">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#941" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4.1. 空行使用规范
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#942" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4.2. 导入语句的最佳实践
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#943" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4.3. 命名一致性和可见性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5. 常见错误和注意事项
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.5. 常见错误和注意事项">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#951" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.1. 导入相关错误
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#952" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.2. 文档字符串缺失
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#953" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.5.3. 主入口使用不当
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#96" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.6. 总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Python 项目基本文件目录结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Python 项目基本文件目录结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1. 简单项目结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2. 标准包结构（推荐）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2. 标准包结构（推荐）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1021" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.1. 各目录详细说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目录
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="目录">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1022" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.2. 配置文件详解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1023" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2.3. 项目配置文件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3. Web 应用项目结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3. Web 应用项目结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1031-flask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3.1. Flask 应用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-django" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4. Django 项目结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#105" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5. 数据科学项目结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#106" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6. 包发布结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#107" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7. 虚拟环境和依赖管理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.7. 虚拟环境和依赖管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1071" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7.1. 创建虚拟环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1072-poetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7.2. 使用 poetry（现代推荐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#108" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8. 项目结构最佳实践
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8. 项目结构最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1081" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.1. 通用原则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1082" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.2. 不同规模项目的选择
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1083" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.8.3. 常见反模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#109" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.9. 实际案例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.9. 实际案例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        案例 1：Requests 库结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2flask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        案例 2：Flask 结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1010" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.10. 总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Python
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    基础篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Python基础语法</h1>
+
+<h2 id="1">1. 编码</h2>
+<p>默认情况下，python3源码文件以UTF-8编码，所有字符串都是unicode字符串。</p>
+<p>当然，你也可以为源码文件指定不同的编码：</p>
+<pre><code class="language-python">## -*_ coding:cp-1252 _*_
+</code></pre>
+<p>在上面的定义中，允许在源文件中使用Windows-1252字符集中的字符编码，对应适合语言为保加利亚语、白俄罗斯语、马其顿语、俄语、塞尔维亚语。</p>
+<h2 id="2">2. 标识符</h2>
+<h3 id="21">2.1. 关于标识符</h3>
+<p>在 Python 中，标识符 (Identifier) 是程序员用来命名变量、函数、类、模块或其他对象的名称。它是代码中最基本的组成部分之一。
+为了让代码能够被 Python 解释器正确识别和执行，标识符的命名必须遵循严格的规则，同时为了代码的可读性，社区也形成了一套通用的命名规范（风格指南）。</p>
+<h3 id="21_1">2.1. 标识符命名规则</h3>
+<blockquote>
+<p>Python 3 支持 Unicode 字符，这意味着你可以使用中文、Emoji 甚至数学符号作为标识符（虽然不推荐这样做，除非有特殊需求）。
+所以下面的规则中我们一般不考虑使用这些字符。</p>
+</blockquote>
+<p>Python中的标识符必须遵循以下规则：
+* 第一个字符必须为字母或下划线，不能为数字。
+* 标识符的其他部分由字母、数字和下划线组成。
+* 标识符对大小写敏感，count和Count是不同的标识符。
+* 标识符的长度没有硬性要求，但建议保持简洁（一般不超过20个字符）。
+* 禁止使用保留关键字，如<code>if</code>、<code>for</code>、<code>class</code>等。</p>
+<p><strong>正确示例：</strong></p>
+<pre><code class="language-python">age = 25                # 普通变量名，最常见
+user_name = &quot;Alice&quot;     # 用下划线连接单词，清晰易读
+_total = 100            # 下划线开头通常表示“内部使用”或“私有”
+MAX_SIZE = 1024         # 全大写通常表示“常量”（固定不变的值）
+calculate_area()        # 函数名，动词+名词
+StudentInfo             # 类名，首字母大写（驼峰命名法）
+__private_var           # 双下划线开头，有特殊含义
+</code></pre>
+<p><strong>错误示例：</strong></p>
+<pre><code class="language-python">2nd_place = &quot;silver&quot;    # 错误：以数字开头
+user-name = &quot;Bob&quot;       # 错误：包含连字符
+class = &quot;Math&quot;          # 错误：使用关键字
+$price = 9.99          # 错误：包含特殊字符
+for = &quot;loop&quot;           # 错误：**使用关键字**
+</code></pre>
+<p><strong>特别注意：</strong>
+Python 3允许使用Unicode字符作为标识符，可以用中文作为变量名，非ASCII标识符也是允许的。</p>
+<pre><code class="language-python">姓名 = &quot;张三&quot;  # 合法
+π = 3.14159   # 合法
+</code></pre>
+<h3 id="33">3.3. 标识符命名规范</h3>
+<p>虽然以下规则不会导致报错，但违反它们会被认为是不专业的代码，降低可读性。Python 官方风格指南 PEP 8 对此有明确规定。</p>
+<p>规范如下：
+* <strong>变量和函数名</strong>：小写字母 + 下划线 (snake_case / 蛇形命名法)
+  <code>python
+    user_name = "Alice"
+    total_count = 0
+    def calculate_area():
+        pass</code>
+* <strong>类名</strong>：大驼峰命名法 (PascalCase / CapWords)，即每个单词首字母大写，不使用下划线。
+  ```python
+    class UserProfile:
+        pass</p>
+<pre><code>class HttpRequestHandler:
+    pass
+</code></pre>
+<p><code>* **常量名**:全大写字母 + 下划线。</code>python
+    MAX_CONNECTIONS = 100
+    PI = 3.14159
+    API_KEY = "secret_key"
+  ```</p>
+<blockquote>
+<p>Python 没有真正的常量机制，这只是约定俗成，告诉开发者“这个变量不应该被修改”。
+* <strong>私有成员名</strong>：
+  * <code>_var</code>单下划线开头：表示受保护或内部使用。这是一种约定，告诉其他开发者“虽然你可以访问它，但请不要在类外部直接使用它”。
+    * 示例：<code>_internal_cache</code>
+  * <code>__var</code>双下划线开头：表示“私有”。Python 会对其进行名称改写 (Name Mangling)，使其在类外部很难直接访问（主要用于避免子类命名冲突）。
+    * 示例：<code>__password</code> (在类内部自动变为 <code>_ClassName__password</code>)。
+  * <code>__var__</code>双下划线前后：这是 Python 的魔术方法 (Magic Methods) 或特殊属性，千万不要自己发明这种命名。
+    * 示例：<code>__init__</code>, <code>__str__</code>,<code>__name__</code>。</p>
+</blockquote>
+<h3 id="34">3.4. 最佳实践建议</h3>
+<ol>
+<li>见名知意：标识符应该清晰地描述其用途。</li>
+<li>好：days_until_expiry, calculate_total_price</li>
+<li>坏：d, func1, x (除非在极短的循环中如 for i in range(10))</li>
+<li>避免缩写：除非是众所周知的缩写（如 id, url, html），否则尽量拼写完整。</li>
+<li>保持一致性：在整个项目中坚持同一种命名风格（通常遵循 PEP 8）。</li>
+<li>慎用中文：虽然支持，但在团队协作、开源项目或部署到某些老旧系统时，中文标识符可能会引起编码问题或阅读障碍。</li>
+</ol>
+<h2 id="3-python">3. Python 保留关键字</h2>
+<h3 id="31">3.1. 特性</h3>
+<p>Python 关键字（也称为保留字）是 Python 语言中具有特殊含义的单词，它们被 Python 解释器保留用于特定的语法功能。这些关键字不能用作变量名、函数名或其他标识符。</p>
+<p><strong>特点:</strong>
+* 不可变性：关键字是语言规范的一部分，不能修改其含义
+* 有限性：Python 的关键字数量是固定的（Python 3.8 有 35 个关键字）
+* 大小写敏感：所有关键字都是小写形式
+* 语法功能：每个关键字都有特定的语法作用</p>
+<h3 id="32">3.2. 查看所有关键字</h3>
+<p>Python 的标准库提供了一个 keyword 模块，可以输出当前版本的所有关键字：</p>
+<pre><code class="language-python">import keyword
+
+## 打印所有关键字列表
+print(keyword.kwlist)
+
+## 检查某个字符串是否是关键字
+print(keyword.iskeyword(&quot;if&quot;))      # True
+print(keyword.iskeyword(&quot;hello&quot;))   # False
+</code></pre>
+<p><strong>Python 3.14.3 输出：</strong></p>
+<pre><code class="language-text">['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+</code></pre>
+<h3 id="33-35">3.3. 35个关键字详解</h3>
+<p>目前，在Python 3.14版本，共有35个关键字，本章节将概述这35个关键字的含义。</p>
+<p>为了方便记忆和理解，我们可以按照功能将这些关键字分类。后续章节，我们将按照类型讲解这些关键字。</p>
+<h4 id="331-3">3.3.1. 值关键字（3个）</h4>
+<p>这些关键字代表特定的值：
+| 关键字 | 含义 | 示例 |
+| :--- | :--- | :--- |
+| <code>True</code> | 真（布尔值） | <code>is_valid = True</code> |
+| <code>False</code> | 假（布尔值） | <code>is_error = False</code> |
+| <code>None</code> | 空值/无对象 | <code>result = None</code> |</p>
+<h4 id="332-5">3.3.2. 运算符关键字（5个）</h4>
+<p>用于逻辑和布尔运算：
+| 关键字 | 含义 | 示例 |
+| :--- | :--- | :--- |
+| <code>and</code> | 逻辑与 | <code>if a &gt; 0 and b &gt; 0:</code> |
+| <code>or</code> | 逻辑或 | <code>if x == 1 or x == 2:</code> |
+| <code>not</code> | 逻辑非 | <code>if not is_finished:</code> |
+| <code>is</code> | 对象标识对比 | <code>if x is None:</code> |
+| <code>in</code> | 成员测试 | <code>if 'a' in 'apple':</code> |</p>
+<h4 id="333-8">3.3.3. 控制流关键字（8个）</h4>
+<p>控制程序执行流程：</p>
+<p>| 关键字 | 含义 | 示例 |</p>
+<p>| :--- | :--- | :--- |
+| <code>if</code> | 如果（条件开始） | <code>if score &gt;= 60:</code> |
+| <code>elif</code> | 否则如果（中间条件） | <code>elif score &gt;= 90:</code> |
+| <code>else</code> | 否则（默认分支） | <code>else: print("Fail")</code> |
+| <code>for</code> | 遍历循环 | <code>for i in range(5):</code> |
+| <code>while</code> | 条件循环 | <code>while count &lt; 10:</code> |
+| <code>break</code> | 跳出循环 | <code>if found: break</code> |
+| <code>continue</code> | 跳过本次循环 | <code>if skip: continue</code> |
+| <code>pass</code> | 空语句占位符 | <code>pass</code> |</p>
+<blockquote>
+<p>match 和 case 是 Python 3.10 引入的新特性，用于结构化模式匹配。</p>
+</blockquote>
+<h4 id="334-4">3.3.4. 函数与类关键字（4个）</h4>
+<p>用于定义代码块的结构。
+| 关键字 | 含义 | 示例 |
+| :--- | :--- | :--- |
+| <code>def</code> | 定义函数 | <code>def say_hello():</code> |
+| <code>class</code> | 定义类 | <code>class Dog:</code> |
+| <code>return</code> | 返回值 | <code>return x + y</code> |
+| <code>lambda</code> | 匿名函数 | <code>f = lambda x: x*2</code> |</p>
+<h4 id="335-4">3.3.5. 异常处理关键字（4个）</h4>
+<p>处理程序中的异常：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">关键字</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>try</code></td>
+<td style="text-align: left;">尝试执行代码</td>
+<td style="text-align: left;"><code>try: ...</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>except</code></td>
+<td style="text-align: left;">捕获异常</td>
+<td style="text-align: left;"><code>except ValueError:</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>finally</code></td>
+<td style="text-align: left;">最终执行（无论是否出错）</td>
+<td style="text-align: left;"><code>finally: close_file()</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>raise</code></td>
+<td style="text-align: left;">主动抛出异常</td>
+<td style="text-align: left;"><code>raise Exception("Error")</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="336-2">3.3.6. 变量作用域（2个）</h4>
+<p>控制变量作用域：
+| 关键字 | 含义 | 示例 |
+| :--- | :--- | :--- |
+| <code>global</code> | 声明全局变量 | <code>global count</code> |
+| <code>nonlocal</code> | 声明非局部变量 | <code>nonlocal x</code> |</p>
+<h4 id="337-3">3.3.7. 模块与导入（3个）</h4>
+<p>管理模块和导入：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">关键字</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>import</code></td>
+<td style="text-align: left;">导入模块</td>
+<td style="text-align: left;"><code>import math</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>from</code></td>
+<td style="text-align: left;">从模块导入</td>
+<td style="text-align: left;"><code>from math import pi</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>as</code></td>
+<td style="text-align: left;">起别名</td>
+<td style="text-align: left;"><code>import numpy as np</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="338-2">3.3.8. 异步编程关键字（2个）</h4>
+<blockquote>
+<p>Python 3.5新增</p>
+</blockquote>
+<p>用于异步编程：
+| 关键字 | 含义 | 示例 |
+| :--- | :--- | :--- |
+| <code>async</code> | 定义异步函数 | <code>async def fetch():</code> |
+| <code>await</code> | 等待异步操作完成 | <code>await response</code> |</p>
+<h4 id="339-4">3.3.9. 其他关键字（4个）</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">关键字</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>del</code></td>
+<td style="text-align: left;">删除引用</td>
+<td style="text-align: left;"><code>del my_list[0]</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>with</code></td>
+<td style="text-align: left;">上下文管理</td>
+<td style="text-align: left;"><code>with open('file') as f:</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>yield</code></td>
+<td style="text-align: left;">生成器返回值</td>
+<td style="text-align: left;"><code>yield x</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>assert</code></td>
+<td style="text-align: left;">断言条件为真</td>
+<td style="text-align: left;"><code>assert x &gt; 0</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="4">4. 注释</h2>
+<p>Python 中的注释是用来解释代码、提高可读性或临时禁用代码行的文本。解释器在运行代码时会完全忽略注释部分。</p>
+<p>Python 主要支持两种形式的注释：单行注释和多行注释（实际上是多行字符串）。</p>
+<h3 id="41">4.1. 单行注释</h3>
+<p>这是最常用的注释方式。使用<code>#</code>号开头，从<code>#</code>开始直到该行结束的所有内容都会被视为注释。</p>
+<p>示例：</p>
+<pre><code class="language-python">## 这是一个独立的单行注释
+print(&quot;Hello, World!&quot;)  # 这是行尾注释，解释这行代码的作用
+
+## print(&quot;这行代码被注释掉了，不会执行&quot;)
+</code></pre>
+<p>最佳实践：
+* 空格规范：# 后面通常要加一个空格，这样更易读（如 # 注释 而不是 #注释）。
+* 用途：用于解释某一行或某一段代码的逻辑，或者临时调试（屏蔽代码）。</p>
+<h3 id="42">4.2. 多行注释（文档字符串 / 块注释）</h3>
+<p>严格来说，Python 没有专门的多行注释符号（像 C/Java 的 /<em> ... </em>/ 那样）。但在实际使用中，我们可以用以下的方式来实现多行注释的效果：
+* 多个<code>#</code>号。
+* 使用<code>'''</code>。
+* 使用<code>"""</code>。</p>
+<p>示例：</p>
+<pre><code class="language-python">#!/usr/bin/python3
+
+## 第一个注释
+## 第二个注释
+
+'''
+第三注释
+第四注释
+'''
+
+&quot;&quot;&quot;
+第五注释
+第六注释
+&quot;&quot;&quot;
+print (&quot;Hello, Python!&quot;)
+</code></pre>
+<p><strong>多行<code>#</code> vs <code>"""</code>:</strong>
+| 特性 | 单行注释 (<code>#</code>) | 多行字符串 (<code>"""..."""</code>) |
+| :--- | :--- | :--- |
+| 语法本质 | 真正的注释语法 | 字符串字面量 (未被赋值时起到注释效果) |
+| 主要用途 | 解释单行逻辑、临时禁用代码 | 函数/类文档 (Docstring)、大段说明 |
+| 能否被 <code>help()</code> 读取 | 不能 | 能 (仅当位于定义首行时) |
+| 性能影响 | 无 (解析阶段直接忽略) | 极微小 (理论上创建了一个未引用的对象) |
+| 嵌套问题 | 不支持嵌套 | 支持在不同引号类型间嵌套 (如 <code>""" 包含 ' 单引号 """</code>) |</p>
+<p>**<code>'''</code> vs """<code>：**
+| 特性 | 三个单引号 (</code>'''<code>) | 三个双引号 (</code>"""<code>) |
+| :--- | :--- | :--- |
+| 功能 | 完全相同 | 完全相同 |
+| 社区惯例 (Docstring) | 较少见 (PEP 257 推荐双引号) | 标准推荐 (绝大多数开源项目使用) |
+| 最佳适用场景 | 注释内容中包含大量双引号 (</code>"<code>) 时 | 注释内容中包含大量单引号 (</code>'<code>) 时，或作为通用标准 |
+| 嵌套风险 | 如果注释内容里也有</code>'''<code>，会提前结束注释 | 如果注释内容里也有</code>"""`，会提前结束注释 |</p>
+<h2 id="5">5. 行与缩进</h2>
+<p>在 Python 中，行（Lines）和缩进（Indentation）不仅仅是代码风格的问题，它们是语法的核心组成部分。</p>
+<h3 id="51-physical-line">5.1. 物理行 (Physical Line)</h3>
+<p>物理行就是你代码编辑器中看到的每一行。</p>
+<p>Python 通常一行写一条语句。行末不需要分号 ;（虽然写了也不报错，但不推荐）</p>
+<pre><code class="language-python">x = 10          # 这是一个物理行
+y = 20          # 这是另一个物理行
+</code></pre>
+<h3 id="52-logical-line">5.2. 逻辑行（Logical Line）</h3>
+<p>逻辑行是 Python 解释器实际执行的一个完整语句。
+* 一行一语句：大多数情况下，一个物理行就是一个逻辑行。
+  <code>python
+  x = 10          # 一行一语句</code>
+* 多行一语句：如果一个语句太长，可以分成多个物理行来写。
+  * 隐式换行（推荐）：在括号<code>()</code>、<code>[]</code>、<code>{}</code>内换行，不需要任何额外符号。
+    <code>python
+    # 隐式换行 (推荐) - 括号内自动识别为同一逻辑行
+    total = (1 + 2 + 3 + 
+         4 + 5 + 6)</code>
+  * 显式换行：使用反斜杠<code>\</code>作为续行符。
+    <code>python
+    # 显式换行 (不推荐，除非必要) - 使用 \
+    long_string = "这是一段非常非常长的字符串，" \
+                "需要分成两行来写。"</code>
+* 一行多语句：虽然不推荐（不符合 PEP 8 规范），但可以用分号 ; 分隔多条语句。
+  <code>python
+  x = 1; y = 2; z = 3  # 不推荐，可读性差</code></p>
+<h3 id="53-python">5.3. 缩进（Python的灵魂）</h3>
+<p>与 C、Java、JavaScript 等语言使用大括号 <code>{}</code> 来划分代码块不同，Python 强制使用缩进来定义代码块的层级和逻辑结构。如果缩进错误，程序将直接报错（IndentationError）或运行出完全错误的结果。</p>
+<blockquote>
+<p>缩进决定了代码的从属关系。</p>
+</blockquote>
+<p><strong>核心规则：</strong>
+* 同一代码块必须严格对齐：属于同一个逻辑块（如 if 内部、for 循环内部、函数内部）的所有行，必须有完全相同的缩进量。
+* 层级变化通过缩进体现：
+  * 增加缩进：表示进入一个新的代码块（子级）。
+  * 减少缩进：表示当前代码块结束，返回上一级。
+* 禁止混用：绝对不能在同一文件中混用空格（Space）和制表符（Tab）进行缩进。
+  * 现代编辑器（VS Code, PyCharm）默认会将 Tab 转换为 4 个空格，请保持这个设置。</p>
+<p><strong>标准规范 (PEP 8)</strong>
+* 官方推荐使用 4 个空格 作为一个缩进层级。
+* 不要使用 Tab 键（除非你的编辑器配置为“按 Tab 键自动插入 4 个空格”）。</p>
+<p>缩进的空格数是可变的，但是同一个代码块的语句必须包含相同的缩进空格数。实例如下：</p>
+<pre><code class="language-python">if True:
+    print (&quot;True&quot;)
+else:
+    print (&quot;False&quot;)
+</code></pre>
+<p>以下代码最后一行语句缩进数的空格数不一致，会导致运行错误：</p>
+<pre><code class="language-python">if True:
+    print (&quot;Answer&quot;)
+    print (&quot;True&quot;)
+else:
+    print (&quot;Answer&quot;)
+  print (&quot;False&quot;)    # 缩进不一致，会导致运行错误
+</code></pre>
+<p>以上程序由于缩进不一致，执行后会出现类似以下错误：</p>
+<pre><code class="language-python"> File &quot;test.py&quot;, line 6
+    print (&quot;False&quot;)    # 缩进不一致，会导致运行错误
+                                      ^
+IndentationError: unindent does not match any outer indentation level
+
+</code></pre>
+<h3 id="54">5.4. 空行</h3>
+<p>函数之间或类的方法之间用空行分隔，表示一段新的代码的开始。类和函数入口之间也用一行空行分隔，以突出函数入口的开始。</p>
+<p>空行与代码缩进不同，空行并不是 Python 语法的一部分。书写时不插入空行，Python 解释器运行也不会出错。但是空行的作用在于分隔两段不同功能或含义的代码，便于日后代码的维护或重构。</p>
+<p><strong>记住：</strong> 空行也是程序代码的一部分。</p>
+<h3 id="55">5.5. 总结</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">概念</th>
+<th style="text-align: left;">规则</th>
+<th style="text-align: left;">建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">行结束</td>
+<td style="text-align: left;">不需要分号 <code>;</code></td>
+<td style="text-align: left;">一行一语句，太长用括号换行</td>
+</tr>
+<tr>
+<td style="text-align: left;">缩进符号</td>
+<td style="text-align: left;">空格 或 Tab (不可混用)</td>
+<td style="text-align: left;">强制使用 4 个空格</td>
+</tr>
+<tr>
+<td style="text-align: left;">代码块定义</td>
+<td style="text-align: left;">靠缩进量决定，而非 <code>{}</code></td>
+<td style="text-align: left;"><code>if</code>, <code>for</code>, <code>def</code>, <code>class</code> 后必须缩进</td>
+</tr>
+<tr>
+<td style="text-align: left;">对齐要求</td>
+<td style="text-align: left;">同级代码必须严格左对齐</td>
+<td style="text-align: left;">哪怕差一个空格也会报错</td>
+</tr>
+<tr>
+<td style="text-align: left;">空行</td>
+<td style="text-align: left;">允许存在</td>
+<td style="text-align: left;">用于分隔逻辑段落，提高可读性</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-python">6. Python 运算符</h2>
+<p>Python 的运算符非常丰富，下面的章节将分类讲解这些运算符。</p>
+<h3 id="61">6.1. 算术运算符</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">运算符</th>
+<th style="text-align: left;">名称</th>
+<th style="text-align: left;">示例 (<code>a=10, b=3</code>)</th>
+<th style="text-align: left;">结果</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>+</code></td>
+<td style="text-align: left;">加</td>
+<td style="text-align: left;"><code>a + b</code></td>
+<td style="text-align: left;"><code>13</code></td>
+<td style="text-align: left;">数字相加，或字符串拼接</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-</code></td>
+<td style="text-align: left;">减</td>
+<td style="text-align: left;"><code>a - b</code></td>
+<td style="text-align: left;"><code>7</code></td>
+<td style="text-align: left;">数字相减</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*</code></td>
+<td style="text-align: left;">乘</td>
+<td style="text-align: left;"><code>a * b</code></td>
+<td style="text-align: left;"><code>30</code></td>
+<td style="text-align: left;">数字相乘，或字符串重复 (<code>"Hi"*2</code> -&gt; <code>"HiHi"</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/</code></td>
+<td style="text-align: left;">真除法</td>
+<td style="text-align: left;"><code>a / b</code></td>
+<td style="text-align: left;"><code>3.333...</code></td>
+<td style="text-align: left;">结果永远是浮点数 (float)，即使能整除</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>//</code></td>
+<td style="text-align: left;">地板除</td>
+<td style="text-align: left;"><code>a // b</code></td>
+<td style="text-align: left;"><code>3</code></td>
+<td style="text-align: left;">向下取整，结果是整数 (int)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>%</code></td>
+<td style="text-align: left;">取模</td>
+<td style="text-align: left;"><code>a % b</code></td>
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: left;">返回除法的余数</td>
+</tr>
+<tr>
+<td style="text-align: left;">``</td>
+<td style="text-align: left;">幂运算</td>
+<td style="text-align: left;"><code>a  b</code></td>
+<td style="text-align: left;"><code>1000</code></td>
+<td style="text-align: left;">计算 $10^3 $ ，即 10 的 3 次方</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62">6.2. 比较运算符</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">运算符</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">示例</th>
+<th style="text-align: left;">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>==</code></td>
+<td style="text-align: left;">等于</td>
+<td style="text-align: left;"><code>10 == 10</code></td>
+<td style="text-align: left;"><code>True</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>!=</code></td>
+<td style="text-align: left;">不等于</td>
+<td style="text-align: left;"><code>10 != 5</code></td>
+<td style="text-align: left;"><code>True</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>&gt;</code></td>
+<td style="text-align: left;">大于</td>
+<td style="text-align: left;"><code>10 &gt; 5</code></td>
+<td style="text-align: left;"><code>True</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>&lt;</code></td>
+<td style="text-align: left;">小于</td>
+<td style="text-align: left;"><code>10 &lt; 5</code></td>
+<td style="text-align: left;"><code>False</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>&gt;=</code></td>
+<td style="text-align: left;">大于等于</td>
+<td style="text-align: left;"><code>10 &gt;= 10</code></td>
+<td style="text-align: left;"><code>True</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>&lt;=</code></td>
+<td style="text-align: left;">小于等于</td>
+<td style="text-align: left;"><code>10 &lt;= 5</code></td>
+<td style="text-align: left;"><code>False</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>🚨 常见错误：</strong>
+* 千万不要用 = 进行比较！= 是赋值，== 才是判断相等。
+* 链式比较：Python 支持数学写法，如 1 &lt; x &lt; 10，这等价于 1 &lt; x and x &lt; 10，非常优雅。</p>
+</blockquote>
+<h3 id="63">6.3. 赋值运算符</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">运算符</th>
+<th style="text-align: left;">等价写法</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>=</code></td>
+<td style="text-align: left;"><code>x = 5</code></td>
+<td style="text-align: left;">基本赋值</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>+=</code></td>
+<td style="text-align: left;"><code>x += 3</code></td>
+<td style="text-align: left;"><code>x = x + 3</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>-=</code></td>
+<td style="text-align: left;"><code>x -= 3</code></td>
+<td style="text-align: left;"><code>x = x - 3</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>*=</code></td>
+<td style="text-align: left;"><code>x *= 3</code></td>
+<td style="text-align: left;"><code>x = x * 3</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>/=</code></td>
+<td style="text-align: left;"><code>x /= 3</code></td>
+<td style="text-align: left;"><code>x = x / 3</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>//=</code></td>
+<td style="text-align: left;"><code>x //= 3</code></td>
+<td style="text-align: left;"><code>x = x // 3</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>%=</code></td>
+<td style="text-align: left;"><code>x %= 3</code></td>
+<td style="text-align: left;"><code>x = x % 3</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>**=</code></td>
+<td style="text-align: left;"><code>x **= a</code></td>
+<td style="text-align: left;"><code>x = x ** 3</code></td>
+</tr>
+</tbody>
+</table>
+<p>在 Python 3.8 及更高版本中，引入了一种新的语法特性，称为"海象运算符"（Walrus Operator），它使用 <code>:=</code>符号。这个运算符的主要目的是在表达式中同时进行赋值和返回赋值的值。</p>
+<p>使用海象运算符可以在一些情况下简化代码，尤其是在需要在表达式中使用赋值结果的情况下。这对于简化循环条件或表达式中的重复计算很有用。</p>
+<p>下面是一个简单的实例，演示了海象运算符的使用：</p>
+<pre><code class="language-python">## 传统写法
+n = 10
+if n &gt; 5:
+    print(n)
+
+## 使用海象运算符
+if (n := 10) &gt; 5:
+    print(n)
+</code></pre>
+<p>海象运算符的优点：</p>
+<ul>
+<li>海象运算符（:=）允许在表达式内部进行赋值，这可以减少代码的重复，提高代码的可读性和简洁性。</li>
+<li>在上述例子中，传统写法需要单独一行来赋值 n，然后在 if 语句中进行条件检查。而使用海象运算符的写法可以在 if 语句中直接进行赋值和条件检查。</li>
+</ul>
+<h3 id="64">6.4. 逻辑运算符</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">运算符</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">规则</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>and</code></td>
+<td style="text-align: left;">与</td>
+<td style="text-align: left;">全真才真，一假即假</td>
+<td style="text-align: left;"><code>True and False</code> → <code>False</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>or</code></td>
+<td style="text-align: left;">或</td>
+<td style="text-align: left;">一真即真，全假才假</td>
+<td style="text-align: left;"><code>True or False</code> → <code>True</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>not</code></td>
+<td style="text-align: left;">非</td>
+<td style="text-align: left;">取反</td>
+<td style="text-align: left;"><code>not True</code> → <code>False</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>短路逻辑 (Short-circuit)：
+* A and B: 如果 A 为假，直接返回 A，不再计算 B。
+* A or B: 如果 A 为真，直接返回 A，不再计算 B。
+* 应用场景：user and user.name (如果 user 存在，才去访问 name，避免报错)。</p>
+</blockquote>
+<h3 id="65">6.5. 位运算符</h3>
+<p>直接对整数的二进制位进行操作（底层开发或算法题常用）。
+假设 a = 60 (0011 1100), b = 13 (0000 1101)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">运算符</th>
+<th style="text-align: left;">名称</th>
+<th style="text-align: left;">规则</th>
+<th style="text-align: left;">示例结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>&amp;</code></td>
+<td style="text-align: left;">按位与</td>
+<td style="text-align: left;">两位都为 1 时结果为 1</td>
+<td style="text-align: left;"><code>a &amp; b</code> = 12 (<code>0000 1100</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>\|</code></td>
+<td style="text-align: left;">按位或</td>
+<td style="text-align: left;">有一位为 1 时结果为 1</td>
+<td style="text-align: left;"><code>a \| b</code> = 61 (<code>0011 1101</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>^</code></td>
+<td style="text-align: left;">按位异或</td>
+<td style="text-align: left;">两位不同为 1，相同为 0</td>
+<td style="text-align: left;"><code>a ^ b</code> = 49 (<code>0011 0001</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>~</code></td>
+<td style="text-align: left;">按位取反</td>
+<td style="text-align: left;">0 变 1，1 变 0 (包括符号位)</td>
+<td style="text-align: left;"><code>~a</code> = -61</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>&lt;&lt;</code></td>
+<td style="text-align: left;">左移</td>
+<td style="text-align: left;">向左移动指定位数，右边补 0</td>
+<td style="text-align: left;"><code>a &lt;&lt; 2</code> = 240 (相当于 <code>*4</code>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>&gt;&gt;</code></td>
+<td style="text-align: left;">右移</td>
+<td style="text-align: left;">向右移动指定位数，左边补符号位</td>
+<td style="text-align: left;"><code>a &gt;&gt; 2</code> = 15 (相当于 <code>//4</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="66">6.6. 成员运算符</h3>
+<p>用于判断某个值是否存在于序列（字符串、列表、元组等）中。
+| 运算符 | 含义 | 示例 | 结果 |
+| :--- | :--- | :--- | :--- |
+| <code>in</code> | 存在于 | <code>"p" in "Python"</code> | <code>True</code> |
+| <code>not in</code> | 不存在于 | <code>"z" not in "Python"</code> | <code>True</code> |</p>
+<h3 id="67">6.7. 身份运算符</h3>
+<p>这是 Python 特有的重点！ 用于判断两个变量是否指向内存中的同一个对象，而不是判断值是否相等。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">运算符</th>
+<th style="text-align: left;">含义</th>
+<th style="text-align: left;">对比 <code>==</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>is</code></td>
+<td style="text-align: left;">是同一个对象</td>
+<td style="text-align: left;"><code>==</code> 比较值 (Value)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>is not</code></td>
+<td style="text-align: left;">不是同一个对象</td>
+<td style="text-align: left;"><code>is</code> 比较内存地址 (ID)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>避坑指南：
+* 判断变量是否为 None 时，必须使用 is，不要用 ==。
+* ✅ 正确：if x is None:
+* ❌ 错误：if x == None: (虽然通常能工作，但不符合规范，且效率略低)
+* 对于小整数 (-5 到 256)，Python 有缓存机制，is 可能会返回 True，但不要依赖这个特性，比较数值永远用 ==。</p>
+</blockquote>
+<h3 id="68">6.8. 运算符优先级</h3>
+<p>当一行代码中有多个运算符时，执行顺序如下（记不住也没关系，多用括号）：
+1. <code>()</code> (括号，优先级最高)
+2. <code>**</code> (幂)
+3. <code>~</code>, <code>+</code>, <code>-</code> (按位取反，正负号)
+4. <code>*</code>, <code>/</code>, <code>//</code>, <code>%</code> (乘除取模)
+5. <code>+</code>, <code>-</code> (加减)
+6. <code>&lt;&lt;</code>, <code>&gt;&gt;</code> (位移)
+7. <code>&amp;</code> (按位与)
+8. <code>^</code> (按位异或)
+9. <code>|</code> (按位或)
+10. <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, ... (比较)
+11. <code>not</code> (逻辑非)
+12. <code>and</code> (逻辑与)
+13. <code>or</code> (逻辑或)
+14. <code>=</code>, <code>+=</code>, ... (赋值，优先级最低)</p>
+<blockquote>
+<p>建议：如果你不确定顺序，直接加括号 ()。
+例如：3 + 4 * 5 是 23，但 (3 + 4) * 5 是 35。写清楚括号能让代码更易读。</p>
+</blockquote>
+<h2 id="7-python">7. Python 基本数据类型</h2>
+<p>Python 是一种动态类型语言，变量本身没有类型，只有变量所引用的对象有类型。Python 提供了丰富的内置数据类型，用于表示各种不同形式的数据。</p>
+<h3 id="71-numeric-types">7.1. 数字类型 (Numeric Types)</h3>
+<p>Python 支持多种数字类型，包括整数、浮点数、复数等。</p>
+<h4 id="711-int">7.1.1. 整数 (int)</h4>
+<p>Python 3 中的整数类型可以表示任意大小的整数（只受内存限制），这与 Python 2 不同（Python 2 区分 int 和 long）。</p>
+<pre><code class="language-python">## 整数示例
+age = 25
+count = 0
+negative = -10
+large_num = 9999999999999999999999999  # Python 可以处理非常大的整数
+
+## 不同进制的整数表示
+decimal = 10        # 十进制
+binary = 0b1010     # 二进制，等于 10
+octal = 0o12        # 八进制，等于 10
+hexadecimal = 0xA   # 十六进制，等于 10
+
+## 整数的常用操作
+print(10 + 5)       # 加法：15
+print(10 - 5)       # 减法：5
+print(10 * 5)       # 乘法：50
+print(10 // 3)      # 整除：3
+print(10 % 3)       # 取模：1
+print(10 ** 2)      # 幂运算：100
+print(abs(-10))     # 绝对值：10
+print(pow(2, 3))    # 幂运算：8
+</code></pre>
+<h4 id="712-float">7.1.2. 浮点数 (float)</h4>
+<p>浮点数用于表示带小数的数值。Python 的浮点数遵循 IEEE 754 双精度标准（64 位）。</p>
+<pre><code class="language-python">## 浮点数示例
+price = 19.99
+pi = 3.14159
+scientific = 1.23e-4  # 科学计数法，等于 0.000123
+negative_float = -0.001
+
+## 浮点数运算
+print(10.5 + 2.3)     # 12.8
+print(10.0 / 3)       # 3.3333333333333335
+print(2.5 * 4)        # 10.0
+
+## 注意事项：浮点数精度问题
+print(0.1 + 0.2)      # 0.30000000000000004 (不是精确的 0.3)
+print(0.1 + 0.2 == 0.3)  # False
+
+## 解决精度问题的方法
+from decimal import Decimal
+print(Decimal('0.1') + Decimal('0.2'))  # 0.3
+</code></pre>
+<p><strong>⚠️ 浮点数精度警告：</strong>
+由于计算机使用二进制表示浮点数，某些十进制小数无法精确表示。在需要高精度的场景（如金融计算），建议使用 <code>decimal</code> 模块。</p>
+<h4 id="713-complex">7.1.3. 复数 (complex)</h4>
+<p>复数由实部和虚部组成，虚部用 <code>j</code> 或 <code>J</code> 表示。</p>
+<pre><code class="language-python">## 复数示例
+z1 = 3 + 4j
+z2 = complex(1, 2)  # 1 + 2j
+
+## 复数操作
+print(z1.real)      # 实部：3.0
+print(z1.imag)      # 虚部：4.0
+print(z1.conjugate())  # 共轭复数：(3-4j)
+print(abs(z1))      # 模长：5.0
+</code></pre>
+<h4 id="714-bool">7.1.4. 布尔类型 (bool)</h4>
+<p>布尔类型是整数的子类，只有两个值：<code>True</code> 和 <code>False</code>。</p>
+<pre><code class="language-python">## 布尔值
+is_active = True
+is_error = False
+
+## 布尔运算
+print(True and False)   # False
+print(True or False)    # True
+print(not True)         # False
+
+## 布尔值与整数的关系
+print(int(True))        # 1
+print(int(False))       # 0
+print(True + 1)         # 2
+print(False * 10)       # 0
+
+## 真值测试 (Truth Value Testing)
+## 以下值在布尔上下文中被视为 False：
+## - None, False
+## - 零值：0, 0.0, 0j, Decimal(0), Fraction(0, 1)
+## - 空序列和集合：'', (), [], {}, set(), range(0)
+## 其他值都为 True
+
+if &quot;hello&quot;:  # 非空字符串为 True
+    print(&quot;This will print&quot;)
+
+if []:  # 空列表为 False
+    print(&quot;This won't print&quot;)
+</code></pre>
+<h3 id="72-sequence-types">7.2. 序列类型 (Sequence Types)</h3>
+<p>序列类型是可以按索引访问元素的有序集合。</p>
+<h4 id="721-str">7.2.1. 字符串 (str)</h4>
+<p>字符串是不可变的 Unicode 字符序列。</p>
+<pre><code class="language-python">## 字符串创建
+name = &quot;Alice&quot;
+message = 'Hello, World!'
+multiline = &quot;&quot;&quot;这是一个
+多行字符串&quot;&quot;&quot;
+empty = &quot;&quot;
+
+## 字符串特性：不可变
+## name[0] = 'B'  # 错误！不能修改字符串
+
+## 字符串操作
+text = &quot;Python Programming&quot;
+print(len(text))          # 长度：18
+print(text[0])            # 索引：'P'
+print(text[-1])           # 负索引：'g'
+print(text[0:6])          # 切片：'Python'
+print(text[7:])           # 切片：'Programming'
+print(text[::-1])         # 反转：'gnimmargorP nohtyP'
+print(text.lower())       # 小写：'python programming'
+print(text.upper())       # 大写：'PYTHON PROGRAMMING'
+print(text.split())       # 分割：['Python', 'Programming']
+print(&quot;Py&quot; in text)       # 成员测试：True
+print(text.find(&quot;Pro&quot;))   # 查找：7
+print(text.replace(&quot;Python&quot;, &quot;Java&quot;))  # 替换
+
+## 字符串格式化
+name = &quot;Alice&quot;
+age = 25
+print(f&quot;My name is {name} and I am {age} years old.&quot;)  # f-string (推荐)
+print(&quot;My name is {} and I am {} years old.&quot;.format(name, age))
+print(&quot;My name is %s and I am %d years old.&quot; % (name, age))
+
+## 转义字符
+path = &quot;C:\\Users\\Alice&quot;  # 反斜杠
+quote = 'He said, &quot;Hello!&quot;'  # 双引号
+newline = &quot;Line 1\nLine 2&quot;  # 换行
+raw_string = r&quot;C:\Users\Alice&quot;  # 原始字符串，不转义
+</code></pre>
+<h4 id="722-list">7.2.2. 列表 (list)</h4>
+<p>列表是可变的有序元素序列，可以包含不同类型的元素。</p>
+<pre><code class="language-python">## 列表创建
+numbers = [1, 2, 3, 4, 5]
+mixed = [1, &quot;hello&quot;, 3.14, True]
+nested = [[1, 2], [3, 4], [5, 6]]  # 嵌套列表
+empty_list = []
+list_from_range = list(range(5))  # [0, 1, 2, 3, 4]
+
+## 列表特性：可变、有序、允许重复
+numbers[0] = 10  # 修改元素
+numbers.append(6)  # 添加元素
+
+## 列表操作
+nums = [1, 2, 3, 4, 5]
+print(len(nums))        # 长度：5
+print(nums[2])          # 索引：3
+print(nums[-1])         # 负索引：5
+print(nums[1:4])        # 切片：[2, 3, 4]
+print(nums + [6, 7])    # 拼接：[1, 2, 3, 4, 5, 6, 7]
+print(nums * 2)         # 重复：[1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+
+## 列表方法
+nums.append(6)          # 末尾添加：[1, 2, 3, 4, 5, 6]
+nums.insert(0, 0)       # 插入：[0, 1, 2, 3, 4, 5, 6]
+nums.extend([7, 8])     # 扩展：[0, 1, 2, 3, 4, 5, 6, 7, 8]
+nums.remove(0)          # 删除第一个匹配的元素
+popped = nums.pop()     # 弹出末尾元素：8
+index = nums.index(3)   # 查找索引：3
+count = nums.count(3)   # 计数：1
+nums.sort()             # 排序
+nums.reverse()          # 反转
+nums.clear()            # 清空
+
+## 列表推导式 (List Comprehension)
+squares = [x**2 for x in range(10)]  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+evens = [x for x in range(10) if x % 2 == 0]  # [0, 2, 4, 6, 8]
+matrix = [[i*j for j in range(3)] for i in range(3)]
+## [[0, 0, 0], [0, 1, 2], [0, 2, 4]]
+</code></pre>
+<h4 id="723-tuple">7.2.3. 元组 (tuple)</h4>
+<p>元组是不可变的有序元素序列，通常用于保护数据不被修改。</p>
+<pre><code class="language-python">## 元组创建
+coordinates = (10, 20)
+colors = (&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;)
+single_item = (42,)  # 单元素元组需要逗号
+empty_tuple = ()
+mixed = (1, &quot;hello&quot;, 3.14)
+
+## 元组特性：不可变、有序、允许重复
+## coordinates[0] = 15  # 错误！不能修改元组
+
+## 元组操作
+tup = (1, 2, 3, 4, 5)
+print(len(tup))         # 长度：5
+print(tup[2])           # 索引：3
+print(tup[-1])          # 负索引：5
+print(tup[1:4])         # 切片：(2, 3, 4)
+print(tup + (6, 7))     # 拼接：(1, 2, 3, 4, 5, 6, 7)
+print(tup * 2)          # 重复：(1, 2, 3, 4, 5, 1, 2, 3, 4, 5)
+
+## 元组方法
+print(tup.count(3))     # 计数：1
+print(tup.index(4))     # 查找索引：3
+
+## 元组解包 (Tuple Unpacking)
+x, y = coordinates
+print(x, y)  # 10, 20
+
+a, *b, c = (1, 2, 3, 4, 5)
+print(a, b, c)  # 1, [2, 3, 4], 5
+
+## 元组的用途
+## 1. 函数返回多个值
+def get_point():
+    return (10, 20)
+
+x, y = get_point()
+
+## 2. 字典的键（因为元组是不可变的）
+location = {(0, 0): &quot;origin&quot;, (1, 1): &quot;diagonal&quot;}
+
+## 3. 数据库记录
+user_record = (1, &quot;Alice&quot;, &quot;alice@example.com&quot;)
+</code></pre>
+<h4 id="724-range">7.2.4. 范围 (range)</h4>
+<p>range 类型表示不可变的数字序列，通常用于循环指定次数。</p>
+<pre><code class="language-python">## range 创建
+r1 = range(5)           # 0, 1, 2, 3, 4
+r2 = range(2, 7)        # 2, 3, 4, 5, 6
+r3 = range(0, 10, 2)    # 0, 2, 4, 6, 8 (步长为 2)
+r4 = range(10, 0, -1)   # 10, 9, 8, ..., 1 (递减)
+
+## range 特性：节省内存，只在需要时计算值
+print(list(r1))         # [0, 1, 2, 3, 4]
+print(r1.start)         # 起始值：0
+print(r1.stop)          # 结束值：5
+print(r1.step)          # 步长：1
+
+## 常用于循环
+for i in range(5):
+    print(i)  # 输出 0 到 4
+</code></pre>
+<h3 id="73-mapping-type">7.3. 映射类型 (Mapping Type)</h3>
+<h4 id="731-dict">7.3.1. 字典 (dict)</h4>
+<p>字典是无序的键值对集合（Python 3.7+ 保持插入顺序）。</p>
+<pre><code class="language-python">## 字典创建
+person = {
+    &quot;name&quot;: &quot;Alice&quot;,
+    &quot;age&quot;: 25,
+    &quot;city&quot;: &quot;New York&quot;
+}
+empty_dict = {}
+dict_from_pairs = dict([(&quot;name&quot;, &quot;Bob&quot;), (&quot;age&quot;, 30)])
+nested_dict = {
+    &quot;user1&quot;: {&quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 25},
+    &quot;user2&quot;: {&quot;name&quot;: &quot;Bob&quot;, &quot;age&quot;: 30}
+}
+
+## 字典操作
+print(person[&quot;name&quot;])       # 访问：'Alice'
+print(person.get(&quot;age&quot;))    # 安全访问：25
+print(person.get(&quot;email&quot;, &quot;not provided&quot;))  # 默认值
+
+## 修改和添加
+person[&quot;age&quot;] = 26          # 修改
+person[&quot;email&quot;] = &quot;alice@example.com&quot;  # 添加新键值对
+
+## 删除
+del person[&quot;city&quot;]          # 删除键
+age = person.pop(&quot;age&quot;)     # 弹出并返回值
+last_item = person.popitem()  # 弹出最后一个插入的项
+
+## 字典方法
+keys = person.keys()        # 所有键
+values = person.values()    # 所有值
+items = person.items()      # 所有键值对
+person.update({&quot;phone&quot;: &quot;123456&quot;})  # 更新
+person.clear()              # 清空
+
+## 遍历字典
+for key in person:
+    print(key, person[key])
+
+for key, value in person.items():
+    print(f&quot;{key}: {value}&quot;)
+
+## 字典推导式
+squares = {x: x**2 for x in range(5)}  # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+even_squares = {x: x**2 for x in range(10) if x % 2 == 0}
+
+## 字典合并 (Python 3.9+)
+dict1 = {&quot;a&quot;: 1, &quot;b&quot;: 2}
+dict2 = {&quot;c&quot;: 3, &quot;d&quot;: 4}
+merged = dict1 | dict2  # {'a': 1, 'b': 2, 'c': 3, 'd': 4}
+</code></pre>
+<h3 id="74-set-types">7.4. 集合类型 (Set Types)</h3>
+<h4 id="741-set">7.4.1. 集合 (set)</h4>
+<p>集合是无序的不重复元素集。</p>
+<pre><code class="language-python">## 集合创建
+fruits = {&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;}
+empty_set = set()  # 注意：不能用 {}，那是空字典
+numbers = set([1, 2, 2, 3, 3, 3])  # {1, 2, 3}，自动去重
+
+## 集合特性：无序、不重复、可变
+## print(fruits[0])  # 错误！集合不支持索引
+
+## 集合操作
+fruits.add(&quot;orange&quot;)        # 添加元素
+fruits.remove(&quot;banana&quot;)     # 删除元素（不存在会报错）
+fruits.discard(&quot;grape&quot;)     # 删除元素（不存在不报错）
+popped = fruits.pop()       # 随机弹出一个元素
+
+## 集合运算
+set1 = {1, 2, 3, 4, 5}
+set2 = {4, 5, 6, 7, 8}
+
+print(set1 | set2)  # 并集：{1, 2, 3, 4, 5, 6, 7, 8}
+print(set1 &amp; set2)  # 交集：{4, 5}
+print(set1 - set2)  # 差集：{1, 2, 3}
+print(set1 ^ set2)  # 对称差集：{1, 2, 3, 6, 7, 8}
+
+## 集合关系
+print(set1.issubset(set2))     # 子集：False
+print(set1.issuperset(set2))   # 超集：False
+print(set1.isdisjoint(set2))   # 是否无交集：False
+
+## 集合推导式
+unique_squares = {x**2 for x in [1, 1, 2, 2, 3]}  # {1, 4, 9}
+</code></pre>
+<h4 id="742-frozenset">7.4.2. 冻结集合 (frozenset)</h4>
+<p>frozenset 是不可变的集合。</p>
+<pre><code class="language-python">## 冻结集合创建
+frozen = frozenset([1, 2, 3, 4, 5])
+empty_frozen = frozenset()
+
+## 冻结集合特性：不可变、可哈希（可以作为字典的键）
+## frozen.add(6)  # 错误！不能修改
+
+## 作为字典的键
+dict_with_frozen = {frozen: &quot;immutable set&quot;}
+</code></pre>
+<h3 id="75">7.5. 特殊类型</h3>
+<h4 id="751-nonetype">7.5.1. NoneType</h4>
+<p>NoneType 只有一个值：None，表示空值或无。</p>
+<pre><code class="language-python">## None 的使用
+result = None
+
+def no_return():
+    pass
+
+print(no_return())  # None
+
+## 检查是否为 None
+if result is None:
+    print(&quot;Result is None&quot;)
+
+## 默认参数值
+def greet(name=None):
+    if name is None:
+        name = &quot;Guest&quot;
+    return f&quot;Hello, {name}!&quot;
+</code></pre>
+<h4 id="752-bytes-bytearray-memoryview">7.5.2. 字节类型 (bytes, bytearray, memoryview)</h4>
+<p>用于处理二进制数据。</p>
+<pre><code class="language-python">## bytes (不可变)
+b = b&quot;hello&quot;
+byte_data = bytes([65, 66, 67])  # b'ABC'
+
+## bytearray (可变)
+ba = bytearray(b&quot;hello&quot;)
+ba[0] = 72  # 修改
+
+## memoryview (内存视图，用于高效处理大二进制数据)
+mv = memoryview(b&quot;hello world&quot;)
+sub_mv = mv[0:5]  # 不复制数据，只是视图
+</code></pre>
+<h3 id="76">7.6. 类型转换</h3>
+<p>Python 提供了内置函数进行类型转换：</p>
+<pre><code class="language-python">## 转换为整数
+int(&quot;123&quot;)        # 123
+int(3.14)         # 3 (截断，不是四舍五入)
+int(&quot;10&quot;, 2)      # 2 (二进制转十进制)
+
+## 转换为浮点数
+float(&quot;3.14&quot;)     # 3.14
+float(10)         # 10.0
+
+## 转换为字符串
+str(123)          # &quot;123&quot;
+str(3.14)         # &quot;3.14&quot;
+str([1, 2, 3])    # &quot;[1, 2, 3]&quot;
+
+## 转换为列表
+list(&quot;hello&quot;)     # ['h', 'e', 'l', 'l', 'o']
+list((1, 2, 3))   # [1, 2, 3]
+list({1, 2, 3})   # [1, 2, 3]
+
+## 转换为元组
+tuple([1, 2, 3])  # (1, 2, 3)
+
+## 转换为集合
+set([1, 2, 2, 3])  # {1, 2, 3}
+
+## 转换为字典
+dict([(&quot;a&quot;, 1), (&quot;b&quot;, 2)])  # {'a': 1, 'b': 2}
+
+## 类型检查
+type(123)         # &lt;class 'int'&gt;
+isinstance(123, int)  # True
+</code></pre>
+<h3 id="77">7.7. 可变与不可变类型</h3>
+<p>理解可变性对于编写正确的 Python 代码至关重要。</p>
+<p><strong>不可变类型 (Immutable):</strong>
+- 数字 (int, float, complex)
+- 字符串 (str)
+- 元组 (tuple)
+- 冻结集合 (frozenset)
+- 字节 (bytes)</p>
+<p><strong>可变类型 (Mutable):</strong>
+- 列表 (list)
+- 字典 (dict)
+- 集合 (set)
+- 字节数组 (bytearray)</p>
+<pre><code class="language-python">## 不可变示例
+x = 10
+y = x
+x = 20
+print(y)  # 10 (y 不受影响)
+
+## 可变示例
+list1 = [1, 2, 3]
+list2 = list1
+list1.append(4)
+print(list2)  # [1, 2, 3, 4] (list2 也受影响！)
+
+## 解决方案：创建副本
+list3 = list1.copy()  # 或 list(list1), list1[:]
+</code></pre>
+<h3 id="78">7.8. 数据类型总结表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">类型</th>
+<th style="text-align: left;">可变性</th>
+<th style="text-align: left;">有序</th>
+<th style="text-align: left;">可重复</th>
+<th style="text-align: left;">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">不可变</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;"><code>42</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">float</td>
+<td style="text-align: left;">不可变</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;"><code>3.14</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">str</td>
+<td style="text-align: left;">不可变</td>
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;"><code>"hello"</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">list</td>
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;"><code>[1, 2, 3]</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">tuple</td>
+<td style="text-align: left;">不可变</td>
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;"><code>(1, 2, 3)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">dict</td>
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">✓*</td>
+<td style="text-align: left;">N/A</td>
+<td style="text-align: left;"><code>{"a": 1}</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">set</td>
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">✗</td>
+<td style="text-align: left;">✗</td>
+<td style="text-align: left;"><code>{1, 2, 3}</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">frozenset</td>
+<td style="text-align: left;">不可变</td>
+<td style="text-align: left;">✗</td>
+<td style="text-align: left;">✗</td>
+<td style="text-align: left;"><code>frozenset([1,2,3])</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">range</td>
+<td style="text-align: left;">不可变</td>
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;">✓</td>
+<td style="text-align: left;"><code>range(5)</code></td>
+</tr>
+</tbody>
+</table>
+<p>*注：Python 3.7+ 字典保持插入顺序</p>
+<h2 id="8">8. 常量与变量</h2>
+<h3 id="81-variables">8.1. 变量 (Variables)</h3>
+<h4 id="811">8.1.1. 变量的概念</h4>
+<p>在 Python 中，变量是对对象的引用（标签），而不是存储数据的容器。变量本身没有类型，只有它引用的对象有类型。</p>
+<pre><code class="language-python">## 变量赋值
+x = 10          # x 引用整数对象 10
+name = &quot;Alice&quot;  # name 引用字符串对象 &quot;Alice&quot;
+
+## 变量可以重新绑定到不同类型的对象
+x = 10
+x = &quot;hello&quot;     # 合法！x 现在引用字符串
+x = [1, 2, 3]   # 合法！x 现在引用列表
+</code></pre>
+<h4 id="812">8.1.2. 变量命名规则</h4>
+<p>详见第 2 章标识符部分，这里再次强调：</p>
+<p><strong>必须遵守的规则：</strong>
+- 第一个字符必须是字母或下划线 <code>_</code>
+- 不能以数字开头
+- 只能包含字母、数字和下划线
+- 不能使用 Python 关键字
+- 区分大小写</p>
+<pre><code class="language-python">## 正确示例
+user_name = &quot;Alice&quot;
+_total = 100
+MAX_SIZE = 1024
+_private = &quot;internal&quot;
+
+## 错误示例
+## 2nd_place = &quot;silver&quot;  # 以数字开头
+## user-name = &quot;Bob&quot;     # 包含连字符
+## class = &quot;Math&quot;        # 使用关键字
+</code></pre>
+<h4 id="813">8.1.3. 变量赋值</h4>
+<p>Python 支持多种赋值方式：</p>
+<pre><code class="language-python">## 基本赋值
+x = 10
+y = 20
+
+## 链式赋值
+a = b = c = 0  # a, b, c 都引用同一个对象 0
+
+## 多重赋值（元组解包）
+x, y = 10, 20
+print(x, y)  # 10, 20
+
+## 交换变量值
+a, b = b, a  # Python 特有的优雅语法
+
+## 解包序列
+first, *middle, last = [1, 2, 3, 4, 5]
+print(first)   # 1
+print(middle)  # [2, 3, 4]
+print(last)    # 5
+
+## 增强赋值运算符
+x = 10
+x += 5   # x = x + 5
+x -= 3   # x = x - 3
+x *= 2   # x = x * 2
+x /= 4   # x = x / 4
+x //= 2  # x = x // 2
+x %= 3   # x = x % 3
+x **= 2  # x = x ** 2
+
+## 海象运算符 (Python 3.8+)
+if (n := len([1, 2, 3, 4])) &gt; 3:
+    print(f&quot;列表长度为 {n}&quot;)
+</code></pre>
+<h4 id="814">8.1.4. 变量作用域</h4>
+<p>变量的作用域决定了在哪里可以访问该变量。</p>
+<pre><code class="language-python">## 局部变量 (Local Scope)
+def my_function():
+    local_var = 10  # 局部变量，只在函数内部有效
+    print(local_var)
+
+my_function()
+## print(local_var)  # 错误！NameError
+
+## 全局变量 (Global Scope)
+global_var = 100  # 全局变量
+
+def access_global():
+    print(global_var)  # 可以访问
+
+access_global()  # 100
+
+## 修改全局变量
+counter = 0
+
+def increment():
+    global counter  # 声明使用全局变量
+    counter += 1
+
+increment()
+print(counter)  # 1
+
+## 嵌套作用域 (Enclosing Scope)
+def outer():
+    x = 10
+    def inner():
+        nonlocal x  # 声明使用外层函数的变量
+        x += 1
+        print(x)
+    inner()  # 11
+    print(x)  # 11
+
+outer()
+</code></pre>
+<p><strong>作用域查找顺序 (LEGB 规则):</strong>
+1. <strong>L</strong>ocal - 当前函数的局部作用域
+2. <strong>E</strong>nclosing - 外层函数的作用域
+3. <strong>G</strong>lobal - 当前模块的全局作用域
+4. <strong>B</strong>uilt-in - Python 内置作用域</p>
+<h4 id="815-type-hints">8.1.5. 变量类型提示 (Type Hints)</h4>
+<p>Python 3.5+ 支持类型注解，虽然不影响运行，但有助于代码理解和静态分析。</p>
+<pre><code class="language-python">## 变量类型提示
+age: int = 25
+name: str = &quot;Alice&quot;
+prices: list[float] = [19.99, 29.99]
+is_valid: bool = True
+
+## 函数类型提示
+def greet(name: str, age: int) -&gt; str:
+    return f&quot;Hello, {name}! You are {age} years old.&quot;
+
+## 可选类型
+from typing import Optional
+maybe_name: Optional[str] = None  # 可以是 str 或 None
+
+## 联合类型
+from typing import Union
+value: Union[int, str] = 10  # 可以是 int 或 str
+</code></pre>
+<h3 id="82-constants">8.2. 常量 (Constants)</h3>
+<h4 id="821">8.2.1. 常量的概念</h4>
+<p>常量是指在程序运行过程中不应该被改变的值。然而，Python 没有真正的常量机制（不像 C/C++ 的 const）。</p>
+<p>Python 中的常量是通过命名约定来实现的：</p>
+<pre><code class="language-python">## 常量命名约定：全大写字母 + 下划线
+MAX_CONNECTIONS = 100
+PI = 3.14159
+API_KEY = &quot;secret_key_123&quot;
+DEFAULT_TIMEOUT = 30  # 秒
+GRAVITY = 9.8  # m/s²
+</code></pre>
+<h4 id="822">8.2.2. 常量的特性</h4>
+<p><strong>Python 常量实际上是可变的：</strong></p>
+<pre><code class="language-python">## 定义&quot;常量&quot;
+MAX_SIZE = 100
+
+## 技术上可以修改（但不应该这样做）
+MAX_SIZE = 200  # 不会报错，但违反了约定
+
+## 不可变对象作为常量
+TUPLE_COORDINATES = (10, 20)  # 元组本身不可变
+## TUPLE_COORDINATES[0] = 15  # 错误！
+
+## 可变对象作为常量（危险！）
+DEFAULT_CONFIG = {&quot;debug&quot;: False, &quot;timeout&quot;: 30}
+## 可以被修改（应该避免）
+DEFAULT_CONFIG[&quot;debug&quot;] = True  # 不推荐！
+</code></pre>
+<h4 id="823">8.2.3. 定义常量的最佳实践</h4>
+<p><strong>1. 模块级常量</strong></p>
+<pre><code class="language-python">## config.py
+MAX_RETRIES = 3
+TIMEOUT = 30
+API_VERSION = &quot;v1&quot;
+</code></pre>
+<p><strong>2. 使用类来组织常量</strong></p>
+<pre><code class="language-python">class Config:
+    DEBUG = True
+    DATABASE_URL = &quot;sqlite:///db.sqlite&quot;
+    SECRET_KEY = &quot;your-secret-key&quot;
+
+class StatusCodes:
+    OK = 200
+    NOT_FOUND = 404
+    SERVER_ERROR = 500
+</code></pre>
+<p><strong>3. 使用枚举 (Enum)</strong></p>
+<pre><code class="language-python">from enum import Enum
+
+class Color(Enum):
+    RED = &quot;red&quot;
+    GREEN = &quot;green&quot;
+    BLUE = &quot;blue&quot;
+
+print(Color.RED.value)  # &quot;red&quot;
+</code></pre>
+<p><strong>4. 使用命名元组 (Named Tuple)</strong></p>
+<pre><code class="language-python">from collections import namedtuple
+
+Constants = namedtuple('Constants', ['PI', 'E', 'G'])
+MATH_CONSTANTS = Constants(PI=3.14159, E=2.71828, G=6.67430e-11)
+
+print(MATH_CONSTANTS.PI)  # 3.14159
+</code></pre>
+<h4 id="824-vs">8.2.4. 常量 vs 变量</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">特性</th>
+<th style="text-align: left;">变量</th>
+<th style="text-align: left;">常量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">命名规范</td>
+<td style="text-align: left;">snake_case (小写 + 下划线)</td>
+<td style="text-align: left;">UPPER_CASE (全大写 + 下划线)</td>
+</tr>
+<tr>
+<td style="text-align: left;">可变性</td>
+<td style="text-align: left;">可以随时修改</td>
+<td style="text-align: left;">不应该修改（约定）</td>
+</tr>
+<tr>
+<td style="text-align: left;">作用域</td>
+<td style="text-align: left;">局部、全局、嵌套</td>
+<td style="text-align: left;">通常是模块级或类级</td>
+</tr>
+<tr>
+<td style="text-align: left;">类型检查</td>
+<td style="text-align: left;">动态类型</td>
+<td style="text-align: left;">动态类型（但建议类型注解）</td>
+</tr>
+<tr>
+<td style="text-align: left;">用途</td>
+<td style="text-align: left;">存储变化的数据</td>
+<td style="text-align: left;">存储固定配置、魔法数字</td>
+</tr>
+</tbody>
+</table>
+<h4 id="825">8.2.5. 实际应用场景</h4>
+<p><strong>1. 配置文件中的常量</strong></p>
+<pre><code class="language-python">## settings.py
+DATABASE_HOST = &quot;localhost&quot;
+DATABASE_PORT = 5432
+DATABASE_NAME = &quot;myapp&quot;
+
+REDIS_HOST = &quot;127.0.0.1&quot;
+REDIS_PORT = 6379
+
+LOG_LEVEL = &quot;INFO&quot;
+DEBUG_MODE = False
+</code></pre>
+<p><strong>2. 数学和科学计算常量</strong></p>
+<pre><code class="language-python">import math
+
+print(math.pi)        # 圆周率
+print(math.e)         # 自然常数
+print(math.inf)       # 无穷大
+print(math.nan)       # NaN
+</code></pre>
+<p><strong>3. 状态常量</strong></p>
+<pre><code class="language-python">## 订单状态
+ORDER_STATUS_PENDING = &quot;pending&quot;
+ORDER_STATUS_PAID = &quot;paid&quot;
+ORDER_STATUS_SHIPPED = &quot;shipped&quot;
+ORDER_STATUS_COMPLETED = &quot;completed&quot;
+ORDER_STATUS_CANCELLED = &quot;cancelled&quot;
+
+## 使用枚举更好
+from enum import Enum
+
+class OrderStatus(Enum):
+    PENDING = &quot;pending&quot;
+    PAID = &quot;paid&quot;
+    SHIPPED = &quot;shipped&quot;
+    COMPLETED = &quot;completed&quot;
+    CANCELLED = &quot;cancelled&quot;
+</code></pre>
+<h3 id="83">8.3. 变量和常量的内存管理</h3>
+<h4 id="831">8.3.1. 引用计数</h4>
+<p>Python 使用引用计数来管理内存：</p>
+<pre><code class="language-python">import sys
+
+x = 10
+print(sys.getrefcount(x))  # 显示引用计数（实际值可能大于预期）
+
+y = x  # 引用计数 +1
+z = x  # 引用计数再 +1
+
+del y  # 引用计数 -1
+</code></pre>
+<h4 id="832">8.3.2. 小整数缓存</h4>
+<p>Python 会缓存小整数（通常是 -5 到 256），这些整数在内存中只有一个实例：</p>
+<pre><code class="language-python">a = 256
+b = 256
+print(a is b)  # True (同一个对象)
+
+c = 257
+d = 257
+print(c is d)  # False (不同对象，但在某些实现中可能是 True)
+</code></pre>
+<h4 id="833">8.3.3. 字符串驻留</h4>
+<p>Python 会驻留（intern）某些字符串以节省内存：</p>
+<pre><code class="language-python">a = &quot;hello&quot;
+b = &quot;hello&quot;
+print(a is b)  # True (同一个对象)
+
+c = &quot;hello world&quot;
+d = &quot;hello world&quot;
+print(c is d)  # 可能是 False（取决于实现）
+</code></pre>
+<h3 id="84">8.4. 最佳实践</h3>
+<h4 id="841">8.4.1. 变量使用建议</h4>
+<ol>
+<li><strong>见名知意</strong>：使用描述性的名称
+   ```python
+   # 好
+   user_age = 25
+   total_price = 100.50</li>
+</ol>
+<p># 不好
+   a = 25
+   x = 100.50
+   ```</p>
+<ol>
+<li><strong>避免单字母变量</strong>（除非在短循环中）
+   ```python
+   # 好的短循环
+   for i in range(10):
+       print(i)</li>
+</ol>
+<p># 不好的长函数
+   def process_data(d):
+       # d 是什么？不清楚！
+       pass
+   ```</p>
+<ol>
+<li>
+<p><strong>使用类型注解</strong>
+   <code>python
+   def calculate_total(prices: list[float]) -&gt; float:
+       return sum(prices)</code></p>
+</li>
+<li>
+<p><strong>及时清理不再使用的变量</strong>
+   <code>python
+   sensitive_data = "password123"
+   # 使用后删除
+   del sensitive_data</code></p>
+</li>
+</ol>
+<h4 id="842">8.4.2. 常量使用建议</h4>
+<ol>
+<li><strong>避免魔法数字</strong>
+   ```python
+   # 不好
+   if score &gt;= 60:
+       print("及格")</li>
+</ol>
+<p># 好
+   PASSING_SCORE = 60
+   if score &gt;= PASSING_SCORE:
+       print("及格")
+   ```</p>
+<ol>
+<li>
+<p><strong>集中管理常量</strong>
+   <code>python
+   # constants.py
+   MAX_USERS = 1000
+   MIN_PASSWORD_LENGTH = 8
+   API_ENDPOINT = "https://api.example.com"</code></p>
+</li>
+<li>
+<p><strong>使用枚举代替相关常量</strong>
+   ```python
+   from enum import Enum</p>
+</li>
+</ol>
+<p>class Weekday(Enum):
+       MONDAY = 1
+       TUESDAY = 2
+       WEDNESDAY = 3
+       THURSDAY = 4
+       FRIDAY = 5
+   ```</p>
+<ol>
+<li><strong>文档化常量</strong>
+   ```python
+   # 最大重试次数（超过此值后会向用户报告错误）
+   MAX_RETRIES = 3</li>
+</ol>
+<p># API 请求超时时间（秒）
+   REQUEST_TIMEOUT = 30
+   ```</p>
+<h3 id="85">8.5. 常见错误和陷阱</h3>
+<h4 id="851">8.5.1. 可变默认参数</h4>
+<pre><code class="language-python">## 错误示例
+def add_item(item, items=[]):  # 危险！
+    items.append(item)
+    return items
+
+## 第一次调用
+print(add_item(1))  # [1]
+## 第二次调用
+print(add_item(2))  # [1, 2] (!!)
+
+## 正确做法
+def add_item(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items
+</code></pre>
+<h4 id="852">8.5.2. 全局变量滥用</h4>
+<pre><code class="language-python">## 不推荐
+counter = 0
+
+def increment():
+    global counter
+    counter += 1
+
+## 更好的做法：使用类
+class Counter:
+    def __init__(self):
+        self.count = 0
+
+    def increment(self):
+        self.count += 1
+</code></pre>
+<h4 id="853">8.5.3. 混淆可变和不可变类型</h4>
+<pre><code class="language-python">## 列表作为参数
+def modify_list(lst):
+    lst.append(4)
+
+my_list = [1, 2, 3]
+modify_list(my_list)
+print(my_list)  # [1, 2, 3, 4] (原列表被修改！)
+
+## 如果不想修改原列表
+def modify_list_safe(lst):
+    new_list = lst.copy()
+    new_list.append(4)
+    return new_list
+</code></pre>
+<h4 id="854">8.5.4. 错误地使用常量</h4>
+<pre><code class="language-python">## 常量被意外修改
+CONFIG = {&quot;debug&quot;: False}
+CONFIG[&quot;debug&quot;] = True  # 违反了常量不应该修改的原则
+
+## 使用 frozendict 或其他方式保护
+from types import MappingProxyType
+_CONFIG = {&quot;debug&quot;: False}
+CONFIG = MappingProxyType(_CONFIG)  # 只读视图
+## CONFIG[&quot;debug&quot;] = True  # 会报错
+</code></pre>
+<h3 id="86">8.6. 总结</h3>
+<p><strong>变量要点：</strong>
+- 变量是对对象的引用，不是容器
+- 遵循命名规范（snake_case）
+- 理解作用域规则（LEGB）
+- 使用类型注解提高可读性</p>
+<p><strong>常量要点：</strong>
+- Python 没有真正的常量，靠约定维护
+- 使用全大写命名（UPPER_CASE）
+- 避免魔法数字
+- 考虑使用枚举组织相关常量</p>
+<p><strong>最佳实践：</strong>
+- 选择有意义的名称
+- 保持代码一致性
+- 文档化重要变量和常量
+- 谨慎使用全局变量</p>
+<h2 id="9-python">9. Python 源代码文件基本结构</h2>
+<p>Python 源代码文件（.py 文件）有着相对固定和规范的结构。遵循良好的文件组织结构可以提高代码的可读性、可维护性和可复用性。</p>
+<h3 id="91-python">9.1. Python 源文件的标准组成部分</h3>
+<p>一个规范的 Python 模块文件通常包含以下部分（按顺序）：</p>
+<pre><code class="language-python">#!/usr/bin/env python3
+## -*- coding: utf-8 -*-
+
+&quot;&quot;&quot;
+模块文档字符串（Docstring）
+
+这里是模块的详细描述，说明这个文件的用途、功能、作者等信息。
+可以包含多行，使用三个双引号包裹。
+&quot;&quot;&quot;
+
+## 1. 导入标准库模块
+import os
+import sys
+from pathlib import Path
+from typing import List, Dict, Optional
+
+## 2. 导入第三方库
+import requests
+from flask import Flask, request
+
+## 3. 导入本地模块
+from .utils import helper_function
+from .models import User, Product
+from config import Config
+
+## 4. 模块级常量
+__version__ = &quot;1.0.0&quot;
+__author__ = &quot;Your Name&quot;
+MAX_CONNECTIONS = 100
+DEFAULT_TIMEOUT = 30
+
+## 5. 模块级变量（如果有）
+_cache: Dict[str, any] = {}
+_initialized: bool = False
+
+## 6. 类定义
+class MyClass:
+    &quot;&quot;&quot;类的文档字符串&quot;&quot;&quot;
+
+    def __init__(self):
+        &quot;&quot;&quot;初始化方法&quot;&quot;&quot;
+        pass
+
+    def public_method(self):
+        &quot;&quot;&quot;公共方法&quot;&quot;&quot;
+        pass
+
+    def _private_method(self):
+        &quot;&quot;&quot;私有方法（约定俗成）&quot;&quot;&quot;
+        pass
+
+## 7. 函数定义
+def function_one(param1: str, param2: int = 10) -&gt; bool:
+    &quot;&quot;&quot;
+    函数的文档字符串
+
+    Args:
+        param1: 参数 1 的描述
+        param2: 参数 2 的描述，默认值为 10
+
+    Returns:
+        返回值的描述
+
+    Raises:
+        ValueError: 什么情况下会抛出
+    &quot;&quot;&quot;
+    return True
+
+def function_two():
+    &quot;&quot;&quot;另一个函数的文档字符串&quot;&quot;&quot;
+    pass
+
+## 8. 主程序入口
+if __name__ == &quot;__main__&quot;:
+    # 测试代码或命令行入口
+    print(f&quot;Version: {__version__}&quot;)
+    result = function_one(&quot;test&quot;, 20)
+    print(f&quot;Result: {result}&quot;)
+</code></pre>
+<h3 id="92">9.2. 各部分详细说明</h3>
+<h4 id="921-shebang-unixlinuxmac">9.2.1. Shebang 行（仅 Unix/Linux/Mac）</h4>
+<pre><code class="language-python">#!/usr/bin/env python3
+</code></pre>
+<p><strong>作用：</strong>
+- 在 Unix/Linux/Mac 系统上，告诉操作系统用哪个解释器执行此脚本
+- Windows 系统通常忽略此行</p>
+<p><strong>常见写法：</strong></p>
+<pre><code class="language-python">#!/usr/bin/env python3      # 推荐：从环境变量查找 python3
+#!/usr/bin/python3         # 指定路径，不够灵活
+#!/usr/bin/env python      # 可能指向 Python 2（不推荐）
+</code></pre>
+<p><strong>何时需要：</strong>
+- ✅ 需要在 Linux/Mac 上直接执行的脚本（如 <code>./script.py</code>）
+- ❌ 普通模块文件（被导入的文件）不需要</p>
+<h4 id="922">9.2.2. 编码声明</h4>
+<pre><code class="language-python">## -*- coding: utf-8 -*-
+</code></pre>
+<p><strong>作用：</strong>
+- 指定源文件的字符编码
+- Python 3 默认使用 UTF-8，通常不需要显式声明
+- 如果文件中包含非 ASCII 字符（如中文注释），建议保留</p>
+<p><strong>现代实践：</strong>
+- Python 3.8+ 默认 UTF-8，可以不写
+- 但保留此声明是良好的兼容性实践
+- 如果使用其他编码（如 GBK），必须声明</p>
+<h4 id="923-module-docstring">9.2.3. 模块文档字符串（Module Docstring）</h4>
+<pre><code class="language-python">&quot;&quot;&quot;
+这是一个用户管理模块
+
+提供用户创建、查询、更新、删除等功能。
+支持本地存储和数据库存储两种方式。
+
+示例用法:
+    &gt;&gt;&gt; from user_module import User
+    &gt;&gt;&gt; user = User.create(&quot;Alice&quot;, 25)
+    &gt;&gt;&gt; print(user.name)
+    Alice
+
+作者: 张三
+日期: 2024-01-15
+版本: 1.0.0
+&quot;&quot;&quot;
+</code></pre>
+<p><strong>规范：</strong>
+- 必须是文件的第一条语句（在 shebang 和编码声明之后）
+- 使用三个双引号 <code>"""</code>
+- 第一行简明扼要，空行后详细描述
+- 可以包含示例、作者、版本等信息</p>
+<h4 id="924-imports">9.2.4. 导入语句（Imports）</h4>
+<p><strong>导入分组顺序（PEP 8 规范）：</strong></p>
+<pre><code class="language-python">## 第一组：标准库（按字母排序）
+import asyncio
+import json
+import os
+import sys
+from collections import defaultdict
+from typing import List, Dict
+
+## 第二组：第三方库（按字母排序）
+import numpy as np
+import pandas as pd
+import requests
+from flask import Flask
+
+## 第三组：本地模块/项目内导入
+from . import utils
+from .models import User
+from config import settings
+from myapp.services import UserService
+</code></pre>
+<p><strong>分组规则：</strong>
+1. 每组之间用一空行分隔
+2. 组内按字母顺序排列
+3. 标准库优先，第三方库次之，本地模块最后</p>
+<p><strong>导入最佳实践：</strong></p>
+<pre><code class="language-python">## ✅ 推荐：清晰明确的导入
+from datetime import datetime, timedelta
+import requests
+
+## ✅ 推荐：避免命名冲突
+import numpy as np
+import pandas as pd
+
+## ⚠️ 谨慎：通配符导入（污染命名空间）
+from module import *  # 不推荐，除非明确需要
+
+## ❌ 避免：循环导入
+## file_a.py: from file_b import func_b
+## file_b.py: from file_a import func_a
+## 解决方案：在函数内部导入或重构代码
+</code></pre>
+<h4 id="925">9.2.5. 模块级常量和变量</h4>
+<p><strong>模块元信息：</strong></p>
+<pre><code class="language-python">__version__ = &quot;1.0.0&quot;
+__author__ = &quot;Your Name&quot;
+__email__ = &quot;your.email@example.com&quot;
+__license__ = &quot;MIT&quot;
+__copyright__ = &quot;Copyright 2024, Your Name&quot;
+</code></pre>
+<p><strong>业务常量：</strong></p>
+<pre><code class="language-python">## 配置相关
+MAX_RETRIES = 3
+TIMEOUT_SECONDS = 30
+API_BASE_URL = &quot;https://api.example.com&quot;
+
+## 业务规则
+MIN_AGE = 18
+MAX_FILE_SIZE_MB = 10
+ALLOWED_EXTENSIONS = {'.jpg', '.png', '.gif'}
+</code></pre>
+<p><strong>模块状态变量：</strong></p>
+<pre><code class="language-python">## 缓存
+_cache: Dict[str, any] = {}
+
+## 初始化标志
+_initialized: bool = False
+
+## 计数器
+_request_count: int = 0
+</code></pre>
+<p><strong>命名注意：</strong>
+- 常量：全大写 + 下划线
+- 模块私有变量：单下划线开头 <code>_var</code>
+- 类型注解：建议使用，提高可读性</p>
+<h4 id="926">9.2.6. 类定义</h4>
+<p><strong>标准类结构：</strong></p>
+<pre><code class="language-python">class ClassName:
+    &quot;&quot;&quot;类的文档字符串&quot;&quot;&quot;
+
+    # 类属性
+    class_var = &quot;shared by all instances&quot;
+    _private_class_var = &quot;internal use&quot;
+
+    def __init__(self, param1: str, param2: int = 0):
+        &quot;&quot;&quot;
+        初始化方法
+
+        Args:
+            param1: 描述
+            param2: 描述
+        &quot;&quot;&quot;
+        # 实例属性
+        self.param1 = param1
+        self.param2 = param2
+        self._internal_state = None  # 私有属性（约定）
+
+    def public_method(self, arg: str) -&gt; bool:
+        &quot;&quot;&quot;
+        公共方法的文档字符串
+
+        Args:
+            arg: 参数描述
+
+        Returns:
+            返回值描述
+        &quot;&quot;&quot;
+        return True
+
+    def _private_method(self):
+        &quot;&quot;&quot;
+        私有方法（约定俗成，不强制）
+
+        不应该在类外部直接调用
+        &quot;&quot;&quot;
+        pass
+
+    @classmethod
+    def class_method(cls):
+        &quot;&quot;&quot;类方法&quot;&quot;&quot;
+        return cls.class_var
+
+    @staticmethod
+    def static_method(x, y):
+        &quot;&quot;&quot;静态方法&quot;&quot;&quot;
+        return x + y
+
+    @property
+    def computed_property(self):
+        &quot;&quot;&quot;属性装饰器&quot;&quot;&quot;
+        return self.param1.upper()
+
+    def __str__(self):
+        &quot;&quot;&quot;字符串表示&quot;&quot;&quot;
+        return f&quot;ClassName({self.param1})&quot;
+
+    def __repr__(self):
+        &quot;&quot;&quot;开发者友好的表示&quot;&quot;&quot;
+        return f&quot;ClassName('{self.param1}', {self.param2})&quot;
+</code></pre>
+<p><strong>类组织顺序：</strong>
+1. 类文档字符串
+2. 类属性
+3. <code>__init__</code> 方法
+4. 其他公共方法
+5. 私有方法
+6. 类方法、静态方法
+7. 属性装饰器
+8. 魔术方法（<code>__str__</code>, <code>__repr__</code> 等）</p>
+<h4 id="927">9.2.7. 函数定义</h4>
+<p><strong>函数结构：</strong></p>
+<pre><code class="language-python">def function_name(param1: type, param2: type = default) -&gt; return_type:
+    &quot;&quot;&quot;
+    函数的文档字符串（遵循 Google 或 NumPy 风格）
+
+    Args:
+        param1: 参数 1 的描述
+        param2: 参数 2 的描述，默认值为 xxx
+
+    Returns:
+        返回值的描述
+
+    Raises:
+        ValueError: 当参数不合法时
+        TypeError: 当参数类型错误时
+
+    Examples:
+        &gt;&gt;&gt; function_name(&quot;test&quot;, 10)
+        True
+
+    See Also:
+        related_function: 相关函数说明
+    &quot;&quot;&quot;
+    # 函数体
+    # 1. 参数验证
+    if not param1:
+        raise ValueError(&quot;param1 cannot be empty&quot;)
+
+    # 2. 主要逻辑
+    result = some_operation(param1, param2)
+
+    # 3. 返回结果
+    return result
+</code></pre>
+<p><strong>函数组织原则：</strong>
+- 单一职责：一个函数只做一件事
+- 长度控制：尽量不超过 50 行
+- 参数数量：不超过 5 个参数（过多考虑封装）
+- 副作用最小化：尽量避免修改全局状态</p>
+<h4 id="928">9.2.8. 主程序入口</h4>
+<p><strong>测试入口：</strong></p>
+<pre><code class="language-python">if __name__ == &quot;__main__&quot;:
+    # 简单测试
+    print(&quot;Running tests...&quot;)
+    assert function_one(&quot;test&quot;) == True
+    print(&quot;All tests passed!&quot;)
+</code></pre>
+<p><strong>命令行工具入口：</strong></p>
+<pre><code class="language-python">if __name__ == &quot;__main__&quot;:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=&quot;工具描述&quot;)
+    parser.add_argument(&quot;-v&quot;, &quot;--version&quot;, action=&quot;store_true&quot;, help=&quot;显示版本&quot;)
+    parser.add_argument(&quot;-f&quot;, &quot;--file&quot;, type=str, required=True, help=&quot;输入文件&quot;)
+    parser.add_argument(&quot;-o&quot;, &quot;--output&quot;, type=str, default=&quot;output.txt&quot;, help=&quot;输出文件&quot;)
+
+    args = parser.parse_args()
+
+    if args.version:
+        print(f&quot;Version: {__version__}&quot;)
+        sys.exit(0)
+
+    # 主逻辑
+    result = process_file(args.file)
+    save_result(result, args.output)
+    print(f&quot;Done! Output saved to {args.output}&quot;)
+</code></pre>
+<p><strong>为什么需要 <code>if __name__ == "__main__"</code>？</strong></p>
+<pre><code class="language-python">## module.py
+def hello():
+    print(&quot;Hello from module!&quot;)
+
+print(&quot;This runs on import&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;This only runs when executed directly&quot;)
+    hello()
+
+## 场景 1: 直接运行 python module.py
+## 输出:
+## This runs on import
+## This only runs when executed directly
+## Hello from module!
+
+## 场景 2: 被导入 from module import hello
+## 输出:
+## This runs on import
+## (不会执行 if 块中的内容)
+</code></pre>
+<h3 id="93">9.3. 完整的示例文件</h3>
+<h4 id="1_1">示例 1：工具模块</h4>
+<pre><code class="language-python">#!/usr/bin/env python3
+## -*- coding: utf-8 -*-
+
+&quot;&quot;&quot;
+字符串处理工具模块
+
+提供常用的字符串操作函数，包括格式化、清理、转换等功能。
+
+示例用法:
+    &gt;&gt;&gt; from string_utils import capitalize_words
+    &gt;&gt;&gt; capitalize_words(&quot;hello world&quot;)
+    'Hello World'
+
+作者: Python Team
+版本: 2.1.0
+&quot;&quot;&quot;
+
+import re
+from typing import List, Optional
+
+
+## 常量
+__version__ = &quot;2.1.0&quot;
+DEFAULT_SEPARATOR = &quot;-&quot;
+MAX_STRING_LENGTH = 10000
+
+
+def capitalize_words(text: str) -&gt; str:
+    &quot;&quot;&quot;
+    将每个单词的首字母大写
+
+    Args:
+        text: 输入字符串
+
+    Returns:
+        首字母大写的字符串
+
+    Examples:
+        &gt;&gt;&gt; capitalize_words(&quot;hello world&quot;)
+        'Hello World'
+        &gt;&gt;&gt; capitalize_words(&quot;PYTHON programming&quot;)
+        'Python Programming'
+    &quot;&quot;&quot;
+    if not isinstance(text, str):
+        raise TypeError(&quot;Input must be a string&quot;)
+
+    if len(text) &gt; MAX_STRING_LENGTH:
+        raise ValueError(f&quot;String too long (max {MAX_STRING_LENGTH} chars)&quot;)
+
+    return text.title()
+
+
+def slugify(text: str, separator: str = DEFAULT_SEPARATOR) -&gt; str:
+    &quot;&quot;&quot;
+    将文本转换为 URL 友好的 slug 格式
+
+    Args:
+        text: 输入文本
+        separator: 分隔符，默认为 '-'
+
+    Returns:
+        slug 格式的字符串
+
+    Examples:
+        &gt;&gt;&gt; slugify(&quot;Hello World!&quot;)
+        'hello-world'
+        &gt;&gt;&gt; slugify(&quot;Python 编程&quot;, separator='_')
+        'python_编程'
+    &quot;&quot;&quot;
+    # 转小写
+    text = text.lower()
+
+    # 替换非字母数字字符为分隔符
+    text = re.sub(r'[^\w\s]', '', text)
+    text = re.sub(r'[\s_]+', separator, text)
+
+    # 去除首尾分隔符
+    return text.strip(separator)
+
+
+def truncate(text: str, max_length: int = 100, suffix: str = &quot;...&quot;) -&gt; str:
+    &quot;&quot;&quot;
+    截断文本到指定长度
+
+    Args:
+        text: 输入文本
+        max_length: 最大长度
+        suffix: 超出时添加的后缀
+
+    Returns:
+        截断后的文本
+
+    Examples:
+        &gt;&gt;&gt; truncate(&quot;这是一段很长的文本&quot;, 5)
+        '这是...'
+    &quot;&quot;&quot;
+    if len(text) &lt;= max_length:
+        return text
+
+    return text[:max_length - len(suffix)] + suffix
+
+
+## 测试代码
+if __name__ == &quot;__main__&quot;:
+    print(f&quot;String Utils v{__version__}&quot;)
+    print(&quot;=&quot; * 40)
+
+    # 测试 capitalize_words
+    test_text = &quot;hello world from python&quot;
+    print(f&quot;capitalize_words('{test_text}') = '{capitalize_words(test_text)}'&quot;)
+
+    # 测试 slugify
+    title = &quot;Hello World! This is a Test.&quot;
+    print(f&quot;slugify('{title}') = '{slugify(title)}'&quot;)
+
+    # 测试 truncate
+    long_text = &quot;这是一段非常长的文本，需要被截断&quot;
+    print(f&quot;truncate('{long_text}', 10) = '{truncate(long_text, 10)}'&quot;)
+</code></pre>
+<h4 id="2_1">示例 2：类模块</h4>
+<pre><code class="language-python">#!/usr/bin/env python3
+## -*- coding: utf-8 -*-
+
+&quot;&quot;&quot;
+用户模型模块
+
+定义用户数据结构和相关操作。
+&quot;&quot;&quot;
+
+from datetime import datetime
+from typing import Optional, List
+import hashlib
+
+
+class User:
+    &quot;&quot;&quot;
+    用户类
+
+    表示系统中的一个用户，包含基本信息和操作方法。
+
+    Attributes:
+        id: 用户 ID
+        username: 用户名
+        email: 邮箱地址
+        created_at: 创建时间
+    &quot;&quot;&quot;
+
+    # 类常量
+    MIN_USERNAME_LENGTH = 3
+    MAX_USERNAME_LENGTH = 50
+    SYSTEM_PREFIX = &quot;sys_&quot;
+
+    def __init__(self, user_id: int, username: str, email: str):
+        &quot;&quot;&quot;
+        初始化用户
+
+        Args:
+            user_id: 用户 ID
+            username: 用户名
+            email: 邮箱地址
+
+        Raises:
+            ValueError: 当用户名或邮箱格式不正确时
+        &quot;&quot;&quot;
+        self.id = user_id
+        self.username = self._validate_username(username)
+        self.email = self._validate_email(email)
+        self._password_hash: Optional[str] = None
+        self.created_at = datetime.now()
+        self.is_active = True
+        self._login_count = 0
+
+    def _validate_username(self, username: str) -&gt; str:
+        &quot;&quot;&quot;验证用户名合法性&quot;&quot;&quot;
+        if not username:
+            raise ValueError(&quot;Username cannot be empty&quot;)
+        if len(username) &lt; self.MIN_USERNAME_LENGTH:
+            raise ValueError(f&quot;Username too short (min {self.MIN_USERNAME_LENGTH})&quot;)
+        if len(username) &gt; self.MAX_USERNAME_LENGTH:
+            raise ValueError(f&quot;Username too long (max {self.MAX_USERNAME_LENGTH})&quot;)
+        return username
+
+    def _validate_email(self, email: str) -&gt; str:
+        &quot;&quot;&quot;验证邮箱格式&quot;&quot;&quot;
+        if not email or '@' not in email:
+            raise ValueError(&quot;Invalid email format&quot;)
+        return email.lower()
+
+    def set_password(self, password: str) -&gt; None:
+        &quot;&quot;&quot;设置密码&quot;&quot;&quot;
+        self._password_hash = hashlib.sha256(password.encode()).hexdigest()
+
+    def check_password(self, password: str) -&gt; bool:
+        &quot;&quot;&quot;验证密码&quot;&quot;&quot;
+        if self._password_hash is None:
+            return False
+        return self._password_hash == hashlib.sha256(password.encode()).hexdigest()
+
+    def login(self) -&gt; None:
+        &quot;&quot;&quot;记录登录&quot;&quot;&quot;
+        self._login_count += 1
+
+    @property
+    def login_count(self) -&gt; int:
+        &quot;&quot;&quot;获取登录次数&quot;&quot;&quot;
+        return self._login_count
+
+    @property
+    def display_name(self) -&gt; str:
+        &quot;&quot;&quot;获取显示名称&quot;&quot;&quot;
+        return self.username.capitalize()
+
+    def is_system_user(self) -&gt; bool:
+        &quot;&quot;&quot;检查是否为系统用户&quot;&quot;&quot;
+        return self.username.startswith(self.SYSTEM_PREFIX)
+
+    def __str__(self) -&gt; str:
+        return f&quot;User({self.username})&quot;
+
+    def __repr__(self) -&gt; str:
+        return f&quot;User(id={self.id}, username='{self.username}')&quot;
+
+    def to_dict(self) -&gt; dict:
+        &quot;&quot;&quot;转换为字典&quot;&quot;&quot;
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'created_at': self.created_at.isoformat(),
+            'is_active': self.is_active
+        }
+
+
+## 测试
+if __name__ == &quot;__main__&quot;:
+    # 创建用户
+    user = User(1, &quot;alice&quot;, &quot;alice@example.com&quot;)
+    print(user)
+
+    # 设置密码
+    user.set_password(&quot;secret123&quot;)
+    print(f&quot;Password set: {user.check_password('secret123')}&quot;)
+
+    # 登录测试
+    user.login()
+    user.login()
+    print(f&quot;Login count: {user.login_count}&quot;)
+
+    # 显示信息
+    print(f&quot;Display name: {user.display_name}&quot;)
+    print(f&quot;Is system user: {user.is_system_user()}&quot;)
+    print(f&quot;User data: {user.to_dict()}&quot;)
+</code></pre>
+<h3 id="94">9.4. 代码组织和风格指南</h3>
+<h4 id="941">9.4.1. 空行使用规范</h4>
+<pre><code class="language-python">## 模块级定义之间：2 个空行
+def function_one():
+    pass
+
+
+def function_two():
+    pass
+
+
+## 类定义与前后内容：2 个空行
+class MyClass:
+    pass
+
+
+## 方法之间：1 个空行
+class MyClass:
+    def method_one(self):
+        pass
+
+    def method_two(self):
+        pass
+
+
+## 函数内部逻辑段落：1 个空行
+def complex_function():
+    # 第一部分：初始化
+    data = []
+
+    # 第二部分：处理
+    for i in range(10):
+        data.append(i)
+
+    # 第三部分：返回
+    return data
+</code></pre>
+<h4 id="942">9.4.2. 导入语句的最佳实践</h4>
+<pre><code class="language-python">## ✅ 好的导入
+from collections import defaultdict, Counter
+import logging
+from typing import List, Dict, Optional
+
+## ⚠️ 避免循环导入的解决方案
+
+## 方案 1：在函数内部导入
+## file_a.py
+def func_a():
+    from file_b import func_b  # 延迟导入
+    return func_b()
+
+## 方案 2：重构代码结构
+## 将共同依赖提取到单独模块
+## common.py
+def shared_utility():
+    pass
+
+## file_a.py 和 file_b.py 都导入 common
+from common import shared_utility
+</code></pre>
+<h4 id="943">9.4.3. 命名一致性和可见性</h4>
+<pre><code class="language-python">## 公开 API（无下划线前缀）
+def public_function():
+    &quot;&quot;&quot;可以被外部模块使用&quot;&quot;&quot;
+    pass
+
+class PublicClass:
+    &quot;&quot;&quot;公开类&quot;&quot;&quot;
+    pass
+
+## 内部使用（单下划线前缀）
+def _internal_helper():
+    &quot;&quot;&quot;约定：不应该在外部使用&quot;&quot;&quot;
+    pass
+
+_internal_var = &quot;internal&quot;
+
+## 名称改写（双下划线前缀）
+class MyClass:
+    def __private_method(self):
+        &quot;&quot;&quot;会被改写为 _MyClass__private_method&quot;&quot;&quot;
+        pass
+
+    __private_attr = &quot;private&quot;
+
+## 魔术方法（双下划线前后）
+class MyClass:
+    def __init__(self):
+        pass
+
+    def __str__(self):
+        return &quot;MyClass&quot;
+</code></pre>
+<h3 id="95">9.5. 常见错误和注意事项</h3>
+<h4 id="951">9.5.1. 导入相关错误</h4>
+<pre><code class="language-python">## ❌ 错误：导入顺序混乱
+from .models import User
+import os
+import requests
+from .utils import helper
+
+## ✅ 正确：按标准库、第三方、本地排序
+import os
+import requests
+from .models import User
+from .utils import helper
+
+## ❌ 错误：通配符导入导致命名污染
+from module import *
+
+## ✅ 正确：明确导入
+from module import specific_function, AnotherClass
+
+## ❌ 错误：循环导入
+## module_a.py
+from module_b import func_b
+def func_a(): pass
+
+## module_b.py
+from module_a import func_a  # 循环依赖！
+def func_b(): pass
+
+## ✅ 解决方案：重构或使用局部导入
+</code></pre>
+<h4 id="952">9.5.2. 文档字符串缺失</h4>
+<pre><code class="language-python">## ❌ 不好：没有文档
+def calculate(a, b):
+    return a + b
+
+## ✅ 好：完整文档
+def calculate(a: float, b: float) -&gt; float:
+    &quot;&quot;&quot;
+    计算两个数的和
+
+    Args:
+        a: 第一个数
+        b: 第二个数
+
+    Returns:
+        两数之和
+    &quot;&quot;&quot;
+    return a + b
+</code></pre>
+<h4 id="953">9.5.3. 主入口使用不当</h4>
+<pre><code class="language-python">## ❌ 错误：测试代码污染全局
+def main_function():
+    pass
+
+print(&quot;Testing...&quot;)  # 导入时就会执行
+main_function()
+
+## ✅ 正确：使用 if __name__ == &quot;__main__&quot;
+def main_function():
+    pass
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;Testing...&quot;)
+    main_function()
+</code></pre>
+<h3 id="96">9.6. 总结</h3>
+<p><strong>Python 源文件标准结构：</strong>
+1. Shebang 行（Unix 可执行脚本）
+2. 编码声明
+3. 模块文档字符串
+4. 导入语句（分组排序）
+5. 模块级常量和变量
+6. 类定义
+7. 函数定义
+8. 主程序入口</p>
+<p><strong>关键要点：</strong>
+- 遵循 PEP 8 风格指南
+- 保持清晰的层次和顺序
+- 编写完整的文档字符串
+- 使用 <code>if __name__ == "__main__"</code> 隔离测试代码
+- 合理的空行分隔提高可读性</p>
+<p><strong>最佳实践：</strong>
+- 一个文件只做一件事
+- 保持文件简洁（建议&lt;500 行）
+- 及时重构过大的模块
+- 为公开 API 编写详细文档
+- 使用类型注解提高可读性</p>
+<hr />
+<h2 id="10-python">10. Python 项目基本文件目录结构</h2>
+<p>合理的项目目录结构对于 Python 项目的可维护性、可扩展性和团队协作至关重要。本节介绍几种常见的项目组织模式。</p>
+<h3 id="101">10.1. 简单项目结构</h3>
+<p>适用于小型脚本、工具程序或学习项目。</p>
+<pre><code>my_project/
+├── main.py              # 主程序入口
+├── utils.py             # 工具函数
+├── config.py            # 配置文件
+├── requirements.txt     # 依赖列表
+└── README.md            # 项目说明
+</code></pre>
+<p><strong>示例：数据爬取脚本</strong></p>
+<pre><code>web_scraper/
+├── scraper.py           # 爬虫主逻辑
+├── parsers.py           # 数据解析
+├── storage.py           # 数据存储
+├── config.json          # 配置（目标网站、字段等）
+├── requirements.txt     # requests, beautifulsoup4
+└── README.md
+</code></pre>
+<p><strong>特点：</strong>
+- ✅ 结构简单，一目了然
+- ✅ 适合单人开发或小项目
+- ❌ 不适合大型项目
+- ❌ 模块组织不够清晰</p>
+<h3 id="102">10.2. 标准包结构（推荐）</h3>
+<p>适用于中型项目、可发布的 Python 包。</p>
+<pre><code>my_project/
+├── my_package/              # 主包目录
+│   ├── __init__.py          # 包初始化文件
+│   ├── core.py              # 核心逻辑
+│   ├── utils.py             # 工具函数
+│   ├── models.py            # 数据模型
+│   ├── config.py            # 配置
+│   └── exceptions.py        # 自定义异常
+│
+├── tests/                   # 测试目录
+│   ├── __init__.py
+│   ├── test_core.py
+│   ├── test_utils.py
+│   └── test_models.py
+│
+├── docs/                    # 文档目录
+│   ├── index.md
+│   ├── api.md
+│   └── tutorial.md
+│
+├── examples/                # 示例代码
+│   ├── basic_usage.py
+│   └── advanced_example.py
+│
+├── scripts/                 # 辅助脚本
+│   ├── setup_db.py
+│   └── deploy.sh
+│
+├── data/                    # 数据文件（如有）
+│   ├── input/
+│   └── output/
+│
+├── .gitignore               # Git 忽略配置
+├── .env                     # 环境变量（不提交到 Git）
+├── .env.example             # 环境变量示例
+├── requirements.txt         # 生产环境依赖
+├── requirements-dev.txt     # 开发环境依赖
+├── setup.py                 # 包安装配置（传统方式）
+├── pyproject.toml           # 项目配置（现代方式）
+├── README.md                # 项目说明
+├── LICENSE                  # 许可证
+└── CHANGELOG.md             # 变更日志
+</code></pre>
+<h4 id="1021">10.2.1. 各目录详细说明</h4>
+<p><strong>主包目录 (<code>my_package/</code>)</strong></p>
+<pre><code class="language-python">## my_package/__init__.py
+&quot;&quot;&quot;
+My Package - 一个有用的 Python 包
+
+提供 XXX、YYY、ZZZ 等功能。
+&quot;&quot;&quot;
+
+__version__ = &quot;1.0.0&quot;
+__author__ = &quot;Your Name&quot;
+
+from .core import main_function
+from .utils import helper_function
+from .models import DataModel
+
+## 定义包的公开 API
+__all__ = [
+    'main_function',
+    'helper_function',
+    'DataModel',
+]
+</code></pre>
+<p><strong>测试目录 (<code>tests/</code>)</strong></p>
+<pre><code class="language-python">## tests/test_core.py
+&quot;&quot;&quot;核心模块的单元测试&quot;&quot;&quot;
+
+import unittest
+from my_package.core import main_function
+
+class TestCoreFunction(unittest.TestCase):
+
+    def test_normal_case(self):
+        &quot;&quot;&quot;测试正常情况&quot;&quot;&quot;
+        result = main_function(&quot;input&quot;)
+        self.assertEqual(result, &quot;expected&quot;)
+
+    def test_edge_case(self):
+        &quot;&quot;&quot;测试边界情况&quot;&quot;&quot;
+        with self.assertRaises(ValueError):
+            main_function(&quot;&quot;)
+
+    def test_performance(self):
+        &quot;&quot;&quot;测试性能&quot;&quot;&quot;
+        import time
+        start = time.time()
+        for _ in range(1000):
+            main_function(&quot;test&quot;)
+        end = time.time()
+        self.assertLess(end - start, 1.0)  # 1 秒内完成
+
+if __name__ == &quot;__main__&quot;:
+    unittest.main()
+</code></pre>
+<p><strong>文档目录 (<code>docs/</code>)</strong></p>
+<pre><code class="language-markdown">## docs/index.md
+## My Package 文档
+
+欢迎使用 My Package！
+
+### 快速开始
+
+```python
+from my_package import main_function
+result = main_function(&quot;input&quot;)
+</code></pre>
+<h3 id="_1">目录</h3>
+<ul>
+<li><a href="api.md">API 文档</a></li>
+<li><a href="tutorial.md">教程</a></li>
+<li><a href="faq.md">常见问题</a></li>
+</ul>
+<pre><code>
+**示例目录 (`examples/`)**
+```python
+## examples/basic_usage.py
+&quot;&quot;&quot;基础使用示例&quot;&quot;&quot;
+
+from my_package import main_function, DataModel
+
+## 示例 1：简单调用
+result = main_function(&quot;test input&quot;)
+print(f&quot;Result: {result}&quot;)
+
+## 示例 2：使用数据模型
+data = DataModel(name=&quot;example&quot;, value=42)
+processed = main_function(data)
+print(f&quot;Processed: {processed}&quot;)
+</code></pre>
+<h4 id="1022">10.2.2. 配置文件详解</h4>
+<p><strong>requirements.txt</strong> - 生产环境依赖</p>
+<pre><code class="language-txt">## 核心依赖
+requests&gt;=2.28.0
+pandas&gt;=1.5.0
+numpy&gt;=1.23.0
+
+## Web 框架
+flask&gt;=2.2.0
+
+## 数据库
+sqlalchemy&gt;=2.0.0
+psycopg2-binary&gt;=2.9.0
+
+## 工具库
+python-dotenv&gt;=1.0.0
+pydantic&gt;=2.0.0
+</code></pre>
+<p><strong>requirements-dev.txt</strong> - 开发环境依赖</p>
+<pre><code class="language-txt">## 包含生产环境依赖
+-r requirements.txt
+
+## 测试框架
+pytest&gt;=7.0.0
+pytest-cov&gt;=4.0.0
+pytest-asyncio&gt;=0.21.0
+
+## 代码质量
+flake8&gt;=6.0.0
+black&gt;=23.0.0
+isort&gt;=5.12.0
+mypy&gt;=1.0.0
+
+## 文档生成
+sphinx&gt;=6.0.0
+sphinx-rtd-theme&gt;=1.2.0
+
+## 开发工具
+ipython&gt;=8.0.0
+jupyter&gt;=1.0.0
+</code></pre>
+<p><strong>.gitignore</strong> - Git 忽略配置</p>
+<pre><code class="language-gitignore">## Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+## C extensions
+*.so
+
+## Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+## PyInstaller
+*.manifest
+*.spec
+
+## Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+## Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+## Translations
+*.mo
+*.pot
+
+## Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+## IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+## Project specific
+data/output/
+*.log
+.DS_Store
+</code></pre>
+<p><strong>.env.example</strong> - 环境变量示例</p>
+<pre><code class="language-bash">## 数据库配置
+DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+REDIS_URL=redis://localhost:6379/0
+
+## API 密钥
+API_KEY=your-api-key-here
+SECRET_KEY=your-secret-key-here
+
+## 应用配置
+DEBUG=False
+LOG_LEVEL=INFO
+PORT=8000
+</code></pre>
+<h4 id="1023">10.2.3. 项目配置文件</h4>
+<p><strong>setup.py</strong> - 传统包安装配置</p>
+<pre><code class="language-python">from setuptools import setup, find_packages
+from pathlib import Path
+
+## 读取 README
+this_directory = Path(__file__).parent
+long_description = (this_directory / &quot;README.md&quot;).read_text(encoding='utf-8')
+
+## 读取 requirements
+requirements = []
+with open('requirements.txt', 'r', encoding='utf-8') as f:
+    requirements = [line.strip() for line in f if line.strip() and not line.startswith('#')]
+
+setup(
+    name='my-package',
+    version='1.0.0',
+    author='Your Name',
+    author_email='your.email@example.com',
+    description='一个有用的 Python 包',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    url='https://github.com/yourusername/my-package',
+    packages=find_packages(exclude=['tests', 'examples']),
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+    ],
+    python_requires='&gt;=3.8',
+    install_requires=requirements,
+    extras_require={
+        'dev': [
+            'pytest',
+            'black',
+            'flake8',
+        ]
+    },
+    entry_points={
+        'console_scripts': [
+            'my-command=my_package.cli:main',
+        ],
+    },
+)
+</code></pre>
+<p><strong>pyproject.toml</strong> - 现代项目配置（推荐）</p>
+<pre><code class="language-toml">[build-system]
+requires = [&quot;setuptools&gt;=61.0&quot;, &quot;wheel&quot;]
+build-backend = &quot;setuptools.build_meta&quot;
+
+[project]
+name = &quot;my-package&quot;
+version = &quot;1.0.0&quot;
+description = &quot;一个有用的 Python 包&quot;
+readme = &quot;README.md&quot;
+requires-python = &quot;&gt;=3.8&quot;
+license = {text = &quot;MIT&quot;}
+authors = [
+    {name = &quot;Your Name&quot;, email = &quot;your.email@example.com&quot;}
+]
+keywords = [&quot;package&quot;, &quot;useful&quot;, &quot;python&quot;]
+classifiers = [
+    &quot;Development Status :: 4 - Beta&quot;,
+    &quot;Intended Audience :: Developers&quot;,
+    &quot;License :: OSI Approved :: MIT License&quot;,
+    &quot;Programming Language :: Python :: 3&quot;,
+]
+dependencies = [
+    &quot;requests&gt;=2.28.0&quot;,
+    &quot;pandas&gt;=1.5.0&quot;,
+]
+
+[project.optional-dependencies]
+dev = [
+    &quot;pytest&gt;=7.0.0&quot;,
+    &quot;black&gt;=23.0.0&quot;,
+    &quot;flake8&gt;=6.0.0&quot;,
+]
+
+[project.urls]
+Homepage = &quot;https://github.com/yourusername/my-package&quot;
+Documentation = &quot;https://my-package.readthedocs.io&quot;
+Repository = &quot;https://github.com/yourusername/my-package.git&quot;
+
+[tool.setuptools.packages.find]
+include = [&quot;my_package*&quot;]
+exclude = [&quot;tests&quot;, &quot;examples&quot;]
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310']
+
+[tool.isort]
+profile = &quot;black&quot;
+line_length = 88
+
+[tool.mypy]
+python_version = &quot;3.8&quot;
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = [&quot;tests&quot;]
+python_files = &quot;test_*.py&quot;
+addopts = &quot;-v --cov=my_package&quot;
+</code></pre>
+<h3 id="103-web">10.3. Web 应用项目结构</h3>
+<p>适用于 Flask、Django 等 Web 框架项目。</p>
+<pre><code>web_app/
+├── app/                       # 应用主目录
+│   ├── __init__.py            # 应用工厂
+│   ├── main.py                # Flask/Django 应用实例
+│   ├── config.py              # 配置管理
+│   │
+│   ├── models/                # 数据模型
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   └── product.py
+│   │
+│   ├── routes/                # 路由处理
+│   │   ├── __init__.py
+│   │   ├── auth.py            # 认证路由
+│   │   ├── api.py             # API 路由
+│   │   └── views.py           # 页面视图
+│   │
+│   ├── services/              # 业务逻辑层
+│   │   ├── __init__.py
+│   │   ├── user_service.py
+│   │   └── payment_service.py
+│   │
+│   ├── schemas/               # 数据验证（Pydantic）
+│   │   ├── __init__.py
+│   │   ├── user.py
+│   │   └── product.py
+│   │
+│   ├── utils/                 # 工具函数
+│   │   ├── __init__.py
+│   │   ├── decorators.py
+│   │   └── helpers.py
+│   │
+│   ├── templates/             # HTML 模板
+│   │   ├── base.html
+│   │   ├── index.html
+│   │   └── login.html
+│   │
+│   ├── static/                # 静态资源
+│   │   ├── css/
+│   │   ├── js/
+│   │   └── images/
+│   │
+│   └── middleware/            # 中间件
+│       ├── __init__.py
+│       └── authentication.py
+│
+├── migrations/                # 数据库迁移
+│   ├── versions/
+│   └── env.py
+│
+├── tests/                     # 测试
+│   ├── __init__.py
+│   ├── conftest.py            # pytest 配置
+│   ├── test_auth.py
+│   └── test_api.py
+│
+├── scripts/                   # 运维脚本
+│   ├── deploy.sh
+│   └── backup_db.py
+│
+├── logs/                      # 日志目录
+│
+├── .env                       # 环境变量
+├── .gitignore
+├── requirements.txt
+├── requirements-dev.txt
+├── gunicorn.conf.py           # Gunicorn 配置
+├── Dockerfile                 # Docker 配置
+├── docker-compose.yml         # Docker Compose
+├── README.md
+└── wsgi.py                    # WSGI 入口
+</code></pre>
+<h4 id="1031-flask">10.3.1. Flask 应用示例</h4>
+<pre><code class="language-python">## app/__init__.py
+&quot;&quot;&quot;Flask 应用工厂&quot;&quot;&quot;
+
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_login import LoginManager
+
+db = SQLAlchemy()
+migrate = Migrate()
+login_manager = LoginManager()
+
+def create_app(config_name='default'):
+    &quot;&quot;&quot;应用工厂函数&quot;&quot;&quot;
+    app = Flask(__name__)
+
+    # 加载配置
+    from .config import config
+    app.config.from_object(config[config_name])
+
+    # 初始化扩展
+    db.init_app(app)
+    migrate.init_app(app, db)
+    login_manager.init_app(app)
+
+    # 注册蓝图
+    from .routes.auth import auth_bp
+    from .routes.api import api_bp
+    from .routes.views import views_bp
+
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(api_bp, url_prefix='/api')
+    app.register_blueprint(views_bp)
+
+    return app
+</code></pre>
+<pre><code class="language-python">## app/routes/auth.py
+&quot;&quot;&quot;认证路由&quot;&quot;&quot;
+
+from flask import Blueprint, request, jsonify, render_template
+from flask_login import login_user, logout_user, login_required
+from ..models.user import User
+from ..services.user_service import authenticate_user
+
+auth_bp = Blueprint('auth', __name__)
+
+@auth_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    &quot;&quot;&quot;登录页面&quot;&quot;&quot;
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = authenticate_user(username, password)
+        if user:
+            login_user(user)
+            return jsonify({'success': True})
+        return jsonify({'success': False, 'error': 'Invalid credentials'}), 401
+    return render_template('login.html')
+
+@auth_bp.route('/logout')
+@login_required
+def logout():
+    &quot;&quot;&quot;登出&quot;&quot;&quot;
+    logout_user()
+    return jsonify({'success': True})
+</code></pre>
+<h3 id="104-django">10.4. Django 项目结构</h3>
+<p>Django 有自己约定的项目结构。</p>
+<pre><code>django_project/
+├── manage.py                  # Django 管理脚本
+│
+├── django_project/            # 项目配置目录
+│   ├── __init__.py
+│   ├── settings.py            # 项目设置
+│   ├── urls.py                # 主 URL 配置
+│   ├── wsgi.py                # WSGI 入口
+│   └── asgi.py                # ASGI 入口
+│
+├── apps/                      # 应用目录
+│   ├── blog/                  # 博客应用
+│   │   ├── __init__.py
+│   │   ├── admin.py           # Admin 配置
+│   │   ├── apps.py            # 应用配置
+│   │   ├── models.py          # 数据模型
+│   │   ├── views.py           # 视图函数
+│   │   ├── urls.py            # URL 路由
+│   │   ├── forms.py           # 表单类
+│   │   ├── serializers.py     # DRF 序列化
+│   │   ├── tests.py           # 测试
+│   │   ├── templates/         # 模板
+│   │   ├── static/            # 静态文件
+│   │   └── migrations/        # 数据库迁移
+│   │
+│   └── accounts/              # 用户应用
+│       └── ...
+│
+├── static/                    # 全局静态文件
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── media/                     # 用户上传文件
+│
+├── templates/                 # 全局模板
+│   └── base.html
+│
+├── requirements.txt
+├── .env
+├── .gitignore
+└── README.md
+</code></pre>
+<h3 id="105">10.5. 数据科学项目结构</h3>
+<pre><code>data_science_project/
+├── data/
+│   ├── raw/                   # 原始数据（不修改）
+│   ├── processed/             # 处理后的数据
+│   └── external/              # 外部数据源
+│
+├── notebooks/                 # Jupyter Notebooks
+│   ├── 01_data_exploration.ipynb
+│   ├── 02_feature_engineering.ipynb
+│   └── 03_model_training.ipynb
+│
+├── src/                       # 源代码
+│   ├── __init__.py
+│   ├── data_preprocessing.py  # 数据预处理
+│   ├── feature_engineering.py # 特征工程
+│   ├── model.py               # 模型定义
+│   ├── training.py            # 训练逻辑
+│   └── evaluation.py          # 评估指标
+│
+├── models/                    # 训练好的模型
+│   ├── model_v1.pkl
+│   └── model_v2.pkl
+│
+├── results/                   # 结果输出
+│   ├── predictions.csv
+│   └── metrics.json
+│
+├── configs/                   # 配置文件
+│   ├── data_config.yaml
+│   └── model_config.yaml
+│
+├── scripts/                   # 运行脚本
+│   ├── train_model.sh
+│   └── evaluate.sh
+│
+├── tests/                     # 测试
+│   ├── test_preprocessing.py
+│   └── test_model.py
+│
+├── requirements.txt
+├── environment.yml            # Conda 环境
+└── README.md
+</code></pre>
+<h3 id="106">10.6. 包发布结构</h3>
+<p>如果要发布到 PyPI，需要更严格的组织。</p>
+<pre><code>my_package/
+├── my_package/                # 包源码
+│   ├── __init__.py
+│   └── ...
+│
+├── tests/                     # 测试
+│   └── ...
+│
+├── docs/                      # 文档
+│   ├── source/
+│   │   ├── conf.py
+│   │   ├── index.rst
+│   │   └── modules.rst
+│   └── Makefile
+│
+├── .github/                   # GitHub 配置
+│   └── workflows/
+│       ├── ci.yml             # CI/CD
+│       └── release.yml        # 发布流程
+│
+├── .gitignore
+├── .editorconfig              # 编辑器配置
+├── .pre-commit-config.yaml    # pre-commit 钩子
+├── MANIFEST.in                # 打包文件清单
+├── pyproject.toml             # 项目配置
+├── setup.py                   # 安装脚本
+├── tox.ini                    # 多环境测试
+├── pytest.ini                 # pytest 配置
+├── README.md
+├── LICENSE
+├── AUTHORS.rst                # 作者列表
+├── CHANGELOG.md               # 变更日志
+├── CONTRIBUTING.md            # 贡献指南
+└── CODE_OF_CONDUCT.md         # 行为准则
+</code></pre>
+<h3 id="107">10.7. 虚拟环境和依赖管理</h3>
+<h4 id="1071">10.7.1. 创建虚拟环境</h4>
+<pre><code class="language-bash">## 使用 venv（Python 3.3+ 内置）
+python -m venv venv
+
+## 激活虚拟环境
+## Windows
+venv\Scripts\activate
+## macOS/Linux
+source venv/bin/activate
+
+## 退出虚拟环境
+deactivate
+</code></pre>
+<h4 id="1072-poetry">10.7.2. 使用 poetry（现代推荐）</h4>
+<pre><code class="language-bash">## 安装 poetry
+pip install poetry
+
+## 创建新项目
+poetry new my-project
+
+## 添加依赖
+poetry add requests pandas
+poetry add --group dev pytest black
+
+## 安装所有依赖
+poetry install
+
+## 运行命令
+poetry run python main.py
+
+## 进入虚拟环境
+poetry shell
+</code></pre>
+<h3 id="108">10.8. 项目结构最佳实践</h3>
+<h4 id="1081">10.8.1. 通用原则</h4>
+<ol>
+<li><strong>清晰的层次结构</strong></li>
+<li>按功能模块组织</li>
+<li>
+<p>避免过深的嵌套（建议不超过 3 层）</p>
+</li>
+<li>
+<p><strong>命名一致性</strong></p>
+</li>
+<li>全部使用小写字母和下划线</li>
+<li>
+<p>避免使用空格和特殊字符</p>
+</li>
+<li>
+<p><strong>分离关注点</strong></p>
+</li>
+<li>代码、测试、文档分开</li>
+<li>
+<p>源码、数据、配置分开</p>
+</li>
+<li>
+<p><strong>便于扩展</strong></p>
+</li>
+<li>预留扩展空间</li>
+<li>遵循开闭原则</li>
+</ol>
+<h4 id="1082">10.8.2. 不同规模项目的选择</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">项目类型</th>
+<th style="text-align: left;">推荐结构</th>
+<th style="text-align: left;">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>脚本/工具</strong></td>
+<td style="text-align: left;">简单结构</td>
+<td style="text-align: left;">单个文件或少量模块</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>小型项目</strong></td>
+<td style="text-align: left;">标准包结构</td>
+<td style="text-align: left;">清晰的模块划分</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Web 应用</strong></td>
+<td style="text-align: left;">Web 应用结构</td>
+<td style="text-align: left;">MVC/MTV 模式</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>数据科学</strong></td>
+<td style="text-align: left;">DS 项目结构</td>
+<td style="text-align: left;">Notebook + 源码分离</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>开源包</strong></td>
+<td style="text-align: left;">包发布结构</td>
+<td style="text-align: left;">完整的 CI/CD、文档</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1083">10.8.3. 常见反模式</h4>
+<pre><code>❌ 糟糕的结构
+project/
+├── final_code.py
+├── final_code_v2.py
+├── final_code_v3_really_final.py
+├── test.py
+├── test2.py
+├── utils_copy.py
+├── 新建文件夹/
+└── 未命名文件夹/
+
+✅ 推荐的结构
+project/
+├── src/
+│   ├── __init__.py
+│   ├── main.py
+│   └── utils.py
+├── tests/
+│   ├── __init__.py
+│   └── test_main.py
+├── docs/
+├── requirements.txt
+└── README.md
+</code></pre>
+<h3 id="109">10.9. 实际案例</h3>
+<h4 id="1requests">案例 1：Requests 库结构</h4>
+<pre><code>requests/
+├── requests/
+│   ├── __init__.py
+│   ├── api.py
+│   ├── sessions.py
+│   ├── models.py
+│   ├── adapters.py
+│   └── utils.py
+├── tests/
+├── docs/
+└── setup.py
+</code></pre>
+<h4 id="2flask">案例 2：Flask 结构</h4>
+<pre><code>flask/
+├── src/flask/
+│   ├── __init__.py
+│   ├── app.py
+│   ├── blueprints.py
+│   ├── config.py
+│   └── templating.py
+├── tests/
+├── examples/
+├── docs/
+└── setup.py
+</code></pre>
+<h3 id="1010">10.10. 总结</h3>
+<p><strong>选择合适的结构：</strong>
+- 根据项目规模和类型选择
+- 不要过度设计小项目
+- 也不要让大项目过于简单</p>
+<p><strong>关键要素：</strong>
+1. 清晰的模块划分
+2. 测试和源码分离
+3. 完善的文档
+4. 明确的依赖管理
+5. 统一的命名规范</p>
+<p><strong>持续改进：</strong>
+- 定期重构代码结构
+- 收集团队反馈
+- 学习优秀开源项目
+- 遵循社区最佳实践</p>
+<p><strong>记住：</strong> 最好的结构是适合你的团队和项目的结构！</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2718 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87009_%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/">
+      
+      
+        <link rel="next" href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87002_Go%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>并发编程相关概念解释 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              并发编程相关概念解释
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang语言
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang语言
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    并发编程篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程相关概念解释
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程相关概念解释
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 串行、并行、并发
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 串行、并行、并发">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-serial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 串行(Serial)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-parallel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 并行(Parallel)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-concurrent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 并发(Concurrent)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. 总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 进程与线程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 进程与线程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 进程(Process)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-thread" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 线程(Thread)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 进程与线程的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 线程的生命周期
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-coroutine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 协程(Coroutine)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 协程(Coroutine)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 什么是协程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-gogoroutine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Go语言中的协程(goroutine)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 协程与线程的比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 同步与异步
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 同步与异步">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-synchronous" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 同步(Synchronous)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-asynchronous" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 异步(Asynchronous)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 阻塞与非阻塞
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 组合模式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4. 组合模式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#441" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.1. 同步阻塞
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#442" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.2. 同步非阻塞
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#443" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.3. 异步非阻塞
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. Go语言中的实现
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.5. Go语言中的实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#451" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.1. 同步阻塞示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#452" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.2. 同步非阻塞示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#453" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.3. 异步非阻塞示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 竞态条件与临界区
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 竞态条件与临界区">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-race-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 什么是竞态条件(Race Condition)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-critical-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 临界区(Critical Section)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87002_Go%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Go并发基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87003_sync%E5%8C%85%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    sync包详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87004_Timer%26Ticker%E5%AE%9A%E6%97%B6%E5%99%A8%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Timer&Ticker定时器详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87005_context%E5%8C%85%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    context包详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gin框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gin框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../gin%20framework/Gin%E6%A1%86%E6%9E%B6%E8%BF%9B%E9%98%B6%E7%AF%87001_%E6%9B%B4%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8gin%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 串行、并行、并发
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 串行、并行、并发">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-serial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 串行(Serial)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-parallel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 并行(Parallel)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-concurrent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 并发(Concurrent)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. 总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 进程与线程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 进程与线程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 进程(Process)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-thread" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 线程(Thread)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 进程与线程的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 线程的生命周期
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-coroutine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 协程(Coroutine)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 协程(Coroutine)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 什么是协程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-gogoroutine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Go语言中的协程(goroutine)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 协程与线程的比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 同步与异步
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 同步与异步">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-synchronous" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 同步(Synchronous)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-asynchronous" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 异步(Asynchronous)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 阻塞与非阻塞
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 组合模式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4. 组合模式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#441" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.1. 同步阻塞
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#442" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.2. 同步非阻塞
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#443" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.3. 异步非阻塞
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. Go语言中的实现
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.5. Go语言中的实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#451" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.1. 同步阻塞示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#452" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.2. 同步非阻塞示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#453" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.3. 异步非阻塞示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 竞态条件与临界区
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 竞态条件与临界区">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-race-condition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 什么是竞态条件(Race Condition)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-critical-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 临界区(Critical Section)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang语言
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    并发编程篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>并发编程相关概念解释</h1>
+
+<h2 id="1">1. 串行、并行、并发</h2>
+<blockquote>
+<p>这三者指的都是系统（CPU）处理任务或指令的方式。</p>
+</blockquote>
+<h3 id="11-serial">1.1. 串行(Serial)</h3>
+<p><strong>CPU按照顺序依次处理任务或指令，一次只能处理一个任务或指令。</strong></p>
+<p>在串行处理中，任务按顺序依次执行，每个任务必须等待前一个任务完成后才能开始执行。这意味着任务的执行是相互依赖的，无法同时进行。</p>
+<pre><code class="language-mermaid">graph LR
+    CPU[CPU] --&gt;|执行|A[任务1] --&gt; B[任务2] --&gt; C[任务3]
+    style A fill:#f96,stroke:#333
+    style B fill:#69f,stroke:#333
+    style C fill:#9f6,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡 想象你在餐厅点餐，只有一个服务员，他必须先完成你的点单，再为下一位顾客服务，这就是串行处理。虽然简单，但效率较低。</p>
+</blockquote>
+<h3 id="12-parallel">1.2. 并行(Parallel)</h3>
+<p><strong>多个CPU同时处理多个任务或指令的方式。</strong></p>
+<p>在并行处理中，多个任务可以同时进行，每个任务都有独立的处理资源。这样可以显著提高处理速度和效率。并行处理通常需要多个处理器或多个计算单元。</p>
+<pre><code class="language-mermaid">graph TD
+    subgraph &quot;CPU1&quot;
+        A[任务1] --&gt; B[任务2] --&gt; C[任务3]
+    end
+    subgraph &quot;CPU2&quot;
+        D[任务4] --&gt; E[任务5] --&gt; F[任务6]
+    end
+    style A fill:#f96,stroke:#333
+    style B fill:#69f,stroke:#333
+    style C fill:#9f6,stroke:#333
+    style D fill:#f96,stroke:#333
+    style E fill:#69f,stroke:#333
+    style F fill:#9f6,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡 就像餐厅有多个服务员，可以同时为多位顾客服务，每位服务员负责一位或多位顾客，这就是并行处理。它需要更多资源（服务员），但效率更高。</p>
+</blockquote>
+<p>当一个CPU执行一个线程时，另一个CPU可以执行另一个线程，两个线程互不抢占CPU资源，可以同时进行，这种方式我们称之为并行。</p>
+<h3 id="13-concurrent">1.3. 并发(Concurrent)</h3>
+<p><strong>一个或多个CPU，按照一定的策略，交替（分配CPU时间片和资源）执行多个任务。</strong></p>
+<p>与并行不同，并发并不要求任务同时进行或独立处理资源。在并发处理中，任务可以按照一定的策略交替执行，任务之间通过快速切换来实现看起来同时执行的效果。</p>
+<blockquote>
+<ul>
+<li>并行处理时，同时能够处理的任务数取决于CPU数量，这些同时处理的任务是真正的同时处理，相当于N个人同时做N件事情，互不干扰。</li>
+<li>并发处理时，“同时”能够处理的任务数通过程序控制，这些同时处理的任务只是看起来在同时处理，相当于N个人同时做M件事情，人做事情的时候会交替着做。</li>
+</ul>
+</blockquote>
+<p>单CPU执行两个任务示例：</p>
+<pre><code class="language-mermaid">graph LR
+    CPU[CPU] --&gt;|时间片1|A1[任务1-1] --&gt;|时间片2|B1[任务2-1] --&gt;|时间片3|A2[任务1-2] --&gt;|时间片4|B2[任务2-2]
+    style A1 fill:#f96,stroke:#333
+    style B1 fill:#69f,stroke:#333
+    style A2 fill:#f96,stroke:#333
+    style B2 fill:#69f,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡 想象一个厨师要同时做两道菜，他先切第一道菜的材料（时间片1），然后切第二道菜的材料（时间片2），再回来看第一道菜（时间片3）...虽然看起来他同时在做两道菜，但实际上是在交替进行。</p>
+</blockquote>
+<p>双CPU执行三个任务示例：</p>
+<pre><code class="language-mermaid">graph LR
+    CPU1[CPU1] --&gt;|时间片1|A1[任务1-1] --&gt;|时间片2|B2[任务2-2] --&gt;|时间片3|C2[任务3-2]
+    CPU2[CPU2] --&gt;|时间片1|B1[任务2-1] --&gt;|时间片2|C1[任务3-1] --&gt;|时间片3|A2[任务1-2]
+    style A1 fill:#f96,stroke:#333
+    style B1 fill:#69f,stroke:#333
+    style A2 fill:#f96,stroke:#333
+    style B2 fill:#69f,stroke:#333
+    style C1 fill:#9f6,stroke:#333
+    style C2 fill:#9f6,stroke:#333
+</code></pre>
+<p>在程序中，往往有很多很耗时的工作，比如上传文件、下载文件、跟客户聊天需要长时间建立连接。这种时候，一个线程是服务不了多个用户的，会产生因为资源独占产生的等待问题。并发的实质是一个物理CPU(也可以多个物理CPU) 在若干道程序之间多路复用，并发性是对有限物理资源强制行使多用户共享以提高效率。</p>
+<h3 id="14">1.4. 总结</h3>
+<p>并发和并行是即相似又有区别的两个概念，并行是指两个或者多个事件在同一时刻发生；而并发是指两个或多个事件在同一时间间隔内发生。在多道程序环境下，并发性是指在一段时间内宏观上有多个程序在同时运行，但在单处理机系统中，每一时刻却仅能有一道程序执行，故微观上这些程序只能是分时地交替执行。倘若在计算机系统中有多个处理机，则这些可以并发执行的程序便可被分配到多个处理机上，实现并行执行，即利用每个处理机来处理一个可并发执行的程序，这样，多个程序便可以同时执行。</p>
+<blockquote>
+<p>💡 简单来说，<strong>并行是真正的同时执行，需要多核CPU；并发是看起来同时执行，通过快速切换实现，单核CPU也能实现</strong>。Go语言的并发模型非常强大，即使在单核CPU上也能高效处理大量任务。</p>
+</blockquote>
+<p>综上所述，串行是按顺序一个一个执行任务，一次只能处理一个任务；并行是同时处理多个任务，每个任务都有独立的处理资源；而并发是指同时处理多个任务的能力，任务之间可以交替执行，通过时间片切换或资源分配来实现。</p>
+<h2 id="2">2. 进程与线程</h2>
+<h3 id="21-process">2.1. 进程(Process)</h3>
+<p>进程是操作系统中的一个执行实例。它拥有独立的内存空间和资源，是程序的一次执行过程。每个进程都是相互独立的，它们之间不能直接共享内存，通信需要通过进程间通信（IPC）机制。进程的创建和销毁是相对较重的操作。</p>
+<blockquote>
+<p>💡可以把进程想象成一个独立的办公室，里面有自己独立的空间、资源和员工。不同办公室之间不能直接共享资源，需要通过特定渠道（如电话、邮件）沟通。</p>
+</blockquote>
+<p>进程是一个具有一定独立功能的程序在一个数据集上的一次动态执行的过程，是操作系统进行资源分配和调度的一个独立单位，是应用程序运行的载体。进程是一种抽象的概念，从来没有统一的标准定义。</p>
+<p>进程一般由程序、数据集合和进程控制块三部分组成：</p>
+<ul>
+<li><strong>程序</strong>：用于描述进程要完成的功能，是控制进程执行的指令集</li>
+<li><strong>数据集合</strong>：是程序在执行时所需要的数据和工作区</li>
+<li><strong>程序控制块(PCB)</strong>：包含进程的描述信息和控制信息，是进程存在的唯一标志</li>
+</ul>
+<p>进程具有的特征：</p>
+<ul>
+<li><strong>动态性</strong>：进程是程序的一次执行过程，是临时的，有生命期的，是动态产生，动态消亡的</li>
+<li><strong>并发性</strong>：任何进程都可以同其他进程一起并发执行</li>
+<li><strong>独立性</strong>：进程是系统进行资源分配和调度的一个独立单位</li>
+<li><strong>结构性</strong>：进程由程序、数据和进程控制块三部分组成</li>
+</ul>
+<h3 id="22-thread">2.2. 线程(Thread)</h3>
+<p>线程是进程的一个执行实体，是进程内的一个轻量级执行单元。一个进程可以包含多个线程，它们共享同一进程的内存和资源，可以直接访问共享的数据。线程之间的切换开销较小，因为它们共享了进程的上下文。然而，线程之间的同步与互斥需要适当的同步机制，例如锁和信号量。</p>
+<blockquote>
+<p>💡 线程就像是办公室里的员工，他们共享同一个办公室（进程）的空间和资源，可以一起工作，但也需要协调（同步）避免冲突。</p>
+</blockquote>
+<p>线程是程序执行中一个单一的顺序控制流程，是程序执行流的最小单元，是处理器调度和分派的基本单位。一个标准的线程由线程ID、当前指令指针(PC)、寄存器和堆栈组成。</p>
+<h3 id="23">2.3. 进程与线程的关系</h3>
+<ul>
+<li>线程是程序执行的最小单位，而进程是操作系统分配资源的最小单位</li>
+<li>一个进程由一个或多个线程组成，线程是一个进程中代码的不同执行路线</li>
+<li>进程之间相互独立，但同一进程下的各个线程之间共享程序的内存空间(包括代码段、数据集、堆等)及一些进程级的资源(如打开文件和信号)，某进程内的线程在其它进程不可见</li>
+<li>调度和切换：线程上下文切换比进程上下文切换要快得多</li>
+</ul>
+<pre><code class="language-mermaid">graph TD
+    P[进程] --&gt; T1[线程1]
+    P --&gt; T2[线程2]
+    P --&gt; T3[线程3]
+    T1 --&gt;|共享| MEM[内存空间]
+    T2 --&gt;|共享| MEM
+    T3 --&gt;|共享| MEM
+    style P fill:#f96,stroke:#333
+    style T1 fill:#69f,stroke:#333
+    style T2 fill:#69f,stroke:#333
+    style T3 fill:#69f,stroke:#333
+    style MEM fill:#9f6,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡一个进程可以理解为一个应用程序（如Chrome浏览器），而线程则是这个应用程序中不同的工作单元（如一个标签页一个线程）。进程创建开销大，线程创建开销小。</p>
+</blockquote>
+<p>总之，线程和进程都是一种抽象的概念，线程是一种比进程更小的抽象，线程和进程都可用于实现并发。在早期的操作系统中并没有线程的概念，进程是能拥有资源和独立运行的最小单位，也是程序执行的最小单位。它相当于一个进程里只有一个线程，进程本身就是线程。所以线程有时被称为轻量级进程(Lightweight Process，LWP)</p>
+<h3 id="24">2.4. 线程的生命周期</h3>
+<p>线程的生命周期共有五个状态：</p>
+<ul>
+<li><strong>创建</strong>：一个新的线程被创建，等待该线程被调用执行</li>
+<li><strong>就绪</strong>：时间片已用完，此线程被强制暂停，等待下一个属于它的时间片到来</li>
+<li><strong>运行</strong>：此线程正在执行，正在占用时间片</li>
+<li><strong>阻塞</strong>：也叫等待状态，等待某一事件(如IO或另一个线程)执行完</li>
+<li><strong>退出</strong>：一个线程完成任务或者其他终止条件发生，该线程终止进入退出状态，退出状态释放该线程所分配的资源</li>
+</ul>
+<pre><code class="language-mermaid">stateDiagram-v2
+    [*] --&gt; 创建
+    创建 --&gt; 就绪 : start()
+    就绪 --&gt; 运行 : 获得CPU时间片
+    运行 --&gt; 就绪 : 时间片用完
+    运行 --&gt; 阻塞 : 等待资源
+    阻塞 --&gt; 就绪 : 资源可用
+    运行 --&gt; 退出 : 任务完成
+    阻塞 --&gt; 退出 : 中断
+</code></pre>
+<blockquote>
+<p>💡 线程就像一个员工，创建=招聘，就绪=准备好工作但等待任务，运行=正在工作，阻塞=等待其他同事完成某项工作，退出=完成工作离开。</p>
+</blockquote>
+<h2 id="3-coroutine">3. 协程(Coroutine)</h2>
+<h3 id="31">3.1. 什么是协程</h3>
+<p>协程是一种用户态的轻量级线程，也称为协作式任务。与线程不同，协程由程序员控制，而不是由操作系统调度。协程可以在执行过程中主动暂停和恢复，可以保存和恢复上下文，并通过协程调度器决定执行哪个协程。协程允许非抢占式的任务切换，因此可以实现高效的并发和协作。</p>
+<blockquote>
+<p>💡 协程就像接力赛中的运动员，可以主动把接力棒交给下一位运动员（让出执行权），而不是被裁判强行中断（操作系统抢占）。</p>
+</blockquote>
+<p>协程是一种基于线程之上，但又比线程更加轻量级的存在，这种由程序员自己写程序来管理的轻量级线程叫做『用户空间线程』，具有对内核来说不可见的特性。</p>
+<p>正如一个进程可以拥有多个线程一样，一个线程也可以拥有多个协程。</p>
+<h3 id="32-gogoroutine">3.2. Go语言中的协程(goroutine)</h3>
+<p>Go语言中的goroutine是协程的一种实现。它是Go并发编程的核心。</p>
+<ul>
+<li><strong>轻量</strong>：goroutine的初始栈大小仅为2KB，可以根据需要动态增长</li>
+<li><strong>由Go运行时调度</strong>：Go的调度器可以在操作系统线程上复用成千上万个goroutine</li>
+<li><strong>创建简单</strong>：使用<code>go</code>关键字即可启动一个新的goroutine</li>
+</ul>
+<pre><code class="language-go">func main() {
+    go someFunction() // 启动一个goroutine
+}
+</code></pre>
+<h3 id="33">3.3. 协程与线程的比较</h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>线程</th>
+<th>协程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创建开销</td>
+<td>较大（通常1MB栈空间）</td>
+<td>极小（初始2KB栈空间）</td>
+</tr>
+<tr>
+<td>调度方式</td>
+<td>操作系统抢占式调度</td>
+<td>用户程序协作式调度</td>
+</tr>
+<tr>
+<td>上下文切换</td>
+<td>开销较大</td>
+<td>开销极小</td>
+</tr>
+<tr>
+<td>数量限制</td>
+<td>通常几百到几千</td>
+<td>可以成千上万</td>
+</tr>
+<tr>
+<td>通信方式</td>
+<td>共享内存+锁</td>
+<td>通道(channel)通信</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-mermaid">graph LR
+    Thread[线程] --&gt;|操作系统调度| OS[操作系统]
+    Coroutine[协程] --&gt;|用户程序调度| App[应用程序]
+    style Thread fill:#f96,stroke:#333
+    style Coroutine fill:#69f,stroke:#333
+    style OS fill:#9f6,stroke:#333
+    style App fill:#9f6,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡线程是操作系统管理的，切换需要系统调用，开销大；协程是程序自己管理的，切换只需保存/恢复少量寄存器，开销小。Go的goroutine是协程的高效实现。</p>
+</blockquote>
+<h2 id="4">4. 同步与异步</h2>
+<h3 id="41-synchronous">4.1. 同步(Synchronous)</h3>
+<p>同步操作是指任务按照顺序依次执行，当前任务必须等待前一个任务完成后才能开始。在同步模式下，调用者会一直等待被调用者返回结果。</p>
+<pre><code class="language-mermaid">flowchart LR
+    A[调用开始] --&gt; B[等待结果]
+    B --&gt; C{结果返回?}
+    C --&gt;|是| D[继续执行]
+    C --&gt;|否| B
+    style A fill:#f96,stroke:#333
+    style D fill:#69f,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡想象你在银行柜台办理业务，必须排队等待前面的人办完，然后你开始办理业务并全程等待工作人员处理，期间你不能离开去做其他事情，直到业务完成。（～～事实上你可以干点小事情，比如往头上套丝袜～～）</p>
+</blockquote>
+<h3 id="42-asynchronous">4.2. 异步(Asynchronous)</h3>
+<p>异步操作是指任务可以不必等待前一个任务完成就开始执行。在异步模式下，调用者发出调用后立即返回，不需要等待结果，结果通过回调、事件或轮询等方式获取。</p>
+<pre><code class="language-mermaid">flowchart LR
+    A[发起调用] --&gt; B[继续执行]
+    B --&gt; C[做其他工作]
+    C --&gt; D{结果返回?}
+    D --&gt;|是| E[处理结果]
+    D --&gt;|否| C
+    style A fill:#f96,stroke:#333
+    style E fill:#69f,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡 异步就像发电子邮件——你发送邮件后可以立即去做其他事情，不需要一直盯着收件箱，当对方回复时你会收到通知再去处理。</p>
+<p>🌰 就像你在餐厅点餐后拿到一个呼叫器，你可以去逛街或工作，当食物准备好时呼叫器会震动提醒你，这期间你可以自由做其他事情。</p>
+</blockquote>
+<h3 id="43">4.3. 阻塞与非阻塞</h3>
+<ul>
+<li><strong>阻塞</strong>：调用者在等待结果返回期间不能执行其他任务</li>
+<li><strong>非阻塞</strong>：调用者在等待结果返回期间可以执行其他任务</li>
+</ul>
+<pre><code class="language-mermaid">flowchart BT
+    subgraph 阻塞
+        A[发起调用] --&gt; B[等待结果]
+        B --&gt; C[不能做其他事]
+        C --&gt; D[结果返回]
+    end
+    subgraph 非阻塞
+        E[发起调用] --&gt; F[立即返回]
+        F --&gt; G[做其他事]
+        G --&gt; H{结果可用?}
+        H --&gt;|是| I[处理结果]
+    end
+    style 阻塞 fill:#f96,stroke:#333
+    style 非阻塞 fill:#69f,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡阻塞就像堵车时你在车里干等着；非阻塞就像你发现堵车后，可以下车去旁边咖啡店坐坐，时不时出来看看路况。</p>
+</blockquote>
+<h3 id="44">4.4. 组合模式</h3>
+<h4 id="441">4.4.1. 同步阻塞</h4>
+<p>调用者等待结果，期间不能做其他事情。</p>
+<pre><code class="language-mermaid">flowchart LR
+    A[发起调用] --&gt; B[等待结果]
+    B --&gt; C{结果返回?}
+    C --&gt;|是| D[继续执行]
+    C --&gt;|否| B
+    style A fill:#f96,stroke:#333
+    style D fill:#69f,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡 <strong>初学者小贴士</strong>：就像在ATM机取钱，你必须一直站在机器前等待，直到交易完成才能离开。Go中channel的默认操作就是同步阻塞的。</p>
+</blockquote>
+<h4 id="442">4.4.2. 同步非阻塞</h4>
+<p>调用者发起调用后立即返回，但需要定期检查结果是否可用，期间可以做其他事情。</p>
+<pre><code class="language-mermaid">flowchart LR
+    A[发起调用] --&gt; B[立即返回]
+    B --&gt; C[做其他事]
+    C --&gt; D{检查结果}
+    D --&gt;|结果可用| E[处理结果]
+    D --&gt;|结果不可用| C
+    style A fill:#f96,stroke:#333
+    style E fill:#69f,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡 就像煮鸡蛋时你设了个定时器，可以去做其他事，但每隔一段时间要检查一下鸡蛋是否煮好。</p>
+</blockquote>
+<h4 id="443">4.4.3. 异步非阻塞</h4>
+<p>调用者发起调用后立即返回，不需要主动检查结果，结果通过回调或事件通知方式获取。</p>
+<pre><code class="language-mermaid">flowchart LR
+    A[发起调用] --&gt; B[注册回调]
+    B --&gt; C[继续执行]
+    C --&gt; D[做其他事]
+    D --&gt; E{结果返回}
+    E --&gt; F[自动触发回调]
+    F --&gt; G[处理结果]
+    style A fill:#f96,stroke:#333
+    style G fill:#69f,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡 就像网购商品，下单后你继续工作，当快递到达时会有短信通知你，你只需等待通知然后去取快递即可。</p>
+</blockquote>
+<h3 id="45-go">4.5. Go语言中的实现</h3>
+<p>在Go中，这些模式主要通过channel和select实现：</p>
+<h4 id="451">4.5.1. 同步阻塞示例</h4>
+<pre><code class="language-go">func main() {
+    ch := make(chan int)
+
+    // 启动一个goroutine执行任务
+    go func() {
+        result := doSomething()
+        ch &lt;- result // 发送结果，如果无接收者则阻塞
+    }()
+
+    result := &lt;-ch // 接收结果，如果无发送者则阻塞
+    fmt.Println(&quot;Result:&quot;, result)
+}
+</code></pre>
+<h4 id="452">4.5.2. 同步非阻塞示例</h4>
+<pre><code class="language-go">func main() {
+    ch := make(chan int)
+
+    go func() {
+        result := doSomething()
+        ch &lt;- result
+    }()
+
+    // 定期检查结果是否可用
+    for {
+        select {
+        case result := &lt;-ch:
+            fmt.Println(&quot;Result:&quot;, result)
+            return
+        default:
+            // 结果不可用，做其他事情
+            fmt.Println(&quot;Doing other work...&quot;)
+            time.Sleep(100 * time.Millisecond)
+        }
+    }
+}
+</code></pre>
+<h4 id="453">4.5.3. 异步非阻塞示例</h4>
+<pre><code class="language-go">func main() {
+    ch := make(chan int)
+
+    // 启动一个goroutine执行任务
+    go func() {
+        result := doSomething()
+        ch &lt;- result
+    }()
+
+    // 使用select语句实现超时控制
+    select {
+    case result := &lt;-ch:
+        fmt.Println(&quot;Result:&quot;, result)
+    case &lt;-time.After(2 * time.Second):
+        fmt.Println(&quot;Timeout!&quot;)
+    }
+}
+</code></pre>
+<blockquote>
+<p>💡 在Go中，channel的默认操作是同步阻塞的，但通过select语句可以轻松实现同步非阻塞和异步非阻塞模式。理解这些模式对编写高效的并发程序至关重要。</p>
+</blockquote>
+<h2 id="5">5. 竞态条件与临界区</h2>
+<h3 id="51-race-condition">5.1. 什么是竞态条件(Race Condition)</h3>
+<p>竞态条件是指多个goroutine或线程访问共享资源时，最终的结果取决于它们执行的相对时间。由于调度的不确定性，可能会导致程序行为不一致或数据损坏。</p>
+<blockquote>
+<p>💡 就像两个人同时尝试从同一张银行卡取钱，如果系统没有正确处理，可能会导致账户余额错误。</p>
+</blockquote>
+<h3 id="52">5.2. 示例</h3>
+<pre><code class="language-go">var counter int
+
+func increment() {
+    counter++ // 非原子操作
+}
+
+// 多个goroutine同时调用increment可能导致计数不准确
+</code></pre>
+<blockquote>
+<p>💡counter++实际包含三步操作：读取值、加1、写回。如果两个goroutine同时执行，可能会导致其中一个的增加操作被覆盖。</p>
+</blockquote>
+<h3 id="53-critical-section">5.3. 临界区(Critical Section)</h3>
+<p>临界区是指访问共享资源的代码段，同一时间只能有一个goroutine或线程执行。保护临界区是避免竞态条件的关键。</p>
+<pre><code class="language-mermaid">graph LR
+    G1[Goroutine1] --&gt;|尝试进入| CS[临界区]
+    G2[Goroutine2] --&gt;|尝试进入| CS
+    CS --&gt;|执行中| G1
+    CS -.-&gt;|等待| G2
+    style CS fill:#f96,stroke:#333
+    style G1 fill:#69f,stroke:#333
+    style G2 fill:#9f6,stroke:#333
+</code></pre>
+<blockquote>
+<p>💡临界区就像公共厕所的单间，一次只能有一个人使用，其他人需要等待。在Go中，可以使用sync.Mutex来保护临界区。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

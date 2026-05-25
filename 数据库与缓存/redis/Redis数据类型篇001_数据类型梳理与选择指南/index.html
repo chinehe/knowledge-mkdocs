@@ -1,0 +1,2070 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87005_%E4%BD%BF%E7%94%A8Lua%E8%84%9A%E6%9C%AC%E4%B8%8E%E5%87%BD%E6%95%B0%E6%8B%93%E5%B1%95Redis%E8%AF%A6%E8%A7%A3/">
+      
+      
+        <link rel="next" href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87002_%E8%AF%A6%E8%A7%A3Strings%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>数据类型梳理与选择指南 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-redis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              数据类型梳理与选择指南
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库与缓存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87001_%E9%94%AE%28Keys%29%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C%E4%B8%8E%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_3" id="__nav_5_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据类型篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型梳理与选择指南
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型梳理与选择指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 梳理Redis数据类型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 专业化/通用性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 盘点通用数据类型的特性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 盘点通用数据类型的特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Strings 字符串
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-hashes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Hashes 哈希
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. Lists 列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. Sets 集合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-sorted-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6. Sorted sets 有序集合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7. Stream 流
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 选择数据类型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 选择数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Documents 文档
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Collections 集合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Sequences 序列
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87002_%E8%AF%A6%E8%A7%A3Strings%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Strings核心命令与存储结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87003_%E8%AF%A6%E8%A7%A3Lists%E5%88%97%E8%A1%A8%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Lists列表类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87004_%E8%AF%A6%E8%A7%A3Hashes%E5%93%88%E5%B8%8C%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Hashes哈希类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87005_%E8%AF%A6%E8%A7%A3Sets%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Sets集合类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87006_%E8%AF%A6%E8%A7%A3SortedSets%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解SortedSets有序集合类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87007_%E8%AF%A6%E8%A7%A3Stream%E6%B5%81%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Stream流类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87008_JSON%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3%EF%BC%88%E8%8D%89%E7%A8%BF%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON类型详解（草稿）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 梳理Redis数据类型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 专业化/通用性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 盘点通用数据类型的特性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 盘点通用数据类型的特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Strings 字符串
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-hashes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Hashes 哈希
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. Lists 列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. Sets 集合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-sorted-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6. Sorted sets 有序集合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#37-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7. Stream 流
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 选择数据类型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 选择数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Documents 文档
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-collections" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Collections 集合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Sequences 序列
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据库与缓存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Redis
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据类型篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>数据类型梳理与选择指南</h1>
+
+<p>Redis是一个数据结构服务器（data structure server），其核心是提供一系列原生数据类型来帮助你解决各种各样的问题，如缓存、队列、事件处理。</p>
+<p>本文第一章节将简要介绍每种数据类型，并提供详细教程和命令参考的链接；第二章节简单将这些数据类型分成专业化类型和通用类型两种；第三章节简单介绍了通用数据类型的特性，以帮助我们选择合适的数据类型。最后章节则讲解了如何选择我们要使用的数据类型。</p>
+<p>参考官方文档：<a href="https://redis.io/docs/latest/develop/data-types/">Data-Types</a>、<a href="https://redis.io/docs/latest/develop/data-types/compare-data-types/">Compare-Data-Types</a></p>
+<h2 id="1-redis">1. 梳理Redis数据类型</h2>
+<p>Redis Open Source实现以下的数据类型:</p>
+<ul>
+<li>String 字符串</li>
+</ul>
+<p>字符串是Redis最基本的数据类型，表示一个二进制安全的字节序列。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/strings/">Overview of Redis strings</a></li>
+<li>
+<p><a href="https://redis.io/docs/latest/commands/?group=string">Redis string command reference</a></p>
+</li>
+<li>
+<p>Hash 哈希</p>
+</li>
+</ul>
+<p>哈希是一种记录类型，由字段-值对组成的集合。类似于Python的字典、Java的HashMap、Ruby的哈希。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/hashes/">Overview of Redis hashes</a></li>
+<li>
+<p><a href="https://redis.io/docs/latest/commands/?group=hash">Redis hashes command reference</a></p>
+</li>
+<li>
+<p>List 列表</p>
+</li>
+</ul>
+<p>列表（list）是按照插入顺序排序的字符串列表。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/lists/">Overview of Redis lists</a></li>
+<li>
+<p><a href="https://redis.io/docs/latest/commands/?group=list">Redis list command reference</a></p>
+</li>
+<li>
+<p>Set 集合</p>
+</li>
+</ul>
+<p>集合（set）是无序且不重复的字符串集合。使用 Redis 集合时，你可以在 O(1) 时间内添加、删除并检验存在性（换句话说，无论集合元素数量多少）。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/sets/">Overview of Redis sets</a></li>
+<li>
+<p><a href="https://redis.io/docs/latest/commands/?group=set">Redis set command reference</a></p>
+</li>
+<li>
+<p>Sorted Set 有序集合</p>
+</li>
+</ul>
+<p>有序集合（sorted set）是一组唯一成员的集合，按照每个成员的分数进行排序。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/sorted-sets/">Overview of Redis sorted sets</a></li>
+<li>
+<p><a href="https://redis.io/docs/latest/commands/?group=sorted-set">Redis sorted set command reference</a></p>
+</li>
+<li>
+<p>Vector set 向量集</p>
+</li>
+</ul>
+<p>向量集是一种专门用于管理高维向量数据的数据类型，在Redis中提供了快速高效的向量相似性搜索能力。向量集针对机器学习、推荐系统和语义搜索等场景进行了优化，每个向量代表多维空间中的一个数据点。向量集支持HNSW（hierarchical navigable small world）算法，允许你根据余弦相似度度量存储、索引和查询向量。对于向量集，Redis 原生支持混合搜索，结合了向量相似度与结构化<a href="https://redis.io/docs/latest/develop/data-types/vector-sets/filtered-search/">滤波器</a>。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/vector-sets/">Overview of Redis vector sets</a></li>
+<li>
+<p><a href="https://redis.io/docs/latest/commands/?group=vector_set">Redis vector set command reference</a></p>
+</li>
+<li>
+<p>Stream 流</p>
+</li>
+</ul>
+<p>Redis流（stream）是一种仅追加日志类型的数据结构，按照发生的顺序记录事件，然后将其联合处理。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/streams/">Overview of Redis Streams</a></li>
+<li>
+<p><a href="https://redis.io/docs/latest/commands/?group=stream">Redis Streams command reference</a></p>
+</li>
+<li>
+<p>Bitmap 位图</p>
+</li>
+</ul>
+<p>Redis位图不是一种独立的数据类型，而是基于字符串类型的一组位操作，将字符串视为位向量。由于字符串是二进制安全的，最大长度为512MB（即512 * 1024 * 1024 * 8 = 2^32位），因此适合设置多达2^32个不同的位。</p>
+<blockquote>
+<p>位图就像一个巨大的开关面板，每个位代表一个独立的开关状态（开/关）。例如，可以用位图记录某个月每天的签到情况，31位就能表示整个月的签到状态，非常节省空间。</p>
+</blockquote>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/bitmaps/">Overview of Redis bitmaps</a></li>
+<li>
+<p><a href="https://redis.io/docs/latest/commands/?group=bitmap">Redis bitmap command reference</a></p>
+</li>
+<li>
+<p>Bitfield 位域</p>
+</li>
+</ul>
+<p>Redis位域允许在单个字符串值中高效地编码多个整数值（从1位到63位）。这些值以二进制编码的Redis字符串形式存储。位域支持原子的读取、写入和递增操作，使其成为管理计数器和其他数值的理想选择。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/bitfields/">Overview of Redis bitfields</a></li>
+<li>
+<p>The <a href="https://redis.io/docs/latest/commands/bitfield/"><code>BITFIELD</code></a> command</p>
+</li>
+<li>
+<p>Geospatial 地理空间</p>
+</li>
+</ul>
+<p>Redis地理空间索引适用于在指定地理半径或边界框内查找位置。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/geospatial/">Overview of Redis geospatial indexes</a></li>
+<li>
+<p><a href="https://redis.io/docs/latest/commands/?group=geo">Redis geospatial indexes command reference</a></p>
+</li>
+<li>
+<p>JSON JSON</p>
+</li>
+</ul>
+<p>Redis JSON提供结构化的层次式数组和键值对象，这些都与流行的JSON文本文件格式匹配。你可以将JSON文本导入Redis对象，访问、修改和查询单个数据元素。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/json/">Overview of Redis JSON</a></li>
+<li>
+<p><a href="https://redis.io/docs/latest/commands/?group=json">JSON command reference</a></p>
+</li>
+<li>
+<p>Probabilistic data types 概率数据类型</p>
+</li>
+</ul>
+<p>这些数据类型让你能够以近似但高效的方式收集和计算统计数据，包括以下类型：</p>
+<ul>
+<li>
+<p>HyperLogLog</p>
+<p>Redis HyperLogLog 数据结构提供了一种概率性的方法来估计大集合的基数（即唯一元素的数量）。该实现最多使用12KB内存，标准误差小于1%。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/">Overview of Redis HyperLogLog</a></li>
+<li><a href="https://redis.io/docs/latest/commands/?group=hyperloglog">Redis HyperLogLog command reference</a></li>
+</ul>
+</li>
+<li>
+<p>Bloom filter 布隆过滤器</p>
+<p>布隆过滤器是一种概率性数据结构，用于检查某个元素是否可能存在于集合中。它可以保证不存在的准确性，但对于存在的判断可能会有误报。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/probabilistic/bloom-filter/">Overview of Redis Bloom filters</a></li>
+<li><a href="https://redis.io/docs/latest/commands/?group=bf">Bloom filter command reference</a></li>
+</ul>
+</li>
+<li>
+<p>Cuckoo filter 布谷鸟过滤器</p>
+<p>布谷鸟过滤器是一种概率性数据结构，用于检查某个元素是否存在于集合中。与布隆过滤器类似，但支持删除操作，并且在某些场景下性能更好。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/probabilistic/cuckoo-filter/">Overview of Redis Cuckoo filters</a></li>
+<li><a href="https://redis.io/docs/latest/commands/?group=cf">Cuckoo filter command reference</a></li>
+</ul>
+</li>
+<li>
+<p>t-digest</p>
+<p>t-digest 结构用于从数据流中估算百分位数，而无需存储和排序所有数据点。它可以回答诸如"给定值小于多少比例的数据"或"p百分位的值是多少"等问题。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/probabilistic/t-digest/">Redis t-digest overview</a></li>
+<li><a href="https://redis.io/docs/latest/commands/?group=tdigest">t-digest command reference</a></li>
+</ul>
+</li>
+<li>
+<p>Top-K</p>
+<p>Top-K 数据结构用于估算数据流中出现频率最高的K个元素。它特别适用于检测网络异常和DDoS攻击等场景。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/probabilistic/top-k/">Redis Top-K overview</a></li>
+<li><a href="https://redis.io/docs/latest/commands/?group=topk">Top-K command reference</a></li>
+</ul>
+</li>
+<li>
+<p>Count-min sketch </p>
+<p>Count-min sketch 用于估算数据流中元素的出现频率。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/probabilistic/count-min-sketch/">Redis Count-min sketch overview</a></li>
+<li><a href="https://redis.io/docs/latest/commands/?group=cms">Count-min sketch command reference</a></li>
+</ul>
+</li>
+<li>
+<p>Time series 时间序列</p>
+</li>
+</ul>
+<p>时间序列数据结构允许你存储和查询带时间戳的数据点。</p>
+<ul>
+<li><a href="https://redis.io/docs/latest/develop/data-types/timeseries/">Redis time series overview</a></li>
+<li><a href="https://redis.io/docs/latest/commands/?group=timeseries">Count-min sketch command reference</a></li>
+</ul>
+<h2 id="2">2. 专业化/通用性</h2>
+<p>Redis提供的数据类型中，一部分是用于特定目的高度专业化的：</p>
+<ul>
+<li>
+<p>Geospatial 地理空间：存储带有相关坐标的字符串，用于地理空间查询。</p>
+</li>
+<li>
+<p>Vector sets 向量集：存储字符串及其关联的向量数据（以及可选的元数据），用于向量相似性查询。</p>
+</li>
+<li>
+<p>Probabilistic data types 概率数据类型：为大型数据集提供近似技术和其他统计数据。</p>
+</li>
+</ul>
+<blockquote>
+<p>包含HyperLogLog、Bloom filter、Cuckoo filter、t-digest、Top-K、Count-min sketch </p>
+</blockquote>
+<ul>
+<li>Time series 时间序列：存储实值数据点及其收集时间。</li>
+</ul>
+<p>一部分则更加通用：</p>
+<ul>
+<li>Strings 字符串：存储文本或二进制数据。</li>
+<li>Hashes 哈希：将键值对集合存储在单个键内。</li>
+<li>JSON：存储结构化的层级数组和K-V键值对对象，与流行的JSON文本文件格式相匹配。</li>
+<li>Lists 列表：存储一组有序的简单字符串。</li>
+<li>Sets 集合：存储一组无序且唯一的字符串。</li>
+<li>Sorted sets 有序集合：存储一组唯一的字符串以及其对应的分数。</li>
+<li>Streams 流：存储一系列条目，每个条目包含一组字段-值对。</li>
+</ul>
+<p>通用数据类型在功能上有部分重叠，你甚至可以只使用字符串类型加一点小创意，就能模拟他们。但是，每种数据类型在性能、内存占用和功能上存在不同的权衡。</p>
+<blockquote>
+<p>专业化数据类型都有其特定的使用场景，一个专业场景下基本上就只能使用对应的专业化数据类型。</p>
+<p>而通用数据类型则更加灵活，一个场景下可能使用数据类型A、B、C、D都能实现。因此在一个业务场景下，选择使用哪种通用数据类型反而是更需要思考的。</p>
+</blockquote>
+<h2 id="3">3. 盘点通用数据类型的特性</h2>
+<p>在学习如何选择数据类型前，我们需要先简单介绍一下这些通用数据类型的特性。</p>
+<h3 id="31-strings">3.1. Strings 字符串</h3>
+<ul>
+<li><strong>结构：</strong>非结构化文本/二进制数据、简单计数器、位集、整数集合。</li>
+<li><strong>操作：</strong>get, set, append, increment, decrement, bitwise operations.</li>
+<li><strong>适用场景：</strong>非结构化文档、计数器、标志、位图。</li>
+</ul>
+<p>字符串主要用于存储文本或二进制数据块，其内部结构将由你的应用程序管理。不过，它们也支持访问字符串中位区间的槽作，以作为比特集、整数或浮点数使用。</p>
+<h3 id="32-hashes">3.2. Hashes 哈希</h3>
+<ul>
+<li><strong>结构：</strong>键值对集合</li>
+<li><strong>操作：</strong>get, set, delete, increment, decrement, query.</li>
+<li><strong>适用场景：</strong>字段数较少的简单对象。</li>
+</ul>
+<p>哈希主要用于存储字段数量较少的对象（非嵌套、不复杂）。不过，实际上哈希中的字段数量并没有真正的限制，所以你可以在应用程序中意多种不同的方式来使用哈希。</p>
+<p>哈希的字段值是字符串类型，但Redis提供了将他们作为整数/浮点数处理的命令，并且提供了简单的算术运算操作。</p>
+<p>你可以为单个哈希字段设置过期时间，也可以用Redis查询引擎来索引和查询哈希文档。</p>
+<h3 id="33-json">3.3. JSON</h3>
+<ul>
+<li><strong>结构：</strong> 层级数组和与流行的JSON文本文件格式匹配的键值对像。</li>
+<li><strong>操作：</strong>get, set, update, delete, query.</li>
+<li><strong>适用场景：</strong>具有多个字段的复杂嵌套对象。</li>
+</ul>
+<p>JSON提供了丰富的数据建模功能，包含嵌套字段和数组。你可以使用简单的路径语法访问JSON数据中任意子集的数据。JSON也提供了比哈希更强大、更灵活的查询引擎特性。</p>
+<h3 id="34-lists">3.4. Lists 列表</h3>
+<ul>
+<li><strong>结构：</strong>简单的字符串序列</li>
+<li><strong>操作：</strong>push, pop, get, set, trim.</li>
+<li><strong>适用场景：</strong> 队列、栈、日志、其他的线性数据结构。</li>
+</ul>
+<h3 id="35-sets">3.5. Sets 集合</h3>
+<ul>
+<li><strong>结构：</strong>无序的唯一字符串集合</li>
+<li><strong>操作：</strong>add, remove, test membership, intersect, union, difference.</li>
+<li><strong>适用场景：</strong>无关联数据的唯一元素集</li>
+</ul>
+<p>集合存储唯一字符串的集合。提供高效的元素检查、添加、移除操作，还支持集合运算，如并集、交集和差分。</p>
+<h3 id="36-sorted-sets">3.6. Sorted sets 有序集合</h3>
+<ul>
+<li><strong>结构：</strong> 唯一字符串及其对应分数的集合。</li>
+<li><strong>操作：</strong>add, remove, test membership, range by score or rank.</li>
+<li><strong>适用场景：</strong>带有分数的唯一元素、有序的集合。</li>
+</ul>
+<p>有序结合存储唯一字符串及其对应的分数。针对基于分数的范围查询进行了优化，因此对实现优先队列和其他的有序集合非常有用。</p>
+<h3 id="37-stream">3.7. Stream 流</h3>
+<ul>
+<li><strong>结构：</strong> 一系列条目，每个条目包含字段-值对。</li>
+<li><strong>操作：</strong>add, read, trim.</li>
+<li><strong>适用场景：</strong>日志数据、时间序列以及其他仅追加结构。</li>
+</ul>
+<p>流存储一系列条目，每个条目包含一组字段值对。针对追加新条目和顺序读取做了优化，因此在实现日志数据、时间序列和其他仅追加数据结构时非常有用。还内置支持了消费者组来管理多个读取者，确保至少一次送达。</p>
+<h2 id="4">4. 选择数据类型</h2>
+<p>本章节将探讨每种数据类型在特定任务中的优缺点。</p>
+<p>需要注意的是，这些建议都是“经验法则”，而非严格的定论。因为偏好某些数据类型可能存在许多微妙的理由。</p>
+<h3 id="41-documents">4.1. Documents 文档</h3>
+<p>通常使用字符串、哈希或者JSON类型来存储文档数据。</p>
+<p>JSON通常对内存和处理的要求更高，其次是哈希，最后是字符串。</p>
+<p>建议参考下面的决策树作为你选择最合适数据类型的指南：</p>
+<pre><code class="language-mermaid">graph TD
+    Q1[需要嵌套数据结构（字段、数组），或者需要使用Redis查询引擎进行地理空间索引/查询？] --&gt;|Yes|J[JSON]
+    Q1 --&gt;|No| Q2[需要使用Redis查询引擎进行索引和查询，且可以没有嵌套数据结构和地理空间索引？]
+    Q2 --&gt;|Yes| H1[Hashes 哈希]
+    Q2 --&gt;|No| Q3[需要在文档的单个数据项上设置过期时间？]
+    Q3 --&gt;|Yes| H2[Hashes 哈希]
+    Q3 --&gt;|No| Q4[需要频繁访问文档中的单个数据字段，但这些字段只是简单的整型或比特，可以通过整数索引轻松引用？]
+    Q4 --&gt;|Yes| S1[Strings 字符串]
+    Q4 --&gt;|No| Q5[需要频繁访问文档中，包含字符串或二进制数据值的各个数据字段？]
+    Q5 --&gt;|Yes| H3[Hashes 哈希]
+    Q5 --&gt;|No| S2[Strings 字符串]
+</code></pre>
+<h3 id="42-collections">4.2. Collections 集合</h3>
+<p>通常使用集合或有序集合来存储集合数据，对于非常简单的集合，甚至可以使用字符串。</p>
+<p>他们都可以进行基本的元素测试，但有着不同的额外功能和权衡。有序集合的内存开销和处理需求最高；其次是集合；最后是字符串。</p>
+<blockquote>
+<p>注意：如果你需要存储集合或有序集合中键的额外属性，可以使用辅助哈希或JSON对象，其中的字段名与集合中的键匹配。</p>
+</blockquote>
+<p>建议参考下面的决策树作为你选择最合适数据类型的指南：</p>
+<pre><code class="language-mermaid">graph TD
+    Q1[需要以任意顺序或字典顺序存储和检索键？] --&gt;|Yes| SS[Sorted sets 有序集合]
+    Q1 --&gt;|No| Q2[需要为每个键存储额外的信息，且不需要集合操作（交集、并集、差分）？]
+    Q2 --&gt;|Yes| H[Hashes 哈希]
+    Q2 --&gt;|No| Q3[键是否都是已知范围内的简单整数索引？]
+    Q3 --&gt;|Yes| S[Strings 字符串（Bitmap 位图）]
+    Q3 --&gt;|No| CS[Sets 集合]
+</code></pre>
+<h3 id="43-sequences">4.3. Sequences 序列</h3>
+<p>通常使用有序结合、列表、流来存储字符串或二进制数据序列。它们在特定用途上各有优缺点。</p>
+<p>建议参考下面的决策树作为你选择最合适数据类型的指南：</p>
+<pre><code class="language-mermaid">graph TD
+    Q1[需要维护任意优先级顺序/字典顺序，需要频繁通过索引访问元素或者执行集合操作？]--&gt;|Yes| SS[Sorted sets 有序集合]
+    Q1 --&gt;|No| Q2[主要是按照时间戳顺序存储和检索元素，或者管理多个消费者从序列中读取？]
+    Q2 --&gt;|Yes| S[Stream 流]
+    Q2 --&gt;|No| L[Lists 列表]
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2888 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87003_%E8%AF%A6%E8%A7%A3Lists%E5%88%97%E8%A1%A8%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/">
+      
+      
+        <link rel="next" href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87005_%E8%AF%A6%E8%A7%A3Sets%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>详解Hashes哈希类型及其命令 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              详解Hashes哈希类型及其命令
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库与缓存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Redis%E5%9F%BA%E7%A1%80%E7%AF%87001_%E9%94%AE%28Keys%29%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C%E4%B8%8E%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1_3" id="__nav_5_1_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_1_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据类型篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87001_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据类型梳理与选择指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87002_%E8%AF%A6%E8%A7%A3Strings%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4%E4%B8%8E%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Strings核心命令与存储结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87003_%E8%AF%A6%E8%A7%A3Lists%E5%88%97%E8%A1%A8%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Lists列表类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Hashes哈希类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Hashes哈希类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 哈希类型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 相关命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 相关命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 命令列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 设置键值对
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. 设置键值对">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-hset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. HSET
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-hsetex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. HSETEX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-hsetnx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. HSETNX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224-hincrby" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4. HINCRBY
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225-hincrbyfloat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5. HINCRBYFLOAT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#226-hdel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.6 HDEL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 获取键值对
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. 获取键值对">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-hget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. HGET
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-hgetdel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. HGETDEL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-hgetex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3. HGETEX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#234-hgetall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.4. HGETALL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#235-hmget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.5. HMGET
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#236-hexists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.6. HEXISTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#237-hscan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.7. HSCAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#238-hkeys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.8. HKEYS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#239-hvals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.9. HVALS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2310-hrandfield" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.10. HRANDFIELD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2311-hlen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.11. HLEN
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 字段有效期
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. 字段有效期">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1. 关于字段有效期
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2. 设置字段有效期
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4.2. 设置字段有效期">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2421-hexpire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2.1. HEXPIRE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2422-hexpireat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2.2. HEXPIREAT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2423-hpexpire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2.3. HPEXPIRE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2424-hpexpireat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2.4. HPEXPIREAT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2425-hpersist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2.5 HPERSIST
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3. 获取字段有效期
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4.3. 获取字段有效期">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2431-hexpiretime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3.1. HEXPIRETIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2432-hpexpiretime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3.2. HPEXPIRETIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2433-hpttl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3.3. HPTTL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2434-httl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3.4. HTTL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87005_%E8%AF%A6%E8%A7%A3Sets%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Sets集合类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87006_%E8%AF%A6%E8%A7%A3SortedSets%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解SortedSets有序集合类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87007_%E8%AF%A6%E8%A7%A3Stream%E6%B5%81%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E5%91%BD%E4%BB%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    详解Stream流类型及其命令
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87008_JSON%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3%EF%BC%88%E8%8D%89%E7%A8%BF%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON类型详解（草稿）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 哈希类型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 相关命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 相关命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 命令列表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 设置键值对
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. 设置键值对">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-hset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1. HSET
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-hsetex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2. HSETEX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-hsetnx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3. HSETNX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224-hincrby" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.4. HINCRBY
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225-hincrbyfloat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.5. HINCRBYFLOAT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#226-hdel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.6 HDEL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 获取键值对
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. 获取键值对">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-hget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1. HGET
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-hgetdel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2. HGETDEL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-hgetex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3. HGETEX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#234-hgetall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.4. HGETALL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#235-hmget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.5. HMGET
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#236-hexists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.6. HEXISTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#237-hscan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.7. HSCAN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#238-hkeys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.8. HKEYS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#239-hvals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.9. HVALS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2310-hrandfield" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.10. HRANDFIELD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2311-hlen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.11. HLEN
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 字段有效期
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4. 字段有效期">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1. 关于字段有效期
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2. 设置字段有效期
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4.2. 设置字段有效期">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2421-hexpire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2.1. HEXPIRE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2422-hexpireat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2.2. HEXPIREAT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2423-hpexpire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2.3. HPEXPIRE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2424-hpexpireat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2.4. HPEXPIREAT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2425-hpersist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2.5 HPERSIST
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3. 获取字段有效期
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4.3. 获取字段有效期">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2431-hexpiretime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3.1. HEXPIRETIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2432-hpexpiretime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3.2. HPEXPIRETIME
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2433-hpttl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3.3. HPTTL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2434-httl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.3.4. HTTL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据库与缓存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Redis
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87001_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据类型篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>详解Hashes哈希类型及其命令</h1>
+
+<p>Redis Hashes（哈希）是一种<strong>键值对集合</strong>数据类型，可以使用哈希来表示基本对象、计数器分组等。</p>
+<p>本文详细介绍了哈希数据类型的基础知识、核心特性；对哈希类型相关的所有命令都提供了详细的说明和示例；另外，文章还介绍了Redis 7.4引入的<strong>哈希字段有效期</strong>。</p>
+<p>参考官方文档：<a href="https://redis.io/docs/latest/develop/data-types/hashes/">Redis Hashes</a></p>
+<h2 id="1">1. 哈希类型</h2>
+<p>Redis Hashes（哈希）是一种<strong>键值对集合</strong>数据类型，可以使用哈希来表示基本对象、计数器分组等。</p>
+<p>你可以将多个字段-值对存储在一个Redis哈希键中。这类似于一个小型的键值存储系统，但所有内容都位于一个顶级键下。</p>
+<blockquote>
+<p>可以将Redis Hashes想象成一本字典或电话簿。整个字典有一个名字（Redis键），里面包含很多词条（字段），每个词条都有其解释（值）。比如，你可以用一个名为"user:1000"的哈希来存储用户信息，其中包含"name"、"email"、"age"等字段。</p>
+</blockquote>
+<p><strong>主要特性：</strong></p>
+<ul>
+<li><strong>结构：</strong>键值对集合</li>
+<li><strong>性能：</strong> 大部分Redis哈希命令为O(1)；小部分命令为O(n)，比如 <a href="https://redis.io/docs/latest/commands/hkeys/"><code>HKEYS</code></a>、<a href="https://redis.io/docs/latest/commands/hvals/"><code>HVALS</code></a>、<a href="https://redis.io/docs/latest/commands/hgetall/"><code>HGETALL</code></a> 以及大多数与到期相关的命令</li>
+<li><strong>限制：</strong> 每个哈希最多可存储 4,294,967,295（2^32 - 1）个字段值对。</li>
+<li><strong>底层实现：</strong>在字段数量较少且元素较小时使用ziplist（压缩列表），否则使用hashtable（哈希表）</li>
+</ul>
+<blockquote>
+<p>Redis 7.0版本后，Hashes的编码优化进一步增强，能够更智能地在不同编码之间转换，以达到最佳的内存和性能平衡。</p>
+</blockquote>
+<h2 id="2">2. 相关命令</h2>
+<p>哈希数据类型的相关命令，参考官方文档：<a href="https://redis.io/docs/latest/commands/?group=hash">Redis Command Hashes</a></p>
+<h3 id="21">2.1. 命令列表</h3>
+<p>按照基本的功能分类，哈希相关的全部命令如下；</p>
+<ul>
+<li>设置键值对</li>
+<li><code>HSET</code>：创建或修改哈希中字段的值。</li>
+<li><code>HSETEX</code>：创建或修改哈希中一个或多个字段的值，并设置有效期（可选）。</li>
+<li><code>HSETNX</code>：当哈希中指定字段不存在时，设置字段的值。</li>
+<li><code>HINCRBY</code>：将哈希中指定字段的整数值加N。</li>
+<li><code>HINCRBYFLOAT</code>：将哈希中指定字段的浮点值加F。</li>
+<li><code>HDEL</code>：从哈希中删除一个或多个键值对。</li>
+<li><code>HMSET</code>：设置哈希中的多个字段值（弃用）。</li>
+<li>获取键值对</li>
+<li><code>HGET</code>：获取哈希中指定字段的值。</li>
+<li><code>HGETDEL</code>： 获取并删除哈希中指定的键值对。</li>
+<li><code>HGETEX</code>：获取哈希中一个或多个键，并设置其有效期（可选）。</li>
+<li><code>HGETALL</code>：获取哈希中所有的键值对。</li>
+<li><code>HMGET</code>：获取哈希中所有字段的值</li>
+<li><code>HEXISTS</code>：检查哈希中是否存在指定字段。</li>
+<li><code>HSCAN</code>：对哈希值的键值对进行迭代。</li>
+<li><code>HKEYS</code>：获取哈希中的所有字段。</li>
+<li><code>HVALS</code>：返回哈希中所有值。</li>
+<li><code>HRANDFIELD</code>：返回哈希中一个或多个随机字段。</li>
+<li><code>HLEN</code>：获取哈希中的字段数量。</li>
+<li><code>HSTRLEN</code>：获取哈希中指定字段值的长度。</li>
+<li>设置有效期</li>
+<li><code>HEXPIRE</code>：使用相对到期时间设置哈希字段的到期时间。</li>
+<li><code>HPEXPIRE</code>：使用该相对过期时间（毫秒）设置哈希字段的过期时间。</li>
+<li><code>HEXPIREAT</code>：使用绝对Unix时间戳（秒）设置哈希字段的到期时间。</li>
+<li><code>HPEXPIREAT</code>：使用该Unix时间戳（毫秒）设置哈希字段的过期时间。</li>
+<li><code>HPERSIST</code>：移除哈希中指定字段的有效期。</li>
+<li>获取有效期</li>
+<li><code>HEXPIRETIME</code>：以Unix时间戳（秒）返回哈希字段的过期时间。</li>
+<li><code>HPEXPIRETIME</code>： 以Unix时间戳（毫秒）返回哈希字段的过期时间。</li>
+<li><code>HPTTL</code>：返回哈希字段的TTL（毫秒）。</li>
+<li><code>HTTL</code>：返回哈希字段的TTL（秒）。</li>
+</ul>
+<h3 id="22">2.2. 设置键值对</h3>
+<p>设置键值对相关命令，用于创建、修改、删除哈希字段值。</p>
+<h4 id="221-hset">2.2.1. HSET</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HSET key field value [field value ...]
+</code></pre>
+<p>为哈希中指定的字段设置值。</p>
+<ul>
+<li>如果哈希中不存在该字段，将自动创建。</li>
+<li>如果哈希中存在该字段，将覆盖值。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">&gt; HSET myhash field1 &quot;Hello&quot;
+(integer) 1
+&gt; HGET myhash field1
+&quot;Hello&quot;
+&gt; HSET myhash field2 &quot;Hi&quot; field3 &quot;World&quot;
+(integer) 2
+&gt; HGET myhash field2
+&quot;Hi&quot;
+&gt; HGET myhash field3
+&quot;World&quot;
+&gt; HGETALL myhash
+1) &quot;field1&quot;
+2) &quot;Hello&quot;
+3) &quot;field2&quot;
+4) &quot;Hi&quot;
+5) &quot;field3&quot;
+6) &quot;World&quot;
+</code></pre>
+<h4 id="222-hsetex">2.2.2. HSETEX</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HSETEX key 
+    [FNX | FXX] 
+    [EX seconds | PX milliseconds | EXAT unix-time-seconds | PXAT unix-time-milliseconds | KEEPTTL]
+  FIELDS numfields field value [field value ...]
+</code></pre>
+<p>为哈希中指定的字段设置值，并且设置有效时间（可选）。</p>
+<ul>
+<li>如果哈希中不存在该字段，将自动创建。</li>
+<li>如果哈希中存在该字段，将覆盖值。</li>
+</ul>
+<p>可选参数：</p>
+<ul>
+<li>执行条件</li>
+<li>FNX：所有字段都不存在时才执行。</li>
+<li>FXX：所有字段都存在时才执行。</li>
+<li>有效期</li>
+<li>EX：将有效期设置成指定的秒数。</li>
+<li>PX：将有效期设置成指定的毫秒数。</li>
+<li>EXAT：设置到期时间为指定的Unix时间（秒）。</li>
+<li>PXAT：设置到期时间为指定的Unix时间（毫秒）。</li>
+<li>KEEPTTL：保持原有的字段有效期不变。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSETEX mykey EXAT 1740470400 FIELDS 2 field1 &quot;Hello&quot; field2 &quot;World&quot;
+(integer) 1
+redis&gt; HTTL mykey FIELDS 2 field1 field2
+1) (integer) 55627
+2) (integer) 55627
+redis&gt; HSETEX mykey FNX EX 60 FIELDS 2 field1 &quot;Hello&quot; field2 &quot;World&quot;
+(integer) 0
+redis&gt; HSETEX mykey FXX EX 60 KEEPTTL FIELDS 2 field1 &quot;hello&quot; field2 &quot;world&quot;
+(error) ERR Only one of EX, PX, EXAT, PXAT or KEEPTTL arguments can be specified
+redis&gt; HSETEX mykey FXX KEEPTTL FIELDS 2 field1 &quot;hello&quot; field2 &quot;world&quot;
+(integer) 1
+redis&gt; HTTL mykey FIELDS 2 field1 field2
+1) (integer) 55481
+2) (integer) 55481
+</code></pre>
+<h4 id="223-hsetnx">2.2.3. HSETNX</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HSETNX key field value
+</code></pre>
+<p>当哈希中指定的字段不存在时，为字段设置值。</p>
+<ul>
+<li>如果哈希中不存在该字段，将自动创建。</li>
+<li>如果哈希中存在该字段，则不执行操作。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSETNX myhash field &quot;Hello&quot;
+(integer) 1
+redis&gt; HSETNX myhash field &quot;World&quot;
+(integer) 0
+redis&gt; HGET myhash field
+&quot;Hello&quot;
+redis&gt;
+</code></pre>
+<h4 id="224-hincrby">2.2.4. HINCRBY</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HINCRBY key field increment
+</code></pre>
+<p>将哈希中指定字段的整数值增加increment。</p>
+<ul>
+<li>如果字段不存在，当成0处理，结果为increment。</li>
+<li>如果字段存在，</li>
+<li>如果值为数字，结果为原值+increment</li>
+<li>如果值不是数字，报错。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET myhash field 5
+(integer) 1
+redis&gt; HINCRBY myhash field 1
+(integer) 6
+redis&gt; HINCRBY myhash field -1
+(integer) 5
+redis&gt; HINCRBY myhash field -10
+(integer) -5
+redis&gt; 
+</code></pre>
+<h4 id="225-hincrbyfloat">2.2.5. HINCRBYFLOAT</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HINCRBYFLOAT key field increment
+</code></pre>
+<p>将哈希中指定字段的浮点数值增加increment。</p>
+<ul>
+<li>如果字段不存在，当成0处理，结果为increment。</li>
+<li>如果字段存在，</li>
+<li>如果值为双精度浮点数，结果为原值+increment</li>
+<li>如果值不是双精度浮点数，报错。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET mykey field 10.50
+(integer) 1
+redis&gt; HINCRBYFLOAT mykey field 0.1
+&quot;10.6&quot;
+redis&gt; HINCRBYFLOAT mykey field -5
+&quot;5.6&quot;
+redis&gt; HSET mykey field 5.0e3
+(integer) 0
+redis&gt; HINCRBYFLOAT mykey field 2.0e2
+&quot;5200&quot;
+redis&gt; 
+</code></pre>
+<h4 id="226-hdel">2.2.6 HDEL</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HDEL key field [field ...]
+</code></pre>
+<p>从哈希中删除指定的一个或多个字段</p>
+<p>示例：</p>
+<pre><code class="language-shell">HSET myhash field1 &quot;foo&quot;
+(integer) 1
+HDEL myhash field1
+(integer) 1
+HDEL myhash field2
+(integer) 0
+</code></pre>
+<h3 id="23">2.3. 获取键值对</h3>
+<p>获取键值对命令用于获取哈希中的键/值/键值对及其信息。</p>
+<h4 id="231-hget">2.3.1. HGET</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HGET key field
+</code></pre>
+<p>获取哈希中指定字段的值。</p>
+<p>示例：</p>
+<pre><code class="language-shell">&gt; HSET myhash field1 &quot;foo&quot;
+(integer) 1
+&gt; HGET myhash field1
+&quot;foo&quot;
+&gt; HGET myhash field2
+(nil)
+</code></pre>
+<h4 id="232-hgetdel">2.3.2. HGETDEL</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HGETDEL key FIELDS numfields field [field ...]
+</code></pre>
+<p>获取并删除哈希中指定的一个或多个字段。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;Hello&quot; field2 &quot;World&quot; field3 &quot;!&quot;
+(integer) 3
+redis&gt; HGETALL mykey
+1) &quot;field1&quot;
+2) &quot;Hello&quot;
+3) &quot;field2&quot;
+4) &quot;World&quot;
+5) &quot;field3&quot;
+6) &quot;!&quot;
+redis&gt; HGETDEL mykey FIELDS 2 field3 field4
+1) &quot;!&quot;
+2) (nil)
+redis&gt; HGETALL mykey
+1) &quot;field1&quot;
+2) &quot;Hello&quot;
+3) &quot;field2&quot;
+4) &quot;World&quot;
+redis&gt; HGETDEL mykey FIELDS 2 field1 field2
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+redis&gt; KEYS *
+(empty array)
+</code></pre>
+<h4 id="233-hgetex">2.3.3. HGETEX</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HGETEX key 
+    [EX seconds | PX milliseconds | EXAT unix-time-seconds | PXAT unix-time-milliseconds | PERSIST]     FIELDS numfields field
+  [field ...]
+</code></pre>
+<p>获取哈希中的一个或多个字段的值，并设置有效期（可选）。</p>
+<p>可选参数：</p>
+<ul>
+<li>
+<p>有效期</p>
+</li>
+<li>
+<p>EX：将有效期设置成指定的秒数。</p>
+</li>
+<li>
+<p>PX：将有效期设置成指定的毫秒数。</p>
+</li>
+<li>
+<p>EXAT：设置到期时间为指定的Unix时间（秒）。</p>
+</li>
+<li>
+<p>PXAT：设置到期时间为指定的Unix时间（毫秒）。</p>
+</li>
+<li>
+<p>PERSIST：移除与字段关联的有效期。</p>
+</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;Hello&quot; field2 &quot;World&quot;
+(integer) 2
+redis&gt; HGETEX mykey EX 120 FIELDS 1 field1
+1) &quot;Hello&quot;
+redis&gt; HGETEX mykey EX 100 FIELDS 1 field2
+1) &quot;World&quot;
+redis&gt; HTTL mykey FIELDS 2 field1 field2
+1) (integer) 91
+2) (integer) 85
+redis&gt; HTTL mykey FIELDS 3 field1 field2 field3 
+1) (integer) 75
+2) (integer) 68
+3) (integer) -2
+...
+redis&gt; HTTL mykey FIELDS 3 field1 field2 
+1) (integer) -2
+2) (integer) -2
+redis&gt; HGETALL myk
+</code></pre>
+<h4 id="234-hgetall">2.3.4. HGETALL</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HGETALL key
+</code></pre>
+<p>返回哈希中的所有字段和值。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET myhash field1 &quot;Hello&quot;
+(integer) 1
+redis&gt; HSET myhash field2 &quot;World&quot;
+(integer) 1
+redis&gt; HGETALL myhash
+1) &quot;field1&quot;
+2) &quot;Hello&quot;
+3) &quot;field2&quot;
+4) &quot;World&quot;
+</code></pre>
+<h4 id="235-hmget">2.3.5. HMGET</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HMGET key field [field ...]
+</code></pre>
+<p>获取哈希中指定的一个或多个字段的值。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET myhash field1 &quot;Hello&quot;
+(integer) 1
+redis&gt; HSET myhash field2 &quot;World&quot;
+(integer) 1
+redis&gt; HMGET myhash field1 field2 nofield
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+3) (nil)
+redis&gt;
+</code></pre>
+<h4 id="236-hexists">2.3.6. HEXISTS</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HEXISTS key field
+</code></pre>
+<p>检查哈希中是否存在指定字段。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET myhash field1 &quot;foo&quot;
+(integer) 1
+redis&gt; HEXISTS myhash field1
+(integer) 1
+redis&gt; HEXISTS myhash field2
+(integer) 0
+redis&gt; 
+</code></pre>
+<h4 id="237-hscan">2.3.7. HSCAN</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HSCAN key cursor [MATCH pattern] [COUNT count] [NOVALUES]
+</code></pre>
+<p>对哈希值的键值对进行迭代。</p>
+<p>参考官方文档：<a href="https://redis.io/docs/latest/commands/scan/">Redis SCAN</a></p>
+<h4 id="238-hkeys">2.3.8. HKEYS</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HKEYS key
+</code></pre>
+<p>获取哈希中所有的字段名称。</p>
+<p>示例：</p>
+<pre><code class="language-shell">(integer) 1
+redis&gt; HSET myhash field2 &quot;World&quot;
+(integer) 1
+redis&gt; HKEYS myhash
+1) &quot;field1&quot;
+2) &quot;field2&quot;
+redis&gt;
+</code></pre>
+<h4 id="239-hvals">2.3.9. HVALS</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HVALS key
+</code></pre>
+<p>获取哈希中所有的字段值。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET myhash field1 &quot;Hello&quot;
+(integer) 1
+redis&gt; HSET myhash field2 &quot;World&quot;
+(integer) 1
+redis&gt; HVALS myhash
+1) &quot;Hello&quot;
+2) &quot;World&quot;
+</code></pre>
+<h4 id="2310-hrandfield">2.3.10. HRANDFIELD</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HRANDFIELD key [count [WITHVALUES]]
+</code></pre>
+<p>返回哈希中的一个随机字段名称。</p>
+<p>可选参数：</p>
+<ul>
+<li>count 计数：</li>
+<li>如果大于0：返回随机字段数组（不重复），数组长度等于count和哈希字段数的较小值。</li>
+<li>如果小于0：返回随机字段数组（可以重复），数组长度等于count的绝对值。</li>
+<li>WITHVALUES：指定需要同时返回对应字段的值。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET coin heads obverse tails reverse edge null
+(integer) 3
+redis&gt; HRANDFIELD coin
+&quot;edge&quot;
+redis&gt; HRANDFIELD coin
+&quot;heads&quot;
+redis&gt; HRANDFIELD coin -5 WITHVALUES
+1) &quot;tails&quot;
+2) &quot;reverse&quot;
+3) &quot;heads&quot;
+4) &quot;obverse&quot;
+5) &quot;tails&quot;
+6) &quot;reverse&quot;
+7) &quot;edge&quot;
+8) &quot;null&quot;
+9) &quot;tails&quot;
+10) &quot;reverse&quot;
+redis&gt; 
+</code></pre>
+<h4 id="2311-hlen">2.3.11. HLEN</h4>
+<p>语法格式：</p>
+<pre><code class="language-shell">HLEN key
+</code></pre>
+<p>获取哈希中的字段数量。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET myhash field1 &quot;Hello&quot;
+(integer) 1
+redis&gt; HSET myhash field2 &quot;World&quot;
+(integer) 1
+redis&gt; HLEN myhash
+(integer) 2
+redis&gt;
+</code></pre>
+<h3 id="24">2.4. 字段有效期</h3>
+<h4 id="241">2.4.1. 关于字段有效期</h4>
+<p>Redis 7.4 引入了为哈希中单个字段设置到期时间的功能：</p>
+<ul>
+<li>设置有效期</li>
+<li><code>HEXPIRE</code>：使用相对到期时间设置哈希字段的到期时间。</li>
+<li><code>HPEXPIRE</code>：使用该相对过期时间（毫秒）设置哈希字段的过期时间。</li>
+<li><code>HEXPIREAT</code>：使用绝对Unix时间戳（秒）设置哈希字段的到期时间。</li>
+<li><code>HPEXPIREAT</code>：使用该Unix时间戳（毫秒）设置哈希字段的过期时间。</li>
+<li><code>HPERSIST</code>：移除哈希中指定字段的有效期。</li>
+<li>获取有效期</li>
+<li><code>HEXPIRETIME</code>：以Unix时间戳（秒）返回哈希字段的过期时间。</li>
+<li><code>HPEXPIRETIME</code>： 以Unix时间戳（毫秒）返回哈希字段的过期时间。</li>
+<li><code>HPTTL</code>：返回哈希字段的TTL（毫秒）。</li>
+<li><code>HTTL</code>：返回哈希字段的TTL（秒）。</li>
+</ul>
+<p>Redis 8.0 引入了以下额外命令：</p>
+<ul>
+<li>HGETEX</li>
+<li>HSETEX</li>
+</ul>
+<h4 id="242">2.4.2. 设置字段有效期</h4>
+<h5 id="2421-hexpire">2.4.2.1. HEXPIRE</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">HEXPIRE key seconds 
+    [NX | XX | GT | LT] 
+FIELDS numfields field
+  [field ...]
+</code></pre>
+<p>设置哈希中一个或多个字段的有效期。</p>
+<p>可选参数：</p>
+<ul>
+<li>执行条件</li>
+<li>NX：对于每个字段，仅在字段无到期时间时设置。</li>
+<li>XX：对于每个字段，仅在字段已有有效期时设置。</li>
+<li>GT：对于每个字段，仅在新有效期大于当前有效期时设置。</li>
+<li>LT：对于每个字段，仅在新有效期小于当前有效期时设置。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-shell">HEXPIRE no-key 20 NX FIELDS 2 field1 field2
+(nil)
+HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
+(integer) 2
+HEXPIRE mykey 10 FIELDS 3 field1 field2 field3
+1) (integer) 1
+2) (integer) 1
+3) (integer) -2
+HGETALL mykey
+</code></pre>
+<h5 id="2422-hexpireat">2.4.2.2. HEXPIREAT</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">EXPIREAT key unix-time-seconds 
+    [NX | XX | GT | LT] 
+FIELDS numfields field [field ...]
+</code></pre>
+<p>使用绝对Unix时间戳（秒）设置哈希中一个或多个字段的到期时间。</p>
+<blockquote>
+<p>可选参数的含义同HEXPIRE</p>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
+(integer) 2
+redis&gt; HEXPIREAT mykey 1715704971 FIELDS 2 field1 field2
+1) (integer) 1
+2) (integer) 1
+redis&gt; HTTL mykey FIELDS 2 field1 field2
+1) (integer) 567
+2) (integer) 567
+</code></pre>
+<h5 id="2423-hpexpire">2.4.2.3. HPEXPIRE</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">HPEXPIRE key milliseconds 
+    [NX | XX | GT | LT] 
+FIELDS numfields field [field ...]
+</code></pre>
+<p>设置哈希中一个或多个字段的有效期（毫秒）。</p>
+<blockquote>
+<p>可选参数的含义同HEXPIRE</p>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
+(integer) 2
+redis&gt; HPEXPIRE mykey 2000 FIELDS 2 field1 field2
+1) (integer) 1
+2) (integer) 1
+redis&gt; HGETALL mykey
+(empty array)
+</code></pre>
+<h5 id="2424-hpexpireat">2.4.2.4. HPEXPIREAT</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">HPEXPIREAT key unix-time-milliseconds 
+    [NX | XX | GT | LT]
+FIELDS numfields field [field ...]
+</code></pre>
+<p>使用该Unix时间戳（毫秒）设置哈希中一个或多个字段的有效期。</p>
+<blockquote>
+<p>可选参数的含义同HEXPIRE</p>
+</blockquote>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
+(integer) 2
+redis&gt; HPEXPIREAT mykey 1715704971000 FIELDS 2 field1 field2
+1) (integer) 1
+2) (integer) 1
+redis&gt; HPTTL mykey FIELDS 2 field1 field2
+1) (integer) 303340
+2) (integer) 303340
+</code></pre>
+<h5 id="2425-hpersist">2.4.2.5 HPERSIST</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">HPERSIST key FIELDS numfields field [field ...]
+</code></pre>
+<p>移除哈希中指定字段的有效期，使其变成持久的。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
+(integer) 2
+redis&gt; HEXPIRE mykey 300 FIELDS 2 field1 field2
+1) (integer) 1
+2) (integer) 1
+redis&gt; HTTL mykey FIELDS 2 field1 field2
+1) (integer) 283
+2) (integer) 283
+redis&gt; HPERSIST mykey FIELDS 1 field2
+1) (integer) 1
+redis&gt; HTTL mykey FIELDS 2 field1 field2
+1) (integer) 268
+2) (integer) -1
+</code></pre>
+<h4 id="243">2.4.3. 获取字段有效期</h4>
+<h5 id="2431-hexpiretime">2.4.3.1. HEXPIRETIME</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">HEXPIRETIME key FIELDS numfields field [field ...]
+</code></pre>
+<p>以Unix时间戳（秒）返回哈希字段的过期时间。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
+(integer) 2
+redis&gt; HEXPIRE mykey 300  FIELDS 2 field1 field2
+1) (integer) 1
+2) (integer) 1
+redis&gt; HEXPIRETIME mykey FIELDS 2 field1 field2
+1) (integer) 1715705914
+2) (integer) 1715705914
+</code></pre>
+<h5 id="2432-hpexpiretime">2.4.3.2. HPEXPIRETIME</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">HPEXPIRETIME key FIELDS numfields field [field ...]
+</code></pre>
+<p>以Unix时间戳（毫秒）返回哈希字段的过期时间。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
+(integer) 2
+redis&gt; HEXPIRE mykey 300 FIELDS 2 field1 field2
+1) (integer) 1
+2) (integer) 1
+redis&gt; HPEXPIRETIME mykey FIELDS 2 field1 field2
+1) (integer) 1715705913659
+2) (integer) 1715705913659
+</code></pre>
+<h5 id="2433-hpttl">2.4.3.3. HPTTL</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">HPTTL key FIELDS numfields field [field ...]
+</code></pre>
+<p>返回哈希字段的TTL（毫秒）。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HPTTL no-key FIELDS 3 field1 field2 field3
+(nil)
+redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
+(integer) 2
+redis&gt; HEXPIRE mykey 300 FIELDS 2 field1 field3
+1) (integer) 1
+2) (integer) -2
+redis&gt; HPTTL mykey FIELDS 3 field1 field2 field3
+1) (integer) 292202
+2) (integer) -1
+3) (integer) -2
+</code></pre>
+<h5 id="2434-httl">2.4.3.4. HTTL</h5>
+<p>语法格式：</p>
+<pre><code class="language-shell">HTTL key FIELDS numfields field [field ...]
+</code></pre>
+<p>返回哈希字段的TTL（秒）。</p>
+<p>示例：</p>
+<pre><code class="language-shell">redis&gt; HTTL no-key FIELDS 3 field1 field2 field3
+(nil)
+redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
+(integer) 2
+redis&gt; HEXPIRE mykey 300 FIELDS 2 field1 field3
+1) (integer) 1
+2) (integer) -2
+redis&gt; HTTL mykey FIELDS 3 field1 field2 field3
+1) (integer) 283
+2) (integer) -1
+3) (integer) -2
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

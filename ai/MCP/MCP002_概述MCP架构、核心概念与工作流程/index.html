@@ -1,0 +1,1457 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../MCP001_%E5%88%9D%E5%A7%8BMCP%EF%BC%88Model%20Context%20Protocol%EF%BC%89/">
+      
+      
+        <link rel="next" href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>概述MCP架构、核心概念与工作流程 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-mcp-scope" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              概述MCP架构、核心概念与工作流程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI大模型领域热门&核心概念梳理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E3%80%90%E5%B0%9A%E7%A1%85%E8%B0%B7MCP%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%E3%80%912%E5%B0%8F%E6%97%B6%E5%AD%A6%E9%80%8FMCP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    尚硅谷MCP实战指南学习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI大模型零基础全套教程
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI大模型零基础全套教程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A8%E5%A5%97%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%BC%94%E5%8F%98%E5%8F%8A%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大模型的演变及概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MCP
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MCP001_%E5%88%9D%E5%A7%8BMCP%EF%BC%88Model%20Context%20Protocol%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初识MCP
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概述MCP架构、核心概念与工作流程
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概述MCP架构、核心概念与工作流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-mcp-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. MCP 包含的内容（Scope ）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. MCP架构的参与者
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 深入理解MCP核心概念
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. MCP工作流程
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-mcp-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. MCP 包含的内容（Scope ）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. MCP架构的参与者
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 深入理解MCP核心概念
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. MCP工作流程
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    AI
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../MCP001_%E5%88%9D%E5%A7%8BMCP%EF%BC%88Model%20Context%20Protocol%EF%BC%89/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    MCP
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>概述MCP架构、核心概念与工作流程</h1>
+
+<h2 id="1-mcp-scope">1. MCP 包含的内容（Scope ）</h2>
+<p>MCP（Model Context Protocol）协议包含以下内容：
+* MCP规范（Specification）：定义客户端和服务端需要实现的需求。
+* MCP SDKs： 用于实现MCP协议的，针对不同变成语言的SDK。
+* MCP Development Tools： 帮助开发者开发MCP服务端和客户端的工具，包括MCP检查器（MCP Inspector）.
+* MCP Reference Implementation： MCP协议的参考实现。</p>
+<blockquote>
+<p>MCP协议专注于上下文交换协议本身，不关心AI应用如何使用LLM大语言模型，也不关心如何使用上下文。</p>
+</blockquote>
+<h2 id="2-mcp">2. MCP架构的参与者</h2>
+<p>MCP遵循客户端-服务器（client-server）架构，MCP主机（如Claude Code等AI应用）建立与一个或多个MCP服务的连接。</p>
+<blockquote>
+<p>MCP主机通过为每个MCP服务创建一个MCP客户端来实现这一点。
+每个MCP客户端都与其对应的MCP服务保持专用连接。</p>
+</blockquote>
+<p>MCP架构的主要参与者：
+* <strong>MCP主机（Host）</strong>：协调和管理一个或多个MCP客户端的AI应用。
+* <strong>MCP客户端（Client）</strong>：一个组件，负责维护与MCP服务器连接，并从MCP服务获取上下文供主机使用。
+* <strong>MCP服务（Server）</strong>：为MCP客户端提供上下文的程序。</p>
+<p><strong>举例 ：</strong>
+Visual Studio Code 作为 MCP 主机。当 Visual Studio Code 建立与 MCP 服务器（如 Sentry MCP 服务器 ）的连接时，Visual Studio Code 运行时实例化一个 MCP 客户端对象，以维护与 Sentry MCP 服务器的连接。当 Visual Studio Code 随后连接到另一个 MCP 服务器（如本地文件系统服务器 ）时，Visual Studio Code 运行时会实例化一个额外的 MCP 客户端对象以维持该连接。</p>
+<p><strong>示意图：</strong></p>
+<pre><code class="language-mermaid">flowchart TB
+    subgraph Host[&quot;MCP Host (AI Application)&quot;]
+        Client1[&quot;MCP Client 1&quot;]
+        Client2[&quot;MCP Client 2&quot;]
+        Client3[&quot;MCP Client 3&quot;]
+        Client4[&quot;MCP Client 4&quot;]
+    end
+
+    ServerA[&quot;MCP Server A - Local&lt;br/&gt;(e.g. Filesystem)&quot;]
+    ServerB[&quot;MCP Server B - Local&lt;br/&gt;(e.g. Database)&quot;]
+    ServerC[&quot;MCP Server C - Remote&lt;br/&gt;(e.g. Sentry)&quot;]
+
+    Client1 --&gt;|Dedicated connection| ServerA
+    Client2 --&gt;|Dedicated connection| ServerB
+    Client3 --&gt;|Dedicated connection| ServerC
+    Client4 --&gt;|Dedicated connection| ServerC
+</code></pre>
+<blockquote>
+<p>注意：
+MCP服务器指的是提供上下文数据的程序，既可以运行在本地，也可以运行在远程。
+例如：
+当Claude Desktop启动filesystem server时，这个服务器和主机运行在相同的机器上，使用stdio传输，这种称为本地MCP服务器。
+而Sentry MCP Server运行在Sentry平台上，使用HTTP流式传输，这种称为远程MCP服务器。</p>
+</blockquote>
+<h2 id="3-mcp">3. 深入理解MCP核心概念</h2>
+<p>其中包含以下的核心概念：
+* MCP主机（Host）：运行大语言模型并发起连接的应用程序，是与用户直接交互的界面和环境。
+  * 是整个架构的大脑，负责接收用户指令，决定需要调用什么工具或访问什么数据，并通过内置的Client发起请求。
+  * 常见示例：Claude Desktop、Cursor、Cline
+* MCP服务（Server）：轻量级的程序或服务，负责暴露特定的功能、数据或工具给 Host 使用。
+  * 角色：它是“服务提供者”或“工具箱”。
+    * 它不直接运行大模型，而是专注于提供具体的业务能力（如查询数据库、读取文件、调用 API、执行代码）。
+    * 它向连接的 Client 声明自己支持的能力（Tools, Resources, Prompts）。
+    * 它接收来自 Client 的请求，执行实际操作，并返回结果。
+  * 特点：开发者可以针对不同的需求编写不同的 Server（例如：一个专门连接 MySQL 的 Server，一个专门读取本地 PDF 的 Server）。
+* MCP客户端（Client）：嵌入到Host内部的通信模块或中间件，负责维护与特定Server的一对一连接。
+  * 角色：它是“翻译官”或“连接器”。
+    * 当 Host 中的 LLM 决定需要外部数据时，Client 负责将模型的意图转换为标准的 MCP 协议消息（基于 JSON-RPC 2.0）。
+    * 它管理连接的生命周期（建立、保持、断开）。
+    * 它处理传输层细节（如通过 stdio 或 Streamable HTTP 发送数据）。
+  * 关系：Host 包含 Client。通常一个 Host 内部会有多个 Client 实例，每个实例专门负责连接一个特定的 Server。
+* 本地资源（Local Resources）：指位于用户本地计算机上，通过 MCP Server 暴露给模型的数据或上下文。
+  * 让 AI 能够安全地读取和理解用户本地的文件和环境，而无需将数据上传到云端（取决于具体实现和隐私设置）。
+  * 常见类型：
+    * 文件系统：本地代码库、文档（PDF, MD, TXT）、配置文件。
+    * 本地数据库：SQLite 文件、本地运行的 PostgreSQL/MySQL 实例。
+    * 系统信息：当前运行的进程、环境变量、Git 状态。
+  * 访问方式：通常通过运行在本地机器上的 MCP Server（使用 stdio 传输层）来访问。
+* 远程资源（Remote Resources）：指位于网络远端（云端或其他服务器），通过 MCP Server 暴露给模型的数据或服务。
+  * 扩展 AI 的能力边界，使其能访问互联网实时数据、企业私有云数据或第三方 SaaS 服务。
+  * 常见类型：
+    * 在线数据库：云端的 RDS、Data Warehouse。
+    * API 服务：天气数据、股票行情、搜索引擎、Jira/Slack 等企业工具。
+    * 知识库：托管在云端的公司文档库、Wiki。
+  * 访问方式：通常通过基于网络的 MCP Server（使用 Streamable HTTP 或早期的 SSE 传输层）来访问。</p>
+<p><strong>架构图：</strong></p>
+<pre><code class="language-mermaid">graph LR
+  Host[Host with MCP Client]
+  ServerA[MCP Server A]
+  ServerB[MCP Server B]
+  ServerC[MCP Server C]
+  LocalResourcesA[Local Resources A]
+  LocalResourcesB[Local Resources B]
+  RemoteResources[Remote Resources]
+  Host --&gt; | MCP Protocol | ServerA
+  Host --&gt; | MCP Protocol | ServerB
+  Host --&gt; | MCP Protocol | ServerC
+  ServerA --&gt; LocalResourcesA
+  ServerB --&gt; LocalResourcesB
+  ServerC --&gt; |Web APIs| RemoteResources
+</code></pre>
+<h2 id="4-mcp">4. MCP工作流程</h2>
+<p>MCP（Model Context Protocol）的工作流程基于客户端-服务器架构，采用JSON-RPC 2.0协议进行通信。整个流程涉及Host、MCP Client、MCP Server以及后端资源之间的协调配合。</p>
+<p>主要工作步骤：
+1. 初始化阶段
+   1. 服务发现与注册：Host通过配置文件或服务注册中心发现可用的MCP Server
+   2. 连接建立：MCP Client与指定的MCP Server建立通信连接（通过stdio或SSE）
+   3. 能力声明：MCP Server向Host声明其支持的工具（Tools）、资源（Resources）和提示（Prompts）
+2. 请求处理阶段
+   1.  用户输入：用户向AI模型提出请求或问题
+   2. 意图识别：AI模型分析用户意图，确定需要调用的外部工具或资源
+   3. 请求转发：MCP Client将模型的请求转换为标准MCP协议消息
+   4. 服务执行：MCP Server接收请求，执行相应的操作（如数据库查询、文件读取等）
+   5. 结果返回：MCP Server将执行结果返回给MCP Client，再传递给AI模型
+3. 响应生成阶段
+   1. 上下文整合：AI模型将外部数据与原有知识整合
+   2. 响应生成：基于整合后的信息生成最终响应
+   3. 用户反馈：将结果呈现给用户</p>
+<p><strong>工作流程图：</strong></p>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant User as 用户
+    participant Host as MCP Host (Claude/Cursor等)
+    participant LLM as 大语言模型LLM
+    participant Client as MCP Client
+    participant Server as MCP Server
+    participant Resource as 外部资源(数据库/文件系统/API)
+
+    Note over User,Server: 初始化阶段
+
+    User-&gt;&gt;Host: 启动
+    Host-&gt;&gt;Client: 启动客户端
+    Client-&gt;&gt;Server: 连接可用的MCP Server
+    Server-&gt;&gt;Client: 确认连接
+    Client-&gt;&gt;Server: 请求可用的工具列表
+    Server--&gt;&gt;Client: 返回工具列表和描述
+
+    Note over User,Resource: 请求处理阶段
+    User-&gt;&gt;Host: 输入问题
+    Host-&gt;&gt;LLM: 转发请求
+    LLM-&gt;&gt;Client: 请求调用工具
+    Client--&gt;&gt;User: 请求确认是否调用工具
+    User--&gt;&gt;Client: 确认调用工具
+    Client-&gt;&gt;Server: 发送工具调用请求
+    Server-&gt;&gt;Resource: 获取资源数据
+    Resource-&gt;&gt;Server: 返回数据
+    Server-&gt;&gt;Client: 获取工具调用结果
+    Client-&gt;&gt;LLM: 传递执行结果
+    LLM-&gt;&gt;Host: 返回应答
+    Host-&gt;&gt;User: 生成并返回最终响应
+</code></pre>
+<p><strong>数据流向图：</strong></p>
+<pre><code class="language-mermaid">flowchart TD
+    User[用户]
+    Host[MCP Host]
+    LLM[大语言模型]
+    Client[MCP Client]
+    Server[MCP Server]
+    Resource[外部资源]
+    User --&gt; |1.输入自然语言|Host
+    Host --&gt; |2.发送输入和工具列表|Client
+    LLM --&gt; |3.工具调用请求|Host
+    Host --&gt; |4.工具调用请求审批|User
+    User --&gt; |5.批准|Host
+    Host --&gt; |6.工具调用命令|Client
+    Client --&gt; |7.工具调用请求|Server
+    Server --&gt; |8.获取资源|Resource
+    Resource --&gt; |9.返回数据|Server
+    Server --&gt; |10.返回工具调用结果|Client
+    Client --&gt; |11.传递工具调用结果|Host
+    Host --&gt; |12.传递工具调用结果|LLM
+    LLM --&gt; |13.返回应答|Host
+    Host --&gt; |14.展示应答|User
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

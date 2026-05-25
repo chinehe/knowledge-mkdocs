@@ -1,0 +1,2593 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87002_%E7%AC%AC%E4%B8%80%E4%B8%AAGin%E6%9C%8D%E5%8A%A1/">
+      
+      
+        <link rel="next" href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96%26%E6%A8%A1%E5%9E%8B%E7%BB%91%E5%AE%9A%E4%B8%8E%E6%A0%A1%E9%AA%8C/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>路由与路由组详解 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-gin" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              路由与路由组详解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang语言
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang语言
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87001_%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gin框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gin框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    路由与路由组详解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    路由与路由组详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-gin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 第一个Gin服务中的路由
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 设置路由Method
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 设置路由Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-getpostput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. GET、POST、PUT....
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-methodsany" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 匹配所有Methods（Any）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-methodhandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 更灵活的Method（Handle）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-methodsmatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 匹配多种Methods（Match）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-methodnotallowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. MethodNotAllowed处理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5. MethodNotAllowed处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#251-404" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5.1. 默认行为404
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#252-handlemethodnotallowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5.2. HandleMethodNotAllowed配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#253-methodnotallowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5.3 自定义MethodNotAllowed处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 路由组
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 路由组">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 路由组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 嵌套路由组
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 最佳实践
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 按业务模块划分路由组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 合理使用中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 统一错误处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-restful" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. RESTful风格设计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. 路由版本控制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. 参数验证和路由分离
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96%26%E6%A8%A1%E5%9E%8B%E7%BB%91%E5%AE%9A%E4%B8%8E%E6%A0%A1%E9%AA%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    请求参数获取&模型绑定与校验
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87003_%E5%93%8D%E5%BA%94%E8%AE%BE%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%88%E7%8A%B6%E6%80%81%E7%A0%81%E3%80%81%E5%A4%B4%E4%BF%A1%E6%81%AF%E3%80%81%E5%A4%9A%E6%A0%BC%E5%BC%8F%E5%BA%94%E7%AD%94%E4%BD%93%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    响应设置详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87004_%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    中间件的使用与机制详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87005_%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    静态文件服务
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87006_HTML%E6%A8%A1%E6%9D%BF%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%B8%B2%E6%9F%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTML模板加载与渲染
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87007_%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    文件上传与下载
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87008_%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    错误处理机制详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87009_%E6%97%A5%E5%BF%97%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志中间件详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Gin%E6%A1%86%E6%9E%B6%E8%BF%9B%E9%98%B6%E7%AF%87001_%E6%9B%B4%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8gin%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-gin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 第一个Gin服务中的路由
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 设置路由Method
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 设置路由Method">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-getpostput" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. GET、POST、PUT....
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-methodsany" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 匹配所有Methods（Any）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-methodhandle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 更灵活的Method（Handle）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-methodsmatch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 匹配多种Methods（Match）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-methodnotallowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. MethodNotAllowed处理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5. MethodNotAllowed处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#251-404" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5.1. 默认行为404
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#252-handlemethodnotallowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5.2. HandleMethodNotAllowed配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#253-methodnotallowed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5.3 自定义MethodNotAllowed处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 路由组
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 路由组">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 路由组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 嵌套路由组
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 最佳实践
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 最佳实践">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 按业务模块划分路由组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 合理使用中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 统一错误处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-restful" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. RESTful风格设计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. 路由版本控制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. 参数验证和路由分离
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Gin框架
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    基础篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>路由与路由组详解</h1>
+
+<h2 id="1-gin">1. 第一个Gin服务中的路由</h2>
+<p>我们的第一个gin服务源码如下：</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;net/http&quot;
+
+    // 导入gin框架
+    &quot;github.com/gin-gonic/gin&quot;
+)
+
+func main() {
+    // 创建默认的gin路由
+    router := gin.Default()
+
+    // 定义一个简单的GET端点
+    router.GET(&quot;/ping&quot;, func(c *gin.Context) {
+        // 返回JSON数据
+        c.JSON(http.StatusOK, gin.H{
+            &quot;message&quot;: &quot;pong&quot;,
+        })
+    })
+
+    // 启动服务（默认端口8080）
+    err := router.Run()
+    if err != nil {
+        return
+    } 
+}
+</code></pre>
+<p>代码中，我们使用<code>router.GET</code>方法为我们的gin服务定义了一个简单的<code>/ping</code>路由。</p>
+<h2 id="2-method">2. 设置路由Method</h2>
+<p>除了GET方式的路由外，Gin框架支持定义各种HTTP Method的路由！</p>
+<h3 id="21-getpostput">2.1. GET、POST、PUT....</h3>
+<p>Gin框架直接提供了大部分HTTP Method的路由定义方法：</p>
+<ul>
+<li>GET</li>
+<li>POST</li>
+<li>PUT</li>
+<li>DELETE</li>
+<li>PATCH</li>
+<li>OPTIONS</li>
+<li>HEAD</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">
+func NewHttpRouter() *gin.Engine {
+    router := gin.Default()
+
+    router.GET(&quot;/ping&quot;, handler.GetPing)
+    router.POST(&quot;/ping&quot;, handler.PostPing)
+    router.PUT(&quot;/ping&quot;, handler.PutPing)
+    router.DELETE(&quot;/ping&quot;, handler.DeletePing)
+    router.PATCH(&quot;/ping&quot;, handler.PatchPing)
+    router.OPTIONS(&quot;/ping&quot;, handler.OptionsPing)
+    router.HEAD(&quot;/ping&quot;, handler.HeadPing)
+
+    return router
+}
+</code></pre>
+<p><strong>注意：</strong> 使用这些方法定义的路由，只能使用对应的HTTP Method访问。如果使用错误的HTTP Method访问接口，默认会404。</p>
+<h3 id="22-methodsany">2.2. 匹配所有Methods（Any）</h3>
+<p>Gin框架提供了<code>Any</code>方法来定义匹配所有HTTP Methods的路由。</p>
+<p>源码：</p>
+<pre><code class="language-go">func (group *RouterGroup) Any(relativePath string, handlers ...HandlerFunc) IRoutes {
+  // 可以看到，实际上是为anyMethods中定义的所有HTTP Method都注册了路由
+    for _, method := range anyMethods {
+        group.handle(method, relativePath, handlers)
+    }
+
+    return group.returnObj()
+}
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-go">func NewHttpRouter() *gin.Engine {
+    router := gin.Default()
+
+    router.Any(&quot;/ping/any&quot;, handler.AnyPing)
+
+    return router
+}
+</code></pre>
+<h3 id="23-methodhandle">2.3. 更灵活的Method（Handle）</h3>
+<p><code>Handle</code>方法以指定的路径和method注册路由。</p>
+<ul>
+<li>对于 GET、POST、PUT、PATCH 和 DELETE 请求，可以使用相应的快捷函数。</li>
+<li><code>Handle</code>方法旨在用于批量加载，且它运行使用不常用的、非标准化的或者自定义的HTTP Method。</li>
+</ul>
+<p><code>Handle</code>方法源码如下：</p>
+<pre><code class="language-go">func (group *RouterGroup) Handle(httpMethod, relativePath string, handlers ...HandlerFunc) IRoutes {
+  // 可以看到，http method只做了简单的正则校验
+    if matched := regEnLetter.MatchString(httpMethod); !matched {
+        panic(&quot;http method &quot; + httpMethod + &quot; is not valid&quot;)
+    }
+    return group.handle(httpMethod, relativePath, handlers)
+}
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-go">
+func NewHttpRouter() *gin.Engine {
+    router := gin.Default()
+
+  // look，这里的HTTP Method竟然是HELLO
+    router.Handle(&quot;HELLO&quot;, &quot;/ping&quot;, handler.HelloPing)
+
+    return router
+}
+</code></pre>
+<h3 id="24-methodsmatch">2.4. 匹配多种Methods（Match）</h3>
+<p><code>Match</code>方法用于定义匹配多种HTTP Methods的路由。</p>
+<p>源码：</p>
+<pre><code class="language-go">// 可以看到methods参数是一个数组
+func (group *RouterGroup) Match(methods []string, relativePath string, handlers ...HandlerFunc) IRoutes {
+    for _, method := range methods {
+        group.handle(method, relativePath, handlers)
+    }
+
+    return group.returnObj()
+}
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-go">func NewHttpRouter() *gin.Engine {
+    router := gin.Default()
+
+  // 这里匹配GET和POST
+    router.Match([]string{&quot;GET&quot;, &quot;POST&quot;}, &quot;/match&quot;, handler.MatchPing)
+
+    return router
+}
+</code></pre>
+<h3 id="25-methodnotallowed">2.5. MethodNotAllowed处理</h3>
+<h4 id="251-404">2.5.1. 默认行为404</h4>
+<p>在上面的章节中，我们介绍了各种定义路由HTTP Method的方式。</p>
+<p>当我们定义了一个路由应该使用的HTTP Method后，如果请求的HTTP Method不匹配，默认会应答404.</p>
+<p>示例：</p>
+<pre><code class="language-go">router.GET(&quot;/ping&quot;, handler.GetPing)
+
+// 使用GET方式访问：正常应答
+// 使用POST方式访问：应答404
+</code></pre>
+<h4 id="252-handlemethodnotallowed">2.5.2. HandleMethodNotAllowed配置</h4>
+<p><code>gin.Engine</code>中有一个<code>HandleMethodNotAllowed</code>属性，可以用于修改Method不匹配时的默认行为。</p>
+<pre><code class="language-go">// HandleMethodNotAllowed if enabled, the router checks if another method is allowed for the
+    // current route, if the current request can not be routed.
+    // If this is the case, the request is answered with 'Method Not Allowed'
+    // and HTTP status code 405.
+    // If no other Method is allowed, the request is delegated to the NotFound
+    // handler.
+HandleMethodNotAllowed bool
+</code></pre>
+<ul>
+<li>当HandleMethodNotAllowed开启时，如果请求的路径存在但HTTP方法不匹配，gin会检查该路径是否注册了其他HTTP方法。如果存在其他方法，则返回405（Method Not Allowed）；如果该路径没有任何方法注册，则仍然返回404（Not Found）。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">router.HandleMethodNotAllowed = true
+
+router.GET(&quot;/ping&quot;, handler.GetPing)
+
+// GET方式访问/ping：正常应答
+// POST方式访问/ping：应答405
+</code></pre>
+<h4 id="253-methodnotallowed">2.5.3 自定义MethodNotAllowed处理</h4>
+<p>上文提到，如果请求路径正确但请求Method不匹配（MethodNotAllowed场景）：</p>
+<ul>
+<li>如果HandleMethodNotAllowed=false：默认应答404（Not Found）。</li>
+<li>如果HandleMethodNotAllowed=true：默认应答405（Method Not Allowed）。</li>
+</ul>
+<p>除此之外，gin还提供了<code>NoMethod</code>方法来自定义处理逻辑：</p>
+<pre><code class="language-go">// 用于设置当 Engine.HandleMethodNotAllowed = true 时调用的处理程序。
+func (engine *Engine) NoMethod(handlers ...HandlerFunc) {
+    engine.noMethod = handlers
+    engine.rebuild405Handlers()
+}
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-go">func NewHttpRouter() *gin.Engine {
+    router := gin.Default()
+
+  // 开启HandleMethodNotAllowed
+    router.HandleMethodNotAllowed = true
+
+    router.GET(&quot;/ping&quot;, handler.GetPing)
+
+  // 定义处理函数
+    router.NoMethod(handler.NoMethodPing)
+
+    return router
+}
+
+func NoMethodPing(c *gin.Context) {
+    // 通常应返回405状态码，但可根据需求自定义
+    c.JSON(http.StatusMethodNotAllowed, gin.H{
+        &quot;message&quot;: &quot;method not allowed&quot;,
+    })
+}
+
+// GET方式访问/ping：正常应答
+// POST方式访问/ping：no method pong
+</code></pre>
+<h2 id="3">3. 路由组</h2>
+<h4 id="31">3.1. 路由组</h4>
+<p>gin框架支持路由分组：即将具有相同路径前缀或者需要相同中间件的路由放在同一个路由组中。</p>
+<p><code>Group</code>方法用于路由分组，其源码如下：</p>
+<pre><code class="language-go">// Group creates a new router group. You should add all the routes that have common middlewares or the same path prefix.
+// For example, all the routes that use a common middleware for authorization could be grouped.
+func (group *RouterGroup) Group(relativePath string, handlers ...HandlerFunc) *RouterGroup {
+    return &amp;RouterGroup{
+        Handlers: group.combineHandlers(handlers),
+        basePath: group.calculateAbsolutePath(relativePath),
+        engine:   group.engine,
+    }
+}
+</code></pre>
+<p><code>Group</code>方法用于创建一个新的路由组：</p>
+<ul>
+<li>参数<code>relativePath</code>用于定义组中路由的通用路径。</li>
+<li>参数<code>handlers</code>用于定义组中路由的通用中间件。</li>
+<li><code>Group</code>方法创建一个新的路由组，我们可以将具有相同路径前缀或者要使用相同中间件的路由划分为一个组。</li>
+</ul>
+<p>示例：</p>
+<pre><code class="language-go">func NewHttpRouter() *gin.Engine {
+    router := gin.Default()
+
+    testRouter := router.Group(&quot;/test&quot;)
+    {
+        testRouter.Any(&quot;/ping&quot;, handler.TestPing)
+        testRouter.Any(&quot;/hello&quot;, handler.TestHello)
+    }
+
+    platRouter := router.Group(&quot;/plat&quot;, middleware.AuthMiddleware())
+    {
+        platRouter.Any(&quot;/login&quot;, handler.PlatLogin)
+        platRouter.Any(&quot;/logout&quot;, handler.PlatLogout)
+    }
+
+    return router
+}
+
+// 上面接口的访问路径分别为
+// /test/ping
+// /test/hello
+// /plat/login
+// /plat/logout
+</code></pre>
+<h4 id="32">3.2. 嵌套路由组</h4>
+<p>Gin框架支持多级路由组嵌套，允许更细粒度的路由组织。例如：</p>
+<pre><code class="language-go">func NewHttpRouter() *gin.Engine {
+    router := gin.Default()
+
+    api := router.Group(&quot;/api&quot;)
+    {
+        v1 := api.Group(&quot;/v1&quot;)
+        {
+            v1.GET(&quot;/users&quot;, handler.GetUsers)
+            v1.POST(&quot;/users&quot;, handler.CreateUser)
+        }
+
+        v2 := api.Group(&quot;/v2&quot;)
+        {
+            v2.GET(&quot;/users&quot;, handler.GetUsersV2)
+        }
+    }
+
+    return router
+}
+</code></pre>
+<p>这样，<code>/api/v1/users</code>和<code>/api/v2/users</code>将分别由不同的处理函数处理。</p>
+<p>此外，父路由组的中间件会自动应用到所有子路由组。例如，如果<code>api</code>组配置了认证中间件，则<code>v1</code>和<code>v2</code>组的所有路由都将应用该中间件。</p>
+<h2 id="4">4. 最佳实践</h2>
+<p>在实际项目开发中，合理使用Gin框架的路由和路由组功能能够大大提高代码的可维护性和可扩展性。以下是一些推荐的最佳实践：</p>
+<h3 id="41">4.1. 按业务模块划分路由组</h3>
+<p>将不同业务模块的路由划分到不同的路由组中，有助于保持代码结构清晰：</p>
+<pre><code class="language-go">func SetupRoutes(router *gin.Engine) {
+    // 用户相关路由
+    userGroup := router.Group(&quot;/user&quot;)
+    {
+        userGroup.POST(&quot;/register&quot;, user.Register)
+        userGroup.POST(&quot;/login&quot;, user.Login)
+        userGroup.GET(&quot;/profile&quot;, authMiddleware(), user.GetProfile)
+    }
+
+    // 订单相关路由
+    orderGroup := router.Group(&quot;/order&quot;)
+    {
+        orderGroup.GET(&quot;/:id&quot;, order.GetOrder)
+        orderGroup.POST(&quot;/&quot;, authMiddleware(), order.CreateOrder)
+        orderGroup.PUT(&quot;/:id&quot;, authMiddleware(), order.UpdateOrder)
+    }
+
+    // 管理后台路由
+    adminGroup := router.Group(&quot;/admin&quot;, adminAuthMiddleware())
+    {
+        adminGroup.GET(&quot;/dashboard&quot;, admin.Dashboard)
+        adminGroup.GET(&quot;/users&quot;, admin.ListUsers)
+        adminGroup.DELETE(&quot;/users/:id&quot;, admin.DeleteUser)
+    }
+}
+</code></pre>
+<h3 id="42">4.2. 合理使用中间件</h3>
+<p>在路由组上应用共享的中间件，避免重复代码：</p>
+<pre><code class="language-go">// API版本控制
+v1 := router.Group(&quot;/api/v1&quot;)
+v1.Use(loggingMiddleware(), corsMiddleware())
+
+authGroup := v1.Group(&quot;/auth&quot;)
+authGroup.Use(rateLimitMiddleware()) // 特定路由组的额外中间件
+{
+    authGroup.POST(&quot;/login&quot;, auth.Login)
+    authGroup.POST(&quot;/register&quot;, auth.Register)
+}
+
+userGroup := v1.Group(&quot;/user&quot;, authRequiredMiddleware()) // 需要认证的路由组
+{
+    userGroup.GET(&quot;/profile&quot;, user.GetProfile)
+    userGroup.PUT(&quot;/profile&quot;, user.UpdateProfile)
+}
+</code></pre>
+<h3 id="43">4.3. 统一错误处理</h3>
+<p>通过NoRoute和NoMethod统一处理404和405错误：</p>
+<pre><code class="language-go">func SetupRouter() *gin.Engine {
+    router := gin.Default()
+
+    // 全局404处理
+    router.NoRoute(func(c *gin.Context) {
+        c.JSON(http.StatusNotFound, gin.H{
+            &quot;error&quot;: &quot;Page not found&quot;,
+            &quot;path&quot;: c.Request.URL.Path,
+        })
+    })
+
+    // 全局405处理
+    router.HandleMethodNotAllowed = true
+    router.NoMethod(func(c *gin.Context) {
+        c.JSON(http.StatusMethodNotAllowed, gin.H{
+            &quot;error&quot;: &quot;Method not allowed&quot;,
+            &quot;method&quot;: c.Request.Method,
+            &quot;path&quot;: c.Request.URL.Path,
+        })
+    })
+
+    // 路由定义...
+    return router
+}
+</code></pre>
+<h3 id="44-restful">4.4. RESTful风格设计</h3>
+<p>遵循RESTful API设计原则，合理使用HTTP方法：</p>
+<pre><code class="language-go">// 推荐的RESTful风格路由设计
+api := router.Group(&quot;/api/v1&quot;)
+{
+    // 资源集合操作
+    api.GET(&quot;/posts&quot;, post.ListPosts)      // 获取文章列表
+    api.POST(&quot;/posts&quot;, post.CreatePost)    // 创建新文章
+
+    // 单个资源操作
+    api.GET(&quot;/posts/:id&quot;, post.GetPost)    // 获取特定文章
+    api.PUT(&quot;/posts/:id&quot;, post.UpdatePost) // 完整更新文章
+    api.PATCH(&quot;/posts/:id&quot;, post.PatchPost) // 部分更新文章
+    api.DELETE(&quot;/posts/:id&quot;, post.DeletePost) // 删除文章
+
+    // 子资源操作
+    api.GET(&quot;/posts/:id/comments&quot;, comment.ListComments) // 获取文章评论
+    api.POST(&quot;/posts/:id/comments&quot;, comment.CreateComment) // 添加评论
+}
+</code></pre>
+<h3 id="45">4.5. 路由版本控制</h3>
+<p>通过路由组实现API版本控制：</p>
+<pre><code class="language-go">func SetupRoutes(router *gin.Engine) {
+    // v1版本API
+    v1 := router.Group(&quot;/api/v1&quot;)
+    {
+        v1.GET(&quot;/users&quot;, userHandler.ListUsersV1)
+        v1.GET(&quot;/users/:id&quot;, userHandler.GetUserV1)
+    }
+
+    // v2版本API
+    v2 := router.Group(&quot;/api/v2&quot;)
+    {
+        v2.GET(&quot;/users&quot;, userHandler.ListUsersV2)
+        v2.GET(&quot;/users/:id&quot;, userHandler.GetUserV2)
+        v2.GET(&quot;/users/:id/profile&quot;, userHandler.GetUserProfileV2)
+    }
+}
+</code></pre>
+<h3 id="46">4.6. 参数验证和路由分离</h3>
+<p>将路由定义与业务逻辑分离，使代码更加清晰：</p>
+<pre><code class="language-go">// routes/setup.go
+func SetupUserRoutes(router *gin.Engine) {
+    userGroup := router.Group(&quot;/users&quot;)
+    {
+        userGroup.GET(&quot;/&quot;, listUsers)
+        userGroup.POST(&quot;/&quot;, createUser)
+        userGroup.GET(&quot;/:id&quot;, getUser)
+        userGroup.PUT(&quot;/:id&quot;, updateUser)
+        userGroup.DELETE(&quot;/:id&quot;, deleteUser)
+    }
+}
+
+// handlers/user_handler.go
+func listUsers(c *gin.Context) {
+    // 处理获取用户列表逻辑
+}
+
+func createUser(c *gin.Context) {
+    // 处理创建用户逻辑
+}
+
+func getUser(c *gin.Context) {
+    id := c.Param(&quot;id&quot;)
+    // 处理获取单个用户逻辑
+}
+
+func updateUser(c *gin.Context) {
+    id := c.Param(&quot;id&quot;)
+    // 处理更新用户逻辑
+}
+
+func deleteUser(c *gin.Context) {
+    id := c.Param(&quot;id&quot;)
+    // 处理删除用户逻辑
+}
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

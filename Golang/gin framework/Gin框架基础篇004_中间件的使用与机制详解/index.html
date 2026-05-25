@@ -1,0 +1,2483 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87003_%E5%93%8D%E5%BA%94%E8%AE%BE%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%88%E7%8A%B6%E6%80%81%E7%A0%81%E3%80%81%E5%A4%B4%E4%BF%A1%E6%81%AF%E3%80%81%E5%A4%9A%E6%A0%BC%E5%BC%8F%E5%BA%94%E7%AD%94%E4%BD%93%EF%BC%89/">
+      
+      
+        <link rel="next" href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87005_%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>中间件的使用与机制详解 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              中间件的使用与机制详解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang语言
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Golang语言
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%B8%B8%E9%87%8F%E5%8F%98%E9%87%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../golang/Golang%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87001_%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5%E8%A7%A3%E9%87%8A/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并发编程篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gin框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Gin框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    路由与路由组详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E8%8E%B7%E5%8F%96%26%E6%A8%A1%E5%9E%8B%E7%BB%91%E5%AE%9A%E4%B8%8E%E6%A0%A1%E9%AA%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    请求参数获取&模型绑定与校验
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87003_%E5%93%8D%E5%BA%94%E8%AE%BE%E7%BD%AE%E8%AF%A6%E8%A7%A3%EF%BC%88%E7%8A%B6%E6%80%81%E7%A0%81%E3%80%81%E5%A4%B4%E4%BF%A1%E6%81%AF%E3%80%81%E5%A4%9A%E6%A0%BC%E5%BC%8F%E5%BA%94%E7%AD%94%E4%BD%93%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    响应设置详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    中间件的使用与机制详解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    中间件的使用与机制详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 中间件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 中间件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 何为中间件？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 中间件与普通处理函数的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 使用中间件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 使用中间件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 全局中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 路由组中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 单个路由中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 内置中间件介绍
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 内置中间件介绍">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 默认中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 其他内置中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 自定义中间件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 自定义中间件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 自定义中间件基础
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 中间件基础结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 实际示例：权限控制中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 实际示例：请求限流中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 中间件执行顺序
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87005_%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    静态文件服务
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87006_HTML%E6%A8%A1%E6%9D%BF%E5%8A%A0%E8%BD%BD%E4%B8%8E%E6%B8%B2%E6%9F%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTML模板加载与渲染
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87007_%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E4%B8%8B%E8%BD%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    文件上传与下载
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87008_%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    错误处理机制详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87009_%E6%97%A5%E5%BF%97%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日志中间件详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../Gin%E6%A1%86%E6%9E%B6%E8%BF%9B%E9%98%B6%E7%AF%87001_%E6%9B%B4%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8gin%E6%9C%8D%E5%8A%A1/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 中间件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 中间件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 何为中间件？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 中间件与普通处理函数的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 使用中间件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 使用中间件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 全局中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 路由组中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 单个路由中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 内置中间件介绍
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 内置中间件介绍">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 默认中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 其他内置中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 自定义中间件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 自定义中间件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 自定义中间件基础
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 中间件基础结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 实际示例：权限控制中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 实际示例：请求限流中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 中间件执行顺序
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Golang
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Gin%E6%A1%86%E6%9E%B6%E5%85%A5%E9%97%A8%E7%AF%87001_Gin%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Gin框架
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Gin%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%B7%AF%E7%94%B1%E4%B8%8E%E8%B7%AF%E7%94%B1%E7%BB%84%E8%AF%A6%E8%A7%A3/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    基础篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>中间件的使用与机制详解</h1>
+
+<h2 id="1">1. 中间件</h2>
+<h3 id="11">1.1. 何为中间件？</h3>
+<p>在Gin框架中，中间件（Middleware）是一个非常重要的概念。中间件本质上是一个函数，它可以在请求到达路由处理函数之前或之后执行一些公共逻辑，例如身份验证、日志记录、错误处理等。</p>
+<p>中间件在HTTP请求处理流程中扮演着"拦截器"的角色。当请求到达路由处理函数之前，会先经过注册的中间件进行预处理，处理完成后才会到达实际的路由处理函数。同样，在路由处理函数执行完成后，中间件还可以进行后置处理。</p>
+<p>中间件的设计模式遵循洋葱模型，请求会依次通过每一层中间件，形成一个"外-内-外"的执行流程，即请求进入时执行中间件前半部分逻辑，最后再按相反顺序执行后半部分逻辑。</p>
+<h3 id="12">1.2. 中间件与普通处理函数的区别</h3>
+<p>在深入学习中间件之前，我们需要理解中间件和普通处理函数之间的区别：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>中间件</th>
+<th>普通处理函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>函数签名</td>
+<td><code>gin.HandlerFunc</code></td>
+<td><code>gin.HandlerFunc</code></td>
+</tr>
+<tr>
+<td>执行时机</td>
+<td>在请求到达路由处理函数前/后执行</td>
+<td>作为路由的最终处理逻辑</td>
+</tr>
+<tr>
+<td>调用方式</td>
+<td>通过 <code>c.Next()</code> 调用链中的下一个处理器</td>
+<td>直接响应客户端</td>
+</tr>
+<tr>
+<td>主要用途</td>
+<td>处理公共逻辑（如认证、日志、限流等）</td>
+<td>实现具体的业务逻辑</td>
+</tr>
+<tr>
+<td>执行顺序</td>
+<td>可以设置执行顺序，形成处理链</td>
+<td>按路由匹配执行</td>
+</tr>
+<tr>
+<td>响应权</td>
+<td>通常不直接响应，而是调用 <code>c.Next()</code></td>
+<td>通常直接向客户端返回响应</td>
+</tr>
+<tr>
+<td>通用性</td>
+<td>通常应用于多个路由或整个应用</td>
+<td>通常针对特定路由</td>
+</tr>
+</tbody>
+</table>
+<p><strong>重要说明：中间件与普通处理函数本质相同</strong></p>
+<p>从技术上讲，中间件和普通处理函数的类型完全相同，都是 <code>gin.HandlerFunc</code> 类型：</p>
+<pre><code class="language-go">type HandlerFunc func(*Context)
+</code></pre>
+<p>这意味着：
+1. 普通处理函数可以作为中间件使用
+2. 中间件也可以作为路由处理函数使用
+3. 它们的唯一区别在于使用方式和设计意图</p>
+<pre><code class="language-go">// 普通处理函数
+func userHandler(c *gin.Context) {
+    c.JSON(200, gin.H{&quot;user&quot;: &quot;example&quot;})
+}
+
+// 中间件
+func authMiddleware(c *gin.Context) {
+    token := c.GetHeader(&quot;Authorization&quot;)
+    if token == &quot;&quot; {
+        c.JSON(401, gin.H{&quot;error&quot;: &quot;未提供认证令牌&quot;})
+        c.Abort()
+        return
+    }
+    c.Set(&quot;user_id&quot;, &quot;some_user&quot;)
+    c.Next()
+}
+
+// 两者可以混用
+r := gin.Default()
+
+// 将普通处理函数作为中间件使用（虽然不常见）
+r.Use(userHandler)  // 这样会将userHandler作为全局中间件
+r.GET(&quot;/test&quot;, func(c *gin.Context) {
+    c.String(200, &quot;test&quot;)
+})
+
+// 将中间件作为路由处理函数使用
+r.GET(&quot;/protected&quot;, authMiddleware)  // 中间件作为路由处理函数，但没有后续处理
+</code></pre>
+<p><strong>关键区别点：</strong></p>
+<ol>
+<li>
+<p><strong>执行流程</strong>：普通处理函数直接处理业务逻辑并返回响应，而中间件通常在业务逻辑执行前后进行预处理或后处理。</p>
+</li>
+<li>
+<p><strong>控制权传递</strong>：中间件通过调用 <code>c.Next()</code> 将控制权传递给下一个处理器，而普通处理函数通常不调用 <code>c.Next()</code>。</p>
+</li>
+<li>
+<p><strong>复用性</strong>：中间件设计用于跨多个路由复用，而普通处理函数通常只处理特定路由的逻辑。</p>
+</li>
+<li>
+<p><strong>中断机制</strong>：中间件可以通过 <code>c.Abort()</code> 中断处理链，阻止后续中间件或路由处理函数执行；普通处理函数通常不使用此机制。</p>
+</li>
+<li>
+<p><strong>设计意图</strong>：中间件用于处理跨切面关注点（如认证、日志、限流等），而处理函数用于实现具体业务逻辑。</p>
+</li>
+</ol>
+<h2 id="2">2. 使用中间件</h2>
+<p>在Gin框架中，使用<code>Use</code>方法来使用中间件，根据作用范围的不同，可以分为三种：</p>
+<ul>
+<li><strong>全局中间件</strong>：中间件注册到引擎，作用于所有路由。</li>
+<li><strong>路由组中间件</strong>：中间件注册到路由组，作用于路由组中的所有路由。</li>
+<li><strong>单路由中间件</strong>：中间件注册到单个路由，只作用于当前路由。</li>
+</ul>
+<h3 id="21">2.1. 全局中间件</h3>
+<p>在Gin引擎上注册中间件，中间件作用于所有路由。</p>
+<p>示例：</p>
+<pre><code class="language-go">// gin引擎
+engine := gin.New()
+// 注册内置中间件Recovery
+engine.Use(gin.Recovery())
+</code></pre>
+<p>全局中间件注册后，后续注册的所有路由都会自动应用该全局中间件。</p>
+<h3 id="22">2.2. 路由组中间件</h3>
+<p>在路由组上注册中间件，中间件作用于路由组中的所有路由：</p>
+<pre><code class="language-go">// 可以在路由组定义时直接设置路由组中间件
+paramRouter := router.Group(&quot;/param&quot;, middleware.AuthMiddleware)
+
+// 也可以在路由组定义后，再用Use方法设置路由组中间件
+paramRouter := router.Group(&quot;/param&quot;)
+paramRouter.Use(middleware.AuthMiddleware)
+</code></pre>
+<p>路由组中间件注册后，该路由组后续注册的所有路由都会自动应用该中间件。</p>
+<h3 id="23">2.3. 单个路由中间件</h3>
+<p>调用注册路由的方法是，处理函数的入参都是可变参数，一般前面的处理作为中间件，该中间件只作用于当前路由。</p>
+<blockquote>
+<p>从这里也能看出来，处理函数和中间件本质上是相同的。</p>
+</blockquote>
+<pre><code class="language-go">// 路由定义时，注册中间件
+testRouter.Any(&quot;/ping&quot;, middleware.AuthMiddleware, handler.Ping)
+</code></pre>
+<h2 id="3">3. 内置中间件介绍</h2>
+<p>Gin框架为我们提供了一些内置的中间件，我们开发时可以根据需要自行选择使用。</p>
+<h3 id="31">3.1.  默认中间件</h3>
+<p>当你使用 <code>gin.Default()</code> 创建引擎时，Gin会自动加载两个默认中间件：</p>
+<ul>
+<li><strong>Logger</strong>：Logger中间件用于记录HTTP请求日志，包括请求方法、路径、状态码和处理时间等信息。</li>
+<li><strong>Recovery</strong>：Recovery中间件用于从panic中恢复，防止程序崩溃，并返回500错误：。</li>
+</ul>
+<pre><code class="language-go">r := gin.Default()  // 自动加载 Logger 和 Recovery 中间件
+
+r := gin.New()   // 不会自动加载 Logger 和 Recovery 中间件
+</code></pre>
+<h3 id="32">3.2 其他内置中间件</h3>
+<p>除了默认的两个中间件外，Gin框架还提供了其他的内置中间件供我们使用，部分中间件如下：</p>
+<ul>
+<li>BasicAuth：HTTP基础认证中间件，用于简单的用户名密码认证。</li>
+<li>Bind：绑定请求体到结构体，自动解析 JSON、XML 等格式的数据。</li>
+</ul>
+<h2 id="4">4. 自定义中间件</h2>
+<h3 id="41">4.1. 自定义中间件基础</h3>
+<p>中间件本质上是一个<code>gin.HandlerFunc</code>方法，自定义中间件就是自定义一个<code>gin.HandlerFunc</code>方法。</p>
+<pre><code class="language-go">// HandlerFunc defines the handler used by gin middleware as return value.
+type HandlerFunc func(*Context)
+</code></pre>
+<p>要正确定义中间件，必须以下几个方法：</p>
+<ul>
+<li><code>Next</code>：调用下一个处理器或中间件。</li>
+<li><code>Abort</code>：中断请求处理链，不再执行后续中间件和处理器。</li>
+<li><code>Set</code>、<code>Get</code>：，Set 和 Get 方法是 gin.Context 接口提供的用于在请求生命周期内存储和获取数据的方法，主要用于中间件之间或中间件与处理器之间的数据传递。</li>
+</ul>
+<h3 id="42">4.2. 中间件基础结构</h3>
+<p>自定义中间件的基本结构如下：</p>
+<pre><code class="language-go">func CustomMiddleware() gin.HandlerFunc {
+  return func(c *gin.Context) {
+      // 某些异常条件下可能需要中止后续调用
+      if condition {
+        c.Abort()
+        return
+      }
+
+      // 可能需要拿前面中间件的数据
+      c.Get()
+
+
+     // 可能需要向后面中间件或处理器传递数据
+     c.Set()
+
+
+      // 调用下一个中间件或路由处理函数
+      c.Next()
+
+      // 在请求处理后执行的逻辑
+  }
+}
+</code></pre>
+<h3 id="43">4.3. 实际示例：权限控制中间件</h3>
+<pre><code class="language-go">package main
+
+import (
+    &quot;github.com/gin-gonic/gin&quot;
+    &quot;strings&quot;
+)
+
+// 权限控制中间件
+func PermissionMiddleware(permissions []string) gin.HandlerFunc {
+    return func(c *gin.Context) {
+        // 从请求头获取用户权限（实际应用中可能从JWT或session中获取）
+        userPermissions := c.GetHeader(&quot;X-User-Permissions&quot;)
+        userPermList := strings.Split(userPermissions, &quot;,&quot;)
+
+        // 检查用户是否拥有必需权限
+        hasPermission := false
+        for _, reqPerm := range permissions {
+            for _, userPerm := range userPermList {
+                if strings.TrimSpace(userPerm) == reqPerm {
+                    hasPermission = true
+                    break
+                }
+            }
+            if hasPermission {
+                break
+            }
+        }
+
+        if !hasPermission {
+            c.JSON(403, gin.H{
+                &quot;error&quot;: &quot;权限不足&quot;,
+                &quot;required_permissions&quot;: permissions,
+            })
+            c.Abort()
+            return
+        }
+
+        // 设置用户权限到上下文
+        c.Set(&quot;user_permissions&quot;, userPermList)
+        c.Next()
+    }
+}
+
+func main() {
+    r := gin.Default()
+
+    // 需要admin权限的路由
+    admin := r.Group(&quot;/admin&quot;, PermissionMiddleware([]string{&quot;admin&quot;}))
+    {
+        admin.GET(&quot;/users&quot;, func(c *gin.Context) {
+            c.JSON(200, gin.H{&quot;message&quot;: &quot;用户列表&quot;})
+        })
+
+        admin.POST(&quot;/users&quot;, func(c *gin.Context) {
+            c.JSON(201, gin.H{&quot;message&quot;: &quot;创建用户&quot;})
+        })
+    }
+
+    // 需要read权限的路由
+    r.GET(&quot;/data&quot;, PermissionMiddleware([]string{&quot;read&quot;}), func(c *gin.Context) {
+        c.JSON(200, gin.H{&quot;data&quot;: &quot;只读数据&quot;})
+    })
+
+    r.Run(&quot;:8080&quot;)
+}
+</code></pre>
+<h3 id="44">4.4. 实际示例：请求限流中间件</h3>
+<pre><code class="language-go">package main
+
+import (
+    &quot;sync&quot;
+
+    &quot;github.com/gin-gonic/gin&quot;
+    &quot;golang.org/x/time/rate&quot;
+)
+
+// 限流中间件
+type IPRateLimiter struct {
+    ips map[string]*rate.Limiter
+    mtx sync.RWMutex
+    r   rate.Limit
+    b   int
+}
+
+func NewIPRateLimiter(r rate.Limit, b int) *IPRateLimiter {
+    i := &amp;IPRateLimiter{
+        ips: make(map[string]*rate.Limiter),
+        r:   r,
+        b:   b,
+    }
+    return i
+}
+
+func (i *IPRateLimiter) AddIP(ip string) *rate.Limiter {
+    i.mtx.Lock()
+    defer i.mtx.Unlock()
+
+    limiter := rate.NewLimiter(i.r, i.b)
+    i.ips[ip] = limiter
+    return limiter
+}
+
+func (i *IPRateLimiter) GetLimiter(ip string) *rate.Limiter {
+    // 先尝试使用读锁获取限流器
+    i.mtx.RLock()
+    limiter, exists := i.ips[ip]
+    i.mtx.RUnlock()
+
+    if !exists {
+        // 如果不存在，则添加新的限流器
+        return i.AddIP(ip)
+    }
+
+    return limiter
+}
+
+func RateLimitMiddleware(r rate.Limit, b int) gin.HandlerFunc {
+    limiter := NewIPRateLimiter(r, b)
+
+    return func(c *gin.Context) {
+        clientIP := c.ClientIP()
+        ipLimiter := limiter.GetLimiter(clientIP) // 修复：重命名局部变量
+
+        if !ipLimiter.Allow() { // 现在正确引用了限流器的 Allow 方法
+            c.JSON(429, gin.H{&quot;error&quot;: &quot;请求过于频繁，请稍后再试&quot;})
+            c.Abort()
+            return
+        }
+
+        c.Next()
+    }
+}
+
+func main() {
+    r := gin.Default()
+
+    // 限制每个IP每秒最多10个请求，突发容量为20
+    r.Use(RateLimitMiddleware(10, 20))
+
+    r.GET(&quot;/&quot;, func(c *gin.Context) {
+        c.JSON(200, gin.H{&quot;message&quot;: &quot;Hello World&quot;})
+    })
+
+    r.Run(&quot;:8080&quot;)
+}
+</code></pre>
+<h2 id="5">5. 中间件执行顺序</h2>
+<p>Gin中间件遵循洋葱模型（Onion Model）的执行顺序。当请求进入时，会依次通过各个中间件，到达路由处理函数后，再按相反顺序返回。</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+    &quot;github.com/gin-gonic/gin&quot;
+)
+
+func main() {
+    r := gin.New()
+
+    // 注册多个中间件，注意顺序
+    r.Use(Middleware1(), Middleware2(), Middleware3())
+
+    r.GET(&quot;/&quot;, func(c *gin.Context) {
+        fmt.Println(&quot;执行路由处理函数&quot;)
+        c.String(200, &quot;Hello World&quot;)
+    })
+
+    r.Run(&quot;:8080&quot;)
+}
+
+func Middleware1() gin.HandlerFunc {
+    return func(c *gin.Context) {
+        fmt.Println(&quot;Middleware1 - 请求前&quot;)
+        c.Next()
+        fmt.Println(&quot;Middleware1 - 请求后&quot;)
+    }
+}
+
+func Middleware2() gin.HandlerFunc {
+    return func(c *gin.Context) {
+        fmt.Println(&quot;Middleware2 - 请求前&quot;)
+        c.Next()
+        fmt.Println(&quot;Middleware2 - 请求后&quot;)
+    }
+}
+
+func Middleware3() gin.HandlerFunc {
+    return func(c *gin.Context) {
+        fmt.Println(&quot;Middleware3 - 请求前&quot;)
+        c.Next()
+        fmt.Println(&quot;Middleware3 - 请求后&quot;)
+    }
+}
+</code></pre>
+<p>执行顺序为：
+1. Middleware1 - 请求前
+2. Middleware2 - 请求前
+3. Middleware3 - 请求前
+4. 执行路由处理函数
+5. Middleware3 - 请求后
+6. Middleware2 - 请求后
+7. Middleware1 - 请求后</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.path", "navigation.prune", "toc.follow", "navigation.top"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
