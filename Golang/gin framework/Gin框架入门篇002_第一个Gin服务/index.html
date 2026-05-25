@@ -1478,23 +1478,23 @@
 </li>
 <li>
 <p>创建项目文件夹</p>
-<p><code>shell
-  # 创建并进入项目文件夹
-  mkdir gin-quickstart &amp;&amp; cd gin-quickstart</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 创建并进入项目文件夹</span>
+mkdir<span class="w"> </span>gin-quickstart<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>gin-quickstart
+</code></pre></div>
 </li>
 <li>
 <p>初始化项目</p>
-<p><code>shell
-  # 初始化项目
-  go mod init gin-quickstart</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 初始化项目</span>
+go<span class="w"> </span>mod<span class="w"> </span>init<span class="w"> </span>gin-quickstart
+</code></pre></div>
 </li>
 <li>
 <p>导入gin框架</p>
 </li>
 </ol>
-<p><code>shell
-   # 引入gin依赖
-   go get -u github.com/gin-gonic/gin</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 引入gin依赖</span>
+go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>github.com/gin-gonic/gin
+</code></pre></div>
 <ol>
 <li>
 <p>编写第一个gin服务</p>
@@ -1504,41 +1504,42 @@
 </li>
 <li>
 <p>编写服务代码</p>
-<p>```go
-  package main</p>
-<p>import (
-    "net/http"</p>
-<pre><code>// 导入gin框架
-"github.com/gin-gonic/gin"
-</code></pre>
-<p>)</p>
-<p>func main() {
-    // 创建默认的gin路由
-    router := gin.Default()</p>
-<pre><code>// 定义一个简单的GET端点
-router.GET("/ping", func(c *gin.Context) {
-    // 返回JSON数据
-    c.JSON(http.StatusOK, gin.H{
-        "message": "pong",
-    })
-})
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-// 启动服务（默认端口8080）
-err := router.Run()
-if err != nil {
-    return
-}
-</code></pre>
-<p>}
-  ```</p>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="s">&quot;net/http&quot;</span>
+
+<span class="w">  </span><span class="c1">// 导入gin框架</span>
+<span class="w">  </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 创建默认的gin路由</span>
+<span class="w">  </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+
+<span class="w">  </span><span class="c1">// 定义一个简单的GET端点</span>
+<span class="w">  </span><span class="nx">router</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// 返回JSON数据</span>
+<span class="w">      </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">          </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;pong&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="p">})</span>
+<span class="w">  </span><span class="p">})</span>
+
+<span class="w">  </span><span class="c1">// 启动服务（默认端口8080）</span>
+<span class="w">  </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p>运行</p>
 </li>
 </ol>
-<p><code>shell
-   # 启动gin服务
-   go run main.go</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 启动gin服务</span>
+go<span class="w"> </span>run<span class="w"> </span>main.go
+</code></pre></div>
 <ol>
 <li>
 <p>测试</p>

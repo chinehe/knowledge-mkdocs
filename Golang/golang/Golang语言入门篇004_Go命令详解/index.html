@@ -4361,12 +4361,12 @@
 <p>我们可以使用<code>go</code>命令来执行各种操作，包括编译、运行、测试代码等。Go工具链提供了丰富的命令来帮助开发者高效地进行开发工作。本文将详细介绍Go语言的各种命令及其使用方法。</p>
 <h2 id="1-go">1. Go命令概览</h2>
 <p>要查看Go命令的帮助文档，可以在终端中执行以下命令：</p>
-<pre><code class="language-bash">go help # 查看所有可用的go命令，将显示Go工具链支持的所有命令列表
-go help &lt;command&gt; # 查看指定命令的帮助文档
-go help &lt;topic&gt; # 查看指定话题的帮助文档
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span><span class="nb">help</span><span class="w"> </span><span class="c1"># 查看所有可用的go命令，将显示Go工具链支持的所有命令列表</span>
+go<span class="w"> </span><span class="nb">help</span><span class="w"> </span>&lt;command&gt;<span class="w"> </span><span class="c1"># 查看指定命令的帮助文档</span>
+go<span class="w"> </span><span class="nb">help</span><span class="w"> </span>&lt;topic&gt;<span class="w"> </span><span class="c1"># 查看指定话题的帮助文档</span>
+</code></pre></div>
 <p>go1.25.0版本<code>go help</code>命令输出如下：</p>
-<pre><code>Go is a tool for managing Go source code.
+<div class="highlight"><pre><span></span><code>Go is a tool for managing Go source code.
 
 Usage:
 
@@ -4419,18 +4419,18 @@ Additional help topics:
     vcs             controlling version control with GOVCS
 
 Use &quot;go help &lt;topic&gt;&quot; for more information about that topic.
-</code></pre>
+</code></pre></div>
 <h2 id="2">2. 基础命令</h2>
 <h3 id="21-go-version-">2.1. go version - 查看版本信息</h3>
 <p>用于查看当前安装的Go版本，或者查看Go二进制文件的构建信息：</p>
-<pre><code class="language-bash">go version # 最常用命令，查看go版本
-</code></pre>
-<p>输出示例：</p>
-<pre><code>go version go1.21.0 darwin/amd64
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>version<span class="w"> </span><span class="c1"># 最常用命令，查看go版本</span>
+</code></pre></div>
+<p>输出示例：
+<div class="highlight"><pre><span></span><code>go version go1.21.0 darwin/amd64
+</code></pre></div></p>
 <h4 id="211">2.1.1. 命令语法</h4>
-<pre><code class="language-bash">go version [-m] [-v] [-json] [file ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>version<span class="w"> </span><span class="o">[</span>-m<span class="o">]</span><span class="w"> </span><span class="o">[</span>-v<span class="o">]</span><span class="w"> </span><span class="o">[</span>-json<span class="o">]</span><span class="w"> </span><span class="o">[</span>file<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <h4 id="212">2.1.2. 参数说明</h4>
 <ul>
 <li><code>-m</code>: 打印每个文件内嵌的模块版本信息（如果可用）。在输出中，模块信息由版本行后面的多行组成，每行都以制表符开头。</li>
@@ -4438,24 +4438,24 @@ Use &quot;go help &lt;topic&gt;&quot; for more information about that topic.
 <li><code>-json</code>: 类似于-m，但以JSON格式输出runtime/debug.BuildInfo。如果指定了-json而没有-m，go version会报告错误。</li>
 </ul>
 <h4 id="213">2.1.3. 使用示例</h4>
-<pre><code class="language-bash">## 查看当前Go工具链的版本
-go version
+<div class="highlight"><pre><span></span><code><span class="c1">## 查看当前Go工具链的版本</span>
+go<span class="w"> </span>version
 
-## 查看指定二进制文件的Go版本
-go version myapp
+<span class="c1">## 查看指定二进制文件的Go版本</span>
+go<span class="w"> </span>version<span class="w"> </span>myapp
 
-## 查看二进制文件的模块版本信息
-go version -m myapp
+<span class="c1">## 查看二进制文件的模块版本信息</span>
+go<span class="w"> </span>version<span class="w"> </span>-m<span class="w"> </span>myapp
 
-## 以JSON格式输出构建信息
-go version -m -json myapp
+<span class="c1">## 以JSON格式输出构建信息</span>
+go<span class="w"> </span>version<span class="w"> </span>-m<span class="w"> </span>-json<span class="w"> </span>myapp
 
-## 查看目录下所有Go二进制文件的版本
-go version /path/to/bin
+<span class="c1">## 查看目录下所有Go二进制文件的版本</span>
+go<span class="w"> </span>version<span class="w"> </span>/path/to/bin
 
-## 查看目录下所有文件（包括未识别的文件）的版本信息
-go version -v /path/to/bin
-</code></pre>
+<span class="c1">## 查看目录下所有文件（包括未识别的文件）的版本信息</span>
+go<span class="w"> </span>version<span class="w"> </span>-v<span class="w"> </span>/path/to/bin
+</code></pre></div>
 <h4 id="214">2.1.4. 注意事项</h4>
 <ul>
 <li>如果命令行上没有指定文件，则<code>go version</code>打印其自身的版本信息</li>
@@ -4466,8 +4466,8 @@ go version -v /path/to/bin
 <h3 id="22-go-env-">2.2. go env - 管理环境变量</h3>
 <p>用于查看和设置Go环境变量：</p>
 <h4 id="221">2.2.1. 命令语法</h4>
-<pre><code class="language-bash">go env [-json] [-changed] [-u] [-w] [var ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>env<span class="w"> </span><span class="o">[</span>-json<span class="o">]</span><span class="w"> </span><span class="o">[</span>-changed<span class="o">]</span><span class="w"> </span><span class="o">[</span>-u<span class="o">]</span><span class="w"> </span><span class="o">[</span>-w<span class="o">]</span><span class="w"> </span><span class="o">[</span>var<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <h4 id="222">2.2.2. 功能说明</h4>
 <p>Env命令用于打印Go环境信息。默认情况下，env以shell脚本格式（在Windows上是批处理文件格式）打印信息。如果在参数中给出了一个或多个变量名，env会在单独的行上打印每个命名变量的值。</p>
 <h4 id="223">2.2.3. 参数说明</h4>
@@ -4478,30 +4478,30 @@ go version -v /path/to/bin
 <li><code>-w</code>: 需要一个或多个NAME=VALUE形式的参数，并将命名环境变量的默认设置更改为给定值</li>
 </ul>
 <h4 id="224">2.2.4. 使用示例</h4>
-<pre><code class="language-bash">## 查看所有环境变量
-go env
+<div class="highlight"><pre><span></span><code><span class="c1">## 查看所有环境变量</span>
+go<span class="w"> </span>env
 
-## 查看特定环境变量
-go env GOROOT
-go env GOPATH
-go env GOMODCACHE
+<span class="c1">## 查看特定环境变量</span>
+go<span class="w"> </span>env<span class="w"> </span>GOROOT
+go<span class="w"> </span>env<span class="w"> </span>GOPATH
+go<span class="w"> </span>env<span class="w"> </span>GOMODCACHE
 
-## 以JSON格式查看环境变量
-go env -json
-go env -json GOPATH GOROOT
+<span class="c1">## 以JSON格式查看环境变量</span>
+go<span class="w"> </span>env<span class="w"> </span>-json
+go<span class="w"> </span>env<span class="w"> </span>-json<span class="w"> </span>GOPATH<span class="w"> </span>GOROOT
 
-## 设置环境变量
-go env -w GOPROXY=https://goproxy.cn,direct
-go env -w GOPATH=$HOME/go
-go env -w GOBIN=$HOME/go/bin
+<span class="c1">## 设置环境变量</span>
+go<span class="w"> </span>env<span class="w"> </span>-w<span class="w"> </span><span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct
+go<span class="w"> </span>env<span class="w"> </span>-w<span class="w"> </span><span class="nv">GOPATH</span><span class="o">=</span><span class="nv">$HOME</span>/go
+go<span class="w"> </span>env<span class="w"> </span>-w<span class="w"> </span><span class="nv">GOBIN</span><span class="o">=</span><span class="nv">$HOME</span>/go/bin
 
-## 恢复环境变量默认值
-go env -u GOPROXY
-go env -u GOPATH GOBIN
+<span class="c1">## 恢复环境变量默认值</span>
+go<span class="w"> </span>env<span class="w"> </span>-u<span class="w"> </span>GOPROXY
+go<span class="w"> </span>env<span class="w"> </span>-u<span class="w"> </span>GOPATH<span class="w"> </span>GOBIN
 
-## 查看已更改的环境变量设置
-go env -changed
-</code></pre>
+<span class="c1">## 查看已更改的环境变量设置</span>
+go<span class="w"> </span>env<span class="w"> </span>-changed
+</code></pre></div>
 <h4 id="225">2.2.5. 常用环境变量</h4>
 <p>Go有许多环境变量，以下是一些常用的环境变量：</p>
 <ul>
@@ -4522,24 +4522,24 @@ go env -changed
 </ul>
 <h3 id="23-go-help-">2.3. go help - 获取帮助信息</h3>
 <p>用于获取特定命令或者话题的帮助信息：</p>
-<pre><code class="language-bash">## 获取go命令的总体帮助
-go help
+<div class="highlight"><pre><span></span><code><span class="c1">## 获取go命令的总体帮助</span>
+go<span class="w"> </span><span class="nb">help</span>
 
-## 获取特定子命令的帮助
-go help build # 获取build命令的帮助
-go help run # 获取run命令的帮助
-go help test # 获取test命令的帮助
+<span class="c1">## 获取特定子命令的帮助</span>
+go<span class="w"> </span><span class="nb">help</span><span class="w"> </span>build<span class="w"> </span><span class="c1"># 获取build命令的帮助</span>
+go<span class="w"> </span><span class="nb">help</span><span class="w"> </span>run<span class="w"> </span><span class="c1"># 获取run命令的帮助</span>
+go<span class="w"> </span><span class="nb">help</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="c1"># 获取test命令的帮助</span>
 
-## 获取特定话题的帮助
-go help gopath # 获取gopath话题的帮助
-go help packages # 获取packages话题的帮助
-go help environment # 获取environment话题的帮助
-</code></pre>
+<span class="c1">## 获取特定话题的帮助</span>
+go<span class="w"> </span><span class="nb">help</span><span class="w"> </span>gopath<span class="w"> </span><span class="c1"># 获取gopath话题的帮助</span>
+go<span class="w"> </span><span class="nb">help</span><span class="w"> </span>packages<span class="w"> </span><span class="c1"># 获取packages话题的帮助</span>
+go<span class="w"> </span><span class="nb">help</span><span class="w"> </span>environment<span class="w"> </span><span class="c1"># 获取environment话题的帮助</span>
+</code></pre></div>
 <h3 id="24-go-telemetry-">2.4. go telemetry - 管理遥测数据</h3>
 <p>用于管理Go遥测数据和设置。</p>
 <h4 id="241">2.4.1. 命令语法</h4>
-<pre><code class="language-bash">go telemetry [off|local|on]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>telemetry<span class="w"> </span><span class="o">[</span>off<span class="p">|</span>local<span class="p">|</span>on<span class="o">]</span>
+</code></pre></div>
 <h4 id="242">2.4.2. 功能说明</h4>
 <p>Telemetry命令用于管理Go遥测数据和设置。遥测可以处于三种模式之一：off（关闭）、local（本地）或on（开启）。</p>
 <h4 id="243">2.4.3. 遥测数据介绍</h4>
@@ -4558,7 +4558,7 @@ go help environment # 获取environment话题的帮助
 <li><strong>on模式</strong>: 当遥测处于on模式时，遥测数据会写入本地文件系统，并定期发送到https://telemetry.go.dev/。上传的数据用于帮助改进Go工具链和相关工具，并将作为公共数据集的一部分发布。</li>
 </ul>
 <h4 id="245">2.4.5. 使用示例</h4>
-<pre><code>## 查看当前遥测模式
+<div class="highlight"><pre><span></span><code>## 查看当前遥测模式
 go telemetry
 
 ## 禁用遥测上传，但保持本地数据收集
@@ -4569,7 +4569,7 @@ go telemetry on
 
 ## 禁用数据收集和上传
 go telemetry off
-</code></pre>
+</code></pre></div>
 <h4 id="246">2.4.6. 环境变量</h4>
 <ul>
 <li><code>GOTELEMETRY</code>: 当前遥测模式的值，这是一个不可设置的go env变量</li>
@@ -4587,8 +4587,8 @@ go telemetry off
 <h3 id="31-go-build-">3.1. go build - 编译源代码</h3>
 <p>用于编译Go程序，生成可执行文件。</p>
 <h4 id="311">3.1.1. 命令语法</h4>
-<pre><code class="language-bash">go build [-o output] [build flags] [packages]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>build<span class="w"> </span><span class="o">[</span>-o<span class="w"> </span>output<span class="o">]</span><span class="w"> </span><span class="o">[</span>build<span class="w"> </span>flags<span class="o">]</span><span class="w"> </span><span class="o">[</span>packages<span class="o">]</span>
+</code></pre></div>
 <h4 id="312">3.1.2. 功能说明</h4>
 <p>Build命令编译由导入路径命名的包及其依赖项，但不安装结果。</p>
 <p>当编译包时，build会忽略以'_test.go'结尾的文件。</p>
@@ -4620,7 +4620,7 @@ go telemetry off
 <li><code>-mod mode</code>: 模块下载模式（readonly、vendor或mod）</li>
 </ul>
 <h4 id="315">3.1.5. 使用示例</h4>
-<pre><code>## 编译当前目录下的main包
+<div class="highlight"><pre><span></span><code>## 编译当前目录下的main包
 go build
 
 ## 编译指定包
@@ -4655,7 +4655,7 @@ go build -trimpath
 
 ## 指定构建模式
 go build -buildmode=shared
-</code></pre>
+</code></pre></div>
 <h4 id="316">3.1.6. 注意事项</h4>
 <ul>
 <li>构建标志由build、clean、get、install、list、run和test命令共享</li>
@@ -4666,8 +4666,8 @@ go build -buildmode=shared
 <h3 id="32-go-install-">3.2. go install - 编译并安装包</h3>
 <p>编译并安装由导入路径命名的包。</p>
 <h4 id="321">3.2.1. 命令语法</h4>
-<pre><code class="language-bash">go install [build flags] [packages]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>install<span class="w"> </span><span class="o">[</span>build<span class="w"> </span>flags<span class="o">]</span><span class="w"> </span><span class="o">[</span>packages<span class="o">]</span>
+</code></pre></div>
 <h4 id="322">3.2.2. 功能说明</h4>
 <p>Install命令编译并安装由导入路径命名的包。</p>
 <p>可执行文件安装在GOBIN环境变量命名的目录中，默认为$GOPATH/bin或$HOME/go/bin（如果未设置GOPATH环境变量）。$GOROOT中的可执行文件安装在$GOROOT/bin或$GOTOOLDIR中，而不是$GOBIN。</p>
@@ -4690,7 +4690,7 @@ go build -buildmode=shared
 从Go 1.20开始，标准库会被构建和缓存但不会被安装。
 设置GODEBUG=installgoroot=all可以恢复使用$GOROOT/pkg/$GOOS_$GOARCH。</p>
 <h4 id="326">3.2.6. 使用示例</h4>
-<pre><code>## 安装当前目录下的包
+<div class="highlight"><pre><span></span><code>## 安装当前目录下的包
 go install
 
 ## 安装指定路径的包
@@ -4710,7 +4710,7 @@ go install -race github.com/user/package@latest
 
 ## 安装包并指定构建标签
 go install -tags &quot;linux,prod&quot; github.com/user/package@latest
-</code></pre>
+</code></pre></div>
 <h4 id="327">3.2.7. 注意事项</h4>
 <ul>
 <li>更多关于构建标志的信息，请参见'go help build'</li>
@@ -4721,8 +4721,8 @@ go install -tags &quot;linux,prod&quot; github.com/user/package@latest
 <h3 id="33-go-run-">3.3. go run - 编译并运行程序</h3>
 <p>编译并立即运行Go程序，不会生成可执行文件。</p>
 <h4 id="331">3.3.1. 命令语法</h4>
-<pre><code class="language-bash">go run [build flags] [-exec xprog] package [arguments...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>run<span class="w"> </span><span class="o">[</span>build<span class="w"> </span>flags<span class="o">]</span><span class="w"> </span><span class="o">[</span>-exec<span class="w"> </span>xprog<span class="o">]</span><span class="w"> </span>package<span class="w"> </span><span class="o">[</span>arguments...<span class="o">]</span>
+</code></pre></div>
 <h4 id="332">3.3.2. 功能说明</h4>
 <p>Run命令编译并运行指定的主Go包。通常包被指定为单个目录中的.go源文件列表，但它也可以是导入路径、文件系统路径或匹配单个已知包的模式，如'go run .'或'go run my/cmd'。</p>
 <h4 id="333">3.3.3. 版本后缀处理</h4>
@@ -4738,7 +4738,7 @@ go install -tags &quot;linux,prod&quot; github.com/user/package@latest
 <h4 id="336">3.3.6. 退出状态</h4>
 <p>Run的退出状态不是编译后二进制文件的退出状态。</p>
 <h4 id="337">3.3.7. 使用示例</h4>
-<pre><code>## 运行程序
+<div class="highlight"><pre><span></span><code>## 运行程序
 go run main.go
 
 ## 运行多个文件
@@ -4767,7 +4767,7 @@ go run -cover main.go
 
 ## 使用指定程序执行编译后的二进制文件
 go run -exec mydebugger main.go
-</code></pre>
+</code></pre></div>
 <h4 id="338">3.3.8. 注意事项</h4>
 <ul>
 <li>更多关于构建标志的信息，请参见'go help build'</li>
@@ -4778,8 +4778,8 @@ go run -exec mydebugger main.go
 <h3 id="34-go-clean-">3.4. go clean - 清理编译文件</h3>
 <p>清理编译生成的文件。</p>
 <h4 id="341">3.4.1. 命令语法</h4>
-<pre><code>go clean [-i] [-r] [-cache] [-testcache] [-modcache] [-fuzzcache] [build flags] [packages]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go clean [-i] [-r] [-cache] [-testcache] [-modcache] [-fuzzcache] [build flags] [packages]
+</code></pre></div>
 <h4 id="342">3.4.2. 功能说明</h4>
 <p>Clean命令从包源目录中删除对象文件。go命令在临时目录中构建大多数对象，因此go clean主要关注其他工具或手动调用go build留下的对象文件。</p>
 <p>如果给出了包参数或设置了-i或-r标志，clean会从与导入路径对应的每个源目录中删除以下文件：</p>
@@ -4808,7 +4808,7 @@ go run -exec mydebugger main.go
 <li><code>-x</code>：导致clean在执行删除命令时打印它们</li>
 </ul>
 <h4 id="344">3.4.4. 使用示例</h4>
-<pre><code>## 清理当前目录下的编译文件
+<div class="highlight"><pre><span></span><code>## 清理当前目录下的编译文件
 go clean
 
 ## 清理并删除安装的包
@@ -4837,7 +4837,7 @@ go clean -x
 
 ## 清理指定包
 go clean ./cmd/...
-</code></pre>
+</code></pre></div>
 <h4 id="345">3.4.5. 注意事项</h4>
 <ul>
 <li>模糊测试引擎缓存扩展代码覆盖率的文件，因此删除它们可能会降低模糊测试的效果，直到找到提供相同覆盖率的新输入</li>
@@ -4849,8 +4849,8 @@ go clean ./cmd/...
 <h3 id="41-go-mod-">4.1. go mod - 模块管理</h3>
 <p>Go 1.11版本引入的模块管理工具。</p>
 <h4 id="411">4.1.1. 命令语法</h4>
-<pre><code>go mod &lt;command&gt; [arguments]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go mod &lt;command&gt; [arguments]
+</code></pre></div>
 <h4 id="412">4.1.2. 功能说明</h4>
 <p>Go mod提供对模块操作的访问。需要注意的是，对模块的支持内置于所有go命令中，而不仅仅是'go mod'。例如，日常的添加、删除、升级和降级依赖项应该使用'go get'。模块功能的概述请参见'go help modules'。</p>
 <h4 id="413">4.1.3. 子命令</h4>
@@ -4865,7 +4865,7 @@ go clean ./cmd/...
 <li><code>why</code>：解释为什么需要包或模块</li>
 </ul>
 <h4 id="414">4.1.4. 使用示例</h4>
-<pre><code>## 初始化新模块
+<div class="highlight"><pre><span></span><code>## 初始化新模块
 go mod init module_name
 
 ## 下载依赖
@@ -4891,7 +4891,7 @@ go mod vendor
 
 ## 查看模块信息
 go mod download -json
-</code></pre>
+</code></pre></div>
 <h4 id="415">4.1.5. 注意事项</h4>
 <ul>
 <li>更多关于模块的信息，请参见：https://golang.org/ref/mod</li>
@@ -4899,8 +4899,8 @@ go mod download -json
 <h3 id="42-go-get-">4.2. go get - 获取包</h3>
 <p>下载并安装指定的包，更新go.mod以要求这些版本，并将源代码下载到模块缓存中。</p>
 <h4 id="421">4.2.1. 命令语法</h4>
-<pre><code>go get [-t] [-u] [-tool] [build flags] [packages]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go get [-t] [-u] [-tool] [build flags] [packages]
+</code></pre></div>
 <h4 id="422">4.2.2. 功能说明</h4>
 <p>Get将其命令行参数解析为特定模块版本的包，更新go.mod以要求这些版本，并将源代码下载到模块缓存中。</p>
 <p>在早期版本的Go中，'go get'用于构建和安装包。现在，'go get'专门用于调整go.mod中的依赖项。'go install'可用于构建和安装命令。当指定了版本时，'go install'在模块感知模式下运行，并忽略当前目录中的go.mod文件。</p>
@@ -4913,7 +4913,7 @@ go mod download -json
 <li><code>-x</code>：在执行时打印命令。这对于调试版本控制命令（当模块直接从存储库下载时）很有用</li>
 </ul>
 <h4 id="424">4.2.4. 使用示例</h4>
-<pre><code>## 添加依赖或将其升级到最新版本
+<div class="highlight"><pre><span></span><code>## 添加依赖或将其升级到最新版本
 go get example.com/pkg
 
 ## 升级或降级包到特定版本
@@ -4940,7 +4940,7 @@ go get -t example.com/pkg
 ## 构建和安装特定版本的命令
 go install example.com/pkg@v1.2.3
 go install example.com/pkg@latest
-</code></pre>
+</code></pre></div>
 <h4 id="425">4.2.5. 注意事项</h4>
 <ul>
 <li>更多关于模块的信息，请参见：https://golang.org/ref/mod</li>
@@ -4949,8 +4949,8 @@ go install example.com/pkg@latest
 <h3 id="43-go-list-">4.3. go list - 列出包或模块</h3>
 <p>列出命名的包，每行一个。</p>
 <h4 id="431">4.3.1. 命令语法</h4>
-<pre><code>go list [-f format] [-json] [-m] [list flags] [build flags] [packages]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go list [-f format] [-json] [-m] [list flags] [build flags] [packages]
+</code></pre></div>
 <h4 id="432">4.3.2. 功能说明</h4>
 <p>List列出命名的包，每行一个。最常用的标志是-f和-json，它们控制为每个包打印的输出格式。其他列表标志控制更具体的细节。</p>
 <h4 id="433">4.3.3. 参数说明</h4>
@@ -4969,7 +4969,7 @@ go install example.com/pkg@latest
 <li><code>-u</code>：添加有关可用升级的信息</li>
 </ul>
 <h4 id="434">4.3.4. 使用示例</h4>
-<pre><code>## 列出当前目录下的所有包
+<div class="highlight"><pre><span></span><code>## 列出当前目录下的所有包
 go list ./...
 
 ## 列出所有依赖
@@ -5004,7 +5004,7 @@ go list -m -versions example.com/module
 
 ## 显示已撤回的模块版本
 go list -m -retracted all
-</code></pre>
+</code></pre></div>
 <h4 id="435">4.3.5. 注意事项</h4>
 <ul>
 <li>更多关于指定包的信息，请参见'go help packages'</li>
@@ -5014,8 +5014,8 @@ go list -m -retracted all
 <h3 id="51-go-fmt-">5.1. go fmt - 格式化代码</h3>
 <p>格式化Go源代码文件。</p>
 <h4 id="511">5.1.1. 命令语法</h4>
-<pre><code class="language-bash">go fmt [-n] [-x] [packages]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>fmt<span class="w"> </span><span class="o">[</span>-n<span class="o">]</span><span class="w"> </span><span class="o">[</span>-x<span class="o">]</span><span class="w"> </span><span class="o">[</span>packages<span class="o">]</span>
+</code></pre></div>
 <h4 id="512">5.1.2. 功能说明</h4>
 <p>Fmt在导入路径命名的包上运行'gofmt -l -w'命令。它会打印被修改的文件名。</p>
 <h4 id="513">5.1.3. 参数说明</h4>
@@ -5025,21 +5025,21 @@ go list -m -retracted all
 <li><code>-mod</code>：设置要使用的模块下载模式，值可以是readonly或vendor</li>
 </ul>
 <h4 id="514">5.1.4. 使用示例</h4>
-<pre><code class="language-bash">## 格式化当前目录下的所有Go文件
-go fmt ./...
+<div class="highlight"><pre><span></span><code><span class="c1">## 格式化当前目录下的所有Go文件</span>
+go<span class="w"> </span>fmt<span class="w"> </span>./...
 
-## 格式化指定文件
-go fmt main.go
+<span class="c1">## 格式化指定文件</span>
+go<span class="w"> </span>fmt<span class="w"> </span>main.go
 
-## 显示将要格式化的文件但不执行格式化
-go fmt -n ./...
+<span class="c1">## 显示将要格式化的文件但不执行格式化</span>
+go<span class="w"> </span>fmt<span class="w"> </span>-n<span class="w"> </span>./...
 
-## 格式化时打印执行的命令
-go fmt -x ./...
+<span class="c1">## 格式化时打印执行的命令</span>
+go<span class="w"> </span>fmt<span class="w"> </span>-x<span class="w"> </span>./...
 
-## 格式化指定包
-go fmt example.com/package
-</code></pre>
+<span class="c1">## 格式化指定包</span>
+go<span class="w"> </span>fmt<span class="w"> </span>example.com/package
+</code></pre></div>
 <h4 id="515">5.1.5. 注意事项</h4>
 <ul>
 <li>要使用特定选项运行gofmt，请直接运行gofmt本身</li>
@@ -5049,8 +5049,8 @@ go fmt example.com/package
 <h3 id="52-go-vet-">5.2. go vet - 检查代码问题</h3>
 <p>检查Go源代码中可能存在的错误。</p>
 <h4 id="521">5.2.1. 命令语法</h4>
-<pre><code class="language-bash">go vet [build flags] [-vettool prog] [vet flags] [packages]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>vet<span class="w"> </span><span class="o">[</span>build<span class="w"> </span>flags<span class="o">]</span><span class="w"> </span><span class="o">[</span>-vettool<span class="w"> </span>prog<span class="o">]</span><span class="w"> </span><span class="o">[</span>vet<span class="w"> </span>flags<span class="o">]</span><span class="w"> </span><span class="o">[</span>packages<span class="o">]</span>
+</code></pre></div>
 <h4 id="522">5.2.2. 功能说明</h4>
 <p>Vet在导入路径命名的包上运行Go vet命令。</p>
 <h4 id="523">5.2.3. 参数说明</h4>
@@ -5059,27 +5059,27 @@ go fmt example.com/package
 <li>构建标志：支持的构建标志包括控制包解析和执行的标志，如-C、-n、-x、-v、-tags和-toolexec</li>
 </ul>
 <h4 id="524">5.2.4. 使用示例</h4>
-<pre><code class="language-bash">## 检查当前目录下的代码
-go vet
+<div class="highlight"><pre><span></span><code><span class="c1">## 检查当前目录下的代码</span>
+go<span class="w"> </span>vet
 
-## 检查指定包
-go vet package_name
+<span class="c1">## 检查指定包</span>
+go<span class="w"> </span>vet<span class="w"> </span>package_name
 
-## 检查所有包
-go vet ./...
+<span class="c1">## 检查所有包</span>
+go<span class="w"> </span>vet<span class="w"> </span>./...
 
-## 使用特定的检查工具
-go vet -vettool=$(which shadow)
+<span class="c1">## 使用特定的检查工具</span>
+go<span class="w"> </span>vet<span class="w"> </span>-vettool<span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>shadow<span class="k">)</span>
 
-## 显示详细信息
-go vet -v ./...
+<span class="c1">## 显示详细信息</span>
+go<span class="w"> </span>vet<span class="w"> </span>-v<span class="w"> </span>./...
 
-## 打印将要执行的命令
-go vet -n ./...
+<span class="c1">## 打印将要执行的命令</span>
+go<span class="w"> </span>vet<span class="w"> </span>-n<span class="w"> </span>./...
 
-## 打印执行的命令
-go vet -x ./...
-</code></pre>
+<span class="c1">## 打印执行的命令</span>
+go<span class="w"> </span>vet<span class="w"> </span>-x<span class="w"> </span>./...
+</code></pre></div>
 <h4 id="525">5.2.5. 注意事项</h4>
 <ul>
 <li>更多关于vet及其标志的信息，请参见'go doc cmd/vet'</li>
@@ -5091,15 +5091,15 @@ go vet -x ./...
 <h3 id="53-go-generate-">5.3. go generate - 通过注释执行命令</h3>
 <p>通过源码中的注释执行命令生成代码。</p>
 <h4 id="531">5.3.1. 命令语法</h4>
-<pre><code>go generate [-run regexp] [-n] [-v] [-x] [build flags] [file.go... | packages]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go generate [-run regexp] [-n] [-v] [-x] [build flags] [file.go... | packages]
+</code></pre></div>
 <h4 id="532">5.3.2. 功能说明</h4>
 <p>Generate运行现有文件中指令描述的命令。这些命令可以运行任何进程，但目的是创建或更新Go源文件。</p>
 <p>Go generate永远不会被go build、go test等自动运行，必须显式运行。</p>
 <h4 id="533">5.3.3. 指令格式</h4>
 <p>Go generate扫描文件中的指令，这些指令是以下形式的行：</p>
-<pre><code>//go:generate command argument...
-</code></pre>
+<div class="highlight"><pre><span></span><code>//go:generate command argument...
+</code></pre></div>
 <p>注意：没有前导空格且"//go"中没有空格，其中command是要运行的生成器，对应于可以在本地运行的可执行文件。</p>
 <h4 id="534">5.3.4. 参数说明</h4>
 <ul>
@@ -5123,15 +5123,15 @@ go vet -x ./...
 </ul>
 <h4 id="536">5.3.6. 命令别名</h4>
 <p>可以使用以下形式的指令为源文件的其余部分指定命令别名：</p>
-<pre><code>//go:generate -command xxx args...
-</code></pre>
+<div class="highlight"><pre><span></span><code>//go:generate -command xxx args...
+</code></pre></div>
 <p>这指定字符串xxx代表由参数标识的命令。这可以用于创建别名或处理多字生成器。</p>
 <p>例如：</p>
-<pre><code>//go:generate -command foo go tool foo
-</code></pre>
+<div class="highlight"><pre><span></span><code>//go:generate -command foo go tool foo
+</code></pre></div>
 <p>指定命令"foo"代表生成器"go tool foo"。</p>
 <h4 id="537">5.3.7. 使用示例</h4>
-<pre><code>## 执行源码中的generate指令
+<div class="highlight"><pre><span></span><code>## 执行源码中的generate指令
 go generate
 
 ## 执行指定包中的generate指令
@@ -5154,7 +5154,7 @@ go generate -skip=&quot;stringer&quot;
 
 ## 处理指定文件
 go generate main.go
-</code></pre>
+</code></pre></div>
 <h4 id="538">5.3.8. 注意事项</h4>
 <ul>
 <li>生成的源代码应该有一行匹配正则表达式<code>^// Code generated .* DO NOT EDIT\.$</code>，以表明代码是生成的</li>
@@ -5168,15 +5168,15 @@ go generate main.go
 <h3 id="61-go-test-">6.1. go test - 运行测试</h3>
 <p>运行Go测试文件。</p>
 <h4 id="611">6.1.1. 命令语法</h4>
-<pre><code class="language-bash">go test [build/test flags] [packages] [build/test flags &amp; test binary flags]
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="o">[</span>build/test<span class="w"> </span>flags<span class="o">]</span><span class="w"> </span><span class="o">[</span>packages<span class="o">]</span><span class="w"> </span><span class="o">[</span>build/test<span class="w"> </span>flags<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>binary<span class="w"> </span>flags<span class="o">]</span>
+</code></pre></div>
 <h4 id="612">6.1.2. 功能说明</h4>
 <p>'Go test'自动化测试由导入路径命名的包。它以以下格式打印测试结果摘要：</p>
-<pre><code>ok   archive/tar   0.011s
+<div class="highlight"><pre><span></span><code>ok   archive/tar   0.011s
 FAIL archive/zip   0.022s
 ok   compress/gzip 0.033s
 ...
-</code></pre>
+</code></pre></div>
 <p>'Go test'会重新编译每个包以及任何文件名匹配文件模式"*_test.go"的文件。这些附加文件可以包含测试函数、基准函数、模糊测试和示例函数。</p>
 <h4 id="613">6.1.3. 测试模式</h4>
 <p>Go test在两种不同的模式下运行：</p>
@@ -5203,7 +5203,7 @@ ok   compress/gzip 0.033s
 <li><code>-o file</code>：将测试二进制文件编译到指定文件</li>
 </ul>
 <h4 id="617">6.1.7. 使用示例</h4>
-<pre><code>## 运行当前目录下的所有测试
+<div class="highlight"><pre><span></span><code>## 运行当前目录下的所有测试
 go test
 
 ## 运行指定包的测试
@@ -5263,7 +5263,7 @@ go test -vet=off
 
 ## 运行所有vet检查
 go test -vet=all
-</code></pre>
+</code></pre></div>
 <h4 id="618">6.1.8. 注意事项</h4>
 <ul>
 <li>测试文件名以"_"（包括"_test.go"）或"."开头的文件将被忽略</li>
@@ -5277,77 +5277,75 @@ go test -vet=all
 <h2 id="7">7. 文档和工具命令</h2>
 <h3 id="71-go-doc-">7.1. go doc - 显示文档</h3>
 <p>显示Go程序实体的文档：</p>
-<pre><code class="language-bash">## 显示当前目录的文档
-go doc
+<div class="highlight"><pre><span></span><code><span class="c1">## 显示当前目录的文档</span>
+go<span class="w"> </span>doc
 
-## 显示指定包的文档
-go doc package_name
+<span class="c1">## 显示指定包的文档</span>
+go<span class="w"> </span>doc<span class="w"> </span>package_name
 
-## 显示函数或类型的文档
-go doc package_name.function_name
-</code></pre>
+<span class="c1">## 显示函数或类型的文档</span>
+go<span class="w"> </span>doc<span class="w"> </span>package_name.function_name
+</code></pre></div>
 <h3 id="72-go-tool-">7.2. go tool - 调用底层工具</h3>
 <p>调用Go工具链中的底层工具：</p>
-<pre><code class="language-bash">## 查看可用的工具
-go tool
+<div class="highlight"><pre><span></span><code><span class="c1">## 查看可用的工具</span>
+go<span class="w"> </span>tool
 
-## 使用pprof进行性能分析
-go tool pprof cpu.prof
+<span class="c1">## 使用pprof进行性能分析</span>
+go<span class="w"> </span>tool<span class="w"> </span>pprof<span class="w"> </span>cpu.prof
 
-## 使用trace分析程序执行
-go tool trace trace.out
+<span class="c1">## 使用trace分析程序执行</span>
+go<span class="w"> </span>tool<span class="w"> </span>trace<span class="w"> </span>trace.out
 
-## 查看汇编代码
-go tool compile -S main.go
-</code></pre>
+<span class="c1">## 查看汇编代码</span>
+go<span class="w"> </span>tool<span class="w"> </span>compile<span class="w"> </span>-S<span class="w"> </span>main.go
+</code></pre></div>
 <h2 id="8">8. 环境和配置命令</h2>
 <h3 id="81-go-bug-bug">8.1. go bug - 报告bug</h3>
 <p>打开浏览器报告Go语言的bug：</p>
-<pre><code class="language-bash">go bug
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>bug
+</code></pre></div>
 <h3 id="82-go-fix-">8.2. go fix - 更新旧代码</h3>
 <p>更新旧版本Go代码以适应新版本：</p>
-<pre><code class="language-bash">go fix
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>fix
+</code></pre></div>
 <h2 id="9">9. 实用示例</h2>
 <h3 id="91">9.1. 创建新项目</h3>
-<pre><code class="language-bash">
-## 创建项目目录
-mkdir myproject
-cd myproject
+<div class="highlight"><pre><span></span><code><span class="c1">## 创建项目目录</span>
+mkdir<span class="w"> </span>myproject
+<span class="nb">cd</span><span class="w"> </span>myproject
 
-## 初始化Go模块
-go mod init myproject
+<span class="c1">## 初始化Go模块</span>
+go<span class="w"> </span>mod<span class="w"> </span>init<span class="w"> </span>myproject
 
-## 创建main.go文件
-cat &gt; main.go &lt;&lt; EOF
-package main
+<span class="c1">## 创建main.go文件</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>main.go<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
+<span class="s">package main</span>
 
-import &quot;fmt&quot;
+<span class="s">import &quot;fmt&quot;</span>
 
-func main() {
-    fmt.Println(&quot;Hello, World!&quot;)
-}
-EOF
+<span class="s">func main() {</span>
+<span class="s">    fmt.Println(&quot;Hello, World!&quot;)</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
 
-## 运行程序
-go run main.go
-</code></pre>
+<span class="c1">## 运行程序</span>
+go<span class="w"> </span>run<span class="w"> </span>main.go
+</code></pre></div>
 <h3 id="92">9.2. 添加外部依赖</h3>
-<pre><code class="language-bash">## 添加Gin框架
-go get -u github.com/gin-gonic/gin
+<div class="highlight"><pre><span></span><code><span class="c1">## 添加Gin框架</span>
+go<span class="w"> </span>get<span class="w"> </span>-u<span class="w"> </span>github.com/gin-gonic/gin
 
-## 整理依赖
-go mod tidy
-</code></pre>
+<span class="c1">## 整理依赖</span>
+go<span class="w"> </span>mod<span class="w"> </span>tidy
+</code></pre></div>
 <h3 id="93">9.3. 构建和部署</h3>
-<pre><code class="language-bash">
-## 构建项目
-go build -o myapp main.go
+<div class="highlight"><pre><span></span><code><span class="c1">## 构建项目</span>
+go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>myapp<span class="w"> </span>main.go
 
-## 跨平台编译
-GOOS=linux GOARCH=amd64 go build -o myapp main.go
-</code></pre>
+<span class="c1">## 跨平台编译</span>
+<span class="nv">GOOS</span><span class="o">=</span>linux<span class="w"> </span><span class="nv">GOARCH</span><span class="o">=</span>amd64<span class="w"> </span>go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>myapp<span class="w"> </span>main.go
+</code></pre></div>
 
 
 

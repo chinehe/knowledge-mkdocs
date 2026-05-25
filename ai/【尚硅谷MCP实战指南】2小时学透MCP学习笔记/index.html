@@ -1630,8 +1630,8 @@ Agent需要理解其他Agent的意图、协同完成任务、与用户进行自�
 <p>而对应的技术则是：
 * MCP：完成Agent与Tools的交互
 * A2A：完成Agent与Agent的交互</p>
-<p><strong>MCP</strong>是大模型连接世界的标准/桥梁：</p>
-<pre><code class="language-mermaid">graph
+<p><strong>MCP</strong>是大模型连接世界的标准/桥梁：
+<pre class="mermaid"><code>graph
     Web[Web APIs]
     Slack[Slack] 
     Database[Database]
@@ -1644,21 +1644,19 @@ Agent需要理解其他Agent的意图、协同完成任务、与用户进行自�
     Database --&gt; |MCP| AI
     Github --&gt; |MCP| AI
     Gmail --&gt; |MCP| AI
-    FS --&gt; |MCP| AI
-</code></pre>
+    FS --&gt; |MCP| AI</code></pre></p>
 <p><strong>对于Java程序员：</strong>
-使用MCP，可以快速落地智能体项目：</p>
-<pre><code class="language-mermaid">graph LR
+使用MCP，可以快速落地智能体项目：
+<pre class="mermaid"><code>graph LR
    Java[Java]
    Frame[Spring AI/LangChain/LangChain4J]
    MCP[MCP]
    AI[AI 项目]
-   Java --&gt; |+| Frame --&gt; |+| MCP --&gt; |快速落地| AI
-</code></pre>
+   Java --&gt; |+| Frame --&gt; |+| MCP --&gt; |快速落地| AI</code></pre></p>
 <p><strong>对于大众：如何理解MCP？</strong>
 有了LLM（如DeepSeek），就有了一个“智能助理”。但是，我们期望LLM能够实现更多的功能，而不仅限于简单对话，还要能与外部的多种数据、工具交互。
-有了MCP，这就成为了现实：</p>
-<pre><code class="language-mermaid">   graph LR
+有了MCP，这就成为了现实：
+<pre class="mermaid"><code>   graph LR
    AI[AI模型]
    MCP[MCP]
    FS[文件系统]
@@ -1667,8 +1665,7 @@ Agent需要理解其他Agent的意图、协同完成任务、与用户进行自�
    AI --&gt; MCP
    MCP --&gt; FS
    MCP --&gt; Search
-   MCP --&gt; Database
-</code></pre>
+   MCP --&gt; Database</code></pre></p>
 <h3 id="12-mcp">1.2. MCP能干什么？</h3>
 <p><strong>对于程序员的示例场景：</strong>
 * 开发部署：开发者可以通过自然语言指令（如“部署新版本到测试环境”），使用MCP，可以链式调用GitLab API实现代码合并，调用Jenkins API实现镜像构建，调用Slack API通知团队。
@@ -1683,8 +1680,8 @@ Agent需要理解其他Agent的意图、协同完成任务、与用户进行自�
  * 业绩查询：用户询问“上季度营业额是多少？”，智能体使用MCP组合调用CRM系统、财务系统、邮件系统API，自动获取数据并发送总结报告。</p>
 <h3 id="13-mcp">1.3. MCP是什么？</h3>
 <p>MCP（Model Context Protocol，模型上下文协议），是2024年11月底，由Anthropic推出的一种开放标准。旨在为大语言模型提供统一的标准化方式，来与外部数据源和工具进行通信。</p>
-<p><strong>无MCP时：</strong></p>
-<pre><code class="language-mermaid">   graph TD
+<p><strong>无MCP时：</strong>
+<pre class="mermaid"><code>   graph TD
    Cursor[Cursor]
    Claude[Claude]
    Qoder[Qoder]
@@ -1699,12 +1696,11 @@ Agent需要理解其他Agent的意图、协同完成任务、与用户进行自�
    Qoder --&gt; PLSQL
    Qoder --&gt; GitHub
    Qoder --&gt; Redis
-   Qoder --&gt; Slack
-</code></pre>
-<p>在没有MCP时，每个LLM都需要为每个数据源构建独立的连接方式，可以被视为一个M*N的问题。
+   Qoder --&gt; Slack</code></pre>
+在没有MCP时，每个LLM都需要为每个数据源构建独立的连接方式，可以被视为一个M*N的问题。
 架构碎片化、难以拓展、限制了AI获取必要上下文信息的能力。</p>
-<p><strong>有MCP时：</strong></p>
-<pre><code class="language-mermaid">graph LR
+<p><strong>有MCP时：</strong>
+<pre class="mermaid"><code>graph LR
  Cursor[Cursor]
  Claude[Claude]
  Qoder[Qoder]
@@ -1719,9 +1715,8 @@ Agent需要理解其他Agent的意图、协同完成任务、与用户进行自�
  MCP --&gt; PLSQL
  MCP --&gt; GitHub
  MCP --&gt; Redis
- MCP --&gt; Slack
-</code></pre>
-<p>MCP作为一种标准化协议，极大地简化了大语言模型与外部世界的交互方式，使得开发者能够以统一的方式为AI应用添加各种能力。</p>
+ MCP --&gt; Slack</code></pre>
+MCP作为一种标准化协议，极大地简化了大语言模型与外部世界的交互方式，使得开发者能够以统一的方式为AI应用添加各种能力。</p>
 <h3 id="14-mcp-server">1.4. 查找MCP Server</h3>
 <p>说明：
 * 随着越来越多Server接入MCP协议，未来AI能够直接调用的工具将呈现指数级增长，这能从根源上打开Agent能力的天花板。未来AI生态系统将变得更加的开放和强大。
@@ -1766,16 +1761,16 @@ Agent需要理解其他Agent的意图、协同完成任务、与用户进行自�
 <p><strong>uvx安装：</strong>
 1. 安装
    * 方式一：若已经配置Python环境，直接使用pip命令安装。
-      <code>shell
-         pip install uv # 安装uvx</code>
+      <div class="highlight"><pre><span></span><code><span class="w">   </span>pip<span class="w"> </span>install<span class="w"> </span>uv<span class="w"> </span><span class="c1"># 安装uvx</span>
+</code></pre></div>
    * 方式二：Windows PowerShell安装
      <code>shell
      powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex”</code>
 2. 验证
    1. 重启终端并运行以下命令检查是否正常
-      <code>shell
-      uvx --version
-      uvx --help</code></p>
+      <div class="highlight"><pre><span></span><code>uvx<span class="w"> </span>--version
+uvx<span class="w"> </span>--help
+</code></pre></div></p>
 <p><strong>npx安装：</strong>
 安装Node.js即可。
 Node.js下载的官网：https://nodejs.org/zh-cn</p>
@@ -1794,62 +1789,61 @@ Node.js下载的官网：https://nodejs.org/zh-cn</p>
 <p>此处不去讲解安装的具体细节，请自行安装和配置。</p>
 </blockquote>
 <h3 id="23">2.3 明确需求</h3>
-<pre><code class="language-text">现在交给你一个任务，编写一个北京一日游的出行攻略
+<div class="highlight"><pre><span></span><code>现在交给你一个任务，编写一个北京一日游的出行攻略
 1、在工作目录D:\ClineWorkSpace下创建一个新的文件夹，命名为&quot;北京旅行&quot;。分别
 从数据库beijing_trip中获取表location_foods当地美食表、subway_trips地铁
 线路表的结构、数据信息。然后提取出其中的数据，放入两个txt中进行保存。
 2、根据txt中的内容，生成一个精美的html前端展示北京地铁交通及周边美食的页面，
 并存放在该目录下
-</code></pre>
+</code></pre></div>
 <h3 id="24-mcp-server">2.4. 配置MCP Server</h3>
 <p>根据前面的需求，我们需要配置以下的MCP Server：
 * 用于文件操作的desktop-commander: https://smithery.ai/server/@wonderwhy-er/desktop-commander
 * 用于数据库操作的mysqldb-mcp-server: https://smithery.ai/server/@burakdirin/mysqldb-mcp-server</p>
 <p>按照MCP Server文档中的配置说明，配置文件如下：</p>
 <blockquote>
-<p>Cline配置mcp服务的方式比较简单，这里就不配图了~</p>
+<p>Cline配置mcp服务的方式比较简单，这里就不配图了~
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;desktop-commander&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;/c&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;npx&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;-y&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;@smithery/cli@latest&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;run&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;@wonderwhy-er/desktop-commander&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;--key&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;8ce02901-a503-4520-8ebc-a2a362e93993&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cmd&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;mysqldb-mcp-server&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;mysqldb-mcp-server&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uvx&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;MYSQL_DATABASE&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;beijing_trip&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;MYSQL_HOST&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;MYSQL_PASSWORD&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;abc123&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;MYSQL_READONLY&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;false&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;MYSQL_USER&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;root&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 </blockquote>
-<pre><code class="language-json">{
-  &quot;mcpServers&quot;: {
-    &quot;desktop-commander&quot;: {
-      &quot;args&quot;: [
-        &quot;/c&quot;,
-        &quot;npx&quot;,
-        &quot;-y&quot;,
-        &quot;@smithery/cli@latest&quot;,
-        &quot;run&quot;,
-        &quot;@wonderwhy-er/desktop-commander&quot;,
-        &quot;--key&quot;,
-        &quot;8ce02901-a503-4520-8ebc-a2a362e93993&quot;
-      ],
-      &quot;command&quot;: &quot;cmd&quot;
-    },
-    &quot;mysqldb-mcp-server&quot;: {
-      &quot;args&quot;: [
-        &quot;mysqldb-mcp-server&quot;
-      ],
-      &quot;command&quot;: &quot;uvx&quot;,
-      &quot;env&quot;: {
-        &quot;MYSQL_DATABASE&quot;: &quot;beijing_trip&quot;,
-        &quot;MYSQL_HOST&quot;: &quot;localhost&quot;,
-        &quot;MYSQL_PASSWORD&quot;: &quot;abc123&quot;,
-        &quot;MYSQL_READONLY&quot;: &quot;false&quot;,
-        &quot;MYSQL_USER&quot;: &quot;root&quot;
-      }
-    }
-  }
-}
-
-</code></pre>
 <h3 id="25">2.5. 功能测试</h3>
-<p>配置完成后，在聊天框中输入我们的需求：</p>
-<pre><code class="language-text">现在交给你一个任务，编写一个北京一日游的出行攻略
+<p>配置完成后，在聊天框中输入我们的需求：
+<div class="highlight"><pre><span></span><code>现在交给你一个任务，编写一个北京一日游的出行攻略
 1、在工作目录D:\ClineWorkSpace下创建一个新的文件夹，命名为&quot;北京旅行&quot;。分别
 从数据库beijing_trip中获取表location_foods当地美食表、subway_trips地铁
 线路表的结构、数据信息。然后提取出其中的数据，放入两个txt中进行保存。
 2、根据txt中的内容，生成一个精美的html前端展示北京地铁交通及周边美食的页面，
 并存放在该目录下
-</code></pre>
+</code></pre></div></p>
 <p>静待Cline的执行完毕即可，最终将返回一个设计精美的前端页面。</p>
 <h2 id="3-mcp">3. MCP工作原理</h2>
 <h3 id="31-mcp">3.1. MCP的架构</h3>
@@ -1883,8 +1877,8 @@ Node.js下载的官网：https://nodejs.org/zh-cn</p>
     * API 服务：天气数据、股票行情、搜索引擎、Jira/Slack 等企业工具。
     * 知识库：托管在云端的公司文档库、Wiki。
   * 访问方式：通常通过基于网络的 MCP Server（使用 Streamable HTTP 或早期的 SSE 传输层）来访问。</p>
-<p><strong>架构图：</strong></p>
-<pre><code class="language-mermaid">graph LR
+<p><strong>架构图：</strong>
+<pre class="mermaid"><code>graph LR
   Host[Host with MCP Client]
   ServerA[MCP Server A]
   ServerB[MCP Server B]
@@ -1897,8 +1891,7 @@ Node.js下载的官网：https://nodejs.org/zh-cn</p>
   Host --&gt; | MCP Protocol | ServerC
   ServerA --&gt; LocalResourcesA
   ServerB --&gt; LocalResourcesB
-  ServerC --&gt; |Web APIs| RemoteResources
-</code></pre>
+  ServerC --&gt; |Web APIs| RemoteResources</code></pre></p>
 <h3 id="32-mcp">3.2. MCP工作流程</h3>
 <p>MCP（Model Context Protocol）的工作流程基于客户端-服务器架构，采用JSON-RPC 2.0协议进行通信。整个流程涉及Host、MCP Client、MCP Server以及后端资源之间的协调配合。</p>
 <p>主要工作步骤：
@@ -1916,8 +1909,8 @@ Node.js下载的官网：https://nodejs.org/zh-cn</p>
    1. 上下文整合：AI模型将外部数据与原有知识整合
    2. 响应生成：基于整合后的信息生成最终响应
    3. 用户反馈：将结果呈现给用户</p>
-<p><strong>工作流程图：</strong></p>
-<pre><code class="language-mermaid">sequenceDiagram
+<p><strong>工作流程图：</strong>
+<pre class="mermaid"><code>sequenceDiagram
     participant User as 用户
     participant Host as MCP Host (Claude/Cursor等)
     participant LLM as 大语言模型LLM
@@ -1946,10 +1939,9 @@ Node.js下载的官网：https://nodejs.org/zh-cn</p>
     Server-&gt;&gt;Client: 获取工具调用结果
     Client-&gt;&gt;LLM: 传递执行结果
     LLM-&gt;&gt;Host: 返回应答
-    Host-&gt;&gt;User: 生成并返回最终响应
-</code></pre>
-<p><strong>数据流向图：</strong></p>
-<pre><code class="language-mermaid">flowchart TD
+    Host-&gt;&gt;User: 生成并返回最终响应</code></pre></p>
+<p><strong>数据流向图：</strong>
+<pre class="mermaid"><code>flowchart TD
     User[用户]
     Host[MCP Host]
     LLM[大语言模型]
@@ -1969,8 +1961,7 @@ Node.js下载的官网：https://nodejs.org/zh-cn</p>
     Client --&gt; |11.传递工具调用结果|Host
     Host --&gt; |12.传递工具调用结果|LLM
     LLM --&gt; |13.返回应答|Host
-    Host --&gt; |14.展示应答|User
-</code></pre>
+    Host --&gt; |14.展示应答|User</code></pre></p>
 <h3 id="4-mcp">4. 手动开发MCP项目</h3>
 <h2 id="5-cherrystudiomcp">5. CherryStudio中使用MCP</h2>
 <h2 id="6-mcp-server">6. 热门MCP Server推荐</h2>

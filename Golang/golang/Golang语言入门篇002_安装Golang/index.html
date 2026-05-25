@@ -2306,36 +2306,36 @@
 </ol>
 <h3 id="23">2.3. 验证安装</h3>
 <p>打开命令提示符（cmd）或PowerShell，输入以下命令：</p>
-<pre><code class="language-bash">go version
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>version
+</code></pre></div>
 <p>如果显示版本信息，说明安装成功。</p>
 <h2 id="3-linuxgo">3. Linux系统安装Go</h2>
 <h3 id="31">3.1. 下载安装包</h3>
 <p>访问<a href="https://go.dev/dl/">Go官方下载页面</a>，下载Linux对应的<code>.tar.gz</code>压缩包，或者使用wget命令：</p>
-<pre><code class="language-bash">wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz
-</code></pre>
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>https://go.dev/dl/go1.21.0.linux-amd64.tar.gz
+</code></pre></div>
 <h3 id="32">3.2. 安装步骤</h3>
 <ol>
 <li>解压下载的压缩包到<code>/usr/local</code>目录：</li>
 </ol>
-<pre><code class="language-bash">sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
-</code></pre>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tar<span class="w"> </span>-C<span class="w"> </span>/usr/local<span class="w"> </span>-xzf<span class="w"> </span>go1.21.0.linux-amd64.tar.gz
+</code></pre></div>
 <ol>
 <li>配置环境变量，将Go的bin目录添加到PATH中：</li>
 </ol>
 <p>编辑<code>~/.bashrc</code>或<code>~/.profile</code>文件：</p>
-<pre><code class="language-bash">export PATH=$PATH:/usr/local/go/bin
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:/usr/local/go/bin
+</code></pre></div>
 <ol>
 <li>使配置生效：</li>
 </ol>
-<pre><code class="language-bash">source ~/.bashrc
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>~/.bashrc
+</code></pre></div>
 <p>或者重新登录系统。</p>
 <h3 id="33">3.3. 验证安装</h3>
 <p>在终端中执行：</p>
-<pre><code class="language-bash">go version
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>version
+</code></pre></div>
 <h2 id="4-macosgo">4. macOS系统安装Go</h2>
 <h3 id="41">4.1. 方法一：使用安装包</h3>
 <ol>
@@ -2345,12 +2345,12 @@
 </ol>
 <h3 id="42-homebrew">4.2. 方法二：使用Homebrew</h3>
 <p>如果你已经安装了Homebrew，可以使用以下命令安装：</p>
-<pre><code class="language-bash">brew install go
-</code></pre>
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>go
+</code></pre></div>
 <h3 id="43">4.3. 验证安装</h3>
 <p>在终端中执行：</p>
-<pre><code class="language-bash">go version
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>version
+</code></pre></div>
 <h2 id="5-go">5. 配置Go环境变量</h2>
 <p>安装Go后，还需要配置一些重要的环境变量：</p>
 <ul>
@@ -2360,81 +2360,81 @@
 <li><code>PATH</code>：需要包含Go的可执行文件路径</li>
 </ul>
 <h3 id="51-go">5.1. 查看当前Go环境变量</h3>
-<pre><code class="language-bash">go env
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>env
+</code></pre></div>
 <h3 id="52-go">5.2. 设置Go环境变量</h3>
-<pre><code class="language-bash">## 设置GOPATH
-go env -w GOPATH=$HOME/go
+<div class="highlight"><pre><span></span><code><span class="c1">## 设置GOPATH</span>
+go<span class="w"> </span>env<span class="w"> </span>-w<span class="w"> </span><span class="nv">GOPATH</span><span class="o">=</span><span class="nv">$HOME</span>/go
 
-## 设置代理（国内用户推荐）
-go env -w GOPROXY=https://goproxy.cn,direct
-</code></pre>
+<span class="c1">## 设置代理（国内用户推荐）</span>
+go<span class="w"> </span>env<span class="w"> </span>-w<span class="w"> </span><span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct
+</code></pre></div>
 <h2 id="6-go">6. Go多版本管理</h2>
 <p>在实际开发中，可能需要在不同项目中使用不同版本的Go。以下是几种常用的Go多版本管理工具：</p>
 <h3 id="61-gvmgo-version-manager">6.1. 使用gvm（Go Version Manager）</h3>
 <p>gvm是Linux和macOS平台下常用的Go版本管理工具。</p>
 <h4 id="611-gvm">6.1.1. 安装gvm</h4>
-<pre><code class="language-bash">bash &lt; &lt;(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-</code></pre>
+<div class="highlight"><pre><span></span><code>bash<span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>curl<span class="w"> </span>-s<span class="w"> </span>-S<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer<span class="o">)</span>
+</code></pre></div>
 <h4 id="612-gvm">6.1.2. 使用gvm</h4>
-<pre><code class="language-bash">## 查看可安装的Go版本
-gvm listall
+<div class="highlight"><pre><span></span><code><span class="c1">## 查看可安装的Go版本</span>
+gvm<span class="w"> </span>listall
 
-## 安装指定版本的Go
-gvm install go1.21.0
+<span class="c1">## 安装指定版本的Go</span>
+gvm<span class="w"> </span>install<span class="w"> </span>go1.21.0
 
-## 切换Go版本
-gvm use go1.21.0
+<span class="c1">## 切换Go版本</span>
+gvm<span class="w"> </span>use<span class="w"> </span>go1.21.0
 
-## 设置默认Go版本
-gvm use go1.21.0 --default
-</code></pre>
+<span class="c1">## 设置默认Go版本</span>
+gvm<span class="w"> </span>use<span class="w"> </span>go1.21.0<span class="w"> </span>--default
+</code></pre></div>
 <h3 id="62-goenv">6.2. 使用goenv</h3>
 <p>goenv是一个跨平台的Go版本管理工具，灵感来源于rbenv。</p>
 <h4 id="621-goenv">6.2.1. 安装goenv</h4>
-<pre><code class="language-bash">git clone https://github.com/syndbg/goenv.git ~/.goenv
-</code></pre>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/syndbg/goenv.git<span class="w"> </span>~/.goenv
+</code></pre></div>
 <p>添加到PATH：</p>
-<pre><code class="language-bash">echo 'export GOENV_ROOT=&quot;$HOME/.goenv&quot;' &gt;&gt; ~/.bashrc
-echo 'export PATH=&quot;$GOENV_ROOT/bin:$PATH&quot;' &gt;&gt; ~/.bashrc
-echo 'eval &quot;$(goenv init -)&quot;' &gt;&gt; ~/.bashrc
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export GOENV_ROOT=&quot;$HOME/.goenv&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;export PATH=&quot;$GOENV_ROOT/bin:$PATH&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;eval &quot;$(goenv init -)&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.bashrc
+</code></pre></div>
 <h4 id="622-goenv">6.2.2. 使用goenv</h4>
-<pre><code class="language-bash">## 查看可用的Go版本
-goenv install -l
+<div class="highlight"><pre><span></span><code><span class="c1">## 查看可用的Go版本</span>
+goenv<span class="w"> </span>install<span class="w"> </span>-l
 
-## 安装指定版本
-goenv install 1.21.0
+<span class="c1">## 安装指定版本</span>
+goenv<span class="w"> </span>install<span class="w"> </span><span class="m">1</span>.21.0
 
-## 设置全局版本
-goenv global 1.21.0
+<span class="c1">## 设置全局版本</span>
+goenv<span class="w"> </span>global<span class="w"> </span><span class="m">1</span>.21.0
 
-## 设置项目版本
-goenv local 1.20.0
-</code></pre>
+<span class="c1">## 设置项目版本</span>
+goenv<span class="w"> </span><span class="nb">local</span><span class="w"> </span><span class="m">1</span>.20.0
+</code></pre></div>
 <h3 id="63">6.3. 使用第三方包管理器</h3>
 <h4 id="631-macos-homebrew">6.3.1. macOS (使用Homebrew)</h4>
-<pre><code class="language-bash">## 安装不同版本的Go
-brew install go@1.20
-brew install go@1.19
+<div class="highlight"><pre><span></span><code><span class="c1">## 安装不同版本的Go</span>
+brew<span class="w"> </span>install<span class="w"> </span>go@1.20
+brew<span class="w"> </span>install<span class="w"> </span>go@1.19
 
-## 切换版本
-brew unlink go
-brew link go@1.20
-</code></pre>
+<span class="c1">## 切换版本</span>
+brew<span class="w"> </span>unlink<span class="w"> </span>go
+brew<span class="w"> </span>link<span class="w"> </span>go@1.20
+</code></pre></div>
 <h2 id="7-dockergo">7. Docker中使用Go</h2>
 <p>对于不想在本地安装Go或者需要隔离环境的开发者，可以使用Docker：</p>
-<pre><code class="language-bash">## 拉取Go官方镜像
-docker pull golang:1.21
+<div class="highlight"><pre><span></span><code><span class="c1">## 拉取Go官方镜像</span>
+docker<span class="w"> </span>pull<span class="w"> </span>golang:1.21
 
-## 运行Go容器
-docker run -it --rm golang:1.21 go version
-</code></pre>
+<span class="c1">## 运行Go容器</span>
+docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>golang:1.21<span class="w"> </span>go<span class="w"> </span>version
+</code></pre></div>
 <h2 id="8">8. 常见问题及解决方案</h2>
 <h3 id="81">8.1. 网络问题</h3>
 <p>国内用户可能遇到下载包慢的问题，可以配置Go代理：</p>
-<pre><code class="language-bash">go env -w GOPROXY=https://goproxy.cn,direct
-</code></pre>
+<div class="highlight"><pre><span></span><code>go<span class="w"> </span>env<span class="w"> </span>-w<span class="w"> </span><span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct
+</code></pre></div>
 
 
 

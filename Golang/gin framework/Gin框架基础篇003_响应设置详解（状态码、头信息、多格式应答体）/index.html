@@ -1994,9 +1994,9 @@
 <blockquote>
 <p>除了该方法外，很多Gin框架设置应答体的方法也会带有一个状态码参数，用于在设置应答体的同时设置应答码。后文会介绍～</p>
 </blockquote>
-<pre><code class="language-go">// 示例
-c.Status(http.StatusBadRequest)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 示例</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">Status</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="2">2. 头信息</h2>
 <h3 id="21-header">2.1. 设置普通Header</h3>
 <p>Gin框架提供了<code>func (c *Context) Header(key, value string)</code>方法来设置应答的请求头。</p>
@@ -2004,30 +2004,30 @@ c.Status(http.StatusBadRequest)
 <li>底层调用<code>c.Writer.Header().Set(key, value)</code>设置请求头。</li>
 <li>如果参数value为空，则表示删除指定key请求头信息。</li>
 </ul>
-<pre><code class="language-go">// 示例
-    c.Header(&quot;ClientID&quot;, &quot;12345678&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 示例</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Header</span><span class="p">(</span><span class="s">&quot;ClientID&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;12345678&quot;</span><span class="p">)</span>
+</code></pre></div>
 <h3 id="22-cookie">2.2. 设置Cookie</h3>
 <p>对于设置cookie这种常见场景，Gin框架提供了如下两个方法来方便我们设置cookie：</p>
 <ul>
 <li><code>func (c *Context) SetCookie(name, value string, maxAge int, path, domain string, secure, httpOnly bool)</code></li>
 <li><code>func (c *Context) SetCookieData(cookie *http.Cookie)</code></li>
 </ul>
-<pre><code class="language-go">// SetCookie 示例
-    c.SetCookie(&quot;token&quot;, &quot;12345678&quot;, 3600, &quot;/&quot;, &quot;hello.com&quot;, false, true)
+<div class="highlight"><pre><span></span><code><span class="c1">// SetCookie 示例</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">SetCookie</span><span class="p">(</span><span class="s">&quot;token&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;12345678&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3600</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
 
-// SetCookieData示例
-c.SetCookieData(&amp;http.Cookie{
-        Name:     &quot;token&quot;,
-        Value:    url.QueryEscape(&quot;12345678&quot;),
-        MaxAge:   3600,
-        Path:     &quot;/&quot;,
-        Domain:   &quot;hello.com&quot;,
-        SameSite: http.SameSiteDefaultMode,
-        Secure:   false,
-        HttpOnly: true,
-    })
-</code></pre>
+<span class="c1">// SetCookieData示例</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">SetCookieData</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Name</span><span class="p">:</span><span class="w">     </span><span class="s">&quot;token&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Value</span><span class="p">:</span><span class="w">    </span><span class="nx">url</span><span class="p">.</span><span class="nx">QueryEscape</span><span class="p">(</span><span class="s">&quot;12345678&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">MaxAge</span><span class="p">:</span><span class="w">   </span><span class="mi">3600</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Path</span><span class="p">:</span><span class="w">     </span><span class="s">&quot;/&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Domain</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;hello.com&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">SameSite</span><span class="p">:</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">SameSiteDefaultMode</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Secure</span><span class="p">:</span><span class="w">   </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">HttpOnly</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div>
 <h2 id="3">3. 应答体</h2>
 <p>Gin框架针对不同的应答体格式，提供了对应的便捷方法供开发者使用～</p>
 <h3 id="31">3.1. 常用格式</h3>
@@ -2056,9 +2056,9 @@ c.SetCookieData(&amp;http.Cookie{
 <li>方法支持字符串格式化，底层使用的是<code>fmt</code>格式化包。</li>
 <li>如果没有设置<code>Content-Type</code>请求头，该方法会自动设置为<code>"text/plain; charset=utf-8"</code>.</li>
 </ul>
-<pre><code class="language-go">// 示例
-c.String(http.StatusOK, &quot;Hello World: %s&quot;, time.Now().Format(&quot;2006-01-02 15:04:05&quot;))
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 示例</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello World: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">Format</span><span class="p">(</span><span class="s">&quot;2006-01-02 15:04:05&quot;</span><span class="p">))</span>
+</code></pre></div>
 <h4 id="312-json">3.1.2. JSON</h4>
 <p>JSON格式相关方法：</p>
 <ul>
@@ -2079,105 +2079,105 @@ c.String(http.StatusOK, &quot;Hello World: %s&quot;, time.Now().Format(&quot;200
 <blockquote>
 <p>仅用于演示，正常不会这么写</p>
 </blockquote>
-<pre><code class="language-go">func TestJson(c *gin.Context) {
-    data := Data{
-        ID:       1,
-        Name:     &quot;hello&quot;,
-        LongName: &quot;abc123!@#你好&quot;,
-        Html:     &quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;,
-    }
-    c.JSON(http.StatusOK, data)
-    c.AsciiJSON(http.StatusOK, data)
-    c.IndentedJSON(http.StatusOK, data)
-    c.JSONP(http.StatusOK, data)
-    c.PureJSON(http.StatusOK, data)
-    c.SecureJSON(http.StatusOK, data)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">TestJson</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Data</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ID</span><span class="p">:</span><span class="w">       </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Name</span><span class="p">:</span><span class="w">     </span><span class="s">&quot;hello&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">LongName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;abc123!@#你好&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Html</span><span class="p">:</span><span class="w">     </span><span class="s">&quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">AsciiJSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">IndentedJSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSONP</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">PureJSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">SecureJSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>请求：</p>
-<pre><code class="language-http">GET /resp/json?callback=abc HTTP/1.1
-Host: 127.0.0.1:8080
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/resp/json?callback=abc</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">127.0.0.1:8080</span>
+</code></pre></div>
 <p>输出：</p>
-<pre><code class="language-json">// JSON
-[{&quot;name&quot;:&quot;abc123!@#你好&quot;,&quot;html&quot;:&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;}]
+<div class="highlight"><pre><span></span><code><span class="c1">// JSON</span>
+<span class="p">[{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;abc123!@#你好&quot;</span><span class="p">,</span><span class="nt">&quot;html&quot;</span><span class="p">:</span><span class="s2">&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;</span><span class="p">}]</span>
 
-// AsciiJSON
-[{&quot;name&quot;:&quot;abc123!@#\u4f60\u597d&quot;,&quot;html&quot;:&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;}]
+<span class="c1">// AsciiJSON</span>
+<span class="p">[{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;abc123!@#\u4f60\u597d&quot;</span><span class="p">,</span><span class="nt">&quot;html&quot;</span><span class="p">:</span><span class="s2">&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;</span><span class="p">}]</span>
 
-// IndentedJSON
-[
-    {
-        &quot;name&quot;: &quot;abc123!@#你好&quot;,
-        &quot;html&quot;: &quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;
-    }
-]
+<span class="c1">// IndentedJSON</span>
+<span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;abc123!@#你好&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;html&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
 
-// JSONP
-abc([{&quot;name&quot;:&quot;abc123!@#你好&quot;,&quot;html&quot;:&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;}]);
+<span class="c1">// JSONP</span>
+<span class="err">abc(</span><span class="p">[{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;abc123!@#你好&quot;</span><span class="p">,</span><span class="nt">&quot;html&quot;</span><span class="p">:</span><span class="s2">&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;</span><span class="p">}]</span><span class="err">);</span>
 
-// PureJSON
-[{&quot;name&quot;:&quot;abc123!@#你好&quot;,&quot;html&quot;:&quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;}]
+<span class="c1">// PureJSON</span>
+<span class="p">[{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;abc123!@#你好&quot;</span><span class="p">,</span><span class="nt">&quot;html&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;</span><span class="p">}]</span>
 
-// SecureJSON
-while(1);[{&quot;name&quot;:&quot;abc123!@#你好&quot;,&quot;html&quot;:&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;}]
-</code></pre>
+<span class="c1">// SecureJSON</span>
+<span class="err">while(</span><span class="mi">1</span><span class="err">);</span><span class="p">[{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;abc123!@#你好&quot;</span><span class="p">,</span><span class="nt">&quot;html&quot;</span><span class="p">:</span><span class="s2">&quot;\u003ch1\u003ehello world\u003c/h1\u003e&quot;</span><span class="p">}]</span>
+</code></pre></div>
 <h4 id="313-toml">3.1.3. TOML</h4>
 <p>Gin框架提供了<code>func (c *Context) TOML(code int, obj any)</code>方法来便于处理TOML格式应答。</p>
 <p>示例：</p>
-<pre><code class="language-go">func TestToml(c *gin.Context) {
-    data := struct {
-        Name string `toml:&quot;name&quot;`
-        Html string `toml:&quot;html&quot;`
-    }{
-        Name: &quot;abc123!@#你好&quot;,
-        Html: &quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;,
-    }
-    c.TOML(http.StatusOK, data)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">TestToml</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`toml:&quot;name&quot;`</span>
+<span class="w">        </span><span class="nx">Html</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`toml:&quot;html&quot;`</span>
+<span class="w">    </span><span class="p">}{</span>
+<span class="w">        </span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;abc123!@#你好&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Html</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">TOML</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>应答：</p>
-<pre><code class="language-toml">name = 'abc123!@#你好'
-html = '&lt;h1&gt;hello world&lt;/h1&gt;'
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;abc123!@#你好&#39;</span>
+<span class="n">html</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&lt;h1&gt;hello world&lt;/h1&gt;&#39;</span>
+</code></pre></div>
 <h4 id="314-xml">3.1.4. XML</h4>
 <p>Gin框架提供了<code>func (c *Context) XML(code int, obj any)</code>方法来便于处理XML格式应答。</p>
 <p>示例：</p>
-<pre><code class="language-go">// xml不支持匿名结构体
-type XmlData struct {
-    Name string `xml:&quot;name&quot;`
-    Html string `xml:&quot;html&quot;`
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// xml不支持匿名结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">XmlData</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`xml:&quot;name&quot;`</span>
+<span class="w">    </span><span class="nx">Html</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`xml:&quot;html&quot;`</span>
+<span class="p">}</span>
 
-func TestXml(c *gin.Context) {
-    data := XmlData{
-        Name: &quot;abc123!@#你好&quot;,
-        Html: &quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;,
-    }
-    c.XML(http.StatusOK, data)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TestXml</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">XmlData</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;abc123!@#你好&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Html</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">XML</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>应答：</p>
-<pre><code class="language-xml">&lt;XmlData&gt;&lt;name&gt;abc123!@#你好&lt;/name&gt;&lt;html&gt;&amp;lt;h1&amp;gt;hello world&amp;lt;/h1&amp;gt;&lt;/html&gt;&lt;/XmlData&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;XmlData&gt;&lt;name&gt;</span>abc123!@#你好<span class="nt">&lt;/name&gt;&lt;html&gt;</span><span class="ni">&amp;lt;</span>h1<span class="ni">&amp;gt;</span>hello<span class="w"> </span>world<span class="ni">&amp;lt;</span>/h1<span class="ni">&amp;gt;</span><span class="nt">&lt;/html&gt;&lt;/XmlData&gt;</span>
+</code></pre></div>
 <h4 id="315-yaml">3.1.5. YAML</h4>
 <p>Gin框架提供了<code>func (c *Context) YAML(code int, obj any)</code>方法来便于处理YAML格式应答。</p>
 <p>示例：</p>
-<pre><code class="language-go">func TestYaml(c *gin.Context) {
-    data := struct {
-        Name string `yaml:&quot;name&quot;`
-        Html string `yaml:&quot;html&quot;`
-    }{
-        Name: &quot;abc123!@#你好&quot;,
-        Html: &quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;,
-    }
-    c.YAML(http.StatusOK, data)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">TestYaml</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`yaml:&quot;name&quot;`</span>
+<span class="w">        </span><span class="nx">Html</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`yaml:&quot;html&quot;`</span>
+<span class="w">    </span><span class="p">}{</span>
+<span class="w">        </span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;abc123!@#你好&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Html</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&lt;h1&gt;hello world&lt;/h1&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">YAML</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>应答：</p>
-<pre><code class="language-yaml">name: &quot;abc123!@#你好&quot;
-html: &lt;h1&gt;hello world&lt;/h1&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;abc123!@#你好&quot;</span>
+<span class="nt">html</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;h1&gt;hello world&lt;/h1&gt;</span>
+</code></pre></div>
 <h3 id="32">3.2. 设置字节数组</h3>
 <p><code>func (c *Context) Data(code int, contentType string, data []byte)</code>方法用于直接向应答体中写入字节数组。</p>
 <ul>
@@ -2186,14 +2186,13 @@ html: &lt;h1&gt;hello world&lt;/h1&gt;
 <li>data 数据</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">func TestBytes(c *gin.Context) {
-    c.Data(http.StatusOK, &quot;text/plain&quot;, []byte(&quot;hello world&quot;))
-}
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">TestBytes</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Data</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;text/plain&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;hello world&quot;</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>应答：</p>
-<pre><code>hello world
-</code></pre>
+<div class="highlight"><pre><span></span><code>hello world
+</code></pre></div>
 <h3 id="33-reader">3.3. 从Reader流中读取数据返回</h3>
 <p><code>func (c *Context) DataFromReader(code int, contentLength int64, contentType string, reader io.Reader, extraHeaders map[string]string)</code>方法用于直接从Reader中读取数据，然后向应答中写入读取到的数据。</p>
 <ul>
@@ -2204,22 +2203,21 @@ html: &lt;h1&gt;hello world&lt;/h1&gt;
 <li>extraHeaders 指定其他的头信息</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">func TestReader(c *gin.Context) {
-    req, _ := http.NewRequest(&quot;GET&quot;, &quot;https://www.baidu.com&quot;, nil)
-    response, err := http.DefaultClient.Do(req)
-    if err != nil {
-        c.String(http.StatusInternalServerError, &quot;error&quot;)
-        return
-    }
-    c.DataFromReader(http.StatusOK, response.ContentLength, response.Header.Get(&quot;Content-Type&quot;), response.Body, nil)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">TestReader</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">NewRequest</span><span class="p">(</span><span class="s">&quot;GET&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;https://www.baidu.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">response</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">DefaultClient</span><span class="p">.</span><span class="nx">Do</span><span class="p">(</span><span class="nx">req</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">String</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;error&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">DataFromReader</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">ContentLength</span><span class="p">,</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">Header</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">),</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">Body</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>应答：</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/bdorz/baidu.min.css&gt;&lt;title&gt;百度一下，你就知道&lt;/title&gt;&lt;/head&gt; &lt;body link=#0000cc&gt; &lt;div id=wrapper&gt; &lt;div id=head&gt; &lt;div class=head_wrapper&gt; &lt;div class=s_form&gt; &lt;div class=s_form_wrapper&gt; &lt;div id=lg&gt; &lt;img hidefocus=true src=//www.baidu.com/img/bd_logo1.png width=270 height=129&gt; &lt;/div&gt; &lt;form id=form name=f action=//www.baidu.com/s class=fm&gt; &lt;input type=hidden name=bdorz_come value=1&gt; &lt;input type=hidden name=ie value=utf-8&gt; &lt;input type=hidden name=f value=8&gt; &lt;input type=hidden name=rsv_bp value=1&gt; &lt;input type=hidden name=rsv_idx value=1&gt; &lt;input type=hidden name=tn value=baidu&gt;&lt;span class=&quot;bg s_ipt_wr&quot;&gt;&lt;input id=kw name=wd class=s_ipt value maxlength=255 autocomplete=off autofocus=autofocus&gt;&lt;/span&gt;&lt;span class=&quot;bg s_btn_wr&quot;&gt;&lt;input type=submit id=su value=百度一下 class=&quot;bg s_btn&quot; autofocus&gt;&lt;/span&gt; &lt;/form&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=u1&gt; &lt;a href=http://news.baidu.com name=tj_trnews class=mnav&gt;新闻&lt;/a&gt; &lt;a href=https://www.hao123.com name=tj_trhao123 class=mnav&gt;hao123&lt;/a&gt; &lt;a href=http://map.baidu.com name=tj_trmap class=mnav&gt;地图&lt;/a&gt; &lt;a href=http://v.baidu.com name=tj_trvideo class=mnav&gt;视频&lt;/a&gt; &lt;a href=http://tieba.baidu.com name=tj_trtieba class=mnav&gt;贴吧&lt;/a&gt; &lt;noscript&gt; &lt;a href=http://www.baidu.com/bdorz/login.gif?login&amp;amp;tpl=mn&amp;amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb&gt;登录&lt;/a&gt; &lt;/noscript&gt; &lt;script&gt;document.write('&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u='+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ '&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;');
-                &lt;/script&gt; &lt;a href=//www.baidu.com/more/ name=tj_briicon class=bri style=&quot;display: block;&quot;&gt;更多产品&lt;/a&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=ftCon&gt; &lt;div id=ftConw&gt; &lt;p id=lh&gt; &lt;a href=http://home.baidu.com&gt;关于百度&lt;/a&gt; &lt;a href=http://ir.baidu.com&gt;About Baidu&lt;/a&gt; &lt;/p&gt; &lt;p id=cp&gt;&amp;copy;2017&amp;nbsp;Baidu&amp;nbsp;&lt;a href=http://www.baidu.com/duty/&gt;使用百度前必读&lt;/a&gt;&amp;nbsp; &lt;a href=http://jianyi.baidu.com/ class=cp-feedback&gt;意见反馈&lt;/a&gt;&amp;nbsp;京ICP证030173号&amp;nbsp; &lt;img src=//www.baidu.com/img/gs.gif&gt; &lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt;
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="cm">&lt;!--STATUS OK--&gt;</span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">content-type</span> <span class="na">content</span><span class="o">=</span><span class="s">text/html;charset=utf-8</span><span class="p">&gt;&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">X-UA-Compatible</span> <span class="na">content</span><span class="o">=</span><span class="s">IE=Edge</span><span class="p">&gt;&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">always</span> <span class="na">name</span><span class="o">=</span><span class="s">referrer</span><span class="p">&gt;&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">stylesheet</span> <span class="na">type</span><span class="o">=</span><span class="s">text/css</span> <span class="na">href</span><span class="o">=</span><span class="s">https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/bdorz/baidu.min.css</span><span class="p">&gt;&lt;</span><span class="nt">title</span><span class="p">&gt;</span>百度一下，你就知道<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;&lt;/</span><span class="nt">head</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">body</span> <span class="na">link</span><span class="o">=</span><span class="s">#0000cc</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">wrapper</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">head</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">head_wrapper</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">s_form</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">s_form_wrapper</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">lg</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">img</span> <span class="na">hidefocus</span><span class="o">=</span><span class="s">true</span> <span class="na">src</span><span class="o">=</span><span class="s">//www.baidu.com/img/bd_logo1.png</span> <span class="na">width</span><span class="o">=</span><span class="s">270</span> <span class="na">height</span><span class="o">=</span><span class="s">129</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">form</span> <span class="na">id</span><span class="o">=</span><span class="s">form</span> <span class="na">name</span><span class="o">=</span><span class="s">f</span> <span class="na">action</span><span class="o">=</span><span class="s">//www.baidu.com/s</span> <span class="na">class</span><span class="o">=</span><span class="s">fm</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">hidden</span> <span class="na">name</span><span class="o">=</span><span class="s">bdorz_come</span> <span class="na">value</span><span class="o">=</span><span class="s">1</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">hidden</span> <span class="na">name</span><span class="o">=</span><span class="s">ie</span> <span class="na">value</span><span class="o">=</span><span class="s">utf-8</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">hidden</span> <span class="na">name</span><span class="o">=</span><span class="s">f</span> <span class="na">value</span><span class="o">=</span><span class="s">8</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">hidden</span> <span class="na">name</span><span class="o">=</span><span class="s">rsv_bp</span> <span class="na">value</span><span class="o">=</span><span class="s">1</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">hidden</span> <span class="na">name</span><span class="o">=</span><span class="s">rsv_idx</span> <span class="na">value</span><span class="o">=</span><span class="s">1</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">hidden</span> <span class="na">name</span><span class="o">=</span><span class="s">tn</span> <span class="na">value</span><span class="o">=</span><span class="s">baidu</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;bg s_ipt_wr&quot;</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">kw</span> <span class="na">name</span><span class="o">=</span><span class="s">wd</span> <span class="na">class</span><span class="o">=</span><span class="s">s_ipt</span> <span class="na">value</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">255</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">off</span> <span class="na">autofocus</span><span class="o">=</span><span class="s">autofocus</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;bg s_btn_wr&quot;</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">submit</span> <span class="na">id</span><span class="o">=</span><span class="s">su</span> <span class="na">value</span><span class="o">=</span><span class="s">百度一下</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;bg s_btn&quot;</span> <span class="na">autofocus</span><span class="p">&gt;&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">u1</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">http://news.baidu.com</span> <span class="na">name</span><span class="o">=</span><span class="s">tj_trnews</span> <span class="na">class</span><span class="o">=</span><span class="s">mnav</span><span class="p">&gt;</span>新闻<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">https://www.hao123.com</span> <span class="na">name</span><span class="o">=</span><span class="s">tj_trhao123</span> <span class="na">class</span><span class="o">=</span><span class="s">mnav</span><span class="p">&gt;</span>hao123<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">http://map.baidu.com</span> <span class="na">name</span><span class="o">=</span><span class="s">tj_trmap</span> <span class="na">class</span><span class="o">=</span><span class="s">mnav</span><span class="p">&gt;</span>地图<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">http://v.baidu.com</span> <span class="na">name</span><span class="o">=</span><span class="s">tj_trvideo</span> <span class="na">class</span><span class="o">=</span><span class="s">mnav</span><span class="p">&gt;</span>视频<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">http://tieba.baidu.com</span> <span class="na">name</span><span class="o">=</span><span class="s">tj_trtieba</span> <span class="na">class</span><span class="o">=</span><span class="s">mnav</span><span class="p">&gt;</span>贴吧<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">noscript</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">http://www.baidu.com/bdorz/login.gif?login&amp;amp;tpl=mn&amp;amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1</span> <span class="na">name</span><span class="o">=</span><span class="s">tj_login</span> <span class="na">class</span><span class="o">=</span><span class="s">lb</span><span class="p">&gt;</span>登录<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">noscript</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&#39;</span><span class="o">+</span><span class="w"> </span><span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">&quot;?&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;&amp;&quot;</span><span class="p">)</span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;bdorz_come=1&quot;</span><span class="p">)</span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;登录&lt;/a&gt;&#39;</span><span class="p">);</span>
+<span class="w">                </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">//www.baidu.com/more/</span> <span class="na">name</span><span class="o">=</span><span class="s">tj_briicon</span> <span class="na">class</span><span class="o">=</span><span class="s">bri</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;display: block;&quot;</span><span class="p">&gt;</span>更多产品<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">ftCon</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">ftConw</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">lh</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">http://home.baidu.com</span><span class="p">&gt;</span>关于百度<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">http://ir.baidu.com</span><span class="p">&gt;</span>About Baidu<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">cp</span><span class="p">&gt;</span><span class="ni">&amp;copy;</span>2017<span class="ni">&amp;nbsp;</span>Baidu<span class="ni">&amp;nbsp;</span><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">http://www.baidu.com/duty/</span><span class="p">&gt;</span>使用百度前必读<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="ni">&amp;nbsp;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">http://jianyi.baidu.com/</span> <span class="na">class</span><span class="o">=</span><span class="s">cp-feedback</span><span class="p">&gt;</span>意见反馈<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span><span class="ni">&amp;nbsp;</span>京ICP证030173号<span class="ni">&amp;nbsp;</span> <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">//www.baidu.com/img/gs.gif</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
 <h3 id="34">3.4. 下载文件</h3>
 <p>Gin 框架的 Context 提供了几个用于处理文件的方法，包括 File、FileAttachment 和 FileFromFS。下面详细介绍这些方法：</p>
 <ul>
@@ -2256,17 +2254,17 @@ html: &lt;h1&gt;hello world&lt;/h1&gt;
 </li>
 </ul>
 <p>使用示例：</p>
-<pre><code class="language-go">// 直接发送服务器上的文件
-c.File(&quot;/path/to/file.txt&quot;)
+<div class="highlight"><pre><span></span><code><span class="c1">// 直接发送服务器上的文件</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">File</span><span class="p">(</span><span class="s">&quot;/path/to/file.txt&quot;</span><span class="p">)</span>
 
-// 强制下载文件，下载时显示为 custom-name.txt
-c.FileAttachment(&quot;/path/to/server-file.txt&quot;, &quot;custom-name.txt&quot;)
+<span class="c1">// 强制下载文件，下载时显示为 custom-name.txt</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">FileAttachment</span><span class="p">(</span><span class="s">&quot;/path/to/server-file.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;custom-name.txt&quot;</span><span class="p">)</span>
 
 
-// 从自定义文件系统发送文件
-customFS := http.Dir(&quot;./static&quot;)
-c.FileFromFS(&quot;index.html&quot;, customFS)
-</code></pre>
+<span class="c1">// 从自定义文件系统发送文件</span>
+<span class="nx">customFS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">Dir</span><span class="p">(</span><span class="s">&quot;./static&quot;</span><span class="p">)</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">FileFromFS</span><span class="p">(</span><span class="s">&quot;index.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">customFS</span><span class="p">)</span>
+</code></pre></div>
 <p>这些方法为 Gin 应用提供了灵活的文件服务功能，可以根据不同需求选择合适的方法来提供文件服务。</p>
 <h3 id="35">3.5. 其他</h3>
 <p>Gin还提供了下面这些应答相关的方法，由于不太常用，此处不去详细讲解：</p>

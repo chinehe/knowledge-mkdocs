@@ -1969,7 +1969,7 @@
 <p>通常使用字符串、哈希或者JSON类型来存储文档数据。</p>
 <p>JSON通常对内存和处理的要求更高，其次是哈希，最后是字符串。</p>
 <p>建议参考下面的决策树作为你选择最合适数据类型的指南：</p>
-<pre><code class="language-mermaid">graph TD
+<pre class="mermaid"><code>graph TD
     Q1[需要嵌套数据结构（字段、数组），或者需要使用Redis查询引擎进行地理空间索引/查询？] --&gt;|Yes|J[JSON]
     Q1 --&gt;|No| Q2[需要使用Redis查询引擎进行索引和查询，且可以没有嵌套数据结构和地理空间索引？]
     Q2 --&gt;|Yes| H1[Hashes 哈希]
@@ -1979,8 +1979,7 @@
     Q4 --&gt;|Yes| S1[Strings 字符串]
     Q4 --&gt;|No| Q5[需要频繁访问文档中，包含字符串或二进制数据值的各个数据字段？]
     Q5 --&gt;|Yes| H3[Hashes 哈希]
-    Q5 --&gt;|No| S2[Strings 字符串]
-</code></pre>
+    Q5 --&gt;|No| S2[Strings 字符串]</code></pre>
 <h3 id="42-collections">4.2. Collections 集合</h3>
 <p>通常使用集合或有序集合来存储集合数据，对于非常简单的集合，甚至可以使用字符串。</p>
 <p>他们都可以进行基本的元素测试，但有着不同的额外功能和权衡。有序集合的内存开销和处理需求最高；其次是集合；最后是字符串。</p>
@@ -1988,23 +1987,21 @@
 <p>注意：如果你需要存储集合或有序集合中键的额外属性，可以使用辅助哈希或JSON对象，其中的字段名与集合中的键匹配。</p>
 </blockquote>
 <p>建议参考下面的决策树作为你选择最合适数据类型的指南：</p>
-<pre><code class="language-mermaid">graph TD
+<pre class="mermaid"><code>graph TD
     Q1[需要以任意顺序或字典顺序存储和检索键？] --&gt;|Yes| SS[Sorted sets 有序集合]
     Q1 --&gt;|No| Q2[需要为每个键存储额外的信息，且不需要集合操作（交集、并集、差分）？]
     Q2 --&gt;|Yes| H[Hashes 哈希]
     Q2 --&gt;|No| Q3[键是否都是已知范围内的简单整数索引？]
     Q3 --&gt;|Yes| S[Strings 字符串（Bitmap 位图）]
-    Q3 --&gt;|No| CS[Sets 集合]
-</code></pre>
+    Q3 --&gt;|No| CS[Sets 集合]</code></pre>
 <h3 id="43-sequences">4.3. Sequences 序列</h3>
 <p>通常使用有序结合、列表、流来存储字符串或二进制数据序列。它们在特定用途上各有优缺点。</p>
 <p>建议参考下面的决策树作为你选择最合适数据类型的指南：</p>
-<pre><code class="language-mermaid">graph TD
+<pre class="mermaid"><code>graph TD
     Q1[需要维护任意优先级顺序/字典顺序，需要频繁通过索引访问元素或者执行集合操作？]--&gt;|Yes| SS[Sorted sets 有序集合]
     Q1 --&gt;|No| Q2[主要是按照时间戳顺序存储和检索元素，或者管理多个消费者从序列中读取？]
     Q2 --&gt;|Yes| S[Stream 流]
-    Q2 --&gt;|No| L[Lists 列表]
-</code></pre>
+    Q2 --&gt;|No| L[Lists 列表]</code></pre>
 
 
 

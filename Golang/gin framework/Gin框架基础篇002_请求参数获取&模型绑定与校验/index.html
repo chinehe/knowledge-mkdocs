@@ -2101,114 +2101,115 @@
 <li><code>ShouldBindHeader</code>与<code>BindHeader</code>方法：绑定请求头信息到结构体。</li>
 </ul>
 <p><strong>假设我们的请求上送格式如下：</strong></p>
-<pre><code class="language-http">GET /param/header HTTP/1.1
-Host: 127.0.0.1:8080
-Roles: admin
-Roles: super
-Roles: developer
-User-Name: chinehe
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/param/header</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">127.0.0.1:8080</span>
+<span class="na">Roles</span><span class="o">:</span> <span class="l">admin</span>
+<span class="na">Roles</span><span class="o">:</span> <span class="l">super</span>
+<span class="na">Roles</span><span class="o">:</span> <span class="l">developer</span>
+<span class="na">User-Name</span><span class="o">:</span> <span class="l">chinehe</span>
+</code></pre></div>
 <p>其中<code>Roles</code>请求头对应多个值，<code>User-Name</code>请求头对应一个值。</p>
 <p><strong>则获取请求头参数的代码如下：</strong></p>
 <ul>
 <li><code>c.GetHeader</code>方法：</li>
 </ul>
-<p>```go
-  // 处理方法
-  func HeaderParam(c *gin.Context) {
-    roles := c.GetHeader("Roles")
-    userName := c.GetHeader("User-Name")
-    c.JSON(200, gin.H{
-        "roles":    roles,
-        "userName": userName,
-    })
-  }</p>
-<p>// 输出结果
-  {
-      "roles": "admin", // 当请求头对应多个值时，c.GetHeader只会返回第一个
-      "userName": "chinehe"
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 处理方法</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">HeaderParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">roles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">GetHeader</span><span class="p">(</span><span class="s">&quot;Roles&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="nx">userName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">GetHeader</span><span class="p">(</span><span class="s">&quot;User-Name&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">      </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w">    </span><span class="nx">roles</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">userName</span><span class="p">,</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出结果</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// 当请求头对应多个值时，c.GetHeader只会返回第一个</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>
 <p><code>c.Request.Header</code>方法：</p>
 </li>
 <li>
 <p><code>c.Request.Header.Get</code>方法：获取单个值</p>
-<p>```go
-// 处理方法
-func HeaderParam(c *gin.Context) {
-    header := c.Request.Header
-    roles := header.Get("Roles")
-    userName := header.Get("User-Name")
-    c.JSON(200, gin.H{
-        "roles":    roles,
-        "userName": userName,
-    })
-}</p>
-<p>// 输出结果
-{
-    "roles": "admin", // 当请求头对应多个值时，c.Request.Header.Get只会返回第一个
-    "userName": "chinehe"
-}
-```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 处理方法</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">HeaderParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">header</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">Header</span>
+<span class="w">    </span><span class="nx">roles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">header</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;Roles&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">userName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">header</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;User-Name&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w">    </span><span class="nx">roles</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">userName</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出结果</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// 当请求头对应多个值时，c.Request.Header.Get只会返回第一个</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p><code>c.Request.Header.Values</code>方法：获取值数组</p>
-<p>```go
-// 处理方法
-func HeaderParam(c *gin.Context) {
-    header := c.Request.Header
-    roles := header.Values("Roles") // 获取单个值
-    userName := header.Get("User-Name") // 获取值数组
-    c.JSON(200, gin.H{
-        "roles":    roles,
-        "userName": userName,
-    })
-}</p>
-<p>// 输出
-{
-    "roles": [ // c.Request.Header.Values方法获取值数组
-        "admin",
-        "super",
-        "developer"
-    ],
-    "userName": "chinehe" // c.Request.Header.Get方法获取单个值
-}
-```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 处理方法</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">HeaderParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">header</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">Header</span>
+<span class="w">    </span><span class="nx">roles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">header</span><span class="p">.</span><span class="nx">Values</span><span class="p">(</span><span class="s">&quot;Roles&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 获取单个值</span>
+<span class="w">    </span><span class="nx">userName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">header</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;User-Name&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 获取值数组</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w">    </span><span class="nx">roles</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">userName</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="c1">// c.Request.Header.Values方法获取值数组</span>
+<span class="w">        </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;super&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;developer&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span><span class="w"> </span><span class="c1">// c.Request.Header.Get方法获取单个值</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p><code>ShouldBindHeader</code>方法</p>
 </li>
 </ul>
-<p><code>``go
-  // 处理方法
-  func HeaderParam(c *gin.Context) {
-    // 接收参数的结构体
-    // header tag标识请求头名称（大小写不敏感），json tag标识json序列化时的字段名称
-    headerInfo := struct {
-        Roles    []string</code>header:"roles" json:"roles"<code>UserName string</code>header:"user-name" json:"userName"`
-    }{}
-    err := c.ShouldBindHeader(&amp;headerInfo)
-    if err != nil {
-        c.JSON(400, gin.H{
-            "message": err.Error(),
-        })
-    }
-    c.JSON(200, headerInfo)
-  }</p>
-<p>// 输出结果
-  {
-      "roles": [
-          "admin",
-          "super",
-          "developer"
-      ],
-      "userName": [
-          "chinehe"
-      ]
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 处理方法</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">HeaderParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 接收参数的结构体</span>
+<span class="w">  </span><span class="c1">// header tag标识请求头名称（大小写不敏感），json tag标识json序列化时的字段名称</span>
+<span class="w">  </span><span class="nx">headerInfo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">Roles</span><span class="w">    </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`header:&quot;roles&quot; json:&quot;roles&quot;`</span>
+<span class="w">      </span><span class="nx">UserName</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`header:&quot;user-name&quot; json:&quot;userName&quot;`</span>
+<span class="w">  </span><span class="p">}{}</span>
+<span class="w">  </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">ShouldBindHeader</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">headerInfo</span><span class="p">)</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">          </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">      </span><span class="p">})</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">headerInfo</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出结果</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;super&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;developer&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s">&quot;chinehe&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><code>BindHeader</code>：与<code>ShouldBindHeader</code>差不多，区别在于如果绑定参数出错，会中止请求并应答400。</li>
 </ul>
@@ -2264,101 +2265,101 @@ func HeaderParam(c *gin.Context) {
 </li>
 </ul>
 <p><strong>假设我们的请求上送格式如下：</strong></p>
-<pre><code class="language-http">GET /param/header HTTP/1.1
-Host: 127.0.0.1:8080
-Cookie: roles=admin,super,developer; username=john_doe
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/param/header</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">127.0.0.1:8080</span>
+<span class="na">Cookie</span><span class="o">:</span> <span class="l">roles=admin,super,developer; username=john_doe</span>
+</code></pre></div>
 <p>其中<code>roles</code>请求头对应多个值（以逗号分隔），<code>username</code>请求头对应一个值。</p>
 <p><strong>则获取cookie参数的示例代码如下：</strong></p>
 <ul>
 <li><code>c.Cookie</code>方法</li>
 </ul>
-<p>```go
-  func CookieParam(c *gin.Context) {
-    userName, _ := c.Cookie("username") // 忽略错误
-    roles, _ := c.Cookie("roles") // 忽略错误
-    c.JSON(200, gin.H{
-        "username": userName,
-        "roles":    roles,
-    })
-  }</p>
-<p>// 输出
-  {
-      "roles": "super,admin,develop",
-      "username": "chinehe"
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">CookieParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">userName</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 忽略错误</span>
+<span class="w">  </span><span class="nx">roles</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">(</span><span class="s">&quot;roles&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 忽略错误</span>
+<span class="w">  </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">      </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">userName</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w">    </span><span class="nx">roles</span><span class="p">,</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;super,admin,develop&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>
 <p>从<code>c.Request</code>中获取：</p>
 </li>
 <li>
 <p><code>c.Request.Cookies</code></p>
-<p>```go
-func CookieParam(c *gin.Context) {
-    req := c.Request
-    // 获取所有cookie
-    cookies := req.Cookies()</p>
-<pre><code>// 遍历获取cookie
-res := make(map[string]string)
-for _, cookie := range cookies {
-    res[cookie.Name] = cookie.Value
-}
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">CookieParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span>
+<span class="w">    </span><span class="c1">// 获取所有cookie</span>
+<span class="w">    </span><span class="nx">cookies</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Cookies</span><span class="p">()</span>
 
-c.JSON(200, res)
-</code></pre>
-<p>}</p>
-<p>// 输出
-{
-    "roles": "super,admin,develop",
-    "username": "chinehe"
-}
-```</p>
+<span class="w">    </span><span class="c1">// 遍历获取cookie</span>
+<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">cookie</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">cookies</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">res</span><span class="p">[</span><span class="nx">cookie</span><span class="p">.</span><span class="nx">Name</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">cookie</span><span class="p">.</span><span class="nx">Value</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;super,admin,develop&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p><code>c.Request.CookieNamed</code></p>
-<p>```go
-func CookieParam(c *gin.Context) {
-    req := c.Request</p>
-<pre><code>// 仅供演示用
-// 实际不要这么写哦
-userName := req.CookiesNamed("username")[0]
-roles := req.CookiesNamed("roles")[0]
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">CookieParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span>
 
-c.JSON(200, gin.H{
-    "username": userName,
-    "roles":    roles,
-})
-</code></pre>
-<p>}</p>
-<p>// 输出
-{
-    "roles": "super,admin,develop",
-    "username": "chinehe"
-}
-```</p>
+<span class="w">    </span><span class="c1">// 仅供演示用</span>
+<span class="w">    </span><span class="c1">// 实际不要这么写哦</span>
+<span class="w">    </span><span class="nx">userName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">CookiesNamed</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="w">    </span><span class="nx">roles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">CookiesNamed</span><span class="p">(</span><span class="s">&quot;roles&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">userName</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w">    </span><span class="nx">roles</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;super,admin,develop&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p><code>c.Request.Cookie</code></p>
-<p>```go
-func CookieParam(c *gin.Context) {
-    req := c.Request</p>
-<pre><code>// 获取Cookie
-userNameCookie, _ := req.Cookie("username") // 忽略错误
-rolesCookie, _ := req.Cookie("roles") // 忽略错误
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">CookieParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">req</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span>
 
-c.JSON(200, gin.H{
-    "username": userNameCookie.Value, // 获取到的是*Cookie类型
-    "roles":    rolesCookie.Value, // 获取到的是*Cookie类型
-})
-</code></pre>
-<p>}</p>
-<p>// 输出
-{
-    "roles": "super,admin,develop",
-    "username": "chinehe"
-}
-```</p>
+<span class="w">    </span><span class="c1">// 获取Cookie</span>
+<span class="w">    </span><span class="nx">userNameCookie</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 忽略错误</span>
+<span class="w">    </span><span class="nx">rolesCookie</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">(</span><span class="s">&quot;roles&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 忽略错误</span>
+
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">userNameCookie</span><span class="p">.</span><span class="nx">Value</span><span class="p">,</span><span class="w"> </span><span class="c1">// 获取到的是*Cookie类型</span>
+<span class="w">        </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w">    </span><span class="nx">rolesCookie</span><span class="p">.</span><span class="nx">Value</span><span class="p">,</span><span class="w"> </span><span class="c1">// 获取到的是*Cookie类型</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;super,admin,develop&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p>直接从请求头中获取：不常用，略。可以参考《从请求头中获取参数》章节。</p>
@@ -2382,9 +2383,9 @@ c.JSON(200, gin.H{
 <li><code>c.Request.URL</code>：从URL属性中获取值</li>
 </ul>
 <p><strong>假设HTTP请求如下：</strong></p>
-<pre><code class="language-http">GET /param/query?username=chinehe&amp;roles=super&amp;roles=admin&amp;roles=develop&amp;info[age]=18&amp;info[nick]=CCCCC HTTP/1.1
-Host: 127.0.0.1:8080
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nf">GET</span> <span class="nn">/param/query?username=chinehe&amp;roles=super&amp;roles=admin&amp;roles=develop&amp;info[age]=18&amp;info[nick]=CCCCC</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">127.0.0.1:8080</span>
+</code></pre></div>
 <p><strong>示例代码：</strong></p>
 <ul>
 <li>
@@ -2392,86 +2393,85 @@ Host: 127.0.0.1:8080
 </li>
 <li>
 <p><code>c.Query</code>、<code>c.QueryArray</code>、<code>c.QueryMap</code> </p>
-<p>```go
-func QueryParam(c *gin.Context) {
-    userName := c.Query("username") // 获取字符串信息
-    roles := c.QueryArray("roles") // 获取字符串数组信息
-    info := c.QueryMap("info") // 获取map信息</p>
-<pre><code>c.JSON(200, gin.H{
-    "username": userName,
-    "roles":    roles,
-    "info":     info,
-})
-</code></pre>
-<p>}</p>
-<p>// 输出
-{
-    "info": {
-        "age": "18",
-        "nick": "CCCCC"
-    },
-    "roles": [
-        "super",
-        "admin",
-        "develop"
-    ],
-    "username": "chinehe"
-}
-```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">QueryParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">userName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Query</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 获取字符串信息</span>
+<span class="w">    </span><span class="nx">roles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">QueryArray</span><span class="p">(</span><span class="s">&quot;roles&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 获取字符串数组信息</span>
+<span class="w">    </span><span class="nx">info</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">QueryMap</span><span class="p">(</span><span class="s">&quot;info&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 获取map信息</span>
+
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">userName</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w">    </span><span class="nx">roles</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;info&quot;</span><span class="p">:</span><span class="w">     </span><span class="nx">info</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;18&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;nick&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CCCCC&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s">&quot;super&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;develop&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p><code>c.GetQuery</code>、<code>c.GetQueryArray</code>、<code>c.GetQueryMap</code></p>
-<p>```go 
-func QueryParam(c *gin.Context) {
-  // 演示代码都忽略返回的标识符
-    userName, _ := c.GetQuery("username") // 获取字符串信息
-    roles, _ := c.GetQueryArray("roles") // 获取字符串数组信息
-    info, _ := c.GetQueryMap("info") // 获取map信息</p>
-<pre><code>c.JSON(200, gin.H{
-    "username": userName,
-    "roles":    roles,
-    "info":     info,
-})
-</code></pre>
-<p>}</p>
-<p>// 输出
-{
-    "info": {
-        "age": "18",
-        "nick": "CCCCC"
-    },
-    "roles": [
-        "super",
-        "admin",
-        "develop"
-    ],
-    "username": "chinehe"
-}
-```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">QueryParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 演示代码都忽略返回的标识符</span>
+<span class="w">    </span><span class="nx">userName</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">GetQuery</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 获取字符串信息</span>
+<span class="w">    </span><span class="nx">roles</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">GetQueryArray</span><span class="p">(</span><span class="s">&quot;roles&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 获取字符串数组信息</span>
+<span class="w">    </span><span class="nx">info</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">GetQueryMap</span><span class="p">(</span><span class="s">&quot;info&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 获取map信息</span>
+
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">userName</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w">    </span><span class="nx">roles</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;info&quot;</span><span class="p">:</span><span class="w">     </span><span class="nx">info</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;18&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;nick&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CCCCC&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s">&quot;super&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;develop&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p><code>c.DefaultQuery</code></p>
-<p>```go
-// 仅演示用
-func QueryParam(c *gin.Context) {
-  // 都以字符串参数的形式获取，并设置默认值
-    userName := c.DefaultQuery("username", "default-username")
-    roles := c.DefaultQuery("roles", "default-roles")
-    info := c.DefaultQuery("info", "default-info")</p>
-<pre><code>c.JSON(200, gin.H{
-    "username": userName,
-    "roles":    roles,
-    "info":     info,
-})
-</code></pre>
-<p>}
-// 输出
-{
-    "info": "default-info", // 由于参数中不存在info，采用了默认值
-    "roles": "super", // 参数值为数组，该方法自动返回了第一个值
-    "username": "chinehe" 
-}
-```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 仅演示用</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">QueryParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 都以字符串参数的形式获取，并设置默认值</span>
+<span class="w">    </span><span class="nx">userName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">DefaultQuery</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;default-username&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">roles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">DefaultQuery</span><span class="p">(</span><span class="s">&quot;roles&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;default-roles&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">info</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">DefaultQuery</span><span class="p">(</span><span class="s">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;default-info&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">userName</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w">    </span><span class="nx">roles</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;info&quot;</span><span class="p">:</span><span class="w">     </span><span class="nx">info</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;info&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;default-info&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// 由于参数中不存在info，采用了默认值</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;super&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// 参数值为数组，该方法自动返回了第一个值</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p>从上下文绑定到结构体</p>
@@ -2483,96 +2483,103 @@ func QueryParam(c *gin.Context) {
 <ul>
 <li>
 <p><code>c.BindQuery</code>方法</p>
-<p><code>``go
-func QueryParam(c *gin.Context) {
-    queryParam := struct {
-        UserName string</code>form:"username" json:"username"<code>Roles    []string</code>form:"roles" json:"roles"<code>Info     struct {
-            Age  int</code>form:"info[age]" json:"age"<code>// 俺也不知道为什么不支持json那种嵌套的写法
-            Nick string</code>form:"info[nick]" json:"nick"<code>}</code>json:"info"`
-    }{}
-    _ = c.BindQuery(&amp;queryParam)
-    c.JSON(200, queryParam)
-}</p>
-<p>// 输出
-{
-    "username": "chinehe",
-    "roles": [
-        "super",
-        "admin",
-        "develop"
-    ],
-    "info": {
-        "age": 18,
-        "nick": "CCCC"
-    }
-}
-```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">QueryParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">queryParam</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">UserName</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`form:&quot;username&quot; json:&quot;username&quot;`</span>
+<span class="w">        </span><span class="nx">Roles</span><span class="w">    </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`form:&quot;roles&quot; json:&quot;roles&quot;`</span>
+<span class="w">        </span><span class="nx">Info</span><span class="w">     </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`form:&quot;info[age]&quot; json:&quot;age&quot;`</span><span class="w"> </span><span class="c1">// 俺也不知道为什么不支持json那种嵌套的写法</span>
+<span class="w">            </span><span class="nx">Nick</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`form:&quot;info[nick]&quot; json:&quot;nick&quot;`</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="s">`json:&quot;info&quot;`</span>
+<span class="w">    </span><span class="p">}{}</span>
+<span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">BindQuery</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">queryParam</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">queryParam</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s">&quot;super&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;develop&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s">&quot;info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;nick&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CCCC&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p><code>c.ShouldBindQuery</code>方法</p>
-<p><code>``go
-func QueryParam(c *gin.Context) {
-    queryParam := struct {
-        UserName string</code>form:"username" json:"username"<code>Roles    []string</code>form:"roles" json:"roles"<code>Info     struct {
-            Age  int</code>form:"info[age]" json:"age"<code>Nick string</code>form:"info[nick]" json:"nick"<code>}</code>json:"info"`
-    }{}
-    err := c.ShouldBindQuery(&amp;queryParam)
-    if err != nil {
-        c.JSON(400, gin.H{
-            "message": err.Error(),
-        })
-    }
-    c.JSON(200, queryParam)
-}</p>
-<p>// 输出
-{
-    "username": "chinehe",
-    "roles": [
-        "super",
-        "admin",
-        "develop"
-    ],
-    "info": {
-        "age": 18,
-        "nick": "CCCC"
-    }
-}
-```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">QueryParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">queryParam</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">UserName</span><span class="w"> </span><span class="kt">string</span><span class="w">   </span><span class="s">`form:&quot;username&quot; json:&quot;username&quot;`</span>
+<span class="w">        </span><span class="nx">Roles</span><span class="w">    </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`form:&quot;roles&quot; json:&quot;roles&quot;`</span>
+<span class="w">        </span><span class="nx">Info</span><span class="w">     </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span><span class="w">    </span><span class="s">`form:&quot;info[age]&quot; json:&quot;age&quot;`</span>
+<span class="w">            </span><span class="nx">Nick</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`form:&quot;info[nick]&quot; json:&quot;nick&quot;`</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="s">`json:&quot;info&quot;`</span>
+<span class="w">    </span><span class="p">}{}</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">ShouldBindQuery</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">queryParam</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">queryParam</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s">&quot;super&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;develop&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s">&quot;info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;nick&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CCCC&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p>直接从请求中获取</p>
 </li>
 </ul>
-<p>```go
-  func QueryParam(c *gin.Context) {
-    rawQuery := c.Request.URL.RawQuery // 获取原始query字符串
-    values := c.Request.URL.Query() // 获取url.Values
-    c.JSON(200, gin.H{
-        "rawQuery": rawQuery,
-        "values":   values,
-    })
-  }</p>
-<p>// 输出
-  {
-      "rawQuery": "username=chinehe&amp;roles=super&amp;roles=admin&amp;roles=develop&amp;info[age]=18&amp;info[nick]=CCCC",
-      "values": {
-          "info[age]": [
-              "18"
-          ],
-          "info[nick]": [
-              "CCCC"
-          ],
-          "roles": [
-              "super",
-              "admin",
-              "develop"
-          ],
-          "username": [
-              "chinehe"
-          ]
-      }
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">QueryParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">rawQuery</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">RawQuery</span><span class="w"> </span><span class="c1">// 获取原始query字符串</span>
+<span class="w">  </span><span class="nx">values</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Query</span><span class="p">()</span><span class="w"> </span><span class="c1">// 获取url.Values</span>
+<span class="w">  </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">      </span><span class="s">&quot;rawQuery&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">rawQuery</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;values&quot;</span><span class="p">:</span><span class="w">   </span><span class="nx">values</span><span class="p">,</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;rawQuery&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;username=chinehe&amp;roles=super&amp;roles=admin&amp;roles=develop&amp;info[age]=18&amp;info[nick]=CCCC&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;info[age]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s">&quot;18&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="s">&quot;info[nick]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s">&quot;CCCC&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s">&quot;super&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;develop&quot;</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s">&quot;chinehe&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="4-url">4. 从URL中获取参数</h2>
 <p>gin支持定义包含动态参数的路由路径～</p>
 <h3 id="41">4.1. 动态参数路由</h3>
@@ -2580,23 +2587,23 @@ func QueryParam(c *gin.Context) {
 <ul>
 <li>单个路径参数：匹配单个路径段，不包含<code>/。</code></li>
 </ul>
-<p><code>go
-  paramRouter.GET("/url/:username", handler.URLParam)</code></p>
+<div class="highlight"><pre><span></span><code><span class="nx">paramRouter</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/url/:username&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li>多个路径参数：匹配多个单路径段，不包含<code>/</code>。</li>
 </ul>
-<p><code>go
-  paramRouter.GET("/url/:username/:userid", handler.URLParam)</code></p>
+<div class="highlight"><pre><span></span><code><span class="nx">paramRouter</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/url/:username/:userid&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li>通配符参数：匹配剩余所有路径内容，包含<code>/</code>。通配符参数只允许在路由路径的末尾。</li>
 </ul>
-<p><code>go
-  paramRouter.GET("/url/path/*path", handler.URLParam)</code></p>
+<div class="highlight"><pre><span></span><code><span class="nx">paramRouter</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/url/path/*path&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li>混合使用</li>
 </ul>
-<p><code>go
-  paramRouter.GET("/url/mix/:username/:userid/*path", handler.URLParam)</code></p>
+<div class="highlight"><pre><span></span><code><span class="nx">paramRouter</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/url/mix/:username/:userid/*path&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">)</span>
+</code></pre></div>
 <h3 id="42">4.2. 获取路径参数的方式</h3>
 <p><strong>从URL中获取路径参数的方式如下：</strong></p>
 <ul>
@@ -2610,212 +2617,223 @@ func QueryParam(c *gin.Context) {
 </ul>
 <h3 id="43">4.3. 示例</h3>
 <p>下面的示例都使用相同的路由定义：</p>
-<pre><code class="language-go">// 下面的路由都使用了相同的处理器URLParam
-paramRouter.GET(&quot;/url/:username&quot;, handler.URLParam) // 一个路径参数
-paramRouter.GET(&quot;/url/:username/:userid&quot;, handler.URLParam) // 两个单路径参数
-paramRouter.GET(&quot;/url/path/*path&quot;, handler.URLParam) // 通配符参数
-paramRouter.GET(&quot;/url/mix/:username/:userid/*path&quot;, handler.URLParam) // 两个单路径参数+通配符参数
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 下面的路由都使用了相同的处理器URLParam</span>
+<span class="nx">paramRouter</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/url/:username&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">)</span><span class="w"> </span><span class="c1">// 一个路径参数</span>
+<span class="nx">paramRouter</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/url/:username/:userid&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">)</span><span class="w"> </span><span class="c1">// 两个单路径参数</span>
+<span class="nx">paramRouter</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/url/path/*path&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">)</span><span class="w"> </span><span class="c1">// 通配符参数</span>
+<span class="nx">paramRouter</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/url/mix/:username/:userid/*path&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">URLParam</span><span class="p">)</span><span class="w"> </span><span class="c1">// 两个单路径参数+通配符参数</span>
+</code></pre></div>
 <ul>
 <li><code>c.Param</code>方法</li>
 </ul>
-<p>```go
-  func URLParam(c *gin.Context) {
-    userName := c.Param("username")
-    userID := c.Param("userid")
-    path := c.Param("path")
-    c.JSON(200, gin.H{
-        "userName": userName,
-        "userID":   userID,
-        "path":     path,
-    })
-  }</p>
-<p>// 访问/url/chinehe
-  {
-      "path": "",
-      "userID": "",
-      "userName": "chinehe"
-  }</p>
-<p>// 访问/url/chinehe/001
-  {
-      "path": "",
-      "userID": "001",
-      "userName": "chinehe"
-  }
-  // 访问/url/path/mypath/path
-  {
-      "path": "/mypath/path",
-      "userID": "",
-      "userName": ""
-  }
-  // 访问/url/mix/chinehe/001/mypath/path
-  {
-      "path": "/mypath/path",
-      "userID": "001",
-      "userName": "chinehe"
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">userName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="nx">userID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;userid&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="nx">path</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;path&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">      </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">userName</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w">   </span><span class="nx">userID</span><span class="p">,</span>
+<span class="w">      </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w">     </span><span class="nx">path</span><span class="p">,</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 访问/url/chinehe</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">// 访问/url/chinehe/001</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+<span class="c1">// 访问/url/path/mypath/path</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mypath/path&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="p">}</span>
+<span class="c1">// 访问/url/mix/chinehe/001/mypath/path</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mypath/path&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>
 <p><code>c.Params</code>属性</p>
 </li>
 <li>
 <p>遍历路径参数数组</p>
-<p>```go
-func URLParam(c *gin.Context) {
-    paramMap := make(map[string]string)
-    for _, param := range c.Params {
-        paramMap[param.Key] = param.Value
-    }
-    c.JSON(200, paramMap)
-}</p>
-<p>// 访问/url/chinehe
-{
-    "path": "",
-    "userid": "",
-    "username": "chinehe"
-}</p>
-<p>// 访问/url/chinehe/001
-{
-    "path": "",
-    "userid": "001",
-    "username": "chinehe"
-}
-// 访问/url/path/mypath/path
-{
-    "path": "/mypath/path",
-    "userid": "",
-    "username": ""
-}
-// 访问/url/mix/chinehe/001/mypath/path
-{
-    "path": "/mypath/path",
-    "userid": "001",
-    "username": "chinehe"
-}
-```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">paramMap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">param</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Params</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">paramMap</span><span class="p">[</span><span class="nx">param</span><span class="p">.</span><span class="nx">Key</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">param</span><span class="p">.</span><span class="nx">Value</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">paramMap</span><span class="p">)</span>
+<span class="p">}</span>
+
+
+<span class="c1">// 访问/url/chinehe</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">// 访问/url/chinehe/001</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+<span class="c1">// 访问/url/path/mypath/path</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mypath/path&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="p">}</span>
+<span class="c1">// 访问/url/mix/chinehe/001/mypath/path</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mypath/path&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p><code>c.Params.Get</code>方法</p>
-<p>```go
-func URLParam(c *gin.Context) {
-  // 忽略标识符
-    username, _ := c.Params.Get("username")
-    userid, _ := c.Params.Get("userid")
-    path, _ := c.Params.Get("path")
-    c.JSON(200, gin.H{
-        "userName": username,
-        "userID":   userid,
-        "path":     path,
-    })
-}</p>
-<p>// 访问/url/chinehe
-{
-    "path": "",
-    "userID": "",
-    "userName": "chinehe"
-}</p>
-<p>// 访问/url/chinehe/001
-{
-    "path": "",
-    "userID": "001",
-    "userName": "chinehe"
-}
-// 访问/url/path/mypath/path
-{
-    "path": "/mypath/path",
-    "userID": "",
-    "userName": ""
-}
-// 访问/url/mix/chinehe/001/mypath/path
-{
-    "path": "/mypath/path",
-    "userID": "001",
-    "userName": "chinehe"
-}
-```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 忽略标识符</span>
+<span class="w">    </span><span class="nx">username</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">userid</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;userid&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">path</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;path&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">username</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w">   </span><span class="nx">userid</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w">     </span><span class="nx">path</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+
+
+<span class="c1">// 访问/url/chinehe</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">// 访问/url/chinehe/001</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+<span class="c1">// 访问/url/path/mypath/path</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mypath/path&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="p">}</span>
+<span class="c1">// 访问/url/mix/chinehe/001/mypath/path</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mypath/path&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p><code>c.Params.ByName</code>方法</p>
-<p>```go
-func URLParam(c *gin.Context) {
-    username := c.Params.ByName("username")
-    userid := c.Params.ByName("userid")
-    path := c.Params.ByName("path")
-    c.JSON(200, gin.H{
-        "userName": username,
-        "userID":   userid,
-        "path":     path,
-    })
-}</p>
-<p>// 访问/url/chinehe
-{
-    "path": "",
-    "userID": "",
-    "userName": "chinehe"
-}</p>
-<p>// 访问/url/chinehe/001
-{
-    "path": "",
-    "userID": "001",
-    "userName": "chinehe"
-}
-// 访问/url/path/mypath/path
-{
-    "path": "/mypath/path",
-    "userID": "",
-    "userName": ""
-}
-// 访问/url/mix/chinehe/001/mypath/path
-{
-    "path": "/mypath/path",
-    "userID": "001",
-    "userName": "chinehe"
-}
-```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">username</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">ByName</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">userid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">ByName</span><span class="p">(</span><span class="s">&quot;userid&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">path</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Params</span><span class="p">.</span><span class="nx">ByName</span><span class="p">(</span><span class="s">&quot;path&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">username</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w">   </span><span class="nx">userid</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w">     </span><span class="nx">path</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+
+
+<span class="c1">// 访问/url/chinehe</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">// 访问/url/chinehe/001</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+<span class="c1">// 访问/url/path/mypath/path</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mypath/path&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="p">}</span>
+<span class="c1">// 访问/url/mix/chinehe/001/mypath/path</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mypath/path&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 </li>
 <li>
 <p><code>c.ShouldBindUri</code>方法</p>
 </li>
 </ul>
-<p><code>``go
-  func URLParam(c *gin.Context) {
-    param := struct {
-        UserName string</code>uri:"username" json:"userName"<code>UserID   string</code>uri:"userid" json:"userID"<code>Path     string</code>uri:"path" json:"path"`
-    }{}
-    err := c.ShouldBindUri(&amp;param)
-    if err != nil {
-        c.JSON(400, gin.H{
-            "message": err.Error(),
-        })
-    }
-    c.JSON(200, param)
-  }</p>
-<p>// 访问/url/chinehe
-  {
-      "path": "",
-      "userID": "",
-      "userName": "chinehe"
-  }</p>
-<p>// 访问/url/chinehe/001
-  {
-      "path": "",
-      "userID": "001",
-      "userName": "chinehe"
-  }
-  // 访问/url/path/mypath/path
-  {
-      "path": "/mypath/path",
-      "userID": "",
-      "userName": ""
-  }
-  // 访问/url/mix/chinehe/001/mypath/path
-  {
-      "path": "/mypath/path",
-      "userID": "001",
-      "userName": "chinehe"
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">URLParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">param</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">UserName</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`uri:&quot;username&quot; json:&quot;userName&quot;`</span>
+<span class="w">      </span><span class="nx">UserID</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="s">`uri:&quot;userid&quot; json:&quot;userID&quot;`</span>
+<span class="w">      </span><span class="nx">Path</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`uri:&quot;path&quot; json:&quot;path&quot;`</span>
+<span class="w">  </span><span class="p">}{}</span>
+<span class="w">  </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">ShouldBindUri</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">param</span><span class="p">)</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">          </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">      </span><span class="p">})</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">param</span><span class="p">)</span>
+<span class="p">}</span>
+
+
+<span class="c1">// 访问/url/chinehe</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">// 访问/url/chinehe/001</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+<span class="c1">// 访问/url/path/mypath/path</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mypath/path&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="p">}</span>
+<span class="c1">// 访问/url/mix/chinehe/001/mypath/path</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/mypath/path&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><code>c.BindUri</code>方法：参考<code>c.ShouldBindUri</code>方法，略</li>
 </ul>
@@ -2828,59 +2846,59 @@ func URLParam(c *gin.Context) {
 </ul>
 <p><strong>特别注意：请求的Body只能被读取一次，因此用上述方法读取请求体内容后，不能在使用任何方法从请求中读取请求体内容！</strong></p>
 <p><strong><code>c.GetRawData</code>示例：</strong></p>
-<pre><code class="language-go">func BodyParam(c *gin.Context) {
-  // c.GetRawData()方法获取请求原始数据
-    data, err := c.GetRawData()
-    if err != nil {
-        c.JSON(400, gin.H{
-            &quot;message&quot;: err.Error(),
-        })
-    }
-    c.JSON(200, gin.H{
-        &quot;data&quot;: string(data),
-    })
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">BodyParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// c.GetRawData()方法获取请求原始数据</span>
+<span class="w">    </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">GetRawData</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>测试请求：</p>
-<pre><code class="language-http">POST /param/body HTTP/1.1
-Host: 127.0.0.1:8080
-Content-Type: text/plain
-Content-Length: 11
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/param/body</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">127.0.0.1:8080</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/plain</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">11</span>
 
 Hello World
-</code></pre>
+</code></pre></div>
 <p>应答：</p>
-<pre><code class="language-json">{
-    &quot;data&quot;: &quot;Hello World&quot;
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello World&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>直接从<code>c.Request.Body</code>读取示例：</strong></p>
-<pre><code class="language-go">func BodyParam(c *gin.Context) {
-  // 使用io.ReadAll读取请求体内容
-    data, err := io.ReadAll(c.Request.Body)
-    if err != nil {
-        c.JSON(400, gin.H{
-            &quot;message&quot;: err.Error(),
-        })
-    }
-    c.JSON(200, gin.H{
-        &quot;data&quot;: string(data),
-    })
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">BodyParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 使用io.ReadAll读取请求体内容</span>
+<span class="w">    </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadAll</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">Body</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>测试请求：</p>
-<pre><code class="language-http">POST /param/body HTTP/1.1
-Host: 127.0.0.1:8080
-Content-Type: text/plain
-Content-Length: 11
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/param/body</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">127.0.0.1:8080</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">text/plain</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">11</span>
 
 Hello World
-</code></pre>
+</code></pre></div>
 <p>应答：</p>
-<pre><code class="language-json">{
-    &quot;data&quot;: &quot;Hello World&quot;
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello World&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="52-formbody">5.2. Form格式Body</h3>
 <p>除了前面介绍的各种参数获取方式以及通用的请求体绑定方法之外，Gin还专门提供了处理form表单格式数据的方法。Form表单是Web开发中最常见的数据提交方式之一，特别是在HTML表单提交、文件上传等场景中广泛使用。</p>
 <h4 id="521-form">5.2.1. Form表单数据获取方法</h4>
@@ -2908,71 +2926,74 @@ Hello World
 </ul>
 <h4 id="522">5.2.2. 示例</h4>
 <p><strong>假设HTTP请求如下：</strong></p>
-<pre><code class="language-http">POST /param/form HTTP/1.1
-Host: 127.0.0.1:8080
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 58
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/param/form</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">127.0.0.1:8080</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">58</span>
 
-username=chinehe&amp;roles=super&amp;roles=admin&amp;roles=develop&amp;age=18
-</code></pre>
+<span class="nt">username</span><span class="o">=</span><span class="s">chinehe</span><span class="p">&amp;</span><span class="nt">roles</span><span class="o">=</span><span class="s">super</span><span class="p">&amp;</span><span class="nt">roles</span><span class="o">=</span><span class="s">admin</span><span class="p">&amp;</span><span class="nt">roles</span><span class="o">=</span><span class="s">develop</span><span class="p">&amp;</span><span class="nt">age</span><span class="o">=</span><span class="s">18</span>
+</code></pre></div>
 <p><strong>示例代码：</strong></p>
 <ul>
 <li>从上下文简单获取</li>
 </ul>
-<p>```go
-  func FormParam(c *gin.Context) {
-      userName := c.PostForm("username")           // 获取字符串信息
-      roles := c.PostFormArray("roles")            // 获取字符串数组信息
-      age := c.DefaultPostForm("age", "unknown")   // 获取字符串信息，设置默认值</p>
-<pre><code>  c.JSON(200, gin.H{
-      "username": userName,
-      "roles":    roles,
-      "age":      age,
-  })
-</code></pre>
-<p>}</p>
-<p>// 输出
-  {
-      "age": "18",
-      "roles": [
-          "super",
-          "admin",
-          "develop"
-      ],
-      "username": "chinehe"
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">FormParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">userName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">PostForm</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span><span class="w">           </span><span class="c1">// 获取字符串信息</span>
+<span class="w">    </span><span class="nx">roles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">PostFormArray</span><span class="p">(</span><span class="s">&quot;roles&quot;</span><span class="p">)</span><span class="w">            </span><span class="c1">// 获取字符串数组信息</span>
+<span class="w">    </span><span class="nx">age</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">DefaultPostForm</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;unknown&quot;</span><span class="p">)</span><span class="w">   </span><span class="c1">// 获取字符串信息，设置默认值</span>
+
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">userName</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w">    </span><span class="nx">roles</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w">      </span><span class="nx">age</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;18&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s">&quot;super&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;develop&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>从上下文绑定到结构体</li>
 </ul>
 <blockquote>
 <p>结构体tag为form</p>
 </blockquote>
-<p><code>``go
-  type UserParam struct {
-      UserName string</code>form:"username" json:"username"<code>Roles    []string</code>form:"roles" json:"roles"<code>Age      int</code>form:"age" json:"age"`
-  }</p>
-<p>func FormParam(c *gin.Context) {
-      var userParam UserParam
-      // 自动识别Content-Type为application/x-www-form-urlencoded并绑定
-      if err := c.ShouldBind(&amp;userParam); err != nil {
-          c.JSON(400, gin.H{"error": err.Error()})
-          return
-      }</p>
-<pre><code>  c.JSON(200, userParam)
-</code></pre>
-<p>}</p>
-<p>// 输出
-  {
-      "age": 18,
-      "roles": [
-          "super",
-          "admin",
-          "develop"
-      ],
-      "username": "chinehe"
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">UserParam</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">UserName</span><span class="w"> </span><span class="kt">string</span><span class="w">   </span><span class="s">`form:&quot;username&quot; json:&quot;username&quot;`</span>
+<span class="w">    </span><span class="nx">Roles</span><span class="w">    </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`form:&quot;roles&quot; json:&quot;roles&quot;`</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">      </span><span class="kt">int</span><span class="w">      </span><span class="s">`form:&quot;age&quot; json:&quot;age&quot;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">FormParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">userParam</span><span class="w"> </span><span class="nx">UserParam</span>
+<span class="w">    </span><span class="c1">// 自动识别Content-Type为application/x-www-form-urlencoded并绑定</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">ShouldBind</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">userParam</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">()})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">userParam</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 输出</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s">&quot;super&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;develop&quot;</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="523-multipart-form">5.2.3. Multipart Form数据处理</h4>
 <p>对于包含文件上传的multipart/form-data格式表单，Gin同样提供了专门的处理方法：</p>
 <ul>
@@ -2981,9 +3002,9 @@ username=chinehe&amp;roles=super&amp;roles=admin&amp;roles=develop&amp;age=18
 <li><code>c.SaveUploadedFile()</code>方法：保存上传的文件到指定路径</li>
 </ul>
 <p><strong>文件上传示例：</strong></p>
-<pre><code class="language-http">POST /upload HTTP/1.1
-Host: 127.0.0.1:8080
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/upload</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">127.0.0.1:8080</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW</span>
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name=&quot;username&quot;
@@ -2995,62 +3016,62 @@ Content-Type: image/jpeg
 
 (binary data)
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
-</code></pre>
+</code></pre></div>
 <p><strong>处理文件上传的代码示例：</strong></p>
-<pre><code class="language-go">func UploadHandler(c *gin.Context) {
-    // 获取multipart表单
-    form, err := c.MultipartForm()
-    if err != nil {
-        c.JSON(400, gin.H{&quot;error&quot;: err.Error()})
-        return
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">UploadHandler</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 获取multipart表单</span>
+<span class="w">    </span><span class="nx">form</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">MultipartForm</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">()})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 获取表单中的非文件字段
-    username := form.Value[&quot;username&quot;][0]
+<span class="w">    </span><span class="c1">// 获取表单中的非文件字段</span>
+<span class="w">    </span><span class="nx">username</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">form</span><span class="p">.</span><span class="nx">Value</span><span class="p">[</span><span class="s">&quot;username&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-    // 获取上传的文件
-    files := form.File[&quot;avatar&quot;]
+<span class="w">    </span><span class="c1">// 获取上传的文件</span>
+<span class="w">    </span><span class="nx">files</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">form</span><span class="p">.</span><span class="nx">File</span><span class="p">[</span><span class="s">&quot;avatar&quot;</span><span class="p">]</span>
 
-    // 遍历所有上传的文件
-    for _, file := range files {
-        // 保存文件到指定路径
-        if err := c.SaveUploadedFile(file, &quot;./uploads/&quot;+file.Filename); err != nil {
-            c.JSON(500, gin.H{&quot;error&quot;: err.Error()})
-            return
-        }
-    }
+<span class="w">    </span><span class="c1">// 遍历所有上传的文件</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">files</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 保存文件到指定路径</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">SaveUploadedFile</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;./uploads/&quot;</span><span class="o">+</span><span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">()})</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    c.JSON(200, gin.H{
-        &quot;message&quot;:  &quot;上传成功&quot;,
-        &quot;username&quot;: username,
-    })
-}
-</code></pre>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;上传成功&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">username</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>简化版文件上传处理：</strong></p>
-<pre><code class="language-go">func SimpleUploadHandler(c *gin.Context) {
-    // 获取单个上传文件
-    file, err := c.FormFile(&quot;avatar&quot;)
-    if err != nil {
-        c.JSON(400, gin.H{&quot;error&quot;: err.Error()})
-        return
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">SimpleUploadHandler</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 获取单个上传文件</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">FormFile</span><span class="p">(</span><span class="s">&quot;avatar&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">()})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 获取其他表单字段
-    username := c.PostForm(&quot;username&quot;)
+<span class="w">    </span><span class="c1">// 获取其他表单字段</span>
+<span class="w">    </span><span class="nx">username</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">PostForm</span><span class="p">(</span><span class="s">&quot;username&quot;</span><span class="p">)</span>
 
-    // 保存文件
-    if err := c.SaveUploadedFile(file, &quot;./uploads/&quot;+file.Filename); err != nil {
-        c.JSON(500, gin.H{&quot;error&quot;: err.Error()})
-        return
-    }
+<span class="w">    </span><span class="c1">// 保存文件</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">SaveUploadedFile</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;./uploads/&quot;</span><span class="o">+</span><span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">()})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    c.JSON(200, gin.H{
-        &quot;message&quot;:  &quot;上传成功&quot;,
-        &quot;username&quot;: username,
-        &quot;filename&quot;: file.Filename,
-    })
-}
-</code></pre>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;上传成功&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">username</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>文件上传注意事项</strong>：</p>
 <ul>
 <li>处理文件上传时需要设置合适的内存限制，防止恶意上传大文件导致内存溢出</li>
@@ -3116,59 +3137,59 @@ Content-Type: image/jpeg
 <p>在上述的所有绑定方法中，最常用的应该是<code>ShouldBind</code>方法或者<code>ShouldBindT</code>系列的方法。其他的方法自然有其对应的用处，开发者应该充分了解他们之间的区别并自行决定使用哪个方法.</p>
 <p><strong>示例演示使用<code>ShouldBind</code>方法自动处理JSON格式的请求体参数:</strong></p>
 <p><strong>代码：</strong></p>
-<pre><code class="language-go">// UserParam 演示用参数结构体
-type UserParam struct {
-    UserID   string    `json:&quot;userID&quot;`
-    UserName string    `json:&quot;userName&quot;`
-    Info     *UserInfo `json:&quot;info&quot;`
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// UserParam 演示用参数结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">UserParam</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">UserID</span><span class="w">   </span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&quot;userID&quot;`</span>
+<span class="w">    </span><span class="nx">UserName</span><span class="w"> </span><span class="kt">string</span><span class="w">    </span><span class="s">`json:&quot;userName&quot;`</span>
+<span class="w">    </span><span class="nx">Info</span><span class="w">     </span><span class="o">*</span><span class="nx">UserInfo</span><span class="w"> </span><span class="s">`json:&quot;info&quot;`</span>
+<span class="p">}</span>
 
-type UserInfo struct {
-    Age   int      `json:&quot;age&quot;`
-    Roles []string `json:&quot;roles&quot;`
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">UserInfo</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">   </span><span class="kt">int</span><span class="w">      </span><span class="s">`json:&quot;age&quot;`</span>
+<span class="w">    </span><span class="nx">Roles</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;roles&quot;`</span>
+<span class="p">}</span>
 
-// BodyParam 处理函数
-func BodyParam(c *gin.Context) {
-    param := new(UserParam)
-    err := c.ShouldBind(param)
-    if err != nil {
-        c.JSON(400, gin.H{
-            &quot;message&quot;: err.Error(),
-        })
-    }
-    c.JSON(200, param)
-}
-</code></pre>
+<span class="c1">// BodyParam 处理函数</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">BodyParam</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">param</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">UserParam</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">ShouldBind</span><span class="p">(</span><span class="nx">param</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">param</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>请求：</strong></p>
-<pre><code class="language-http">POST /param/body HTTP/1.1
-Host: 127.0.0.1:8080
-Content-Type: application/json
-Content-Length: 130
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/param/body</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">127.0.0.1:8080</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">130</span>
 
-{
-    &quot;userID&quot;:&quot;001&quot;,
-    &quot;userName&quot;:&quot;chinehe&quot;,
-    &quot;info&quot;:{
-        &quot;age&quot;:18,
-        &quot;roles&quot;:[&quot;super&quot;,&quot;admin&quot;,&quot;develop&quot;]
-    }
-}
-</code></pre>
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;userID&quot;</span><span class="p">:</span><span class="s2">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;userName&quot;</span><span class="p">:</span><span class="s2">&quot;chinehe&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;info&quot;</span><span class="p">:{</span>
+<span class="w">        </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">18</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;roles&quot;</span><span class="p">:[</span><span class="s2">&quot;super&quot;</span><span class="p">,</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span><span class="s2">&quot;develop&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>结果：</strong></p>
-<pre><code class="language-json">{
-    &quot;userID&quot;: &quot;001&quot;,
-    &quot;userName&quot;: &quot;chinehe&quot;,
-    &quot;info&quot;: {
-        &quot;age&quot;: 18,
-        &quot;roles&quot;: [
-            &quot;super&quot;,
-            &quot;admin&quot;,
-            &quot;develop&quot;
-        ]
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;userID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;chinehe&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;roles&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;super&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;develop&quot;</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="64-tag">6.4. 请求体格式与结构体Tag对照表</h3>
 <p>在使用Gin框架绑定请求体数据时，不同的数据格式需要使用不同的绑定方法和结构体tag。下表详细列出了各种请求体格式对应的绑定方法和结构体tag：</p>
 <table>
@@ -3252,88 +3273,87 @@ Content-Length: 130
 <p><strong>示例结构体定义：</strong></p>
 </li>
 </ol>
-<pre><code class="language-go">// 不同格式的数据绑定示例
-type User struct {
-    ID       int      `json:&quot;id&quot; xml:&quot;id&quot; form:&quot;id&quot; yaml:&quot;id&quot;`
-    Name     string   `json:&quot;name&quot; xml:&quot;name&quot; form:&quot;name&quot; yaml:&quot;name&quot;`
-    Email    string   `json:&quot;email&quot; xml:&quot;email&quot; form:&quot;email&quot; yaml:&quot;email&quot;`
-    IsActive bool     `json:&quot;is_active&quot; xml:&quot;is_active&quot; form:&quot;is_active&quot; yaml:&quot;is_active&quot;`
-    Roles    []string `json:&quot;roles,omitempty&quot; xml:&quot;roles&quot; form:&quot;roles&quot; yaml:&quot;roles&quot;`
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 不同格式的数据绑定示例</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">       </span><span class="kt">int</span><span class="w">      </span><span class="s">`json:&quot;id&quot; xml:&quot;id&quot; form:&quot;id&quot; yaml:&quot;id&quot;`</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">     </span><span class="kt">string</span><span class="w">   </span><span class="s">`json:&quot;name&quot; xml:&quot;name&quot; form:&quot;name&quot; yaml:&quot;name&quot;`</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w">    </span><span class="kt">string</span><span class="w">   </span><span class="s">`json:&quot;email&quot; xml:&quot;email&quot; form:&quot;email&quot; yaml:&quot;email&quot;`</span>
+<span class="w">    </span><span class="nx">IsActive</span><span class="w"> </span><span class="kt">bool</span><span class="w">     </span><span class="s">`json:&quot;is_active&quot; xml:&quot;is_active&quot; form:&quot;is_active&quot; yaml:&quot;is_active&quot;`</span>
+<span class="w">    </span><span class="nx">Roles</span><span class="w">    </span><span class="p">[]</span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;roles,omitempty&quot; xml:&quot;roles&quot; form:&quot;roles&quot; yaml:&quot;roles&quot;`</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>通过这个对照表，开发者可以根据需要选择合适的数据格式和绑定方法来处理请求体数据。</p>
 <h2 id="7">7. 模型校验</h2>
 <p>在模型绑定相关方法中，会在模型绑定完成后，自动执行模型校验。</p>
 <p>比如在JSON模型绑定的源码中：</p>
-<pre><code class="language-go">type jsonBinding struct{}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">jsonBinding</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
 
-func (jsonBinding) Name() string {
-    return &quot;json&quot;
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">jsonBinding</span><span class="p">)</span><span class="w"> </span><span class="nx">Name</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;json&quot;</span>
+<span class="p">}</span>
 
-func (jsonBinding) Bind(req *http.Request, obj any) error {
-    if req == nil || req.Body == nil {
-        return errors.New(&quot;invalid request&quot;)
-    }
-    return decodeJSON(req.Body, obj)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">jsonBinding</span><span class="p">)</span><span class="w"> </span><span class="nx">Bind</span><span class="p">(</span><span class="nx">req</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">,</span><span class="w"> </span><span class="nx">obj</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;invalid request&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">decodeJSON</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Body</span><span class="p">,</span><span class="w"> </span><span class="nx">obj</span><span class="p">)</span>
+<span class="p">}</span>
 
-func (jsonBinding) BindBody(body []byte, obj any) error {
-    return decodeJSON(bytes.NewReader(body), obj)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">jsonBinding</span><span class="p">)</span><span class="w"> </span><span class="nx">BindBody</span><span class="p">(</span><span class="nx">body</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="nx">obj</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">decodeJSON</span><span class="p">(</span><span class="nx">bytes</span><span class="p">.</span><span class="nx">NewReader</span><span class="p">(</span><span class="nx">body</span><span class="p">),</span><span class="w"> </span><span class="nx">obj</span><span class="p">)</span>
+<span class="p">}</span>
 
-func decodeJSON(r io.Reader, obj any) error {
-    decoder := json.API.NewDecoder(r)
-    if EnableDecoderUseNumber {
-        decoder.UseNumber()
-    }
-    if EnableDecoderDisallowUnknownFields {
-        decoder.DisallowUnknownFields()
-    }
-    if err := decoder.Decode(obj); err != nil {
-        return err
-    }
+<span class="kd">func</span><span class="w"> </span><span class="nx">decodeJSON</span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Reader</span><span class="p">,</span><span class="w"> </span><span class="nx">obj</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">decoder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nx">API</span><span class="p">.</span><span class="nx">NewDecoder</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">EnableDecoderUseNumber</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">decoder</span><span class="p">.</span><span class="nx">UseNumber</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">EnableDecoderDisallowUnknownFields</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">decoder</span><span class="p">.</span><span class="nx">DisallowUnknownFields</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">decoder</span><span class="p">.</span><span class="nx">Decode</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
 
-  // 这里自动调用的模型校验方法
-    return validate(obj)
-}
-
-</code></pre>
+<span class="w">  </span><span class="c1">// 这里自动调用的模型校验方法</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">validate</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>Gin使用 <a href="https://github.com/go-playground/validator">go-playground/validator/v10</a> 进行验证。 查看标签用法的全部<a href="https://pkg.go.dev/github.com/go-playground/validator/v10#hdr-Baked_In_Validators_and_Tags">文档</a>.</strong></p>
 <p>官方示例：</p>
-<pre><code class="language-go">// 绑定 JSON
-type Login struct {
-  User     string `json:&quot;user&quot; binding:&quot;required&quot;`
-  Password string `json:&quot;password&quot; binding:&quot;required&quot;`
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 绑定 JSON</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Login</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">User</span><span class="w">     </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;user&quot; binding:&quot;required&quot;`</span>
+<span class="w">  </span><span class="nx">Password</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;password&quot; binding:&quot;required&quot;`</span>
+<span class="p">}</span>
 
-func main() {
-  router := gin.Default()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-  // 绑定 JSON ({&quot;user&quot;: &quot;manu&quot;, &quot;password&quot;: &quot;123&quot;})
-  router.POST(&quot;/loginJSON&quot;, func(c *gin.Context) {
-    var json Login
-    if err := c.ShouldBindJSON(&amp;json); err != nil {
-      c.JSON(http.StatusBadRequest, gin.H{&quot;error&quot;: err.Error()})
-      return
-    }
+<span class="w">  </span><span class="c1">// 绑定 JSON ({&quot;user&quot;: &quot;manu&quot;, &quot;password&quot;: &quot;123&quot;})</span>
+<span class="w">  </span><span class="nx">router</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/loginJSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">json</span><span class="w"> </span><span class="nx">Login</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">ShouldBindJSON</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">json</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">()})</span>
+<span class="w">      </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    if json.User != &quot;manu&quot; || json.Password != &quot;123&quot; {
-      c.JSON(http.StatusUnauthorized, gin.H{&quot;status&quot;: &quot;unauthorized&quot;})
-      return
-    }
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nx">User</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;manu&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">json</span><span class="p">.</span><span class="nx">Password</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;123&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;unauthorized&quot;</span><span class="p">})</span>
+<span class="w">      </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    c.JSON(http.StatusOK, gin.H{&quot;status&quot;: &quot;you are logged in&quot;})
-  })
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;you are logged in&quot;</span><span class="p">})</span>
+<span class="w">  </span><span class="p">})</span>
 
-  // 监听并在 0.0.0.0:8080 上启动服务
-  router.Run(&quot;:8080&quot;)
-}
-</code></pre>
-<pre><code class="language-curl">$ curl -v -X POST \
+<span class="w">  </span><span class="c1">// 监听并在 0.0.0.0:8080 上启动服务</span>
+<span class="w">  </span><span class="nx">router</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$ curl -v -X POST \
   http://localhost:8080/loginJSON \
-  -H 'content-type: application/json' \
-  -d '{ &quot;user&quot;: &quot;manu&quot; }'
+  -H &#39;content-type: application/json&#39; \
+  -d &#39;{ &quot;user&quot;: &quot;manu&quot; }&#39;
 &gt; POST /loginJSON HTTP/1.1
 &gt; Host: localhost:8080
 &gt; User-Agent: curl/7.51.0
@@ -3347,8 +3367,8 @@ func main() {
 &lt; Date: Fri, 04 Aug 2017 03:51:31 GMT
 &lt; Content-Length: 100
 &lt;
-{&quot;error&quot;:&quot;Key: 'Login.Password' Error:Field validation for 'Password' failed on the 'required' tag&quot;}
-</code></pre>
+{&quot;error&quot;:&quot;Key: &#39;Login.Password&#39; Error:Field validation for &#39;Password&#39; failed on the &#39;required&#39; tag&quot;}
+</code></pre></div>
 
 
 

@@ -2127,37 +2127,37 @@
 <h3 id="21-error">2.1. error简述</h3>
 <p>error表示一种可控制的错误，一般由代码显式生成和返回，调用者根据业务需求对error进行处理。</p>
 <p>例如go自带的<code>strconv.ParseBool</code>方法：</p>
-<pre><code class="language-go">// ParseBool 解析布尔值的字符串
-func ParseBool(str string) (bool, error) {
-    switch str {
-  // 如果为&quot;1&quot;, &quot;t&quot;, &quot;T&quot;, &quot;true&quot;, &quot;TRUE&quot;, &quot;True&quot;:返回true和空错误
-    case &quot;1&quot;, &quot;t&quot;, &quot;T&quot;, &quot;true&quot;, &quot;TRUE&quot;, &quot;True&quot;:
-        return true, nil
-  // 如果为&quot;0&quot;, &quot;f&quot;, &quot;F&quot;, &quot;false&quot;, &quot;FALSE&quot;, &quot;False&quot;:返回false和空错误
-    case &quot;0&quot;, &quot;f&quot;, &quot;F&quot;, &quot;false&quot;, &quot;FALSE&quot;, &quot;False&quot;:
-        return false, nil
-    }
-  // 如果不为上述值，则返回false和一个解析错误
-    return false, syntaxError(&quot;ParseBool&quot;, str)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// ParseBool 解析布尔值的字符串</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">ParseBool</span><span class="p">(</span><span class="nx">str</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nx">str</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 如果为&quot;1&quot;, &quot;t&quot;, &quot;T&quot;, &quot;true&quot;, &quot;TRUE&quot;, &quot;True&quot;:返回true和空错误</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;t&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;true&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;TRUE&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;True&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">  </span><span class="c1">// 如果为&quot;0&quot;, &quot;f&quot;, &quot;F&quot;, &quot;false&quot;, &quot;FALSE&quot;, &quot;False&quot;:返回false和空错误</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;f&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;F&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;false&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FALSE&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;False&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// 如果不为上述值，则返回false和一个解析错误</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nx">syntaxError</span><span class="p">(</span><span class="s">&quot;ParseBool&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">str</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在<code>strconv.ParseBool</code>方法中，如果传入的字符串不合法，会返回一个error。我们在调用时，需要对该error进行处理：</p>
-<pre><code class="language-go">s := &quot;Hello&quot;
-b, err := strconv.ParseBool(s)
-if err != nil {
-  fmt.Printf(&quot;Error: %v&quot;, err) // Error: strconv.ParseBool: parsing &quot;Hello&quot;: invalid syntaxfalse
-} else {
-  fmt.Println(b)
-}
+<div class="highlight"><pre><span></span><code><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span>
+<span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">ParseBool</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="c1">// Error: strconv.ParseBool: parsing &quot;Hello&quot;: invalid syntaxfalse</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
 
-s = &quot;true&quot;
-b, err = strconv.ParseBool(s)
-if err != nil {
-  fmt.Printf(&quot;Error: %v&quot;, err)
-} else {
-  fmt.Println(b) // true
-}
-</code></pre>
+<span class="nx">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">ParseBool</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// true</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在上面的示例中，我们根据返回的error是否为空来控制业务逻辑：</p>
 <ul>
 <li>如果解析字符串成功（error为nil）：打印解析结果。</li>
@@ -2165,10 +2165,10 @@ if err != nil {
 </ul>
 <h3 id="22-error">2.2. error类型</h3>
 <p>error本质上是go语言内置的一个接口，其源码如下：</p>
-<pre><code class="language-go">type error interface {
-    Error() string
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Error</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>可以看到，error其实就是只有一个<code>Error() string</code>方法的接口，任何实现了该接口的类型都是一个error类型。</p>
 <blockquote>
 <p>所以在go语言中，error就是一个有特殊意义的普通接口！</p>
@@ -2176,118 +2176,118 @@ if err != nil {
 <h3 id="23-error">2.3. 自定义error</h3>
 <p>上一个章节我们提到，error其实就是只有一个<code>Error() string</code>方法的接口，任何实现了该接口的类型都是一个error类型。</p>
 <p>示例：</p>
-<pre><code class="language-go">// 定义自定义错误类型
-type ValidationError struct {
-    Field   string
-    Message string
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义自定义错误类型</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ValidationError</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Field</span><span class="w">   </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-// 实现error接口
-func (e ValidationError) Error() string {
-    return fmt.Sprintf(&quot;验证错误 - 字段: %s, 信息: %s&quot;, e.Field, e.Message)
-}
-</code></pre>
-<pre><code class="language-go">// 使用自定义错误
-func validateEmail(email string) error {
-    if email == &quot;&quot; {
-        return ValidationError{
-            Field:   &quot;email&quot;,
-            Message: &quot;邮箱不能为空&quot;,
-        }
-    }
-    if !strings.Contains(email, &quot;@&quot;) {
-        return ValidationError{
-            Field:   &quot;email&quot;,
-            Message: &quot;邮箱格式不正确&quot;,
-        }
-    }
-    return nil
-}
+<span class="c1">// 实现error接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="nx">ValidationError</span><span class="p">)</span><span class="w"> </span><span class="nx">Error</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;验证错误 - 字段: %s, 信息: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Field</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// 使用自定义错误</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">validateEmail</span><span class="p">(</span><span class="nx">email</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">email</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ValidationError</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Field</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;email&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">Message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;邮箱不能为空&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">strings</span><span class="p">.</span><span class="nx">Contains</span><span class="p">(</span><span class="nx">email</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;@&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ValidationError</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Field</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;email&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">Message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;邮箱格式不正确&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-func main() {
-    err := validateEmail(&quot;invalid-email&quot;)
-    if err != nil {
-        // 类型断言检查具体错误类型
-        if ve, ok := err.(ValidationError); ok {
-            fmt.Printf(&quot;字段 %s 验证失败: %s\n&quot;, ve.Field, ve.Message)
-        } else {
-            fmt.Println(&quot;其他错误:&quot;, err)
-        }
-    }
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">validateEmail</span><span class="p">(</span><span class="s">&quot;invalid-email&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 类型断言检查具体错误类型</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">ve</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">err</span><span class="p">.(</span><span class="nx">ValidationError</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;字段 %s 验证失败: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ve</span><span class="p">.</span><span class="nx">Field</span><span class="p">,</span><span class="w"> </span><span class="nx">ve</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;其他错误:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="24-error">2.4. 创建error</h3>
 <p>创建错误实际上就是创建一个实现了error接口的结构体的对象。</p>
 <h4 id="241-errorsnew">2.4.1. 使用errors.New</h4>
 <p><code>errors.New</code>方法源码如下：</p>
-<pre><code class="language-go">// 创建一个errorString对象
-func New(text string) error {
-    return &amp;errorString{text}
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 创建一个errorString对象</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">New</span><span class="p">(</span><span class="nx">text</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">errorString</span><span class="p">{</span><span class="nx">text</span><span class="p">}</span>
+<span class="p">}</span>
 
-// errorString is a trivial implementation of error.
-type errorString struct {
-    s string
-}
+<span class="c1">// errorString is a trivial implementation of error.</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">errorString</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func (e *errorString) Error() string {
-    return e.s
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="o">*</span><span class="nx">errorString</span><span class="p">)</span><span class="w"> </span><span class="nx">Error</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">s</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>从源码可以看到，<code>errors.New</code>方法实际上是创建了一个<code>errorString</code>结构体对象，该结构体实现了error接口，结构体中只包含一个字符串用于记录错误信息。</p>
 <p>示例：</p>
-<pre><code class="language-go">import &quot;errors&quot;
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;errors&quot;</span>
 
-func divide(a, b float64) (float64, error) {
-    if b == 0 {
-        return 0, errors.New(&quot;除数不能为零&quot;)
-    }
-    return a / b, nil
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">divide</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">float64</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;除数不能为零&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-func main() {
-    result, err := divide(10, 0)
-    if err != nil {
-        fmt.Println(&quot;错误:&quot;, err.Error())
-        return
-    }
-    fmt.Printf(&quot;结果: %.2f\n&quot;, result)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;错误:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;结果: %.2f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="242-fmterrorf">2.4.2. 使用fmt.Errorf</h4>
 <p><code>fmt.Errorf</code>方法源码如下：</p>
-<pre><code class="language-go">func Errorf(format string, a ...any) error {
-    p := newPrinter()
-    p.wrapErrs = true
-    p.doPrintf(format, a)
-    s := string(p.buf)
-    var err error
-    switch len(p.wrappedErrs) {
-    case 0:
-       err = errors.New(s)
-    case 1:
-       w := &amp;wrapError{msg: s}
-       w.err, _ = a[p.wrappedErrs[0]].(error)
-       err = w
-    default:
-       if p.reordered {
-          slices.Sort(p.wrappedErrs)
-       }
-       var errs []error
-       for i, argNum := range p.wrappedErrs {
-          if i &gt; 0 &amp;&amp; p.wrappedErrs[i-1] == argNum {
-             continue
-          }
-          if e, ok := a[argNum].(error); ok {
-             errs = append(errs, e)
-          }
-       }
-       err = &amp;wrapErrors{s, errs}
-    }
-    p.free()
-    return err
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">Errorf</span><span class="p">(</span><span class="nx">format</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">...</span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">newPrinter</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">p</span><span class="p">.</span><span class="nx">wrapErrs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="nx">p</span><span class="p">.</span><span class="nx">doPrintf</span><span class="p">(</span><span class="nx">format</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">buf</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">wrappedErrs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">       </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">       </span><span class="nx">w</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">wrapError</span><span class="p">{</span><span class="nx">msg</span><span class="p">:</span><span class="w"> </span><span class="nx">s</span><span class="p">}</span>
+<span class="w">       </span><span class="nx">w</span><span class="p">.</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="nx">p</span><span class="p">.</span><span class="nx">wrappedErrs</span><span class="p">[</span><span class="mi">0</span><span class="p">]].(</span><span class="kt">error</span><span class="p">)</span>
+<span class="w">       </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">w</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">reordered</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">slices</span><span class="p">.</span><span class="nx">Sort</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">wrappedErrs</span><span class="p">)</span>
+<span class="w">       </span><span class="p">}</span>
+<span class="w">       </span><span class="kd">var</span><span class="w"> </span><span class="nx">errs</span><span class="w"> </span><span class="p">[]</span><span class="kt">error</span>
+<span class="w">       </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">argNum</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">wrappedErrs</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">wrappedErrs</span><span class="p">[</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">argNum</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="k">continue</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="nx">e</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="nx">argNum</span><span class="p">].(</span><span class="kt">error</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="nx">errs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">errs</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">)</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">       </span><span class="p">}</span>
+<span class="w">       </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">wrapErrors</span><span class="p">{</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nx">errs</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">p</span><span class="p">.</span><span class="nx">free</span><span class="p">()</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">err</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>
 <p><code>fmt.Errorf</code>方法可以在创建错误时，格式化错误消息，相比于<code>errors.New</code>方法更加灵活。</p>
@@ -2300,162 +2300,162 @@ func main() {
 <p><code>*fmt.wrapErrors</code>涉及到错误包装的内容，我们后续讲解。</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-go">import &quot;fmt&quot;
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func processUser(id int) error {
-    if id &lt;= 0 {
-        return fmt.Errorf(&quot;无效的用户ID: %d&quot;, id)
-    }
-    // 处理用户...
-    return nil
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">processUser</span><span class="p">(</span><span class="nx">id</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;无效的用户ID: %d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 处理用户...</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-func main() {
-    err := processUser(-1)
-    if err != nil {
-        fmt.Println(&quot;处理用户时出错:&quot;, err)
-    }
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">processUser</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;处理用户时出错:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="243">2.4.3. 创建自定义错误类型</h4>
 <p>创建自定义错误类型实际上就是创建一个普通的结构体对象：</p>
-<pre><code class="language-go">// 定义自定义错误类型
-type ValidationError struct {
-    Field   string
-    Message string
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义自定义错误类型</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ValidationError</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Field</span><span class="w">   </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-// 实现error接口
-func (e ValidationError) Error() string {
-    return fmt.Sprintf(&quot;验证错误 - 字段: %s, 信息: %s&quot;, e.Field, e.Message)
-}
+<span class="c1">// 实现error接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="nx">ValidationError</span><span class="p">)</span><span class="w"> </span><span class="nx">Error</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;验证错误 - 字段: %s, 信息: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Field</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 使用自定义错误
-func validateEmail(email string) error {
-    if email == &quot;&quot; {
-        return ValidationError{
-            Field:   &quot;email&quot;,
-            Message: &quot;邮箱不能为空&quot;,
-        }
-    }
-    if !strings.Contains(email, &quot;@&quot;) {
-        return ValidationError{
-            Field:   &quot;email&quot;,
-            Message: &quot;邮箱格式不正确&quot;,
-        }
-    }
-    return nil
-}
+<span class="c1">// 使用自定义错误</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">validateEmail</span><span class="p">(</span><span class="nx">email</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">email</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ValidationError</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Field</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;email&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">Message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;邮箱不能为空&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">strings</span><span class="p">.</span><span class="nx">Contains</span><span class="p">(</span><span class="nx">email</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;@&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">ValidationError</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Field</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;email&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">Message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;邮箱格式不正确&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-func main() {
-    err := validateEmail(&quot;invalid-email&quot;)
-    if err != nil {
-        // 类型断言检查具体错误类型
-        if ve, ok := err.(ValidationError); ok {
-            fmt.Printf(&quot;字段 %s 验证失败: %s\n&quot;, ve.Field, ve.Message)
-        } else {
-            fmt.Println(&quot;其他错误:&quot;, err)
-        }
-    }
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">validateEmail</span><span class="p">(</span><span class="s">&quot;invalid-email&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 类型断言检查具体错误类型</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">ve</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">err</span><span class="p">.(</span><span class="nx">ValidationError</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;字段 %s 验证失败: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ve</span><span class="p">.</span><span class="nx">Field</span><span class="p">,</span><span class="w"> </span><span class="nx">ve</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;其他错误:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="25-error">2.5. 基本error处理</h3>
 <p>一般来说，如果一个方法可能出现错误，我们通常会在该方法声明中增加一个error`类型的返回值。</p>
-<pre><code class="language-go">// 例如os.Open方法，最后一个返回值即为error类型
-func Open(name string) (*File, error) {
-    return OpenFile(name, O_RDONLY, 0)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 例如os.Open方法，最后一个返回值即为error类型</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">Open</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">File</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">OpenFile</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">O_RDONLY</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>这里所说的错误处理，即是调用者如何处理方法返回的错误。</p>
 </blockquote>
 <p>处理错误最常见的方式是判断方法返回的错误是否为nil，以根据是否发生错误来决定业务流程（打印日志、中止处理等等）。</p>
-<pre><code class="language-go">// 基本的错误检查模式
-file, err := os.Open(&quot;test.txt&quot;)
-if err != nil {
-    log.Fatal(&quot;打开文件失败:&quot;, err)
-}
-defer file.Close()
+<div class="highlight"><pre><span></span><code><span class="c1">// 基本的错误检查模式</span>
+<span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="s">&quot;test.txt&quot;</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">&quot;打开文件失败:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">defer</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
-// 处理文件...
-</code></pre>
+<span class="c1">// 处理文件...</span>
+</code></pre></div>
 <h3 id="26">2.6 错误包装</h3>
 <h2 id="4-panicrecover">4. panic和recover</h2>
 <p>虽然Go鼓励使用显式的错误处理，但在某些情况下可以使用panic和recover机制。</p>
 <h3 id="41-panic">4.1. panic</h3>
 <p>panic用于引发运行时恐慌，会立即停止当前函数的执行：</p>
-<pre><code class="language-go">func divide(a, b int) int {
-    if b == 0 {
-        panic(&quot;除数不能为零&quot;)
-    }
-    return a / b
-}
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">divide</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;除数不能为零&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func main() {
-    defer func() {
-        if r := recover(); r != nil {
-            fmt.Println(&quot;捕获到恐慌:&quot;, r)
-        }
-    }()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">recover</span><span class="p">();</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;捕获到恐慌:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    result := divide(10, 0)
-    fmt.Printf(&quot;结果: %d\n&quot;, result)
+<span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;结果: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
 
-    fmt.Println(&quot;这行代码不会执行&quot;)
-}
-</code></pre>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;这行代码不会执行&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="42-recover">4.2. recover</h3>
 <p>recover用于捕获panic，只能在defer函数中使用：</p>
-<pre><code class="language-go">func riskyOperation() {
-    defer func() {
-        if r := recover(); r != nil {
-            fmt.Printf(&quot;恢复自恐慌: %v\n&quot;, r)
-            // 可以记录日志、清理资源等
-        }
-    }()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">riskyOperation</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">recover</span><span class="p">();</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;恢复自恐慌: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="w">            </span><span class="c1">// 可以记录日志、清理资源等</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    // 可能引发恐慌的操作
-    panic(&quot;出错了!&quot;)
-}
+<span class="w">    </span><span class="c1">// 可能引发恐慌的操作</span>
+<span class="w">    </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;出错了!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    riskyOperation()
-    fmt.Println(&quot;程序继续执行&quot;)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">riskyOperation</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;程序继续执行&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="43-panicrecover">4.3. panic/recover的最佳实践</h3>
-<pre><code class="language-go">// 服务器中间件示例
-func middleware(next http.HandlerFunc) http.HandlerFunc {
-    return func(w http.ResponseWriter, r *http.Request) {
-        defer func() {
-            if err := recover(); err != nil {
-                // 记录错误日志
-                log.Printf(&quot;请求 %s 发生恐慌: %v&quot;, r.URL.Path, err)
+<div class="highlight"><pre><span></span><code><span class="c1">// 服务器中间件示例</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">middleware</span><span class="p">(</span><span class="nx">next</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">HandlerFunc</span><span class="p">)</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">recover</span><span class="p">();</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// 记录错误日志</span>
+<span class="w">                </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;请求 %s 发生恐慌: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
 
-                // 返回500错误
-                http.Error(w, &quot;内部服务器错误&quot;, http.StatusInternalServerError)
-            }
-        }()
+<span class="w">                </span><span class="c1">// 返回500错误</span>
+<span class="w">                </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;内部服务器错误&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}()</span>
 
-        next.ServeHTTP(w, r)
-    }
-}
+<span class="w">        </span><span class="nx">next</span><span class="p">.</span><span class="nx">ServeHTTP</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-// 数组安全访问
-func safeGet(arr []int, index int) (int, error) {
-    defer func() {
-        if r := recover(); r != nil {
-            log.Printf(&quot;数组访问越界: %v&quot;, r)
-        }
-    }()
+<span class="c1">// 数组安全访问</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">safeGet</span><span class="p">(</span><span class="nx">arr</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">recover</span><span class="p">();</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;数组访问越界: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    if index &lt; 0 || index &gt;= len(arr) {
-        panic(fmt.Sprintf(&quot;索引%d超出范围[0,%d)&quot;, index, len(arr)))
-    }
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;索引%d超出范围[0,%d)&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">arr</span><span class="p">)))</span>
+<span class="w">    </span><span class="p">}</span>
 
-    return arr[index], nil
-}
-</code></pre>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="nx">index</span><span class="p">],</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="5">5. 错误处理最佳实践</h2>
 <h3 id="51">5.1. 错误处理原则</h3>
 <ol>
@@ -2464,141 +2464,141 @@ func safeGet(arr []int, index int) (int, error) {
 <li><strong>不要吞掉错误</strong>：至少要记录日志</li>
 <li><strong>区分错误和异常</strong>：预期的错误用error，真正的异常用panic</li>
 </ol>
-<pre><code class="language-go">// 不好的做法：忽略错误
-file, _ := os.Open(&quot;test.txt&quot;)  // 错误：忽略了错误
+<div class="highlight"><pre><span></span><code><span class="c1">// 不好的做法：忽略错误</span>
+<span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="s">&quot;test.txt&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1">// 错误：忽略了错误</span>
 
-// 好的做法：处理错误
-file, err := os.Open(&quot;test.txt&quot;)
-if err != nil {
-    log.Printf(&quot;打开文件失败: %v&quot;, err)
-    return
-}
-defer file.Close()
-</code></pre>
+<span class="c1">// 好的做法：处理错误</span>
+<span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="s">&quot;test.txt&quot;</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;打开文件失败: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="p">}</span>
+<span class="k">defer</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
+</code></pre></div>
 <h3 id="52">5.2. 错误日志记录</h3>
-<pre><code class="language-go">import (
-    &quot;log&quot;
-    &quot;go.uber.org/zap&quot;  // 第三方日志库示例
-)
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;log&quot;</span>
+<span class="w">    </span><span class="s">&quot;go.uber.org/zap&quot;</span><span class="w">  </span><span class="c1">// 第三方日志库示例</span>
+<span class="p">)</span>
 
-func processOrder(orderID string) error {
-    order, err := getOrder(orderID)
-    if err != nil {
-        // 记录结构化日志
-        log.Printf(&quot;获取订单失败 order_id=%s error=%v&quot;, orderID, err)
-        return fmt.Errorf(&quot;获取订单%s失败: %w&quot;, orderID, err)
-    }
+<span class="kd">func</span><span class="w"> </span><span class="nx">processOrder</span><span class="p">(</span><span class="nx">orderID</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">order</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">getOrder</span><span class="p">(</span><span class="nx">orderID</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 记录结构化日志</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;获取订单失败 order_id=%s error=%v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">orderID</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;获取订单%s失败: %w&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">orderID</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    if err := validateOrder(order); err != nil {
-        log.Printf(&quot;订单验证失败 order_id=%s error=%v&quot;, orderID, err)
-        return fmt.Errorf(&quot;订单%s验证失败: %w&quot;, orderID, err)
-    }
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">validateOrder</span><span class="p">(</span><span class="nx">order</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;订单验证失败 order_id=%s error=%v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">orderID</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;订单%s验证失败: %w&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">orderID</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 处理订单...
-    return nil
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 处理订单...</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="53">5.3. 错误分类</h3>
-<pre><code class="language-go">// 定义错误类型常量
-type ErrorCode string
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义错误类型常量</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ErrorCode</span><span class="w"> </span><span class="kt">string</span>
 
-const (
-    ErrInvalidInput   ErrorCode = &quot;INVALID_INPUT&quot;
-    ErrNotFound       ErrorCode = &quot;NOT_FOUND&quot;
-    ErrInternal       ErrorCode = &quot;INTERNAL_ERROR&quot;
-    ErrUnauthorized   ErrorCode = &quot;UNAUTHORIZED&quot;
-)
+<span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">ErrInvalidInput</span><span class="w">   </span><span class="nx">ErrorCode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;INVALID_INPUT&quot;</span>
+<span class="w">    </span><span class="nx">ErrNotFound</span><span class="w">       </span><span class="nx">ErrorCode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;NOT_FOUND&quot;</span>
+<span class="w">    </span><span class="nx">ErrInternal</span><span class="w">       </span><span class="nx">ErrorCode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;INTERNAL_ERROR&quot;</span>
+<span class="w">    </span><span class="nx">ErrUnauthorized</span><span class="w">   </span><span class="nx">ErrorCode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;UNAUTHORIZED&quot;</span>
+<span class="p">)</span>
 
-// 自定义业务错误
-type BusinessError struct {
-    Code    ErrorCode
-    Message string
-    Cause   error
-}
+<span class="c1">// 自定义业务错误</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">BusinessError</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Code</span><span class="w">    </span><span class="nx">ErrorCode</span>
+<span class="w">    </span><span class="nx">Message</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Cause</span><span class="w">   </span><span class="kt">error</span>
+<span class="p">}</span>
 
-func (e BusinessError) Error() string {
-    return string(e.Code) + &quot;: &quot; + e.Message
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="nx">BusinessError</span><span class="p">)</span><span class="w"> </span><span class="nx">Error</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">Code</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Message</span>
+<span class="p">}</span>
 
-func (e BusinessError) Unwrap() error {
-    return e.Cause
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="w"> </span><span class="nx">BusinessError</span><span class="p">)</span><span class="w"> </span><span class="nx">Unwrap</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Cause</span>
+<span class="p">}</span>
 
-// 使用示例
-func getUser(id string) (*User, error) {
-    if id == &quot;&quot; {
-        return nil, BusinessError{
-            Code:    ErrInvalidInput,
-            Message: &quot;用户ID不能为空&quot;,
-        }
-    }
+<span class="c1">// 使用示例</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">getUser</span><span class="p">(</span><span class="nx">id</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">BusinessError</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Code</span><span class="p">:</span><span class="w">    </span><span class="nx">ErrInvalidInput</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">Message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;用户ID不能为空&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 查询用户...
-    return nil, BusinessError{
-        Code:    ErrNotFound,
-        Message: fmt.Sprintf(&quot;用户%s不存在&quot;, id),
-    }
-}
+<span class="w">    </span><span class="c1">// 查询用户...</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">BusinessError</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Code</span><span class="p">:</span><span class="w">    </span><span class="nx">ErrNotFound</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Message</span><span class="p">:</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;用户%s不存在&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">),</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    _, err := getUser(&quot;&quot;)
-    if err != nil {
-        var bizErr BusinessError
-        if errors.As(err, &amp;bizErr) {
-            switch bizErr.Code {
-            case ErrInvalidInput:
-                fmt.Println(&quot;输入参数错误:&quot;, bizErr.Message)
-            case ErrNotFound:
-                fmt.Println(&quot;资源未找到:&quot;, bizErr.Message)
-            default:
-                fmt.Println(&quot;未知业务错误:&quot;, bizErr)
-            }
-        } else {
-            fmt.Println(&quot;系统错误:&quot;, err)
-        }
-    }
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">getUser</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">bizErr</span><span class="w"> </span><span class="nx">BusinessError</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">As</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">bizErr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">switch</span><span class="w"> </span><span class="nx">bizErr</span><span class="p">.</span><span class="nx">Code</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="nx">ErrInvalidInput</span><span class="p">:</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;输入参数错误:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">bizErr</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="nx">ErrNotFound</span><span class="p">:</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;资源未找到:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">bizErr</span><span class="p">.</span><span class="nx">Message</span><span class="p">)</span>
+<span class="w">            </span><span class="k">default</span><span class="p">:</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;未知业务错误:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">bizErr</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;系统错误:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="54">5.4. 错误传播</h3>
-<pre><code class="language-go">// 层级错误处理示例
-func handleRequest(request Request) error {
-    user, err := authenticate(request.Token)
-    if err != nil {
-        return fmt.Errorf(&quot;认证失败: %w&quot;, err)  // 包装认证错误
-    }
+<div class="highlight"><pre><span></span><code><span class="c1">// 层级错误处理示例</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">handleRequest</span><span class="p">(</span><span class="nx">request</span><span class="w"> </span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">authenticate</span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">Token</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;认证失败: %w&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span><span class="w">  </span><span class="c1">// 包装认证错误</span>
+<span class="w">    </span><span class="p">}</span>
 
-    data, err := fetchData(user.ID)
-    if err != nil {
-        return fmt.Errorf(&quot;获取数据失败: %w&quot;, err)  // 包装数据获取错误
-    }
+<span class="w">    </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fetchData</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">ID</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;获取数据失败: %w&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span><span class="w">  </span><span class="c1">// 包装数据获取错误</span>
+<span class="w">    </span><span class="p">}</span>
 
-    if err := processData(data); err != nil {
-        return fmt.Errorf(&quot;处理数据失败: %w&quot;, err)  // 包装数据处理错误
-    }
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">processData</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;处理数据失败: %w&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span><span class="w">  </span><span class="c1">// 包装数据处理错误</span>
+<span class="w">    </span><span class="p">}</span>
 
-    return nil
-}
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-// 在上层处理错误
-func serveHTTP(w http.ResponseWriter, r *http.Request) {
-    var req Request
-    // 解析请求...
+<span class="c1">// 在上层处理错误</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">serveHTTP</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">Request</span>
+<span class="w">    </span><span class="c1">// 解析请求...</span>
 
-    if err := handleRequest(req); err != nil {
-        // 根据错误类型返回不同的HTTP状态码
-        if errors.Is(err, ErrUnauthorized) {
-            http.Error(w, &quot;未授权&quot;, http.StatusUnauthorized)
-        } else if errors.Is(err, ErrNotFound) {
-            http.Error(w, &quot;资源未找到&quot;, http.StatusNotFound)
-        } else {
-            http.Error(w, &quot;内部服务器错误&quot;, http.StatusInternalServerError)
-        }
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">handleRequest</span><span class="p">(</span><span class="nx">req</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 根据错误类型返回不同的HTTP状态码</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">Is</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">ErrUnauthorized</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;未授权&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">Is</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">ErrNotFound</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;资源未找到&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">http</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;内部服务器错误&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
 
-        // 记录详细错误日志
-        log.Printf(&quot;处理请求失败: %v&quot;, err)
-    }
-}
-</code></pre>
+<span class="w">        </span><span class="c1">// 记录详细错误日志</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;处理请求失败: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 

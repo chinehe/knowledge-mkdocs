@@ -1985,38 +1985,38 @@
 <ol>
 <li>下载预编译包</li>
 </ol>
-<p>```shell
-   # 去安装目录
-   cd /usr/src</p>
-<p># 下载
-   wget https://redismodules.s3.amazonaws.com/rejson/rejson.Linux-rhel7-x86_64.2.4.7.zip
-   ```</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 去安装目录</span>
+<span class="nb">cd</span><span class="w"> </span>/usr/src
+
+<span class="c1"># 下载</span>
+wget<span class="w"> </span>https://redismodules.s3.amazonaws.com/rejson/rejson.Linux-rhel7-x86_64.2.4.7.zip
+</code></pre></div>
 <ol>
 <li>解压</li>
 </ol>
-<p><code>shell
-   unzip rejson.Linux-rhel7-x86_64.2.4.7.zip -d ./rejson2.4.7/</code></p>
+<div class="highlight"><pre><span></span><code>unzip<span class="w"> </span>rejson.Linux-rhel7-x86_64.2.4.7.zip<span class="w"> </span>-d<span class="w"> </span>./rejson2.4.7/
+</code></pre></div>
 <ol>
 <li>查看内容</li>
 </ol>
-<p>```shell
-   cd rejson2.4.7 # 进入目录
-   ll # 查看目录文件</p>
-<p># 输出
-   -rw------- 1 root root    6951 4月  22 2023 module.json
-   -rwxr-xr-x 1 root root 4425368 4月  22 2023 rejson.so
-   ```</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>rejson2.4.7<span class="w"> </span><span class="c1"># 进入目录</span>
+ll<span class="w"> </span><span class="c1"># 查看目录文件</span>
+
+<span class="c1"># 输出</span>
+-rw-------<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">    </span><span class="m">6951</span><span class="w"> </span>4月<span class="w">  </span><span class="m">22</span><span class="w"> </span><span class="m">2023</span><span class="w"> </span>module.json
+-rwxr-xr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">4425368</span><span class="w"> </span>4月<span class="w">  </span><span class="m">22</span><span class="w"> </span><span class="m">2023</span><span class="w"> </span>rejson.so
+</code></pre></div>
 <ol>
 <li>将so文件放到目标文件夹</li>
 </ol>
-<p><code>shell
-   # 我这里将它放到配置文件所在目录
-   cp rejson.so /etc/redis/</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 我这里将它放到配置文件所在目录</span>
+cp<span class="w"> </span>rejson.so<span class="w"> </span>/etc/redis/
+</code></pre></div>
 <ol>
 <li>修改redis配置文件，配置Redis加载JSON模块</li>
 </ol>
-<p><code>shell
-   loadmodule /etc/redis/rejson.so</code></p>
+<div class="highlight"><pre><span></span><code>loadmodule<span class="w"> </span>/etc/redis/rejson.so
+</code></pre></div>
 <ol>
 <li>
 <p>重启Redis服务</p>
@@ -2025,16 +2025,16 @@
 <p>验证，在redis客户端中执行module list命令</p>
 </li>
 </ol>
-<p><code>shell
-   127.0.0.1:6379&gt; module list
-   1) 1) "name"
-      2) "ReJSON"
-      3) "ver"
-      4) (integer) 20407
-      5) "path"
-      6) "/etc/redis/rejson.so"
-      7) "args"
-      8) (empty array)</code></p>
+<div class="highlight"><pre><span></span><code><span class="m">127</span>.0.0.1:6379&gt;<span class="w"> </span>module<span class="w"> </span>list
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;name&quot;</span>
+<span class="w">   </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;ReJSON&quot;</span>
+<span class="w">   </span><span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;ver&quot;</span>
+<span class="w">   </span><span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">20407</span>
+<span class="w">   </span><span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;path&quot;</span>
+<span class="w">   </span><span class="m">6</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;/etc/redis/rejson.so&quot;</span>
+<span class="w">   </span><span class="m">7</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;args&quot;</span>
+<span class="w">   </span><span class="m">8</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>empty<span class="w"> </span>array<span class="o">)</span>
+</code></pre></div>
 <h2 id="3-json">3. JSON 路径语法</h2>
 <p>JSON Path语法用于访问JSON中的特定元素。</p>
 <p>由于没有JSON路径语法的标准，Redis基于常见的最佳实践，实现了自己的JSON路径语法。</p>
@@ -2053,8 +2053,8 @@
 <p>JSONPath查询可以间接到JSON文档中的多个位置。在这种情况下，JSON命令会将操作应用到所有可能的位置。这相比传统的路径查询是一个重大改进，后者只在第一个路径上执行操作。</p>
 <p>新语法支持括号表示法，允许使用特殊字符串如<code>:</code>或者键中的空白字符。</p>
 <p>如果要在CLI查询中包含双引号，要用单引号包住JSONPath。例如：</p>
-<pre><code class="language-shell">JSON.GET store '$.inventory[&quot;mountain_bikes&quot;]'
-</code></pre>
+<div class="highlight"><pre><span></span><code>JSON.GET<span class="w"> </span>store<span class="w"> </span><span class="s1">&#39;$.inventory[&quot;mountain_bikes&quot;]&#39;</span>
+</code></pre></div>
 <hr />
 <h4 id="212">2.1.2. 语法表</h4>
 <p><strong>JSONPath 语法表：</strong></p>
@@ -2111,148 +2111,148 @@
 <h4 id="213">2.1.3. 示例</h4>
 <h5 id="2131-json">2.1.3.1. 创建示例JSON</h5>
 <p>假设我们要操作的JSON文档存储了商店库存中商品的详细信息，如下：</p>
-<pre><code class="language-json">{
-    &quot;inventory&quot;: {
-        &quot;mountain_bikes&quot;: [
-            {
-                &quot;id&quot;: &quot;bike:1&quot;,
-                &quot;model&quot;: &quot;Phoebe&quot;,
-                &quot;description&quot;: &quot;This is a mid-travel trail slayer that is a fantastic daily driver or one bike quiver. The Shimano Claris 8-speed groupset gives plenty of gear range to tackle hills and there\u2019s room for mudguards and a rack too.  This is the bike for the rider who wants trail manners with low fuss ownership.&quot;,
-                &quot;price&quot;: 1920,
-                &quot;specs&quot;: {&quot;material&quot;: &quot;carbon&quot;, &quot;weight&quot;: 13.1},
-                &quot;colors&quot;: [&quot;black&quot;, &quot;silver&quot;],
-            },
-            {
-                &quot;id&quot;: &quot;bike:2&quot;,
-                &quot;model&quot;: &quot;Quaoar&quot;,
-                &quot;description&quot;: &quot;Redesigned for the 2020 model year, this bike impressed our testers and is the best all-around trail bike we've ever tested. The Shimano gear system effectively does away with an external cassette, so is super low maintenance in terms of wear and tear. All in all it's an impressive package for the price, making it very competitive.&quot;,
-                &quot;price&quot;: 2072,
-                &quot;specs&quot;: {&quot;material&quot;: &quot;aluminium&quot;, &quot;weight&quot;: 7.9},
-                &quot;colors&quot;: [&quot;black&quot;, &quot;white&quot;],
-            },
-            {
-                &quot;id&quot;: &quot;bike:3&quot;,
-                &quot;model&quot;: &quot;Weywot&quot;,
-                &quot;description&quot;: &quot;This bike gives kids aged six years and older a durable and uberlight mountain bike for their first experience on tracks and easy cruising through forests and fields. A set of powerful Shimano hydraulic disc brakes provide ample stopping ability. If you're after a budget option, this is one of the best bikes you could get.&quot;,
-                &quot;price&quot;: 3264,
-                &quot;specs&quot;: {&quot;material&quot;: &quot;alloy&quot;, &quot;weight&quot;: 13.8},
-            },
-        ],
-        &quot;commuter_bikes&quot;: [
-            {
-                &quot;id&quot;: &quot;bike:4&quot;,
-                &quot;model&quot;: &quot;Salacia&quot;,
-                &quot;description&quot;: &quot;This bike is a great option for anyone who just wants a bike to get about on With a slick-shifting Claris gears from Shimano\u2019s, this is a bike which doesn\u2019t break the bank and delivers craved performance.  It\u2019s for the rider who wants both efficiency and capability.&quot;,
-                &quot;price&quot;: 1475,
-                &quot;specs&quot;: {&quot;material&quot;: &quot;aluminium&quot;, &quot;weight&quot;: 16.6},
-                &quot;colors&quot;: [&quot;black&quot;, &quot;silver&quot;],
-            },
-            {
-                &quot;id&quot;: &quot;bike:5&quot;,
-                &quot;model&quot;: &quot;Mimas&quot;,
-                &quot;description&quot;: &quot;A real joy to ride, this bike got very high scores in last years Bike of the year report. The carefully crafted 50-34 tooth chainset and 11-32 tooth cassette give an easy-on-the-legs bottom gear for climbing, and the high-quality Vittoria Zaffiro tires give balance and grip.It includes a low-step frame , our memory foam seat, bump-resistant shocks and conveniently placed thumb throttle. Put it all together and you get a bike that helps redefine what can be done for this price.&quot;,
-                &quot;price&quot;: 3941,
-                &quot;specs&quot;: {&quot;material&quot;: &quot;alloy&quot;, &quot;weight&quot;: 11.6},
-            },
-        ],
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;inventory&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;mountain_bikes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bike:1&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Phoebe&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This is a mid-travel trail slayer that is a fantastic daily driver or one bike quiver. The Shimano Claris 8-speed groupset gives plenty of gear range to tackle hills and there\u2019s room for mudguards and a rack too.  This is the bike for the rider who wants trail manners with low fuss ownership.&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;specs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;material&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;carbon&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;weight&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">13.1</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;colors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;silver&quot;</span><span class="p">],</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bike:2&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Quaoar&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Redesigned for the 2020 model year, this bike impressed our testers and is the best all-around trail bike we&#39;ve ever tested. The Shimano gear system effectively does away with an external cassette, so is super low maintenance in terms of wear and tear. All in all it&#39;s an impressive package for the price, making it very competitive.&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2072</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;specs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;material&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;aluminium&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;weight&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">7.9</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;colors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;white&quot;</span><span class="p">],</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bike:3&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Weywot&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This bike gives kids aged six years and older a durable and uberlight mountain bike for their first experience on tracks and easy cruising through forests and fields. A set of powerful Shimano hydraulic disc brakes provide ample stopping ability. If you&#39;re after a budget option, this is one of the best bikes you could get.&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3264</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;specs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;material&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alloy&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;weight&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">13.8</span><span class="p">},</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">&quot;commuter_bikes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bike:4&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Salacia&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;This bike is a great option for anyone who just wants a bike to get about on With a slick-shifting Claris gears from Shimano\u2019s, this is a bike which doesn\u2019t break the bank and delivers craved performance.  It\u2019s for the rider who wants both efficiency and capability.&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1475</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;specs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;material&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;aluminium&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;weight&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">16.6</span><span class="p">},</span>
+<span class="w">                </span><span class="nt">&quot;colors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;silver&quot;</span><span class="p">],</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bike:5&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mimas&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A real joy to ride, this bike got very high scores in last years Bike of the year report. The carefully crafted 50-34 tooth chainset and 11-32 tooth cassette give an easy-on-the-legs bottom gear for climbing, and the high-quality Vittoria Zaffiro tires give balance and grip.It includes a low-step frame , our memory foam seat, bump-resistant shocks and conveniently placed thumb throttle. Put it all together and you get a bike that helps redefine what can be done for this price.&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3941</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;specs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;material&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alloy&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;weight&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">11.6</span><span class="p">},</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在Redis CLI中使用如下的命令来创建它：</p>
-<pre><code class="language-shell">JSON.SET bikes:inventory $ '{ &quot;inventory&quot;: { &quot;mountain_bikes&quot;: [ { &quot;id&quot;: &quot;bike:1&quot;, &quot;model&quot;: &quot;Phoebe&quot;, &quot;description&quot;: &quot;This is a mid-travel trail slayer that is a fantastic daily driver or one bike quiver. The Shimano Claris 8-speed groupset gives plenty of gear range to tackle hills and there\'s room for mudguards and a rack too. This is the bike for the rider who wants trail manners with low fuss ownership.&quot;, &quot;price&quot;: 1920, &quot;specs&quot;: {&quot;material&quot;: &quot;carbon&quot;, &quot;weight&quot;: 13.1}, &quot;colors&quot;: [&quot;black&quot;, &quot;silver&quot;] }, { &quot;id&quot;: &quot;bike:2&quot;, &quot;model&quot;: &quot;Quaoar&quot;, &quot;description&quot;: &quot;Redesigned for the 2020 model year, this bike impressed our testers and is the best all-around trail bike we\'ve ever tested. The Shimano gear system effectively does away with an external cassette, so is super low maintenance in terms of wear and tear. All in all it\'s an impressive package for the price, making it very competitive.&quot;, &quot;price&quot;: 2072, &quot;specs&quot;: {&quot;material&quot;: &quot;aluminium&quot;, &quot;weight&quot;: 7.9}, &quot;colors&quot;: [&quot;black&quot;, &quot;white&quot;] }, { &quot;id&quot;: &quot;bike:3&quot;, &quot;model&quot;: &quot;Weywot&quot;, &quot;description&quot;: &quot;This bike gives kids aged six years and older a durable and uberlight mountain bike for their first experience on tracks and easy cruising through forests and fields. A set of powerful Shimano hydraulic disc brakes provide ample stopping ability. If you\'re after a budget option, this is one of the best bikes you could get.&quot;, &quot;price&quot;: 3264, &quot;specs&quot;: {&quot;material&quot;: &quot;alloy&quot;, &quot;weight&quot;: 13.8} } ], &quot;commuter_bikes&quot;: [ { &quot;id&quot;: &quot;bike:4&quot;, &quot;model&quot;: &quot;Salacia&quot;, &quot;description&quot;: &quot;This bike is a great option for anyone who just wants a bike to get about on With a slick-shifting Claris gears from Shimano\'s, this is a bike which doesn\'t break the bank and delivers craved performance. It\'s for the rider who wants both efficiency and capability.&quot;, &quot;price&quot;: 1475, &quot;specs&quot;: {&quot;material&quot;: &quot;aluminium&quot;, &quot;weight&quot;: 16.6}, &quot;colors&quot;: [&quot;black&quot;, &quot;silver&quot;] }, { &quot;id&quot;: &quot;bike:5&quot;, &quot;model&quot;: &quot;Mimas&quot;, &quot;description&quot;: &quot;A real joy to ride, this bike got very high scores in last years Bike of the year report. The carefully crafted 50-34 tooth chainset and 11-32 tooth cassette give an easy-on-the-legs bottom gear for climbing, and the high-quality Vittoria Zaffiro tires give balance and grip.It includes a low-step frame , our memory foam seat, bump-resistant shocks and conveniently placed thumb throttle. Put it all together and you get a bike that helps redefine what can be done for this price.&quot;, &quot;price&quot;: 3941, &quot;specs&quot;: {&quot;material&quot;: &quot;alloy&quot;, &quot;weight&quot;: 11.6} } ] }}'
-</code></pre>
+<div class="highlight"><pre><span></span><code>JSON.SET<span class="w"> </span>bikes:inventory<span class="w"> </span>$<span class="w"> </span><span class="s1">&#39;{ &quot;inventory&quot;: { &quot;mountain_bikes&quot;: [ { &quot;id&quot;: &quot;bike:1&quot;, &quot;model&quot;: &quot;Phoebe&quot;, &quot;description&quot;: &quot;This is a mid-travel trail slayer that is a fantastic daily driver or one bike quiver. The Shimano Claris 8-speed groupset gives plenty of gear range to tackle hills and there\&#39;</span>s<span class="w"> </span>room<span class="w"> </span><span class="k">for</span><span class="w"> </span>mudguards<span class="w"> </span>and<span class="w"> </span>a<span class="w"> </span>rack<span class="w"> </span>too.<span class="w"> </span>This<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>bike<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>rider<span class="w"> </span>who<span class="w"> </span>wants<span class="w"> </span>trail<span class="w"> </span>manners<span class="w"> </span>with<span class="w"> </span>low<span class="w"> </span>fuss<span class="w"> </span>ownership.<span class="s2">&quot;, &quot;</span>price<span class="s2">&quot;: 1920, &quot;</span>specs<span class="s2">&quot;: {&quot;</span>material<span class="s2">&quot;: &quot;</span>carbon<span class="s2">&quot;, &quot;</span>weight<span class="s2">&quot;: 13.1}, &quot;</span>colors<span class="s2">&quot;: [&quot;</span>black<span class="s2">&quot;, &quot;</span>silver<span class="s2">&quot;] }, { &quot;</span>id<span class="s2">&quot;: &quot;</span>bike:2<span class="s2">&quot;, &quot;</span>model<span class="s2">&quot;: &quot;</span>Quaoar<span class="s2">&quot;, &quot;</span>description<span class="s2">&quot;: &quot;</span>Redesigned<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span><span class="m">2020</span><span class="w"> </span>model<span class="w"> </span>year,<span class="w"> </span>this<span class="w"> </span>bike<span class="w"> </span>impressed<span class="w"> </span>our<span class="w"> </span>testers<span class="w"> </span>and<span class="w"> </span>is<span class="w"> </span>the<span class="w"> </span>best<span class="w"> </span>all-around<span class="w"> </span>trail<span class="w"> </span>bike<span class="w"> </span>we<span class="se">\&#39;</span>ve<span class="w"> </span>ever<span class="w"> </span>tested.<span class="w"> </span>The<span class="w"> </span>Shimano<span class="w"> </span>gear<span class="w"> </span>system<span class="w"> </span>effectively<span class="w"> </span>does<span class="w"> </span>away<span class="w"> </span>with<span class="w"> </span>an<span class="w"> </span>external<span class="w"> </span>cassette,<span class="w"> </span>so<span class="w"> </span>is<span class="w"> </span>super<span class="w"> </span>low<span class="w"> </span>maintenance<span class="w"> </span><span class="k">in</span><span class="w"> </span>terms<span class="w"> </span>of<span class="w"> </span>wear<span class="w"> </span>and<span class="w"> </span>tear.<span class="w"> </span>All<span class="w"> </span><span class="k">in</span><span class="w"> </span>all<span class="w"> </span>it<span class="se">\&#39;</span>s<span class="w"> </span>an<span class="w"> </span>impressive<span class="w"> </span>package<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>price,<span class="w"> </span>making<span class="w"> </span>it<span class="w"> </span>very<span class="w"> </span>competitive.<span class="s2">&quot;, &quot;</span>price<span class="s2">&quot;: 2072, &quot;</span>specs<span class="s2">&quot;: {&quot;</span>material<span class="s2">&quot;: &quot;</span>aluminium<span class="s2">&quot;, &quot;</span>weight<span class="s2">&quot;: 7.9}, &quot;</span>colors<span class="s2">&quot;: [&quot;</span>black<span class="s2">&quot;, &quot;</span>white<span class="s2">&quot;] }, { &quot;</span>id<span class="s2">&quot;: &quot;</span>bike:3<span class="s2">&quot;, &quot;</span>model<span class="s2">&quot;: &quot;</span>Weywot<span class="s2">&quot;, &quot;</span>description<span class="s2">&quot;: &quot;</span>This<span class="w"> </span>bike<span class="w"> </span>gives<span class="w"> </span>kids<span class="w"> </span>aged<span class="w"> </span>six<span class="w"> </span>years<span class="w"> </span>and<span class="w"> </span>older<span class="w"> </span>a<span class="w"> </span>durable<span class="w"> </span>and<span class="w"> </span>uberlight<span class="w"> </span>mountain<span class="w"> </span>bike<span class="w"> </span><span class="k">for</span><span class="w"> </span>their<span class="w"> </span>first<span class="w"> </span>experience<span class="w"> </span>on<span class="w"> </span>tracks<span class="w"> </span>and<span class="w"> </span>easy<span class="w"> </span>cruising<span class="w"> </span>through<span class="w"> </span>forests<span class="w"> </span>and<span class="w"> </span>fields.<span class="w"> </span>A<span class="w"> </span><span class="nb">set</span><span class="w"> </span>of<span class="w"> </span>powerful<span class="w"> </span>Shimano<span class="w"> </span>hydraulic<span class="w"> </span>disc<span class="w"> </span>brakes<span class="w"> </span>provide<span class="w"> </span>ample<span class="w"> </span>stopping<span class="w"> </span>ability.<span class="w"> </span>If<span class="w"> </span>you<span class="se">\&#39;</span>re<span class="w"> </span>after<span class="w"> </span>a<span class="w"> </span>budget<span class="w"> </span>option,<span class="w"> </span>this<span class="w"> </span>is<span class="w"> </span>one<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>best<span class="w"> </span>bikes<span class="w"> </span>you<span class="w"> </span>could<span class="w"> </span>get.<span class="s2">&quot;, &quot;</span>price<span class="s2">&quot;: 3264, &quot;</span>specs<span class="s2">&quot;: {&quot;</span>material<span class="s2">&quot;: &quot;</span>alloy<span class="s2">&quot;, &quot;</span>weight<span class="s2">&quot;: 13.8} } ], &quot;</span>commuter_bikes<span class="s2">&quot;: [ { &quot;</span>id<span class="s2">&quot;: &quot;</span>bike:4<span class="s2">&quot;, &quot;</span>model<span class="s2">&quot;: &quot;</span>Salacia<span class="s2">&quot;, &quot;</span>description<span class="s2">&quot;: &quot;</span>This<span class="w"> </span>bike<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>great<span class="w"> </span>option<span class="w"> </span><span class="k">for</span><span class="w"> </span>anyone<span class="w"> </span>who<span class="w"> </span>just<span class="w"> </span>wants<span class="w"> </span>a<span class="w"> </span>bike<span class="w"> </span>to<span class="w"> </span>get<span class="w"> </span>about<span class="w"> </span>on<span class="w"> </span>With<span class="w"> </span>a<span class="w"> </span>slick-shifting<span class="w"> </span>Claris<span class="w"> </span>gears<span class="w"> </span>from<span class="w"> </span>Shimano<span class="se">\&#39;</span>s,<span class="w"> </span>this<span class="w"> </span>is<span class="w"> </span>a<span class="w"> </span>bike<span class="w"> </span>which<span class="w"> </span>doesn<span class="se">\&#39;</span>t<span class="w"> </span><span class="k">break</span><span class="w"> </span>the<span class="w"> </span>bank<span class="w"> </span>and<span class="w"> </span>delivers<span class="w"> </span>craved<span class="w"> </span>performance.<span class="w"> </span>It<span class="se">\&#39;</span>s<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>rider<span class="w"> </span>who<span class="w"> </span>wants<span class="w"> </span>both<span class="w"> </span>efficiency<span class="w"> </span>and<span class="w"> </span>capability.<span class="s2">&quot;, &quot;</span>price<span class="s2">&quot;: 1475, &quot;</span>specs<span class="s2">&quot;: {&quot;</span>material<span class="s2">&quot;: &quot;</span>aluminium<span class="s2">&quot;, &quot;</span>weight<span class="s2">&quot;: 16.6}, &quot;</span>colors<span class="s2">&quot;: [&quot;</span>black<span class="s2">&quot;, &quot;</span>silver<span class="s2">&quot;] }, { &quot;</span>id<span class="s2">&quot;: &quot;</span>bike:5<span class="s2">&quot;, &quot;</span>model<span class="s2">&quot;: &quot;</span>Mimas<span class="s2">&quot;, &quot;</span>description<span class="s2">&quot;: &quot;</span>A<span class="w"> </span>real<span class="w"> </span>joy<span class="w"> </span>to<span class="w"> </span>ride,<span class="w"> </span>this<span class="w"> </span>bike<span class="w"> </span>got<span class="w"> </span>very<span class="w"> </span>high<span class="w"> </span>scores<span class="w"> </span><span class="k">in</span><span class="w"> </span>last<span class="w"> </span>years<span class="w"> </span>Bike<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>year<span class="w"> </span>report.<span class="w"> </span>The<span class="w"> </span>carefully<span class="w"> </span>crafted<span class="w"> </span><span class="m">50</span>-34<span class="w"> </span>tooth<span class="w"> </span>chainset<span class="w"> </span>and<span class="w"> </span><span class="m">11</span>-32<span class="w"> </span>tooth<span class="w"> </span>cassette<span class="w"> </span>give<span class="w"> </span>an<span class="w"> </span>easy-on-the-legs<span class="w"> </span>bottom<span class="w"> </span>gear<span class="w"> </span><span class="k">for</span><span class="w"> </span>climbing,<span class="w"> </span>and<span class="w"> </span>the<span class="w"> </span>high-quality<span class="w"> </span>Vittoria<span class="w"> </span>Zaffiro<span class="w"> </span>tires<span class="w"> </span>give<span class="w"> </span>balance<span class="w"> </span>and<span class="w"> </span>grip.It<span class="w"> </span>includes<span class="w"> </span>a<span class="w"> </span>low-step<span class="w"> </span>frame<span class="w"> </span>,<span class="w"> </span>our<span class="w"> </span>memory<span class="w"> </span>foam<span class="w"> </span>seat,<span class="w"> </span>bump-resistant<span class="w"> </span>shocks<span class="w"> </span>and<span class="w"> </span>conveniently<span class="w"> </span>placed<span class="w"> </span>thumb<span class="w"> </span>throttle.<span class="w"> </span>Put<span class="w"> </span>it<span class="w"> </span>all<span class="w"> </span>together<span class="w"> </span>and<span class="w"> </span>you<span class="w"> </span>get<span class="w"> </span>a<span class="w"> </span>bike<span class="w"> </span>that<span class="w"> </span>helps<span class="w"> </span>redefine<span class="w"> </span>what<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span><span class="k">done</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>this<span class="w"> </span>price.<span class="s2">&quot;, &quot;</span>price<span class="s2">&quot;: 3941, &quot;</span>specs<span class="s2">&quot;: {&quot;</span>material<span class="s2">&quot;: &quot;</span>alloy<span class="s2">&quot;, &quot;</span>weight<span class="s2">&quot;: 11.6} } ] }}&#39;</span>
+</code></pre></div>
 <h5 id="2132">2.1.3.2. 访问示例</h5>
 <p><strong>可以使用<code>*</code>操作符获取inventory的所有元素：</strong></p>
-<pre><code class="language-shell">JSON.GET bikes:inventory $.inventory.*
-&quot;[[{\&quot;id\&quot;:\&quot;bike:1\&quot;,\&quot;model\&quot;:\&quot;Phoebe\&quot;,\&quot;description\&quot;:\&quot;This is a mid-travel trail slayer...
-</code></pre>
+<div class="highlight"><pre><span></span><code>JSON.GET<span class="w"> </span>bikes:inventory<span class="w"> </span>$.inventory.*
+<span class="s2">&quot;[[{\&quot;id\&quot;:\&quot;bike:1\&quot;,\&quot;model\&quot;:\&quot;Phoebe\&quot;,\&quot;description\&quot;:\&quot;This is a mid-travel trail slayer...</span>
+</code></pre></div>
 <hr />
 <h2 id="2">2. 相关命令</h2>
 <h3 id="21">2.1 基本操作</h3>
 <h4 id="211-jsonset">2.1.1 JSON.SET：创建/更新文档</h4>
-<p><strong>语法</strong>：</p>
-<pre><code>JSON.SET &lt;key&gt; &lt;path&gt; &lt;json&gt; [NX | XX]
-</code></pre>
+<p><strong>语法</strong>：
+<div class="highlight"><pre><span></span><code>JSON.SET &lt;key&gt; &lt;path&gt; &lt;json&gt; [NX | XX]
+</code></pre></div></p>
 <p><strong>参数说明</strong>：
 - <code>key</code>：Redis 键名
 - <code>path</code>：JSONPath 路径（<code>$</code> 表示根节点）
 - <code>json</code>：有效的 JSON 值
 - <code>NX</code>：仅当路径不存在时设置
 - <code>XX</code>：仅当路径存在时设置</p>
-<p><strong>使用示例</strong>：</p>
-<pre><code class="language-bash">## 创建完整JSON文档
-JSON.SET user $ '{&quot;name&quot;:&quot;John&quot;, &quot;age&quot;:30, &quot;city&quot;:&quot;New York&quot;}'
+<p><strong>使用示例</strong>：
+<div class="highlight"><pre><span></span><code><span class="c1">## 创建完整JSON文档</span>
+JSON.SET<span class="w"> </span>user<span class="w"> </span>$<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;:&quot;John&quot;, &quot;age&quot;:30, &quot;city&quot;:&quot;New York&quot;}&#39;</span>
 
-## 更新嵌套字段
-JSON.SET user $.age 31
+<span class="c1">## 更新嵌套字段</span>
+JSON.SET<span class="w"> </span>user<span class="w"> </span>$.age<span class="w"> </span><span class="m">31</span>
 
-## 条件更新（仅当字段存在）
-JSON.SET user $.preferences.theme &quot;dark&quot; XX
-</code></pre>
+<span class="c1">## 条件更新（仅当字段存在）</span>
+JSON.SET<span class="w"> </span>user<span class="w"> </span>$.preferences.theme<span class="w"> </span><span class="s2">&quot;dark&quot;</span><span class="w"> </span>XX
+</code></pre></div></p>
 <blockquote>
 <p>💡 <strong>初学者小贴士</strong>
 当看到 <code>$.user.name</code> 这样的路径时，可以把 <code>$</code> 想象成 JSON 文档的“起点站”，
 后续的 <code>.user.name</code> 就是沿着“地铁线路”逐站查找，最终到达目标数据节点。</p>
 </blockquote>
 <h4 id="212-jsonget">2.1.2 JSON.GET：查询文档</h4>
-<p><strong>语法</strong>：</p>
-<pre><code>JSON.GET &lt;key&gt; [path]
-</code></pre>
+<p><strong>语法</strong>：
+<div class="highlight"><pre><span></span><code>JSON.GET &lt;key&gt; [path]
+</code></pre></div></p>
 <p><strong>参数说明</strong>：
 - <code>path</code>：可选路径，省略时返回整个文档</p>
-<p><strong>使用示例</strong>：</p>
-<pre><code class="language-bash">## 获取完整文档
-JSON.GET user
+<p><strong>使用示例</strong>：
+<div class="highlight"><pre><span></span><code><span class="c1">## 获取完整文档</span>
+JSON.GET<span class="w"> </span>user
 
-## 获取特定字段
-JSON.GET user $.name
+<span class="c1">## 获取特定字段</span>
+JSON.GET<span class="w"> </span>user<span class="w"> </span>$.name
 
-## 获取多个字段（数组形式）
-JSON.GET user $.name $.age
-</code></pre>
+<span class="c1">## 获取多个字段（数组形式）</span>
+JSON.GET<span class="w"> </span>user<span class="w"> </span>$.name<span class="w"> </span>$.age
+</code></pre></div></p>
 <h3 id="22">2.2 数值操作</h3>
 <h4 id="221-jsonnumincrby">2.2.1 JSON.NUMINCRBY：数值递增</h4>
-<p><strong>语法</strong>：</p>
-<pre><code>JSON.NUMINCRBY &lt;key&gt; &lt;path&gt; &lt;number&gt;
-</code></pre>
-<p><strong>使用示例</strong>：</p>
-<pre><code class="language-bash">## 用户积分+10
-JSON.NUMINCRBY user $.points 10
+<p><strong>语法</strong>：
+<div class="highlight"><pre><span></span><code>JSON.NUMINCRBY &lt;key&gt; &lt;path&gt; &lt;number&gt;
+</code></pre></div></p>
+<p><strong>使用示例</strong>：
+<div class="highlight"><pre><span></span><code><span class="c1">## 用户积分+10</span>
+JSON.NUMINCRBY<span class="w"> </span>user<span class="w"> </span>$.points<span class="w"> </span><span class="m">10</span>
 
-## 购物车商品数量+1
-JSON.NUMINCRBY cart $.items[0].quantity 1
-</code></pre>
+<span class="c1">## 购物车商品数量+1</span>
+JSON.NUMINCRBY<span class="w"> </span>cart<span class="w"> </span>$.items<span class="o">[</span><span class="m">0</span><span class="o">]</span>.quantity<span class="w"> </span><span class="m">1</span>
+</code></pre></div></p>
 <h3 id="23">2.3 字符串操作</h3>
 <h4 id="231-jsonstrappend">2.3.1 JSON.STRAPPEND：字符串追加</h4>
-<p><strong>语法</strong>：</p>
-<pre><code>JSON.STRAPPEND &lt;key&gt; &lt;path&gt; &lt;string&gt;
-</code></pre>
-<p><strong>使用示例</strong>：</p>
-<pre><code class="language-bash">## 给用户描述追加内容
-JSON.STRAPPEND user $.bio &quot; - Redis enthusiast&quot;
-</code></pre>
+<p><strong>语法</strong>：
+<div class="highlight"><pre><span></span><code>JSON.STRAPPEND &lt;key&gt; &lt;path&gt; &lt;string&gt;
+</code></pre></div></p>
+<p><strong>使用示例</strong>：
+<div class="highlight"><pre><span></span><code><span class="c1">## 给用户描述追加内容</span>
+JSON.STRAPPEND<span class="w"> </span>user<span class="w"> </span>$.bio<span class="w"> </span><span class="s2">&quot; - Redis enthusiast&quot;</span>
+</code></pre></div></p>
 <h3 id="24">2.4 数组操作</h3>
 <h4 id="241-jsonarrappend">2.4.1 JSON.ARRAPPEND：数组追加</h4>
-<p><strong>语法</strong>：</p>
-<pre><code>JSON.ARRAPPEND &lt;key&gt; &lt;path&gt; &lt;json&gt; [json ...]
-</code></pre>
-<p><strong>使用示例</strong>：</p>
-<pre><code class="language-bash">## 添加新订单
-JSON.ARRAPPEND orders $.history '{&quot;id&quot;:101, &quot;amount&quot;:99.9}'
+<p><strong>语法</strong>：
+<div class="highlight"><pre><span></span><code>JSON.ARRAPPEND &lt;key&gt; &lt;path&gt; &lt;json&gt; [json ...]
+</code></pre></div></p>
+<p><strong>使用示例</strong>：
+<div class="highlight"><pre><span></span><code><span class="c1">## 添加新订单</span>
+JSON.ARRAPPEND<span class="w"> </span>orders<span class="w"> </span>$.history<span class="w"> </span><span class="s1">&#39;{&quot;id&quot;:101, &quot;amount&quot;:99.9}&#39;</span>
 
-## 一次追加多个元素
-JSON.ARRAPPEND user $.hobbies &quot;hiking&quot; &quot;photography&quot;
-</code></pre>
+<span class="c1">## 一次追加多个元素</span>
+JSON.ARRAPPEND<span class="w"> </span>user<span class="w"> </span>$.hobbies<span class="w"> </span><span class="s2">&quot;hiking&quot;</span><span class="w"> </span><span class="s2">&quot;photography&quot;</span>
+</code></pre></div></p>
 <h3 id="25">2.5 对象操作</h3>
 <h4 id="251-jsonobjkeys">2.5.1 JSON.OBJKEYS：获取对象键列表</h4>
-<p><strong>语法</strong>：</p>
-<pre><code>JSON.OBJKEYS &lt;key&gt; &lt;path&gt;
-</code></pre>
-<p><strong>使用示例</strong>：</p>
-<pre><code class="language-bash">## 获取用户对象的所有字段名
-JSON.OBJKEYS user $
-## 返回 [&quot;name&quot;, &quot;age&quot;, &quot;city&quot;]
-</code></pre>
+<p><strong>语法</strong>：
+<div class="highlight"><pre><span></span><code>JSON.OBJKEYS &lt;key&gt; &lt;path&gt;
+</code></pre></div></p>
+<p><strong>使用示例</strong>：
+<div class="highlight"><pre><span></span><code><span class="c1">## 获取用户对象的所有字段名</span>
+JSON.OBJKEYS<span class="w"> </span>user<span class="w"> </span>$
+<span class="c1">## 返回 [&quot;name&quot;, &quot;age&quot;, &quot;city&quot;]</span>
+</code></pre></div></p>
 <h2 id="3">3. 内部实现原理</h2>
 <p>RedisJSON 采用 <strong>二进制树结构</strong> 存储 JSON 文档，其核心设计特点：</p>
 <ol>
@@ -2263,13 +2263,12 @@ JSON.OBJKEYS user $
 </li>
 <li>
 <p><strong>快速访问</strong>：
-   <code>mermaid
-   graph TD
-     A[JSON Root] --&gt; B["$.user"]
-     A --&gt; C["$.settings"]
-     B --&gt; D["$.user.name"]
-     B --&gt; E["$.user.age"]
-     C --&gt; F["$.settings.theme"]</code>
+   <pre class="mermaid"><code>graph TD
+  A[JSON Root] --&gt; B["$.user"]
+  A --&gt; C["$.settings"]
+  B --&gt; D["$.user.name"]
+  B --&gt; E["$.user.age"]
+  C --&gt; F["$.settings.theme"]</code></pre>
    通过树形结构实现 O(1) 复杂度的路径查找</p>
 </li>
 <li>

@@ -2109,34 +2109,34 @@
 
 <h2 id="1-gin">1. 第一个Gin服务中的路由</h2>
 <p>我们的第一个gin服务源码如下：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;net/http&quot;
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
 
-    // 导入gin框架
-    &quot;github.com/gin-gonic/gin&quot;
-)
+<span class="w">    </span><span class="c1">// 导入gin框架</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    // 创建默认的gin路由
-    router := gin.Default()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建默认的gin路由</span>
+<span class="w">    </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    // 定义一个简单的GET端点
-    router.GET(&quot;/ping&quot;, func(c *gin.Context) {
-        // 返回JSON数据
-        c.JSON(http.StatusOK, gin.H{
-            &quot;message&quot;: &quot;pong&quot;,
-        })
-    })
+<span class="w">    </span><span class="c1">// 定义一个简单的GET端点</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 返回JSON数据</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;pong&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    // 启动服务（默认端口8080）
-    err := router.Run()
-    if err != nil {
-        return
-    } 
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 启动服务（默认端口8080）</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
 <p>代码中，我们使用<code>router.GET</code>方法为我们的gin服务定义了一个简单的<code>/ping</code>路由。</p>
 <h2 id="2-method">2. 设置路由Method</h2>
 <p>除了GET方式的路由外，Gin框架支持定义各种HTTP Method的路由！</p>
@@ -2152,43 +2152,42 @@ func main() {
 <li>HEAD</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">
-func NewHttpRouter() *gin.Engine {
-    router := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">NewHttpRouter</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    router.GET(&quot;/ping&quot;, handler.GetPing)
-    router.POST(&quot;/ping&quot;, handler.PostPing)
-    router.PUT(&quot;/ping&quot;, handler.PutPing)
-    router.DELETE(&quot;/ping&quot;, handler.DeletePing)
-    router.PATCH(&quot;/ping&quot;, handler.PatchPing)
-    router.OPTIONS(&quot;/ping&quot;, handler.OptionsPing)
-    router.HEAD(&quot;/ping&quot;, handler.HeadPing)
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">GetPing</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">PostPing</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">PUT</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">PutPing</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">DeletePing</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">PATCH</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">PatchPing</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">OPTIONS</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">OptionsPing</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">HEAD</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">HeadPing</span><span class="p">)</span>
 
-    return router
-}
-</code></pre>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">router</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>注意：</strong> 使用这些方法定义的路由，只能使用对应的HTTP Method访问。如果使用错误的HTTP Method访问接口，默认会404。</p>
 <h3 id="22-methodsany">2.2. 匹配所有Methods（Any）</h3>
 <p>Gin框架提供了<code>Any</code>方法来定义匹配所有HTTP Methods的路由。</p>
 <p>源码：</p>
-<pre><code class="language-go">func (group *RouterGroup) Any(relativePath string, handlers ...HandlerFunc) IRoutes {
-  // 可以看到，实际上是为anyMethods中定义的所有HTTP Method都注册了路由
-    for _, method := range anyMethods {
-        group.handle(method, relativePath, handlers)
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">group</span><span class="w"> </span><span class="o">*</span><span class="nx">RouterGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Any</span><span class="p">(</span><span class="nx">relativePath</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">handlers</span><span class="w"> </span><span class="o">...</span><span class="nx">HandlerFunc</span><span class="p">)</span><span class="w"> </span><span class="nx">IRoutes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 可以看到，实际上是为anyMethods中定义的所有HTTP Method都注册了路由</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">method</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">anyMethods</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">group</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">method</span><span class="p">,</span><span class="w"> </span><span class="nx">relativePath</span><span class="p">,</span><span class="w"> </span><span class="nx">handlers</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    return group.returnObj()
-}
-</code></pre>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">group</span><span class="p">.</span><span class="nx">returnObj</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-go">func NewHttpRouter() *gin.Engine {
-    router := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">NewHttpRouter</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    router.Any(&quot;/ping/any&quot;, handler.AnyPing)
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">Any</span><span class="p">(</span><span class="s">&quot;/ping/any&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">AnyPing</span><span class="p">)</span>
 
-    return router
-}
-</code></pre>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">router</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="23-methodhandle">2.3. 更灵活的Method（Handle）</h3>
 <p><code>Handle</code>方法以指定的路径和method注册路由。</p>
 <ul>
@@ -2196,78 +2195,77 @@ func NewHttpRouter() *gin.Engine {
 <li><code>Handle</code>方法旨在用于批量加载，且它运行使用不常用的、非标准化的或者自定义的HTTP Method。</li>
 </ul>
 <p><code>Handle</code>方法源码如下：</p>
-<pre><code class="language-go">func (group *RouterGroup) Handle(httpMethod, relativePath string, handlers ...HandlerFunc) IRoutes {
-  // 可以看到，http method只做了简单的正则校验
-    if matched := regEnLetter.MatchString(httpMethod); !matched {
-        panic(&quot;http method &quot; + httpMethod + &quot; is not valid&quot;)
-    }
-    return group.handle(httpMethod, relativePath, handlers)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">group</span><span class="w"> </span><span class="o">*</span><span class="nx">RouterGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Handle</span><span class="p">(</span><span class="nx">httpMethod</span><span class="p">,</span><span class="w"> </span><span class="nx">relativePath</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">handlers</span><span class="w"> </span><span class="o">...</span><span class="nx">HandlerFunc</span><span class="p">)</span><span class="w"> </span><span class="nx">IRoutes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 可以看到，http method只做了简单的正则校验</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">matched</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">regEnLetter</span><span class="p">.</span><span class="nx">MatchString</span><span class="p">(</span><span class="nx">httpMethod</span><span class="p">);</span><span class="w"> </span><span class="p">!</span><span class="nx">matched</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;http method &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">httpMethod</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; is not valid&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">group</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">httpMethod</span><span class="p">,</span><span class="w"> </span><span class="nx">relativePath</span><span class="p">,</span><span class="w"> </span><span class="nx">handlers</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-go">
-func NewHttpRouter() *gin.Engine {
-    router := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">NewHttpRouter</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-  // look，这里的HTTP Method竟然是HELLO
-    router.Handle(&quot;HELLO&quot;, &quot;/ping&quot;, handler.HelloPing)
+<span class="w">  </span><span class="c1">// look，这里的HTTP Method竟然是HELLO</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">Handle</span><span class="p">(</span><span class="s">&quot;HELLO&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">HelloPing</span><span class="p">)</span>
 
-    return router
-}
-</code></pre>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">router</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="24-methodsmatch">2.4. 匹配多种Methods（Match）</h3>
 <p><code>Match</code>方法用于定义匹配多种HTTP Methods的路由。</p>
 <p>源码：</p>
-<pre><code class="language-go">// 可以看到methods参数是一个数组
-func (group *RouterGroup) Match(methods []string, relativePath string, handlers ...HandlerFunc) IRoutes {
-    for _, method := range methods {
-        group.handle(method, relativePath, handlers)
-    }
+<div class="highlight"><pre><span></span><code><span class="c1">// 可以看到methods参数是一个数组</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">group</span><span class="w"> </span><span class="o">*</span><span class="nx">RouterGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Match</span><span class="p">(</span><span class="nx">methods</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">relativePath</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">handlers</span><span class="w"> </span><span class="o">...</span><span class="nx">HandlerFunc</span><span class="p">)</span><span class="w"> </span><span class="nx">IRoutes</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">method</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">methods</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">group</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">method</span><span class="p">,</span><span class="w"> </span><span class="nx">relativePath</span><span class="p">,</span><span class="w"> </span><span class="nx">handlers</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    return group.returnObj()
-}
-</code></pre>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">group</span><span class="p">.</span><span class="nx">returnObj</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-go">func NewHttpRouter() *gin.Engine {
-    router := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">NewHttpRouter</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-  // 这里匹配GET和POST
-    router.Match([]string{&quot;GET&quot;, &quot;POST&quot;}, &quot;/match&quot;, handler.MatchPing)
+<span class="w">  </span><span class="c1">// 这里匹配GET和POST</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">Match</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;GET&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;POST&quot;</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;/match&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">MatchPing</span><span class="p">)</span>
 
-    return router
-}
-</code></pre>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">router</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="25-methodnotallowed">2.5. MethodNotAllowed处理</h3>
 <h4 id="251-404">2.5.1. 默认行为404</h4>
 <p>在上面的章节中，我们介绍了各种定义路由HTTP Method的方式。</p>
 <p>当我们定义了一个路由应该使用的HTTP Method后，如果请求的HTTP Method不匹配，默认会应答404.</p>
 <p>示例：</p>
-<pre><code class="language-go">router.GET(&quot;/ping&quot;, handler.GetPing)
+<div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">GetPing</span><span class="p">)</span>
 
-// 使用GET方式访问：正常应答
-// 使用POST方式访问：应答404
-</code></pre>
+<span class="c1">// 使用GET方式访问：正常应答</span>
+<span class="c1">// 使用POST方式访问：应答404</span>
+</code></pre></div>
 <h4 id="252-handlemethodnotallowed">2.5.2. HandleMethodNotAllowed配置</h4>
 <p><code>gin.Engine</code>中有一个<code>HandleMethodNotAllowed</code>属性，可以用于修改Method不匹配时的默认行为。</p>
-<pre><code class="language-go">// HandleMethodNotAllowed if enabled, the router checks if another method is allowed for the
-    // current route, if the current request can not be routed.
-    // If this is the case, the request is answered with 'Method Not Allowed'
-    // and HTTP status code 405.
-    // If no other Method is allowed, the request is delegated to the NotFound
-    // handler.
-HandleMethodNotAllowed bool
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// HandleMethodNotAllowed if enabled, the router checks if another method is allowed for the</span>
+<span class="w">    </span><span class="c1">// current route, if the current request can not be routed.</span>
+<span class="w">    </span><span class="c1">// If this is the case, the request is answered with &#39;Method Not Allowed&#39;</span>
+<span class="w">    </span><span class="c1">// and HTTP status code 405.</span>
+<span class="w">    </span><span class="c1">// If no other Method is allowed, the request is delegated to the NotFound</span>
+<span class="w">    </span><span class="c1">// handler.</span>
+<span class="nx">HandleMethodNotAllowed</span><span class="w"> </span><span class="kt">bool</span>
+</code></pre></div>
 <ul>
 <li>当HandleMethodNotAllowed开启时，如果请求的路径存在但HTTP方法不匹配，gin会检查该路径是否注册了其他HTTP方法。如果存在其他方法，则返回405（Method Not Allowed）；如果该路径没有任何方法注册，则仍然返回404（Not Found）。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">router.HandleMethodNotAllowed = true
+<div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="p">.</span><span class="nx">HandleMethodNotAllowed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
 
-router.GET(&quot;/ping&quot;, handler.GetPing)
+<span class="nx">router</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">GetPing</span><span class="p">)</span>
 
-// GET方式访问/ping：正常应答
-// POST方式访问/ping：应答405
-</code></pre>
+<span class="c1">// GET方式访问/ping：正常应答</span>
+<span class="c1">// POST方式访问/ping：应答405</span>
+</code></pre></div>
 <h4 id="253-methodnotallowed">2.5.3 自定义MethodNotAllowed处理</h4>
 <p>上文提到，如果请求路径正确但请求Method不匹配（MethodNotAllowed场景）：</p>
 <ul>
@@ -2275,51 +2273,51 @@ router.GET(&quot;/ping&quot;, handler.GetPing)
 <li>如果HandleMethodNotAllowed=true：默认应答405（Method Not Allowed）。</li>
 </ul>
 <p>除此之外，gin还提供了<code>NoMethod</code>方法来自定义处理逻辑：</p>
-<pre><code class="language-go">// 用于设置当 Engine.HandleMethodNotAllowed = true 时调用的处理程序。
-func (engine *Engine) NoMethod(handlers ...HandlerFunc) {
-    engine.noMethod = handlers
-    engine.rebuild405Handlers()
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 用于设置当 Engine.HandleMethodNotAllowed = true 时调用的处理程序。</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">engine</span><span class="w"> </span><span class="o">*</span><span class="nx">Engine</span><span class="p">)</span><span class="w"> </span><span class="nx">NoMethod</span><span class="p">(</span><span class="nx">handlers</span><span class="w"> </span><span class="o">...</span><span class="nx">HandlerFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">engine</span><span class="p">.</span><span class="nx">noMethod</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">handlers</span>
+<span class="w">    </span><span class="nx">engine</span><span class="p">.</span><span class="nx">rebuild405Handlers</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-go">func NewHttpRouter() *gin.Engine {
-    router := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">NewHttpRouter</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-  // 开启HandleMethodNotAllowed
-    router.HandleMethodNotAllowed = true
+<span class="w">  </span><span class="c1">// 开启HandleMethodNotAllowed</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">HandleMethodNotAllowed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
 
-    router.GET(&quot;/ping&quot;, handler.GetPing)
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">GetPing</span><span class="p">)</span>
 
-  // 定义处理函数
-    router.NoMethod(handler.NoMethodPing)
+<span class="w">  </span><span class="c1">// 定义处理函数</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">NoMethod</span><span class="p">(</span><span class="nx">handler</span><span class="p">.</span><span class="nx">NoMethodPing</span><span class="p">)</span>
 
-    return router
-}
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">router</span>
+<span class="p">}</span>
 
-func NoMethodPing(c *gin.Context) {
-    // 通常应返回405状态码，但可根据需求自定义
-    c.JSON(http.StatusMethodNotAllowed, gin.H{
-        &quot;message&quot;: &quot;method not allowed&quot;,
-    })
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">NoMethodPing</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 通常应返回405状态码，但可根据需求自定义</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusMethodNotAllowed</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;method not allowed&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
 
-// GET方式访问/ping：正常应答
-// POST方式访问/ping：no method pong
-</code></pre>
+<span class="c1">// GET方式访问/ping：正常应答</span>
+<span class="c1">// POST方式访问/ping：no method pong</span>
+</code></pre></div>
 <h2 id="3">3. 路由组</h2>
 <h4 id="31">3.1. 路由组</h4>
 <p>gin框架支持路由分组：即将具有相同路径前缀或者需要相同中间件的路由放在同一个路由组中。</p>
 <p><code>Group</code>方法用于路由分组，其源码如下：</p>
-<pre><code class="language-go">// Group creates a new router group. You should add all the routes that have common middlewares or the same path prefix.
-// For example, all the routes that use a common middleware for authorization could be grouped.
-func (group *RouterGroup) Group(relativePath string, handlers ...HandlerFunc) *RouterGroup {
-    return &amp;RouterGroup{
-        Handlers: group.combineHandlers(handlers),
-        basePath: group.calculateAbsolutePath(relativePath),
-        engine:   group.engine,
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// Group creates a new router group. You should add all the routes that have common middlewares or the same path prefix.</span>
+<span class="c1">// For example, all the routes that use a common middleware for authorization could be grouped.</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">group</span><span class="w"> </span><span class="o">*</span><span class="nx">RouterGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Group</span><span class="p">(</span><span class="nx">relativePath</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">handlers</span><span class="w"> </span><span class="o">...</span><span class="nx">HandlerFunc</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">RouterGroup</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">RouterGroup</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Handlers</span><span class="p">:</span><span class="w"> </span><span class="nx">group</span><span class="p">.</span><span class="nx">combineHandlers</span><span class="p">(</span><span class="nx">handlers</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">basePath</span><span class="p">:</span><span class="w"> </span><span class="nx">group</span><span class="p">.</span><span class="nx">calculateAbsolutePath</span><span class="p">(</span><span class="nx">relativePath</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">engine</span><span class="p">:</span><span class="w">   </span><span class="nx">group</span><span class="p">.</span><span class="nx">engine</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><code>Group</code>方法用于创建一个新的路由组：</p>
 <ul>
 <li>参数<code>relativePath</code>用于定义组中路由的通用路径。</li>
@@ -2327,207 +2325,207 @@ func (group *RouterGroup) Group(relativePath string, handlers ...HandlerFunc) *R
 <li><code>Group</code>方法创建一个新的路由组，我们可以将具有相同路径前缀或者要使用相同中间件的路由划分为一个组。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">func NewHttpRouter() *gin.Engine {
-    router := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">NewHttpRouter</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    testRouter := router.Group(&quot;/test&quot;)
-    {
-        testRouter.Any(&quot;/ping&quot;, handler.TestPing)
-        testRouter.Any(&quot;/hello&quot;, handler.TestHello)
-    }
+<span class="w">    </span><span class="nx">testRouter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/test&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">testRouter</span><span class="p">.</span><span class="nx">Any</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">TestPing</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">testRouter</span><span class="p">.</span><span class="nx">Any</span><span class="p">(</span><span class="s">&quot;/hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">TestHello</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    platRouter := router.Group(&quot;/plat&quot;, middleware.AuthMiddleware())
-    {
-        platRouter.Any(&quot;/login&quot;, handler.PlatLogin)
-        platRouter.Any(&quot;/logout&quot;, handler.PlatLogout)
-    }
+<span class="w">    </span><span class="nx">platRouter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/plat&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">middleware</span><span class="p">.</span><span class="nx">AuthMiddleware</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">platRouter</span><span class="p">.</span><span class="nx">Any</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">PlatLogin</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">platRouter</span><span class="p">.</span><span class="nx">Any</span><span class="p">(</span><span class="s">&quot;/logout&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">PlatLogout</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    return router
-}
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">router</span>
+<span class="p">}</span>
 
-// 上面接口的访问路径分别为
-// /test/ping
-// /test/hello
-// /plat/login
-// /plat/logout
-</code></pre>
+<span class="c1">// 上面接口的访问路径分别为</span>
+<span class="c1">// /test/ping</span>
+<span class="c1">// /test/hello</span>
+<span class="c1">// /plat/login</span>
+<span class="c1">// /plat/logout</span>
+</code></pre></div>
 <h4 id="32">3.2. 嵌套路由组</h4>
 <p>Gin框架支持多级路由组嵌套，允许更细粒度的路由组织。例如：</p>
-<pre><code class="language-go">func NewHttpRouter() *gin.Engine {
-    router := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">NewHttpRouter</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    api := router.Group(&quot;/api&quot;)
-    {
-        v1 := api.Group(&quot;/v1&quot;)
-        {
-            v1.GET(&quot;/users&quot;, handler.GetUsers)
-            v1.POST(&quot;/users&quot;, handler.CreateUser)
-        }
+<span class="w">    </span><span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/api&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">v1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/v1&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">v1</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">GetUsers</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">v1</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">CreateUser</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
 
-        v2 := api.Group(&quot;/v2&quot;)
-        {
-            v2.GET(&quot;/users&quot;, handler.GetUsersV2)
-        }
-    }
+<span class="w">        </span><span class="nx">v2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">api</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/v2&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">v2</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">GetUsersV2</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    return router
-}
-</code></pre>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">router</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>这样，<code>/api/v1/users</code>和<code>/api/v2/users</code>将分别由不同的处理函数处理。</p>
 <p>此外，父路由组的中间件会自动应用到所有子路由组。例如，如果<code>api</code>组配置了认证中间件，则<code>v1</code>和<code>v2</code>组的所有路由都将应用该中间件。</p>
 <h2 id="4">4. 最佳实践</h2>
 <p>在实际项目开发中，合理使用Gin框架的路由和路由组功能能够大大提高代码的可维护性和可扩展性。以下是一些推荐的最佳实践：</p>
 <h3 id="41">4.1. 按业务模块划分路由组</h3>
 <p>将不同业务模块的路由划分到不同的路由组中，有助于保持代码结构清晰：</p>
-<pre><code class="language-go">func SetupRoutes(router *gin.Engine) {
-    // 用户相关路由
-    userGroup := router.Group(&quot;/user&quot;)
-    {
-        userGroup.POST(&quot;/register&quot;, user.Register)
-        userGroup.POST(&quot;/login&quot;, user.Login)
-        userGroup.GET(&quot;/profile&quot;, authMiddleware(), user.GetProfile)
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">SetupRoutes</span><span class="p">(</span><span class="nx">router</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 用户相关路由</span>
+<span class="w">    </span><span class="nx">userGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/user&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/register&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">Register</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">Login</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/profile&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">authMiddleware</span><span class="p">(),</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">GetProfile</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 订单相关路由
-    orderGroup := router.Group(&quot;/order&quot;)
-    {
-        orderGroup.GET(&quot;/:id&quot;, order.GetOrder)
-        orderGroup.POST(&quot;/&quot;, authMiddleware(), order.CreateOrder)
-        orderGroup.PUT(&quot;/:id&quot;, authMiddleware(), order.UpdateOrder)
-    }
+<span class="w">    </span><span class="c1">// 订单相关路由</span>
+<span class="w">    </span><span class="nx">orderGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/order&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">orderGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">order</span><span class="p">.</span><span class="nx">GetOrder</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">orderGroup</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">authMiddleware</span><span class="p">(),</span><span class="w"> </span><span class="nx">order</span><span class="p">.</span><span class="nx">CreateOrder</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">orderGroup</span><span class="p">.</span><span class="nx">PUT</span><span class="p">(</span><span class="s">&quot;/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">authMiddleware</span><span class="p">(),</span><span class="w"> </span><span class="nx">order</span><span class="p">.</span><span class="nx">UpdateOrder</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 管理后台路由
-    adminGroup := router.Group(&quot;/admin&quot;, adminAuthMiddleware())
-    {
-        adminGroup.GET(&quot;/dashboard&quot;, admin.Dashboard)
-        adminGroup.GET(&quot;/users&quot;, admin.ListUsers)
-        adminGroup.DELETE(&quot;/users/:id&quot;, admin.DeleteUser)
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 管理后台路由</span>
+<span class="w">    </span><span class="nx">adminGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/admin&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">adminAuthMiddleware</span><span class="p">())</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">adminGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/dashboard&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">admin</span><span class="p">.</span><span class="nx">Dashboard</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">adminGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">admin</span><span class="p">.</span><span class="nx">ListUsers</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">adminGroup</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">admin</span><span class="p">.</span><span class="nx">DeleteUser</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="42">4.2. 合理使用中间件</h3>
 <p>在路由组上应用共享的中间件，避免重复代码：</p>
-<pre><code class="language-go">// API版本控制
-v1 := router.Group(&quot;/api/v1&quot;)
-v1.Use(loggingMiddleware(), corsMiddleware())
+<div class="highlight"><pre><span></span><code><span class="c1">// API版本控制</span>
+<span class="nx">v1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
+<span class="nx">v1</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">loggingMiddleware</span><span class="p">(),</span><span class="w"> </span><span class="nx">corsMiddleware</span><span class="p">())</span>
 
-authGroup := v1.Group(&quot;/auth&quot;)
-authGroup.Use(rateLimitMiddleware()) // 特定路由组的额外中间件
-{
-    authGroup.POST(&quot;/login&quot;, auth.Login)
-    authGroup.POST(&quot;/register&quot;, auth.Register)
-}
+<span class="nx">authGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">v1</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/auth&quot;</span><span class="p">)</span>
+<span class="nx">authGroup</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">rateLimitMiddleware</span><span class="p">())</span><span class="w"> </span><span class="c1">// 特定路由组的额外中间件</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nx">authGroup</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">auth</span><span class="p">.</span><span class="nx">Login</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">authGroup</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/register&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">auth</span><span class="p">.</span><span class="nx">Register</span><span class="p">)</span>
+<span class="p">}</span>
 
-userGroup := v1.Group(&quot;/user&quot;, authRequiredMiddleware()) // 需要认证的路由组
-{
-    userGroup.GET(&quot;/profile&quot;, user.GetProfile)
-    userGroup.PUT(&quot;/profile&quot;, user.UpdateProfile)
-}
-</code></pre>
+<span class="nx">userGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">v1</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/user&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">authRequiredMiddleware</span><span class="p">())</span><span class="w"> </span><span class="c1">// 需要认证的路由组</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/profile&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">GetProfile</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">PUT</span><span class="p">(</span><span class="s">&quot;/profile&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">user</span><span class="p">.</span><span class="nx">UpdateProfile</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="43">4.3. 统一错误处理</h3>
 <p>通过NoRoute和NoMethod统一处理404和405错误：</p>
-<pre><code class="language-go">func SetupRouter() *gin.Engine {
-    router := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">SetupRouter</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    // 全局404处理
-    router.NoRoute(func(c *gin.Context) {
-        c.JSON(http.StatusNotFound, gin.H{
-            &quot;error&quot;: &quot;Page not found&quot;,
-            &quot;path&quot;: c.Request.URL.Path,
-        })
-    })
+<span class="w">    </span><span class="c1">// 全局404处理</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">NoRoute</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusNotFound</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Page not found&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    // 全局405处理
-    router.HandleMethodNotAllowed = true
-    router.NoMethod(func(c *gin.Context) {
-        c.JSON(http.StatusMethodNotAllowed, gin.H{
-            &quot;error&quot;: &quot;Method not allowed&quot;,
-            &quot;method&quot;: c.Request.Method,
-            &quot;path&quot;: c.Request.URL.Path,
-        })
-    })
+<span class="w">    </span><span class="c1">// 全局405处理</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">HandleMethodNotAllowed</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="nx">router</span><span class="p">.</span><span class="nx">NoMethod</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusMethodNotAllowed</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Method not allowed&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">Method</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    // 路由定义...
-    return router
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 路由定义...</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">router</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="44-restful">4.4. RESTful风格设计</h3>
 <p>遵循RESTful API设计原则，合理使用HTTP方法：</p>
-<pre><code class="language-go">// 推荐的RESTful风格路由设计
-api := router.Group(&quot;/api/v1&quot;)
-{
-    // 资源集合操作
-    api.GET(&quot;/posts&quot;, post.ListPosts)      // 获取文章列表
-    api.POST(&quot;/posts&quot;, post.CreatePost)    // 创建新文章
+<div class="highlight"><pre><span></span><code><span class="c1">// 推荐的RESTful风格路由设计</span>
+<span class="nx">api</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// 资源集合操作</span>
+<span class="w">    </span><span class="nx">api</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/posts&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">post</span><span class="p">.</span><span class="nx">ListPosts</span><span class="p">)</span><span class="w">      </span><span class="c1">// 获取文章列表</span>
+<span class="w">    </span><span class="nx">api</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/posts&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">post</span><span class="p">.</span><span class="nx">CreatePost</span><span class="p">)</span><span class="w">    </span><span class="c1">// 创建新文章</span>
 
-    // 单个资源操作
-    api.GET(&quot;/posts/:id&quot;, post.GetPost)    // 获取特定文章
-    api.PUT(&quot;/posts/:id&quot;, post.UpdatePost) // 完整更新文章
-    api.PATCH(&quot;/posts/:id&quot;, post.PatchPost) // 部分更新文章
-    api.DELETE(&quot;/posts/:id&quot;, post.DeletePost) // 删除文章
+<span class="w">    </span><span class="c1">// 单个资源操作</span>
+<span class="w">    </span><span class="nx">api</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/posts/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">post</span><span class="p">.</span><span class="nx">GetPost</span><span class="p">)</span><span class="w">    </span><span class="c1">// 获取特定文章</span>
+<span class="w">    </span><span class="nx">api</span><span class="p">.</span><span class="nx">PUT</span><span class="p">(</span><span class="s">&quot;/posts/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">post</span><span class="p">.</span><span class="nx">UpdatePost</span><span class="p">)</span><span class="w"> </span><span class="c1">// 完整更新文章</span>
+<span class="w">    </span><span class="nx">api</span><span class="p">.</span><span class="nx">PATCH</span><span class="p">(</span><span class="s">&quot;/posts/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">post</span><span class="p">.</span><span class="nx">PatchPost</span><span class="p">)</span><span class="w"> </span><span class="c1">// 部分更新文章</span>
+<span class="w">    </span><span class="nx">api</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">&quot;/posts/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">post</span><span class="p">.</span><span class="nx">DeletePost</span><span class="p">)</span><span class="w"> </span><span class="c1">// 删除文章</span>
 
-    // 子资源操作
-    api.GET(&quot;/posts/:id/comments&quot;, comment.ListComments) // 获取文章评论
-    api.POST(&quot;/posts/:id/comments&quot;, comment.CreateComment) // 添加评论
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 子资源操作</span>
+<span class="w">    </span><span class="nx">api</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/posts/:id/comments&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">comment</span><span class="p">.</span><span class="nx">ListComments</span><span class="p">)</span><span class="w"> </span><span class="c1">// 获取文章评论</span>
+<span class="w">    </span><span class="nx">api</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/posts/:id/comments&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">comment</span><span class="p">.</span><span class="nx">CreateComment</span><span class="p">)</span><span class="w"> </span><span class="c1">// 添加评论</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="45">4.5. 路由版本控制</h3>
 <p>通过路由组实现API版本控制：</p>
-<pre><code class="language-go">func SetupRoutes(router *gin.Engine) {
-    // v1版本API
-    v1 := router.Group(&quot;/api/v1&quot;)
-    {
-        v1.GET(&quot;/users&quot;, userHandler.ListUsersV1)
-        v1.GET(&quot;/users/:id&quot;, userHandler.GetUserV1)
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">SetupRoutes</span><span class="p">(</span><span class="nx">router</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// v1版本API</span>
+<span class="w">    </span><span class="nx">v1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/api/v1&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">v1</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">userHandler</span><span class="p">.</span><span class="nx">ListUsersV1</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">v1</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">userHandler</span><span class="p">.</span><span class="nx">GetUserV1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // v2版本API
-    v2 := router.Group(&quot;/api/v2&quot;)
-    {
-        v2.GET(&quot;/users&quot;, userHandler.ListUsersV2)
-        v2.GET(&quot;/users/:id&quot;, userHandler.GetUserV2)
-        v2.GET(&quot;/users/:id/profile&quot;, userHandler.GetUserProfileV2)
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// v2版本API</span>
+<span class="w">    </span><span class="nx">v2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/api/v2&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">v2</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">userHandler</span><span class="p">.</span><span class="nx">ListUsersV2</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">v2</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">userHandler</span><span class="p">.</span><span class="nx">GetUserV2</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">v2</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users/:id/profile&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">userHandler</span><span class="p">.</span><span class="nx">GetUserProfileV2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="46">4.6. 参数验证和路由分离</h3>
 <p>将路由定义与业务逻辑分离，使代码更加清晰：</p>
-<pre><code class="language-go">// routes/setup.go
-func SetupUserRoutes(router *gin.Engine) {
-    userGroup := router.Group(&quot;/users&quot;)
-    {
-        userGroup.GET(&quot;/&quot;, listUsers)
-        userGroup.POST(&quot;/&quot;, createUser)
-        userGroup.GET(&quot;/:id&quot;, getUser)
-        userGroup.PUT(&quot;/:id&quot;, updateUser)
-        userGroup.DELETE(&quot;/:id&quot;, deleteUser)
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// routes/setup.go</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">SetupUserRoutes</span><span class="p">(</span><span class="nx">router</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">userGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">listUsers</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">createUser</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">getUser</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">PUT</span><span class="p">(</span><span class="s">&quot;/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">updateUser</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">userGroup</span><span class="p">.</span><span class="nx">DELETE</span><span class="p">(</span><span class="s">&quot;/:id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">deleteUser</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-// handlers/user_handler.go
-func listUsers(c *gin.Context) {
-    // 处理获取用户列表逻辑
-}
+<span class="c1">// handlers/user_handler.go</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">listUsers</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 处理获取用户列表逻辑</span>
+<span class="p">}</span>
 
-func createUser(c *gin.Context) {
-    // 处理创建用户逻辑
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">createUser</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 处理创建用户逻辑</span>
+<span class="p">}</span>
 
-func getUser(c *gin.Context) {
-    id := c.Param(&quot;id&quot;)
-    // 处理获取单个用户逻辑
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">getUser</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 处理获取单个用户逻辑</span>
+<span class="p">}</span>
 
-func updateUser(c *gin.Context) {
-    id := c.Param(&quot;id&quot;)
-    // 处理更新用户逻辑
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">updateUser</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 处理更新用户逻辑</span>
+<span class="p">}</span>
 
-func deleteUser(c *gin.Context) {
-    id := c.Param(&quot;id&quot;)
-    // 处理删除用户逻辑
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">deleteUser</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;id&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 处理删除用户逻辑</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 

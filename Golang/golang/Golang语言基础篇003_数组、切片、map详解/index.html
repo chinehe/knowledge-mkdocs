@@ -2537,159 +2537,159 @@
 <p>在Go语言中，数组有多种声明和初始化方式：</p>
 <h4 id="121">1.2.1. 声明数组</h4>
 <p>声明数组的方式如下：</p>
-<pre><code class="language-go">// 声明一个长度为5的整数数组（零值初始化）
-var arr1 [5]int
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明一个长度为5的整数数组（零值初始化）</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">arr1</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span>
 
-// 声明并初始化数组
-var arr2 [3]string = [3]string{&quot;apple&quot;, &quot;banana&quot;, &quot;orange&quot;}
+<span class="c1">// 声明并初始化数组</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">arr2</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;banana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;orange&quot;</span><span class="p">}</span>
 
-// 使用短变量声明
-arr3 := [5]int{1, 2, 3, 4, 5}
+<span class="c1">// 使用短变量声明</span>
+<span class="nx">arr3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
 
-// 让编译器自动计算数组长度
-arr4 := [...]int{1, 2, 3, 4, 5}  // 长度为5
+<span class="c1">// 让编译器自动计算数组长度</span>
+<span class="nx">arr4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span><span class="w">  </span><span class="c1">// 长度为5</span>
 
-// 指定索引初始化
-arr5 := [5]int{0: 10, 4: 50}  // 索引0为10，索引4为50，其余为0
-</code></pre>
+<span class="c1">// 指定索引初始化</span>
+<span class="nx">arr5</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">}</span><span class="w">  </span><span class="c1">// 索引0为10，索引4为50，其余为0</span>
+</code></pre></div>
 <p><strong>注意</strong>：声明数组是，数组长度必须是常量，使用变量会报错。</p>
-<pre><code class="language-go">length := 3 // length一个变量
-c := [length]int{1, 2, 3} // 报错：declared and not used: length ； invalid array length length
+<div class="highlight"><pre><span></span><code><span class="nx">length</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c1">// length一个变量</span>
+<span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="nx">length</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span><span class="w"> </span><span class="c1">// 报错：declared and not used: length ； invalid array length length</span>
 
-const length = 3 // length是一个常量
-c := [length]int{1, 2, 3} // 正确
-</code></pre>
+<span class="kd">const</span><span class="w"> </span><span class="nx">length</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c1">// length是一个常量</span>
+<span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="nx">length</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span><span class="w"> </span><span class="c1">// 正确</span>
+</code></pre></div>
 <h4 id="122">1.2.2. 多维数组</h4>
 <p>多维数组的基本使用方式如下：</p>
-<pre><code class="language-go">// 声明二维数组
-var matrix [3][3]int
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明二维数组</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">matrix</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span>
 
-// 初始化二维数组
-matrix2 := [2][3]int{
-    {1, 2, 3},
-    {4, 5, 6},
-}
+<span class="c1">// 初始化二维数组</span>
+<span class="nx">matrix2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">},</span>
+<span class="p">}</span>
 
-// 使用索引号初始化元素
-var arr2 = [...][2]int{
-    0: {1: 2},
-    1: {1: 4},
-}
+<span class="c1">// 使用索引号初始化元素</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">arr2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="o">...</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="mi">0</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
+<span class="w">    </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">},</span>
+<span class="p">}</span>
 
-// 访问二维数组元素
-value := matrix2[0][1]  // 第一行第二列的值
-</code></pre>
+<span class="c1">// 访问二维数组元素</span>
+<span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">matrix2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w">  </span><span class="c1">// 第一行第二列的值</span>
+</code></pre></div>
 <p>需要特别注意的是，多维数组声明时，只有第一个维度支持编译器自动计算长度：</p>
-<pre><code class="language-go">// 第一个维度支持编译器自动计算长度
-matrix2 := [...][3]int{
-    {1, 2, 3},
-    {4, 5, 6},
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 第一个维度支持编译器自动计算长度</span>
+<span class="nx">matrix2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="o">...</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">},</span>
+<span class="p">}</span>
 
-// 其他维度不支持编译器自动计算长度
-matrix2 := [2][...]int{
-    {1, 2, 3},
-    {4, 5, 6},
-} // 报错：invalid use of [...] array (outside a composite literal)
-</code></pre>
+<span class="c1">// 其他维度不支持编译器自动计算长度</span>
+<span class="nx">matrix2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="o">...</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">},</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// 报错：invalid use of [...] array (outside a composite literal)</span>
+</code></pre></div>
 <h3 id="13">1.3. 数组的操作</h3>
 <h4 id="131">1.3.1. 访问和修改数组元素</h4>
-<pre><code class="language-go">arr := [5]int{1, 2, 3, 4, 5}
+<div class="highlight"><pre><span></span><code><span class="nx">arr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
 
-// 访问元素
-first := arr[0]  // 获取第一个元素
-last := arr[4]   // 获取最后一个元素
+<span class="c1">// 访问元素</span>
+<span class="nx">first</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">  </span><span class="c1">// 获取第一个元素</span>
+<span class="nx">last</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w">   </span><span class="c1">// 获取最后一个元素</span>
 
-// 修改元素
-arr[0] = 10  // 修改第一个元素
+<span class="c1">// 修改元素</span>
+<span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="w">  </span><span class="c1">// 修改第一个元素</span>
 
-// 获取数组长度
-length := len(arr)  // 返回5
-</code></pre>
+<span class="c1">// 获取数组长度</span>
+<span class="nx">length</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span><span class="w">  </span><span class="c1">// 返回5</span>
+</code></pre></div>
 <h4 id="132">1.3.2. 数组遍历</h4>
-<pre><code class="language-go">arr := [5]int{1, 2, 3, 4, 5}
+<div class="highlight"><pre><span></span><code><span class="nx">arr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
 
-// 使用索引遍历
-for i := 0; i &lt; len(arr); i++ {
-    fmt.Printf(&quot;索引%d: %d\n&quot;, i, arr[i])
-}
+<span class="c1">// 使用索引遍历</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;索引%d: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+<span class="p">}</span>
 
-// 使用range遍历（推荐）
-for index, value := range arr {
-    fmt.Printf(&quot;索引%d: %d\n&quot;, index, value)
-}
+<span class="c1">// 使用range遍历（推荐）</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">arr</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;索引%d: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 只获取值（忽略索引）
-for _, value := range arr {
-    fmt.Printf(&quot;值: %d\n&quot;, value)
-}
-</code></pre>
+<span class="c1">// 只获取值（忽略索引）</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">arr</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;值: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="133">1.3.3. 数组比较和复制</h4>
-<pre><code class="language-go">arr1 := [3]int{1, 2, 3}
-arr2 := [3]int{1, 2, 3}
-arr3 := [3]int{1, 2, 4}
+<div class="highlight"><pre><span></span><code><span class="nx">arr1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<span class="nx">arr2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<span class="nx">arr3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">}</span>
 
-// 数组可以直接比较（长度和类型必须相同）
-fmt.Println(arr1 == arr2)  // true
-fmt.Println(arr1 == arr3)  // false
+<span class="c1">// 数组可以直接比较（长度和类型必须相同）</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">arr1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">arr2</span><span class="p">)</span><span class="w">  </span><span class="c1">// true</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">arr1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">arr3</span><span class="p">)</span><span class="w">  </span><span class="c1">// false</span>
 
-// 数组赋值会复制整个数组
-arr4 := arr1  // 复制arr1到arr4
-arr4[0] = 10  // 修改arr4不会影响arr1
-fmt.Println(arr1[0])  // 仍然是1
-</code></pre>
+<span class="c1">// 数组赋值会复制整个数组</span>
+<span class="nx">arr4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr1</span><span class="w">  </span><span class="c1">// 复制arr1到arr4</span>
+<span class="nx">arr4</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="w">  </span><span class="c1">// 修改arr4不会影响arr1</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">arr1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w">  </span><span class="c1">// 仍然是1</span>
+</code></pre></div>
 <h4 id="134">1.3.4. 数组的长度</h4>
 <p>内置函数 len 和 cap 都返回数组长度 (元素数量)。</p>
-<pre><code class="language-go">// 声明并初始化数组
-a := [...][2]int{
-  {1, 2},
-  {3, 4},
-  {5, 6},
-}
-fmt.Println(len(a)) // 3
-fmt.Println(len(a[0])) // 2
-fmt.Println(cap(a)) // 3
-fmt.Println(cap(a[0])) // 2
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明并初始化数组</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="o">...</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">  </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">},</span>
+<span class="p">}</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">))</span><span class="w"> </span><span class="c1">// 3</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="w"> </span><span class="c1">// 2</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">cap</span><span class="p">(</span><span class="nx">a</span><span class="p">))</span><span class="w"> </span><span class="c1">// 3</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">cap</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="w"> </span><span class="c1">// 2</span>
+</code></pre></div>
 <h4 id="135">1.3.5. 数组截取</h4>
 <p>使用<code>arr[m:n]</code>的语法，可以截取数组。</p>
-<pre><code class="language-go">// 声明一维数组
-a := [6]int{1,2,3,4,5,6}
-// 截取
-fmt.Println(a[0:1]) // [1]
-fmt.Println(a[3:]) // [4 5 6]
-fmt.Println(a[:5]) // [1 2 3 4 5]
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明一维数组</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span>
+<span class="c1">// 截取</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="c1">// [1]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span><span class="w"> </span><span class="c1">// [4 5 6]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span><span class="w"> </span><span class="c1">// [1 2 3 4 5]</span>
+</code></pre></div>
 <p>该方式同样适用于多维数组：</p>
-<pre><code class="language-go">// 声明多维数组
-a := [...][2]int{
-  {1, 2},
-  {3, 4},
-  {5, 6},
-}
-// 截取
-fmt.Println(a[0:2][0:1]) // [[1 2]]
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明多维数组</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="o">...</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">  </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">},</span>
+<span class="p">}</span>
+<span class="c1">// 截取</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="c1">// [[1 2]]</span>
+</code></pre></div>
 <p><strong>特别注意：</strong> 截取数组得到的结果，是一个切片Slice，而非一个数组：</p>
-<pre><code class="language-go">// 定义数组
-a := [5]int{1, 2, 3, 4, 5}
-// 数组截取
-b := a[2:4]
-fmt.Println(a) // [1 2 3 4 5]
-fmt.Println(b) // [3 4]
-fmt.Printf(&quot;%T\n&quot;, a) // [5]int
-fmt.Printf(&quot;%T\n&quot;, b) // []int
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义数组</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="c1">// 数组截取</span>
+<span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1 2 3 4 5]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// [3 4]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// [5]int</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// []int</span>
+</code></pre></div>
 <blockquote>
 <p>[]int是一个切片Slice，而非一个数组。关于切片后面会说...</p>
 </blockquote>
 <h2 id="2-slice">2. 切片(Slice)</h2>
 <p>由于数组的长度固定，这在很多场景下不够灵活。例如：</p>
-<pre><code class="language-go">// 这样的代码在实际开发中很少见
-func processScores(scores [100]int) {
-    // 只能处理恰好100个分数
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 这样的代码在实际开发中很少见</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">processScores</span><span class="p">(</span><span class="nx">scores</span><span class="w"> </span><span class="p">[</span><span class="mi">100</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 只能处理恰好100个分数</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>为了解决这个问题，Go语言引入了切片（Slice）。</p>
 <h3 id="21">2.1. 切片的概念和特性</h3>
 <p>切片是对数组的封装，提供了动态数组的功能。切片的特点包括：</p>
@@ -2704,47 +2704,47 @@ func processScores(scores [100]int) {
 <h3 id="22">2.2. 切片的声明和初始化</h3>
 <h4 id="221">2.2.1. 声明切片</h4>
 <p>切片的基本声明方式如下：</p>
-<pre><code class="language-go">// 声明一个整数切片（零值为nil）
-var slice1 []int
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明一个整数切片（零值为nil）</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">slice1</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span>
 
-// 使用make创建切片(虽然元素仍为零值，但切片已经初始化，不为nil)
-slice2 := make([]int, 5)      // 长度为5，容量为5
-slice3 := make([]int, 3, 5)   // 长度为3，容量为5
-</code></pre>
+<span class="c1">// 使用make创建切片(虽然元素仍为零值，但切片已经初始化，不为nil)</span>
+<span class="nx">slice2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">      </span><span class="c1">// 长度为5，容量为5</span>
+<span class="nx">slice3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">   </span><span class="c1">// 长度为3，容量为5</span>
+</code></pre></div>
 <p>与数组一样，切片也可以在声明时初始化：</p>
-<pre><code class="language-go">// 直接初始化
-slice8 := []int{1, 2, 3, 4, 5}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 直接初始化</span>
+<span class="nx">slice8</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+</code></pre></div>
 <h4 id="222">2.2.2. 通过截取来创建切片</h4>
 <p>可以通过截取数组的方式来初始化切片：</p>
-<pre><code class="language-go">// 定义数组
-a := [5]int{1, 2, 3, 4, 5}
-// 数组截取,以初始化切片
-b := a[2:4]
-fmt.Println(a) // [1 2 3 4 5]
-fmt.Println(b) // [3 4]
-fmt.Printf(&quot;%T\n&quot;, a) // [5]int
-fmt.Printf(&quot;%T\n&quot;, b) // []int
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义数组</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="c1">// 数组截取,以初始化切片</span>
+<span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1 2 3 4 5]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// [3 4]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// [5]int</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// []int</span>
+</code></pre></div>
 <p>切片也支持截取操作，可以通过截取切片的方式来初始化另一个切片：</p>
-<pre><code class="language-go">// 声明并初始化切片
-a := []int{1, 2, 3, 4, 5}
-// 切片截取,以初始化切片
-b := a[2:4]
-fmt.Println(a) // [1 2 3 4 5]
-fmt.Println(b) // [3 4]
-fmt.Printf(&quot;%T\n&quot;, a) // []int
-fmt.Printf(&quot;%T\n&quot;, b) // []int
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明并初始化切片</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="c1">// 切片截取,以初始化切片</span>
+<span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1 2 3 4 5]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// [3 4]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// []int</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// []int</span>
+</code></pre></div>
 <h4 id="223">2.2.3. 理解切片的内部结构</h4>
 <p>切片的底层是数组，切片包含三个字段：
 - 指向底层数组的指针
 - 长度（len）
 - 容量（cap）</p>
-<pre><code class="language-go">slice := make([]int, 3, 5)
-fmt.Println(len(slice))  // 3
-fmt.Println(cap(slice))  // 5
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">))</span><span class="w">  </span><span class="c1">// 3</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">))</span><span class="w">  </span><span class="c1">// 5</span>
+</code></pre></div>
 <blockquote>
 <p>由于长度和容量是切片的属性，因此获取长度和容量时不需要遍历底层数组，性能约等于访问一个普通变量。</p>
 </blockquote>
@@ -2757,62 +2757,62 @@ fmt.Println(cap(slice))  // 5
 <li>作为一种特殊情况，将字符串append到字节切片是合法的。</li>
 </ul>
 <p>追加单个元素：</p>
-<pre><code class="language-go">slice := []int{1, 2, 3}
+<div class="highlight"><pre><span></span><code><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
 
-// 追加单个元素
-slice = append(slice, 4)
+<span class="c1">// 追加单个元素</span>
+<span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
 
-fmt.Println(slice)  // [1 2 3 4]
-</code></pre>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span><span class="w">  </span><span class="c1">// [1 2 3 4]</span>
+</code></pre></div>
 <p>追加多个元素：</p>
-<pre><code class="language-go">slice := []int{1, 2, 3}
+<div class="highlight"><pre><span></span><code><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
 
-// 追加多个元素
-slice = append(slice, 5, 6, 7)
-fmt.Println(slice)  // [1 2 3 5 6 7]
-</code></pre>
+<span class="c1">// 追加多个元素</span>
+<span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span><span class="w">  </span><span class="c1">// [1 2 3 5 6 7]</span>
+</code></pre></div>
 <p>还可以追加另一个切片的元素：</p>
-<pre><code class="language-go">slice := []int{1, 2, 3}
+<div class="highlight"><pre><span></span><code><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
 
-// 追加另一个切片
-other := []int{8, 9, 10}
-slice = append(slice, other...)
+<span class="c1">// 追加另一个切片</span>
+<span class="nx">other</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">}</span>
+<span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="w"> </span><span class="nx">other</span><span class="o">...</span><span class="p">)</span>
 
-fmt.Println(slice)  // [1 2 3 8 9 10]
-</code></pre>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span><span class="w">  </span><span class="c1">// [1 2 3 8 9 10]</span>
+</code></pre></div>
 <h4 id="232">2.3.2. 切片截取</h4>
 <p>与数组一样，使用<code>slice[m:n]</code>的语法，可以截取切片：</p>
-<pre><code class="language-go">// 声明一维切片
-a := []int{1,2,3,4,5,6}
-// 截取
-fmt.Println(a[0:1]) // [1]
-fmt.Println(a[3:]) // [4 5 6]
-fmt.Println(a[:5]) // [1 2 3 4 5]
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明一维切片</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span>
+<span class="c1">// 截取</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="c1">// [1]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span><span class="w"> </span><span class="c1">// [4 5 6]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span><span class="w"> </span><span class="c1">// [1 2 3 4 5]</span>
+</code></pre></div>
 <p>该方式同样适用于多维切片：</p>
-<pre><code class="language-go">// 声明多维切片
-a := [][]int{
-  {1, 2},
-  {3, 4},
-  {5, 6},
-}
-// 截取
-fmt.Println(a[0:2][0:1]) // [[1 2]]
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明多维切片</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[][]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">  </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">},</span>
+<span class="p">}</span>
+<span class="c1">// 截取</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="c1">// [[1 2]]</span>
+</code></pre></div>
 <p><strong>特别注意：</strong> 截取数组得到的结果，是一个切片Slice，而非一个数组：</p>
-<pre><code class="language-go">// 定义切片
-a := []int{1, 2, 3, 4, 5}
-// 切片截取
-b := a[2:4]
-fmt.Println(a) // [1 2 3 4 5]
-fmt.Println(b) // [3 4]
-fmt.Printf(&quot;%T\n&quot;, a) // []int
-fmt.Printf(&quot;%T\n&quot;, b) // []int
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义切片</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="c1">// 切片截取</span>
+<span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1 2 3 4 5]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// [3 4]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// []int</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// []int</span>
+</code></pre></div>
 <p>另外，截取时还可以指定容量：</p>
-<pre><code class="language-go">// 语法格式
-slice := array[low:high:capacity]
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 语法格式</span>
+<span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">array</span><span class="p">[</span><span class="nx">low</span><span class="p">:</span><span class="nx">high</span><span class="p">:</span><span class="nx">capacity</span><span class="p">]</span>
+</code></pre></div>
 <ul>
 <li>low：起始索引（包含）</li>
 <li>high：结束索引（不包含）</li>
@@ -2826,59 +2826,59 @@ slice := array[low:high:capacity]
 <li>长度是 high - low</li>
 <li>容量是 capacity - low</li>
 </ul>
-<pre><code class="language-go">slice := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+<div class="highlight"><pre><span></span><code><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">}</span>
 
-// 基本截取操作
-part1 := slice[2:5]   // [3 4 5]
-part2 := slice[:5]    // [1 2 3 4 5]
-part3 := slice[5:]    // [6 7 8 9 10]
-part4 := slice[:]     // 整个切片的副本
+<span class="c1">// 基本截取操作</span>
+<span class="nx">part1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">slice</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span><span class="w">   </span><span class="c1">// [3 4 5]</span>
+<span class="nx">part2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">slice</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="w">    </span><span class="c1">// [1 2 3 4 5]</span>
+<span class="nx">part3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">slice</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span><span class="w">    </span><span class="c1">// [6 7 8 9 10]</span>
+<span class="nx">part4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">slice</span><span class="p">[:]</span><span class="w">     </span><span class="c1">// 整个切片的副本</span>
 
-// 指定容量的截取
-part5 := slice[2:5:7] // 长度为3，容量为5（7-2）
-</code></pre>
+<span class="c1">// 指定容量的截取</span>
+<span class="nx">part5</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">slice</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span><span class="w"> </span><span class="c1">// 长度为3，容量为5（7-2）</span>
+</code></pre></div>
 <p><strong>特别注意：截取后得到的新切片，与原数组和切片共享底层数组内存，直到其中一个重新分配。</strong></p>
-<pre><code class="language-go">// 定义源切片
-a := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
-// 截取
-b := a[:5]
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义源切片</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">}</span>
+<span class="c1">// 截取</span>
+<span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">a</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
 
-// 从0索引开始截取，由于共享内存，因此两个切片起始地址相同
-fmt.Printf(&quot;%p\n&quot;, a) // 0x14000016500
-fmt.Printf(&quot;%p\n&quot;, b) // 0x14000016500
+<span class="c1">// 从0索引开始截取，由于共享内存，因此两个切片起始地址相同</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%p\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// 0x14000016500</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%p\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// 0x14000016500</span>
 
-// 修改其中一个切片的元素，另一个切片的数组也会变（只针对共享内存区间的元素）
-a[0] = 111
-a[8] = 888
-b[1] = 222
-fmt.Println(a) // [111 222 3 4 5 6 7 8 888]
-fmt.Println(b) // [111 222 3 4 5]
+<span class="c1">// 修改其中一个切片的元素，另一个切片的数组也会变（只针对共享内存区间的元素）</span>
+<span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">111</span>
+<span class="nx">a</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">888</span>
+<span class="nx">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">222</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// [111 222 3 4 5 6 7 8 888]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// [111 222 3 4 5]</span>
 
-// 追加元素以使b切片重新分配
-for i := 0; i &lt; 10; i++ {
-  b = append(b, i)
-}
+<span class="c1">// 追加元素以使b切片重新分配</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 由于重新分配内存，b切片起始地址变更
-fmt.Printf(&quot;%p\n&quot;, a) // 0x14000016500
-fmt.Printf(&quot;%p\n&quot;, b) // 0x14000110000
+<span class="c1">// 由于重新分配内存，b切片起始地址变更</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%p\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// 0x14000016500</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%p\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// 0x14000110000</span>
 
-// 再次修改元素，两者不再互相影响
-a[0] = 100
-b[1] = 200
-fmt.Println(a) // [100 222 3 4 5 0 1 2 3]
-fmt.Println(b) // [111 200 3 4 5 0 1 2 3 4 5 6 7 8 9]
-</code></pre>
+<span class="c1">// 再次修改元素，两者不再互相影响</span>
+<span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="nx">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">200</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="w"> </span><span class="c1">// [100 222 3 4 5 0 1 2 3]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// [111 200 3 4 5 0 1 2 3 4 5 6 7 8 9]</span>
+</code></pre></div>
 <h4 id="233-copy">2.3.3. copy复制切片</h4>
 <p>内置函数copy可以用来复制切片：</p>
-<pre><code class="language-go">src := []int{1, 2, 3, 4, 5}
-dst := make([]int, len(src))
+<div class="highlight"><pre><span></span><code><span class="nx">src</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="nx">dst</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">src</span><span class="p">))</span>
 
-// 使用copy函数复制
-n := copy(dst, src)
-fmt.Printf(&quot;复制了%d个元素\n&quot;, n)
-fmt.Println(dst)  // [1 2 3 4 5]
-</code></pre>
+<span class="c1">// 使用copy函数复制</span>
+<span class="nx">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">copy</span><span class="p">(</span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">src</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;复制了%d个元素\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">n</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">dst</span><span class="p">)</span><span class="w">  </span><span class="c1">// [1 2 3 4 5]</span>
+</code></pre></div>
 <blockquote>
 <p>使用内置函数copy，比手动循环copy更加高效。</p>
 <p>这里就不贴测试性能的代码了，读者可以自己去测试！</p>
@@ -2888,71 +2888,71 @@ fmt.Println(dst)  // [1 2 3 4 5]
 <ul>
 <li>使用索引遍历</li>
 </ul>
-<pre><code class="language-go">slice := []int{1, 2, 3, 4, 5}
+<div class="highlight"><pre><span></span><code><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
 
-// 使用索引遍历
-for i := 0; i &lt; len(slice); i++ {
-    fmt.Printf(&quot;索引%d: %d\n&quot;, i, slice[i])
-}
-</code></pre>
+<span class="c1">// 使用索引遍历</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">);</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;索引%d: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">slice</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>使用range遍历</li>
 </ul>
-<pre><code class="language-go">slice := []string{&quot;apple&quot;, &quot;banana&quot;, &quot;orange&quot;}
+<div class="highlight"><pre><span></span><code><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;apple&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;banana&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;orange&quot;</span><span class="p">}</span>
 
-// 使用range遍历
-for index, value := range slice {
-    fmt.Printf(&quot;索引%d: %s\n&quot;, index, value)
-}
+<span class="c1">// 使用range遍历</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">slice</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;索引%d: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 只获取值
-for _, value := range slice {
-    fmt.Printf(&quot;水果: %s\n&quot;, value)
-}
-</code></pre>
+<span class="c1">// 只获取值</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">slice</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;水果: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="235">2.3.5. 删除元素</h4>
 <p>Go语言并没有对删除切片元素提供专用的语法或者接口，需要使用切片本身的特性来删除元素。</p>
 <ul>
 <li>可以使用截取操作来删除前置元素和后置元素。</li>
 </ul>
-<pre><code class="language-go">// 删除前置元素
-slice := []int{1, 2, 3, 4, 5}
-slice := slice[2:] // [3, 4, 5]
+<div class="highlight"><pre><span></span><code><span class="c1">// 删除前置元素</span>
+<span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">slice</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span><span class="w"> </span><span class="c1">// [3, 4, 5]</span>
 
-// 删除后置元素
-slice := []int{1, 2, 3, 4, 5}
-slice := slice[:2] // [1,2]
-</code></pre>
+<span class="c1">// 删除后置元素</span>
+<span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">slice</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="c1">// [1,2]</span>
+</code></pre></div>
 <ul>
 <li>可以使用append内置函数+截取操作来删除元素</li>
 </ul>
-<pre><code class="language-go">// 删除前置元素(不常用)
-a = []int{1, 2, 3,4,5}
-a = append(a[:0], a[2:]...) // [3, 4, 5]
+<div class="highlight"><pre><span></span><code><span class="c1">// 删除前置元素(不常用)</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">a</span><span class="p">[:</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span><span class="o">...</span><span class="p">)</span><span class="w"> </span><span class="c1">// [3, 4, 5]</span>
 
-// 删除后置元素（不常用）
-a = []int{1, 2, 3,4,5}
-a = append(a[:0], a[:2]...) // [1,2]
+<span class="c1">// 删除后置元素（不常用）</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">a</span><span class="p">[:</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="nx">a</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="o">...</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1,2]</span>
 
-// 删除中间元素（常用）
-a = []int{1, 2, 3,4,5}
-a = append(a[:2], a[3:]...) // [1,2,4,5]
-</code></pre>
+<span class="c1">// 删除中间元素（常用）</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">a</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span><span class="o">...</span><span class="p">)</span><span class="w"> </span><span class="c1">// [1,2,4,5]</span>
+</code></pre></div>
 <ul>
 <li>可以使用copy内置函数+截取操作来删除元素</li>
 </ul>
-<pre><code class="language-go">// 删除前置元素
-a = []int{1, 2, 3,4,5}
-a = a[:copy(a, a[2:])]// [3, 4, 5]
+<div class="highlight"><pre><span></span><code><span class="c1">// 删除前置元素</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="p">[:</span><span class="nb">copy</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:])]</span><span class="c1">// [3, 4, 5]</span>
 
-// 删除后置元素
-a = []int{1, 2, 3,4,5}
-a = a[:copy(a, a[:2])] // [1,2]
+<span class="c1">// 删除后置元素</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="p">[:</span><span class="nb">copy</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">[:</span><span class="mi">2</span><span class="p">])]</span><span class="w"> </span><span class="c1">// [1,2]</span>
 
-// 删除中间元素
-a = []int{1, 2, 3,4,5}
-a = a[:2+copy(a[2:], a[3:])] // [1,2,4,5]
-</code></pre>
+<span class="c1">// 删除中间元素</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+<span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="p">[:</span><span class="mi">2</span><span class="o">+</span><span class="nb">copy</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="mi">3</span><span class="p">:])]</span><span class="w"> </span><span class="c1">// [1,2,4,5]</span>
+</code></pre></div>
 <p><strong>最佳实践：</strong></p>
 <ul>
 <li>使用截取操作来删除前置元素和后置元素。</li>
@@ -2960,67 +2960,67 @@ a = a[:2+copy(a[2:], a[3:])] // [1,2,4,5]
 </ul>
 <h3 id="24">2.4. 切片的扩容机制</h3>
 <p>当切片容量不足时，append操作会触发扩容：</p>
-<pre><code class="language-go">slice := make([]int, 0, 2)  // 长度0，容量2
-slice = append(slice, 1)    // [1]
-slice = append(slice, 2)    // [1 2]
-slice = append(slice, 3)    // 触发扩容，容量变为4或更多
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">  </span><span class="c1">// 长度0，容量2</span>
+<span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">    </span><span class="c1">// [1]</span>
+<span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">    </span><span class="c1">// [1 2]</span>
+<span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w">    </span><span class="c1">// 触发扩容，容量变为4或更多</span>
+</code></pre></div>
 <p>扩容规则：
 - 当所需容量超过当前容量时，会创建新的底层数组
 - 新容量通常是原容量的2倍（具体规则较为复杂）
 - 扩容后会将原数据复制到新数组</p>
 <p>使用go1.25.0版本，从容量0开始填充元素，触发扩容的时机及结果如下：</p>
-<pre><code class="language-go">func main() {
-    slice := make([]int, 0, 0)
-    fmt.Printf(&quot;len(%d) cap(%d)\n&quot;, len(slice), cap(slice))
-    oldCap := cap(slice)
-    for i := 0; i &lt; 1000; i++ {
-        slice = append(slice, i)
-        if cap(slice) != oldCap {
-            fmt.Printf(&quot;len(%d) cap(%d)\n&quot;, len(slice), cap(slice))
-            oldCap = cap(slice)
-        }
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;len(%d) cap(%d)\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">),</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">oldCap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">oldCap</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;len(%d) cap(%d)\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">),</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">))</span>
+<span class="w">            </span><span class="nx">oldCap</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-// len(0) cap(0)
-// len(1) cap(4)
-// len(5) cap(8)
-// len(9) cap(16)
-// len(17) cap(32)
-// len(33) cap(64)
-// len(65) cap(128)
-// len(129) cap(256)
-// len(257) cap(512)
-// len(513) cap(848)
-// len(849) cap(1280)
-</code></pre>
+<span class="c1">// len(0) cap(0)</span>
+<span class="c1">// len(1) cap(4)</span>
+<span class="c1">// len(5) cap(8)</span>
+<span class="c1">// len(9) cap(16)</span>
+<span class="c1">// len(17) cap(32)</span>
+<span class="c1">// len(33) cap(64)</span>
+<span class="c1">// len(65) cap(128)</span>
+<span class="c1">// len(129) cap(256)</span>
+<span class="c1">// len(257) cap(512)</span>
+<span class="c1">// len(513) cap(848)</span>
+<span class="c1">// len(849) cap(1280)</span>
+</code></pre></div>
 <h3 id="25">2.5. 切片的陷阱和最佳实践</h3>
 <h4 id="251">2.5.1. 共享底层数组的问题</h4>
-<pre><code class="language-go">original := []int{1, 2, 3, 4, 5}
-sub := original[1:3]  // [2 3]
+<div class="highlight"><pre><span></span><code><span class="nx">original</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="nx">sub</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">original</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="w">  </span><span class="c1">// [2 3]</span>
 
-// 修改子切片会影响原切片
-sub[0] = 20
-fmt.Println(original)  // [1 20 3 4 5]
-</code></pre>
+<span class="c1">// 修改子切片会影响原切片</span>
+<span class="nx">sub</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">original</span><span class="p">)</span><span class="w">  </span><span class="c1">// [1 20 3 4 5]</span>
+</code></pre></div>
 <h4 id="252">2.5.2. 避免切片污染</h4>
-<pre><code class="language-go">// 错误示例：可能导致意外的内存占用
-func processLargeData() []byte {
-    large := make([]byte, 1024*1024)  // 1MB数据
-    // 处理数据...
-    return large[100:200]  // 返回小切片，但仍引用整个1MB数组
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 错误示例：可能导致意外的内存占用</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">processLargeData</span><span class="p">()</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">large</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span><span class="w">  </span><span class="c1">// 1MB数据</span>
+<span class="w">    </span><span class="c1">// 处理数据...</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">large</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">200</span><span class="p">]</span><span class="w">  </span><span class="c1">// 返回小切片，但仍引用整个1MB数组</span>
+<span class="p">}</span>
 
-// 正确做法：复制数据
-func processLargeDataCorrectly() []byte {
-    large := make([]byte, 1024*1024)
-    // 处理数据...
-    result := make([]byte, 100)
-    copy(result, large[100:200])
-    return result
-}
-</code></pre>
+<span class="c1">// 正确做法：复制数据</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">processLargeDataCorrectly</span><span class="p">()</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">large</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 处理数据...</span>
+<span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">copy</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span><span class="w"> </span><span class="nx">large</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">200</span><span class="p">])</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="3-map">3. 映射(Map)</h2>
 <h3 id="31">3.1. 映射的概念和特性</h3>
 <p>映射是一种无序的key-value键值对数据结构，类似于其他语言中的哈希表或字典。映射的特点包括：</p>
@@ -3051,25 +3051,25 @@ func processLargeDataCorrectly() []byte {
 <h3 id="33-map">3.3. map的操作</h3>
 <h4 id="331-map">3.3.1 map的声明和初始化</h4>
 <p>声明一个map的方式如下：</p>
-<pre><code class="language-go">// 声明一个空映射（零值为nil）
-var map1 map[string]int
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明一个空映射（零值为nil）</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">map1</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span>
 
-// 使用make创建映射
-map2 := make(map[string]int)
+<span class="c1">// 使用make创建映射</span>
+<span class="nx">map2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
 
-// 直接初始化
-map3 := map[string]int{
-    &quot;apple&quot;:  5,
-    &quot;banana&quot;: 3,
-    &quot;orange&quot;: 8,
-}
+<span class="c1">// 直接初始化</span>
+<span class="nx">map3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;apple&quot;</span><span class="p">:</span><span class="w">  </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;banana&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;orange&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="p">}</span>
 
-// 声明并初始化
-var map4 = map[string]string{
-    &quot;name&quot;: &quot;张三&quot;,
-    &quot;city&quot;: &quot;北京&quot;,
-}
-</code></pre>
+<span class="c1">// 声明并初始化</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">map4</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;张三&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;city&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;北京&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>map可以嵌套，如<code>map[string]map[string]int</code></p>
 </blockquote>
@@ -3079,112 +3079,112 @@ var map4 = map[string]string{
 <li>如果指定的key在map中不存在，则向map中添加键值对。</li>
 <li>如果指定的key在map中存在，则修改map中指定key对应的值。</li>
 </ul>
-<pre><code class="language-go">// 创建映射
-ages := make(map[string]int)
+<div class="highlight"><pre><span></span><code><span class="c1">// 创建映射</span>
+<span class="nx">ages</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
 
-// 添加元素
-ages[&quot;张三&quot;] = 25
-ages[&quot;李四&quot;] = 30
+<span class="c1">// 添加元素</span>
+<span class="nx">ages</span><span class="p">[</span><span class="s">&quot;张三&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">25</span>
+<span class="nx">ages</span><span class="p">[</span><span class="s">&quot;李四&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">30</span>
 
-// 修改元素
-ages[&quot;张三&quot;] = 26
+<span class="c1">// 修改元素</span>
+<span class="nx">ages</span><span class="p">[</span><span class="s">&quot;张三&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">26</span>
 
-fmt.Println(ages)  // map[张三:26 李四:30]
-</code></pre>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ages</span><span class="p">)</span><span class="w">  </span><span class="c1">// map[张三:26 李四:30]</span>
+</code></pre></div>
 <h4 id="332">3.3.2. 访问键值</h4>
 <p>使用<code>v = map[key]</code>的方式可以访问map中指定key的值。</p>
 <ul>
 <li>如果map中存在指定key，返回key对应的值。</li>
 <li>如果map中不存在指定的key，返回零值（值对应类型的零值）。</li>
 </ul>
-<pre><code class="language-go">ages := map[string]int{
-    &quot;张三&quot;: 25,
-    &quot;李四&quot;: 30,
-}
+<div class="highlight"><pre><span></span><code><span class="nx">ages</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;张三&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;李四&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="p">}</span>
 
-// 获取存在的键
-age := ages[&quot;张三&quot;]
-fmt.Println(age)  // 25
+<span class="c1">// 获取存在的键</span>
+<span class="nx">age</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ages</span><span class="p">[</span><span class="s">&quot;张三&quot;</span><span class="p">]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span><span class="w">  </span><span class="c1">// 25</span>
 
-// 获取不存在的键（返回零值）
-age = ages[&quot;王五&quot;]
-fmt.Println(age)  // 0
-</code></pre>
+<span class="c1">// 获取不存在的键（返回零值）</span>
+<span class="nx">age</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">ages</span><span class="p">[</span><span class="s">&quot;王五&quot;</span><span class="p">]</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span><span class="w">  </span><span class="c1">// 0</span>
+</code></pre></div>
 <p>使用<code>v,ok = map[key]</code>的方式，可以访问map中指定key的值，并且返回该值是否存在的标识。</p>
 <ul>
 <li>如果map中存在指定key，返回key对应的值，标识符为true。</li>
 <li>如果map中不存在指定的key，返回零值（值对应类型的零值），标识符为false。</li>
 </ul>
-<pre><code class="language-go">ages := map[string]int{
-    &quot;张三&quot;: 25,
-    &quot;李四&quot;: 30,
-}
+<div class="highlight"><pre><span></span><code><span class="nx">ages</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;张三&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;李四&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="p">}</span>
 
-// 检查键是否存在
-age, exists := ages[&quot;张三&quot;]
-if exists {
-    fmt.Printf(&quot;张三的年龄是%d\n&quot;, age)
-} else {
-    fmt.Println(&quot;找不到张三的信息&quot;)
-}
+<span class="c1">// 检查键是否存在</span>
+<span class="nx">age</span><span class="p">,</span><span class="w"> </span><span class="nx">exists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ages</span><span class="p">[</span><span class="s">&quot;张三&quot;</span><span class="p">]</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">exists</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;张三的年龄是%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;找不到张三的信息&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 简写形式
-if age, ok := ages[&quot;李四&quot;]; ok {
-    fmt.Printf(&quot;李四的年龄是%d\n&quot;, age)
-}
-</code></pre>
+<span class="c1">// 简写形式</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">age</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ages</span><span class="p">[</span><span class="s">&quot;李四&quot;</span><span class="p">];</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;李四的年龄是%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="333">3.3.3. 删除元素</h4>
 <p>使用delete内置函数，可以删除map中指定的key。</p>
 <blockquote>
 <p>删除一个不存在的key，并不会报错哦～</p>
 </blockquote>
-<pre><code class="language-go">ages := map[string]int{
-    &quot;张三&quot;: 25,
-    &quot;李四&quot;: 30,
-    &quot;王五&quot;: 35,
-}
+<div class="highlight"><pre><span></span><code><span class="nx">ages</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;张三&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;李四&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;王五&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span>
+<span class="p">}</span>
 
-// 删除键值对
-delete(ages, &quot;王五&quot;)
+<span class="c1">// 删除键值对</span>
+<span class="nb">delete</span><span class="p">(</span><span class="nx">ages</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;王五&quot;</span><span class="p">)</span>
 
-// 删除不存在的键不会报错
-delete(ages, &quot;赵六&quot;)
+<span class="c1">// 删除不存在的键不会报错</span>
+<span class="nb">delete</span><span class="p">(</span><span class="nx">ages</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;赵六&quot;</span><span class="p">)</span>
 
-fmt.Println(ages)  // map[张三:25 李四:30]
-</code></pre>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ages</span><span class="p">)</span><span class="w">  </span><span class="c1">// map[张三:25 李四:30]</span>
+</code></pre></div>
 <h4 id="334">3.3.4. 遍历映射</h4>
 <p>遍历map有两种方式：</p>
-<pre><code class="language-go">// 只遍历键
-for 键 := range 映射名称{
+<div class="highlight"><pre><span></span><code><span class="c1">// 只遍历键</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">键</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">映射名称</span><span class="p">{</span>
 
-}
-// 遍历键和值
-for 键,值 := range 映射名称{
+<span class="p">}</span>
+<span class="c1">// 遍历键和值</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">键</span><span class="p">,</span><span class="nx">值</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">映射名称</span><span class="p">{</span>
 
-}
-</code></pre>
+<span class="p">}</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-go">scores := map[string]int{
-    &quot;数学&quot;: 95,
-    &quot;语文&quot;: 87,
-    &quot;英语&quot;: 92,
-}
+<div class="highlight"><pre><span></span><code><span class="nx">scores</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;数学&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">95</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;语文&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">87</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;英语&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">92</span><span class="p">,</span>
+<span class="p">}</span>
 
-// 遍历映射（顺序不确定）
-for subject, score := range scores {
-    fmt.Printf(&quot;%s: %d分\n&quot;, subject, score)
-}
+<span class="c1">// 遍历映射（顺序不确定）</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">subject</span><span class="p">,</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">scores</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s: %d分\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">subject</span><span class="p">,</span><span class="w"> </span><span class="nx">score</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 只获取键
-for subject := range scores {
-    fmt.Println(&quot;科目:&quot;, subject)
-}
+<span class="c1">// 只获取键</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">subject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">scores</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;科目:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">subject</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 只获取值
-for _, score := range scores {
-    fmt.Println(&quot;分数:&quot;, score)
-}
-</code></pre>
+<span class="c1">// 只获取值</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">scores</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;分数:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">score</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 

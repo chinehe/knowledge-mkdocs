@@ -1947,12 +1947,12 @@ Go语言的接口设计独特，采用隐式实现的方式，类型只要实现
 <p>接口（interface）定义了一个对象的行为规范，只定义规范不实现，由具体的对象来实现规范的细节。</p>
 </blockquote>
 <p>声明一个接口的语法格式如下：</p>
-<pre><code class="language-go">type 接口名称 interface{
-    方法名称1(参数列表1) 返回值列表1
-    方法名称2(参数列表2) 返回值列表2
-    ...
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">接口名称</span><span class="w"> </span><span class="kd">interface</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">方法名称1</span><span class="p">(</span><span class="nx">参数列表1</span><span class="p">)</span><span class="w"> </span><span class="nx">返回值列表1</span>
+<span class="w">    </span><span class="nx">方法名称2</span><span class="p">(</span><span class="nx">参数列表2</span><span class="p">)</span><span class="w"> </span><span class="nx">返回值列表2</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>接口名：自定义的接口类型名。</li>
 </ul>
@@ -1980,118 +1980,118 @@ Go语言的接口设计独特，采用隐式实现的方式，类型只要实现
 <p>接口中可以嵌套匿名结构体，这是一种特殊情况。</p>
 </li>
 </ul>
-<p>示例：</p>
-<pre><code class="language-go">// 声明一个简单的接口
-type Writer interface {
-    Write([]byte) (int, error)
-}
-</code></pre>
-<pre><code class="language-go">// 声明一个包含多个方法的接口
-type ReadWriter interface {
-    Read([]byte) (int, error)
-    Write([]byte) (int, error)
-}
-</code></pre>
+<p>示例：
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明一个简单的接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Writer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明一个包含多个方法的接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ReadWriter</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Read</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="2">2. 实现接口</h2>
 <p>Go语言的接口设计理念与其他面向对象语言有所不同，它更加灵活和隐式。在Go中，如果一个类型实现了接口定义的所有方法，那么就认为该类型实现了这个接口，无需显式声明。</p>
 <blockquote>
 <p>一个结构体可以同时实现多个接口，一个接口也可以被多个结构体实现。</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-go">// 这是接口
-type Sayer interface {
-    say()
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 这是接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Sayer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">say</span><span class="p">()</span>
+<span class="p">}</span>
 
-// dog结构体
-type dog struct {
-}
+<span class="c1">// dog结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">dog</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
 
-// dog结构体有Sayer接口的所有方法，则认为实现了Sayer接口
-func (d dog) say() {
-    fmt.Println(&quot;汪汪汪&quot;)
-}
+<span class="c1">// dog结构体有Sayer接口的所有方法，则认为实现了Sayer接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="nx">dog</span><span class="p">)</span><span class="w"> </span><span class="nx">say</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;汪汪汪&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// cat结构体
-type cat struct {
-}
+<span class="c1">// cat结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">cat</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
 
-// cat结构体有Sayer接口的所有方法，则认为实现了Sayer接口
-func (c cat) say() {
-    fmt.Println(&quot;喵喵喵&quot;)
-}
+<span class="c1">// cat结构体有Sayer接口的所有方法，则认为实现了Sayer接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">cat</span><span class="p">)</span><span class="w"> </span><span class="nx">say</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;喵喵喵&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 测试方法，传入一个Sayer接口类型
-func Say(sayer Sayer) {
-    sayer.say()
-}
+<span class="c1">// 测试方法，传入一个Sayer接口类型</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">Say</span><span class="p">(</span><span class="nx">sayer</span><span class="w"> </span><span class="nx">Sayer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">sayer</span><span class="p">.</span><span class="nx">say</span><span class="p">()</span>
+<span class="p">}</span>
 
-func main() {
-    Say(cat{}) // 喵喵喵
-    Say(dog{}) // 汪汪汪
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Say</span><span class="p">(</span><span class="nx">cat</span><span class="p">{})</span><span class="w"> </span><span class="c1">// 喵喵喵</span>
+<span class="w">    </span><span class="nx">Say</span><span class="p">(</span><span class="nx">dog</span><span class="p">{})</span><span class="w"> </span><span class="c1">// 汪汪汪</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="3">3. 空接口</h2>
 <p>空接口是指没有定义任何方法的接口。</p>
 <p>可以直接用<code>interface{}</code>和<code>any</code>来表示空接口：</p>
-<pre><code class="language-go">var a interface{} // 空接口类型的对象
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span><span class="w"> </span><span class="c1">// 空接口类型的对象</span>
 
-var b any // Go 1.18及以后版本推荐使用any关键字
-</code></pre>
+<span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">any</span><span class="w"> </span><span class="c1">// Go 1.18及以后版本推荐使用any关键字</span>
+</code></pre></div>
 <p>当然，我们也可以自己写一个空接口类型：</p>
-<pre><code class="language-go">type Everything interface{}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Everything</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span>
+</code></pre></div>
 <p>空接口没有定义任何方法。而上面提到，在Go中，如果一个类型实现了接口定义的所有方法，那么就认为该类型实现了这个接口，无需显式声明。<strong>因此任何类型都实现了空接口，空接口类型的变量可以存储任意类型的变量。</strong></p>
 <h2 id="4">4. 使用接口</h2>
 <p>接口类型变量能够存储所有实现了该接口的类型的实例。</p>
-<pre><code class="language-Go">// 假设结构体A、B都实现了接口I,接口中有一个方法say()
-var i I // 接口变量
-a := A{}
-b := B{}
-i = a
-i.say()
-i = b
-i.say()
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 假设结构体A、B都实现了接口I,接口中有一个方法say()</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="nx">I</span><span class="w"> </span><span class="c1">// 接口变量</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">A</span><span class="p">{}</span>
+<span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">B</span><span class="p">{}</span>
+<span class="nx">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span>
+<span class="nx">i</span><span class="p">.</span><span class="nx">say</span><span class="p">()</span>
+<span class="nx">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">b</span>
+<span class="nx">i</span><span class="p">.</span><span class="nx">say</span><span class="p">()</span>
+</code></pre></div>
 <p>Go语言中所有类型都默认实现了空接口，所以空接口可以作为任何类型数据的容器 。</p>
-<pre><code class="language-Go">a := 1
-var i interface{} // 空接口变量i
-i = a
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span><span class="w"> </span><span class="c1">// 空接口变量i</span>
+<span class="nx">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-go">// 这是接口
-type Sayer interface {
-    say()
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 这是接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Sayer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">say</span><span class="p">()</span>
+<span class="p">}</span>
 
-// dog结构体
-type dog struct {
-}
+<span class="c1">// dog结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">dog</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
 
-// dog结构体有Sayer接口的所有方法，则认为实现了Sayer接口
-func (d dog) say() {
-    fmt.Println(&quot;汪汪汪&quot;)
-}
+<span class="c1">// dog结构体有Sayer接口的所有方法，则认为实现了Sayer接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="nx">dog</span><span class="p">)</span><span class="w"> </span><span class="nx">say</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;汪汪汪&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// cat结构体
-type cat struct {
-}
+<span class="c1">// cat结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">cat</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
 
-// cat结构体有Sayer接口的所有方法，则认为实现了Sayer接口
-func (c cat) say() {
-    fmt.Println(&quot;喵喵喵&quot;)
-}
+<span class="c1">// cat结构体有Sayer接口的所有方法，则认为实现了Sayer接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">cat</span><span class="p">)</span><span class="w"> </span><span class="nx">say</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;喵喵喵&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 使用接口：传入一个Sayer接口类型
-func Say(sayer Sayer) {
-    sayer.say()
-}
+<span class="c1">// 使用接口：传入一个Sayer接口类型</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">Say</span><span class="p">(</span><span class="nx">sayer</span><span class="w"> </span><span class="nx">Sayer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">sayer</span><span class="p">.</span><span class="nx">say</span><span class="p">()</span>
+<span class="p">}</span>
 
-func main() {
-    Say(cat{}) // 喵喵喵
-    Say(dog{}) // 汪汪汪
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Say</span><span class="p">(</span><span class="nx">cat</span><span class="p">{})</span><span class="w"> </span><span class="c1">// 喵喵喵</span>
+<span class="w">    </span><span class="nx">Say</span><span class="p">(</span><span class="nx">dog</span><span class="p">{})</span><span class="w"> </span><span class="c1">// 汪汪汪</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>面向接口编程可以实现更加灵活和具备可扩展性的代码，这只是冰山一角～</p>
 </blockquote>
@@ -2100,28 +2100,28 @@ func main() {
 <blockquote>
 <p>甚至还可以混用，即一部分方法用值接收者方式实现、一部分方法用指针接收者方式实现！</p>
 </blockquote>
-<pre><code class="language-go">// 接口
-type Sayer interface {
-    Say() string
-    Hello() string
-}
-</code></pre>
-<pre><code class="language-go">type Cat struct {
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Sayer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Say</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Hello</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Cat</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
 
-// 使用值类型接收者实现接口
-func (c Cat) Say() string {
-    return &quot;meow&quot;
-}
-</code></pre>
-<pre><code class="language-go">type Cat struct {
-}
+<span class="c1">// 使用值类型接收者实现接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Cat</span><span class="p">)</span><span class="w"> </span><span class="nx">Say</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;meow&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Cat</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
 
-// 使用指针类型接收者实现接口
-func (c *Cat) Say() string {
-    return &quot;meow&quot;
-}
-</code></pre>
+<span class="c1">// 使用指针类型接收者实现接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Cat</span><span class="p">)</span><span class="w"> </span><span class="nx">Say</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;meow&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>这两种方式的区别在于：</p>
 <ul>
 <li>值接收者方式实现接口：既可以使用结构体对象，也可以使用结构体对象指针，来赋值给该接口类型的变量。</li>
@@ -2129,76 +2129,83 @@ func (c *Cat) Say() string {
 <blockquote>
 <p>因为Go语言中有对指针类型变量求值的语法糖</p>
 </blockquote>
-<p>```go
-  type Sayer interface {
-    Say() string
-  }</p>
-<p>type Cat struct {
-  }</p>
-<p>// 值类型接收者
-  func (c Cat) Say() string {
-    return "meow"
-  }</p>
-<p>func main() {
-    var c Sayer
-    c = &amp;Cat{}
-    println(c.Say()) // 正确</p>
-<pre><code>c = Cat{}
-println(c.Say()) // 正确
-</code></pre>
-<p>}
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Sayer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">Say</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">Cat</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+
+<span class="c1">// 值类型接收者</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Cat</span><span class="p">)</span><span class="w"> </span><span class="nx">Say</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;meow&quot;</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="nx">Sayer</span>
+<span class="w">  </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Cat</span><span class="p">{}</span>
+<span class="w">  </span><span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Say</span><span class="p">())</span><span class="w"> </span><span class="c1">// 正确</span>
+
+<span class="w">  </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Cat</span><span class="p">{}</span>
+<span class="w">  </span><span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Say</span><span class="p">())</span><span class="w"> </span><span class="c1">// 正确</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>指针接收者方式实现接口：结构体对象指针可以赋值给该接口类型的变量。</li>
 </ul>
-<p>```go
-  type Sayer interface {
-    Say() string
-  }</p>
-<p>type Cat struct {
-  }</p>
-<p>// 指针类型接收者
-  func (c *Cat) Say() string {
-    return "meow"
-  }</p>
-<p>func main() {
-    var c Sayer
-    c = &amp;Cat{}
-    println(c.Say()) // 正确</p>
-<pre><code>c = Cat{} // 编译报错
-println(c.Say())
-</code></pre>
-<p>}
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Sayer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">Say</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">Cat</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+
+<span class="c1">// 指针类型接收者</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Cat</span><span class="p">)</span><span class="w"> </span><span class="nx">Say</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;meow&quot;</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="nx">Sayer</span>
+<span class="w">  </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Cat</span><span class="p">{}</span>
+<span class="w">  </span><span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Say</span><span class="p">())</span><span class="w"> </span><span class="c1">// 正确</span>
+
+<span class="w">  </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Cat</span><span class="p">{}</span><span class="w"> </span><span class="c1">// 编译报错</span>
+<span class="w">  </span><span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Say</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>两种方式混用：只有结构体对象指针可以赋值给该接口类型的变量。</li>
 </ul>
-<p>```go</p>
-<p>type Sayer interface {
-    Say() string
-    Hello() string
-  }</p>
-<p>type Cat struct {
-  }</p>
-<p>// 混用：值类型接收者
-  func (c Cat) Say() string {
-    return "meow"
-  }</p>
-<p>// 混用：指针类型接收者
-  func (c *Cat) Hello() string {
-    return "hello"
-  }</p>
-<p>func main() {
-    var c Sayer
-    c = &amp;Cat{}
-    println(c.Say()) // 正确
-    println(c.Hello()) // 正确</p>
-<pre><code>c = Cat{} // 编译报错
-println(c.Say())
-println(c.Hello())
-</code></pre>
-<p>}
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Sayer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">Say</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="nx">Hello</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">Cat</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+
+<span class="c1">// 混用：值类型接收者</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Cat</span><span class="p">)</span><span class="w"> </span><span class="nx">Say</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;meow&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">// 混用：指针类型接收者</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Cat</span><span class="p">)</span><span class="w"> </span><span class="nx">Hello</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;hello&quot;</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="nx">Sayer</span>
+<span class="w">  </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Cat</span><span class="p">{}</span>
+<span class="w">  </span><span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Say</span><span class="p">())</span><span class="w"> </span><span class="c1">// 正确</span>
+<span class="w">  </span><span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Hello</span><span class="p">())</span><span class="w"> </span><span class="c1">// 正确</span>
+
+<span class="w">  </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Cat</span><span class="p">{}</span><span class="w"> </span><span class="c1">// 编译报错</span>
+<span class="w">  </span><span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Say</span><span class="p">())</span>
+<span class="w">  </span><span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Hello</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="6">6. 内嵌（组合）接口</h2>
 <p>接口和结构体声明时，都可以内嵌（组合）另一个接口：</p>
 <ul>
@@ -2206,95 +2213,95 @@ println(c.Hello())
 <li><strong>接口内嵌另一个接口：</strong>表示组合另一个接口的功能（可以简单理解成复制了其内嵌接口的方法）。</li>
 </ul>
 <p><strong>结构体内嵌接口：</strong></p>
-<pre><code class="language-go">// 接口有两个方法
-type Sayer interface {
-    SayHello()
-    SayBye()
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 接口有两个方法</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Sayer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">SayHello</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">SayBye</span><span class="p">()</span>
+<span class="p">}</span>
 
-// 结构体内嵌接口
-type Person struct {
-    Sayer
-    Name string
-}
+<span class="c1">// 结构体内嵌接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Sayer</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-// 只实现其中一个接口方法
-func (t *Person) SayHello() {
-    fmt.Println(&quot;hello&quot;)
-}
+<span class="c1">// 只实现其中一个接口方法</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">Person</span><span class="p">)</span><span class="w"> </span><span class="nx">SayHello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    var p Sayer = &amp;Person{Name: &quot;tom&quot;} // 即使没有实现全部接口方法，由于内嵌接口，也是实现了接口
-    p.SayHello() // 能够正常调用
-    p.SayBye() // 调用没有实现的方法，编译通过，执行panic
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="nx">Sayer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;tom&quot;</span><span class="p">}</span><span class="w"> </span><span class="c1">// 即使没有实现全部接口方法，由于内嵌接口，也是实现了接口</span>
+<span class="w">    </span><span class="nx">p</span><span class="p">.</span><span class="nx">SayHello</span><span class="p">()</span><span class="w"> </span><span class="c1">// 能够正常调用</span>
+<span class="w">    </span><span class="nx">p</span><span class="p">.</span><span class="nx">SayBye</span><span class="p">()</span><span class="w"> </span><span class="c1">// 调用没有实现的方法，编译通过，执行panic</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>从上例可以看到：</p>
 <ul>
 <li>内嵌接口后，即使没有实现接口的全部方法，结构体可以当成内嵌的接口类型变量（即实现了接口）。</li>
 <li><strong>内嵌接口的方式实现接口后，只能调用实现了的房啊，否则会panic。</strong></li>
 </ul>
 <p><strong>接口内嵌另一个接口：</strong></p>
-<pre><code class="language-go">// 定义基础接口
-type Reader interface {
-    Read([]byte) (int, error)
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义基础接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Reader</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Read</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
 
-type Writer interface {
-    Write([]byte) (int, error)
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Writer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
 
-type Closer interface {
-    Close() error
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Closer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Close</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span>
+<span class="p">}</span>
 
-// 组合接口
-type ReadWriter interface {
-    Reader
-    Writer
-}
+<span class="c1">// 组合接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ReadWriter</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Reader</span>
+<span class="w">    </span><span class="nx">Writer</span>
+<span class="p">}</span>
 
-type ReadWriteCloser interface {
-    Reader
-    Writer
-    Closer
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">ReadWriteCloser</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Reader</span>
+<span class="w">    </span><span class="nx">Writer</span>
+<span class="w">    </span><span class="nx">Closer</span>
+<span class="p">}</span>
 
-// 定义结构体
-type File struct {
-    name string
-}
+<span class="c1">// 定义结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">File</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-// 实现Reader接口
-func (f *File) Read(data []byte) (int, error) {
-    // 简化实现
-    copy(data, []byte(&quot;文件内容&quot;))
-    return len(data), nil
-}
+<span class="c1">// 实现Reader接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="o">*</span><span class="nx">File</span><span class="p">)</span><span class="w"> </span><span class="nx">Read</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 简化实现</span>
+<span class="w">    </span><span class="nb">copy</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;文件内容&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-// 实现Writer接口
-func (f *File) Write(data []byte) (int, error) {
-    fmt.Printf(&quot;向文件 %s 写入数据: %s\n&quot;, f.name, string(data))
-    return len(data), nil
-}
+<span class="c1">// 实现Writer接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="o">*</span><span class="nx">File</span><span class="p">)</span><span class="w"> </span><span class="nx">Write</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;向文件 %s 写入数据: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-// 实现Closer接口
-func (f *File) Close() error {
-    fmt.Printf(&quot;关闭文件 %s\n&quot;, f.name)
-    return nil
-}
+<span class="c1">// 实现Closer接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="o">*</span><span class="nx">File</span><span class="p">)</span><span class="w"> </span><span class="nx">Close</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;关闭文件 %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-// File自动实现了ReadWriter和ReadWriteCloser接口
-func main() {
-    file := &amp;File{name: &quot;test.txt&quot;}
+<span class="c1">// File自动实现了ReadWriter和ReadWriteCloser接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">file</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">File</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;test.txt&quot;</span><span class="p">}</span>
 
-    var rw ReadWriter = file
-    rw.Write([]byte(&quot;Hello&quot;))
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">rw</span><span class="w"> </span><span class="nx">ReadWriter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">file</span>
+<span class="w">    </span><span class="nx">rw</span><span class="p">.</span><span class="nx">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">))</span>
 
-    var rwc ReadWriteCloser = file
-    rwc.Close()
-}
-</code></pre>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">rwc</span><span class="w"> </span><span class="nx">ReadWriteCloser</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">file</span>
+<span class="w">    </span><span class="nx">rwc</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>从上例可以看到：</p>
 <ul>
 <li>接口组合另一个接口后，视同与接口定义了被组合接口的所有方法。</li>
@@ -2303,12 +2310,12 @@ func main() {
 <p>接口类型变量能够存储所有实现了该接口的类型的实例，那么我们应该如何知道这个变量存储的变量的具体类型呢？</p>
 <p>答案是使用类型断言，类型断言可以将接口类型的变量转换成其实际存储的类型。</p>
 <p>格式：</p>
-<pre><code class="language-go">// 安全的类型断言
-具体类型变量,成功标识符 := 接口类型变量.(具体类型)
+<div class="highlight"><pre><span></span><code><span class="c1">// 安全的类型断言</span>
+<span class="nx">具体类型变量</span><span class="p">,</span><span class="nx">成功标识符</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">接口类型变量</span><span class="p">.(</span><span class="nx">具体类型</span><span class="p">)</span>
 
-// 直接类型断言
-具体类型变量 := 接口类型变量.(具体类型)
-</code></pre>
+<span class="c1">// 直接类型断言</span>
+<span class="nx">具体类型变量</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">接口类型变量</span><span class="p">.(</span><span class="nx">具体类型</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li>安全的类型断言</li>
 <li>如果实际类型与括号中的具体类型相同，则将接口类型变量转换成具体类型，并且成功标识符为true。</li>
@@ -2318,210 +2325,210 @@ func main() {
 <li>如果实际类型与括号中的具体类型不相同，则panic。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">//  接口类型变量
-var v interface{}
-v = 1000 // 具体类型为int
+<div class="highlight"><pre><span></span><code><span class="c1">//  接口类型变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">v</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span>
+<span class="nx">v</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="c1">// 具体类型为int</span>
 
-// 安全的类型断言 - 成功场景
-i, ok := v.(int)
-if ok {
-  fmt.Printf(&quot;类型断言成功,i=%d\n&quot;, i)
-} else {
-  fmt.Printf(&quot;类型断言失败,i=%d\n&quot;, i)
-}
+<span class="c1">// 安全的类型断言 - 成功场景</span>
+<span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">v</span><span class="p">.(</span><span class="kt">int</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;类型断言成功,i=%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;类型断言失败,i=%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 安全的类型断言 - 失败场景
-s, ok := v.(string)
-if ok {
-  fmt.Printf(&quot;类型断言成功,s=%s\n&quot;, s)
-} else {
-  fmt.Printf(&quot;类型断言失败,s=%s\n&quot;, s)
-}
+<span class="c1">// 安全的类型断言 - 失败场景</span>
+<span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">v</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;类型断言成功,s=%s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;类型断言失败,s=%s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 直接类型断言 - 成功场景
-ii := v.(int)
-fmt.Printf(&quot;类型断言成功,ii=%d\n&quot;, ii)
+<span class="c1">// 直接类型断言 - 成功场景</span>
+<span class="nx">ii</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">v</span><span class="p">.(</span><span class="kt">int</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;类型断言成功,ii=%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ii</span><span class="p">)</span>
 
-// 直接类型断言 - 失败场景
-ss := v.(string)
-fmt.Printf(&quot;类型断言成功,ss=%s\n&quot;, ss)
-</code></pre>
+<span class="c1">// 直接类型断言 - 失败场景</span>
+<span class="nx">ss</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">v</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;类型断言成功,ss=%s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ss</span><span class="p">)</span>
+</code></pre></div>
 <p>输出：</p>
-<pre><code class="language-go">// 实际输出：
-类型断言成功,i=1000
-类型断言失败,s=
-类型断言成功,ii=1000
-panic: interface conversion: interface {} is int, not string
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 实际输出：</span>
+<span class="nx">类型断言成功</span><span class="p">,</span><span class="nx">i</span><span class="p">=</span><span class="mi">1000</span>
+<span class="nx">类型断言失败</span><span class="p">,</span><span class="nx">s</span><span class="p">=</span>
+<span class="nx">类型断言成功</span><span class="p">,</span><span class="nx">ii</span><span class="p">=</span><span class="mi">1000</span>
+<span class="nx">panic</span><span class="p">:</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">conversion</span><span class="p">:</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="kt">string</span>
+</code></pre></div>
 <h2 id="8">8. 类型选择</h2>
 <p>使用类型断言，可以将接口类型变量中存储的值转换成具体类型的值。</p>
 <p>而有时候，我们需要根据接口类型变量的具体类型，做不同的操作。如果全部使用类型断言去做，代码就会非常的难看且繁长。此时我们就可以使用类型选择这种语法来根据接口变量的具体类型执行不同的操作。</p>
 <p>语法格式：</p>
-<pre><code class="language-go">// 需要具体类型变量的值
-switch 具体类型变量 := 接口类型变量.(type) {
-  case 具体类型1:
-      // 业务逻辑
-  case 具体类型2:
-      // 业务逻辑
-  case 具体类型3:
-      // 业务逻辑
-  default:
-      // 业务逻辑
-  }
+<div class="highlight"><pre><span></span><code><span class="c1">// 需要具体类型变量的值</span>
+<span class="k">switch</span><span class="w"> </span><span class="nx">具体类型变量</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">接口类型变量</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nx">具体类型1</span><span class="p">:</span>
+<span class="w">      </span><span class="c1">// 业务逻辑</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nx">具体类型2</span><span class="p">:</span>
+<span class="w">      </span><span class="c1">// 业务逻辑</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nx">具体类型3</span><span class="p">:</span>
+<span class="w">      </span><span class="c1">// 业务逻辑</span>
+<span class="w">  </span><span class="k">default</span><span class="p">:</span>
+<span class="w">      </span><span class="c1">// 业务逻辑</span>
+<span class="w">  </span><span class="p">}</span>
 
-// 不需要具体类型变量的值
-switch 接口类型变量.(type) {
-  case 具体类型1:
-      // 业务逻辑
-  case 具体类型2:
-      // 业务逻辑
-  case 具体类型3:
-      // 业务逻辑
-  default:
-      // 业务逻辑
-  }
-</code></pre>
+<span class="c1">// 不需要具体类型变量的值</span>
+<span class="k">switch</span><span class="w"> </span><span class="nx">接口类型变量</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nx">具体类型1</span><span class="p">:</span>
+<span class="w">      </span><span class="c1">// 业务逻辑</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nx">具体类型2</span><span class="p">:</span>
+<span class="w">      </span><span class="c1">// 业务逻辑</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nx">具体类型3</span><span class="p">:</span>
+<span class="w">      </span><span class="c1">// 业务逻辑</span>
+<span class="w">  </span><span class="k">default</span><span class="p">:</span>
+<span class="w">      </span><span class="c1">// 业务逻辑</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>case中的所有具体类型，都必须是实现了该接口的类型，否则会编译报错。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">func Print(v any) {
-    switch vv := v.(type) {
-    case int:
-        fmt.Printf(&quot;type: %s, value = %d\n&quot;, &quot;int&quot;, vv)
-    case string:
-        fmt.Printf(&quot;type: %s, value = %s\n&quot;, &quot;string&quot;, vv)
-    case byte:
-        fmt.Printf(&quot;type: %s, value = %v\n&quot;, &quot;byte&quot;, vv)
-    case bool:
-        fmt.Printf(&quot;type: %s, value = %t\n&quot;, &quot;bool&quot;, vv)
-    default:
-        fmt.Printf(&quot;type: %s, value = %v\n&quot;, &quot;unknown&quot;, vv)
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">Print</span><span class="p">(</span><span class="nx">v</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nx">vv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">v</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kt">int</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;type: %s, value = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">vv</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kt">string</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;type: %s, value = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">vv</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kt">byte</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;type: %s, value = %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;byte&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">vv</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kt">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;type: %s, value = %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;bool&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">vv</span><span class="p">)</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;type: %s, value = %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;unknown&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">vv</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    Print(1) // type: int, value = 1
-    Print(&quot;hello&quot;) // type: string, value = hello
-    Print(true) // type: bool, value = true
-    Print(byte(1)) // type: byte, value = 1
-    Print(1.1) // type: unknown, value = 1.1
-    Print(complex(1, 2)) // type: unknown, value = (1+2i)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Print</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// type: int, value = 1</span>
+<span class="w">    </span><span class="nx">Print</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// type: string, value = hello</span>
+<span class="w">    </span><span class="nx">Print</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="c1">// type: bool, value = true</span>
+<span class="w">    </span><span class="nx">Print</span><span class="p">(</span><span class="nb">byte</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="c1">// type: byte, value = 1</span>
+<span class="w">    </span><span class="nx">Print</span><span class="p">(</span><span class="mf">1.1</span><span class="p">)</span><span class="w"> </span><span class="c1">// type: unknown, value = 1.1</span>
+<span class="w">    </span><span class="nx">Print</span><span class="p">(</span><span class="nb">complex</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="c1">// type: unknown, value = (1+2i)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="9">9. 接口的最佳实践</h2>
 <h3 id="91">9.1. 倾向于定义小接口</h3>
 <p>Go语言倾向于定义小而专注的接口，这样更容易实现和组合：</p>
-<pre><code class="language-go">// 好的做法：小而专注的接口
-type Stringer interface {
-    String() string
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 好的做法：小而专注的接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Stringer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">String</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-type Reader interface {
-    Read([]byte) (int, error)
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Reader</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Read</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
 
-type Writer interface {
-    Write([]byte) (int, error)
-</code></pre>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Writer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+</code></pre></div>
 <h3 id="92">9.2. 接受接口，返回结构体</h3>
 <p>在设计函数时，倾向于接受接口参数，返回具体类型：</p>
-<pre><code class="language-go">// 接受接口作为参数
-func ProcessData(r Reader) []byte {
-    data := make([]byte, 1024)
-    r.Read(data)
-    return data
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 接受接口作为参数</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">ProcessData</span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="nx">Reader</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Read</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">data</span>
+<span class="p">}</span>
 
-// 返回具体类型
-func NewFile(name string) *File {
-    return &amp;File{name: name}
-}
-</code></pre>
+<span class="c1">// 返回具体类型</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewFile</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">File</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">File</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="93">9.3. 接口作为函数参数实现解耦</h3>
-<pre><code class="language-go">type Animal interface {
-    Speak() string
-}
-</code></pre>
-<pre><code class="language-go">type Dog struct{}
-func (d Dog) Speak() string {
-    return &quot;汪汪&quot;
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Animal</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Speak</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Dog</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="nx">Dog</span><span class="p">)</span><span class="w"> </span><span class="nx">Speak</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;汪汪&quot;</span>
+<span class="p">}</span>
 
-type Cat struct{}
-func (c Cat) Speak() string {
-    return &quot;喵喵&quot;
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Cat</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Cat</span><span class="p">)</span><span class="w"> </span><span class="nx">Speak</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;喵喵&quot;</span>
+<span class="p">}</span>
 
-// 使用接口作为函数参数实现解耦
-func MakeAnimalSpeak(a Animal) {
-    fmt.Println(a.Speak())
-}
+<span class="c1">// 使用接口作为函数参数实现解耦</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">MakeAnimalSpeak</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="nx">Animal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">Speak</span><span class="p">())</span>
+<span class="p">}</span>
 
-func main() {
-    dog := Dog{}
-    cat := Cat{}
-    MakeAnimalSpeak(dog) // 汪汪
-    MakeAnimalSpeak(cat) // 喵喵
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">dog</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Dog</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">cat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Cat</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">MakeAnimalSpeak</span><span class="p">(</span><span class="nx">dog</span><span class="p">)</span><span class="w"> </span><span class="c1">// 汪汪</span>
+<span class="w">    </span><span class="nx">MakeAnimalSpeak</span><span class="p">(</span><span class="nx">cat</span><span class="p">)</span><span class="w"> </span><span class="c1">// 喵喵</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="94">9.4. 接口与结构体的组合使用</h3>
 <p>接口和结构体经常一起使用来实现面向对象的设计模式：</p>
-<pre><code class="language-go">// 定义接口
-type Shape interface {
-    Area() float64
-    Perimeter() float64
-}
-</code></pre>
-<pre><code class="language-go">// 定义结构体
-type Rectangle struct {
-    Width, Height float64
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Shape</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Area</span><span class="p">()</span><span class="w"> </span><span class="kt">float64</span>
+<span class="w">    </span><span class="nx">Perimeter</span><span class="p">()</span><span class="w"> </span><span class="kt">float64</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Rectangle</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Width</span><span class="p">,</span><span class="w"> </span><span class="nx">Height</span><span class="w"> </span><span class="kt">float64</span>
+<span class="p">}</span>
 
-type Circle struct {
-    Radius float64
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Circle</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Radius</span><span class="w"> </span><span class="kt">float64</span>
+<span class="p">}</span>
 
-// 为结构体实现接口
-func (r Rectangle) Area() float64 {
-    return r.Width * r.Height
-}
+<span class="c1">// 为结构体实现接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="nx">Rectangle</span><span class="p">)</span><span class="w"> </span><span class="nx">Area</span><span class="p">()</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Height</span>
+<span class="p">}</span>
 
-func (r Rectangle) Perimeter() float64 {
-    return 2 * (r.Width + r.Height)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="nx">Rectangle</span><span class="p">)</span><span class="w"> </span><span class="nx">Perimeter</span><span class="p">()</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">Width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Height</span><span class="p">)</span>
+<span class="p">}</span>
 
-func (c Circle) Area() float64 {
-    return math.Pi * c.Radius * c.Radius
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Circle</span><span class="p">)</span><span class="w"> </span><span class="nx">Area</span><span class="p">()</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">Pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Radius</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Radius</span>
+<span class="p">}</span>
 
-func (c Circle) Perimeter() float64 {
-    return 2 * math.Pi * c.Radius
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Circle</span><span class="p">)</span><span class="w"> </span><span class="nx">Perimeter</span><span class="p">()</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">Pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Radius</span>
+<span class="p">}</span>
 
-// 使用接口
-func PrintShapeInfo(s Shape) {
-    fmt.Printf(&quot;面积: %.2f, 周长: %.2f\n&quot;, s.Area(), s.Perimeter())
-}
+<span class="c1">// 使用接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">PrintShapeInfo</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="nx">Shape</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;面积: %.2f, 周长: %.2f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Area</span><span class="p">(),</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Perimeter</span><span class="p">())</span>
+<span class="p">}</span>
 
-func main() {
-    rect := Rectangle{Width: 10, Height: 5}
-    circle := Circle{Radius: 3}
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">rect</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Rectangle</span><span class="p">{</span><span class="nx">Width</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nx">Height</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">circle</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Circle</span><span class="p">{</span><span class="nx">Radius</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
 
-    PrintShapeInfo(rect)
-    PrintShapeInfo(circle)
-}
-</code></pre>
+<span class="w">    </span><span class="nx">PrintShapeInfo</span><span class="p">(</span><span class="nx">rect</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">PrintShapeInfo</span><span class="p">(</span><span class="nx">circle</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="10">10. 接口值的内部结构</h2>
 <p>一个接口的值（简称接口值）是由一个具体类型和具体类型的值两部分组成的。这两部分分别称为接口的动态类型和动态值。
 1. 类型信息（动态类型）
 2. 值信息（动态值）</p>
 <p>示例：</p>
-<pre><code class="language-go">var w io.Writer
-w = os.Stdout
-w = new(bytes.Buffer)
-w = nil
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">w</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span>
+<span class="nx">w</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span>
+<span class="nx">w</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span><span class="p">)</span>
+<span class="nx">w</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">nil</span>
+</code></pre></div>
 <p><img alt="image-20250925164925471" src="../../.public/image-20250925164925471.png" /></p>
 
 

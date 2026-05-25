@@ -1979,14 +1979,14 @@
 <h2 id="1">1. 条件语句</h2>
 <h3 id="11-if">1.1. if语句</h3>
 <p>Go语言中if条件语句的格式如下：</p>
-<pre><code class="language-go">if 布尔表达式1 {
-    // 布尔表达式1结果为true时执行
-} else if 布尔表达式2 {
-    // 布尔表达式1结果为false且布尔表达式2结果为true时执行
-}else{
-    // 前面的布尔表达式都为false时执行
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="nx">布尔表达式1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 布尔表达式1结果为true时执行</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">布尔表达式2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 布尔表达式1结果为false且布尔表达式2结果为true时执行</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 前面的布尔表达式都为false时执行</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><code>else if</code>子语句可能没有，也可能又多个。</li>
 <li><code>else</code>子语句可能没有，但不能有多个。</li>
@@ -1996,61 +1996,61 @@
 <p>Go语言中不支持三目运算符!</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-go">// 基本if语句
-if x &gt; 0 {
-    fmt.Println(&quot;x是正数&quot;)
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 基本if语句</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;x是正数&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// if-else语句
-if x &gt; 0 {
-    fmt.Println(&quot;x是正数&quot;)
-} else {
-    fmt.Println(&quot;x不是正数&quot;)
-}
+<span class="c1">// if-else语句</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;x是正数&quot;</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;x不是正数&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// if-else if-else语句
-if x &gt; 0 {
-    fmt.Println(&quot;x是正数&quot;)
-} else if x &lt; 0 {
-    fmt.Println(&quot;x是负数&quot;)
-} else {
-    fmt.Println(&quot;x是零&quot;)
-}
-</code></pre>
+<span class="c1">// if-else if-else语句</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;x是正数&quot;</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;x是负数&quot;</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;x是零&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>Go语言的if语句支持在条件判断前执行初始化语句：</p>
-<pre><code class="language-go">// 在if语句中声明和初始化变量
-if x := computeValue(); x &gt; 10 {
-    fmt.Printf(&quot;计算结果%d大于10\n&quot;, x)
-} else {
-    fmt.Printf(&quot;计算结果%d不大于10\n&quot;, x)
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 在if语句中声明和初始化变量</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">computeValue</span><span class="p">();</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;计算结果%d大于10\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;计算结果%d不大于10\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 注意：x的作用域仅限于if语句块内
-// fmt.Println(x)  // 错误：未定义
+<span class="c1">// 注意：x的作用域仅限于if语句块内</span>
+<span class="c1">// fmt.Println(x)  // 错误：未定义</span>
 
-// 文件操作示例
-if file, err := os.Open(&quot;test.txt&quot;); err != nil {
-    fmt.Println(&quot;打开文件失败:&quot;, err)
-} else {
-    defer file.Close()
-    // 处理文件...
-}
-</code></pre>
+<span class="c1">// 文件操作示例</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="s">&quot;test.txt&quot;</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;打开文件失败:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">// 处理文件...</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="12-switch">1.2. 基本switch语句</h3>
 <p>switch 语句用于基于不同条件执行不同动作，每一个 case 分支都是唯一的，从上直下逐一测试，直到匹配为止：</p>
 <p>格式：</p>
-<pre><code class="language-go">switch 外层表达式 {
-    case 内层表达式1:
-            // 内层执行体1
-    case 内层表达式2:
-            // 内层执行体2
-            fallthrough
-    case 内层表达式3,内层表达式4:
-            // 内层执行体3
-    default:
-            // 默认执行
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="nx">外层表达式</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">内层表达式1</span><span class="p">:</span>
+<span class="w">            </span><span class="c1">// 内层执行体1</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">内层表达式2</span><span class="p">:</span>
+<span class="w">            </span><span class="c1">// 内层执行体2</span>
+<span class="w">            </span><span class="k">fallthrough</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">内层表达式3</span><span class="p">,</span><span class="nx">内层表达式4</span><span class="p">:</span>
+<span class="w">            </span><span class="c1">// 内层执行体3</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">            </span><span class="c1">// 默认执行</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>
 <p>外层表达式和内层表达式都可以是任意类型，但需要保证两者的结果是同一种类型。</p>
@@ -2087,137 +2087,137 @@ if file, err := os.Open(&quot;test.txt&quot;); err != nil {
 <li>Go语言的switch语句支持在switch关键字后执行初始化语句。</li>
 </ul>
 <p><strong>示例：简单switch语句</strong></p>
-<pre><code class="language-go">// 基本switch语句
-grade := &quot;B&quot;
-switch grade {
-case &quot;A&quot;:
-    fmt.Println(&quot;优秀&quot;)
-case &quot;B&quot;:
-    fmt.Println(&quot;良好&quot;)
-case &quot;C&quot;:
-    fmt.Println(&quot;一般&quot;)
-default:
-    fmt.Println(&quot;不及格&quot;)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 基本switch语句</span>
+<span class="nx">grade</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;B&quot;</span>
+<span class="k">switch</span><span class="w"> </span><span class="nx">grade</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="s">&quot;A&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;优秀&quot;</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;良好&quot;</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;一般&quot;</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;不及格&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>示例：表达式switch</strong></p>
-<pre><code class="language-go">// case后面可以跟表达式
-x := 5
-switch {
-case x &lt; 0:
-    fmt.Println(&quot;x是负数&quot;)
-case x &gt; 0 &amp;&amp; x &lt; 10:
-    fmt.Println(&quot;x是个位正数&quot;)
-case x &gt;= 10:
-    fmt.Println(&quot;x是两位或以上的正数&quot;)
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// case后面可以跟表达式</span>
+<span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span>
+<span class="k">switch</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;x是负数&quot;</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;x是个位正数&quot;</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">10</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;x是两位或以上的正数&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// switch后面可以跟表达式
-x := 10
-y := 0
-switch x + y {
-case 0:
-  fmt.Println(&quot;0&quot;)
-case 10:
-  fmt.Println(&quot;10&quot;)
-default:
-  fmt.Println(&quot;default&quot;)
-}
+<span class="c1">// switch后面可以跟表达式</span>
+<span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span>
+<span class="nx">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">switch</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="mi">10</span><span class="p">:</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;10&quot;</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;default&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// switch后面甚至可以初始化变量
-x := 10
-y := 0
-switch r := x + y; r &gt;= 0 {
-case true:
-  fmt.Println(&quot;true&quot;)
-case false:
-  fmt.Println(&quot;false&quot;)
-default:
-  fmt.Println(&quot;default&quot;)
-}
-</code></pre>
+<span class="c1">// switch后面甚至可以初始化变量</span>
+<span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span>
+<span class="nx">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">switch</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">y</span><span class="p">;</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="kc">true</span><span class="p">:</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;true&quot;</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="kc">false</span><span class="p">:</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;false&quot;</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;default&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>示例：多条件匹配</strong></p>
-<pre><code class="language-go">// 一个case可以匹配多个值
-ch := 'a'
-switch ch {
-case 'a', 'e', 'i', 'o', 'u':
-    fmt.Println(&quot;元音字母&quot;)
-case 'b', 'c', 'd', 'f', 'g':
-    fmt.Println(&quot;辅音字母&quot;)
-default:
-    fmt.Println(&quot;其他字符&quot;)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 一个case可以匹配多个值</span>
+<span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span>
+<span class="k">switch</span><span class="w"> </span><span class="nx">ch</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;e&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;i&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;o&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;u&#39;</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;元音字母&quot;</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;g&#39;</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;辅音字母&quot;</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;其他字符&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>示例：fallthrough关键字</strong></p>
-<pre><code class="language-go">// fallthrough会执行下一个case，即使条件不满足
-x := 10
-switch x {
-case 10:
-    fmt.Println(&quot;等于10&quot;)
-    fallthrough  // 继续执行下一个case
-case 20:
-    fmt.Println(&quot;等于20或执行了fallthrough&quot;)
-case 30:
-    fmt.Println(&quot;等于30或执行了fallthrough&quot;)
-default:
-    fmt.Println(&quot;其他值&quot;)
-}
-// 输出：
-// 等于10
-// 等于20或执行了fallthrough
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// fallthrough会执行下一个case，即使条件不满足</span>
+<span class="nx">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span>
+<span class="k">switch</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="mi">10</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;等于10&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">fallthrough</span><span class="w">  </span><span class="c1">// 继续执行下一个case</span>
+<span class="k">case</span><span class="w"> </span><span class="mi">20</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;等于20或执行了fallthrough&quot;</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="mi">30</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;等于30或执行了fallthrough&quot;</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;其他值&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 输出：</span>
+<span class="c1">// 等于10</span>
+<span class="c1">// 等于20或执行了fallthrough</span>
+</code></pre></div>
 <h3 id="13-switch">1.3. 类型switch</h3>
 <p>switch 语句还可以被用于 type-switch 来判断某个 interface 变量中实际存储的变量类型。</p>
 <blockquote>
 <p>typw-switch语句算是switch语句的一个变种</p>
 </blockquote>
 <p>语法格式：</p>
-<pre><code class="language-go">switch 接口变量.(type){
-    case 类型1:
-        // 执行体1
-    case 类型2:
-        // 执行体2
-    default:
-        // 默认执行体
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="nx">接口变量</span><span class="p">.(</span><span class="kd">type</span><span class="p">){</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">类型1</span><span class="p">:</span>
+<span class="w">        </span><span class="c1">// 执行体1</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">类型2</span><span class="p">:</span>
+<span class="w">        </span><span class="c1">// 执行体2</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="c1">// 默认执行体</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-go">// 类型switch用于判断接口变量的具体类型
-func processValue(v interface{}) {
-    switch val := v.(type) {
-    case int:
-        fmt.Printf(&quot;整数: %d\n&quot;, val)
-    case string:
-        fmt.Printf(&quot;字符串: %s\n&quot;, val)
-    case bool:
-        fmt.Printf(&quot;布尔值: %t\n&quot;, val)
-    case nil:
-        fmt.Println(&quot;空值&quot;)
-    default:
-        fmt.Printf(&quot;未知类型: %T\n&quot;, val)
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 类型switch用于判断接口变量的具体类型</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">processValue</span><span class="p">(</span><span class="nx">v</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">v</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kt">int</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;整数: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kt">string</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;字符串: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kt">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;布尔值: %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="kc">nil</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;空值&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;未知类型: %T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    processValue(42)
-    processValue(&quot;Hello&quot;)
-    processValue(true)
-    processValue(nil)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">processValue</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">processValue</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">processValue</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">processValue</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="14-select">1.4. select语句</h3>
 <p>select 是Go中的一个控制结构，类似于用于通信的switch语句。每个case必须是一个通信操作，要么是发送要么是接收。 select 随机执行一个可运行的case。如果没有case可运行，它将阻塞，直到有case可运行。一个默认的子句应该总是可运行的。</p>
 <p>语法格式：</p>
-<pre><code class="language-go">select {
-    case communication clause  :
-       // statement(s)      
-    case communication clause  :
-       // statement(s)
-    /* 你可以定义任意数量的 case */
-    default : /* 可选 */
-       statement(s)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">communication</span><span class="w"> </span><span class="nx">clause</span><span class="w">  </span><span class="p">:</span>
+<span class="w">       </span><span class="c1">// statement(s)      </span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">communication</span><span class="w"> </span><span class="nx">clause</span><span class="w">  </span><span class="p">:</span>
+<span class="w">       </span><span class="c1">// statement(s)</span>
+<span class="w">    </span><span class="cm">/* 你可以定义任意数量的 case */</span>
+<span class="w">    </span><span class="k">default</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="cm">/* 可选 */</span>
+<span class="w">       </span><span class="nx">statement</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>每个case都必须是一个通信操作.</li>
 <li>如果任意某个通信操作可以进行，它就执行；其他被忽略。</li>
@@ -2231,38 +2231,38 @@ func main() {
 <p>②如果没有default语句，那么select语句将被阻塞，直到至少有一个case可以进行下去。</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-go">// 基本select语句
-ch1 := make(chan string)
-ch2 := make(chan string)
+<div class="highlight"><pre><span></span><code><span class="c1">// 基本select语句</span>
+<span class="nx">ch1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span>
+<span class="nx">ch2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span>
 
-go func() {
-    time.Sleep(1 * time.Second)
-    ch1 &lt;- &quot;来自通道1的消息&quot;
-}()
+<span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ch1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;来自通道1的消息&quot;</span>
+<span class="p">}()</span>
 
-go func() {
-    time.Sleep(2 * time.Second)
-    ch2 &lt;- &quot;来自通道2的消息&quot;
-}()
+<span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ch2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;来自通道2的消息&quot;</span>
+<span class="p">}()</span>
 
-// select会选择第一个准备好的case执行
-select {
-case msg1 := &lt;-ch1:
-    fmt.Println(&quot;收到:&quot;, msg1)
-case msg2 := &lt;-ch2:
-    fmt.Println(&quot;收到:&quot;, msg2)
-case &lt;-time.After(3 * time.Second):
-    fmt.Println(&quot;超时&quot;)
-}
-</code></pre>
+<span class="c1">// select会选择第一个准备好的case执行</span>
+<span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="nx">msg1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch1</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;收到:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">msg1</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="nx">msg2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch2</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;收到:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">msg2</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nx">After</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">):</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;超时&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="2">2. 循环语句</h2>
 <h3 id="21-for">2.1. for语句</h3>
 <p>for循环是一个循环控制结构，可以循环循环执行指定次数或不限次数。</p>
 <p>语法格式如下：</p>
-<pre><code class="language-go">for 初始化子句;条件子句;后置子句{
-    // 执行体
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="nx">初始化子句</span><span class="p">;</span><span class="nx">条件子句</span><span class="p">;</span><span class="nx">后置子句</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 执行体</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>执行流程：</p>
 <ol>
 <li>执行初始化子句</li>
@@ -2280,144 +2280,146 @@ case &lt;-time.After(3 * time.Second):
 <li>for循环可以嵌套使用。</li>
 </ul>
 <p><strong>示例：基本for循环</strong></p>
-<pre><code class="language-go">// 传统的for循环
-for i := 0; i &lt; 5; i++ {
-    fmt.Printf(&quot;循环次数: %d\n&quot;, i)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 传统的for循环</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;循环次数: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>示例：while循环形式</strong></p>
-<pre><code class="language-go">// Go语言没有while关键字，但for可以实现相同效果
-i := 0
-for i &lt; 5 {
-    fmt.Printf(&quot;循环次数: %d\n&quot;, i)
-    i++
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// Go语言没有while关键字，但for可以实现相同效果</span>
+<span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;循环次数: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">i</span><span class="o">++</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>示例：无限循环</strong></p>
-<pre><code class="language-go">// 无限循环
-for {
-    fmt.Println(&quot;无限循环&quot;)
-    // 需要break或其他方式跳出循环
-    break  // 或者return、goto等
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 无限循环</span>
+<span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;无限循环&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 需要break或其他方式跳出循环</span>
+<span class="w">    </span><span class="k">break</span><span class="w">  </span><span class="c1">// 或者return、goto等</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="22-for-range">2.2. for-range循环</h3>
 <p>range关键字用于遍历数组、切片、映射、字符串和通道：</p>
 <ul>
 <li>遍历数组/切片</li>
 </ul>
-<p>```go
-  // 遍历数组或切片
-  numbers := []int{1, 2, 3, 4, 5}
-  for index, value := range numbers {
-      fmt.Printf("索引%d: 值%d\n", index, value)
-  }</p>
-<p>// 只获取索引
-  for i := range numbers {
-      fmt.Printf("索引: %d\n", i)
-  }</p>
-<p>// 只获取值
-  for _, value := range numbers {
-      fmt.Printf("值: %d\n", value)
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 遍历数组或切片</span>
+<span class="nx">numbers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">numbers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;索引%d: 值%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 只获取索引</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">numbers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;索引: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 只获取值</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">numbers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;值: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>遍历映射</li>
 </ul>
-<p>```go
-  // 遍历映射
-  scores := map[string]int{
-      "数学": 95,
-      "语文": 87,
-      "英语": 92,
-  }</p>
-<p>for subject, score := range scores {
-      fmt.Printf("%s: %d分\n", subject, score)
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 遍历映射</span>
+<span class="nx">scores</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span>
+<span class="w">    </span><span class="s">&quot;数学&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">95</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;语文&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">87</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;英语&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">92</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span><span class="w"> </span><span class="nx">subject</span><span class="p">,</span><span class="w"> </span><span class="nx">score</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">scores</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s: %d分\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">subject</span><span class="p">,</span><span class="w"> </span><span class="nx">score</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>遍历字符串</li>
 </ul>
-<p><code>go
-  s := "Hello World"
-  for i, c := range s {
-    fmt.Printf("%d: %c\n", i, c)
-  }
-  for i := range s {
-    fmt.Printf("%d: %c\n", i, s[i])
-  }</code></p>
+<div class="highlight"><pre><span></span><code><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d: %c\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d: %c\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>遍历通道</li>
 </ul>
-<p>```go
-  // 定义通道
-  c := make(chan int)</p>
-<p>// 启动一个单独的协程
-  go func() {
-  // 重复十次
-  for i := 0; i &lt; 10; i++ {
-    // 睡眠1秒
-    time.Sleep(time.Second)
-    // 往通道写入数据
-    c &lt;- i
-  }
-  // 关闭通道
-  close(c)
-  }()</p>
-<p>// 遍历读取通道数据
-  for i := range c {
-  fmt.Println(i)
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义通道</span>
+<span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span>
+
+<span class="c1">// 启动一个单独的协程</span>
+<span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="c1">// 重复十次</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 睡眠1秒</span>
+<span class="w">  </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">  </span><span class="c1">// 往通道写入数据</span>
+<span class="w">  </span><span class="nx">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">i</span>
+<span class="p">}</span>
+<span class="c1">// 关闭通道</span>
+<span class="nb">close</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="p">}()</span>
+
+<span class="c1">// 遍历读取通道数据</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="p">{</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="3">3. 跳转语句</h2>
 <h3 id="31-break">3.1. break</h3>
 <p>break关键字用于跳出当前循环语句或者switch语句。</p>
 <h4 id="311">3.1.1. 循环中使用</h4>
 <p>break关键字在循环体中使用，表示不执行后续操作，直接退出当前循环体。</p>
-<pre><code class="language-go">循环体{
-  // 前面的执行语句
-  break
-  // 后面的执行语句
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">循环体</span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 前面的执行语句</span>
+<span class="w">  </span><span class="k">break</span>
+<span class="w">  </span><span class="c1">// 后面的执行语句</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>break关键字执行后，关键字后面的执行语句不会被执行。</li>
 <li>break关键字执行后，退出当前循环。</li>
 <li>如果break关键字在多重循环内，将退出的是break关键字所在的最内层循环。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">func main() {
-  a := []int{1, 2, 3, 4, 5}
-  for i := 0; i &lt; 5; i++ {
-      for j, v := range a {
-          fmt.Print(v)
-          if j == i {
-              break
-          }
-      }
-      fmt.Println()
-  }
-}
-// 结果:
-1
-12   
-123  
-1234 
-12345
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="nx">j</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Print</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="k">break</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">()</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 结果:</span>
+<span class="mi">1</span>
+<span class="mi">12</span><span class="w">   </span>
+<span class="mi">123</span><span class="w">  </span>
+<span class="mi">1234</span><span class="w"> </span>
+<span class="mi">12345</span>
+</code></pre></div>
 <p>break关键字还可以搭配标签使用，表示退出标签后面紧跟的循环。</p>
 <p>语法格式：</p>
-<pre><code class="language-go">标签名字:    
-循环1 {
-    // 前置语句1
-    循环2 {
-        // 前置语句2
-        break 标签名字
-        // 后置语句2
-    }
-    // 后置语句1
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">标签名字</span><span class="p">:</span><span class="w">    </span>
+<span class="nx">循环1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 前置语句1</span>
+<span class="w">    </span><span class="nx">循环2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 前置语句2</span>
+<span class="w">        </span><span class="k">break</span><span class="w"> </span><span class="nx">标签名字</span>
+<span class="w">        </span><span class="c1">// 后置语句2</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 后置语句1</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>
 <p>标签后面应该紧跟循环，不能再有其他语句。</p>
@@ -2435,65 +2437,65 @@ for {
 <h4 id="312-switch">3.1.2. switch中使用</h4>
 <p>break关键字在switch中使用，表示不执行后续操作，直接退出当前switch体。</p>
 <p>语法格式：</p>
-<pre><code class="language-go">switch语句{
-  case子句{
-      // 前面的执行语句
-      break
-      // 后面的执行语句
-  }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">switch语句</span><span class="p">{</span>
+<span class="w">  </span><span class="nx">case子句</span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// 前面的执行语句</span>
+<span class="w">      </span><span class="k">break</span>
+<span class="w">      </span><span class="c1">// 后面的执行语句</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>break关键字执行后，关键字后面的执行语句不会被执行。</li>
 <li>break关键字执行后，退出当前switch。</li>
 <li>如果break关键字在多重switch内，将退出的是break关键字所在的最内层switch。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">func main() {
-  var a = 1
-  var b = 2
-  switch a {
-  case 1:
-      fmt.Println(11)
-      switch b {
-      case 2:
-          fmt.Println(21)
-          if b &gt; a {
-              break
-          }
-          fmt.Println(22)
-      }
-      fmt.Println(12)
-  }
-}
-// 结果
-11
-21
-12
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">      </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="w">      </span><span class="k">switch</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span>
+<span class="w">          </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="k">break</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">          </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">22</span><span class="p">)</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 结果</span>
+<span class="mi">11</span>
+<span class="mi">21</span>
+<span class="mi">12</span>
+</code></pre></div>
 <p>break关键字还可以搭配标签使用，表示退出标签后面紧跟的switch。</p>
-<pre><code class="language-go">func main() {
-  var a = 1
-  var b = 2
-label:
-  switch a {
-  case 1:
-      fmt.Println(11)
-      switch b {
-      case 2:
-          fmt.Println(21)
-          if b &gt; a {
-              break label
-          }
-          fmt.Println(22)
-      }
-      fmt.Println(12)
-  }
-}
-// 结果
-11
-21
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="nx">label</span><span class="p">:</span>
+<span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">      </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="w">      </span><span class="k">switch</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span>
+<span class="w">          </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="k">break</span><span class="w"> </span><span class="nx">label</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">          </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">22</span><span class="p">)</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 结果</span>
+<span class="mi">11</span>
+<span class="mi">21</span>
+</code></pre></div>
 <ul>
 <li>标签后面应该紧跟switch，不能再有其他语句。</li>
 <li>break关键字执行后，关键字后面的执行语句不会被执行。</li>
@@ -2502,12 +2504,12 @@ label:
 <h3 id="32-continue">3.2. continue语句</h3>
 <p>continue关键字用于停止当前循环体的执行，转而执行下一次循环。</p>
 <p>语法格式：</p>
-<pre><code class="language-go">for 初始化子句;条件子句;后置子句{
-  // 执行体1
-  continue
-  // 执行体2
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="nx">初始化子句</span><span class="p">;</span><span class="nx">条件子句</span><span class="p">;</span><span class="nx">后置子句</span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 执行体1</span>
+<span class="w">  </span><span class="k">continue</span>
+<span class="w">  </span><span class="c1">// 执行体2</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>
 <p>continue关键字只能在循环中使用。</p>
@@ -2525,35 +2527,35 @@ label:
 <li>如果continue关键字在多重循环体内，将作用在关键字所在的最内层循环。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">func main() {
-  a := []int{1, 2, 3}
-  for i := range a {
-      fmt.Print(i, &quot;-&gt;&quot;)
-      if i == 1 {
-          fmt.Println(&quot;XXX&quot;)
-          continue
-      }
-      fmt.Println(a[i])
-  }
-}
-// 结果
-0-&gt;1  
-1-&gt;XXX
-2-&gt;3  
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Print</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-&gt;&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;XXX&quot;</span><span class="p">)</span>
+<span class="w">          </span><span class="k">continue</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 结果</span>
+<span class="mi">0</span><span class="o">-</span><span class="p">&gt;</span><span class="mi">1</span><span class="w">  </span>
+<span class="mi">1</span><span class="o">-</span><span class="p">&gt;</span><span class="nx">XXX</span>
+<span class="mi">2</span><span class="o">-</span><span class="p">&gt;</span><span class="mi">3</span><span class="w">  </span>
+</code></pre></div>
 <p>continue关键字还可以搭配标签使用，表示作用于标签后面紧跟的循环。</p>
 <p>语法格式：</p>
-<pre><code class="language-go">标签名字:    
-  循环1 {
-      // 前置语句1
-      循环2 {
-          // 前置语句2
-          continue 标签名字
-          // 后置语句2
-      }
-      // 后置语句1
-  }
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">标签名字</span><span class="p">:</span><span class="w">    </span>
+<span class="w">  </span><span class="nx">循环1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// 前置语句1</span>
+<span class="w">      </span><span class="nx">循环2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="c1">// 前置语句2</span>
+<span class="w">          </span><span class="k">continue</span><span class="w"> </span><span class="nx">标签名字</span>
+<span class="w">          </span><span class="c1">// 后置语句2</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="c1">// 后置语句1</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>
 <p>标签后面应该紧跟循环，不能再有其他语句。</p>
@@ -2572,24 +2574,24 @@ label:
 <p>Go语言保留了goto语句，但建议谨慎使用。</p>
 <p>goto必须搭配标签使用，表示跳转到标签所在的位置，并开始执行标签后的语句。</p>
 <p>示例：</p>
-<pre><code class="language-go">func main() {
-    a := []int{1, 2, 3}
-    count := 0
-tag:
-    for i := 0; i &lt; len(a); i++ {
-        fmt.Print(a[i])
-    }
-    fmt.Println()
-    count++
-    if count &lt; 3 {
-        goto tag
-    }
-}
-// 结果
-123
-123
-123
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="nx">tag</span><span class="p">:</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Print</span><span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">count</span><span class="o">++</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">goto</span><span class="w"> </span><span class="nx">tag</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 结果</span>
+<span class="mi">123</span>
+<span class="mi">123</span>
+<span class="mi">123</span>
+</code></pre></div>
 
 
 

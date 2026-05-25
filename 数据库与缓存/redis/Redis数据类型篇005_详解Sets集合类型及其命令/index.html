@@ -1972,349 +1972,349 @@
 <p>操作成员命令用于操作集合中的成员，比如添加成员、删除成员、移动成员和弹出成员。</p>
 <h4 id="221-sadd">2.2.1. SADD</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SADD key member [member ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SADD<span class="w"> </span>key<span class="w"> </span>member<span class="w"> </span><span class="o">[</span>member<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>向集合中添加一个或多个成员,如果成员已存在，则忽略。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD myset &quot;Hello&quot; &quot;World&quot;
-(integer) 2
-redis&gt; SADD myset &quot;World&quot;
-(integer) 0
-redis&gt; SMEMBERS myset
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>SMEMBERS<span class="w"> </span>myset
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+</code></pre></div>
 <h4 id="222-smove">2.2.2. SMOVE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SMOVE source destination member
-</code></pre>
+<div class="highlight"><pre><span></span><code>SMOVE<span class="w"> </span><span class="nb">source</span><span class="w"> </span>destination<span class="w"> </span>member
+</code></pre></div>
 <p>将集合中的一个成员移动到另一个集合。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD myset &quot;one&quot;
-(integer) 1
-redis&gt; SADD myset &quot;two&quot;
-(integer) 1
-redis&gt; SADD myotherset &quot;three&quot;
-(integer) 1
-redis&gt; SMOVE myset myotherset &quot;two&quot;
-(integer) 1
-redis&gt; SMEMBERS myset
-1) &quot;one&quot;
-redis&gt; SMEMBERS myotherset
-1) &quot;three&quot;
-2) &quot;two&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myotherset<span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SMOVE<span class="w"> </span>myset<span class="w"> </span>myotherset<span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SMEMBERS<span class="w"> </span>myset
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+redis&gt;<span class="w"> </span>SMEMBERS<span class="w"> </span>myotherset
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+</code></pre></div>
 <h4 id="223-spop">2.2.3. SPOP</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SPOP key [count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SPOP<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>count<span class="o">]</span>
+</code></pre></div>
 <p>从集合中随机弹出一个或多个成员。</p>
 <p>默认情况下，命令会从集合中弹出一个成员。当提供可选的count参数时，将最多弹出count个成员，实际数量取决于集合中的成员数量。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD myset &quot;one&quot;
-(integer) 1
-redis&gt; SADD myset &quot;two&quot;
-(integer) 1
-redis&gt; SADD myset &quot;three&quot;
-(integer) 1
-redis&gt; SPOP myset
-&quot;three&quot;
-redis&gt; SMEMBERS myset
-1) &quot;one&quot;
-2) &quot;two&quot;
-redis&gt; SADD myset &quot;four&quot;
-(integer) 1
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SPOP<span class="w"> </span>myset
+<span class="s2">&quot;three&quot;</span>
+redis&gt;<span class="w"> </span>SMEMBERS<span class="w"> </span>myset
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+</code></pre></div>
 <h4 id="224-srem">2.2.4. SREM</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SREM key member [member ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SREM<span class="w"> </span>key<span class="w"> </span>member<span class="w"> </span><span class="o">[</span>member<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>从集合中移除一个或多个成员。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD myset &quot;one&quot;
-(integer) 1
-redis&gt; SADD myset &quot;two&quot;
-(integer) 1
-redis&gt; SADD myset &quot;three&quot;
-(integer) 1
-redis&gt; SREM myset &quot;one&quot;
-(integer) 1
-redis&gt; SREM myset &quot;four&quot;
-(integer) 0
-redis&gt; SMEMBERS myset
-1) &quot;two&quot;
-2) &quot;three&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SREM<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SREM<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>SMEMBERS<span class="w"> </span>myset
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h3 id="23">2.3. 访问成员</h3>
 <p>访问成员命令用户获取集合中的成员或成员信息，比如检查成员是否存在、获取集合中的成员。</p>
 <h4 id="231-scard">2.3.1. SCARD</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SCARD key
-</code></pre>
+<div class="highlight"><pre><span></span><code>SCARD<span class="w"> </span>key
+</code></pre></div>
 <p>返回集合中的成员数量。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD myset &quot;Hello&quot;
-(integer) 1
-redis&gt; SADD myset &quot;World&quot;
-(integer) 1
-redis&gt; SCARD myset
-(integer) 2
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SCARD<span class="w"> </span>myset
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="232-sismember">2.3.2. SISMEMBER</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SISMEMBER key member
-</code></pre>
+<div class="highlight"><pre><span></span><code>SISMEMBER<span class="w"> </span>key<span class="w"> </span>member
+</code></pre></div>
 <p>检查元素是否为集合的成员。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD myset &quot;one&quot;
-(integer) 1
-redis&gt; SISMEMBER myset &quot;one&quot;
-(integer) 1
-redis&gt; SISMEMBER myset &quot;two&quot;
-(integer) 0
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SISMEMBER<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SISMEMBER<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="233-smembers">2.3.3. SMEMBERS</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SMEMBERS key
-</code></pre>
+<div class="highlight"><pre><span></span><code>SMEMBERS<span class="w"> </span>key
+</code></pre></div>
 <p>返回集合的所有成员。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD myset &quot;Hello&quot;
-(integer) 1
-redis&gt; SADD myset &quot;World&quot;
-(integer) 1
-redis&gt; SMEMBERS myset
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SMEMBERS<span class="w"> </span>myset
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+</code></pre></div>
 <h4 id="234-smismember">2.3.4. SMISMEMBER</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SMISMEMBER key member [member ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SMISMEMBER<span class="w"> </span>key<span class="w"> </span>member<span class="w"> </span><span class="o">[</span>member<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>检查多个元素是否为集合的成员。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD myset &quot;one&quot;
-(integer) 1
-redis&gt; SADD myset &quot;one&quot;
-(integer) 0
-redis&gt; SMISMEMBER myset &quot;one&quot; &quot;notamember&quot;
-1) (integer) 1
-2) (integer) 0
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>SMISMEMBER<span class="w"> </span>myset<span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="w"> </span><span class="s2">&quot;notamember&quot;</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="235-sscan">2.3.5. SSCAN</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SSCAN key cursor [MATCH pattern] [COUNT count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SSCAN<span class="w"> </span>key<span class="w"> </span>cursor<span class="w"> </span><span class="o">[</span>MATCH<span class="w"> </span>pattern<span class="o">]</span><span class="w"> </span><span class="o">[</span>COUNT<span class="w"> </span>count<span class="o">]</span>
+</code></pre></div>
 <p>对集合中的成员进行迭代。</p>
 <p>请参考官方文档：<a href="https://redis.io/docs/latest/commands/scan/">Redis Command Scan</a></p>
 <h4 id="236-srandmember">2.3.6. SRANDMEMBER</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SRANDMEMBER key [count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SRANDMEMBER<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>count<span class="o">]</span>
+</code></pre></div>
 <p>从集合中返回一个或多个成员。</p>
 <ul>
 <li>当count参数为正数时，表示最多返回的成员个数。实际返回个数取count 与集合成员数的较低值。</li>
 <li>当count参数为负数时，命令返回的成员可以重复，实际返回个数为count的绝对值。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD myset one two three
-(integer) 3
-redis&gt; SRANDMEMBER myset
-&quot;one&quot;
-redis&gt; SRANDMEMBER myset 2
-1) &quot;one&quot;
-2) &quot;three&quot;
-redis&gt; SRANDMEMBER myset -5
-1) &quot;three&quot;
-2) &quot;two&quot;
-3) &quot;two&quot;
-4) &quot;two&quot;
-5) &quot;three&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>myset<span class="w"> </span>one<span class="w"> </span>two<span class="w"> </span>three
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>SRANDMEMBER<span class="w"> </span>myset
+<span class="s2">&quot;one&quot;</span>
+redis&gt;<span class="w"> </span>SRANDMEMBER<span class="w"> </span>myset<span class="w"> </span><span class="m">2</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+redis&gt;<span class="w"> </span>SRANDMEMBER<span class="w"> </span>myset<span class="w"> </span>-5
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h3 id="24">2.4. 集合运算</h3>
 <p>集合运算命令用于执行多个集合的集合运算，比如计算交集、并集、差集。</p>
 <h4 id="241-sdiff">2.4.1. SDIFF</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SDIFF key [key ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SDIFF<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>计算多个集合的差集。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD key1 &quot;a&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;b&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;d&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;e&quot;
-(integer) 1
-redis&gt; SDIFF key1 key2
-1) &quot;a&quot;
-2) &quot;b&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;b&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;d&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;e&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SDIFF<span class="w"> </span>key1<span class="w"> </span>key2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;b&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="242-sdiffstore">2.4.2. SDIFFSTORE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SDIFFSTORE destination key [key ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SDIFFSTORE<span class="w"> </span>destination<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>计算多个集合的差集并存储到指定的键中。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD key1 &quot;a&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;b&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;d&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;e&quot;
-(integer) 1
-redis&gt; SDIFFSTORE key key1 key2
-(integer) 2
-redis&gt; SMEMBERS key
-1) &quot;a&quot;
-2) &quot;b&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;b&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;d&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;e&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SDIFFSTORE<span class="w"> </span>key<span class="w"> </span>key1<span class="w"> </span>key2
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>SMEMBERS<span class="w"> </span>key
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;b&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="243-sinter">2.4.3. SINTER</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SINTER key [key ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SINTER<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>计算多个集合的交集。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD key1 &quot;a&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;b&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;d&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;e&quot;
-(integer) 1
-redis&gt; SINTER key1 key2
-1) &quot;c&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;b&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;d&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;e&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SINTER<span class="w"> </span>key1<span class="w"> </span>key2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;c&quot;</span>
+</code></pre></div>
 <h4 id="244-sintercard">2.4.4. SINTERCARD</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SINTERCARD numkeys key [key ...] [LIMIT limit]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SINTERCARD<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span><span class="o">[</span>LIMIT<span class="w"> </span>limit<span class="o">]</span>
+</code></pre></div>
 <p>计算多个集合的交集的成员数量。其中<code>numkeys</code>表示参与计算的键的数量（必须为整数）。</p>
 <p>默认情况下，该命令计算所有给定集合交集的基数。当提供可选的 <code>LIMIT</code> 参数（默认为 0 且表示无限）时，如果计算过程中交集基数达到极限，算法将退出并得到基数极限。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD key1 &quot;a&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;b&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;d&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;d&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;e&quot;
-(integer) 1
-redis&gt; SINTER key1 key2
-1) &quot;c&quot;
-2) &quot;d&quot;
-redis&gt; SINTERCARD 2 key1 key2
-(integer) 2
-redis&gt; SINTERCARD 2 key1 key2 LIMIT 1
-(integer) 1
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;b&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;d&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;d&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;e&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SINTER<span class="w"> </span>key1<span class="w"> </span>key2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;d&quot;</span>
+redis&gt;<span class="w"> </span>SINTERCARD<span class="w"> </span><span class="m">2</span><span class="w"> </span>key1<span class="w"> </span>key2
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>SINTERCARD<span class="w"> </span><span class="m">2</span><span class="w"> </span>key1<span class="w"> </span>key2<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">1</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="245-sinterstore">2.4.5. SINTERSTORE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SINTERSTORE destination key [key ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SINTERSTORE<span class="w"> </span>destination<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>计算多个集合的交集并存储到指定的键中。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD key1 &quot;a&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;b&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;d&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;e&quot;
-(integer) 1
-redis&gt; SINTERSTORE key key1 key2
-(integer) 1
-redis&gt; SMEMBERS key
-1) &quot;c&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;b&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;d&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;e&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SINTERSTORE<span class="w"> </span>key<span class="w"> </span>key1<span class="w"> </span>key2
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SMEMBERS<span class="w"> </span>key
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;c&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="246-sunion">2.4.6. SUNION</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SUNION key [key ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SUNION<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>计算多个集合的并集。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD key1 &quot;a&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;b&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;d&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;e&quot;
-(integer) 1
-redis&gt; SUNION key1 key2
-1) &quot;b&quot;
-2) &quot;c&quot;
-3) &quot;e&quot;
-4) &quot;a&quot;
-5) &quot;d&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;b&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;d&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;e&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SUNION<span class="w"> </span>key1<span class="w"> </span>key2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;b&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;e&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;d&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="247-sunionstore">2.4.7. SUNIONSTORE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">SUNIONSTORE destination key [key ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SUNIONSTORE<span class="w"> </span>destination<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>计算多个集合的并集并存储到指定的键中。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SADD key1 &quot;a&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;b&quot;
-(integer) 1
-redis&gt; SADD key1 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;c&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;d&quot;
-(integer) 1
-redis&gt; SADD key2 &quot;e&quot;
-(integer) 1
-redis&gt; SUNIONSTORE key key1 key2
-(integer) 5
-redis&gt; SMEMBERS key
-1) &quot;a&quot;
-2) &quot;b&quot;
-3) &quot;c&quot;
-4) &quot;d&quot;
-5) &quot;e&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;b&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;d&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;e&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SUNIONSTORE<span class="w"> </span>key<span class="w"> </span>key1<span class="w"> </span>key2
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
+redis&gt;<span class="w"> </span>SMEMBERS<span class="w"> </span>key
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;b&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;d&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;e&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 
 
 

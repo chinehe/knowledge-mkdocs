@@ -895,45 +895,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#context" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Context
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#instruction" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Instruction
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#output-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Output Format
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Output Format">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#42-rag" class="md-nav__link">
     <span class="md-ellipsis">
@@ -1629,45 +1590,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#context" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Context
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#instruction" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Instruction
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#output-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Output Format
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Output Format">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
   <a href="#42-rag" class="md-nav__link">
     <span class="md-ellipsis">
@@ -1836,6 +1758,8 @@
                   
 
 
+
+  <h1>AI大模型领域热门&核心概念梳理</h1>
 
 <p>自2017年Transformer架构诞生以来，AI大模型技术经历了爆发式发展。本文系统梳理大模型领域出现的核心概念，从基础理论到前沿应用，帮助读者建立完整的知识体系。我们将按照概念所属类型组织内容，确保概念间的逻辑衔接。</p>
 <h2 id="1">1. 基础架构与技术类</h2>
@@ -2384,46 +2308,43 @@ GAI 已经渗透到各行各业，成为基础设施：
 * 少样本提示 (Few-Shot Prompting)
   * 原理：在提问前，给模型提供几个“输入 - 输出”的完美范例。
   * 示例：
-    ```text
-    任务：将口语转换为正式商务邮件。
-    例子1：
-    输入：嘿，那个事儿咋样了？快点回我。
-    输出：您好，请问关于该事项的进展如何？期待您的尽快回复。</p>
-<pre><code>例子2：
+    <div class="highlight"><pre><span></span><code>任务：将口语转换为正式商务邮件。
+例子1：
+输入：嘿，那个事儿咋样了？快点回我。
+输出：您好，请问关于该事项的进展如何？期待您的尽快回复。
+
+例子2：
 输入：这价格太贵了，能不能便宜点？
 输出：您好，目前的报价略高于我们的预算，不知是否有调整的空间？
 
 现在请转换：
 输入：你们这软件全是bug，赶紧修修吧。
 输出：
-```
-</code></pre>
-<ul>
-<li>效果：模型能极好地模仿范例的风格和逻辑，无需微调即可适应特殊任务。</li>
-<li>结构化提示 (Structured Prompting)</li>
-<li>原理：使用分隔符（如 ###, """, XML标签）将提示词的不同部分（角色、背景、指令、数据）清晰隔开。</li>
-<li>
-<p>示例：
-    ```text
-    # Role
-    你是一名数据分析师。</p>
-<h1 id="context">Context</h1>
-<p>以下是本季度的销售数据：
-<data>
+</code></pre></div>
+  * 效果：模型能极好地模仿范例的风格和逻辑，无需微调即可适应特殊任务。
+* 结构化提示 (Structured Prompting)
+  * 原理：使用分隔符（如 ###, """, XML标签）将提示词的不同部分（角色、背景、指令、数据）清晰隔开。
+  * 示例：
+    <div class="highlight"><pre><span></span><code># Role
+你是一名数据分析师。
+
+# Context
+以下是本季度的销售数据：
+&lt;data&gt;
 ...
-</data></p>
-<h1 id="instruction">Instruction</h1>
-<p>请分析数据趋势，并找出异常点。</p>
-<h1 id="output-format">Output Format</h1>
-<p>请以JSON格式输出。
-```
+&lt;/data&gt;
+
+# Instruction
+请分析数据趋势，并找出异常点。
+
+# Output Format
+请以JSON格式输出。
+</code></pre></div>
   * 效果：防止模型混淆指令和数据，提高长提示词的稳定性。
 * 自我反思与修正 (Self-Reflection)
   * 原理：要求模型生成答案后，自己检查一遍，指出错误并修正。
   * 写法：“请先生成一个草稿，然后批判性地检查其中的逻辑漏洞，最后输出修正后的最终版本。”
   * 效果：大幅减少幻觉和逻辑错误，产出高质量内容。</p>
-</li>
-</ul>
 <p><strong>提示词 vs 微调</strong>
 | 特性 | 提示词 (Prompting) | 微调 (Fine-tuning) |
 | :--- | :--- | :--- |
@@ -2563,21 +2484,21 @@ Function Call 不是模型真的去“调用”了函数。
 <p><strong>工作流程</strong>
 一个标准的 Function Call 交互包含四个步骤：
 1. 开发者预先告诉模型有哪些工具可用，这通常是一个JSON Schema列表。
-   <code>json
-    [
-        {
-            "name": "get_current_weather",
-            "description": "获取指定城市的当前天气",
-            "parameters": {
-            "type": "object",
-            "properties": {
-                "location": {"type": "string", "description": "城市名，如北京"},
-                "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]}
-            },
-            "required": ["location"]
-            }
-        }
-    ]</code>
+   <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="p">[</span>
+<span class="w">     </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;get_current_weather&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;获取指定城市的当前天气&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;城市名，如北京&quot;</span><span class="p">},</span>
+<span class="w">             </span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;celsius&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;fahrenheit&quot;</span><span class="p">]}</span>
+<span class="w">         </span><span class="p">},</span>
+<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">]</span>
+<span class="w">         </span><span class="p">}</span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w"> </span><span class="p">]</span>
+</code></pre></div>
 2. 用户提问&amp;模型决策
    1. User: “北京今天天气怎么样？”
    2. Model: (检测到需要天气信息，且已定义 get_current_weather 工具)

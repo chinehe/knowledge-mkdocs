@@ -2703,95 +2703,98 @@
 <h3 id="12">1.2. 常量的声明</h3>
 <p>在Go语言中，使用<code>const</code>关键字来声明常量。常量的声明方式有以下几种：</p>
 <h4 id="121">1.2.1. 显式类型声明</h4>
-<pre><code class="language-go">// 声明并初始化单个常量
-const &lt;变量名&gt; &lt;类型&gt; = &lt;表达式 / 值&gt;
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明并初始化单个常量</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量名</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">类型</span><span class="p">&gt;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">表达式</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">值</span><span class="p">&gt;</span>
 
-// 声明并初始化同一类型的多个常量
-const &lt;变量名1&gt;,&lt;变量名2&gt;,&lt;变量名n&gt; &lt;类型&gt; = &lt;表达式1/值1&gt;,&lt;表达式2/值2&gt;,&lt;表达式n/值n&gt;
+<span class="c1">// 声明并初始化同一类型的多个常量</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量名1</span><span class="p">&gt;,&lt;</span><span class="nx">变量名2</span><span class="p">&gt;,&lt;</span><span class="nx">变量名n</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">类型</span><span class="p">&gt;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">表达式1</span><span class="o">/</span><span class="nx">值1</span><span class="p">&gt;,&lt;</span><span class="nx">表达式2</span><span class="o">/</span><span class="nx">值2</span><span class="p">&gt;,&lt;</span><span class="nx">表达式n</span><span class="o">/</span><span class="nx">值n</span><span class="p">&gt;</span>
 
-// 声明并初始化不同类型的多个常量
-const (
-    &lt;变量名1&gt; &lt;类型1&gt;  = &lt;表达式1/值1&gt;
-    &lt;变量名2&gt; &lt;类型2&gt;  = &lt;表达式2/值2&gt;
-    &lt;变量名n&gt; &lt;类型n&gt;  = &lt;表达式n/值n&gt;
-)
-</code></pre>
+<span class="c1">// 声明并初始化不同类型的多个常量</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nx">变量名1</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">类型1</span><span class="p">&gt;</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">表达式1</span><span class="o">/</span><span class="nx">值1</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nx">变量名2</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">类型2</span><span class="p">&gt;</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">表达式2</span><span class="o">/</span><span class="nx">值2</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nx">变量名n</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">类型n</span><span class="p">&gt;</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">表达式n</span><span class="o">/</span><span class="nx">值n</span><span class="p">&gt;</span>
+<span class="p">)</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-go">// 声明并初始化单个常量
-const a int = 1 + 1
-// 声明并初始化同一类型的多个常量
-const b, c, d int = 1, 2, 3
-// 声明并初始化不同类型的多个常量
-const (
-    e string = &quot;&quot;
-    f int    = 1
-)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明并初始化单个常量</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="c1">// 声明并初始化同一类型的多个常量</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span>
+<span class="c1">// 声明并初始化不同类型的多个常量</span>
+<span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">    </span><span class="nx">f</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">)</span>
+</code></pre></div>
 <p>需要特别<strong>注意</strong>的是：在第三种声明并初始化常量的方式中，如果省略了值则表示和上面一行的值相同。</p>
-<pre><code class="language-Go">const (
-    a int = 1 // a=1
-    b // b=1
-    c = 2 // c=2
-    d // d=2
-)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// a=1</span>
+<span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="c1">// b=1</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="c1">// c=2</span>
+<span class="w">    </span><span class="nx">d</span><span class="w"> </span><span class="c1">// d=2</span>
+<span class="p">)</span>
+</code></pre></div>
 <h4 id="122">1.2.2. 隐式类型声明（类型推断）</h4>
 <p>常量声明与初始化时，如果类型推导的类型与目标类型一致，也可以忽略常量类型的编写。</p>
-<pre><code class="language-go">const identifier = value
-</code></pre>
-<p>示例：</p>
-<pre><code class="language-go">const pi = 3.14159
-const appName = &quot;MyApp&quot;
-const version = &quot;1.0.0&quot;
-const maxBufferSize = 1024
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">identifier</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">value</span>
+</code></pre></div>
+<p>示例：
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">pi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">3.14159</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">appName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;MyApp&quot;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">maxBufferSize</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1024</span>
+</code></pre></div></p>
 <p>当使用隐式类型声明时，Go编译器会根据赋值自动推断常量的类型。</p>
 <h3 id="13-iota">1.3. iota枚举</h3>
 <p><code>iota</code>是<code>go</code>语言的常量计数器，只能在常量的表达式中使用。 <code>iota</code>在常量定义中出现时将被重置为<code>0</code>。批量定义常量时，<code>const</code>中每新增一行常量声明将使<code>iota</code>计数一次(<code>iota</code>可理解为<code>const</code>语句块中的行索引)。 使用<code>iota</code>能简化定义，在定义枚举时很有用。</p>
 <ul>
 <li>定义单个常量时，iota=0。</li>
 </ul>
-<p><code>Go
-  const a = iota // a=0
-  const b = iota // b=0
-  const c // 报错</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"> </span><span class="c1">// a=0</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"> </span><span class="c1">// b=0</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="c1">// 报错     </span>
+</code></pre></div>
 <ul>
 <li>批量定义同一行的多个常量时，iota可以出现多次，但每次都是0.</li>
 </ul>
-<p><code>go
-  const a,b,c = iota,1,iota // a=0,b=1,c=0</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="kc">iota</span><span class="w"> </span><span class="c1">// a=0,b=1,c=0</span>
+</code></pre></div>
 <ul>
 <li>批量定义同一行的多个常量时，iota可以出现多次，但每次都是0.</li>
 </ul>
-<p>```go
-  const (
-      a = iota // a=0
-      b // b=iota=1
-      c // c=iota=2
-  )</p>
-<p>const (
-      a = iota<em>2 // a=0
-      b // b=iota</em>2=1<em>1=2
-      c // c=iota</em>2=2*2=4
-  )</p>
-<p>const (
-      a = 4 // a=4
-      b = iota // b=iota=1
-      c // c=iota=2
-  )</p>
-<p>const (
-      a = iota // a=iota=0
-      b = 100 // b = 100
-      c // c=100
-      d = iota // d=iota=3
-      e   // e=iota=4
-  )</p>
-<p>const (
-      a, b = iota+1, iota+2 // a=1,b=2
-      c, d // c=2,d=3
-      e, f // e=3,f=4
-  )
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"> </span><span class="c1">// a=0</span>
+<span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="c1">// b=iota=1</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="c1">// c=iota=2</span>
+<span class="p">)</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="o">*</span><span class="mi">2</span><span class="w"> </span><span class="c1">// a=0</span>
+<span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="c1">// b=iota*2=1*1=2</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="c1">// c=iota*2=2*2=4</span>
+<span class="p">)</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="c1">// a=4</span>
+<span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"> </span><span class="c1">// b=iota=1</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="c1">// c=iota=2</span>
+<span class="p">)</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"> </span><span class="c1">// a=iota=0</span>
+<span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="c1">// b = 100</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="c1">// c=100</span>
+<span class="w">    </span><span class="nx">d</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="w"> </span><span class="c1">// d=iota=3</span>
+<span class="w">    </span><span class="nx">e</span><span class="w">   </span><span class="c1">// e=iota=4</span>
+<span class="p">)</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">iota</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="kc">iota</span><span class="o">+</span><span class="mi">2</span><span class="w"> </span><span class="c1">// a=1,b=2</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="w"> </span><span class="c1">// c=2,d=3</span>
+<span class="w">    </span><span class="nx">e</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="c1">// e=3,f=4</span>
+<span class="p">)</span>
+</code></pre></div>
 <h3 id="14">1.4. 常量的命名规范</h3>
 <p>常量的命名遵循Go语言的命名规范：
 - 不导出的常量使用小驼峰命名法：<code>maxBufferSize</code>
@@ -2805,35 +2808,35 @@ const maxBufferSize = 1024
 <p>在Go语言中，使用<code>var</code>关键字来声明变量。变量的声明方式有以下几种：</p>
 <h4 id="221">2.2.1. 显式类型声明</h4>
 <p>变量显式声明有如下三种格式：</p>
-<pre><code class="language-go">// 声明单个变量
-var &lt;变量名&gt; &lt;变量类型&gt;
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明单个变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量名</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量类型</span><span class="p">&gt;</span>
 
-// 声明同一类型的多个变量
-var &lt;变量名1&gt;,&lt;变量名2&gt;,&lt;变量名n&gt; &lt;变量类型&gt;
+<span class="c1">// 声明同一类型的多个变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量名1</span><span class="p">&gt;,&lt;</span><span class="nx">变量名2</span><span class="p">&gt;,&lt;</span><span class="nx">变量名n</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量类型</span><span class="p">&gt;</span>
 
-// 声明不同类型的多个变量
-var (
-    &lt;变量名1&gt; &lt;变量类型1&gt;
-    &lt;变量名2&gt; &lt;变量类型2&gt;
-    &lt;变量名n&gt; &lt;变量类型n&gt;
-)
-</code></pre>
-<p>示例：</p>
-<pre><code class="language-go">// 声明单个变量
-var name string
-var age int
-var isStudent bool
+<span class="c1">// 声明不同类型的多个变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nx">变量名1</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量类型1</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nx">变量名2</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量类型2</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nx">变量名n</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量类型n</span><span class="p">&gt;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>示例：
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明单个变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="kt">int</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">isStudent</span><span class="w"> </span><span class="kt">bool</span>
 
-// 声明同一个类型的多个变量
-var maxAge,minAge int
+<span class="c1">// 声明同一个类型的多个变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">maxAge</span><span class="p">,</span><span class="nx">minAge</span><span class="w"> </span><span class="kt">int</span>
 
-// 声明多个变量（不限类型）
-var (
-    name string
-    age  int
-    isStudent bool
-)
-</code></pre>
+<span class="c1">// 声明多个变量（不限类型）</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">age</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">isStudent</span><span class="w"> </span><span class="kt">bool</span>
+<span class="p">)</span>
+</code></pre></div></p>
 <p>声明后，变量会被赋予对应类型的零值，比如：
 - 数值类型：0
 - 布尔类型：false
@@ -2841,81 +2844,81 @@ var (
 <h4 id="222">2.2.2. 声明时初始化</h4>
 <p>Go语言在声明变量的时候，会自动对变量对应的内存区域进行初始化操作。每个变量会被初始化成其类型的默认值，例如： 整型和浮点型变量的默认值为0。 字符串变量的默认值为空字符串。 布尔型变量默认为false。 切片、函数、指针变量的默认为nil。</p>
 <p>当然我们也可在声明变量的时候为其指定初始值。变量初始化的格式如下：</p>
-<pre><code class="language-go">// 声明并初始化单个变量
-var &lt;变量名&gt; &lt;变量类型&gt; = &lt;表达式 / 值&gt;
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明并初始化单个变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量名</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量类型</span><span class="p">&gt;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">表达式</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">值</span><span class="p">&gt;</span>
 
-// 声明并初始化同一类型的多个变量
-var &lt;变量名1&gt;,&lt;变量名2&gt;,&lt;变量名n&gt; &lt;变量类型&gt; = &lt;表达式1/值1&gt;,&lt;表达式2/值2&gt;,&lt;表达式n/值n&gt;
+<span class="c1">// 声明并初始化同一类型的多个变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量名1</span><span class="p">&gt;,&lt;</span><span class="nx">变量名2</span><span class="p">&gt;,&lt;</span><span class="nx">变量名n</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量类型</span><span class="p">&gt;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">表达式1</span><span class="o">/</span><span class="nx">值1</span><span class="p">&gt;,&lt;</span><span class="nx">表达式2</span><span class="o">/</span><span class="nx">值2</span><span class="p">&gt;,&lt;</span><span class="nx">表达式n</span><span class="o">/</span><span class="nx">值n</span><span class="p">&gt;</span>
 
-// 声明并初始化不同类型的多个变量
-var (
-    &lt;变量名1&gt; &lt;变量类型1&gt;  = &lt;表达式1/值1&gt;
-    &lt;变量名2&gt; &lt;变量类型2&gt;  = &lt;表达式2/值2&gt;
-    &lt;变量名n&gt; &lt;变量类型n&gt;  = &lt;表达式n/值n&gt;
-)
-</code></pre>
-<p>示例：</p>
-<pre><code class="language-go">// 声明并初始化单个变量
-var a int = 1 + 1
-// 声明并初始化同一类型的多个变量
-var b, c, d int = 1, 2, 3
-// 声明并初始化不同类型的多个变量
-var (
-    e string = &quot;&quot;
-    f int    = 1
-)
-</code></pre>
+<span class="c1">// 声明并初始化不同类型的多个变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nx">变量名1</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量类型1</span><span class="p">&gt;</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">表达式1</span><span class="o">/</span><span class="nx">值1</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nx">变量名2</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量类型2</span><span class="p">&gt;</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">表达式2</span><span class="o">/</span><span class="nx">值2</span><span class="p">&gt;</span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nx">变量名n</span><span class="p">&gt;</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">变量类型n</span><span class="p">&gt;</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">表达式n</span><span class="o">/</span><span class="nx">值n</span><span class="p">&gt;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>示例：
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明并初始化单个变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="c1">// 声明并初始化同一类型的多个变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span>
+<span class="c1">// 声明并初始化不同类型的多个变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">e</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">    </span><span class="nx">f</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">)</span>
+</code></pre></div></p>
 <h4 id="223">2.2.3. 隐式类型声明（类型推断）</h4>
 <p>在变量声明并初始化时，如果我们不设置变量类型，编译器会根据等号右边的值或表达式结果来推导变量的类型，完成初始化。</p>
 <p>所以如果编译器推导的类型与我们的目标类型一致，就可以不编写变量类型：</p>
-<pre><code class="language-go">var a int = 1 // 指定变量类型为int
-var  a = 1 // 编译器推导变量类型为int
-var a int32 = 1 // 指定变量类型为int32
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// 指定变量类型为int</span>
+<span class="kd">var</span><span class="w">  </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// 编译器推导变量类型为int</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kt">int32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// 指定变量类型为int32</span>
+</code></pre></div>
 <p>在上述示例中，第一个语句和第二个语句效果完全一致。只有在第三种情况，编译器推导的变量类型与我们的目标变量类型不一致时，才有必要编写变量类型。</p>
 <h4 id="224">2.2.4. 短变量声明（:=）</h4>
 <p>在类型推导章节中，我们知道当编译器推导的类型与我们的目标类型一致时，<code>var a int =1</code> 和 <code>var a = 1</code>效果完全一样。</p>
 <p><strong>在函数内部</strong>，可以将这两个表达式替换成更简略的<code>:=</code>方式声明并初始化变量：</p>
-<pre><code class="language-go">&lt;变量&gt; := &lt;值&gt;
-</code></pre>
-<p>示例：</p>
-<pre><code class="language-go">a := 1
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nx">变量</span><span class="p">&gt;</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">值</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>示例：
+<div class="highlight"><pre><span></span><code><span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span>
+</code></pre></div></p>
 <p>注意：短变量声明只能在<strong>函数内部</strong>使用，并且要求左侧至少有一个<strong>新</strong>变量。</p>
 <h4 id="225">2.2.5. 匿名变量</h4>
 <p>当使用下划线占位符来代替变量名称时，即称该占位符代表的变量为匿名变量，表示忽略值。匿名变量最常用的方式是用来接收调用方法的返回值，表示忽略该返回值。</p>
-<pre><code class="language-go">data,_:=json.Marshal(p )
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">data</span><span class="p">,</span><span class="nx">_</span><span class="o">:=</span><span class="nx">json</span><span class="p">.</span><span class="nx">Marshal</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">)</span>
+</code></pre></div>
 <h3 id="23">2.3. 变量的赋值和重新赋值</h3>
 <p>变量声明后（不论是否初始化），都可以通过赋值语句进行重新赋值。</p>
-<pre><code class="language-go">// 声明变量
-var count int
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="kt">int</span>
 
-// 赋值
-count = 10
+<span class="c1">// 赋值</span>
+<span class="nx">count</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span>
 
-// 重新赋值
-count = 20
+<span class="c1">// 重新赋值</span>
+<span class="nx">count</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">20</span>
 
-// 多重赋值
-a, b := 1, 2
-a, b = b, a  // 交换a和b的值
-</code></pre>
+<span class="c1">// 多重赋值</span>
+<span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span>
+<span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="w">  </span><span class="c1">// 交换a和b的值</span>
+</code></pre></div>
 <h3 id="24">2.4. 变量的命名规范</h3>
 <p>变量的命名遵循Go语言的命名规范：
 - 全局变量：首字母大写表示导出，首字母小写表示私有
 - 局部变量：推荐使用小驼峰命名法
 - 避免使用下划线分隔符（特殊情况除外）</p>
-<pre><code class="language-go">// 全局变量
-var GlobalCounter int  // 导出变量
-var localCounter int   // 私有变量
+<div class="highlight"><pre><span></span><code><span class="c1">// 全局变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">GlobalCounter</span><span class="w"> </span><span class="kt">int</span><span class="w">  </span><span class="c1">// 导出变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">localCounter</span><span class="w"> </span><span class="kt">int</span><span class="w">   </span><span class="c1">// 私有变量</span>
 
-// 局部变量
-func processData() {
-    userName := &quot;张三&quot;
-    itemCount := 10
-}
-</code></pre>
+<span class="c1">// 局部变量</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">processData</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">userName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;张三&quot;</span>
+<span class="w">    </span><span class="nx">itemCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="3">3. 常量与变量的区别</h2>
 <table>
 <thead>
@@ -2966,485 +2969,485 @@ func processData() {
 <li><strong>无符号整数</strong>：uint8、uint16、uint32、uint64、uint</li>
 <li><strong>特殊整数类型</strong>：uintptr（用于存储指针值）</li>
 </ul>
-<pre><code class="language-go">var a int8 = 127        // 8位有符号整数，范围：-128 到 127
-var b int16 = 32767     // 16位有符号整数，范围：-32768 到 32767
-var c int32 = 2147483647 // 32位有符号整数，范围：-2147483648 到 2147483647
-var d int64 = 9223372036854775807 // 64位有符号整数
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kt">int8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">127</span><span class="w">        </span><span class="c1">// 8位有符号整数，范围：-128 到 127</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">32767</span><span class="w">     </span><span class="c1">// 16位有符号整数，范围：-32768 到 32767</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="kt">int32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2147483647</span><span class="w"> </span><span class="c1">// 32位有符号整数，范围：-2147483648 到 2147483647</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">d</span><span class="w"> </span><span class="kt">int64</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">9223372036854775807</span><span class="w"> </span><span class="c1">// 64位有符号整数</span>
 
-var e uint8 = 255       // 8位无符号整数，范围：0 到 255
-var f uint16 = 65535    // 16位无符号整数，范围：0 到 65535
-var g uint32 = 4294967295 // 32位无符号整数，范围：0 到 4294967295
-var h uint64 = 18446744073709551615 // 64位无符号整数
+<span class="kd">var</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="kt">uint8</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">255</span><span class="w">       </span><span class="c1">// 8位无符号整数，范围：0 到 255</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="kt">uint16</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">65535</span><span class="w">    </span><span class="c1">// 16位无符号整数，范围：0 到 65535</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">g</span><span class="w"> </span><span class="kt">uint32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">4294967295</span><span class="w"> </span><span class="c1">// 32位无符号整数，范围：0 到 4294967295</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">h</span><span class="w"> </span><span class="kt">uint64</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">18446744073709551615</span><span class="w"> </span><span class="c1">// 64位无符号整数</span>
 
-var i int = 100         // 平台相关大小，32位系统上为int32，64位系统上为int64
-var j uint = 100        // 平台相关大小，32位系统上为uint32，64位系统上为uint64
-var k uintptr = 0x1234  // 用于存储指针值的整数类型
-</code></pre>
+<span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w">         </span><span class="c1">// 平台相关大小，32位系统上为int32，64位系统上为int64</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="kt">uint</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w">        </span><span class="c1">// 平台相关大小，32位系统上为uint32，64位系统上为uint64</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">k</span><span class="w"> </span><span class="kt">uintptr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mh">0x1234</span><span class="w">  </span><span class="c1">// 用于存储指针值的整数类型</span>
+</code></pre></div>
 <h5 id="_2">浮点数类型</h5>
 <p>Go语言提供了两种浮点数类型：</p>
 <ul>
 <li><strong>float32</strong>：32位浮点数（单精度）</li>
 <li><strong>float64</strong>：64位浮点数（双精度，默认类型）</li>
 </ul>
-<pre><code class="language-go">var f1 float32 = 3.14
-var f2 float64 = 3.141592653589793
-var f3 = 3.14          // 默认为float64类型
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">f1</span><span class="w"> </span><span class="kt">float32</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">3.14</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">f2</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">3.141592653589793</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">f3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">3.14</span><span class="w">          </span><span class="c1">// 默认为float64类型</span>
 
-// 特殊浮点数值
-var inf = math.Inf(1)   // 正无穷
-var negInf = math.Inf(-1) // 负无穷
-var nan = math.NaN()    // 非数字（Not a Number）
-</code></pre>
+<span class="c1">// 特殊浮点数值</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">inf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">Inf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">   </span><span class="c1">// 正无穷</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">negInf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">Inf</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// 负无穷</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">nan</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">NaN</span><span class="p">()</span><span class="w">    </span><span class="c1">// 非数字（Not a Number）</span>
+</code></pre></div>
 <h5 id="_3">复数类型</h5>
 <p>Go语言原生支持复数类型：</p>
 <ul>
 <li><strong>complex64</strong>：实部和虚部都是float32类型</li>
 <li><strong>complex128</strong>：实部和虚部都是float64类型（默认类型）</li>
 </ul>
-<pre><code class="language-go">var c1 complex64 = 3 + 4i
-var c2 complex128 = 3 + 4i
-var c3 = 3 + 4i         // 默认为complex128类型
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">c1</span><span class="w"> </span><span class="kt">complex64</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">4i</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">c2</span><span class="w"> </span><span class="kt">complex128</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">4i</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">c3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">4i</span><span class="w">         </span><span class="c1">// 默认为complex128类型</span>
 
-// 使用内置函数创建复数
-c4 := complex(3.0, 4.0) // 创建复数3+4i
+<span class="c1">// 使用内置函数创建复数</span>
+<span class="nx">c4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">complex</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">)</span><span class="w"> </span><span class="c1">// 创建复数3+4i</span>
 
-// 获取复数的实部和虚部
-realPart := real(c4)    // 获取实部
-imagPart := imag(c4)    // 获取虚部
-</code></pre>
+<span class="c1">// 获取复数的实部和虚部</span>
+<span class="nx">realPart</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">real</span><span class="p">(</span><span class="nx">c4</span><span class="p">)</span><span class="w">    </span><span class="c1">// 获取实部</span>
+<span class="nx">imagPart</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">imag</span><span class="p">(</span><span class="nx">c4</span><span class="p">)</span><span class="w">    </span><span class="c1">// 获取虚部</span>
+</code></pre></div>
 <h4 id="412">4.1.2. 布尔类型</h4>
 <p>布尔类型只有两个值：true和false。</p>
-<pre><code class="language-go">var isTrue bool = true
-var isFalse bool = false
-var b1 = true           // 默认布尔类型
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">isTrue</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">isFalse</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">b1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span><span class="w">           </span><span class="c1">// 默认布尔类型</span>
 
-// 布尔运算
-result1 := true &amp;&amp; false  // 与运算
-result2 := true || false  // 或运算
-result3 := !true          // 非运算
-</code></pre>
+<span class="c1">// 布尔运算</span>
+<span class="nx">result1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="kc">false</span><span class="w">  </span><span class="c1">// 与运算</span>
+<span class="nx">result2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">false</span><span class="w">  </span><span class="c1">// 或运算</span>
+<span class="nx">result3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">!</span><span class="kc">true</span><span class="w">          </span><span class="c1">// 非运算</span>
+</code></pre></div>
 <h4 id="413">4.1.3. 字符串类型</h4>
 <p>Go语言中的字符串是UTF-8编码的不可变字节序列。</p>
-<pre><code class="language-go">var str1 string = &quot;Hello, 世界&quot;
-var str2 = &quot;Hello, Go&quot;     // 隐式类型声明
-str3 := &quot;Hello, World&quot;     // 短变量声明
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">str1</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Hello, 世界&quot;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">str2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Hello, Go&quot;</span><span class="w">     </span><span class="c1">// 隐式类型声明</span>
+<span class="nx">str3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello, World&quot;</span><span class="w">     </span><span class="c1">// 短变量声明</span>
 
-// 多行字符串
-str4 := `这是一个多行字符串
-可以包含换行符
-还可以包含&quot;引号&quot;`
+<span class="c1">// 多行字符串</span>
+<span class="nx">str4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">`这是一个多行字符串</span>
+<span class="s">可以包含换行符</span>
+<span class="s">还可以包含&quot;引号&quot;`</span>
 
-// 字符串连接
-str5 := &quot;Hello&quot; + &quot; &quot; + &quot;World&quot;
+<span class="c1">// 字符串连接</span>
+<span class="nx">str5</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;World&quot;</span>
 
-// 字符串长度
-length := len(str1)
+<span class="c1">// 字符串长度</span>
+<span class="nx">length</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">str1</span><span class="p">)</span>
 
-// 字符串遍历
-for i, char := range str1 {
-    fmt.Printf(&quot;位置%d: %c\n&quot;, i, char)
-}
-</code></pre>
+<span class="c1">// 字符串遍历</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">char</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">str1</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;位置%d: %c\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">char</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="414">4.1.4. 字符类型</h4>
 <p>Go语言没有专门的字符类型，字符是通过整数类型或rune类型表示的：</p>
 <ul>
 <li><strong>byte</strong>：uint8的别名，用于表示ASCII字符</li>
 <li><strong>rune</strong>：int32的别名，用于表示Unicode字符</li>
 </ul>
-<pre><code class="language-go">var ch1 byte = 'A'      // ASCII字符
-var ch2 rune = '世'     // Unicode字符
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">ch1</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="w">      </span><span class="c1">// ASCII字符</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">ch2</span><span class="w"> </span><span class="kt">rune</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="sc">&#39;世&#39;</span><span class="w">     </span><span class="c1">// Unicode字符</span>
 
-// 字符与字符串的区别
-char := 'A'             // 类型为rune或int32
-str := &quot;A&quot;             // 类型为string
+<span class="c1">// 字符与字符串的区别</span>
+<span class="nx">char</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="w">             </span><span class="c1">// 类型为rune或int32</span>
+<span class="nx">str</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;A&quot;</span><span class="w">             </span><span class="c1">// 类型为string</span>
 
-// 遍历字符串中的字符
-str := &quot;Hello, 世界&quot;
-for i, r := range str {
-    fmt.Printf(&quot;位置%d: %c\n&quot;, i, r)
-}
-</code></pre>
+<span class="c1">// 遍历字符串中的字符</span>
+<span class="nx">str</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello, 世界&quot;</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">str</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;位置%d: %c\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="42">4.2. 复合数据类型</h3>
 <p>Go语言提供了多种复合数据类型，用于组织和存储复杂的数据结构。</p>
 <h4 id="421-array">4.2.1. 数组(Array)</h4>
 <p>数组是固定长度的序列，所有元素必须是相同类型。</p>
-<pre><code class="language-go">// 声明数组
-var arr1 [5]int                     // 声明长度为5的整数数组
-var arr2 [3]string = [3]string{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;} // 声明并初始化
-arr3 := [5]int{1, 2, 3, 4, 5}       // 短变量声明并初始化
-arr4 := [...]int{1, 2, 3}           // 编译器自动计算长度
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明数组</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">arr1</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="w">                     </span><span class="c1">// 声明长度为5的整数数组</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">arr2</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p">}</span><span class="w"> </span><span class="c1">// 声明并初始化</span>
+<span class="nx">arr3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span><span class="w">       </span><span class="c1">// 短变量声明并初始化</span>
+<span class="nx">arr4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span><span class="w">           </span><span class="c1">// 编译器自动计算长度</span>
 
-// 访问数组元素
-first := arr3[0]                    // 获取第一个元素
-arr3[0] = 10                        // 修改元素值
+<span class="c1">// 访问数组元素</span>
+<span class="nx">first</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">                    </span><span class="c1">// 获取第一个元素</span>
+<span class="nx">arr3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="w">                        </span><span class="c1">// 修改元素值</span>
 
-// 数组长度
-length := len(arr3)                 // 获取数组长度
+<span class="c1">// 数组长度</span>
+<span class="nx">length</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">arr3</span><span class="p">)</span><span class="w">                 </span><span class="c1">// 获取数组长度</span>
 
-// 多维数组
-var matrix [3][3]int                // 3x3二维数组
-matrix[0][0] = 1
-</code></pre>
+<span class="c1">// 多维数组</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">matrix</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="w">                </span><span class="c1">// 3x3二维数组</span>
+<span class="nx">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
+</code></pre></div>
 <h4 id="422-slice">4.2.2. 切片(Slice)</h4>
 <p>切片是对数组的封装，提供了动态数组的功能。</p>
-<pre><code class="language-go">// 创建切片
-var slice1 []int                    // 声明空切片
-slice2 := make([]int, 5)            // 创建长度为5的切片
-slice3 := make([]int, 3, 5)         // 创建长度为3，容量为5的切片
-slice4 := []int{1, 2, 3, 4, 5}      // 直接初始化
+<div class="highlight"><pre><span></span><code><span class="c1">// 创建切片</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">slice1</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w">                    </span><span class="c1">// 声明空切片</span>
+<span class="nx">slice2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">            </span><span class="c1">// 创建长度为5的切片</span>
+<span class="nx">slice3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">         </span><span class="c1">// 创建长度为3，容量为5的切片</span>
+<span class="nx">slice4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span><span class="w">      </span><span class="c1">// 直接初始化</span>
 
-// 从数组创建切片
-arr := [5]int{1, 2, 3, 4, 5}
-slice5 := arr[1:4]                  // 从索引1到3创建切片
-slice6 := arr[:3]                   // 从开始到索引2
-slice7 := arr[2:]                   // 从索引2到结束
+<span class="c1">// 从数组创建切片</span>
+<span class="nx">arr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="nx">slice5</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="w">                  </span><span class="c1">// 从索引1到3创建切片</span>
+<span class="nx">slice6</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="w">                   </span><span class="c1">// 从开始到索引2</span>
+<span class="nx">slice7</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span><span class="w">                   </span><span class="c1">// 从索引2到结束</span>
 
-// 切片操作
-length := len(slice4)               // 切片长度
-capacity := cap(slice4)             // 切片容量
+<span class="c1">// 切片操作</span>
+<span class="nx">length</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice4</span><span class="p">)</span><span class="w">               </span><span class="c1">// 切片长度</span>
+<span class="nx">capacity</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice4</span><span class="p">)</span><span class="w">             </span><span class="c1">// 切片容量</span>
 
-// 添加元素
-slice8 := append(slice4, 6)         // 添加单个元素
-slice9 := append(slice4, 7, 8, 9)   // 添加多个元素
-slice10 := append(slice4, slice8...) // 合并切片
+<span class="c1">// 添加元素</span>
+<span class="nx">slice8</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="w">         </span><span class="c1">// 添加单个元素</span>
+<span class="nx">slice9</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice4</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w">   </span><span class="c1">// 添加多个元素</span>
+<span class="nx">slice10</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice4</span><span class="p">,</span><span class="w"> </span><span class="nx">slice8</span><span class="o">...</span><span class="p">)</span><span class="w"> </span><span class="c1">// 合并切片</span>
 
-// 复制切片
-dest := make([]int, len(slice4))
-copy(dest, slice4)
-</code></pre>
+<span class="c1">// 复制切片</span>
+<span class="nx">dest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice4</span><span class="p">))</span>
+<span class="nb">copy</span><span class="p">(</span><span class="nx">dest</span><span class="p">,</span><span class="w"> </span><span class="nx">slice4</span><span class="p">)</span>
+</code></pre></div>
 <h4 id="423-map">4.2.3. 映射(Map)</h4>
 <p>映射是一种无序的键值对集合。</p>
-<pre><code class="language-go">// 创建映射
-var map1 map[string]int             // 声明空映射
-map2 := make(map[string]int)        // 使用make创建
-map3 := map[string]int{             // 直接初始化
-    &quot;apple&quot;:  5,
-    &quot;banana&quot;: 3,
-    &quot;orange&quot;: 8,
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 创建映射</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">map1</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="w">             </span><span class="c1">// 声明空映射</span>
+<span class="nx">map2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span><span class="w">        </span><span class="c1">// 使用make创建</span>
+<span class="nx">map3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="w">             </span><span class="c1">// 直接初始化</span>
+<span class="w">    </span><span class="s">&quot;apple&quot;</span><span class="p">:</span><span class="w">  </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;banana&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="s">&quot;orange&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="p">}</span>
 
-// 操作映射
-map2[&quot;apple&quot;] = 5                  // 添加或更新键值对
-value, exists := map2[&quot;apple&quot;]      // 获取值，exists表示键是否存在
-delete(map2, &quot;apple&quot;)               // 删除键值对
+<span class="c1">// 操作映射</span>
+<span class="nx">map2</span><span class="p">[</span><span class="s">&quot;apple&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="w">                  </span><span class="c1">// 添加或更新键值对</span>
+<span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">exists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">map2</span><span class="p">[</span><span class="s">&quot;apple&quot;</span><span class="p">]</span><span class="w">      </span><span class="c1">// 获取值，exists表示键是否存在</span>
+<span class="nb">delete</span><span class="p">(</span><span class="nx">map2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;apple&quot;</span><span class="p">)</span><span class="w">               </span><span class="c1">// 删除键值对</span>
 
-// 遍历映射
-for key, value := range map3 {
-    fmt.Printf(&quot;%s: %d\n&quot;, key, value)
-}
+<span class="c1">// 遍历映射</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">map3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 映射长度
-length := len(map3)
-</code></pre>
+<span class="c1">// 映射长度</span>
+<span class="nx">length</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">map3</span><span class="p">)</span>
+</code></pre></div>
 <h4 id="424-struct">4.2.4. 结构体(Struct)</h4>
 <p>结构体是一种用户自定义的数据类型，可以包含多个不同类型的字段。</p>
-<pre><code class="language-go">// 定义结构体
-type Person struct {
-    Name string
-    Age  int
-    Email string
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-type Address struct {
-    City, State string
-    ZIP         int
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">City</span><span class="p">,</span><span class="w"> </span><span class="nx">State</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">ZIP</span><span class="w">         </span><span class="kt">int</span>
+<span class="p">}</span>
 
-// 创建结构体实例
-var person1 Person                  // 零值初始化
-person2 := Person{Name: &quot;张三&quot;, Age: 30, Email: &quot;zhangsan@example.com&quot;}
-person3 := Person{&quot;李四&quot;, 25, &quot;lisi@example.com&quot;}  // 按顺序初始化
+<span class="c1">// 创建结构体实例</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">person1</span><span class="w"> </span><span class="nx">Person</span><span class="w">                  </span><span class="c1">// 零值初始化</span>
+<span class="nx">person2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;张三&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nx">Email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;zhangsan@example.com&quot;</span><span class="p">}</span>
+<span class="nx">person3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;李四&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lisi@example.com&quot;</span><span class="p">}</span><span class="w">  </span><span class="c1">// 按顺序初始化</span>
 
-// 访问结构体字段
-name := person2.Name
-person2.Age = 31
+<span class="c1">// 访问结构体字段</span>
+<span class="nx">name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">person2</span><span class="p">.</span><span class="nx">Name</span>
+<span class="nx">person2</span><span class="p">.</span><span class="nx">Age</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">31</span>
 
-// 匿名结构体
-person4 := struct {
-    Name string
-    Age  int
-}{
-    Name: &quot;王五&quot;,
-    Age:  28,
-}
+<span class="c1">// 匿名结构体</span>
+<span class="nx">person4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="p">}{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;王五&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Age</span><span class="p">:</span><span class="w">  </span><span class="mi">28</span><span class="p">,</span>
+<span class="p">}</span>
 
-// 嵌套结构体
-type Employee struct {
-    Person
-    Address
-    Salary int
-}
+<span class="c1">// 嵌套结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Employee</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Person</span>
+<span class="w">    </span><span class="nx">Address</span>
+<span class="w">    </span><span class="nx">Salary</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
 
-emp := Employee{
-    Person:  Person{Name: &quot;赵六&quot;, Age: 35, Email: &quot;zhaoliu@example.com&quot;},
-    Address: Address{City: &quot;北京&quot;, State: &quot;北京&quot;, ZIP: 100000},
-    Salary:  10000,
-}
-</code></pre>
+<span class="nx">emp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Employee</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Person</span><span class="p">:</span><span class="w">  </span><span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;赵六&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w"> </span><span class="nx">Email</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;zhaoliu@example.com&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="nx">Address</span><span class="p">:</span><span class="w"> </span><span class="nx">Address</span><span class="p">{</span><span class="nx">City</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;北京&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">State</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;北京&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">ZIP</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">},</span>
+<span class="w">    </span><span class="nx">Salary</span><span class="p">:</span><span class="w">  </span><span class="mi">10000</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="425-pointer">4.2.5. 指针(Pointer)</h4>
 <p>指针存储了另一个变量的内存地址。</p>
-<pre><code class="language-go">// 声明指针
-var ptr *int                        // 声明指向int的指针
-var value int = 42
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明指针</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">ptr</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="w">                        </span><span class="c1">// 声明指向int的指针</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">42</span>
 
-// 获取变量地址
-ptr = &amp;value                        // 获取value的地址
+<span class="c1">// 获取变量地址</span>
+<span class="nx">ptr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">value</span><span class="w">                        </span><span class="c1">// 获取value的地址</span>
 
-// 解引用
-fmt.Println(*ptr)                   // 输出指针指向的值
-*ptr = 100                          // 修改指针指向的值
+<span class="c1">// 解引用</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">ptr</span><span class="p">)</span><span class="w">                   </span><span class="c1">// 输出指针指向的值</span>
+<span class="o">*</span><span class="nx">ptr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="w">                          </span><span class="c1">// 修改指针指向的值</span>
 
-// 指针与结构体
-type Student struct {
-    Name string
-    Age  int
-}
+<span class="c1">// 指针与结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Student</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="p">}</span>
 
-stu := Student{Name: &quot;小明&quot;, Age: 18}
-var stuPtr *Student = &amp;stu
-fmt.Println((*stuPtr).Name)         // 通过指针访问字段
-fmt.Println(stuPtr.Name)            // 简化写法
+<span class="nx">stu</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Student</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;小明&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">}</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">stuPtr</span><span class="w"> </span><span class="o">*</span><span class="nx">Student</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">stu</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">((</span><span class="o">*</span><span class="nx">stuPtr</span><span class="p">).</span><span class="nx">Name</span><span class="p">)</span><span class="w">         </span><span class="c1">// 通过指针访问字段</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">stuPtr</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span><span class="w">            </span><span class="c1">// 简化写法</span>
 
-// 指针数组和数组指针
-arr := [3]int{1, 2, 3}
-var ptrArr [3]*int                  // 指针数组
-for i := range arr {
-    ptrArr[i] = &amp;arr[i]
-}
+<span class="c1">// 指针数组和数组指针</span>
+<span class="nx">arr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">ptrArr</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="kt">int</span><span class="w">                  </span><span class="c1">// 指针数组</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">arr</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ptrArr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+<span class="p">}</span>
 
-var arrPtr *[3]int = &amp;arr           // 数组指针
-fmt.Println((*arrPtr)[0])
-</code></pre>
+<span class="kd">var</span><span class="w"> </span><span class="nx">arrPtr</span><span class="w"> </span><span class="o">*</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">arr</span><span class="w">           </span><span class="c1">// 数组指针</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">((</span><span class="o">*</span><span class="nx">arrPtr</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</code></pre></div>
 <h4 id="426-channel">4.2.6. 通道(Channel)</h4>
 <p>通道用于goroutine之间的通信。</p>
-<pre><code class="language-go">// 创建通道
-var ch1 chan int                    // 声明通道
-ch2 := make(chan int)               // 创建双向通道
-ch3 := make(chan int, 5)            // 创建带缓冲的通道
-sendCh := make(chan&lt;- string)       // 只发送通道
-receiveCh := make(&lt;-chan string)    // 只接收通道
+<div class="highlight"><pre><span></span><code><span class="c1">// 创建通道</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">ch1</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="w">                    </span><span class="c1">// 声明通道</span>
+<span class="nx">ch2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w">               </span><span class="c1">// 创建双向通道</span>
+<span class="nx">ch3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">            </span><span class="c1">// 创建带缓冲的通道</span>
+<span class="nx">sendCh</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="o">&lt;-</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w">       </span><span class="c1">// 只发送通道</span>
+<span class="nx">receiveCh</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="o">&lt;-</span><span class="kd">chan</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w">    </span><span class="c1">// 只接收通道</span>
 
-// 通道操作
-ch2 &lt;- 42                           // 发送数据
-data := &lt;-ch2                       // 接收数据
+<span class="c1">// 通道操作</span>
+<span class="nx">ch2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">42</span><span class="w">                           </span><span class="c1">// 发送数据</span>
+<span class="nx">data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch2</span><span class="w">                       </span><span class="c1">// 接收数据</span>
 
-// 关闭通道
-close(ch2)
+<span class="c1">// 关闭通道</span>
+<span class="nb">close</span><span class="p">(</span><span class="nx">ch2</span><span class="p">)</span>
 
-// 使用range遍历通道
-ch4 := make(chan int, 3)
-go func() {
-    ch4 &lt;- 1
-    ch4 &lt;- 2
-    ch4 &lt;- 3
-    close(ch4)
-}()
+<span class="c1">// 使用range遍历通道</span>
+<span class="nx">ch4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ch4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nx">ch4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="nx">ch4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="nb">close</span><span class="p">(</span><span class="nx">ch4</span><span class="p">)</span>
+<span class="p">}()</span>
 
-for value := range ch4 {
-    fmt.Println(value)
-}
+<span class="k">for</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">ch4</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 选择语句
-ch5 := make(chan string)
-ch6 := make(chan string)
+<span class="c1">// 选择语句</span>
+<span class="nx">ch5</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span>
+<span class="nx">ch6</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span>
 
-go func() { ch5 &lt;- &quot;hello&quot; }()
-go func() { ch6 &lt;- &quot;world&quot; }()
+<span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ch5</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="w"> </span><span class="p">}()</span>
+<span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ch6</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;world&quot;</span><span class="w"> </span><span class="p">}()</span>
 
-select {
-case msg1 := &lt;-ch5:
-    fmt.Println(msg1)
-case msg2 := &lt;-ch6:
-    fmt.Println(msg2)
-default:
-    fmt.Println(&quot;没有可用的数据&quot;)
-}
-</code></pre>
+<span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="nx">msg1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch5</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">msg1</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="nx">msg2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch6</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">msg2</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;没有可用的数据&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="427-interface">4.2.7. 接口(Interface)</h4>
 <p>接口是一种类型，它定义了一组方法的签名，但不提供具体实现。任何类型只要实现了接口中定义的所有方法，就被认为是实现了该接口。</p>
 <h5 id="4271">4.2.7.1. 接口的定义</h5>
-<pre><code class="language-go">// 定义一个简单的接口
-type Writer interface {
-    Write([]byte) (int, error)
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义一个简单的接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Writer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 定义一个包含多个方法的接口
-type ReadWriter interface {
-    Read([]byte) (int, error)
-    Write([]byte) (int, error)
-}
+<span class="c1">// 定义一个包含多个方法的接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ReadWriter</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Read</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 定义一个空接口（可以表示任何类型）
-type Any interface{}
-// 或者使用Go 1.18+的any关键字
-// var value any
-</code></pre>
+<span class="c1">// 定义一个空接口（可以表示任何类型）</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Any</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span>
+<span class="c1">// 或者使用Go 1.18+的any关键字</span>
+<span class="c1">// var value any</span>
+</code></pre></div>
 <h5 id="4272">4.2.7.2 接口的实现</h5>
-<pre><code class="language-go">// 定义结构体
-type File struct {
-    name string
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">File</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-// 实现Writer接口
-func (f *File) Write(data []byte) (int, error) {
-    fmt.Printf(&quot;向文件 %s 写入数据: %s\n&quot;, f.name, string(data))
-    return len(data), nil
-}
+<span class="c1">// 实现Writer接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="o">*</span><span class="nx">File</span><span class="p">)</span><span class="w"> </span><span class="nx">Write</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;向文件 %s 写入数据: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-// 实现Reader接口
-func (f *File) Read(data []byte) (int, error) {
-    // 简化实现
-    copy(data, []byte(&quot;从文件读取的数据&quot;))
-    return len(data), nil
-}
+<span class="c1">// 实现Reader接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="o">*</span><span class="nx">File</span><span class="p">)</span><span class="w"> </span><span class="nx">Read</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 简化实现</span>
+<span class="w">    </span><span class="nb">copy</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;从文件读取的数据&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-// 使用接口
-func processData(w Writer) {
-    w.Write([]byte(&quot;Hello, Interface!&quot;))
-}
+<span class="c1">// 使用接口</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">processData</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">Writer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hello, Interface!&quot;</span><span class="p">))</span>
+<span class="p">}</span>
 
-// 示例使用
-func main() {
-    file := &amp;File{name: &quot;test.txt&quot;}
-    processData(file)  // File实现了Writer接口
+<span class="c1">// 示例使用</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">file</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">File</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;test.txt&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">processData</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span><span class="w">  </span><span class="c1">// File实现了Writer接口</span>
 
-    // 接口变量
-    var writer Writer = file
-    writer.Write([]byte(&quot;通过接口调用&quot;))
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 接口变量</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">writer</span><span class="w"> </span><span class="nx">Writer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">file</span>
+<span class="w">    </span><span class="nx">writer</span><span class="p">.</span><span class="nx">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;通过接口调用&quot;</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
 <h5 id="4273">4.2.7.3. 接口的组合</h5>
-<pre><code class="language-go">// 接口嵌入
-type Reader interface {
-    Read([]byte) (int, error)
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 接口嵌入</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Reader</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Read</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
 
-type Writer interface {
-    Write([]byte) (int, error)
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Writer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
 
-type ReadWriter interface {
-    Reader  // 嵌入Reader接口
-    Writer  // 嵌入Writer接口
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">ReadWriter</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Reader</span><span class="w">  </span><span class="c1">// 嵌入Reader接口</span>
+<span class="w">    </span><span class="nx">Writer</span><span class="w">  </span><span class="c1">// 嵌入Writer接口</span>
+<span class="p">}</span>
 
-// 实现ReadWriter接口的结构体
-type File struct {
-    name string
-}
+<span class="c1">// 实现ReadWriter接口的结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">File</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func (f *File) Read(data []byte) (int, error) {
-    copy(data, []byte(&quot;文件内容&quot;))
-    return len(data), nil
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="o">*</span><span class="nx">File</span><span class="p">)</span><span class="w"> </span><span class="nx">Read</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">copy</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;文件内容&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-func (f *File) Write(data []byte) (int, error) {
-    fmt.Printf(&quot;写入文件 %s: %s\n&quot;, f.name, string(data))
-    return len(data), nil
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="o">*</span><span class="nx">File</span><span class="p">)</span><span class="w"> </span><span class="nx">Write</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;写入文件 %s: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div>
 <h5 id="4274">4.2.7.4. 空接口和类型断言</h5>
-<pre><code class="language-go">// 空接口可以存储任何类型的值
-var x interface{}
+<div class="highlight"><pre><span></span><code><span class="c1">// 空接口可以存储任何类型的值</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span>
 
-x = 42
-fmt.Println(x)  // 42
+<span class="nx">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">42</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="w">  </span><span class="c1">// 42</span>
 
-x = &quot;Hello&quot;
-fmt.Println(x)  // Hello
+<span class="nx">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="w">  </span><span class="c1">// Hello</span>
 
-x = true
-fmt.Println(x)  // true
+<span class="nx">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span><span class="w">  </span><span class="c1">// true</span>
 
-// 类型断言
-str, ok := x.(string)
-if ok {
-    fmt.Printf(&quot;x 是字符串: %s\n&quot;, str)
-} else {
-    fmt.Println(&quot;x 不是字符串&quot;)
-}
+<span class="c1">// 类型断言</span>
+<span class="nx">str</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">x</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;x 是字符串: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">str</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;x 不是字符串&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 类型选择
-switch v := x.(type) {
-case int:
-    fmt.Printf(&quot;x 是整数: %d\n&quot;, v)
-case string:
-    fmt.Printf(&quot;x 是字符串: %s\n&quot;, v)
-case bool:
-    fmt.Printf(&quot;x 是布尔值: %t\n&quot;, v)
-default:
-    fmt.Printf(&quot;x 是其他类型: %T\n&quot;, v)
-}
-</code></pre>
+<span class="c1">// 类型选择</span>
+<span class="k">switch</span><span class="w"> </span><span class="nx">v</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">x</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="kt">int</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;x 是整数: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="kt">string</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;x 是字符串: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="kt">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;x 是布尔值: %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;x 是其他类型: %T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h5 id="4275">4.2.7.5. 接口的最佳实践</h5>
-<pre><code class="language-go">// 1. 倾向于定义小而专注的接口
-type Stringer interface {
-    String() string
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 1. 倾向于定义小而专注的接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Stringer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">String</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-type Reader interface {
-    Read([]byte) (int, error)
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Reader</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Read</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 2. 接受接口，返回结构体
-func ProcessData(r Reader) []byte {
-    data := make([]byte, 1024)
-    r.Read(data)
-    return data
-}
+<span class="c1">// 2. 接受接口，返回结构体</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">ProcessData</span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="nx">Reader</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Read</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">data</span>
+<span class="p">}</span>
 
-// 3. 使用接口作为函数参数实现解耦
-type Animal interface {
-    Speak() string
-}
+<span class="c1">// 3. 使用接口作为函数参数实现解耦</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Animal</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Speak</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-type Dog struct{}
-func (d Dog) Speak() string {
-    return &quot;汪汪&quot;
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Dog</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="nx">Dog</span><span class="p">)</span><span class="w"> </span><span class="nx">Speak</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;汪汪&quot;</span>
+<span class="p">}</span>
 
-type Cat struct{}
-func (c Cat) Speak() string {
-    return &quot;喵喵&quot;
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Cat</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Cat</span><span class="p">)</span><span class="w"> </span><span class="nx">Speak</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;喵喵&quot;</span>
+<span class="p">}</span>
 
-func MakeAnimalSpeak(a Animal) {
-    fmt.Println(a.Speak())
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">MakeAnimalSpeak</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="nx">Animal</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">Speak</span><span class="p">())</span>
+<span class="p">}</span>
 
-// 使用示例
-func main() {
-    dog := Dog{}
-    cat := Cat{}
-    MakeAnimalSpeak(dog)  // 汪汪
-    MakeAnimalSpeak(cat)  // 喵喵
-}
-</code></pre>
+<span class="c1">// 使用示例</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">dog</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Dog</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">cat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Cat</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">MakeAnimalSpeak</span><span class="p">(</span><span class="nx">dog</span><span class="p">)</span><span class="w">  </span><span class="c1">// 汪汪</span>
+<span class="w">    </span><span class="nx">MakeAnimalSpeak</span><span class="p">(</span><span class="nx">cat</span><span class="p">)</span><span class="w">  </span><span class="c1">// 喵喵</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="43">4.3. 类型别名和自定义类型</h3>
 <p>Go语言允许创建类型别名和自定义类型。</p>
-<pre><code class="language-go">// 类型别名（Go 1.9+）
-type Celsius float64
-type Fahrenheit float64
-type ID = int32                    // 类型别名
+<div class="highlight"><pre><span></span><code><span class="c1">// 类型别名（Go 1.9+）</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Celsius</span><span class="w"> </span><span class="kt">float64</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Fahrenheit</span><span class="w"> </span><span class="kt">float64</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kt">int32</span><span class="w">                    </span><span class="c1">// 类型别名</span>
 
-// 自定义类型
-type UserID int32                  // 新类型，与int32不兼容
-type MyInt int                     // 新类型，与int不兼容
+<span class="c1">// 自定义类型</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">UserID</span><span class="w"> </span><span class="kt">int32</span><span class="w">                  </span><span class="c1">// 新类型，与int32不兼容</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">MyInt</span><span class="w"> </span><span class="kt">int</span><span class="w">                     </span><span class="c1">// 新类型，与int不兼容</span>
 
-// 使用示例
-var temp Celsius = 25.0
-var id ID = 12345
-var userId UserID = 67890
+<span class="c1">// 使用示例</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">temp</span><span class="w"> </span><span class="nx">Celsius</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">25.0</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="nx">ID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">12345</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">userId</span><span class="w"> </span><span class="nx">UserID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">67890</span>
 
-// 类型转换
-func CToF(c Celsius) Fahrenheit {
-    return Fahrenheit(c*9/5 + 32)
-}
+<span class="c1">// 类型转换</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">CToF</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Celsius</span><span class="p">)</span><span class="w"> </span><span class="nx">Fahrenheit</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">Fahrenheit</span><span class="p">(</span><span class="nx">c</span><span class="o">*</span><span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span>
+<span class="p">}</span>
 
-func FToC(f Fahrenheit) Celsius {
-    return Celsius((f - 32) * 5 / 9)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">FToC</span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="nx">Fahrenheit</span><span class="p">)</span><span class="w"> </span><span class="nx">Celsius</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">Celsius</span><span class="p">((</span><span class="nx">f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="44">4.4. 零值概念</h3>
 <p>在Go语言中，所有变量在声明时都会被赋予一个零值：</p>
 <ul>
@@ -3456,74 +3459,74 @@ func FToC(f Fahrenheit) Celsius {
 <li>接口类型：nil</li>
 <li>结构体：各字段的零值</li>
 </ul>
-<pre><code class="language-go">var i int                          // 0
-var f float64                      // 0.0
-var b bool                         // false
-var s string                       // &quot;&quot;
-var ptr *int                       // nil
-var slice []int                    // nil
-var m map[string]int               // nil
-var ch chan int                    // nil
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="w">                          </span><span class="c1">// 0</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="kt">float64</span><span class="w">                      </span><span class="c1">// 0.0</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">bool</span><span class="w">                         </span><span class="c1">// false</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="w">                       </span><span class="c1">// &quot;&quot;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">ptr</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="w">                       </span><span class="c1">// nil</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">slice</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w">                    </span><span class="c1">// nil</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">m</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="w">               </span><span class="c1">// nil</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">ch</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="w">                    </span><span class="c1">// nil</span>
 
-// 结构体零值
-type User struct {
-    Name string
-    Age  int
-    Active bool
-}
+<span class="c1">// 结构体零值</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Active</span><span class="w"> </span><span class="kt">bool</span>
+<span class="p">}</span>
 
-var user User                      // User{&quot;&quot;, 0, false}
-</code></pre>
+<span class="kd">var</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">User</span><span class="w">                      </span><span class="c1">// User{&quot;&quot;, 0, false}</span>
+</code></pre></div>
 <h3 id="45">4.5. 类型转换</h3>
 <p>Go语言不支持隐式类型转换，必须显式进行类型转换。</p>
-<pre><code class="language-go">// 基本类型转换
-var i int = 42
-var f float64 = float64(i)         // int转float64
-var u uint = uint(f)               // float64转uint
+<div class="highlight"><pre><span></span><code><span class="c1">// 基本类型转换</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">42</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">float64</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w">         </span><span class="c1">// int转float64</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="kt">uint</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">uint</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span><span class="w">               </span><span class="c1">// float64转uint</span>
 
-// 字符串与其他类型转换
-import &quot;strconv&quot;
+<span class="c1">// 字符串与其他类型转换</span>
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;strconv&quot;</span>
 
-// 数字转字符串
-str := strconv.Itoa(42)            // int转字符串
-str = strconv.FormatFloat(3.14, 'f', -1, 64) // float64转字符串
+<span class="c1">// 数字转字符串</span>
+<span class="nx">str</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">Itoa</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span><span class="w">            </span><span class="c1">// int转字符串</span>
+<span class="nx">str</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">FormatFloat</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;f&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span><span class="w"> </span><span class="c1">// float64转字符串</span>
 
-// 字符串转数字
-i, err := strconv.Atoi(&quot;42&quot;)       // 字符串转int
-if err != nil {
-    // 处理错误
-}
+<span class="c1">// 字符串转数字</span>
+<span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">Atoi</span><span class="p">(</span><span class="s">&quot;42&quot;</span><span class="p">)</span><span class="w">       </span><span class="c1">// 字符串转int</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 处理错误</span>
+<span class="p">}</span>
 
-f, err = strconv.ParseFloat(&quot;3.14&quot;, 64) // 字符串转float64
+<span class="nx">f</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">strconv</span><span class="p">.</span><span class="nx">ParseFloat</span><span class="p">(</span><span class="s">&quot;3.14&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span><span class="w"> </span><span class="c1">// 字符串转float64</span>
 
-// 字节切片与字符串转换
-str = &quot;hello&quot;
-bytes := []byte(str)               // 字符串转字节切片
-str = string(bytes)                // 字节切片转字符串
-</code></pre>
+<span class="c1">// 字节切片与字符串转换</span>
+<span class="nx">str</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span>
+<span class="nx">bytes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w">               </span><span class="c1">// 字符串转字节切片</span>
+<span class="nx">str</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">bytes</span><span class="p">)</span><span class="w">                </span><span class="c1">// 字节切片转字符串</span>
+</code></pre></div>
 <h3 id="46">4.6. 类型断言</h3>
 <p>类型断言用于接口类型的转换。</p>
-<pre><code class="language-go">var i interface{} = &quot;hello&quot;
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="kd">interface</span><span class="p">{}</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span>
 
-// 类型断言
-s, ok := i.(string)                // 安全类型断言
-if ok {
-    fmt.Println(s)
-}
+<span class="c1">// 类型断言</span>
+<span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">i</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span><span class="w">                </span><span class="c1">// 安全类型断言</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 直接类型断言（如果类型不匹配会panic）
-s = i.(string)
+<span class="c1">// 直接类型断言（如果类型不匹配会panic）</span>
+<span class="nx">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>
 
-// 类型选择
-switch v := i.(type) {
-case string:
-    fmt.Println(&quot;字符串:&quot;, v)
-case int:
-    fmt.Println(&quot;整数:&quot;, v)
-default:
-    fmt.Println(&quot;未知类型&quot;)
-}
-</code></pre>
+<span class="c1">// 类型选择</span>
+<span class="k">switch</span><span class="w"> </span><span class="nx">v</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">i</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="kt">string</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;字符串:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span>
+<span class="k">case</span><span class="w"> </span><span class="kt">int</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;整数:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span>
+<span class="k">default</span><span class="p">:</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;未知类型&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 

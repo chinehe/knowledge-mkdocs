@@ -1246,8 +1246,8 @@
 <p>MCP（Model Context Protocol）是一个开源的，用于连接AI程序和外部系统的标准。</p>
 <p>使用MCP，AI应用（比如Claude、ChatGPT）可以连接数据源（如本地文件、数据库）、工具（如搜索引擎、计算器）和工作流（如指定的提示词），从而使他们能够访问关键信息并执行任务。</p>
 <p>想象一下,MCP就像是AI应用的USB-C接口。USB-C接口提供了一种标准的方式来连接电子设备；MCP提供了一种标准的方式来连接AI应用和外部系统。</p>
-<p>示意图：</p>
-<pre><code class="language-mermaid">graph LR
+<p>示意图：
+<pre class="mermaid"><code>graph LR
   Chat[聊天AI]
   IDE[AI IDE或代码编辑器]
   Other[其他AI应用程序]
@@ -1260,8 +1260,7 @@
   Other &lt;--&gt; MCP
   MCP &lt;--&gt; Data
   MCP &lt;--&gt; Tools
-  MCP &lt;--&gt; Tools2
-</code></pre>
+  MCP &lt;--&gt; Tools2</code></pre></p>
 <blockquote>
 <p>MCP作为一个开发协议，被许多客户端和服务器支持。比如像Claude、ChatGPT这种AI助手，像Visual Studio Code、Cursor这样的开发工具，以及其他的很多应用程序。</p>
 </blockquote>

@@ -2384,11 +2384,11 @@
 <h2 id="2">2. 声明结构体</h2>
 <h3 id="21">2.1. 声明全新的结构体</h3>
 <p>声明一个结构体的基本语法如下：</p>
-<pre><code class="language-go">type 类型名 struct{
-    属性1 属性类型1
-    属性2 属性类型2
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">类型名</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">属性1</span><span class="w"> </span><span class="nx">属性类型1</span>
+<span class="w">    </span><span class="nx">属性2</span><span class="w"> </span><span class="nx">属性类型2</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>类型名：标识自定义结构体的名称，在同一个包内不能重复。</li>
 <li>属性名：</li>
@@ -2397,38 +2397,38 @@
 <li>属性类型：表示结构体属性的具体类型。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">type person struct {
-    name, city string // 相同类型的属性可以写在一起
-    age        int8
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">city</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// 相同类型的属性可以写在一起</span>
+<span class="w">    </span><span class="nx">age</span><span class="w">        </span><span class="kt">int8</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="22">2.2. 基于现有类型定义新类型</h3>
 <h4 id="221">2.2.1. 使用方式</h4>
 <p>除了声明全新的结构体外，还可以基于现有的类型（不一定是结构体）来定义新类型：</p>
-<pre><code class="language-go">type 新类型名称 现有类型名称 
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">新类型名称</span><span class="w"> </span><span class="nx">现有类型名称</span><span class="w"> </span>
+</code></pre></div>
 <ul>
 <li>新类型具有和现有类型相同的属性。</li>
 <li>新类型与现有类型是两个不同的类型，(不能直接使用现有类型的方法，也不能把新类型存入现有类型的数组…);可以通过强转成现有类型后使用。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">type MyInt int // 定义int的新类型
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">MyInt</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="c1">// 定义int的新类型</span>
 
-type MyFunc func(int) int // 定义func的新类型
+<span class="kd">type</span><span class="w"> </span><span class="nx">MyFunc</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="c1">// 定义func的新类型</span>
 
-type User struct {
-    a int
-    b string
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-type MyUser User // 定义结构体的新类型
+<span class="kd">type</span><span class="w"> </span><span class="nx">MyUser</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="c1">// 定义结构体的新类型</span>
 
-type I interface {
-    get() string
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">I</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">get</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-type MyInterface I // 定义接口的新类型
-</code></pre>
+<span class="kd">type</span><span class="w"> </span><span class="nx">MyInterface</span><span class="w"> </span><span class="nx">I</span><span class="w"> </span><span class="c1">// 定义接口的新类型</span>
+</code></pre></div>
 <h4 id="222">2.2.2. 基础类型</h4>
 <p>基于基础类型定义的新类型具有如下特性：</p>
 <ol>
@@ -2436,63 +2436,62 @@ type MyInterface I // 定义接口的新类型
 <li>相同的新类型变量可以直接相互比较和直接运算。</li>
 <li>可以为新类型定义新方法。</li>
 </ol>
-<pre><code class="language-go">type MyInt int // int的新类型
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">MyInt</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="c1">// int的新类型</span>
 
-type MyString string // string的新类型
+<span class="kd">type</span><span class="w"> </span><span class="nx">MyString</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// string的新类型</span>
 
-func main() {
-    i := 1
-    MyI := MyInt(1)
-    MyII := MyInt(1)
-    fmt.Println(i == MyI) // 原类型与新类型变量不能直接比较，此处报错
-    fmt.Println(MyInt(i) == MyI)  // 强转后可以比较
-    fmt.Println(MyI == MyII) // 相同新类型可以比较
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nx">MyI</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">MyInt</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">MyII</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">MyInt</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">MyI</span><span class="p">)</span><span class="w"> </span><span class="c1">// 原类型与新类型变量不能直接比较，此处报错</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">MyInt</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">MyI</span><span class="p">)</span><span class="w">  </span><span class="c1">// 强转后可以比较</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">MyI</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">MyII</span><span class="p">)</span><span class="w"> </span><span class="c1">// 相同新类型可以比较</span>
 
-    s := &quot;Hello World&quot;
-    myS := MyString(&quot;Hello World&quot;)
-    mySS := MyString(&quot;Hello World&quot;)
-    fmt.Println(s == myS) // 原类型与新类型变量不能直接比较，此处报错
-    fmt.Println(MyString(s) == myS) // 强转后可以比较
-    fmt.Println(myS == mySS)// 相同新类型可以比较
-    fmt.Println(strings.ToUpper(myS)) // 也不能通用，此处报错
-    fmt.Println(strings.ToUpper(string(myS))) // 需要强转
-}
-</code></pre>
+<span class="w">    </span><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span>
+<span class="w">    </span><span class="nx">myS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">MyString</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">mySS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">MyString</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">myS</span><span class="p">)</span><span class="w"> </span><span class="c1">// 原类型与新类型变量不能直接比较，此处报错</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">MyString</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">myS</span><span class="p">)</span><span class="w"> </span><span class="c1">// 强转后可以比较</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">myS</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">mySS</span><span class="p">)</span><span class="c1">// 相同新类型可以比较</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">strings</span><span class="p">.</span><span class="nx">ToUpper</span><span class="p">(</span><span class="nx">myS</span><span class="p">))</span><span class="w"> </span><span class="c1">// 也不能通用，此处报错</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">strings</span><span class="p">.</span><span class="nx">ToUpper</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">myS</span><span class="p">)))</span><span class="w"> </span><span class="c1">// 需要强转</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="223">2.2.3. 函数</h4>
 <p>由于Go语言中函数也是一种类型，因此我们可以基于一种函数创建一种新类型。</p>
-<pre><code class="language-go">type 新类型名称 func(参数列表)返回列表
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">新类型名称</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">参数列表</span><span class="p">)</span><span class="nx">返回列表</span>
+</code></pre></div>
 <p>Go语言中，具有相同参数列表和相同返回列表的函数被视为相同的类型。因此当基于一种函数类型定义新类型后，所有具有相同参数列表和返回值列表的函数都是该新类型。</p>
-<pre><code class="language-go">type IntOperateFunc = func(int, int) int // 定义一种新类型
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">IntOperateFunc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="c1">// 定义一种新类型</span>
 
-func Add(a, b int) int {
-    return a + b
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">Add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func Sub(a, b int) int {
-    return a - b
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">Sub</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func Multiply(a, b int) int {
-    return a * b
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">Multiply</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func Divide(a, b int) int {
-    return a / b
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">Divide</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func Operate(a, b int, operate IntOperateFunc) int { // 这个方法入参中包含新类型
-    return operate(a, b)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">Operate</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">operate</span><span class="w"> </span><span class="nx">IntOperateFunc</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 这个方法入参中包含新类型</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">operate</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    Operate(1, 2, Add) // 具有相同参数列表和返回值列表的函数可以被直接当成新类型使用
-    Operate(1, 2, Sub) // 具有相同参数列表和返回值列表的函数可以被直接当成新类型使用
-    Operate(1, 2, Multiply) // 具有相同参数列表和返回值列表的函数可以被直接当成新类型使用
-    Operate(1, 2, Divide) // 具有相同参数列表和返回值列表的函数可以被直接当成新类型使用
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Operate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nx">Add</span><span class="p">)</span><span class="w"> </span><span class="c1">// 具有相同参数列表和返回值列表的函数可以被直接当成新类型使用</span>
+<span class="w">    </span><span class="nx">Operate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nx">Sub</span><span class="p">)</span><span class="w"> </span><span class="c1">// 具有相同参数列表和返回值列表的函数可以被直接当成新类型使用</span>
+<span class="w">    </span><span class="nx">Operate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nx">Multiply</span><span class="p">)</span><span class="w"> </span><span class="c1">// 具有相同参数列表和返回值列表的函数可以被直接当成新类型使用</span>
+<span class="w">    </span><span class="nx">Operate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nx">Divide</span><span class="p">)</span><span class="w"> </span><span class="c1">// 具有相同参数列表和返回值列表的函数可以被直接当成新类型使用</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="224">2.2.4. 结构体</h4>
 <p>基于现有结构体定义的新结构体具备如下特性：</p>
 <ul>
@@ -2501,52 +2500,52 @@ func main() {
 <li>新结构体与原始结构体之间可以强转。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">// 原始结构体
-type Person struct {
-  Name string
-  Age  int
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 原始结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">  </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="p">}</span>
 
-// 原始结构体的方法
-func (p Person) Print() {
-  fmt.Printf(&quot;Name: %s, Age: %d\n&quot;, p.Name, p.Age)
-}
+<span class="c1">// 原始结构体的方法</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">Person</span><span class="p">)</span><span class="w"> </span><span class="nx">Print</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Name: %s, Age: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 基于原始结构体定义新结构体
-type NewPerson Person
+<span class="c1">// 基于原始结构体定义新结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">NewPerson</span><span class="w"> </span><span class="nx">Person</span>
 
-// 新结构体的方法
-func (np NewPerson) NewPrint() {
-  fmt.Printf(&quot;New Name: %s, New Age: %d\n&quot;, np.Name, np.Age)
-}
+<span class="c1">// 新结构体的方法</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">np</span><span class="w"> </span><span class="nx">NewPerson</span><span class="p">)</span><span class="w"> </span><span class="nx">NewPrint</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;New Name: %s, New Age: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">np</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">np</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-  // 原始结构体属性
-  p := Person{Name: &quot;John&quot;, Age: 30}
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 原始结构体属性</span>
+<span class="w">  </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;John&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">}</span>
 
-  // 新结构体具有和原始结构体相同的属性
-  newP := NewPerson{Name: &quot;John&quot;, Age: 30}
+<span class="w">  </span><span class="c1">// 新结构体具有和原始结构体相同的属性</span>
+<span class="w">  </span><span class="nx">newP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewPerson</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;John&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">}</span>
 
-  // 原始结构体的方法
-  p.Print() // Name: John, Age: 30
-  newP.Print() // 新结构体不能直接使用原始结构体的方法，此处报错
-  Person(newP).Print() // 新结构体强转成原始结构体：Name: John, Age: 30
+<span class="w">  </span><span class="c1">// 原始结构体的方法</span>
+<span class="w">  </span><span class="nx">p</span><span class="p">.</span><span class="nx">Print</span><span class="p">()</span><span class="w"> </span><span class="c1">// Name: John, Age: 30</span>
+<span class="w">  </span><span class="nx">newP</span><span class="p">.</span><span class="nx">Print</span><span class="p">()</span><span class="w"> </span><span class="c1">// 新结构体不能直接使用原始结构体的方法，此处报错</span>
+<span class="w">  </span><span class="nx">Person</span><span class="p">(</span><span class="nx">newP</span><span class="p">).</span><span class="nx">Print</span><span class="p">()</span><span class="w"> </span><span class="c1">// 新结构体强转成原始结构体：Name: John, Age: 30</span>
 
-  // 新结构体的方法
-  p.NewPrint() // 原始结构体不能直接使用新结构体的方法，此处报错
-  newP.NewPrint() // New Name: John, New Age: 30
-  NewPerson(p).NewPrint() // 原始结构体强转成新结构体：New Name: John, New Age: 30
-}
-</code></pre>
+<span class="w">  </span><span class="c1">// 新结构体的方法</span>
+<span class="w">  </span><span class="nx">p</span><span class="p">.</span><span class="nx">NewPrint</span><span class="p">()</span><span class="w"> </span><span class="c1">// 原始结构体不能直接使用新结构体的方法，此处报错</span>
+<span class="w">  </span><span class="nx">newP</span><span class="p">.</span><span class="nx">NewPrint</span><span class="p">()</span><span class="w"> </span><span class="c1">// New Name: John, New Age: 30</span>
+<span class="w">  </span><span class="nx">NewPerson</span><span class="p">(</span><span class="nx">p</span><span class="p">).</span><span class="nx">NewPrint</span><span class="p">()</span><span class="w"> </span><span class="c1">// 原始结构体强转成新结构体：New Name: John, New Age: 30</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="225">2.2.5. 接口</h4>
 <p>也可以为基于接口创建新类型：</p>
-<pre><code class="language-go">// Printer 接口
-type Printer interface {
-    Print()
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// Printer 接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Printer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Print</span><span class="p">()</span>
+<span class="p">}</span>
 
-type NewPrinter  Printer
-</code></pre>
+<span class="kd">type</span><span class="w"> </span><span class="nx">NewPrinter</span><span class="w">  </span><span class="nx">Printer</span>
+</code></pre></div>
 <p>新接口类型的特性：</p>
 <ul>
 <li>
@@ -2573,45 +2572,44 @@ type NewPrinter  Printer
 <p>我也还没发现这种做法有什么作用！</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-go">
-// 旧接口
-type Printer interface {
-    Print()
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 旧接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Printer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Print</span><span class="p">()</span>
+<span class="p">}</span>
 
-// 新接口类型
-type NewPrinter Printer
+<span class="c1">// 新接口类型</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">NewPrinter</span><span class="w"> </span><span class="nx">Printer</span>
 
-// 因为新类型也是一个接口类型，不能为新接口类型定义新方法，此处报错
-func (p NewPrinter)Do()  {
-}
+<span class="c1">// 因为新类型也是一个接口类型，不能为新接口类型定义新方法，此处报错</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">NewPrinter</span><span class="p">)</span><span class="nx">Do</span><span class="p">()</span><span class="w">  </span><span class="p">{</span>
+<span class="p">}</span>
 
-//  定义一个结构体，实现接口，会自动实现这两个接口
-type Person struct {
-    Name string
-    Age  int
-}
+<span class="c1">//  定义一个结构体，实现接口，会自动实现这两个接口</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="p">}</span>
 
-func (p Person) Print() {
-    fmt.Println(&quot;Name:&quot;, p.Name, &quot;Age:&quot;, p.Age)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">Person</span><span class="p">)</span><span class="w"> </span><span class="nx">Print</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Name:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Age:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 此处测试用，入参为原始接口类型
-func Do(myInterface Printer) {
-    myInterface.Print()
-}
+<span class="c1">// 此处测试用，入参为原始接口类型</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">Do</span><span class="p">(</span><span class="nx">myInterface</span><span class="w"> </span><span class="nx">Printer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">myInterface</span><span class="p">.</span><span class="nx">Print</span><span class="p">()</span>
+<span class="p">}</span>
 
-func main() {
-  // 原始接口类型
-    var p Printer
-  // 新接口类型
-    var newP NewPrinter
-    p = Person{&quot;Alice&quot;, 18}
-    newP = Person{&quot;Bob&quot;, 20}
-    Do(p) // 传入原始接口类型
-    Do(newP) // 传入新接口类型，不需要强转也可以
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 原始接口类型</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="nx">Printer</span>
+<span class="w">  </span><span class="c1">// 新接口类型</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">newP</span><span class="w"> </span><span class="nx">NewPrinter</span>
+<span class="w">    </span><span class="nx">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">newP</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">Do</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="c1">// 传入原始接口类型</span>
+<span class="w">    </span><span class="nx">Do</span><span class="p">(</span><span class="nx">newP</span><span class="p">)</span><span class="w"> </span><span class="c1">// 传入新接口类型，不需要强转也可以</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="23">2.3. 类型别名</h3>
 <blockquote>
 <p>类型别名是Go1.9版本添加的功能。</p>
@@ -2620,12 +2618,12 @@ func main() {
 <p>现在，我们将介绍一种“差不多的”概念 — 类型别名！</p>
 <h4 id="231">2.3.1. 定义方式</h4>
 <p>定义类型别名的方式和上一章节“基于现有类型定义新类型”及其类似：</p>
-<pre><code class="language-go">// 基于现有类型定义新类型
-type 新类型名称 现有类型名称 
+<div class="highlight"><pre><span></span><code><span class="c1">// 基于现有类型定义新类型</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">新类型名称</span><span class="w"> </span><span class="nx">现有类型名称</span><span class="w"> </span>
 
-// 类型别名
-type 类型别名 = 现有类型名称
-</code></pre>
+<span class="c1">// 类型别名</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">类型别名</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">现有类型名称</span>
+</code></pre></div>
 <p>LOOK！！！</p>
 <p>类型别名定义时，就多了一个<code>=</code>号。</p>
 <h4 id="232">2.3.2. 特性</h4>
@@ -2638,37 +2636,37 @@ type 类型别名 = 现有类型名称
 <p>类型别名和“基于现有类型定义新类型”不同，前者本质上就是现有类型；后者是基于现有类型创建了一个新的类型。</p>
 </li>
 </ul>
-<pre><code class="language-go">type OldType struct{}    // 现有类型
-type TypeAlias = OldType // 类型别名
-type NewType OldType     // 基于现有类型创建新类型
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">OldType</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span><span class="w">    </span><span class="c1">// 现有类型</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">TypeAlias</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">OldType</span><span class="w"> </span><span class="c1">// 类型别名</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">NewType</span><span class="w"> </span><span class="nx">OldType</span><span class="w">     </span><span class="c1">// 基于现有类型创建新类型</span>
 
-func main() {
-    fmt.Printf(&quot;%T\n&quot;, OldType{})   // main.OldType
-    fmt.Printf(&quot;%T\n&quot;, TypeAlias{}) // main.OldType
-    fmt.Printf(&quot;%T\n&quot;, NewType{})   // main.NewType
-}
-</code></pre>
-<pre><code class="language-go">// 方式1：零值初始化
-var person1 Person
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">OldType</span><span class="p">{})</span><span class="w">   </span><span class="c1">// main.OldType</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">TypeAlias</span><span class="p">{})</span><span class="w"> </span><span class="c1">// main.OldType</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">NewType</span><span class="p">{})</span><span class="w">   </span><span class="c1">// main.NewType</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// 方式1：零值初始化</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">person1</span><span class="w"> </span><span class="nx">Person</span>
 
-// 方式2：显式初始化
-person2 := Person{Name: &quot;张三&quot;, Age: 25, Sex: &quot;男&quot;}
+<span class="c1">// 方式2：显式初始化</span>
+<span class="nx">person2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;张三&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="nx">Sex</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;男&quot;</span><span class="p">}</span>
 
-// 方式3：按顺序初始化（不推荐，易出错）
-person3 := Person{&quot;李四&quot;, 30, &quot;女&quot;}
+<span class="c1">// 方式3：按顺序初始化（不推荐，易出错）</span>
+<span class="nx">person3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;李四&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;女&quot;</span><span class="p">}</span>
 
-// 方式4：使用new关键字
-person4 := new(Person)  // 返回指向结构体的指针
+<span class="c1">// 方式4：使用new关键字</span>
+<span class="nx">person4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">Person</span><span class="p">)</span><span class="w">  </span><span class="c1">// 返回指向结构体的指针</span>
 
-// 方式5：匿名结构体
-address := struct {
-    City  string
-    State string
-}{
-    City:  &quot;北京&quot;,
-    State: &quot;北京市&quot;,
-}
-</code></pre>
+<span class="c1">// 方式5：匿名结构体</span>
+<span class="nx">address</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">City</span><span class="w">  </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">State</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}{</span>
+<span class="w">    </span><span class="nx">City</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;北京&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">State</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;北京市&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="3">3. 实例化、初始化</h2>
 <ul>
 <li>这里的实例化指为结构体对象分配内存。</li>
@@ -2676,50 +2674,50 @@ address := struct {
 </ul>
 <h3 id="31">3.1 声明实例化</h3>
 <p>结构体本身也是一种类型，我们可以像声明内置类型一样使用var关键字声明结构体类型：</p>
-<pre><code class="language-go">var 变量名称 结构体类型
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">变量名称</span><span class="w"> </span><span class="nx">结构体类型</span>
+</code></pre></div>
 <p>声明结构体类型的变量时，就已经为变量分配了内存，并完成了结构体属性的默认赋值。</p>
 <blockquote>
 <p>此时所有结构体字段被赋予其类型的零值。</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-go">type Person struct {
-    Age  int
-    Name string
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func main() {
-    var p Person
-    fmt.Printf(&quot;%+v&quot;, p) // {Age:0 Name:}
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="nx">Person</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%+v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="c1">// {Age:0 Name:}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="32-new">3.2 new内置函数实例化</h3>
 <p>还可以使用<code>new</code>内置函数来实例化一个结构体：</p>
-<pre><code class="language-go">变量名 := new(结构体名)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">变量名</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">结构体名</span><span class="p">)</span>
+</code></pre></div>
 <p><code>new</code>内置函数作用：</p>
 <ul>
 <li>实例化结构体，所有结构体字段被赋予其类型的零值。</li>
 <li>返回对象的指针。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">type Person struct {
-    Age  int
-    Name string
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func main() {
-    p := new(Person)
-    fmt.Printf(&quot;%+v&quot;, p) // &amp;{Age:0 Name:}
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">Person</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%+v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="c1">// &amp;{Age:0 Name:}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="33">3.3 使用属性键值对初始化</h3>
 <p>格式：</p>
-<pre><code class="language-go">变量名 := 结构体名{
-  属性1:值1,
-  属性2:值2,
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">变量名</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">结构体名</span><span class="p">{</span>
+<span class="w">  </span><span class="nx">属性1</span><span class="p">:</span><span class="nx">值1</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">属性2</span><span class="p">:</span><span class="nx">值2</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>通过上述的方式，可以在声明结构体对象变量的同时，对结构体属性进行初始化：</p>
 <ul>
 <li>键对应结构体的属性，值对应该字段的初始值。</li>
@@ -2727,18 +2725,18 @@ func main() {
 <li>对于没有指定键值对的属性，其值初始化为对应类型的零值。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">type Person struct {
-    Age  int
-    Name string
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func main() {
-    p := Person{
-        Name: &quot;张三&quot;,
-    }
-    fmt.Printf(&quot;%+v&quot;, p) // {Age:0 Name:张三}
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;张三&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%+v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="c1">// {Age:0 Name:张三}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="34">3.4 使用属性值列表初始化</h3>
 <p>初始化结构体的时候可以简写，也就是初始化的时候不写键，直接写值。</p>
 <p>这种方式需要注意：</p>
@@ -2748,63 +2746,63 @@ func main() {
 <li>该方式不能与键值对初始化方式混用。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">type person struct {
-    name, city string // 相同类型的属性可以写在一起
-    age        int8
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">city</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// 相同类型的属性可以写在一起</span>
+<span class="w">    </span><span class="nx">age</span><span class="w">        </span><span class="kt">int8</span>
+<span class="p">}</span>
 
-func main() {
-    var p = person{
-        &quot;chinehe&quot;,
-        &quot;WuXi&quot;,
-        1,
-    }
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">person</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;chinehe&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;WuXi&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="35">3.5 自定义构造函数</h3>
 <p>Go语言的结构体没有构造函数，我们可以自己实现。</p>
-<pre><code class="language-Go">func newPerson(name, city string, age int8) *person {
-    return &amp;person{
-        name: name,
-        city: city,
-        age:  age,
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">newPerson</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">city</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="w"> </span><span class="kt">int8</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">person</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">person</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">city</span><span class="p">:</span><span class="w"> </span><span class="nx">city</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">age</span><span class="p">:</span><span class="w">  </span><span class="nx">age</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>调用构造函数：</p>
-<pre><code class="language-Go">p9 := newPerson(&quot;pprof.cn&quot;, &quot;测试&quot;, 90)
-fmt.Printf(&quot;%#v\n&quot;, p9)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">p9</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">newPerson</span><span class="p">(</span><span class="s">&quot;pprof.cn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;测试&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%#v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p9</span><span class="p">)</span>
+</code></pre></div>
 <blockquote>
 <p>因为struct是值类型，如果结构体比较复杂的话，值拷贝性能开销会比较大，所以该构造函数返回的是结构体指针类型。</p>
 </blockquote>
 <h2 id="4">4. 访问结构体属性</h2>
 <p>其实上文中的示例代码中，已经无数次展示了如何方法结构体的属性～</p>
 <p>即使用<code>.</code>操作符：</p>
-<pre><code class="language-go">type Person struct {
-    Name string
-    Age  int
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="p">}</span>
 
-func main() {
-    // 创建结构体实例
-    person := Person{Name: &quot;张三&quot;, Age: 25}
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建结构体实例</span>
+<span class="w">    </span><span class="nx">person</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;张三&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">}</span>
 
-    // 访问字段
-    fmt.Printf(&quot;姓名: %s\n&quot;, person.Name) // 姓名: 张三
-    fmt.Printf(&quot;年龄: %d\n&quot;, person.Age) // 年龄: 25
+<span class="w">    </span><span class="c1">// 访问字段</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;姓名: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">person</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span><span class="w"> </span><span class="c1">// 姓名: 张三</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;年龄: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">person</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span><span class="w"> </span><span class="c1">// 年龄: 25</span>
 
-    // 修改字段
-    person.Age = 26
-    fmt.Printf(&quot;新年龄: %d\n&quot;, person.Age) // 新年龄：26
+<span class="w">    </span><span class="c1">// 修改字段</span>
+<span class="w">    </span><span class="nx">person</span><span class="p">.</span><span class="nx">Age</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">26</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;新年龄: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">person</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span><span class="w"> </span><span class="c1">// 新年龄：26</span>
 
-    // 指针访问字段
-    ptr := &amp;person
-    ptr.Name = &quot;李四&quot;
-   // 通过指针修改会影响原值
-    fmt.Printf(&quot;新姓名: %s\n&quot;, person.Name)  // 新姓名: 李四
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 指针访问字段</span>
+<span class="w">    </span><span class="nx">ptr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">person</span>
+<span class="w">    </span><span class="nx">ptr</span><span class="p">.</span><span class="nx">Name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;李四&quot;</span>
+<span class="w">   </span><span class="c1">// 通过指针修改会影响原值</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;新姓名: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">person</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span><span class="w">  </span><span class="c1">// 新姓名: 李四</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="5">5. 结构体方法</h2>
 <h3 id="51">5.1. 概念</h3>
 <p>Go语言中的方法（Method）是一种作用于特定类型变量的函数。这种特定类型变量叫做接收者（Receiver）。接收者的概念就类似于其他语言中的this或者 self。</p>
@@ -2813,10 +2811,10 @@ func main() {
 </blockquote>
 <h3 id="52">5.2. 定义方式</h3>
 <p>结构体方法的定义格式如下：</p>
-<pre><code class="language-go">func (接收者变量 接收者类型)方法名称(参数列表)(返回参数){
-    方法体
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">接收者变量</span><span class="w"> </span><span class="nx">接收者类型</span><span class="p">)</span><span class="nx">方法名称</span><span class="p">(</span><span class="nx">参数列表</span><span class="p">)(</span><span class="nx">返回参数</span><span class="p">){</span>
+<span class="w">    </span><span class="nx">方法体</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>接收者中的参数变量名在命名时，官方建议使用接收者类型名的第一个小写字母，而不是self、this之类的命名。例如，Person类型的接收者变量应该命名为 p，Connector类型的接收者变量应该命名为c等。</li>
 <li>接收者类型：接收者类型和参数类似，可以是指针类型和非指针类型。</li>
@@ -2833,156 +2831,155 @@ func main() {
 <li>当方法作用于值类型接收者时，Go语言会在代码运行时将接收者的值复制一份。在值类型接收者的方法中可以获取接收者的成员值，但修改操作只是针对副本，无法修改接收者变量本身。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">
-type Person struct {
-    Name string
-    Age  int
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="p">}</span>
 
-// 非指针接收者
-func (p Person) PrintAndReset() {
-    fmt.Printf(&quot;Name: %s, Age: %d\n&quot;, p.Name, p.Age)
-    p.Name = &quot;&quot;
-    p.Age = 0
-}
+<span class="c1">// 非指针接收者</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">Person</span><span class="p">)</span><span class="w"> </span><span class="nx">PrintAndReset</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Name: %s, Age: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">p</span><span class="p">.</span><span class="nx">Name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">    </span><span class="nx">p</span><span class="p">.</span><span class="nx">Age</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span>
 
-// 指针接收者
-// 这里演示用，其实不推荐混用
-func (p *Person) PrintAndReset2() {
-    fmt.Printf(&quot;Name: %s, Age: %d\n&quot;, p.Name, p.Age)
-    p.Name = &quot;&quot;
-    p.Age = 0
-}
+<span class="c1">// 指针接收者</span>
+<span class="c1">// 这里演示用，其实不推荐混用</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">Person</span><span class="p">)</span><span class="w"> </span><span class="nx">PrintAndReset2</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Name: %s, Age: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">p</span><span class="p">.</span><span class="nx">Name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">    </span><span class="nx">p</span><span class="p">.</span><span class="nx">Age</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="p">}</span>
 
-func main() {
-    p1 := Person{Name: &quot;Alice&quot;, Age: 30}
-    p1.PrintAndReset()
-    fmt.Printf(&quot;Name: %s, Age: %d\n&quot;, p1.Name, p1.Age) // Name: Alice, Age: 30
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">p1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">p1</span><span class="p">.</span><span class="nx">PrintAndReset</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Name: %s, Age: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p1</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">p1</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span><span class="w"> </span><span class="c1">// Name: Alice, Age: 30</span>
 
-    p2 := &amp;Person{Name: &quot;Bob&quot;, Age: 25}
-    p2.PrintAndReset2()
-    fmt.Printf(&quot;Name: %s, Age: %d\n&quot;, p2.Name, p2.Age) // Name: , Age: 0
-}
-</code></pre>
+<span class="w">    </span><span class="nx">p2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">p2</span><span class="p">.</span><span class="nx">PrintAndReset2</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Name: %s, Age: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p2</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">p2</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span><span class="w"> </span><span class="c1">// Name: , Age: 0</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>特别注意：</strong></p>
 <ul>
 <li>不论接收者是指针还是非指针类型，都可以使用类型对象变量和类型对象指针变量来调用</li>
 <li>如果不使用变量，而直接在初始化语句后调用结构体方法，则不能用类型对象变量来调用指针类型接收者方法。</li>
 </ul>
-<pre><code class="language-go">type Person struct {
-    name string
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func (p Person) Hello(prefix string) string {
-    return fmt.Sprintf(prefix, p.name)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">Person</span><span class="p">)</span><span class="w"> </span><span class="nx">Hello</span><span class="p">(</span><span class="nx">prefix</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="nx">prefix</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+<span class="p">}</span>
 
-func (p *Person) Hello2(prefix string) string {
-    return fmt.Sprintf(prefix, p.name)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">Person</span><span class="p">)</span><span class="w"> </span><span class="nx">Hello2</span><span class="p">(</span><span class="nx">prefix</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="nx">prefix</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    p := &amp;Person{&quot;chinehe&quot;}
-    p2 := Person{&quot;chinehe&quot;}
-    fmt.Println(p.Hello(&quot;hello,i am %s&quot;))   // 正确
-    fmt.Println(p.Hello2(&quot;hello,i am %s&quot;))  // 正确
-    fmt.Println(p2.Hello(&quot;hello,i am %s&quot;))  // 正确
-    fmt.Println(p2.Hello2(&quot;hello,i am %s&quot;)) // 正确
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;chinehe&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">p2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;chinehe&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">Hello</span><span class="p">(</span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span><span class="w">   </span><span class="c1">// 正确</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">Hello2</span><span class="p">(</span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span><span class="w">  </span><span class="c1">// 正确</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">p2</span><span class="p">.</span><span class="nx">Hello</span><span class="p">(</span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span><span class="w">  </span><span class="c1">// 正确</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">p2</span><span class="p">.</span><span class="nx">Hello2</span><span class="p">(</span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// 正确</span>
 
-    fmt.Println((&amp;Person{&quot;chinehe&quot;}).Hello(&quot;hello,i am %s&quot;))  // 正确
-    fmt.Println((&amp;Person{&quot;chinehe&quot;}).Hello2(&quot;hello,i am %s&quot;)) // 正确
-    fmt.Println((Person{&quot;chinehe&quot;}).Hello(&quot;hello,i am %s&quot;))   // 正确
-    fmt.Println((Person{&quot;chinehe&quot;}).Hello2(&quot;hello,i am %s&quot;))  // 错误
-}
-</code></pre>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">((</span><span class="o">&amp;</span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;chinehe&quot;</span><span class="p">}).</span><span class="nx">Hello</span><span class="p">(</span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span><span class="w">  </span><span class="c1">// 正确</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">((</span><span class="o">&amp;</span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;chinehe&quot;</span><span class="p">}).</span><span class="nx">Hello2</span><span class="p">(</span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// 正确</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">((</span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;chinehe&quot;</span><span class="p">}).</span><span class="nx">Hello</span><span class="p">(</span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span><span class="w">   </span><span class="c1">// 正确</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">((</span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;chinehe&quot;</span><span class="p">}).</span><span class="nx">Hello2</span><span class="p">(</span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span><span class="w">  </span><span class="c1">// 错误</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在Go语言中，我们可以为结构体定义方法：</p>
-<pre><code class="language-go">type Rectangle struct {
-    Width, Height float64
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Rectangle</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Width</span><span class="p">,</span><span class="w"> </span><span class="nx">Height</span><span class="w"> </span><span class="kt">float64</span>
+<span class="p">}</span>
 
-// 为Rectangle定义方法（值接收者）
-func (r Rectangle) Area() float64 {
-    return r.Width * r.Height
-}
+<span class="c1">// 为Rectangle定义方法（值接收者）</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="nx">Rectangle</span><span class="p">)</span><span class="w"> </span><span class="nx">Area</span><span class="p">()</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Height</span>
+<span class="p">}</span>
 
-// 为Rectangle定义方法（指针接收者）
-func (r *Rectangle) Scale(factor float64) {
-    r.Width *= factor
-    r.Height *= factor
-}
+<span class="c1">// 为Rectangle定义方法（指针接收者）</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">Rectangle</span><span class="p">)</span><span class="w"> </span><span class="nx">Scale</span><span class="p">(</span><span class="nx">factor</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Width</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="nx">factor</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Height</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="nx">factor</span>
+<span class="p">}</span>
 
-func main() {
-    rect := Rectangle{Width: 10, Height: 5}
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">rect</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Rectangle</span><span class="p">{</span><span class="nx">Width</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nx">Height</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
 
-    // 调用值接收者方法
-    fmt.Printf(&quot;面积: %.2f\n&quot;, rect.Area())  // 50.00
+<span class="w">    </span><span class="c1">// 调用值接收者方法</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;面积: %.2f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">rect</span><span class="p">.</span><span class="nx">Area</span><span class="p">())</span><span class="w">  </span><span class="c1">// 50.00</span>
 
-    // 调用指针接收者方法
-    rect.Scale(2)
-    fmt.Printf(&quot;缩放后面积: %.2f\n&quot;, rect.Area())  // 200.00
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 调用指针接收者方法</span>
+<span class="w">    </span><span class="nx">rect</span><span class="p">.</span><span class="nx">Scale</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;缩放后面积: %.2f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">rect</span><span class="p">.</span><span class="nx">Area</span><span class="p">())</span><span class="w">  </span><span class="c1">// 200.00</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="54">5.4 调用结构体的方法</h3>
 <p>根据调用者不同，分为两种表现形式:</p>
 <ul>
 <li>结构体对象直接调用</li>
 </ul>
-<p><code>go
-  结构体对象.方法名称(参数列表)</code></p>
+<div class="highlight"><pre><span></span><code><span class="nx">结构体对象</span><span class="p">.</span><span class="nx">方法名称</span><span class="p">(</span><span class="nx">参数列表</span><span class="p">)</span>
+</code></pre></div>
 <ul>
 <li>结构体对象作为参数调用</li>
 </ul>
-<p><code>go
-  结构体类型或类型指针.方法名称(结构体对象,参数列表)</code></p>
+<div class="highlight"><pre><span></span><code><span class="nx">结构体类型或类型指针</span><span class="p">.</span><span class="nx">方法名称</span><span class="p">(</span><span class="nx">结构体对象</span><span class="p">,</span><span class="nx">参数列表</span><span class="p">)</span>
+</code></pre></div>
 <blockquote>
 <p>这种方式下，结构体对象的调用规则应该遵从参数的规则，而非接收者的规则</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-go">type Person struct {
-    name string
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func (p Person) Hello(prefix string) string {
-    return fmt.Sprintf(prefix, p.name)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="nx">Person</span><span class="p">)</span><span class="w"> </span><span class="nx">Hello</span><span class="p">(</span><span class="nx">prefix</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="nx">prefix</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+<span class="p">}</span>
 
-func (p *Person) Hello2(prefix string) string {
-    return fmt.Sprintf(prefix, p.name)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">Person</span><span class="p">)</span><span class="w"> </span><span class="nx">Hello2</span><span class="p">(</span><span class="nx">prefix</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="nx">prefix</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    p := Person{&quot;chinehe&quot;}
-    p2 := &amp;Person{&quot;chinehe&quot;}
-    fmt.Println(Person.Hello(p, &quot;hello,i am %s&quot;))
-    fmt.Println(Person.Hello2(p2, &quot;hello,i am %s&quot;)) // 错误
-    fmt.Println((*Person).Hello(p, &quot;hello,i am %s&quot;)) // 错误
-    fmt.Println((*Person).Hello(p2, &quot;hello,i am %s&quot;))
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;chinehe&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">p2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Person</span><span class="p">{</span><span class="s">&quot;chinehe&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">Person</span><span class="p">.</span><span class="nx">Hello</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">Person</span><span class="p">.</span><span class="nx">Hello2</span><span class="p">(</span><span class="nx">p2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// 错误</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">((</span><span class="o">*</span><span class="nx">Person</span><span class="p">).</span><span class="nx">Hello</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span><span class="w"> </span><span class="c1">// 错误</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">((</span><span class="o">*</span><span class="nx">Person</span><span class="p">).</span><span class="nx">Hello</span><span class="p">(</span><span class="nx">p2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello,i am %s&quot;</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="6">6. 匿名结构体</h2>
 <p>在定义一些临时数据结构等场景下还可以使用匿名结构体，即没有名字的结构体：</p>
-<pre><code class="language-go">var 变量名称 struct{
-    属性1 属性类型1
-    属性2 属性类型2
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">变量名称</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">属性1</span><span class="w"> </span><span class="nx">属性类型1</span>
+<span class="w">    </span><span class="nx">属性2</span><span class="w"> </span><span class="nx">属性类型2</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-go">var person  = struct {
-    name, city string // 相同类型的属性可以写在一起
-    age        int8
-}{
-    age: 18,
-    name: &quot;chinehe&quot;,
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">person</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">city</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// 相同类型的属性可以写在一起</span>
+<span class="w">    </span><span class="nx">age</span><span class="w">        </span><span class="kt">int8</span>
+<span class="p">}{</span>
+<span class="w">    </span><span class="nx">age</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="7">7. 结构体匿名字段</h2>
 <p>结构体允许其成员字段在声明时没有字段名而只有类型，这种没有名字的字段就称为匿名字段。</p>
 <p>示例：</p>
-<pre><code class="language-go">type person struct {
-    string
-    age int
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">age</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意：</p>
 <ul>
 <li>匿名字段默认采用类型名作为字段名。</li>
@@ -2992,35 +2989,35 @@ func main() {
 <h2 id="8">8. 结构体嵌套与继承</h2>
 <h3 id="81">8.1. 嵌套结构体</h3>
 <p>一个结构体中可以嵌套包含另一个结构体或结构体指针。</p>
-<pre><code class="language-go">type 结构体名称 struct{
-    嵌套结构体属性名称 嵌套结构体
-    // 其他属性
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">结构体名称</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">嵌套结构体属性名称</span><span class="w"> </span><span class="nx">嵌套结构体</span>
+<span class="w">    </span><span class="c1">// 其他属性</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>嵌套结构体可以是结构体本身，也可以是结构体指针。</li>
 <li>嵌套结构体属性和其他的属性并没有什么区别，只是属性类型为结构体。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">type address struct {
-    pro  string
-    city string
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">pro</span><span class="w">  </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">city</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-type person struct {
-    name    string
-    age     int
-    firstAddress address // 结构体
-    secondAddress *address // 结构体指针
-}
-</code></pre>
+<span class="kd">type</span><span class="w"> </span><span class="nx">person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w">    </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">age</span><span class="w">     </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">firstAddress</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="c1">// 结构体</span>
+<span class="w">    </span><span class="nx">secondAddress</span><span class="w"> </span><span class="o">*</span><span class="nx">address</span><span class="w"> </span><span class="c1">// 结构体指针</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="82">8.2 匿名嵌套结构体</h3>
 <p>如果在嵌套结构体属性时，不指定属性名称，这就称为嵌套匿名结构体。</p>
-<pre><code class="language-go">type 结构体名称 struct{
-    嵌套结构体
-    // 其他属性
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">结构体名称</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">嵌套结构体</span>
+<span class="w">    </span><span class="c1">// 其他属性</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>嵌套结构体可以是结构体本身，也可以是结构体指针。</li>
 <li>该匿名嵌套结构体属性的默认名称为结构体名称。</li>
@@ -3036,70 +3033,70 @@ type person struct {
 <p>初始化时，若要初始化匿名结构体属性的值，不能直接赋值子属性，需要指定名称。</p>
 </li>
 </ul>
-<pre><code class="language-go">type address struct {
-    pro  string
-    city string
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">pro</span><span class="w">  </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">city</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-type person struct {
-    name string
-    age  int
-    address
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">age</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">address</span>
+<span class="p">}</span>
 
-func main() {
-    var person = person{
-        name: &quot;chinehe&quot;,
-        age:  18,
-        address: address{
-            pro:  &quot;JS&quot;,
-            city: &quot;WX&quot;,
-        },
-    }
-    fmt.Println(person.name) // chinehe
-    fmt.Println(person.age) // 18
-    fmt.Println(person.pro) // JS
-    fmt.Println(person.city) // WX
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">person</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">person</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;chinehe&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">age</span><span class="p">:</span><span class="w">  </span><span class="mi">18</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">address</span><span class="p">:</span><span class="w"> </span><span class="nx">address</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">pro</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;JS&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">city</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;WX&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span><span class="w"> </span><span class="c1">// chinehe</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span><span class="w"> </span><span class="c1">// 18</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">pro</span><span class="p">)</span><span class="w"> </span><span class="c1">// JS</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">city</span><span class="p">)</span><span class="w"> </span><span class="c1">// WX</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="83">8.3 结构体“继承”</h3>
 <p>Go语言中使用嵌套匿名结构体的方式，也可以实现类似于继承的效果。</p>
 <ul>
 <li>外层结构体可以直接使用嵌套匿名结构体属性的子属性。</li>
 <li>外层结构体可以直接使用嵌套匿名结构体的方法。</li>
 </ul>
-<pre><code class="language-go">type person struct {
-    name string
-    age  int
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">age</span><span class="w">  </span><span class="kt">int</span>
+<span class="p">}</span>
 
-func (p *person) hello() {
-    fmt.Printf(&quot;hello,i am %v&quot;, p.name)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">person</span><span class="p">)</span><span class="w"> </span><span class="nx">hello</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;hello,i am %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+<span class="p">}</span>
 
-type student struct {
-    person
-    school string
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">student</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">person</span>
+<span class="w">    </span><span class="nx">school</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func main() {
-    s := student{
-        person: person{
-            name: &quot;ChineHe&quot;,
-            age:  18,
-        },
-        school: &quot;JNU&quot;,
-    }
-    s.hello()
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">student</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">person</span><span class="p">:</span><span class="w"> </span><span class="nx">person</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ChineHe&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">age</span><span class="p">:</span><span class="w">  </span><span class="mi">18</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">school</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;JNU&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">s</span><span class="p">.</span><span class="nx">hello</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="9-tag">9. 结构体标签(Tag)</h2>
 <p>结构体标签是附加在字段上的元数据，常用于JSON序列化、数据库映射等场景，可以在运行的时候通过反射的机制读取出来。</p>
 <p>Tag在结构体字段的后方定义，由一对反引号包裹起来，具体的格式如下：</p>
-<pre><code class="language-go">type 结构体名称 struct{
-    属性名称 属性类型 `k1:&quot;v1&quot; k2:&quot;v2&quot;`
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">结构体名称</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">属性名称</span><span class="w"> </span><span class="nx">属性类型</span><span class="w"> </span><span class="s">`k1:&quot;v1&quot; k2:&quot;v2&quot;`</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>结构体标签由一个或多个键值对组成。</li>
 <li>键与值使用冒号分隔，值用双引号括起来。</li>

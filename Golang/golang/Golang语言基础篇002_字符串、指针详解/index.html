@@ -2518,217 +2518,219 @@
 - <strong>不可变性</strong>：字符串一旦创建就不能被修改，任何对字符串的修改实际上都是创建了一个新的字符串。
 - <strong>UTF-8编码</strong>：Go中的字符串使用UTF-8编码，可以正确处理各种语言的字符
 - <strong>字面量表示</strong>：可以用双引号或反引号来定义字符串</p>
-<pre><code class="language-go">// 双引号定义的字符串可以包含转义字符
-str1 := &quot;Hello, 世界&quot;
-str2 := &quot;Hello\nWorld&quot;  // 包含换行符
+<div class="highlight"><pre><span></span><code><span class="c1">// 双引号定义的字符串可以包含转义字符</span>
+<span class="nx">str1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello, 世界&quot;</span>
+<span class="nx">str2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello\nWorld&quot;</span><span class="w">  </span><span class="c1">// 包含换行符</span>
 
-// 反引号定义的原始字符串，保留所有字符原样
-str3 := `Hello,
-World`  // 保留换行符
-str4 := `C:\Program Files\Go`  // 不需要转义反斜杠
-</code></pre>
+<span class="c1">// 反引号定义的原始字符串，保留所有字符原样</span>
+<span class="nx">str3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">`Hello,</span>
+<span class="s">World`</span><span class="w">  </span><span class="c1">// 保留换行符</span>
+<span class="nx">str4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">`C:\Program Files\Go`</span><span class="w">  </span><span class="c1">// 不需要转义反斜杠</span>
+</code></pre></div>
 <h3 id="12">1.2. 字符串的声明和初始化</h3>
 <p>在Go语言中，字符串可以通过多种方式进行声明和初始化：</p>
 <h4 id="121">1.2.1. 显式声明</h4>
-<pre><code class="language-go">// 声明字符串变量
-var str string
-fmt.Println(str)  // 输出空字符串 &quot;&quot;
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明字符串变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">str</span><span class="w"> </span><span class="kt">string</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w">  </span><span class="c1">// 输出空字符串 &quot;&quot;</span>
 
-// 声明并初始化
-var str1 string = &quot;Hello&quot;
-</code></pre>
+<span class="c1">// 声明并初始化</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">str1</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span>
+</code></pre></div>
 <h4 id="122">1.2.2. 隐式声明（类型推断）</h4>
-<pre><code class="language-go">// 使用短变量声明
-str := &quot;Hello, Go&quot;
-str2 := `Hello, World`
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 使用短变量声明</span>
+<span class="nx">str</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello, Go&quot;</span>
+<span class="nx">str2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">`Hello, World`</span>
+</code></pre></div>
 <h4 id="123">1.2.3. 批量声明</h4>
-<pre><code class="language-go">// 批量声明多个字符串变量
-var (
-    firstName string = &quot;张&quot;
-    lastName  string = &quot;三&quot;
-    fullName         = firstName + lastName  // 字符串连接
-)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 批量声明多个字符串变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">firstName</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;张&quot;</span>
+<span class="w">    </span><span class="nx">lastName</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;三&quot;</span>
+<span class="w">    </span><span class="nx">fullName</span><span class="w">         </span><span class="p">=</span><span class="w"> </span><span class="nx">firstName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">lastName</span><span class="w">  </span><span class="c1">// 字符串连接</span>
+<span class="p">)</span>
+</code></pre></div>
 <h3 id="13">1.3. 字符串的基本操作</h3>
 <h4 id="131">1.3.1. 字符串连接</h4>
 <p>Go语言提供了多种字符串连接的方法：</p>
-<pre><code class="language-go">// 使用 + 操作符
-str1 := &quot;Hello&quot;
-str2 := &quot;World&quot;
-result := str1 + &quot; &quot; + str2  // &quot;Hello World&quot;
+<div class="highlight"><pre><span></span><code><span class="c1">// 使用 + 操作符</span>
+<span class="nx">str1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span>
+<span class="nx">str2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;World&quot;</span>
+<span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">str1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">str2</span><span class="w">  </span><span class="c1">// &quot;Hello World&quot;</span>
 
-// 使用 += 操作符
-str := &quot;Hello&quot;
-str += &quot; World&quot;  // &quot;Hello World&quot;
+<span class="c1">// 使用 += 操作符</span>
+<span class="nx">str</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span>
+<span class="nx">str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot; World&quot;</span><span class="w">  </span><span class="c1">// &quot;Hello World&quot;</span>
 
-// 使用 fmt.Sprintf
-name := &quot;张三&quot;
-age := 25
-intro := fmt.Sprintf(&quot;姓名：%s，年龄：%d&quot;, name, age)
-</code></pre>
+<span class="c1">// 使用 fmt.Sprintf</span>
+<span class="nx">name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;张三&quot;</span>
+<span class="nx">age</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">25</span>
+<span class="nx">intro</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;姓名：%s，年龄：%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">)</span>
+</code></pre></div>
 <h4 id="132">1.3.2. 字符串长度</h4>
-<pre><code class="language-go">// len函数返回字节数
-str := &quot;Hello, 世界&quot;
-fmt.Println(len(str))  // 输出：13（英文字符1字节，中文字符3字节）
+<div class="highlight"><pre><span></span><code><span class="c1">// len函数返回字节数</span>
+<span class="nx">str</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello, 世界&quot;</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">str</span><span class="p">))</span><span class="w">  </span><span class="c1">// 输出：13（英文字符1字节，中文字符3字节）</span>
 
-// 使用utf8.RuneCountInString获取字符数
-import &quot;unicode/utf8&quot;
-fmt.Println(utf8.RuneCountInString(str))  // 输出：9
-</code></pre>
+<span class="c1">// 使用utf8.RuneCountInString获取字符数</span>
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;unicode/utf8&quot;</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">utf8</span><span class="p">.</span><span class="nx">RuneCountInString</span><span class="p">(</span><span class="nx">str</span><span class="p">))</span><span class="w">  </span><span class="c1">// 输出：9</span>
+</code></pre></div>
 <h4 id="133">1.3.3. 字符串比较</h4>
-<pre><code class="language-go">str1 := &quot;Hello&quot;
-str2 := &quot;World&quot;
-str3 := &quot;Hello&quot;
+<div class="highlight"><pre><span></span><code><span class="nx">str1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span>
+<span class="nx">str2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;World&quot;</span>
+<span class="nx">str3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span>
 
-// 使用 == 和 !=
-fmt.Println(str1 == str2)  // false
-fmt.Println(str1 == str3)  // true
+<span class="c1">// 使用 == 和 !=</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">str1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">str2</span><span class="p">)</span><span class="w">  </span><span class="c1">// false</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">str1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">str3</span><span class="p">)</span><span class="w">  </span><span class="c1">// true</span>
 
-// 使用比较操作符
-fmt.Println(str1 &lt; str2)   // true（按字典序比较）
-</code></pre>
+<span class="c1">// 使用比较操作符</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">str1</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">str2</span><span class="p">)</span><span class="w">   </span><span class="c1">// true（按字典序比较）</span>
+</code></pre></div>
 <h4 id="134">1.3.4. 字符串索引和切片</h4>
-<pre><code class="language-go">str := &quot;Hello, Go&quot;
+<div class="highlight"><pre><span></span><code><span class="nx">str</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello, Go&quot;</span>
 
-// 索引访问（按字节）
-fmt.Println(str[0])    // 72（H的ASCII码）
-fmt.Println(string(str[0]))  // &quot;H&quot;
+<span class="c1">// 索引访问（按字节）</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">str</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w">    </span><span class="c1">// 72（H的ASCII码）</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">str</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="w">  </span><span class="c1">// &quot;H&quot;</span>
 
-// 切片操作
-fmt.Println(str[0:5])  // &quot;Hello&quot;
-fmt.Println(str[7:])   // &quot;Go&quot;
-fmt.Println(str[:5])   // &quot;Hello&quot;
-</code></pre>
+<span class="c1">// 切片操作</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span><span class="w">  </span><span class="c1">// &quot;Hello&quot;</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">str</span><span class="p">[</span><span class="mi">7</span><span class="p">:])</span><span class="w">   </span><span class="c1">// &quot;Go&quot;</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">str</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span><span class="w">   </span><span class="c1">// &quot;Hello&quot;</span>
+</code></pre></div>
 <h3 id="14">1.4. 字符串与字节切片</h3>
 <p>在Go语言中，字符串和字节切片（[]byte）之间可以相互转换：</p>
-<pre><code class="language-go">// 字符串转字节切片
-str := &quot;Hello&quot;
-bytes := []byte(str)
-fmt.Println(bytes)  // [72 101 108 108 111]
+<div class="highlight"><pre><span></span><code><span class="c1">// 字符串转字节切片</span>
+<span class="nx">str</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span>
+<span class="nx">bytes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">bytes</span><span class="p">)</span><span class="w">  </span><span class="c1">// [72 101 108 108 111]</span>
 
-// 字节切片转字符串
-bytes = []byte{72, 101, 108, 108, 111}
-str = string(bytes)
-fmt.Println(str)    // &quot;Hello&quot;
+<span class="c1">// 字节切片转字符串</span>
+<span class="nx">bytes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">{</span><span class="mi">72</span><span class="p">,</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w"> </span><span class="mi">108</span><span class="p">,</span><span class="w"> </span><span class="mi">108</span><span class="p">,</span><span class="w"> </span><span class="mi">111</span><span class="p">}</span>
+<span class="nx">str</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">bytes</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span><span class="w">    </span><span class="c1">// &quot;Hello&quot;</span>
 
-// 注意：这种转换会产生新的数据副本
-</code></pre>
+<span class="c1">// 注意：这种转换会产生新的数据副本</span>
+</code></pre></div>
 <h3 id="15">1.5. 字符串格式化</h3>
 <p>Go语言提供了强大的字符串格式化功能：</p>
-<pre><code class="language-go">import &quot;fmt&quot;
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-name := &quot;张三&quot;
-age := 25
-score := 95.5
+<span class="nx">name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;张三&quot;</span>
+<span class="nx">age</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">25</span>
+<span class="nx">score</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">95.5</span>
 
-// Printf 格式化输出
-fmt.Printf(&quot;姓名：%s，年龄：%d，成绩：%.1f\n&quot;, name, age, score)
+<span class="c1">// Printf 格式化输出</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;姓名：%s，年龄：%d，成绩：%.1f\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">,</span><span class="w"> </span><span class="nx">score</span><span class="p">)</span>
 
-// Sprintf 格式化为字符串
-info := fmt.Sprintf(&quot;姓名：%s，年龄：%d，成绩：%.1f&quot;, name, age, score)
-fmt.Println(info)
+<span class="c1">// Sprintf 格式化为字符串</span>
+<span class="nx">info</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;姓名：%s，年龄：%d，成绩：%.1f&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="w"> </span><span class="nx">age</span><span class="p">,</span><span class="w"> </span><span class="nx">score</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>
 
-// 常用格式化动词：
-// %s  字符串
-// %d  十进制整数
-// %f  浮点数
-// %.2f 保留两位小数的浮点数
-// %t  布尔值
-// %v  默认格式
-// %#v Go语法格式
-// %T  类型
-</code></pre>
+<span class="c1">// 常用格式化动词：</span>
+<span class="c1">// %s  字符串</span>
+<span class="c1">// %d  十进制整数</span>
+<span class="c1">// %f  浮点数</span>
+<span class="c1">// %.2f 保留两位小数的浮点数</span>
+<span class="c1">// %t  布尔值</span>
+<span class="c1">// %v  默认格式</span>
+<span class="c1">// %#v Go语法格式</span>
+<span class="c1">// %T  类型</span>
+</code></pre></div>
 <h3 id="16-builder">1.6. 字符串 Builder</h3>
 <p>对于大量的字符串拼接操作，使用strings.Builder更高效：</p>
-<pre><code class="language-go">import &quot;strings&quot;
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;strings&quot;</span>
 
-var builder strings.Builder
+<span class="kd">var</span><span class="w"> </span><span class="nx">builder</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Builder</span>
 
-// 写入字符串
-builder.WriteString(&quot;Hello&quot;)
-builder.WriteString(&quot; &quot;)
-builder.WriteString(&quot;World&quot;)
+<span class="c1">// 写入字符串</span>
+<span class="nx">builder</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="nx">builder</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">)</span>
+<span class="nx">builder</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="s">&quot;World&quot;</span><span class="p">)</span>
 
-// 获取最终字符串
-result := builder.String()
-fmt.Println(result)  // &quot;Hello World&quot;
+<span class="c1">// 获取最终字符串</span>
+<span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">builder</span><span class="p">.</span><span class="nx">String</span><span class="p">()</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span><span class="w">  </span><span class="c1">// &quot;Hello World&quot;</span>
 
-// 重置Builder
-builder.Reset()
+<span class="c1">// 重置Builder</span>
+<span class="nx">builder</span><span class="p">.</span><span class="nx">Reset</span><span class="p">()</span>
 
-// 写入其他类型
-builder.WriteByte('H')
-builder.WriteRune('好')
-builder.Write([]byte(&quot; World&quot;))
+<span class="c1">// 写入其他类型</span>
+<span class="nx">builder</span><span class="p">.</span><span class="nx">WriteByte</span><span class="p">(</span><span class="sc">&#39;H&#39;</span><span class="p">)</span>
+<span class="nx">builder</span><span class="p">.</span><span class="nx">WriteRune</span><span class="p">(</span><span class="sc">&#39;好&#39;</span><span class="p">)</span>
+<span class="nx">builder</span><span class="p">.</span><span class="nx">Write</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot; World&quot;</span><span class="p">))</span>
 
-result = builder.String()
-fmt.Println(result)  // &quot;H好 World&quot;
-</code></pre>
+<span class="nx">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">builder</span><span class="p">.</span><span class="nx">String</span><span class="p">()</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span><span class="w">  </span><span class="c1">// &quot;H好 World&quot;</span>
+</code></pre></div>
 <h3 id="17-rune">1.7. 字符串与 Rune</h3>
 <p>在处理Unicode字符时，需要理解rune类型：</p>
-<pre><code class="language-go">// string类型表示UTF-8编码的字节序列
-str := &quot;Hello, 世界&quot;
+<div class="highlight"><pre><span></span><code><span class="c1">// string类型表示UTF-8编码的字节序列</span>
+<span class="nx">str</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello, 世界&quot;</span>
 
-// range遍历字符串会得到rune（Unicode码点）
-for i, r := range str {
-    fmt.Printf(&quot;位置%d: %c\n&quot;, i, r)
-}
+<span class="c1">// range遍历字符串会得到rune（Unicode码点）</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">str</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;位置%d: %c\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 将字符串转换为rune切片
-runes := []rune(str)
-fmt.Println(len(runes))  // 9（字符数）
+<span class="c1">// 将字符串转换为rune切片</span>
+<span class="nx">runes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">rune</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">runes</span><span class="p">))</span><span class="w">  </span><span class="c1">// 9（字符数）</span>
 
-// 访问特定字符
-fmt.Printf(&quot;%c\n&quot;, runes[7])  // 世
+<span class="c1">// 访问特定字符</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%c\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">runes</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span><span class="w">  </span><span class="c1">// 世</span>
 
-// 截取包含中文的字符串
-substr := string(runes[7:9])  // &quot;世界&quot;
-</code></pre>
+<span class="c1">// 截取包含中文的字符串</span>
+<span class="nx">substr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">runes</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">9</span><span class="p">])</span><span class="w">  </span><span class="c1">// &quot;世界&quot;</span>
+</code></pre></div>
 <h3 id="18">1.8. 字符串最佳实践</h3>
 <ol>
-<li><strong>大量字符串拼接使用strings.Builder</strong></li>
-</ol>
-<pre><code class="language-go">var builder strings.Builder
-for i := 0; i &lt; 1000; i++ {
-    builder.WriteString(fmt.Sprintf(&quot;Item %d &quot;, i))
-}
-result := builder.String()
-</code></pre>
-<ol>
-<li><strong>避免频繁的字符串连接操作</strong></li>
-</ol>
-<pre><code class="language-go">// 不推荐：效率低
-var result string
-for _, item := range items {
-    result += item
-}
+<li>
+<p><strong>大量字符串拼接使用strings.Builder</strong>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">builder</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Builder</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">builder</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;Item %d &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">))</span>
+<span class="p">}</span>
+<span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">builder</span><span class="p">.</span><span class="nx">String</span><span class="p">()</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>避免频繁的字符串连接操作</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// 不推荐：效率低</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="kt">string</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">item</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">item</span>
+<span class="p">}</span>
 
-// 推荐：使用strings.Join
-result := strings.Join(items, &quot;&quot;)
-</code></pre>
-<ol>
-<li><strong>正确处理UTF-8字符</strong></li>
+<span class="c1">// 推荐：使用strings.Join</span>
+<span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Join</span><span class="p">(</span><span class="nx">items</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>正确处理UTF-8字符</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// 正确获取字符数</span>
+<span class="nx">charCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">utf8</span><span class="p">.</span><span class="nx">RuneCountInString</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>
+
+<span class="c1">// 正确截取包含中文的字符串</span>
+<span class="nx">runes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">rune</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span>
+<span class="nx">substr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">runes</span><span class="p">[</span><span class="nx">start</span><span class="p">:</span><span class="nx">end</span><span class="p">])</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>字符串比较使用标准库函数</strong>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;strings&quot;</span>
+
+<span class="c1">// 忽略大小写比较</span>
+<span class="nx">equal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">EqualFold</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;HELLO&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1">// true</span>
+
+<span class="c1">// 前缀和后缀检查</span>
+<span class="nx">hasPrefix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">HasPrefix</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="nx">hasSuffix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">HasSuffix</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+</li>
 </ol>
-<pre><code class="language-go">// 正确获取字符数
-charCount := utf8.RuneCountInString(str)
-
-// 正确截取包含中文的字符串
-runes := []rune(str)
-substr := string(runes[start:end])
-</code></pre>
-<ol>
-<li><strong>字符串比较使用标准库函数</strong></li>
-</ol>
-<pre><code class="language-go">import &quot;strings&quot;
-
-// 忽略大小写比较
-equal := strings.EqualFold(&quot;Hello&quot;, &quot;HELLO&quot;)  // true
-
-// 前缀和后缀检查
-hasPrefix := strings.HasPrefix(str, &quot;Hello&quot;)
-hasSuffix := strings.HasSuffix(str, &quot;World&quot;)
-</code></pre>
 <h2 id="2-pointer">2. 指针(Pointer)</h2>
 <h3 id="21">2.1. 指针的概念</h3>
 <p>指针是存储另一个变量内存地址的变量。在Go语言中，指针提供了一种间接访问和修改变量值的方式。</p>
@@ -2738,245 +2740,247 @@ hasSuffix := strings.HasSuffix(str, &quot;World&quot;)
 - 动态分配内存</p>
 <h3 id="22">2.2. 指针的声明和初始化</h3>
 <h4 id="221">2.2.1. 指针声明</h4>
-<pre><code class="language-go">// 声明指针变量
-var ptr *int        // 声明指向int类型的指针
-var ptr2 *string    // 声明指向string类型的指针
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明指针变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">ptr</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="w">        </span><span class="c1">// 声明指向int类型的指针</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">ptr2</span><span class="w"> </span><span class="o">*</span><span class="kt">string</span><span class="w">    </span><span class="c1">// 声明指向string类型的指针</span>
+</code></pre></div>
 <h4 id="222">2.2.2. 获取变量地址</h4>
 <p>使用&amp;操作符获取变量的内存地址：</p>
-<pre><code class="language-go">num := 42
-ptr := &amp;num         // 获取num的地址
+<div class="highlight"><pre><span></span><code><span class="nx">num</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span>
+<span class="nx">ptr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">num</span><span class="w">         </span><span class="c1">// 获取num的地址</span>
 
-fmt.Println(ptr)    // 输出地址，如：0xc000014080
-fmt.Println(*ptr)   // 输出42（解引用）
-</code></pre>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ptr</span><span class="p">)</span><span class="w">    </span><span class="c1">// 输出地址，如：0xc000014080</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">ptr</span><span class="p">)</span><span class="w">   </span><span class="c1">// 输出42（解引用）</span>
+</code></pre></div>
 <h4 id="223">2.2.3. 指针的零值</h4>
 <p>未初始化的指针值为nil：</p>
-<pre><code class="language-go">var ptr *int
-fmt.Println(ptr)    // &lt;nil&gt;
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">ptr</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ptr</span><span class="p">)</span><span class="w">    </span><span class="c1">// &lt;nil&gt;</span>
 
-// 对nil指针解引用会导致运行时恐慌
-// fmt.Println(*ptr)   // panic: runtime error
-</code></pre>
+<span class="c1">// 对nil指针解引用会导致运行时恐慌</span>
+<span class="c1">// fmt.Println(*ptr)   // panic: runtime error</span>
+</code></pre></div>
 <h3 id="23">2.3. 指针的操作</h3>
 <h4 id="231">2.3.1. 解引用</h4>
 <p>使用*操作符访问指针指向的值：</p>
-<pre><code class="language-go">num := 42
-ptr := &amp;num
+<div class="highlight"><pre><span></span><code><span class="nx">num</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span>
+<span class="nx">ptr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">num</span>
 
-// 读取指针指向的值
-value := *ptr
-fmt.Println(value)  // 42
+<span class="c1">// 读取指针指向的值</span>
+<span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">*</span><span class="nx">ptr</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span><span class="w">  </span><span class="c1">// 42</span>
 
-// 修改指针指向的值
-*ptr = 100
-fmt.Println(num)    // 100
-</code></pre>
+<span class="c1">// 修改指针指向的值</span>
+<span class="o">*</span><span class="nx">ptr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span><span class="w">    </span><span class="c1">// 100</span>
+</code></pre></div>
 <h4 id="232">2.3.2. 指针比较</h4>
-<pre><code class="language-go">a := 10
-b := 10
-ptr1 := &amp;a
-ptr2 := &amp;b
-ptr3 := &amp;a
+<div class="highlight"><pre><span></span><code><span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span>
+<span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span>
+<span class="nx">ptr1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">a</span>
+<span class="nx">ptr2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">b</span>
+<span class="nx">ptr3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">a</span>
 
-fmt.Println(ptr1 == ptr2)  // false（不同变量的地址）
-fmt.Println(ptr1 == ptr3)  // true（相同变量的地址）
-fmt.Println(*ptr1 == *ptr2) // true（相同值）
-</code></pre>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ptr1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">ptr2</span><span class="p">)</span><span class="w">  </span><span class="c1">// false（不同变量的地址）</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ptr1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">ptr3</span><span class="p">)</span><span class="w">  </span><span class="c1">// true（相同变量的地址）</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">ptr1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">*</span><span class="nx">ptr2</span><span class="p">)</span><span class="w"> </span><span class="c1">// true（相同值）</span>
+</code></pre></div>
 <h3 id="24">2.4. 指针与函数</h3>
 <p>指针在函数参数传递中非常重要，可以实现引用传递：</p>
 <h4 id="241-vs">2.4.1. 值传递 vs 引用传递</h4>
-<pre><code class="language-go">// 值传递（不会修改原值）
-func incrementValue(num int) {
-    num++
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 值传递（不会修改原值）</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">incrementValue</span><span class="p">(</span><span class="nx">num</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">num</span><span class="o">++</span>
+<span class="p">}</span>
 
-// 指针传递（会修改原值）
-func incrementPointer(num *int) {
-    (*num)++
-    // 或者
-    // *num++
-}
+<span class="c1">// 指针传递（会修改原值）</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">incrementPointer</span><span class="p">(</span><span class="nx">num</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">(</span><span class="o">*</span><span class="nx">num</span><span class="p">)</span><span class="o">++</span>
+<span class="w">    </span><span class="c1">// 或者</span>
+<span class="w">    </span><span class="c1">// *num++</span>
+<span class="p">}</span>
 
-func main() {
-    value := 10
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span>
 
-    incrementValue(value)
-    fmt.Println(value)  // 10（未改变）
+<span class="w">    </span><span class="nx">incrementValue</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span><span class="w">  </span><span class="c1">// 10（未改变）</span>
 
-    incrementPointer(&amp;value)
-    fmt.Println(value)  // 11（已改变）
-}
-</code></pre>
+<span class="w">    </span><span class="nx">incrementPointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span><span class="w">  </span><span class="c1">// 11（已改变）</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="242">2.4.2. 返回指针</h4>
-<pre><code class="language-go">// 返回局部变量的地址是安全的（Go会自动处理）
-func createPointer() *int {
-    value := 42
-    return &amp;value
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 返回局部变量的地址是安全的（Go会自动处理）</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">createPointer</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">value</span>
+<span class="p">}</span>
 
-func main() {
-    ptr := createPointer()
-    fmt.Println(*ptr)  // 42
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ptr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">createPointer</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">ptr</span><span class="p">)</span><span class="w">  </span><span class="c1">// 42</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="25">2.5. 指针与结构体</h3>
 <p>结构体是指针使用最常见的场景之一：</p>
-<pre><code class="language-go">type Person struct {
-    Name string
-    Age  int
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="p">}</span>
 
-func main() {
-    // 创建结构体实例
-    person := Person{Name: &quot;张三&quot;, Age: 25}
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建结构体实例</span>
+<span class="w">    </span><span class="nx">person</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;张三&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">Age</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">}</span>
 
-    // 获取结构体指针
-    ptr := &amp;person
+<span class="w">    </span><span class="c1">// 获取结构体指针</span>
+<span class="w">    </span><span class="nx">ptr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">person</span>
 
-    // 通过指针访问字段（两种方式）
-    fmt.Println((*ptr).Name)  // &quot;张三&quot;
-    fmt.Println(ptr.Name)     // &quot;张三&quot;（简化写法）
+<span class="w">    </span><span class="c1">// 通过指针访问字段（两种方式）</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">((</span><span class="o">*</span><span class="nx">ptr</span><span class="p">).</span><span class="nx">Name</span><span class="p">)</span><span class="w">  </span><span class="c1">// &quot;张三&quot;</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ptr</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span><span class="w">     </span><span class="c1">// &quot;张三&quot;（简化写法）</span>
 
-    // 通过指针修改字段
-    ptr.Age = 30
-    fmt.Println(person.Age)   // 30
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 通过指针修改字段</span>
+<span class="w">    </span><span class="nx">ptr</span><span class="p">.</span><span class="nx">Age</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">30</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span><span class="w">   </span><span class="c1">// 30</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="26">2.6. 指针的指针</h3>
 <p>Go语言支持指向指针的指针：</p>
-<pre><code class="language-go">num := 42
-ptr := &amp;num        // 指向num的指针
-pptr := &amp;ptr       // 指向ptr的指针
+<div class="highlight"><pre><span></span><code><span class="nx">num</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span>
+<span class="nx">ptr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">num</span><span class="w">        </span><span class="c1">// 指向num的指针</span>
+<span class="nx">pptr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">ptr</span><span class="w">       </span><span class="c1">// 指向ptr的指针</span>
 
-fmt.Println(num)   // 42
-fmt.Println(*ptr)  // 42
-fmt.Println(**pptr) // 42
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span><span class="w">   </span><span class="c1">// 42</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">ptr</span><span class="p">)</span><span class="w">  </span><span class="c1">// 42</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">**</span><span class="nx">pptr</span><span class="p">)</span><span class="w"> </span><span class="c1">// 42</span>
 
-// 修改值
-**pptr = 100
-fmt.Println(num)   // 100
-</code></pre>
+<span class="c1">// 修改值</span>
+<span class="o">**</span><span class="nx">pptr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span><span class="w">   </span><span class="c1">// 100</span>
+</code></pre></div>
 <h3 id="27">2.7. 指针与数组、切片</h3>
 <h4 id="271">2.7.1. 数组指针</h4>
-<pre><code class="language-go">// 创建数组
-arr := [3]int{1, 2, 3}
+<div class="highlight"><pre><span></span><code><span class="c1">// 创建数组</span>
+<span class="nx">arr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
 
-// 获取数组指针
-arrPtr := &amp;arr
+<span class="c1">// 获取数组指针</span>
+<span class="nx">arrPtr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">arr</span>
 
-// 通过数组指针访问元素
-fmt.Println((*arrPtr)[0])  // 1
-fmt.Println(arrPtr[0])     // 1（简化写法）
+<span class="c1">// 通过数组指针访问元素</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">((</span><span class="o">*</span><span class="nx">arrPtr</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="w">  </span><span class="c1">// 1</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">arrPtr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w">     </span><span class="c1">// 1（简化写法）</span>
 
-// 修改数组元素
-(*arrPtr)[0] = 10
-fmt.Println(arr[0])        // 10
-</code></pre>
+<span class="c1">// 修改数组元素</span>
+<span class="p">(</span><span class="o">*</span><span class="nx">arrPtr</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w">        </span><span class="c1">// 10</span>
+</code></pre></div>
 <h4 id="272">2.7.2. 指针数组</h4>
-<pre><code class="language-go">a, b, c := 1, 2, 3
-// 创建指针数组
-ptrArr := [3]*int{&amp;a, &amp;b, &amp;c}
+<div class="highlight"><pre><span></span><code><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span>
+<span class="c1">// 创建指针数组</span>
+<span class="nx">ptrArr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="kt">int</span><span class="p">{</span><span class="o">&amp;</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">c</span><span class="p">}</span>
 
-// 访问指针数组中的元素
-fmt.Println(*ptrArr[0])    // 1
-fmt.Println(*ptrArr[1])    // 2
+<span class="c1">// 访问指针数组中的元素</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">ptrArr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w">    </span><span class="c1">// 1</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">ptrArr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="w">    </span><span class="c1">// 2</span>
 
-// 修改原变量
-*ptrArr[0] = 10
-fmt.Println(a)             // 10
-</code></pre>
+<span class="c1">// 修改原变量</span>
+<span class="o">*</span><span class="nx">ptrArr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span><span class="w">             </span><span class="c1">// 10</span>
+</code></pre></div>
 <h4 id="273">2.7.3. 切片与指针</h4>
 <p>切片本身就是一个引用类型，包含了指向底层数组的指针：</p>
-<pre><code class="language-go">arr := [3]int{1, 2, 3}
-slice := arr[:]            // 创建切片
+<div class="highlight"><pre><span></span><code><span class="nx">arr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[:]</span><span class="w">            </span><span class="c1">// 创建切片</span>
 
-// 修改切片会影响原数组
-slice[0] = 10
-fmt.Println(arr[0])        // 10
+<span class="c1">// 修改切片会影响原数组</span>
+<span class="nx">slice</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="w">        </span><span class="c1">// 10</span>
 
-// 切片指针
-slicePtr := &amp;slice
-fmt.Println(*slicePtr)     // [10 2 3]
-</code></pre>
+<span class="c1">// 切片指针</span>
+<span class="nx">slicePtr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">slice</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">slicePtr</span><span class="p">)</span><span class="w">     </span><span class="c1">// [10 2 3]</span>
+</code></pre></div>
 <h3 id="28">2.8. 指针使用注意事项</h3>
 <ol>
 <li><strong>空指针检查</strong></li>
 </ol>
-<pre><code class="language-go">func safeDereference(ptr *int) {
-    if ptr != nil {
-        fmt.Println(*ptr)
-    } else {
-        fmt.Println(&quot;指针为空&quot;)
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">safeDereference</span><span class="p">(</span><span class="nx">ptr</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">ptr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">ptr</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;指针为空&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ol>
 <li><strong>避免悬空指针</strong></li>
 </ol>
-<pre><code class="language-go">// 错误示例（虽然在Go中不太常见，但仍需注意）
-func badExample() *int {
-    num := 42
-    return &amp;num  // 在某些语言中这会是悬空指针，但在Go中是安全的
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 错误示例（虽然在Go中不太常见，但仍需注意）</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">badExample</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">num</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">num</span><span class="w">  </span><span class="c1">// 在某些语言中这会是悬空指针，但在Go中是安全的</span>
+<span class="p">}</span>
+</code></pre></div>
 <ol>
 <li><strong>指针算术</strong></li>
 </ol>
-<pre><code class="language-go">// Go不支持指针算术，这与其他语言不同
-// 以下代码无法编译
-/*
-ptr := &amp;num
-ptr++  // 错误：无效操作
-*/
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// Go不支持指针算术，这与其他语言不同</span>
+<span class="c1">// 以下代码无法编译</span>
+<span class="cm">/*</span>
+<span class="cm">ptr := &amp;num</span>
+<span class="cm">ptr++  // 错误：无效操作</span>
+<span class="cm">*/</span>
+</code></pre></div>
 <h3 id="29">2.9. 指针最佳实践</h3>
 <ol>
-<li><strong>明确何时使用指针</strong></li>
+<li>
+<p><strong>明确何时使用指针</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// 大结构体使用指针避免复制</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">BigStruct</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Data</span><span class="w"> </span><span class="p">[</span><span class="mi">1000</span><span class="p">]</span><span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">processBigStruct</span><span class="p">(</span><span class="nx">bs</span><span class="w"> </span><span class="o">*</span><span class="nx">BigStruct</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 处理逻辑</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>接口与指针</strong>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Writer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Write</span><span class="p">([]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span><span class="w"> </span><span class="nx">File</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="c1">// 实现接口时，通常使用指针接收者</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="o">*</span><span class="nx">File</span><span class="p">)</span><span class="w"> </span><span class="nx">Write</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 实现</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>方法接收者的选择</strong>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Counter</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">count</span><span class="w"> </span><span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="c1">// 需要修改接收者的值时，使用指针接收者</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Counter</span><span class="p">)</span><span class="w"> </span><span class="nx">Increment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span>
+<span class="p">}</span>
+
+<span class="c1">// 只读操作时，可以使用值接收者</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">Counter</span><span class="p">)</span><span class="w"> </span><span class="nx">GetCount</span><span class="p">()</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">count</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
 </ol>
-<pre><code class="language-go">// 大结构体使用指针避免复制
-type BigStruct struct {
-    Data [1000]int
-}
-
-func processBigStruct(bs *BigStruct) {
-    // 处理逻辑
-}
-</code></pre>
-<ol>
-<li><strong>接口与指针</strong></li>
-</ol>
-<pre><code class="language-go">type Writer interface {
-    Write([]byte) (int, error)
-}
-
-type File struct {
-    name string
-}
-
-// 实现接口时，通常使用指针接收者
-func (f *File) Write(data []byte) (int, error) {
-    // 实现
-    return len(data), nil
-}
-</code></pre>
-<ol>
-<li><strong>方法接收者的选择</strong></li>
-</ol>
-<pre><code class="language-go">type Counter struct {
-    count int
-}
-
-// 需要修改接收者的值时，使用指针接收者
-func (c *Counter) Increment() {
-    c.count++
-}
-
-// 只读操作时，可以使用值接收者
-func (c Counter) GetCount() int {
-    return c.count
-}
-</code></pre>
 
 
 

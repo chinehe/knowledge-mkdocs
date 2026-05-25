@@ -1966,75 +1966,75 @@
 </tbody>
 </table>
 <h2 id="10">10. 示例代码</h2>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    // 算术运算符
-    a, b := 10, 3
-    fmt.Println(&quot;算术运算符:&quot;)
-    fmt.Printf(&quot;%d + %d = %d\n&quot;, a, b, a+b)
-    fmt.Printf(&quot;%d - %d = %d\n&quot;, a, b, a-b)
-    fmt.Printf(&quot;%d * %d = %d\n&quot;, a, b, a*b)
-    fmt.Printf(&quot;%d / %d = %d\n&quot;, a, b, a/b)
-    fmt.Printf(&quot;%d %% %d = %d\n&quot;, a, b, a%b)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 算术运算符</span>
+<span class="w">    </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;算术运算符:&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d + %d = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="o">+</span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d - %d = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="o">-</span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d * %d = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="o">*</span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d / %d = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="o">/</span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d %% %d = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="o">%</span><span class="nx">b</span><span class="p">)</span>
 
-    // 自增自减
-    c := 5
-    c++
-    fmt.Printf(&quot;c++ = %d\n&quot;, c)
-    c--
-    fmt.Printf(&quot;c-- = %d\n&quot;, c)
+<span class="w">    </span><span class="c1">// 自增自减</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">    </span><span class="nx">c</span><span class="o">++</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c++ = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="o">--</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c-- = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">)</span>
 
-    // 关系运算符
-    fmt.Println(&quot;\n关系运算符:&quot;)
-    fmt.Printf(&quot;%d == %d ? %t\n&quot;, a, b, a == b)
-    fmt.Printf(&quot;%d != %d ? %t\n&quot;, a, b, a != b)
-    fmt.Printf(&quot;%d &gt; %d ? %t\n&quot;, a, b, a &gt; b)
-    fmt.Printf(&quot;%d &gt;= %d ? %t\n&quot;, a, b, a &gt;= b)
-    fmt.Printf(&quot;%d &lt; %d ? %t\n&quot;, a, b, a &lt; b)
-    fmt.Printf(&quot;%d &lt;= %d ? %t\n&quot;, a, b, a &lt;= b)
+<span class="w">    </span><span class="c1">// 关系运算符</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n关系运算符:&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d == %d ? %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d != %d ? %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d &gt; %d ? %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d &gt;= %d ? %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d &lt; %d ? %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d &lt;= %d ? %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
 
-    // 逻辑运算符
-    x, y := true, false
-    fmt.Println(&quot;\n逻辑运算符:&quot;)
-    fmt.Printf(&quot;%t &amp;&amp; %t = %t\n&quot;, x, y, x &amp;&amp; y)
-    fmt.Printf(&quot;%t || %t = %t\n&quot;, x, y, x || y)
-    fmt.Printf(&quot;!%t = %t\n&quot;, x, !x)
+<span class="w">    </span><span class="c1">// 逻辑运算符</span>
+<span class="w">    </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n逻辑运算符:&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%t &amp;&amp; %t = %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">y</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%t || %t = %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">y</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;!%t = %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="p">!</span><span class="nx">x</span><span class="p">)</span>
 
-    // 位运算符
-    d, e := 5, 3  // 二进制: 101, 011
-    fmt.Println(&quot;\n位运算符:&quot;)
-    fmt.Printf(&quot;%d &amp; %d = %d\n&quot;, d, e, d&amp;e)
-    fmt.Printf(&quot;%d | %d = %d\n&quot;, d, e, d|e)
-    fmt.Printf(&quot;%d ^ %d = %d\n&quot;, d, e, d^e)
-    fmt.Printf(&quot;%d &amp;^ %d = %d\n&quot;, d, e, d&amp;^e)
-    fmt.Printf(&quot;%d &lt;&lt; 1 = %d\n&quot;, d, d&lt;&lt;1)
-    fmt.Printf(&quot;%d &gt;&gt; 1 = %d\n&quot;, d, d&gt;&gt;1)
+<span class="w">    </span><span class="c1">// 位运算符</span>
+<span class="w">    </span><span class="nx">d</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">  </span><span class="c1">// 二进制: 101, 011</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n位运算符:&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d &amp; %d = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="o">&amp;</span><span class="nx">e</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d | %d = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="o">|</span><span class="nx">e</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d ^ %d = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="p">^</span><span class="nx">e</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d &amp;^ %d = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="o">&amp;^</span><span class="nx">e</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d &lt;&lt; 1 = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d &gt;&gt; 1 = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">)</span>
 
-    // 赋值运算符
-    f := 10
-    fmt.Println(&quot;\n赋值运算符:&quot;)
-    f += 5
-    fmt.Printf(&quot;f += 5 =&gt; f = %d\n&quot;, f)
-    f -= 3
-    fmt.Printf(&quot;f -= 3 =&gt; f = %d\n&quot;, f)
-    f *= 2
-    fmt.Printf(&quot;f *= 2 =&gt; f = %d\n&quot;, f)
+<span class="w">    </span><span class="c1">// 赋值运算符</span>
+<span class="w">    </span><span class="nx">f</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n赋值运算符:&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">f</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;f += 5 =&gt; f = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">f</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;f -= 3 =&gt; f = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">f</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;f *= 2 =&gt; f = %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="p">)</span>
 
-    // 其他操作符
-    g := 20
-    fmt.Println(&quot;\n其他操作符:&quot;)
-    fmt.Printf(&quot;&amp;g = %p\n&quot;, &amp;g)  // 地址操作符
+<span class="w">    </span><span class="c1">// 其他操作符</span>
+<span class="w">    </span><span class="nx">g</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n其他操作符:&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;&amp;g = %p\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">g</span><span class="p">)</span><span class="w">  </span><span class="c1">// 地址操作符</span>
 
-    // 使用下划线占位符
-    _, err := fmt.Println(&quot;忽略第一个返回值&quot;)
-    if err != nil {
-        fmt.Println(&quot;错误:&quot;, err)
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 使用下划线占位符</span>
+<span class="w">    </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;忽略第一个返回值&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;错误:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 

@@ -2074,41 +2074,41 @@
 </table>
 <p><strong>重要说明：中间件与普通处理函数本质相同</strong></p>
 <p>从技术上讲，中间件和普通处理函数的类型完全相同，都是 <code>gin.HandlerFunc</code> 类型：</p>
-<pre><code class="language-go">type HandlerFunc func(*Context)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">Context</span><span class="p">)</span>
+</code></pre></div>
 <p>这意味着：
 1. 普通处理函数可以作为中间件使用
 2. 中间件也可以作为路由处理函数使用
 3. 它们的唯一区别在于使用方式和设计意图</p>
-<pre><code class="language-go">// 普通处理函数
-func userHandler(c *gin.Context) {
-    c.JSON(200, gin.H{&quot;user&quot;: &quot;example&quot;})
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 普通处理函数</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">userHandler</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;example&quot;</span><span class="p">})</span>
+<span class="p">}</span>
 
-// 中间件
-func authMiddleware(c *gin.Context) {
-    token := c.GetHeader(&quot;Authorization&quot;)
-    if token == &quot;&quot; {
-        c.JSON(401, gin.H{&quot;error&quot;: &quot;未提供认证令牌&quot;})
-        c.Abort()
-        return
-    }
-    c.Set(&quot;user_id&quot;, &quot;some_user&quot;)
-    c.Next()
-}
+<span class="c1">// 中间件</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">authMiddleware</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">token</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">GetHeader</span><span class="p">(</span><span class="s">&quot;Authorization&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">401</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;未提供认证令牌&quot;</span><span class="p">})</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Abort</span><span class="p">()</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;user_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;some_user&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
+<span class="p">}</span>
 
-// 两者可以混用
-r := gin.Default()
+<span class="c1">// 两者可以混用</span>
+<span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-// 将普通处理函数作为中间件使用（虽然不常见）
-r.Use(userHandler)  // 这样会将userHandler作为全局中间件
-r.GET(&quot;/test&quot;, func(c *gin.Context) {
-    c.String(200, &quot;test&quot;)
-})
+<span class="c1">// 将普通处理函数作为中间件使用（虽然不常见）</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">userHandler</span><span class="p">)</span><span class="w">  </span><span class="c1">// 这样会将userHandler作为全局中间件</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/test&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">String</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;test&quot;</span><span class="p">)</span>
+<span class="p">})</span>
 
-// 将中间件作为路由处理函数使用
-r.GET(&quot;/protected&quot;, authMiddleware)  // 中间件作为路由处理函数，但没有后续处理
-</code></pre>
+<span class="c1">// 将中间件作为路由处理函数使用</span>
+<span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/protected&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">authMiddleware</span><span class="p">)</span><span class="w">  </span><span class="c1">// 中间件作为路由处理函数，但没有后续处理</span>
+</code></pre></div>
 <p><strong>关键区别点：</strong></p>
 <ol>
 <li>
@@ -2137,30 +2137,30 @@ r.GET(&quot;/protected&quot;, authMiddleware)  // 中间件作为路由处理函
 <h3 id="21">2.1. 全局中间件</h3>
 <p>在Gin引擎上注册中间件，中间件作用于所有路由。</p>
 <p>示例：</p>
-<pre><code class="language-go">// gin引擎
-engine := gin.New()
-// 注册内置中间件Recovery
-engine.Use(gin.Recovery())
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// gin引擎</span>
+<span class="nx">engine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
+<span class="c1">// 注册内置中间件Recovery</span>
+<span class="nx">engine</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Recovery</span><span class="p">())</span>
+</code></pre></div>
 <p>全局中间件注册后，后续注册的所有路由都会自动应用该全局中间件。</p>
 <h3 id="22">2.2. 路由组中间件</h3>
 <p>在路由组上注册中间件，中间件作用于路由组中的所有路由：</p>
-<pre><code class="language-go">// 可以在路由组定义时直接设置路由组中间件
-paramRouter := router.Group(&quot;/param&quot;, middleware.AuthMiddleware)
+<div class="highlight"><pre><span></span><code><span class="c1">// 可以在路由组定义时直接设置路由组中间件</span>
+<span class="nx">paramRouter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/param&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">middleware</span><span class="p">.</span><span class="nx">AuthMiddleware</span><span class="p">)</span>
 
-// 也可以在路由组定义后，再用Use方法设置路由组中间件
-paramRouter := router.Group(&quot;/param&quot;)
-paramRouter.Use(middleware.AuthMiddleware)
-</code></pre>
+<span class="c1">// 也可以在路由组定义后，再用Use方法设置路由组中间件</span>
+<span class="nx">paramRouter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">router</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/param&quot;</span><span class="p">)</span>
+<span class="nx">paramRouter</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">middleware</span><span class="p">.</span><span class="nx">AuthMiddleware</span><span class="p">)</span>
+</code></pre></div>
 <p>路由组中间件注册后，该路由组后续注册的所有路由都会自动应用该中间件。</p>
 <h3 id="23">2.3. 单个路由中间件</h3>
 <p>调用注册路由的方法是，处理函数的入参都是可变参数，一般前面的处理作为中间件，该中间件只作用于当前路由。</p>
 <blockquote>
 <p>从这里也能看出来，处理函数和中间件本质上是相同的。</p>
 </blockquote>
-<pre><code class="language-go">// 路由定义时，注册中间件
-testRouter.Any(&quot;/ping&quot;, middleware.AuthMiddleware, handler.Ping)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 路由定义时，注册中间件</span>
+<span class="nx">testRouter</span><span class="p">.</span><span class="nx">Any</span><span class="p">(</span><span class="s">&quot;/ping&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">middleware</span><span class="p">.</span><span class="nx">AuthMiddleware</span><span class="p">,</span><span class="w"> </span><span class="nx">handler</span><span class="p">.</span><span class="nx">Ping</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="3">3. 内置中间件介绍</h2>
 <p>Gin框架为我们提供了一些内置的中间件，我们开发时可以根据需要自行选择使用。</p>
 <h3 id="31">3.1.  默认中间件</h3>
@@ -2169,10 +2169,10 @@ testRouter.Any(&quot;/ping&quot;, middleware.AuthMiddleware, handler.Ping)
 <li><strong>Logger</strong>：Logger中间件用于记录HTTP请求日志，包括请求方法、路径、状态码和处理时间等信息。</li>
 <li><strong>Recovery</strong>：Recovery中间件用于从panic中恢复，防止程序崩溃，并返回500错误：。</li>
 </ul>
-<pre><code class="language-go">r := gin.Default()  // 自动加载 Logger 和 Recovery 中间件
+<div class="highlight"><pre><span></span><code><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span><span class="w">  </span><span class="c1">// 自动加载 Logger 和 Recovery 中间件</span>
 
-r := gin.New()   // 不会自动加载 Logger 和 Recovery 中间件
-</code></pre>
+<span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span><span class="w">   </span><span class="c1">// 不会自动加载 Logger 和 Recovery 中间件</span>
+</code></pre></div>
 <h3 id="32">3.2 其他内置中间件</h3>
 <p>除了默认的两个中间件外，Gin框架还提供了其他的内置中间件供我们使用，部分中间件如下：</p>
 <ul>
@@ -2182,9 +2182,9 @@ r := gin.New()   // 不会自动加载 Logger 和 Recovery 中间件
 <h2 id="4">4. 自定义中间件</h2>
 <h3 id="41">4.1. 自定义中间件基础</h3>
 <p>中间件本质上是一个<code>gin.HandlerFunc</code>方法，自定义中间件就是自定义一个<code>gin.HandlerFunc</code>方法。</p>
-<pre><code class="language-go">// HandlerFunc defines the handler used by gin middleware as return value.
-type HandlerFunc func(*Context)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// HandlerFunc defines the handler used by gin middleware as return value.</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">Context</span><span class="p">)</span>
+</code></pre></div>
 <p>要正确定义中间件，必须以下几个方法：</p>
 <ul>
 <li><code>Next</code>：调用下一个处理器或中间件。</li>
@@ -2193,223 +2193,223 @@ type HandlerFunc func(*Context)
 </ul>
 <h3 id="42">4.2. 中间件基础结构</h3>
 <p>自定义中间件的基本结构如下：</p>
-<pre><code class="language-go">func CustomMiddleware() gin.HandlerFunc {
-  return func(c *gin.Context) {
-      // 某些异常条件下可能需要中止后续调用
-      if condition {
-        c.Abort()
-        return
-      }
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">CustomMiddleware</span><span class="p">()</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// 某些异常条件下可能需要中止后续调用</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="nx">condition</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Abort</span><span class="p">()</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">      </span><span class="p">}</span>
 
-      // 可能需要拿前面中间件的数据
-      c.Get()
-
-
-     // 可能需要向后面中间件或处理器传递数据
-     c.Set()
+<span class="w">      </span><span class="c1">// 可能需要拿前面中间件的数据</span>
+<span class="w">      </span><span class="nx">c</span><span class="p">.</span><span class="nx">Get</span><span class="p">()</span>
 
 
-      // 调用下一个中间件或路由处理函数
-      c.Next()
+<span class="w">     </span><span class="c1">// 可能需要向后面中间件或处理器传递数据</span>
+<span class="w">     </span><span class="nx">c</span><span class="p">.</span><span class="nx">Set</span><span class="p">()</span>
 
-      // 在请求处理后执行的逻辑
-  }
-}
-</code></pre>
+
+<span class="w">      </span><span class="c1">// 调用下一个中间件或路由处理函数</span>
+<span class="w">      </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
+
+<span class="w">      </span><span class="c1">// 在请求处理后执行的逻辑</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="43">4.3. 实际示例：权限控制中间件</h3>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;strings&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;strings&quot;</span>
+<span class="p">)</span>
 
-// 权限控制中间件
-func PermissionMiddleware(permissions []string) gin.HandlerFunc {
-    return func(c *gin.Context) {
-        // 从请求头获取用户权限（实际应用中可能从JWT或session中获取）
-        userPermissions := c.GetHeader(&quot;X-User-Permissions&quot;)
-        userPermList := strings.Split(userPermissions, &quot;,&quot;)
+<span class="c1">// 权限控制中间件</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">PermissionMiddleware</span><span class="p">(</span><span class="nx">permissions</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 从请求头获取用户权限（实际应用中可能从JWT或session中获取）</span>
+<span class="w">        </span><span class="nx">userPermissions</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">GetHeader</span><span class="p">(</span><span class="s">&quot;X-User-Permissions&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">userPermList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">userPermissions</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="p">)</span>
 
-        // 检查用户是否拥有必需权限
-        hasPermission := false
-        for _, reqPerm := range permissions {
-            for _, userPerm := range userPermList {
-                if strings.TrimSpace(userPerm) == reqPerm {
-                    hasPermission = true
-                    break
-                }
-            }
-            if hasPermission {
-                break
-            }
-        }
+<span class="w">        </span><span class="c1">// 检查用户是否拥有必需权限</span>
+<span class="w">        </span><span class="nx">hasPermission</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">reqPerm</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">permissions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">userPerm</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">userPermList</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">TrimSpace</span><span class="p">(</span><span class="nx">userPerm</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">reqPerm</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">hasPermission</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">                    </span><span class="k">break</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">hasPermission</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">break</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
 
-        if !hasPermission {
-            c.JSON(403, gin.H{
-                &quot;error&quot;: &quot;权限不足&quot;,
-                &quot;required_permissions&quot;: permissions,
-            })
-            c.Abort()
-            return
-        }
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">hasPermission</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">403</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;权限不足&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;required_permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">permissions</span><span class="p">,</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">Abort</span><span class="p">()</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
 
-        // 设置用户权限到上下文
-        c.Set(&quot;user_permissions&quot;, userPermList)
-        c.Next()
-    }
-}
+<span class="w">        </span><span class="c1">// 设置用户权限到上下文</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="s">&quot;user_permissions&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">userPermList</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    r := gin.Default()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    // 需要admin权限的路由
-    admin := r.Group(&quot;/admin&quot;, PermissionMiddleware([]string{&quot;admin&quot;}))
-    {
-        admin.GET(&quot;/users&quot;, func(c *gin.Context) {
-            c.JSON(200, gin.H{&quot;message&quot;: &quot;用户列表&quot;})
-        })
+<span class="w">    </span><span class="c1">// 需要admin权限的路由</span>
+<span class="w">    </span><span class="nx">admin</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Group</span><span class="p">(</span><span class="s">&quot;/admin&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">PermissionMiddleware</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;admin&quot;</span><span class="p">}))</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">admin</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;用户列表&quot;</span><span class="p">})</span>
+<span class="w">        </span><span class="p">})</span>
 
-        admin.POST(&quot;/users&quot;, func(c *gin.Context) {
-            c.JSON(201, gin.H{&quot;message&quot;: &quot;创建用户&quot;})
-        })
-    }
+<span class="w">        </span><span class="nx">admin</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s">&quot;/users&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">201</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;创建用户&quot;</span><span class="p">})</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 需要read权限的路由
-    r.GET(&quot;/data&quot;, PermissionMiddleware([]string{&quot;read&quot;}), func(c *gin.Context) {
-        c.JSON(200, gin.H{&quot;data&quot;: &quot;只读数据&quot;})
-    })
+<span class="w">    </span><span class="c1">// 需要read权限的路由</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/data&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">PermissionMiddleware</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;read&quot;</span><span class="p">}),</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;只读数据&quot;</span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.Run(&quot;:8080&quot;)
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="44">4.4. 实际示例：请求限流中间件</h3>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;sync&quot;
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;sync&quot;</span>
 
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;golang.org/x/time/rate&quot;
-)
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;golang.org/x/time/rate&quot;</span>
+<span class="p">)</span>
 
-// 限流中间件
-type IPRateLimiter struct {
-    ips map[string]*rate.Limiter
-    mtx sync.RWMutex
-    r   rate.Limit
-    b   int
-}
+<span class="c1">// 限流中间件</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">IPRateLimiter</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ips</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">rate</span><span class="p">.</span><span class="nx">Limiter</span>
+<span class="w">    </span><span class="nx">mtx</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">RWMutex</span>
+<span class="w">    </span><span class="nx">r</span><span class="w">   </span><span class="nx">rate</span><span class="p">.</span><span class="nx">Limit</span>
+<span class="w">    </span><span class="nx">b</span><span class="w">   </span><span class="kt">int</span>
+<span class="p">}</span>
 
-func NewIPRateLimiter(r rate.Limit, b int) *IPRateLimiter {
-    i := &amp;IPRateLimiter{
-        ips: make(map[string]*rate.Limiter),
-        r:   r,
-        b:   b,
-    }
-    return i
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewIPRateLimiter</span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="nx">rate</span><span class="p">.</span><span class="nx">Limit</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">IPRateLimiter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">IPRateLimiter</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ips</span><span class="p">:</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="o">*</span><span class="nx">rate</span><span class="p">.</span><span class="nx">Limiter</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">r</span><span class="p">:</span><span class="w">   </span><span class="nx">r</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">b</span><span class="p">:</span><span class="w">   </span><span class="nx">b</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">i</span>
+<span class="p">}</span>
 
-func (i *IPRateLimiter) AddIP(ip string) *rate.Limiter {
-    i.mtx.Lock()
-    defer i.mtx.Unlock()
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="nx">IPRateLimiter</span><span class="p">)</span><span class="w"> </span><span class="nx">AddIP</span><span class="p">(</span><span class="nx">ip</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">rate</span><span class="p">.</span><span class="nx">Limiter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">i</span><span class="p">.</span><span class="nx">mtx</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">mtx</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
 
-    limiter := rate.NewLimiter(i.r, i.b)
-    i.ips[ip] = limiter
-    return limiter
-}
+<span class="w">    </span><span class="nx">limiter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rate</span><span class="p">.</span><span class="nx">NewLimiter</span><span class="p">(</span><span class="nx">i</span><span class="p">.</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">b</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">i</span><span class="p">.</span><span class="nx">ips</span><span class="p">[</span><span class="nx">ip</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">limiter</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">limiter</span>
+<span class="p">}</span>
 
-func (i *IPRateLimiter) GetLimiter(ip string) *rate.Limiter {
-    // 先尝试使用读锁获取限流器
-    i.mtx.RLock()
-    limiter, exists := i.ips[ip]
-    i.mtx.RUnlock()
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="nx">IPRateLimiter</span><span class="p">)</span><span class="w"> </span><span class="nx">GetLimiter</span><span class="p">(</span><span class="nx">ip</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">rate</span><span class="p">.</span><span class="nx">Limiter</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 先尝试使用读锁获取限流器</span>
+<span class="w">    </span><span class="nx">i</span><span class="p">.</span><span class="nx">mtx</span><span class="p">.</span><span class="nx">RLock</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">limiter</span><span class="p">,</span><span class="w"> </span><span class="nx">exists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">ips</span><span class="p">[</span><span class="nx">ip</span><span class="p">]</span>
+<span class="w">    </span><span class="nx">i</span><span class="p">.</span><span class="nx">mtx</span><span class="p">.</span><span class="nx">RUnlock</span><span class="p">()</span>
 
-    if !exists {
-        // 如果不存在，则添加新的限流器
-        return i.AddIP(ip)
-    }
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">exists</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 如果不存在，则添加新的限流器</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">i</span><span class="p">.</span><span class="nx">AddIP</span><span class="p">(</span><span class="nx">ip</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    return limiter
-}
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">limiter</span>
+<span class="p">}</span>
 
-func RateLimitMiddleware(r rate.Limit, b int) gin.HandlerFunc {
-    limiter := NewIPRateLimiter(r, b)
+<span class="kd">func</span><span class="w"> </span><span class="nx">RateLimitMiddleware</span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="nx">rate</span><span class="p">.</span><span class="nx">Limit</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">limiter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">NewIPRateLimiter</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
 
-    return func(c *gin.Context) {
-        clientIP := c.ClientIP()
-        ipLimiter := limiter.GetLimiter(clientIP) // 修复：重命名局部变量
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">clientIP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">ClientIP</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">ipLimiter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">limiter</span><span class="p">.</span><span class="nx">GetLimiter</span><span class="p">(</span><span class="nx">clientIP</span><span class="p">)</span><span class="w"> </span><span class="c1">// 修复：重命名局部变量</span>
 
-        if !ipLimiter.Allow() { // 现在正确引用了限流器的 Allow 方法
-            c.JSON(429, gin.H{&quot;error&quot;: &quot;请求过于频繁，请稍后再试&quot;})
-            c.Abort()
-            return
-        }
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">ipLimiter</span><span class="p">.</span><span class="nx">Allow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 现在正确引用了限流器的 Allow 方法</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">429</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;请求过于频繁，请稍后再试&quot;</span><span class="p">})</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">Abort</span><span class="p">()</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
 
-        c.Next()
-    }
-}
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    r := gin.Default()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    // 限制每个IP每秒最多10个请求，突发容量为20
-    r.Use(RateLimitMiddleware(10, 20))
+<span class="w">    </span><span class="c1">// 限制每个IP每秒最多10个请求，突发容量为20</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">RateLimitMiddleware</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">))</span>
 
-    r.GET(&quot;/&quot;, func(c *gin.Context) {
-        c.JSON(200, gin.H{&quot;message&quot;: &quot;Hello World&quot;})
-    })
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.Run(&quot;:8080&quot;)
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="5">5. 中间件执行顺序</h2>
 <p>Gin中间件遵循洋葱模型（Onion Model）的执行顺序。当请求进入时，会依次通过各个中间件，到达路由处理函数后，再按相反顺序返回。</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;github.com/gin-gonic/gin&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    r := gin.New()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
 
-    // 注册多个中间件，注意顺序
-    r.Use(Middleware1(), Middleware2(), Middleware3())
+<span class="w">    </span><span class="c1">// 注册多个中间件，注意顺序</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">Middleware1</span><span class="p">(),</span><span class="w"> </span><span class="nx">Middleware2</span><span class="p">(),</span><span class="w"> </span><span class="nx">Middleware3</span><span class="p">())</span>
 
-    r.GET(&quot;/&quot;, func(c *gin.Context) {
-        fmt.Println(&quot;执行路由处理函数&quot;)
-        c.String(200, &quot;Hello World&quot;)
-    })
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;执行路由处理函数&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">String</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.Run(&quot;:8080&quot;)
-}
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func Middleware1() gin.HandlerFunc {
-    return func(c *gin.Context) {
-        fmt.Println(&quot;Middleware1 - 请求前&quot;)
-        c.Next()
-        fmt.Println(&quot;Middleware1 - 请求后&quot;)
-    }
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">Middleware1</span><span class="p">()</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Middleware1 - 请求前&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Middleware1 - 请求后&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func Middleware2() gin.HandlerFunc {
-    return func(c *gin.Context) {
-        fmt.Println(&quot;Middleware2 - 请求前&quot;)
-        c.Next()
-        fmt.Println(&quot;Middleware2 - 请求后&quot;)
-    }
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">Middleware2</span><span class="p">()</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Middleware2 - 请求前&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Middleware2 - 请求后&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func Middleware3() gin.HandlerFunc {
-    return func(c *gin.Context) {
-        fmt.Println(&quot;Middleware3 - 请求前&quot;)
-        c.Next()
-        fmt.Println(&quot;Middleware3 - 请求后&quot;)
-    }
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">Middleware3</span><span class="p">()</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Middleware3 - 请求前&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Middleware3 - 请求后&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>执行顺序为：
 1. Middleware1 - 请求前
 2. Middleware2 - 请求前

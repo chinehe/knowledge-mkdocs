@@ -2423,8 +2423,8 @@
 <p>基本操作命令用于对有序集合进行基础的增删改查操作。</p>
 <h4 id="221-zadd">2.2.1. ZADD</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZADD key [NX | XX] [GT | LT] [CH] [INCR] score member [score member ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZADD<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>NX<span class="w"> </span><span class="p">|</span><span class="w"> </span>XX<span class="o">]</span><span class="w"> </span><span class="o">[</span>GT<span class="w"> </span><span class="p">|</span><span class="w"> </span>LT<span class="o">]</span><span class="w"> </span><span class="o">[</span>CH<span class="o">]</span><span class="w"> </span><span class="o">[</span>INCR<span class="o">]</span><span class="w"> </span>score<span class="w"> </span>member<span class="w"> </span><span class="o">[</span>score<span class="w"> </span>member<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>向有序集合中添加一个或多个成员，或者更新已存在成员的分数。</p>
 <p>分数为双精度浮点数字符串表示，+inf和-inf也是有效的值。</p>
 <p>可选参数：</p>
@@ -2440,314 +2440,314 @@
 <p>ZADD命令的参数组合需要特别注意互斥关系，例如NX和XX不能同时使用。当使用INCR选项时，只能操作单个成员，此时命令返回更新后的分数（字符串形式）而非操作数量。</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-shell">&gt; ZADD myzset 1 &quot;one&quot;
-(integer) 1
-&gt; ZADD myzset 1 &quot;uno&quot;
-(integer) 1
-&gt; ZADD myzset 2 &quot;two&quot; 3 &quot;three&quot;
-(integer) 2
-&gt; ZRANGE myzset 0 -1 WITHSCORES
-1) &quot;one&quot;
-2) &quot;1&quot;
-3) &quot;uno&quot;
-4) &quot;1&quot;
-5) &quot;two&quot;
-6) &quot;2&quot;
-7) &quot;three&quot;
-8) &quot;3&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;uno&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;uno&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">6</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;2&quot;</span>
+<span class="m">7</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">8</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+</code></pre></div>
 <h4 id="222-zcard">2.2.2. ZCARD</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZCARD key
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZCARD<span class="w"> </span>key
+</code></pre></div>
 <p>获取有序集合中的成员数量。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot; 2 &quot;two&quot;
-(integer) 2
-redis&gt; ZCARD myzset
-(integer) 2
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>ZCARD<span class="w"> </span>myzset
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div>
 <h4 id="223-zcount">2.2.3. ZCOUNT</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZCOUNT key min max
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZCOUNT<span class="w"> </span>key<span class="w"> </span>min<span class="w"> </span>max
+</code></pre></div>
 <p>获取有序集合中指定分数范围的成员数量。</p>
 <ul>
 <li>min和max可以是具体数值，也可以使用<code>-inf</code>（负无穷）和<code>+inf</code>（正无穷）</li>
 <li>区间包含边界值，使用<code>(</code>表示开区间（如<code>(5</code>）</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot; 2 &quot;two&quot; 3 &quot;three&quot;
-(integer) 3
-redis&gt; ZCOUNT myzset 1 2
-(integer) 2
-redis&gt; ZCOUNT myzset (1 +inf
-(integer) 2
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>ZCOUNT<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>ZCOUNT<span class="w"> </span>myzset<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="w"> </span>+inf
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div>
 <h4 id="224-zincrby">2.2.4. ZINCRBY</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZINCRBY key increment member
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZINCRBY<span class="w"> </span>key<span class="w"> </span>increment<span class="w"> </span>member
+</code></pre></div>
 <p>将有序集合中指定的成员分数加N。</p>
 <ul>
 <li>increment可以是整数或浮点数</li>
 <li>如果成员不存在，则先添加成员，分数设置为increment</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD myzset 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZINCRBY myzset 2 &quot;one&quot;
-&quot;3&quot;
-redis&gt; ZRANGE myzset 0 -1 WITHSCORES
-1) &quot;two&quot;
-2) &quot;2&quot;
-3) &quot;one&quot;
-4) &quot;3&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZINCRBY<span class="w"> </span>myzset<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="s2">&quot;3&quot;</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;2&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="225-zrank">2.2.5. ZRANK</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZRANK key member [WITHSCORE]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZRANK<span class="w"> </span>key<span class="w"> </span>member<span class="w"> </span><span class="o">[</span>WITHSCORE<span class="o">]</span>
+</code></pre></div>
 <p>获取指定成员的排名（升序排序）。</p>
 <p>WITHSCORE可选参数用于返回分数。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD myzset 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD myzset 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZRANK myzset &quot;three&quot;
-(integer) 2
-redis&gt; ZRANK myzset &quot;four&quot;
-(nil)
-redis&gt; ZRANK myzset &quot;three&quot; WITHSCORE
-1) (integer) 2
-2) &quot;3&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZRANK<span class="w"> </span>myzset<span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>ZRANK<span class="w"> </span>myzset<span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="o">(</span>nil<span class="o">)</span>
+redis&gt;<span class="w"> </span>ZRANK<span class="w"> </span>myzset<span class="w"> </span><span class="s2">&quot;three&quot;</span><span class="w"> </span>WITHSCORE
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+</code></pre></div>
 <h4 id="226-zrevrank">2.2.6. ZREVRANK</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZREVRANK key member [WITHSCORE]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZREVRANK<span class="w"> </span>key<span class="w"> </span>member<span class="w"> </span><span class="o">[</span>WITHSCORE<span class="o">]</span>
+</code></pre></div>
 <p>获取指定成员的排名（降序排序）。</p>
 <p>WITHSCORE可选参数用于返回分数。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD myzset 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD myzset 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZREVRANK myzset &quot;one&quot;
-(integer) 2
-redis&gt; ZREVRANK myzset &quot;four&quot;
-(nil)
-redis&gt; ZREVRANK myzset &quot;three&quot; WITHSCORE
-1) (integer) 0
-2) &quot;3&quot;
-redis&gt; ZREVRANK myzset &quot;four&quot; WITHSCORE
-(nil)
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZREVRANK<span class="w"> </span>myzset<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>ZREVRANK<span class="w"> </span>myzset<span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="o">(</span>nil<span class="o">)</span>
+redis&gt;<span class="w"> </span>ZREVRANK<span class="w"> </span>myzset<span class="w"> </span><span class="s2">&quot;three&quot;</span><span class="w"> </span>WITHSCORE
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+redis&gt;<span class="w"> </span>ZREVRANK<span class="w"> </span>myzset<span class="w"> </span><span class="s2">&quot;four&quot;</span><span class="w"> </span>WITHSCORE
+<span class="o">(</span>nil<span class="o">)</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="227-zrem">2.2.7. ZREM</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZREM key member [member ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZREM<span class="w"> </span>key<span class="w"> </span>member<span class="w"> </span><span class="o">[</span>member<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>从有序集合中移除一个或多个成员。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD myzset 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD myzset 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZREM myzset &quot;two&quot;
-(integer) 1
-redis&gt; ZRANGE myzset 0 -1 WITHSCORES
-1) &quot;one&quot;
-2) &quot;1&quot;
-3) &quot;three&quot;
-4) &quot;3&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZREM<span class="w"> </span>myzset<span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="228-zscan">2.2.8. ZSCAN</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZSCAN key cursor [MATCH pattern] [COUNT count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZSCAN<span class="w"> </span>key<span class="w"> </span>cursor<span class="w"> </span><span class="o">[</span>MATCH<span class="w"> </span>pattern<span class="o">]</span><span class="w"> </span><span class="o">[</span>COUNT<span class="w"> </span>count<span class="o">]</span>
+</code></pre></div>
 <p>迭代有序集合的成员。</p>
 <p>请参考官方文档：<a href="https://redis.io/docs/latest/commands/scan/">Redis Command Scan</a></p>
 <h4 id="229-zscore">2.2.9. ZSCORE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZSCORE key member
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZSCORE<span class="w"> </span>key<span class="w"> </span>member
+</code></pre></div>
 <p>获取有序集合中指定成员的分数。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1.5 &quot;one&quot;
-(integer) 1
-redis&gt; ZSCORE myzset &quot;one&quot;
-&quot;1.5&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span>.5<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZSCORE<span class="w"> </span>myzset<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="s2">&quot;1.5&quot;</span>
+</code></pre></div>
 <h4 id="2210-zmscore">2.2.10. ZMSCORE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZMSCORE key member [member ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZMSCORE<span class="w"> </span>key<span class="w"> </span>member<span class="w"> </span><span class="o">[</span>member<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>获取有序集合中一个或多个成员的分数（Redis 6.2+）。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD myzset 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZMSCORE myzset &quot;one&quot; &quot;two&quot; &quot;nofield&quot;
-1) &quot;1&quot;
-2) &quot;2&quot;
-3) (nil)
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZMSCORE<span class="w"> </span>myzset<span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="w"> </span><span class="s2">&quot;two&quot;</span><span class="w"> </span><span class="s2">&quot;nofield&quot;</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;2&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="2211-zpopmax">2.2.11. ZPOPMAX</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZPOPMAX key [count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZPOPMAX<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>count<span class="o">]</span>
+</code></pre></div>
 <p>弹出有序集合中分数最高的成员（Redis 5.0+）。</p>
 <ul>
 <li>默认弹出1个成员</li>
 <li>当提供count参数时，最多弹出count个成员</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD myzset 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD myzset 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZPOPMAX myzset
-1) &quot;three&quot;
-2) &quot;3&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZPOPMAX<span class="w"> </span>myzset
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="2212-zpopmin">2.2.12. ZPOPMIN</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZPOPMIN key [count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZPOPMIN<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>count<span class="o">]</span>
+</code></pre></div>
 <p>弹出有序集合中分数最低的成员（Redis 5.0+）。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD myzset 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD myzset 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZPOPMIN myzset
-1) &quot;one&quot;
-2) &quot;1&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZPOPMIN<span class="w"> </span>myzset
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="2213-zmpop">2.2.13. ZMPOP</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZMPOP numkeys key [key ...] [MIN | MAX] [COUNT count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZMPOP<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span><span class="o">[</span>MIN<span class="w"> </span><span class="p">|</span><span class="w"> </span>MAX<span class="o">]</span><span class="w"> </span><span class="o">[</span>COUNT<span class="w"> </span>count<span class="o">]</span>
+</code></pre></div>
 <p>从一个或多个有序集合中第一个非空有序集合中弹出分数最高或最低一个或多个的成员（Redis 7.0+）。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZMPOP 1 notsuchkey MIN
-(nil)
-redis&gt; ZADD myzset 1 &quot;one&quot; 2 &quot;two&quot; 3 &quot;three&quot;
-(integer) 3
-redis&gt; ZMPOP 1 myzset MIN
-1) &quot;myzset&quot;
-2) 1) 1) &quot;one&quot;
-      2) &quot;1&quot;
-redis&gt; ZRANGE myzset 0 -1 WITHSCORES
-1) &quot;two&quot;
-2) &quot;2&quot;
-3) &quot;three&quot;
-4) &quot;3&quot;
-redis&gt; ZMPOP 1 myzset MAX COUNT 10
-1) &quot;myzset&quot;
-2) 1) 1) &quot;three&quot;
-      2) &quot;3&quot;
-   2) 1) &quot;two&quot;
-      2) &quot;2&quot;
-redis&gt; ZADD myzset2 4 &quot;four&quot; 5 &quot;five&quot; 6 &quot;six&quot;
-(integer) 3
-redis&gt; ZMPOP 2 myzset myzset2 MIN COUNT 10
-1) &quot;myzset2&quot;
-2) 1) 1) &quot;four&quot;
-      2) &quot;4&quot;
-   2) 1) &quot;five&quot;
-      2) &quot;5&quot;
-   3) 1) &quot;six&quot;
-      2) &quot;6&quot;
-redis&gt; ZRANGE myzset 0 -1 WITHSCORES
-(empty array)
-redis&gt; ZMPOP 2 myzset myzset2 MAX COUNT 10
-(nil)
-redis&gt; ZRANGE myzset2 0 -1 WITHSCORES
-(empty array)
-redis&gt; EXISTS myzset myzset2
-(integer) 0
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZMPOP<span class="w"> </span><span class="m">1</span><span class="w"> </span>notsuchkey<span class="w"> </span>MIN
+<span class="o">(</span>nil<span class="o">)</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>ZMPOP<span class="w"> </span><span class="m">1</span><span class="w"> </span>myzset<span class="w"> </span>MIN
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;myzset&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="w">      </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;2&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+redis&gt;<span class="w"> </span>ZMPOP<span class="w"> </span><span class="m">1</span><span class="w"> </span>myzset<span class="w"> </span>MAX<span class="w"> </span>COUNT<span class="w"> </span><span class="m">10</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;myzset&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="w">      </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+<span class="w">   </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="w">      </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;2&quot;</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset2<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="s2">&quot;four&quot;</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="s2">&quot;five&quot;</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="s2">&quot;six&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>ZMPOP<span class="w"> </span><span class="m">2</span><span class="w"> </span>myzset<span class="w"> </span>myzset2<span class="w"> </span>MIN<span class="w"> </span>COUNT<span class="w"> </span><span class="m">10</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;myzset2&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="w">      </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;4&quot;</span>
+<span class="w">   </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;five&quot;</span>
+<span class="w">      </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;5&quot;</span>
+<span class="w">   </span><span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;six&quot;</span>
+<span class="w">      </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;6&quot;</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="o">(</span>empty<span class="w"> </span>array<span class="o">)</span>
+redis&gt;<span class="w"> </span>ZMPOP<span class="w"> </span><span class="m">2</span><span class="w"> </span>myzset<span class="w"> </span>myzset2<span class="w"> </span>MAX<span class="w"> </span>COUNT<span class="w"> </span><span class="m">10</span>
+<span class="o">(</span>nil<span class="o">)</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset2<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="o">(</span>empty<span class="w"> </span>array<span class="o">)</span>
+redis&gt;<span class="w"> </span>EXISTS<span class="w"> </span>myzset<span class="w"> </span>myzset2
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="2214-zrandmember">2.2.14. ZRANDMEMBER</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZRANDMEMBER key [count [WITHSCORES]]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZRANDMEMBER<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>count<span class="w"> </span><span class="o">[</span>WITHSCORES<span class="o">]]</span>
+</code></pre></div>
 <p>随机获取有序集合中一个或多个成员。</p>
 <ul>
 <li>当count参数为正数时，表示最多返回的成员个数。实际返回个数取count 与集合成员数的较低值。</li>
 <li>当count参数为负数时，命令返回的成员可以重复，实际返回个数为count的绝对值。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD dadi 1 uno 2 due 3 tre 4 quattro 5 cinque 6 sei
-(integer) 6
-redis&gt; ZRANDMEMBER dadi
-&quot;tre&quot;
-redis&gt; ZRANDMEMBER dadi
-&quot;cinque&quot;
-redis&gt; ZRANDMEMBER dadi -5 WITHSCORES
-1) &quot;quattro&quot;
-2) &quot;4&quot;
-3) &quot;tre&quot;
-4) &quot;3&quot;
-5) &quot;cinque&quot;
-6) &quot;5&quot;
-7) &quot;cinque&quot;
-8) &quot;5&quot;
-9) &quot;sei&quot;
-10) &quot;6&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>dadi<span class="w"> </span><span class="m">1</span><span class="w"> </span>uno<span class="w"> </span><span class="m">2</span><span class="w"> </span>due<span class="w"> </span><span class="m">3</span><span class="w"> </span>tre<span class="w"> </span><span class="m">4</span><span class="w"> </span>quattro<span class="w"> </span><span class="m">5</span><span class="w"> </span>cinque<span class="w"> </span><span class="m">6</span><span class="w"> </span>sei
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">6</span>
+redis&gt;<span class="w"> </span>ZRANDMEMBER<span class="w"> </span>dadi
+<span class="s2">&quot;tre&quot;</span>
+redis&gt;<span class="w"> </span>ZRANDMEMBER<span class="w"> </span>dadi
+<span class="s2">&quot;cinque&quot;</span>
+redis&gt;<span class="w"> </span>ZRANDMEMBER<span class="w"> </span>dadi<span class="w"> </span>-5<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;quattro&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;4&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;tre&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;cinque&quot;</span>
+<span class="m">6</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;5&quot;</span>
+<span class="m">7</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;cinque&quot;</span>
+<span class="m">8</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;5&quot;</span>
+<span class="m">9</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;sei&quot;</span>
+<span class="m">10</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;6&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h3 id="23">2.3. 范围操作</h3>
 <p>范围操作命令用于获取有序集合中指定范围的成员。</p>
 <h4 id="231-zlexcount">2.3.1. ZLEXCOUNT</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZLEXCOUNT key min max
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZLEXCOUNT<span class="w"> </span>key<span class="w"> </span>min<span class="w"> </span>max
+</code></pre></div>
 <p>获取有序集合中指定字典序范围的成员数量。</p>
 <ul>
 <li>min和max使用<code>[</code>表示包含，<code>(</code>表示不包含</li>
 <li>使用<code>-</code>表示负无穷，<code>+</code>表示正无穷</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 0 a 0 b 0 c 0 d 0 e
-(integer) 5
-redis&gt; ZADD myzset 0 f 0 g
-(integer) 2
-redis&gt; ZLEXCOUNT myzset - +
-(integer) 7
-redis&gt; ZLEXCOUNT myzset [b [f
-(integer) 5
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>a<span class="w"> </span><span class="m">0</span><span class="w"> </span>b<span class="w"> </span><span class="m">0</span><span class="w"> </span>c<span class="w"> </span><span class="m">0</span><span class="w"> </span>d<span class="w"> </span><span class="m">0</span><span class="w"> </span>e
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>f<span class="w"> </span><span class="m">0</span><span class="w"> </span>g
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>ZLEXCOUNT<span class="w"> </span>myzset<span class="w"> </span>-<span class="w"> </span>+
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">7</span>
+redis&gt;<span class="w"> </span>ZLEXCOUNT<span class="w"> </span>myzset<span class="w"> </span><span class="o">[</span>b<span class="w"> </span><span class="o">[</span>f
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="232-zrange">2.3.2. ZRANGE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZRANGE key start stop 
-    [BYSCORE | BYLEX]
-  [REV] 
-  [LIMIT offset count]
-  [WITHSCORES]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZRANGE<span class="w"> </span>key<span class="w"> </span>start<span class="w"> </span>stop<span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>BYSCORE<span class="w"> </span><span class="p">|</span><span class="w"> </span>BYLEX<span class="o">]</span>
+<span class="w">  </span><span class="o">[</span>REV<span class="o">]</span><span class="w"> </span>
+<span class="w">  </span><span class="o">[</span>LIMIT<span class="w"> </span>offset<span class="w"> </span>count<span class="o">]</span>
+<span class="w">  </span><span class="o">[</span>WITHSCORES<span class="o">]</span>
+</code></pre></div>
 <p>获取有序集合中指定索引范围内的成员。</p>
 <p>可选参数：</p>
 <ul>
@@ -2763,396 +2763,396 @@ redis&gt;
 <li>WITHSCORES：返回分数</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot; 2 &quot;two&quot; 3 &quot;three&quot;
-(integer) 3
-redis&gt; ZRANGE myzset 0 1
-1) &quot;one&quot;
-2) &quot;two&quot;
-redis&gt; ZRANGE myzset 0 -1 WITHSCORES
-1) &quot;one&quot;
-2) &quot;1&quot;
-3) &quot;two&quot;
-4) &quot;2&quot;
-5) &quot;three&quot;
-6) &quot;3&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;2&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">6</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+</code></pre></div>
 <h4 id="233-zrangebylex">2.3.3. ZRANGEBYLEX（已弃用）</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZRANGEBYLEX key min max [LIMIT offset count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZRANGEBYLEX<span class="w"> </span>key<span class="w"> </span>min<span class="w"> </span>max<span class="w"> </span><span class="o">[</span>LIMIT<span class="w"> </span>offset<span class="w"> </span>count<span class="o">]</span>
+</code></pre></div>
 <p>获取有序集合中指定字典序范围的成员。（已弃用）</p>
 <h4 id="234-zrangebyscore">2.3.4. ZRANGEBYSCORE（已弃用）</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZRANGEBYSCORE<span class="w"> </span>key<span class="w"> </span>min<span class="w"> </span>max<span class="w"> </span><span class="o">[</span>WITHSCORES<span class="o">]</span><span class="w"> </span><span class="o">[</span>LIMIT<span class="w"> </span>offset<span class="w"> </span>count<span class="o">]</span>
+</code></pre></div>
 <p>获取有序集合中指定分数范围内的成员。（已弃用）</p>
 <h4 id="235-zrangestore">2.3.5. ZRANGESTORE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZRANGESTORE dest key min max [BYSCORE | BYLEX] [REV] [LIMIT offset count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZRANGESTORE<span class="w"> </span>dest<span class="w"> </span>key<span class="w"> </span>min<span class="w"> </span>max<span class="w"> </span><span class="o">[</span>BYSCORE<span class="w"> </span><span class="p">|</span><span class="w"> </span>BYLEX<span class="o">]</span><span class="w"> </span><span class="o">[</span>REV<span class="o">]</span><span class="w"> </span><span class="o">[</span>LIMIT<span class="w"> </span>offset<span class="w"> </span>count<span class="o">]</span>
+</code></pre></div>
 <p>获取有序集合中指定范围的成员，并存储到指定的键中。（Redis 6.2+）</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD srczset 1 &quot;one&quot; 2 &quot;two&quot; 3 &quot;three&quot; 4 &quot;four&quot;
-(integer) 4
-redis&gt; ZRANGESTORE dstzset srczset 2 -1
-(integer) 2
-redis&gt; ZRANGE dstzset 0 -1
-1) &quot;three&quot;
-2) &quot;four&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>srczset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">4</span>
+redis&gt;<span class="w"> </span>ZRANGESTORE<span class="w"> </span>dstzset<span class="w"> </span>srczset<span class="w"> </span><span class="m">2</span><span class="w"> </span>-1
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>dstzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;four&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="236-zremrangebylex">2.3.6. ZREMRANGEBYLEX</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZREMRANGEBYLEX key min max
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZREMRANGEBYLEX<span class="w"> </span>key<span class="w"> </span>min<span class="w"> </span>max
+</code></pre></div>
 <p>移除有序集合中指定字典序范围内的成员。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 0 aaaa 0 b 0 c 0 d 0 e
-(integer) 5
-redis&gt; ZADD myzset 0 foo 0 zap 0 zip 0 ALPHA 0 alpha
-(integer) 5
-redis&gt; ZRANGE myzset 0 -1
-1) &quot;ALPHA&quot;
-2) &quot;aaaa&quot;
-3) &quot;alpha&quot;
-4) &quot;b&quot;
-5) &quot;c&quot;
-6) &quot;d&quot;
-7) &quot;e&quot;
-8) &quot;foo&quot;
-9) &quot;zap&quot;
-10) &quot;zip&quot;
-redis&gt; ZREMRANGEBYLEX myzset [alpha [omega
-(integer) 6
-redis&gt; ZRANGE myzset 0 -1
-1) &quot;ALPHA&quot;
-2) &quot;aaaa&quot;
-3) &quot;zap&quot;
-4) &quot;zip&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>aaaa<span class="w"> </span><span class="m">0</span><span class="w"> </span>b<span class="w"> </span><span class="m">0</span><span class="w"> </span>c<span class="w"> </span><span class="m">0</span><span class="w"> </span>d<span class="w"> </span><span class="m">0</span><span class="w"> </span>e
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>foo<span class="w"> </span><span class="m">0</span><span class="w"> </span>zap<span class="w"> </span><span class="m">0</span><span class="w"> </span>zip<span class="w"> </span><span class="m">0</span><span class="w"> </span>ALPHA<span class="w"> </span><span class="m">0</span><span class="w"> </span>alpha
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;ALPHA&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;aaaa&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;alpha&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;b&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="m">6</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;d&quot;</span>
+<span class="m">7</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;e&quot;</span>
+<span class="m">8</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;foo&quot;</span>
+<span class="m">9</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;zap&quot;</span>
+<span class="m">10</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;zip&quot;</span>
+redis&gt;<span class="w"> </span>ZREMRANGEBYLEX<span class="w"> </span>myzset<span class="w"> </span><span class="o">[</span>alpha<span class="w"> </span><span class="o">[</span>omega
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">6</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;ALPHA&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;aaaa&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;zap&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;zip&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="237-zremrangebyrank">2.3.7. ZREMRANGEBYRANK</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZREMRANGEBYRANK key start stop
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZREMRANGEBYRANK<span class="w"> </span>key<span class="w"> </span>start<span class="w"> </span>stop
+</code></pre></div>
 <p>移除有序集合中指定排名范围内的成员（按升序排序）。</p>
 <p>start和stop都是从0开始的索引，0是分数最低的成员，-1表示分数最高的成员，以此类推。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD myzset 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD myzset 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZREMRANGEBYRANK myzset 0 1
-(integer) 2
-redis&gt; ZRANGE myzset 0 -1 WITHSCORES
-1) &quot;three&quot;
-2) &quot;3&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZREMRANGEBYRANK<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="238-zremrangebyscore">2.3.8. ZREMRANGEBYSCORE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZREMRANGEBYSCORE key min max
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZREMRANGEBYSCORE<span class="w"> </span>key<span class="w"> </span>min<span class="w"> </span>max
+</code></pre></div>
 <p>移除有序集合中指定分数范围内的成员。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD myzset 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD myzset 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD myzset 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZREMRANGEBYSCORE myzset -inf (2
-(integer) 1
-redis&gt; ZRANGE myzset 0 -1 WITHSCORES
-1) &quot;two&quot;
-2) &quot;2&quot;
-3) &quot;three&quot;
-4) &quot;3&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>myzset<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZREMRANGEBYSCORE<span class="w"> </span>myzset<span class="w"> </span>-inf<span class="w"> </span><span class="o">(</span><span class="m">2</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>myzset<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;2&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="239-zrevrange">2.3.9. ZREVRANGE（已弃用）</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZREVRANGE key start stop [WITHSCORES]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZREVRANGE<span class="w"> </span>key<span class="w"> </span>start<span class="w"> </span>stop<span class="w"> </span><span class="o">[</span>WITHSCORES<span class="o">]</span>
+</code></pre></div>
 <p>获取有序集合中指定索引范围内的成员（逆序）。（已弃用）</p>
 <h4 id="2310-zrevrangebylex">2.3.10. ZREVRANGEBYLEX（已弃用）</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZREVRANGEBYLEX key max min [LIMIT offset count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZREVRANGEBYLEX<span class="w"> </span>key<span class="w"> </span>max<span class="w"> </span>min<span class="w"> </span><span class="o">[</span>LIMIT<span class="w"> </span>offset<span class="w"> </span>count<span class="o">]</span>
+</code></pre></div>
 <p>获取有序集合中指定字典序范围内的成员（逆序）。（已弃用）</p>
 <h4 id="2311-zrevrangebyscore">2.3.11. ZREVRANGEBYSCORE（已弃用）</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZREVRANGEBYSCORE key max min [WITHSCORES] [LIMIT offset count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZREVRANGEBYSCORE<span class="w"> </span>key<span class="w"> </span>max<span class="w"> </span>min<span class="w"> </span><span class="o">[</span>WITHSCORES<span class="o">]</span><span class="w"> </span><span class="o">[</span>LIMIT<span class="w"> </span>offset<span class="w"> </span>count<span class="o">]</span>
+</code></pre></div>
 <p>获取有序集合中指定分数范围内的成员（逆序）。（已弃用）</p>
 <h3 id="24">2.4. 集合运算</h3>
 <p>集合运算命令用于计算多个有序集合之间的交集、并集和差集。</p>
 <h4 id="241-zdiff">2.4.1. ZDIFF</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZDIFF numkeys key [key ...] [WITHSCORES]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZDIFF<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span><span class="o">[</span>WITHSCORES<span class="o">]</span>
+</code></pre></div>
 <p>计算多个有序集合的差集。</p>
 <ul>
 <li>numkeys表示参与计算的键的数量</li>
 <li>WITHSCORES选项返回结果时包含分数</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD zset1 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset1 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset1 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZADD zset2 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset2 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZDIFF 2 zset1 zset2
-1) &quot;three&quot;
-redis&gt; ZDIFF 2 zset1 zset2 WITHSCORES
-1) &quot;three&quot;
-2) &quot;3&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZDIFF<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+redis&gt;<span class="w"> </span>ZDIFF<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="242-zdiffstore">2.4.2. ZDIFFSTORE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZDIFFSTORE destination numkeys key [key ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZDIFFSTORE<span class="w"> </span>destination<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>计算多个有序集合的差集，并将结果保存到指定的键中。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD zset1 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset1 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset1 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZADD zset2 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset2 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZDIFFSTORE out 2 zset1 zset2
-(integer) 1
-redis&gt; ZRANGE out 0 -1 WITHSCORES
-1) &quot;three&quot;
-2) &quot;3&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZDIFFSTORE<span class="w"> </span>out<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>out<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="243-zinter">2.4.3. ZINTER</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZINTER numkeys key [key ...] 
-    [WEIGHTS weight [weight ...]]
-  [AGGREGATE &lt;SUM | MIN | MAX&gt;] 
-  [WITHSCORES]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZINTER<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>WEIGHTS<span class="w"> </span>weight<span class="w"> </span><span class="o">[</span>weight<span class="w"> </span>...<span class="o">]]</span>
+<span class="w">  </span><span class="o">[</span>AGGREGATE<span class="w"> </span>&lt;SUM<span class="w"> </span><span class="p">|</span><span class="w"> </span>MIN<span class="w"> </span><span class="p">|</span><span class="w"> </span>MAX&gt;<span class="o">]</span><span class="w"> </span>
+<span class="w">  </span><span class="o">[</span>WITHSCORES<span class="o">]</span>
+</code></pre></div>
 <p>计算多个有序集合的交集。</p>
 <ul>
 <li>WEIGHTS：为每个集合设置权重（默认为1）</li>
 <li>AGGREGATE：指定分数聚合方式（SUM默认，MIN取最小，MAX取最大）</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD zset1 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset1 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset2 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset2 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset2 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZINTER 2 zset1 zset2
-1) &quot;one&quot;
-2) &quot;two&quot;
-redis&gt; ZINTER 2 zset1 zset2 WITHSCORES
-1) &quot;one&quot;
-2) &quot;2&quot;
-3) &quot;two&quot;
-4) &quot;4&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZINTER<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+redis&gt;<span class="w"> </span>ZINTER<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;2&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;4&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="244-zintercard">2.4.4. ZINTERCARD</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZINTERCARD numkeys key [key ...] [LIMIT limit]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZINTERCARD<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span><span class="o">[</span>LIMIT<span class="w"> </span>limit<span class="o">]</span>
+</code></pre></div>
 <p>获取多个有序集合的交集的数量。（Redis 7.0+）</p>
 <ul>
 <li>LIMIT：限制计算的最大交集数量</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD zset1 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset1 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset2 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset2 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset2 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZINTER 2 zset1 zset2
-1) &quot;one&quot;
-2) &quot;two&quot;
-redis&gt; ZINTERCARD 2 zset1 zset2
-(integer) 2
-redis&gt; ZINTERCARD 2 zset1 zset2 LIMIT 1
-(integer) 1
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZINTER<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+redis&gt;<span class="w"> </span>ZINTERCARD<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>ZINTERCARD<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2<span class="w"> </span>LIMIT<span class="w"> </span><span class="m">1</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="245-zinterstore">2.4.5. ZINTERSTORE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZINTERSTORE destination numkeys key [key ...] 
-    [WEIGHTS weight [weight ...]] 
-    [AGGREGATE &lt;SUM | MIN | MAX&gt;]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZINTERSTORE<span class="w"> </span>destination<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>WEIGHTS<span class="w"> </span>weight<span class="w"> </span><span class="o">[</span>weight<span class="w"> </span>...<span class="o">]]</span><span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>AGGREGATE<span class="w"> </span>&lt;SUM<span class="w"> </span><span class="p">|</span><span class="w"> </span>MIN<span class="w"> </span><span class="p">|</span><span class="w"> </span>MAX&gt;<span class="o">]</span>
+</code></pre></div>
 <p>计算多个有序集合的交集，并将结果保存到指定的键中。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD zset1 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset1 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset2 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset2 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset2 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZINTERSTORE out 2 zset1 zset2 WEIGHTS 2 3
-(integer) 2
-redis&gt; ZRANGE out 0 -1 WITHSCORES
-1) &quot;one&quot;
-2) &quot;5&quot;
-3) &quot;two&quot;
-4) &quot;10&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZINTERSTORE<span class="w"> </span>out<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2<span class="w"> </span>WEIGHTS<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>out<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;5&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;10&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="246-zunion">2.4.6. ZUNION</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZUNION numkeys key [key ...] 
-    [WEIGHTS weight [weight ...]]
-  [AGGREGATE &lt;SUM | MIN | MAX&gt;] 
-  [WITHSCORES]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZUNION<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>WEIGHTS<span class="w"> </span>weight<span class="w"> </span><span class="o">[</span>weight<span class="w"> </span>...<span class="o">]]</span>
+<span class="w">  </span><span class="o">[</span>AGGREGATE<span class="w"> </span>&lt;SUM<span class="w"> </span><span class="p">|</span><span class="w"> </span>MIN<span class="w"> </span><span class="p">|</span><span class="w"> </span>MAX&gt;<span class="o">]</span><span class="w"> </span>
+<span class="w">  </span><span class="o">[</span>WITHSCORES<span class="o">]</span>
+</code></pre></div>
 <p>计算多个有序集合的并集。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD zset1 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset1 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset2 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset2 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset2 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZUNION 2 zset1 zset2
-1) &quot;one&quot;
-2) &quot;three&quot;
-3) &quot;two&quot;
-redis&gt; ZUNION 2 zset1 zset2 WITHSCORES
-1) &quot;one&quot;
-2) &quot;2&quot;
-3) &quot;three&quot;
-4) &quot;3&quot;
-5) &quot;two&quot;
-6) &quot;4&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZUNION<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+redis&gt;<span class="w"> </span>ZUNION<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;2&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">6</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;4&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="247-zunionstore">2.4.7. ZUNIONSTORE</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">ZUNIONSTORE destination numkeys key [key ...] 
-    [WEIGHTS weight [weight ...]] 
-    [AGGREGATE &lt;SUM | MIN | MAX&gt;]
-</code></pre>
+<div class="highlight"><pre><span></span><code>ZUNIONSTORE<span class="w"> </span>destination<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>WEIGHTS<span class="w"> </span>weight<span class="w"> </span><span class="o">[</span>weight<span class="w"> </span>...<span class="o">]]</span><span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>AGGREGATE<span class="w"> </span>&lt;SUM<span class="w"> </span><span class="p">|</span><span class="w"> </span>MIN<span class="w"> </span><span class="p">|</span><span class="w"> </span>MAX&gt;<span class="o">]</span>
+</code></pre></div>
 <p>计算多个有序集合的并集，并将结果存储到指定的键中。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; ZADD zset1 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset1 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset2 1 &quot;one&quot;
-(integer) 1
-redis&gt; ZADD zset2 2 &quot;two&quot;
-(integer) 1
-redis&gt; ZADD zset2 3 &quot;three&quot;
-(integer) 1
-redis&gt; ZUNIONSTORE out 2 zset1 zset2 WEIGHTS 2 3
-(integer) 3
-redis&gt; ZRANGE out 0 -1 WITHSCORES
-1) &quot;one&quot;
-2) &quot;5&quot;
-3) &quot;three&quot;
-4) &quot;9&quot;
-5) &quot;two&quot;
-6) &quot;10&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset2<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>ZUNIONSTORE<span class="w"> </span>out<span class="w"> </span><span class="m">2</span><span class="w"> </span>zset1<span class="w"> </span>zset2<span class="w"> </span>WEIGHTS<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>ZRANGE<span class="w"> </span>out<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1<span class="w"> </span>WITHSCORES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;5&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;9&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">6</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;10&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h3 id="25">2.5. 阻塞操作</h3>
 <p>阻塞操作命令用于在有序集合中阻塞式地弹出成员。</p>
 <h4 id="251-bzmpop">2.5.1. BZMPOP</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">BZMPOP timeout numkeys key [key ...] &lt;MIN | MAX&gt; [COUNT count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>BZMPOP<span class="w"> </span>timeout<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>&lt;MIN<span class="w"> </span><span class="p">|</span><span class="w"> </span>MAX&gt;<span class="w"> </span><span class="o">[</span>COUNT<span class="w"> </span>count<span class="o">]</span>
+</code></pre></div>
 <p>按照分数从一个或多个有序集合中弹出一个成员。（Redis 7.0+）</p>
 <ul>
 <li>timeout：阻塞等待的超时时间（0表示永久阻塞）</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">## 在一个终端执行
-redis&gt; BZMPOP 0 1 zset1 MAX
+<div class="highlight"><pre><span></span><code><span class="c1">## 在一个终端执行</span>
+redis&gt;<span class="w"> </span>BZMPOP<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>zset1<span class="w"> </span>MAX
 
-## 在另一个终端执行
-redis&gt; ZADD zset1 1 &quot;one&quot;
-(integer) 1)
+<span class="c1">## 在另一个终端执行</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span>
 
-## 第一个终端将返回
-1) &quot;zset1&quot;
-2) 1) &quot;one&quot;
-   2) &quot;1&quot;
-</code></pre>
+<span class="c1">## 第一个终端将返回</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;zset1&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="w">   </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+</code></pre></div>
 <h4 id="252-bzpopmax">2.5.2. BZPOPMAX</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">BZPOPMAX key [key ...] timeout
-</code></pre>
+<div class="highlight"><pre><span></span><code>BZPOPMAX<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>timeout
+</code></pre></div>
 <p>从一个或多个有序集合中弹出分数最高的成员。</p>
 <ul>
 <li>timeout：阻塞等待的超时时间（0表示永久阻塞）</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">## 在一个终端执行
-redis&gt; BZPOPMAX zset1 zset2 0
+<div class="highlight"><pre><span></span><code><span class="c1">## 在一个终端执行</span>
+redis&gt;<span class="w"> </span>BZPOPMAX<span class="w"> </span>zset1<span class="w"> </span>zset2<span class="w"> </span><span class="m">0</span>
 
-## 在另一个终端执行
-redis&gt; ZADD zset1 1 &quot;one&quot;
-(integer) 1)
+<span class="c1">## 在另一个终端执行</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span>
 
-## 第一个终端将返回
-1) &quot;zset1&quot;
-2) &quot;one&quot;
-3) &quot;1&quot;
-</code></pre>
+<span class="c1">## 第一个终端将返回</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;zset1&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+</code></pre></div>
 <h4 id="253-bzpopmin">2.5.3. BZPOPMIN</h4>
 <p>命令语法：</p>
-<pre><code class="language-shell">BZPOPMIN key [key ...] timeout
-</code></pre>
+<div class="highlight"><pre><span></span><code>BZPOPMIN<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>timeout
+</code></pre></div>
 <p>从一个或多个有序集合中弹出分数最低的成员。</p>
 <ul>
 <li>timeout：阻塞等待的超时时间（0表示永久阻塞）</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">## 在一个终端执行
-redis&gt; BZPOPMIN zset1 zset2 0
+<div class="highlight"><pre><span></span><code><span class="c1">## 在一个终端执行</span>
+redis&gt;<span class="w"> </span>BZPOPMIN<span class="w"> </span>zset1<span class="w"> </span>zset2<span class="w"> </span><span class="m">0</span>
 
-## 在另一个终端执行
-redis&gt; ZADD zset1 1 &quot;one&quot;
-(integer) 1)
+<span class="c1">## 在另一个终端执行</span>
+redis&gt;<span class="w"> </span>ZADD<span class="w"> </span>zset1<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span>
 
-## 第一个终端将返回
-1) &quot;zset1&quot;
-2) &quot;one&quot;
-3) &quot;1&quot;
-</code></pre>
+<span class="c1">## 第一个终端将返回</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;zset1&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;1&quot;</span>
+</code></pre></div>
 
 
 

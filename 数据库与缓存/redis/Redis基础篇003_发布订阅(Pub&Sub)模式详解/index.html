@@ -1632,7 +1632,7 @@
 3. 消息代理人保存发布者、订阅者和主题之间的关系。当有新消息发布时，消息代理人将会把消息转发给相应的订阅者。</p>
 <p>发布-订阅系统具有低耦合、可扩展性好等优点。</p>
 <p>而Redis的内部设计非常适合于实现发布-订阅系统，因此，发布-订阅功能被当作Redis的一个热点功能被推出。在Redis系统中，发布者和订阅者都是Redis的客户端或者Redis应用程序，而消息代理人为Redis服务器。</p>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid"><code>graph LR
 pub1[发布者1]
 pub2[发布者2] 
 toc1[[主题1]]
@@ -1648,12 +1648,11 @@ pub2 -.-&gt; toc2 -.-&gt; sub3
 pub2 -.-&gt; toc3 -.-&gt; sub3
 toc3 -.-&gt; sub4 
 
-subgraph &quot;消息代理人—Redis&quot;
+subgraph "消息代理人—Redis"
     toc1
     toc2
     toc3
-end
-</code></pre>
+end</code></pre>
 <h2 id="2-redis-pubsub">2. Redis Pub/Sub的基础操作</h2>
 <h3 id="21">2.1. 基础操作命令</h3>
 <p>Redis Pub/Sub基础操作的相关命令如下：
@@ -1662,7 +1661,7 @@ end
 * <code>UNSUBSCRIBE [channel [channel ...]]</code>：客户端取消对给定频道的订阅，如果没有指定频道，表示取消对所有频道的订阅。</p>
 <h3 id="22">2.2. 操作示例</h3>
 <p>在示例中，我们需要实现如同所示的操作：</p>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid"><code>graph LR
 pub1[publisher 1]
 pub2[publisher 2] 
 toc1[[channel A]]
@@ -1681,25 +1680,24 @@ toc1 -.-&gt; sub2
 toc2 -.-&gt; sub2
 toc2 -.-&gt; sub3
 toc3 -.-&gt; sub3
-toc3 -.-&gt; sub4
-</code></pre>
+toc3 -.-&gt; sub4</code></pre>
 <ol>
 <li>订阅者们订阅指定的频道(以2号订阅者为例)
-    <code>shell
-    127.0.0.1:6379&gt; subscribe channelA channelB
-    Reading messages... (press Ctrl-C to quit)
-    1) "subscribe"
-    2) "channelA"
-    3) (integer) 1
-    1) "subscribe"
-    2) "channelB"
-    3) (integer) 2</code></li>
+    <div class="highlight"><pre><span></span><code><span class="m">127</span>.0.0.1:6379&gt;<span class="w"> </span>subscribe<span class="w"> </span>channelA<span class="w"> </span>channelB
+Reading<span class="w"> </span>messages...<span class="w"> </span><span class="o">(</span>press<span class="w"> </span>Ctrl-C<span class="w"> </span>to<span class="w"> </span>quit<span class="o">)</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;subscribe&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;channelA&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;subscribe&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;channelB&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div></li>
 <li>发布者们发布消息到指定的频道（以发布者1为例）
-    <code>shell
-    127.0.0.1:6379&gt; publish channelA msg_1
-    (integer) 2
-    127.0.0.1:6379&gt; publish channelB msg_2
-    (integer) 2</code>
+    <div class="highlight"><pre><span></span><code><span class="m">127</span>.0.0.1:6379&gt;<span class="w"> </span>publish<span class="w"> </span>channelA<span class="w"> </span>msg_1
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+<span class="m">127</span>.0.0.1:6379&gt;<span class="w"> </span>publish<span class="w"> </span>channelB<span class="w"> </span>msg_2
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div>
     最终结果
     <img alt="在这里插入图片描述" src="https://i-blog.csdnimg.cn/direct/73d06501108e495ab114a71a1046ac00.png" /></li>
 </ol>
@@ -1723,11 +1721,11 @@ toc3 -.-&gt; sub4
 * 最后一个元素是实际的消息</p>
 <h3 id="33">3.3. 如果同时匹配了多个呢？</h3>
 <p>按照上文说的，一个客户端可以订阅多个模式/频道，那么如果一个频道名称和多个模式/频道匹配呢？
-比如,一个客户端执行了下面的这两个订阅操作：</p>
-<pre><code class="language-shell">SUBSCRIBE foo
-PSUBSCRIBE * f*
-</code></pre>
-<p>这时，如果一条消息发送到通道 foo，客户端将收到三条消息：
+比如,一个客户端执行了下面的这两个订阅操作：
+<div class="highlight"><pre><span></span><code>SUBSCRIBE<span class="w"> </span>foo
+PSUBSCRIBE<span class="w"> </span>*<span class="w"> </span>f*
+</code></pre></div>
+这时，如果一条消息发送到通道 foo，客户端将收到三条消息：
 * 一条message消息
 * 一条匹配了模式<code>*</code>的pmessage消息
 * 一条匹配了模式<code>f*</code>的pmessage消息</p>
@@ -1750,18 +1748,18 @@ PSUBSCRIBE * f*
 <h3 id="52">5.2. 推送消息的格式</h3>
 <p>推送的消息是一个包含三个元素的数组回复（array_reply），其中第一个元素是消息的类型，根据消息类型的不同，后面两个元素代表不同的含义：
 * subscribe：意味着我们成功订阅了回复中第二个元素给出的频道。第三个参数代表我们当前订阅的频道数量。
-    <code>shell
-    # 订阅频道
-    1) "subscribe"
-    2) "quene"
-    3) (integer) 1</code>
+    <div class="highlight"><pre><span></span><code><span class="c1"># 订阅频道</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;subscribe&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;quene&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+</code></pre></div>
 * unsubscribe：意味着我们成功取消了回复中作为第二个元素给出的频道的订阅。第三个参数代表我们当前订阅的频道数量。当最后一个参数为零时，我们不再订阅任何频道，并且客户端可以发出任何类型的 Redis 命令，因为我们处于 Pub/Sub 状态之外。
 * message：一位置我们收到了另一个客户端发出的消息。第二个元素是原始通道的名称，第三个参数是实际的消息负载。
-    <code>shell
-    # 收到消息
-    1) "message"
-    2) "quene"
-    3) "11111"</code></p>
+    <div class="highlight"><pre><span></span><code><span class="c1"># 收到消息</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;message&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;quene&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;11111&quot;</span>
+</code></pre></div></p>
 <h3 id="53">5.3 推送消息的范围</h3>
 <p>Pub/Sub（发布/订阅）与键空间没有关系。它被设计为在任何层面都不会干扰键空间，包括数据库编号。Pub/Sub提供了一种独立于键空间操作的消息传递机制，用于实现消息的发布和订阅，与数据库的操作是独立的。</p>
 <blockquote>

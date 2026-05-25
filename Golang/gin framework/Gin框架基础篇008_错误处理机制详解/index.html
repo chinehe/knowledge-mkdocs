@@ -2026,36 +2026,36 @@
 <h4 id="111-ginerror">1.1.1. gin.Error 类型</h4>
 <p>Gin框架提供了一个内置的<code>gin.Error</code>结构体来处理错误。这个结构体不仅包含错误信息本身，还包含错误类型和元数据，使开发者能够更好地管理错误。</p>
 <p>类型源码：</p>
-<pre><code class="language-go">// gin.Error 定义了一种错误的格式
-type Error struct {
-    Err  error // error
-    Type ErrorType // 错误类型
-    Meta any // 元数据
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// gin.Error 定义了一种错误的格式</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Error</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Err</span><span class="w">  </span><span class="kt">error</span><span class="w"> </span><span class="c1">// error</span>
+<span class="w">    </span><span class="nx">Type</span><span class="w"> </span><span class="nx">ErrorType</span><span class="w"> </span><span class="c1">// 错误类型</span>
+<span class="w">    </span><span class="nx">Meta</span><span class="w"> </span><span class="kt">any</span><span class="w"> </span><span class="c1">// 元数据</span>
+<span class="p">}</span>
 
-// errorMsgs 定义了gin.Error数组类型
-type errorMsgs []*Error
-</code></pre>
+<span class="c1">// errorMsgs 定义了gin.Error数组类型</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">errorMsgs</span><span class="w"> </span><span class="p">[]</span><span class="o">*</span><span class="nx">Error</span>
+</code></pre></div>
 <h4 id="112">1.1.2. 错误类型</h4>
 <p><code>gin.Error</code>中的<code>ErrorType</code>属性用于标识错误的类型。</p>
-<pre><code class="language-go">// ErrorType is an unsigned 64-bit error code as defined in the gin spec.
-type ErrorType uint64
+<div class="highlight"><pre><span></span><code><span class="c1">// ErrorType is an unsigned 64-bit error code as defined in the gin spec.</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ErrorType</span><span class="w"> </span><span class="kt">uint64</span>
 
-const (
-    // ErrorTypeBind is used when Context.Bind() fails.
-    ErrorTypeBind ErrorType = 1 &lt;&lt; 63
-    // ErrorTypeRender is used when Context.Render() fails.
-    ErrorTypeRender ErrorType = 1 &lt;&lt; 62
-    // ErrorTypePrivate indicates a private error.
-    ErrorTypePrivate ErrorType = 1 &lt;&lt; 0
-    // ErrorTypePublic indicates a public error.
-    ErrorTypePublic ErrorType = 1 &lt;&lt; 1
-    // ErrorTypeAny indicates any other error.
-    ErrorTypeAny ErrorType = 1&lt;&lt;64 - 1
-    // ErrorTypeNu indicates any other error.
-    ErrorTypeNu = 2
-)
-</code></pre>
+<span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="c1">// ErrorTypeBind is used when Context.Bind() fails.</span>
+<span class="w">    </span><span class="nx">ErrorTypeBind</span><span class="w"> </span><span class="nx">ErrorType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">63</span>
+<span class="w">    </span><span class="c1">// ErrorTypeRender is used when Context.Render() fails.</span>
+<span class="w">    </span><span class="nx">ErrorTypeRender</span><span class="w"> </span><span class="nx">ErrorType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">62</span>
+<span class="w">    </span><span class="c1">// ErrorTypePrivate indicates a private error.</span>
+<span class="w">    </span><span class="nx">ErrorTypePrivate</span><span class="w"> </span><span class="nx">ErrorType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="c1">// ErrorTypePublic indicates a public error.</span>
+<span class="w">    </span><span class="nx">ErrorTypePublic</span><span class="w"> </span><span class="nx">ErrorType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="c1">// ErrorTypeAny indicates any other error.</span>
+<span class="w">    </span><span class="nx">ErrorTypeAny</span><span class="w"> </span><span class="nx">ErrorType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">64</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="c1">// ErrorTypeNu indicates any other error.</span>
+<span class="w">    </span><span class="nx">ErrorTypeNu</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="p">)</span>
+</code></pre></div>
 <p>gin使用位标志来区分不同类型的错误，通过位运算实现错误类型的组合和判断！</p>
 <p>内置的错误类型：</p>
 <ul>
@@ -2088,292 +2088,290 @@ const (
 </ul>
 <h3 id="12">1.2. 上下文中的错误列表</h3>
 <p>在<code>gin.Context</code>结构体中，包含一个<code>Errors errorMsgs</code>属性，用于保存所有处理器/中间件附加到上下文的错误列表。</p>
-<pre><code class="language-go">type Context struct {
-    ...
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Context</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">...</span>
 
-    // Errors is a list of errors attached to all the handlers/middlewares who used this context.
-    Errors errorMsgs
+<span class="w">    </span><span class="c1">// Errors is a list of errors attached to all the handlers/middlewares who used this context.</span>
+<span class="w">    </span><span class="nx">Errors</span><span class="w"> </span><span class="nx">errorMsgs</span>
 
-    ...
-}
-</code></pre>
+<span class="w">    </span><span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="13">1.3. 向上下文中添加错误</h3>
 <p>在处理请求时，可以使用<code>Context.Error()</code>方法向错误列表中添加错误：</p>
 <p><strong>方法源码</strong>：</p>
-<pre><code class="language-go">// Error 用于往上下文错误列表中添加错误
-func (c *Context) Error(err error) *Error {
-    if err == nil {
-        panic(&quot;err is nil&quot;)
-    }
+<div class="highlight"><pre><span></span><code><span class="c1">// Error 用于往上下文错误列表中添加错误</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="nx">Error</span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">Error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;err is nil&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-  // 判断error是否为gin.Error类型
-    var parsedError *Error
-    ok := errors.As(err, &amp;parsedError)
-    if !ok {
-    // 如果不是就包装成一个gin.Error类型
-        parsedError = &amp;Error{
-            Err:  err,
-            Type: ErrorTypePrivate,
-        }
-    }
+<span class="w">  </span><span class="c1">// 判断error是否为gin.Error类型</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">parsedError</span><span class="w"> </span><span class="o">*</span><span class="nx">Error</span>
+<span class="w">    </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">As</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">parsedError</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 如果不是就包装成一个gin.Error类型</span>
+<span class="w">        </span><span class="nx">parsedError</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Error</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Err</span><span class="p">:</span><span class="w">  </span><span class="nx">err</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="nx">ErrorTypePrivate</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-  // 添加到错误列表
-    c.Errors = append(c.Errors, parsedError)
-    return parsedError
-}
-</code></pre>
+<span class="w">  </span><span class="c1">// 添加到错误列表</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">,</span><span class="w"> </span><span class="nx">parsedError</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">parsedError</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>示例：</strong></p>
-<pre><code class="language-go">func handler(c *gin.Context) {
-    if err := someOperation(); err != nil {
-        c.Error(err)  // 添加错误到错误列表
-        c.JSON(500, gin.H{&quot;error&quot;: err.Error()})
-        return
-    }
-    c.JSON(200, gin.H{&quot;status&quot;: &quot;success&quot;})
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">someOperation</span><span class="p">();</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w">  </span><span class="c1">// 添加错误到错误列表</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">()})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;success&quot;</span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="14">1.4. 获取错误列表</h3>
 <p>通过<code>Context.Errors</code>可以获取当前请求的所有错误：</p>
-<pre><code class="language-go">func handler(c *gin.Context) {
-    // ... 一些操作 ...
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">handler</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ... 一些操作 ...</span>
 
-    if len(c.Errors) &gt; 0 {
-        // 处理错误
-        for _, e := range c.Errors {
-            log.Printf(&quot;Error: %v, Type: %v, Meta: %v&quot;, e.Err, e.Type, e.Meta)
-        }
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 处理错误</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error: %v, Type: %v, Meta: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Err</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Type</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">Meta</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="2">2. 错误处理实践</h2>
 <h3 id="21">2.1. 错误处理中间件</h3>
 <p>为了避免重复编写错误处理代码，我们可以将通用的错误处理逻辑写到中间件中。</p>
 <p><strong>错误处理中间件示例：</strong></p>
-<pre><code class="language-go">
-// ErrorsMiddleware 错误处理中间件
-func ErrorsMiddleware() gin.HandlerFunc {
-    return func(c *gin.Context) {
-        // 先执行后续处理函数
-        c.Next()
+<div class="highlight"><pre><span></span><code><span class="c1">// ErrorsMiddleware 错误处理中间件</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">ErrorsMiddleware</span><span class="p">()</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 先执行后续处理函数</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
 
-        // 错误检查
-        if len(c.Errors) == 0 {
-            return
-        }
+<span class="w">        </span><span class="c1">// 错误检查</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
 
-        // 只处理最后一个错误
-        lastError := c.Errors.Last()
-        switch lastError.Type {
-        case gin.ErrorTypeBind:
-            c.JSON(http.StatusBadRequest, gin.H{
-                &quot;error&quot;:  &quot;Binding Error&quot;,
-                &quot;detail&quot;: lastError.Error(),
-            })
-        case gin.ErrorTypeRender:
-            c.JSON(http.StatusInternalServerError, gin.H{
-                &quot;error&quot;:  &quot;Render Error&quot;,
-                &quot;detail&quot;: lastError.Error(),
-            })
-        default:
-            c.JSON(http.StatusInternalServerError, gin.H{
-                &quot;error&quot;:  &quot;Internal Server Error&quot;,
-                &quot;detail&quot;: lastError.Error(),
-            })
-        }
-    }
-}
-</code></pre>
+<span class="w">        </span><span class="c1">// 只处理最后一个错误</span>
+<span class="w">        </span><span class="nx">lastError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">.</span><span class="nx">Last</span><span class="p">()</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">lastError</span><span class="p">.</span><span class="nx">Type</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">ErrorTypeBind</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusBadRequest</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;Binding Error&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">lastError</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">ErrorTypeRender</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;Render Error&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">lastError</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">        </span><span class="k">default</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w">  </span><span class="s">&quot;Internal Server Error&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">lastError</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>业务逻辑示例：</strong></p>
-<pre><code class="language-go">func TestError(c *gin.Context) {
-    param := new(Param)
-    if err := c.ShouldBind(param); err != nil {
-        _ = c.Error(&amp;gin.Error{
-            Err:  err,
-            Type: gin.ErrorTypeBind,
-        })
-        return
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">TestError</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">param</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">Param</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">ShouldBind</span><span class="p">(</span><span class="nx">param</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Error</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">Err</span><span class="p">:</span><span class="w">  </span><span class="nx">err</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">Type</span><span class="p">:</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">ErrorTypeBind</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    c.JSON(200, gin.H{
-        &quot;name&quot;: param.Name,
-        &quot;age&quot;:  param.Age,
-    })
-}
-</code></pre>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">param</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w">  </span><span class="nx">param</span><span class="p">.</span><span class="nx">Age</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="22">2.2. 自定义错误类型</h3>
 <p>gin框架提供的错误类型并不总能满足我们的业务需求，我们可以定义自己的错误类型和处理逻辑。</p>
 <p>比如我们可以定义如下的一个<strong>错误类型：</strong></p>
-<pre><code class="language-go">// AppError 错误结构体
-type AppError struct {
-    status int    // 状态码
-    Code   int    `json:&quot;code&quot;` // 错误码
-    Msg    string `json:&quot;msg&quot;`  // 错误信息
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// AppError 错误结构体</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">AppError</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">status</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="c1">// 状态码</span>
+<span class="w">    </span><span class="nx">Code</span><span class="w">   </span><span class="kt">int</span><span class="w">    </span><span class="s">`json:&quot;code&quot;`</span><span class="w"> </span><span class="c1">// 错误码</span>
+<span class="w">    </span><span class="nx">Msg</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="s">`json:&quot;msg&quot;`</span><span class="w">  </span><span class="c1">// 错误信息</span>
+<span class="p">}</span>
 
-func (err *AppError) Error() string {
-    return fmt.Sprintf(&quot;status: %d, code: %d, msg: %s&quot;, err.status, err.Code, err.Msg)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="w"> </span><span class="o">*</span><span class="nx">AppError</span><span class="p">)</span><span class="w"> </span><span class="nx">Error</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;status: %d, code: %d, msg: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Code</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Msg</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>错误中间件示例：</strong></p>
-<pre><code class="language-go">
-// ErrorsMiddleware 错误处理中间件
-func ErrorsMiddleware() gin.HandlerFunc {
-    return func(c *gin.Context) {
-        // 先执行后续处理函数
-        c.Next()
+<div class="highlight"><pre><span></span><code><span class="c1">// ErrorsMiddleware 错误处理中间件</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">ErrorsMiddleware</span><span class="p">()</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 先执行后续处理函数</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
 
-        // 错误检查
-        if len(c.Errors) == 0 {
-            return
-        }
+<span class="w">        </span><span class="c1">// 错误检查</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
 
-        // 只处理最后一个错误
-        lastError := c.Errors.Last()
-        var appError *model.AppError
-        if errors.As(lastError.Err, &amp;appError) {
-            c.JSON(appError.Status, gin.H{
-                &quot;code&quot;:    appError.Code,
-                &quot;message&quot;: appError.Msg,
-            })
-        } else {
-            c.JSON(500, gin.H{
-                &quot;code&quot;:    &quot;E0000&quot;,
-                &quot;message&quot;: &quot;Internal System Error&quot;,
-            })
-        }
-    }
-}
-</code></pre>
+<span class="w">        </span><span class="c1">// 只处理最后一个错误</span>
+<span class="w">        </span><span class="nx">lastError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">.</span><span class="nx">Last</span><span class="p">()</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">appError</span><span class="w"> </span><span class="o">*</span><span class="nx">model</span><span class="p">.</span><span class="nx">AppError</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">As</span><span class="p">(</span><span class="nx">lastError</span><span class="p">.</span><span class="nx">Err</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">appError</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="nx">appError</span><span class="p">.</span><span class="nx">Status</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;code&quot;</span><span class="p">:</span><span class="w">    </span><span class="nx">appError</span><span class="p">.</span><span class="nx">Code</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">appError</span><span class="p">.</span><span class="nx">Msg</span><span class="p">,</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;code&quot;</span><span class="p">:</span><span class="w">    </span><span class="s">&quot;E0000&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Internal System Error&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>业务逻辑示例：</strong></p>
-<pre><code class="language-go">func TestError(c *gin.Context) {
-    param := new(Param)
-  // 绑定参数
-    if err := c.ShouldBind(param); err != nil {
-        var validatorErrs validator.ValidationErrors
-        if errors.As(err, &amp;validatorErrs) {
-      // 如果是校验出错，返回V0001
-            _ = c.Error(&amp;model.AppError{
-                Status: 400,
-                Code:   &quot;V0001&quot;,
-                Msg:    validatorErrs.Error(),
-            })
-        } else {
-      // 其他错误返回V0000
-            _ = c.Error(&amp;model.AppError{
-                Status: 400,
-                Code:   &quot;V0000&quot;,
-                Msg:    err.Error(),
-            })
-        }
-        return
-    }
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">TestError</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">param</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">Param</span><span class="p">)</span>
+<span class="w">  </span><span class="c1">// 绑定参数</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">ShouldBind</span><span class="p">(</span><span class="nx">param</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">validatorErrs</span><span class="w"> </span><span class="nx">validator</span><span class="p">.</span><span class="nx">ValidationErrors</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">As</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">validatorErrs</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// 如果是校验出错，返回V0001</span>
+<span class="w">            </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">AppError</span><span class="p">{</span>
+<span class="w">                </span><span class="nx">Status</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">Code</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;V0001&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">Msg</span><span class="p">:</span><span class="w">    </span><span class="nx">validatorErrs</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// 其他错误返回V0000</span>
+<span class="w">            </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">AppError</span><span class="p">{</span>
+<span class="w">                </span><span class="nx">Status</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">Code</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;V0000&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nx">Msg</span><span class="p">:</span><span class="w">    </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    c.JSON(200, gin.H{
-        &quot;name&quot;: param.Name,
-        &quot;age&quot;:  param.Age,
-    })
-}
-</code></pre>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">param</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;age&quot;</span><span class="p">:</span><span class="w">  </span><span class="nx">param</span><span class="p">.</span><span class="nx">Age</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="23">2.3. 自定义错误页面</h3>
 <p>在Web应用中，我们可能需要自定义错误页面。这通常与HTML模板一起使用。</p>
 <p>示例：</p>
-<pre><code class="language-go">func main() {
-    r := gin.Default()
-    r.LoadHTMLGlob(&quot;templates/*&quot;)
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">LoadHTMLGlob</span><span class="p">(</span><span class="s">&quot;templates/*&quot;</span><span class="p">)</span>
 
-    r.Use(func(c *gin.Context) {
-        c.Next()
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
 
-        if len(c.Errors) &gt; 0 {
-            err := c.Errors.Last()
-            c.HTML(500, &quot;error.tmpl&quot;, gin.H{
-                &quot;error&quot;: err.Error(),
-                &quot;status&quot;: 500,
-            })
-        }
-    })
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">.</span><span class="nx">Last</span><span class="p">()</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">HTML</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;error.tmpl&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">                </span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.GET(&quot;/error&quot;, func(c *gin.Context) {
-        c.Error(errors.New(&quot;something went wrong&quot;))
-    })
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/error&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;something went wrong&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.Run()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>对应的模板文件 <a href="file:///Users/administrator/ChineHe/projects/chinehe/knowledge-repository/Golang/Gin%E6%A1%86%E6%9E%B6/templates/error.tmpl">error.tmpl</a>：</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Error&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Error: {{ .status }}&lt;/h1&gt;
-    &lt;p&gt;{{ .error }}&lt;/p&gt;
-    &lt;a href=&quot;/&quot;&gt;Go Home&lt;/a&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Error<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Error: {{ .status }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ .error }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/&quot;</span><span class="p">&gt;</span>Go Home<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
 <h3 id="24">2.4. 日志记录错误</h3>
 <p>错误处理通常与日志记录相结合，以便于调试和监控：</p>
 <p>示例：</p>
-<pre><code class="language-go">import (
-    &quot;log&quot;
-    &quot;time&quot;
-)
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;log&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-func LoggingMiddleware() gin.HandlerFunc {
-    return func(c *gin.Context) {
-        start := time.Now()
+<span class="kd">func</span><span class="w"> </span><span class="nx">LoggingMiddleware</span><span class="p">()</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">start</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">()</span>
 
-        c.Next()
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
 
-        duration := time.Since(start)
+<span class="w">        </span><span class="nx">duration</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Since</span><span class="p">(</span><span class="nx">start</span><span class="p">)</span>
 
-        // 记录错误
-        if len(c.Errors) &gt; 0 {
-            for _, e := range c.Errors {
-                log.Printf(&quot;Error: %s | Status: %d | Method: %s | Path: %s | Duration: %v&quot;,
-                    e.Error(),
-                    c.Writer.Status(),
-                    c.Request.Method,
-                    c.Request.URL.Path,
-                    duration,
-                )
-            }
-        }
-    }
-}
+<span class="w">        </span><span class="c1">// 记录错误</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">e</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Error: %s | Status: %d | Method: %s | Path: %s | Duration: %v&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">e</span><span class="p">.</span><span class="nx">Error</span><span class="p">(),</span>
+<span class="w">                    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Writer</span><span class="p">.</span><span class="nx">Status</span><span class="p">(),</span>
+<span class="w">                    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">Method</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">duration</span><span class="p">,</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    r := gin.New()
-    r.Use(LoggingMiddleware())
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">LoggingMiddleware</span><span class="p">())</span>
 
-    r.GET(&quot;/test&quot;, func(c *gin.Context) {
-        c.Error(errors.New(&quot;test error&quot;))
-        c.JSON(200, gin.H{&quot;message&quot;: &quot;Hello&quot;})
-    })
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/test&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;test error&quot;</span><span class="p">))</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.Run()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="3-panic">3. panic与恢复</h2>
 <h3 id="31-recovery">3.1. 默认 Recovery 中间件</h3>
 <p>Gin框架内置了<code>Recovery()</code>中间件，用于从panic中恢复，防止程序崩溃。</p>
 <p><strong>源码：</strong></p>
-<pre><code class="language-go">func Recovery() HandlerFunc {
-    return RecoveryWithWriter(DefaultErrorWriter)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">Recovery</span><span class="p">()</span><span class="w"> </span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">RecoveryWithWriter</span><span class="p">(</span><span class="nx">DefaultErrorWriter</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>Recovery方法返回一个中间件，它会捕获任意panic。如果有panic，还会应答HTTP Code 500。</p>
 <p><strong>示例：</strong></p>
-<pre><code class="language-go">func main() {
-    r := gin.Default()  // 默认包含 Logger 和 Recovery 中间件
-    r.GET(&quot;/panic&quot;, func(c *gin.Context) {
-        panic(&quot;something went wrong!&quot;)
-    })
-    r.Run()
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span><span class="w">  </span><span class="c1">// 默认包含 Logger 和 Recovery 中间件</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/panic&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;something went wrong!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="32-recovery">3.2. 自定义 Recovery 处理</h3>
 <p>如果需要自定义panic处理逻辑，可以使用如下的几个方法：</p>
 <ul>
@@ -2382,85 +2380,85 @@ func main() {
 <li><code>gin.CustomRecoveryWithWriter</code>：返回Recovery处理中间件，支持自定义输出writer和处理方法。。</li>
 </ul>
 <p><strong>源码：</strong></p>
-<pre><code class="language-go">// 支持自定义处理方法
-func CustomRecovery(handle RecoveryFunc) HandlerFunc {
-    return RecoveryWithWriter(DefaultErrorWriter, handle)
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 支持自定义处理方法</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">CustomRecovery</span><span class="p">(</span><span class="nx">handle</span><span class="w"> </span><span class="nx">RecoveryFunc</span><span class="p">)</span><span class="w"> </span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">RecoveryWithWriter</span><span class="p">(</span><span class="nx">DefaultErrorWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">handle</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 支持自定义输出writer和处理方法,处理方法为可变参数。
-func RecoveryWithWriter(out io.Writer, recovery ...RecoveryFunc) HandlerFunc {
-    if len(recovery) &gt; 0 {
-        return CustomRecoveryWithWriter(out, recovery[0])
-    }
-    return CustomRecoveryWithWriter(out, defaultHandleRecovery)
-}
+<span class="c1">// 支持自定义输出writer和处理方法,处理方法为可变参数。</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">RecoveryWithWriter</span><span class="p">(</span><span class="nx">out</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span><span class="w"> </span><span class="nx">recovery</span><span class="w"> </span><span class="o">...</span><span class="nx">RecoveryFunc</span><span class="p">)</span><span class="w"> </span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">recovery</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">CustomRecoveryWithWriter</span><span class="p">(</span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">recovery</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">CustomRecoveryWithWriter</span><span class="p">(</span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="nx">defaultHandleRecovery</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 支持自定义输出writer和处理方法
-func CustomRecoveryWithWriter(out io.Writer, handle RecoveryFunc) HandlerFunc {
-    var logger *log.Logger
-    if out != nil {
-        logger = log.New(out, &quot;\n\n\x1b[31m&quot;, log.LstdFlags)
-    }
-    return func(c *Context) {
-        defer func() {
-            if err := recover(); err != nil {
-                // Check for a broken connection, as it is not really a
-                // condition that warrants a panic stack trace.
-                var brokenPipe bool
-                if ne, ok := err.(*net.OpError); ok {
-                    var se *os.SyscallError
-                    if errors.As(ne, &amp;se) {
-                        seStr := strings.ToLower(se.Error())
-                        if strings.Contains(seStr, &quot;broken pipe&quot;) ||
-                            strings.Contains(seStr, &quot;connection reset by peer&quot;) {
-                            brokenPipe = true
-                        }
-                    }
-                }
-                if logger != nil {
-                    const stackSkip = 3
-                    if brokenPipe {
-                        logger.Printf(&quot;%s\n%s%s&quot;, err, secureRequestDump(c.Request), reset)
-                    } else if IsDebugging() {
-                        logger.Printf(&quot;[Recovery] %s panic recovered:\n%s\n%s\n%s%s&quot;,
-                            timeFormat(time.Now()), secureRequestDump(c.Request), err, stack(stackSkip), reset)
-                    } else {
-                        logger.Printf(&quot;[Recovery] %s panic recovered:\n%s\n%s%s&quot;,
-                            timeFormat(time.Now()), err, stack(stackSkip), reset)
-                    }
-                }
-                if brokenPipe {
-                    // If the connection is dead, we can't write a status to it.
-                    c.Error(err.(error)) //nolint: errcheck
-                    c.Abort()
-                } else {
-                    handle(c, err)
-                }
-            }
-        }()
-        c.Next()
-    }
-}
-</code></pre>
+<span class="c1">// 支持自定义输出writer和处理方法</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">CustomRecoveryWithWriter</span><span class="p">(</span><span class="nx">out</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span><span class="w"> </span><span class="nx">handle</span><span class="w"> </span><span class="nx">RecoveryFunc</span><span class="p">)</span><span class="w"> </span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">logger</span><span class="w"> </span><span class="o">*</span><span class="nx">log</span><span class="p">.</span><span class="nx">Logger</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">out</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">logger</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">log</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="nx">out</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;\n\n\x1b[31m&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">log</span><span class="p">.</span><span class="nx">LstdFlags</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">recover</span><span class="p">();</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Check for a broken connection, as it is not really a</span>
+<span class="w">                </span><span class="c1">// condition that warrants a panic stack trace.</span>
+<span class="w">                </span><span class="kd">var</span><span class="w"> </span><span class="nx">brokenPipe</span><span class="w"> </span><span class="kt">bool</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="nx">ne</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">err</span><span class="p">.(</span><span class="o">*</span><span class="nx">net</span><span class="p">.</span><span class="nx">OpError</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="kd">var</span><span class="w"> </span><span class="nx">se</span><span class="w"> </span><span class="o">*</span><span class="nx">os</span><span class="p">.</span><span class="nx">SyscallError</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">As</span><span class="p">(</span><span class="nx">ne</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">se</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">seStr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">ToLower</span><span class="p">(</span><span class="nx">se</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Contains</span><span class="p">(</span><span class="nx">seStr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;broken pipe&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span>
+<span class="w">                            </span><span class="nx">strings</span><span class="p">.</span><span class="nx">Contains</span><span class="p">(</span><span class="nx">seStr</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;connection reset by peer&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                            </span><span class="nx">brokenPipe</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="nx">logger</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="kd">const</span><span class="w"> </span><span class="nx">stackSkip</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="nx">brokenPipe</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">logger</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s\n%s%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">secureRequestDump</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">),</span><span class="w"> </span><span class="nx">reset</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">IsDebugging</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">logger</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;[Recovery] %s panic recovered:\n%s\n%s\n%s%s&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nx">timeFormat</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">()),</span><span class="w"> </span><span class="nx">secureRequestDump</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">),</span><span class="w"> </span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">stack</span><span class="p">(</span><span class="nx">stackSkip</span><span class="p">),</span><span class="w"> </span><span class="nx">reset</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                        </span><span class="nx">logger</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;[Recovery] %s panic recovered:\n%s\n%s%s&quot;</span><span class="p">,</span>
+<span class="w">                            </span><span class="nx">timeFormat</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">()),</span><span class="w"> </span><span class="nx">err</span><span class="p">,</span><span class="w"> </span><span class="nx">stack</span><span class="p">(</span><span class="nx">stackSkip</span><span class="p">),</span><span class="w"> </span><span class="nx">reset</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="nx">brokenPipe</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// If the connection is dead, we can&#39;t write a status to it.</span>
+<span class="w">                    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="nx">err</span><span class="p">.(</span><span class="kt">error</span><span class="p">))</span><span class="w"> </span><span class="c1">//nolint: errcheck</span>
+<span class="w">                    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Abort</span><span class="p">()</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">handle</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}()</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>示例：</strong></p>
-<pre><code class="language-go">func main() {
-    r := gin.New()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
 
-    // 自定义 Recovery 处理函数
-    r.Use(gin.RecoveryWithWriter(gin.DefaultErrorWriter, func(c *gin.Context, err interface{}) {
-        // 自定义错误处理逻辑
-        c.JSON(500, gin.H{
-            &quot;error&quot;: &quot;Internal Server Error&quot;,
-            &quot;message&quot;: &quot;Something went wrong!&quot;,
-        })
-    }))
+<span class="w">    </span><span class="c1">// 自定义 Recovery 处理函数</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">RecoveryWithWriter</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">DefaultErrorWriter</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kd">interface</span><span class="p">{})</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 自定义错误处理逻辑</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Internal Server Error&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Something went wrong!&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">}))</span>
 
-    r.GET(&quot;/panic&quot;, func(c *gin.Context) {
-        panic(&quot;something went wrong!&quot;)
-    })
-    r.Run()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/panic&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;something went wrong!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 

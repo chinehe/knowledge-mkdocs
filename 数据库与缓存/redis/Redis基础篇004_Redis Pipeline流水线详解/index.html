@@ -1534,7 +1534,7 @@
 <li>服务器处理客户端发来的命令，然后向客户端返回应答。</li>
 </ol>
 <p>比如现在需要执行四条指令，流程图会是这样：</p>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid"><code>graph LR
     C1[命令1]
     C2[命令2]
     C3[命令3]
@@ -1547,19 +1547,18 @@
     C2 --&gt;|INCR X| S2 --&gt;|2| C2
     C3 --&gt;|INCR X| S3 --&gt;|3| C3
     C4 --&gt;|INCR X| S4 --&gt;|4| C4
-    subgraph &quot;Redis服务器&quot;
+    subgraph "Redis服务器"
     S1
     S2
     S3
     S4
     end
-    subgraph &quot;客户端&quot;
+    subgraph "客户端"
     C1
     C2
     C3
     C4
-    end
-</code></pre>
+    end</code></pre>
 <p>从流程图可以看到，客户端每次发送命令都需要等待服务器响应后才能发送下一个命令，这个过程中的网络往返时间（RTT, Round-Trip Time）。</p>
 <blockquote>
 <p>客户端和服务器通过网络链路连接。这种链路可以非常快（环回接口），也可以非常慢（通过互联网建立，两主机之间有许多跳数的连接）。无论网络延迟如何，数据包从客户端到服务器再从服务器返回到客户端，传递回复都需要时间。</p>
@@ -1576,7 +1575,7 @@
 <p>大多数客户端都支持流水线操作。</p>
 </blockquote>
 <p>使用Pipeline时，上述示例的时序图就变成了这样：</p>
-<pre><code class="language-mermaid">graph TD
+<pre class="mermaid"><code>graph TD
     C[客户端]
     CS1(命令1)
     CS2(命令2)
@@ -1592,7 +1591,7 @@
     C --&gt;|INCR X,INCR X,INCR X,INCR X| CS
     RS --&gt;|1,2,3,4| C
 
-    subgraph &quot;Redis服务器&quot;
+    subgraph "Redis服务器"
      CS --&gt; RS
      subgraph CS [命令队列]
       CS4
@@ -1606,8 +1605,7 @@
       RS3
       RS4
     end
-    end
-</code></pre>
+    end</code></pre>
 <p>Redis服务器接收到Pipeline请求后：</p>
 <ol>
 <li>将所有命令放入一个队列</li>
@@ -1620,76 +1618,73 @@
 <p>当使用Pipeline时，它允许多个命令的读通过一次read()操作，多个命令的应答使用一次write()操作，它允许客户端可以一次发送多条命令，而不等待上一条命令执行的结果。<strong>不仅减少了RTT，同时也减少了IO调用次数（IO调用涉及到用户态到内核态之间的切换），最终提升程序的执行效率与性能。</strong></p>
 <h2 id="3-redis-pipeline">3. Redis Pipeline示例与性能对比</h2>
 <h3 id="31-redis-cli">3.1. redis-cli中使用示例</h3>
-<pre><code class="language-shell">
-## 创建 commands.txt 文件
-SET key1 value1
-GET key2
-INCR counter
-HSET hash1 field1 value1
+<div class="highlight"><pre><span></span><code><span class="c1">## 创建 commands.txt 文件</span>
+SET<span class="w"> </span>key1<span class="w"> </span>value1
+GET<span class="w"> </span>key2
+INCR<span class="w"> </span>counter
+HSET<span class="w"> </span>hash1<span class="w"> </span>field1<span class="w"> </span>value1
 
-## 使用pipeline批量执行
-cat commands.txt | redis-cli --pipe
-</code></pre>
+<span class="c1">## 使用pipeline批量执行</span>
+cat<span class="w"> </span>commands.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>redis-cli<span class="w"> </span>--pipe
+</code></pre></div>
 <h3 id="32-go-redis">3.2. go-redis示例与性能对比</h3>
 <p>为了对比性能，我这里分别用普通模式和pipeline模式来执行1000次命令，比较两者耗时差距。</p>
 <p><strong>普通模式代码：</strong></p>
-<pre><code class="language-go">
-func main() {
-    // 初始化 redis客户端
-    client := redis.NewClient(&amp;redis.Options{
-        Addr:     host + &quot;:&quot; + port,
-        Password: password,
-        DB:       0,
-    })
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 初始化 redis客户端</span>
+<span class="w">    </span><span class="nx">client</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">redis</span><span class="p">.</span><span class="nx">NewClient</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Options</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Addr</span><span class="p">:</span><span class="w">     </span><span class="nx">host</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">port</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Password</span><span class="p">:</span><span class="w"> </span><span class="nx">password</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">DB</span><span class="p">:</span><span class="w">       </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
 
-    // 普通模式执行十万次命令
-    cmd := client.Set(context.Background(), &quot;counter&quot;, 0, 0)
-    if cmd.Err() != nil {
-        log.Fatalf(&quot;set error: %v&quot;, cmd.Err())
-    }
+<span class="w">    </span><span class="c1">// 普通模式执行十万次命令</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;counter&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">cmd</span><span class="p">.</span><span class="nx">Err</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatalf</span><span class="p">(</span><span class="s">&quot;set error: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">cmd</span><span class="p">.</span><span class="nx">Err</span><span class="p">())</span>
+<span class="w">    </span><span class="p">}</span>
 
-    startTime := time.Now()
-    var incrCmd *redis.IntCmd
-    for i := 0; i &lt; 1000; i++ {
-        incrCmd = client.Incr(context.Background(), &quot;counter&quot;)
-        if cmd.Err() != nil {
-            log.Fatalf(&quot;incr error: %v&quot;, cmd.Err())
-        }
-    }
-    log.Printf(&quot;普通模式执行十万次命令耗时: %dms,最终结果：%d&quot;, time.Now().Sub(startTime)/time.Millisecond, incrCmd.Val())
-}
+<span class="w">    </span><span class="nx">startTime</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">incrCmd</span><span class="w"> </span><span class="o">*</span><span class="nx">redis</span><span class="p">.</span><span class="nx">IntCmd</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">incrCmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">Incr</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;counter&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">cmd</span><span class="p">.</span><span class="nx">Err</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatalf</span><span class="p">(</span><span class="s">&quot;incr error: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">cmd</span><span class="p">.</span><span class="nx">Err</span><span class="p">())</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;普通模式执行十万次命令耗时: %dms,最终结果：%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">Sub</span><span class="p">(</span><span class="nx">startTime</span><span class="p">)</span><span class="o">/</span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">,</span><span class="w"> </span><span class="nx">incrCmd</span><span class="p">.</span><span class="nx">Val</span><span class="p">())</span>
+<span class="p">}</span>
 
-// 2026/01/07 09:58:02 普通模式执行十万次命令耗时: 34s,最终结果：1000
-</code></pre>
+<span class="c1">// 2026/01/07 09:58:02 普通模式执行十万次命令耗时: 34s,最终结果：1000</span>
+</code></pre></div>
 <p><strong>Pipeline模式代码：</strong></p>
-<pre><code class="language-go">func main() {
-    // 初始化 redis客户端
-    client := redis.NewClient(&amp;redis.Options{
-        Addr:     host + &quot;:&quot; + port,
-        Password: password,
-        DB:       0,
-    })
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 初始化 redis客户端</span>
+<span class="w">    </span><span class="nx">client</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">redis</span><span class="p">.</span><span class="nx">NewClient</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Options</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Addr</span><span class="p">:</span><span class="w">     </span><span class="nx">host</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">port</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">Password</span><span class="p">:</span><span class="w"> </span><span class="nx">password</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">DB</span><span class="p">:</span><span class="w">       </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
 
-    // 普通模式执行十万次命令
-    cmd := client.Set(context.Background(), &quot;counter&quot;, 0, 0)
-    if cmd.Err() != nil {
-        log.Fatalf(&quot;set error: %v&quot;, cmd.Err())
-    }
+<span class="w">    </span><span class="c1">// 普通模式执行十万次命令</span>
+<span class="w">    </span><span class="nx">cmd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;counter&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">cmd</span><span class="p">.</span><span class="nx">Err</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatalf</span><span class="p">(</span><span class="s">&quot;set error: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">cmd</span><span class="p">.</span><span class="nx">Err</span><span class="p">())</span>
+<span class="w">    </span><span class="p">}</span>
 
-    startTime := time.Now()
-    pipeline := client.Pipeline()
-    for i := 0; i &lt; 1000; i++ {
-        pipeline.Incr(context.Background(), &quot;counter&quot;)
-    }
-    cmders, err := pipeline.Exec(context.Background())
-    if err != nil {
-        log.Fatalf(&quot;pipeline error: %v&quot;, err)
-    }
-    val := cmders[len(cmders)-1].(*redis.IntCmd).Val()
-    log.Printf(&quot;普通模式执行十万次命令耗时: %dms,最终结果：%d&quot;, time.Now().Sub(startTime)/time.Millisecond, val)
-}
-
-</code></pre>
+<span class="w">    </span><span class="nx">startTime</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">pipeline</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">Pipeline</span><span class="p">()</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">pipeline</span><span class="p">.</span><span class="nx">Incr</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;counter&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">cmders</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">pipeline</span><span class="p">.</span><span class="nx">Exec</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">())</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatalf</span><span class="p">(</span><span class="s">&quot;pipeline error: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">val</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">cmders</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">cmders</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">].(</span><span class="o">*</span><span class="nx">redis</span><span class="p">.</span><span class="nx">IntCmd</span><span class="p">).</span><span class="nx">Val</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;普通模式执行十万次命令耗时: %dms,最终结果：%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">Sub</span><span class="p">(</span><span class="nx">startTime</span><span class="p">)</span><span class="o">/</span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>性能对比：</strong></p>
 <table>
 <thead>
@@ -1746,24 +1741,24 @@ func main() {
 <h2 id="4">4. 注意事项</h2>
 <h3 id="41">4.1. 原子性限制</h3>
 <p>Pipeline模式只是将客户端发送命令的方式改为发送批量命令，而服务端在处理批量命令的数据流时，仍然是解析出多个单命令并按顺序执行，各个命令相互独立，即服务端仍有可能在该过程中执行其他客户端的命令。如需保证原子性，请使用事务或Lua脚本。</p>
-<pre><code class="language-python">## 这不是原子操作
-pipe = r.pipeline()
-pipe.incr('counter')
-pipe.expire('counter', 100)
-pipe.execute()  # 在这两个命令执行之间，其他客户端可能修改counter
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">## 这不是原子操作</span>
+<span class="n">pipe</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">pipeline</span><span class="p">()</span>
+<span class="n">pipe</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="s1">&#39;counter&#39;</span><span class="p">)</span>
+<span class="n">pipe</span><span class="o">.</span><span class="n">expire</span><span class="p">(</span><span class="s1">&#39;counter&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">pipe</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>  <span class="c1"># 在这两个命令执行之间，其他客户端可能修改counter</span>
+</code></pre></div>
 <p>如果需要原子性操作，应使用MULTI/EXEC事务或Lua脚本。</p>
 <h3 id="42">4.2. 内存使用考虑</h3>
 <p>使用Pipeline处理命令时，客户端会将应答暂时存放在队列里，这会消耗一定的内存。所以如果需要发送大批量的流水线命令，最好分批发送，每个批次包含合理的数量（比如10000个命令）。等收到回复后，在发送后续的一万个命令，以此类推。这样速度几乎相同，但额外使用的内存最多是暂存这一万条命令的响应所需要的内存。</p>
-<pre><code class="language-python">def batch_pipeline_example(r, data_list, batch_size=1000):
-    &quot;&quot;&quot;分批处理Pipeline示例&quot;&quot;&quot;
-    for i in range(0, len(data_list), batch_size):
-        batch = data_list[i:i+batch_size]
-        pipe = r.pipeline()
-        for item in batch:
-            pipe.set(item['key'], item['value'])
-        pipe.execute()
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">batch_pipeline_example</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">data_list</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;分批处理Pipeline示例&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_list</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">batch</span> <span class="o">=</span> <span class="n">data_list</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">batch_size</span><span class="p">]</span>
+        <span class="n">pipe</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">pipeline</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
+            <span class="n">pipe</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;key&#39;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+        <span class="n">pipe</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</code></pre></div>
 <h3 id="43">4.3. 错误处理</h3>
 <p>Pipeline没有事务的特性，若Pipeline执行过程中发生错误，不支持回滚。如果待执行命令的前后存在依赖关系，请勿使用Pipeline。</p>
 <p><strong>说明</strong></p>

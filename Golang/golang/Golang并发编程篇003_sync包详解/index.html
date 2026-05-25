@@ -3586,75 +3586,82 @@
 <ul>
 <li>SwapT：存储新值并返回旧值</li>
 </ul>
-<p><code>go
-  // 类似于
-  old = *addr
-  *addr = new
-  return old</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 类似于</span>
+<span class="nx">old</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">*</span><span class="nx">addr</span>
+<span class="o">*</span><span class="nx">addr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">new</span>
+<span class="k">return</span><span class="w"> </span><span class="nx">old</span>
+</code></pre></div>
 <ul>
 <li>CompareAndSwapT：比较并交换</li>
 </ul>
-<p><code>go
-  // 类似于
-  if *addr == old {
-    *addr = new
-    return true
-  }
-  return false</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 类似于</span>
+<span class="k">if</span><span class="w"> </span><span class="o">*</span><span class="nx">addr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">old</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">*</span><span class="nx">addr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">new</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+<span class="k">return</span><span class="w"> </span><span class="kc">false</span>
+</code></pre></div>
 <ul>
 <li>AddT：加</li>
 </ul>
-<p><code>go
-  // 类似于
-  *addr += delta
-  return *addr</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 类似于</span>
+<span class="o">*</span><span class="nx">addr</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">delta</span>
+<span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="nx">addr</span>
+</code></pre></div>
 <ul>
 <li>
 <p>LoadT：加载
-  <code>go
-  // 类似于
-  return *addr</code></p>
+  <div class="highlight"><pre><span></span><code><span class="c1">// 类似于</span>
+<span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="nx">addr</span>
+</code></pre></div></p>
 </li>
 <li>
 <p>StoreT：存储
-  <code>go
-  // 类似于
-  *addr = val</code></p>
+  <div class="highlight"><pre><span></span><code><span class="c1">// 类似于</span>
+<span class="o">*</span><span class="nx">addr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">val</span>
+</code></pre></div></p>
 </li>
 </ul>
 <p>Go提供了两种方式来调用上述的原子操作：</p>
 <ul>
 <li>直接使用atomic原子操作方法。</li>
 </ul>
-<p>```go
-  // 示例
-  intVal := new(int32)
-  fmt.Println(atomic.LoadInt32(intVal)) // 0</p>
-<p>atomic.StoreInt32(intVal, 10)
-  fmt.Println(atomic.LoadInt32(intVal)) // 10</p>
-<p>fmt.Println(atomic.SwapInt32(intVal, 20)) // 10
-  fmt.Println(atomic.LoadInt32(intVal)) // 20</p>
-<p>fmt.Println(atomic.CompareAndSwapInt32(intVal, 20, 30)) // true
-  fmt.Println(atomic.LoadInt32(intVal)) // 30</p>
-<p>fmt.Println(atomic.AddInt32(intVal, 10)) // 40 
-  fmt.Println(atomic.LoadInt32(intVal)) // 40
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 示例</span>
+<span class="nx">intVal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="kt">int32</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">atomic</span><span class="p">.</span><span class="nx">LoadInt32</span><span class="p">(</span><span class="nx">intVal</span><span class="p">))</span><span class="w"> </span><span class="c1">// 0</span>
+
+<span class="nx">atomic</span><span class="p">.</span><span class="nx">StoreInt32</span><span class="p">(</span><span class="nx">intVal</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">atomic</span><span class="p">.</span><span class="nx">LoadInt32</span><span class="p">(</span><span class="nx">intVal</span><span class="p">))</span><span class="w"> </span><span class="c1">// 10</span>
+
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">atomic</span><span class="p">.</span><span class="nx">SwapInt32</span><span class="p">(</span><span class="nx">intVal</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">))</span><span class="w"> </span><span class="c1">// 10</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">atomic</span><span class="p">.</span><span class="nx">LoadInt32</span><span class="p">(</span><span class="nx">intVal</span><span class="p">))</span><span class="w"> </span><span class="c1">// 20</span>
+
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">atomic</span><span class="p">.</span><span class="nx">CompareAndSwapInt32</span><span class="p">(</span><span class="nx">intVal</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">))</span><span class="w"> </span><span class="c1">// true</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">atomic</span><span class="p">.</span><span class="nx">LoadInt32</span><span class="p">(</span><span class="nx">intVal</span><span class="p">))</span><span class="w"> </span><span class="c1">// 30</span>
+
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">atomic</span><span class="p">.</span><span class="nx">AddInt32</span><span class="p">(</span><span class="nx">intVal</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">))</span><span class="w"> </span><span class="c1">// 40 </span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">atomic</span><span class="p">.</span><span class="nx">LoadInt32</span><span class="p">(</span><span class="nx">intVal</span><span class="p">))</span><span class="w"> </span><span class="c1">// 40</span>
+</code></pre></div>
 <ul>
 <li>使用atomic原子类的方法。</li>
 </ul>
-<p>```go
-  // 示例
-  intVal := atomic.Int32{}</p>
-<p>fmt.Println(intVal.Load()) // 0</p>
-<p>intVal.Store(10)
-  fmt.Println(intVal.Load()) // 10</p>
-<p>fmt.Println(intVal.Swap(20)) // 10
-  fmt.Println(intVal.Load()) // 20</p>
-<p>fmt.Println(intVal.CompareAndSwap(20, 30)) // true
-  fmt.Println(intVal.Load()) // 30</p>
-<p>fmt.Println(intVal.Add(10)) // 40
-  fmt.Println(intVal.Load()) // 40
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 示例</span>
+<span class="nx">intVal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">Int32</span><span class="p">{}</span>
+
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">intVal</span><span class="p">.</span><span class="nx">Load</span><span class="p">())</span><span class="w"> </span><span class="c1">// 0</span>
+
+<span class="nx">intVal</span><span class="p">.</span><span class="nx">Store</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">intVal</span><span class="p">.</span><span class="nx">Load</span><span class="p">())</span><span class="w"> </span><span class="c1">// 10</span>
+
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">intVal</span><span class="p">.</span><span class="nx">Swap</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span><span class="w"> </span><span class="c1">// 10</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">intVal</span><span class="p">.</span><span class="nx">Load</span><span class="p">())</span><span class="w"> </span><span class="c1">// 20</span>
+
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">intVal</span><span class="p">.</span><span class="nx">CompareAndSwap</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">))</span><span class="w"> </span><span class="c1">// true</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">intVal</span><span class="p">.</span><span class="nx">Load</span><span class="p">())</span><span class="w"> </span><span class="c1">// 30</span>
+
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">intVal</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span><span class="w"> </span><span class="c1">// 40</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">intVal</span><span class="p">.</span><span class="nx">Load</span><span class="p">())</span><span class="w"> </span><span class="c1">// 40</span>
+</code></pre></div>
 <h3 id="13">1.3. 支持的类型</h3>
 <p><strong>原子操作方法支持的类型：</strong></p>
 <ul>
@@ -3716,87 +3723,86 @@
 </ul>
 <h3 id="14">1.4. 使用示例</h3>
 <p>int示例：</p>
-<pre><code class="language-go">var a int
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span>
 
-func add() {
-    a = a + 1
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">add</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">a</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
 
-func main() {
-    for i := 0; i &lt; 500; i++ {
-        go func() {
-            add()
-        }()
-    }
-    time.Sleep(time.Second)
-    println(a)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">add</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 输出
-// 每次输出不一样，非并发安全
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="c1">// 每次输出不一样，非并发安全</span>
+</code></pre></div>
 <p>atomic.Int32示例：</p>
-<pre><code class="language-go">
-var a atomic.Int32
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">Int32</span>
 
-func add() {
-    a.Add(1)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">add</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">a</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    for i := 0; i &lt; 500; i++ {
-        go func() {
-            add()
-        }()
-    }
-    time.Sleep(time.Second)
-    println(a.Load())
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">add</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">println</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">Load</span><span class="p">())</span>
+<span class="p">}</span>
 
-// 输出
-// 每次输出都为500，并发安全
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="c1">// 每次输出都为500，并发安全</span>
+</code></pre></div>
 <h2 id="2-cond">2. Cond 条件变量</h2>
 <h3 id="21-cond">2.1. 关于Cond</h3>
-<p>Cond实现类一个条件变量，用于gorountines等待或者通知事件发生的集合点。</p>
-<pre><code class="language-go">type Cond struct {
-    noCopy noCopy // 标识不能被复制
+<p>Cond实现类一个条件变量，用于gorountines等待或者通知事件发生的集合点。
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Cond</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">noCopy</span><span class="w"> </span><span class="nx">noCopy</span><span class="w"> </span><span class="c1">// 标识不能被复制</span>
 
-    // L is held while observing or changing the condition
-    L Locker // 每个Cond都有一个关联的Locker L（通常是Mutex或RWMutex），在改变条件和调用Wait方法时必须保持它。
+<span class="w">    </span><span class="c1">// L is held while observing or changing the condition</span>
+<span class="w">    </span><span class="nx">L</span><span class="w"> </span><span class="nx">Locker</span><span class="w"> </span><span class="c1">// 每个Cond都有一个关联的Locker L（通常是Mutex或RWMutex），在改变条件和调用Wait方法时必须保持它。</span>
 
-    notify  notifyList // 通知列表
-    checker copyChecker //复制检查器
-}
-</code></pre>
+<span class="w">    </span><span class="nx">notify</span><span class="w">  </span><span class="nx">notifyList</span><span class="w"> </span><span class="c1">// 通知列表</span>
+<span class="w">    </span><span class="nx">checker</span><span class="w"> </span><span class="nx">copyChecker</span><span class="w"> </span><span class="c1">//复制检查器</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h3 id="22">2.2. 结构体方法</h3>
 <h4 id="221-newcond">2.2.1. NewCond构造函数</h4>
-<p>用于构造一个Cond结构体对象，无需多言~</p>
-<pre><code class="language-go">// NewCond returns a new Cond with Locker l.
-func NewCond(l Locker) *Cond {
-    return &amp;Cond{L: l}
-}
-</code></pre>
+<p>用于构造一个Cond结构体对象，无需多言~
+<div class="highlight"><pre><span></span><code><span class="c1">// NewCond returns a new Cond with Locker l.</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewCond</span><span class="p">(</span><span class="nx">l</span><span class="w"> </span><span class="nx">Locker</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">Cond</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Cond</span><span class="p">{</span><span class="nx">L</span><span class="p">:</span><span class="w"> </span><span class="nx">l</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="222-wait">2.2.2. Wait等待</h4>
 <p>Wait方法会以原子地方式解锁<code>c.L</code>并暂停调用者goroutine的执行（进入等待状态）；当后续恢复执行时，Wait方法会在返回前锁住<code>c.L</code>。
-* 除非被Signal或Broadcast方法唤醒，否则等待的方法不会恢复执行。</p>
-<pre><code class="language-go">func (c *Cond) Wait() {
-    c.checker.check() // 检查Cond是否被复制
-    t := runtime_notifyListAdd(&amp;c.notify) // 添加通知对象
-    c.L.Unlock() // 解锁
-    runtime_notifyListWait(&amp;c.notify, t)
-    c.L.Lock() // 加锁
-}
-</code></pre>
-<p>需要特别注意的是：由于等待时，c.L是没有上锁的，通常情况下，调用者不能假定当Wait方法返回时，等待的条件是满足的，因此调用者应该在循环中等待。</p>
-<pre><code class="language-go">c.L.Lock()
-for !condition() {
-        c.Wait()
-}
-... make use of condition ...
-c.L.Unlock()
-</code></pre>
-<p>如果在调用 sync.Cond 类型的 Wait 方法时不在循环中检查条件，可能会导致一些问题，主要是因为条件变量的特性和工作原理：在调用 Wait 方法时，条件变量会释放关联的互斥锁，并阻塞当前协程，直到另一个协程调用 Signal 或 Broadcast 方法来通知条件变量。在通知后，等待的协程会被唤醒，并尝试重新获取互斥锁。如果不在循环中检查条件，等待的协程可能会在条件不满足的情况下被唤醒，然后继续执行后续逻辑，这可能导致程序行为不符合预期。可能出现的问题：</p>
+* 除非被Signal或Broadcast方法唤醒，否则等待的方法不会恢复执行。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Cond</span><span class="p">)</span><span class="w"> </span><span class="nx">Wait</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">checker</span><span class="p">.</span><span class="nx">check</span><span class="p">()</span><span class="w"> </span><span class="c1">// 检查Cond是否被复制</span>
+<span class="w">    </span><span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">runtime_notifyListAdd</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">c</span><span class="p">.</span><span class="nx">notify</span><span class="p">)</span><span class="w"> </span><span class="c1">// 添加通知对象</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">L</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span><span class="w"> </span><span class="c1">// 解锁</span>
+<span class="w">    </span><span class="nx">runtime_notifyListWait</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">c</span><span class="p">.</span><span class="nx">notify</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">L</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span><span class="w"> </span><span class="c1">// 加锁</span>
+<span class="p">}</span>
+</code></pre></div>
+需要特别注意的是：由于等待时，c.L是没有上锁的，通常情况下，调用者不能假定当Wait方法返回时，等待的条件是满足的，因此调用者应该在循环中等待。
+<div class="highlight"><pre><span></span><code><span class="nx">c</span><span class="p">.</span><span class="nx">L</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="k">for</span><span class="w"> </span><span class="p">!</span><span class="nx">condition</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="o">...</span><span class="w"> </span><span class="nx">make</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">condition</span><span class="w"> </span><span class="o">...</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">L</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
+</code></pre></div>
+如果在调用 sync.Cond 类型的 Wait 方法时不在循环中检查条件，可能会导致一些问题，主要是因为条件变量的特性和工作原理：在调用 Wait 方法时，条件变量会释放关联的互斥锁，并阻塞当前协程，直到另一个协程调用 Signal 或 Broadcast 方法来通知条件变量。在通知后，等待的协程会被唤醒，并尝试重新获取互斥锁。如果不在循环中检查条件，等待的协程可能会在条件不满足的情况下被唤醒，然后继续执行后续逻辑，这可能导致程序行为不符合预期。可能出现的问题：</p>
 <ul>
 <li>
 <p>竞态条件：如果在等待协程被唤醒后不再检查条件就继续执行后续逻辑，可能会导致竞态条件的发生，从而导致程序出现不确定的行为。</p>
@@ -3811,12 +3817,12 @@ c.L.Unlock()
 <p>因此，为了避免这些问题，通常建议在调用 sync.Cond 类型的 Wait 方法时使用循环来检查条件。这样可以确保条件满足时才继续执行后续逻辑，避免竞态条件和不确定行为的发生。</p>
 <h4 id="223-signal">2.2.3. Signal通知</h4>
 <p>Signal方法会唤醒一个等待的goroutine（如果有的话）。
-* 在调用Signal方法时，允许调用者持有c.L锁，但不是必须持有。</p>
-<pre><code class="language-go">func (c *Cond) Signal() {
-    c.checker.check()
-    runtime_notifyListNotifyOne(&amp;c.notify)
-}
-</code></pre>
+* 在调用Signal方法时，允许调用者持有c.L锁，但不是必须持有。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Cond</span><span class="p">)</span><span class="w"> </span><span class="nx">Signal</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">checker</span><span class="p">.</span><span class="nx">check</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">runtime_notifyListNotifyOne</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">c</span><span class="p">.</span><span class="nx">notify</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <blockquote>
 <p>在 Go 语言中，sync.Cond 类型的 Signal 方法会唤醒一个等待在条件变量上的 goroutine，但它并不会影响 goroutine 的调度优先级。这意味着使用 Signal 方法唤醒的 goroutine 和其他正常运行的 goroutine 之间不会有优先级上的差别。
 此外，当调用 Signal 方法唤醒一个 goroutine 时，并不保证该 goroutine 会立即获取到条件变量关联的互斥锁。其他 goroutine 可能在此时尝试锁定互斥锁，并且它们可能会在被唤醒的 goroutine 之前获取到锁。因此，被唤醒的 goroutine 可能需要等待其他 goroutine 释放锁之后才能继续执行。
@@ -3825,86 +3831,85 @@ c.L.Unlock()
 </blockquote>
 <h4 id="224-broadcast">2.2.4. Broadcast广播</h4>
 <p>Broadcast会唤醒所有在 c 上等待的 goroutine。
-* 允许但不要求调用者在调用过程中持有 c.L。</p>
-<pre><code class="language-go">func (c *Cond) Broadcast() {
-    c.checker.check()
-    runtime_notifyListNotifyAll(&amp;c.notify)
-}
-</code></pre>
+* 允许但不要求调用者在调用过程中持有 c.L。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">Cond</span><span class="p">)</span><span class="w"> </span><span class="nx">Broadcast</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">checker</span><span class="p">.</span><span class="nx">check</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">runtime_notifyListNotifyAll</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">c</span><span class="p">.</span><span class="nx">notify</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h3 id="23">2.3. 示例</h3>
 <h4 id="231-">2.3.1. 实现生产者-消费者模式</h4>
-<p>可以用Cond来实现生产者、消费者模式。（实际不会这么写，此处只是为了演示Cond的用法）</p>
-<pre><code class="language-go">var (
-    mux   = sync.Mutex{} // 互斥锁
-    cond  = sync.NewCond(&amp;mux) // 条件变量
-    queue []int // 消息队列
-)
+<p>可以用Cond来实现生产者、消费者模式。（实际不会这么写，此处只是为了演示Cond的用法）
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">mux</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span><span class="p">{}</span><span class="w"> </span><span class="c1">// 互斥锁</span>
+<span class="w">    </span><span class="nx">cond</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">NewCond</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">mux</span><span class="p">)</span><span class="w"> </span><span class="c1">// 条件变量</span>
+<span class="w">    </span><span class="nx">queue</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="w"> </span><span class="c1">// 消息队列</span>
+<span class="p">)</span>
 
-// producer 生产者
-func producer(count int) {
-    for i := 0; i &lt; count; i++ {
-        mux.Lock() // 获取锁
-        queue = append(queue, i+1) // 生产消息
-        fmt.Printf(&quot;produce %d.\n&quot;, i+1)
-        cond.Signal() // 通知消费者
-        mux.Unlock() // 解锁
-    }
-}
+<span class="c1">// producer 生产者</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">producer</span><span class="p">(</span><span class="nx">count</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">count</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">mux</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span><span class="w"> </span><span class="c1">// 获取锁</span>
+<span class="w">        </span><span class="nx">queue</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">queue</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// 生产消息</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;produce %d.\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">cond</span><span class="p">.</span><span class="nx">Signal</span><span class="p">()</span><span class="w"> </span><span class="c1">// 通知消费者</span>
+<span class="w">        </span><span class="nx">mux</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span><span class="w"> </span><span class="c1">// 解锁</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-// consumer 消费者
-func consumer() {
-    for {
-        mux.Lock() // 获取锁
-        for len(queue) == 0 { 
-            cond.Wait() // 如果没有消息就等待
-        }
-        fmt.Printf(&quot;consume %d.\n&quot;, queue[0])
-        queue = queue[1:]
-        mux.Unlock() // 解锁
-    }
-}
+<span class="c1">// consumer 消费者</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">consumer</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">mux</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span><span class="w"> </span><span class="c1">// 获取锁</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">queue</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">            </span><span class="nx">cond</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span><span class="w"> </span><span class="c1">// 如果没有消息就等待</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;consume %d.\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">queue</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="w">        </span><span class="nx">queue</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">queue</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="w">        </span><span class="nx">mux</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span><span class="w"> </span><span class="c1">// 解锁</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    go producer(10)
-    go consumer()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">producer</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">consumer</span><span class="p">()</span>
 
-    time.Sleep(time.Second)
-}
-
-</code></pre>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="232">2.3.2. 多协程等待任务完成</h4>
-<p>可以使用 sync.Cond 让多个协程等待某个任务的完成。任务完成后通过 Broadcast 方法通知所有等待的协程。</p>
-<pre><code class="language-go">var (
-    mu    sync.Mutex
-    cond  = sync.NewCond(&amp;mu)
-    done  bool
-)
+<p>可以使用 sync.Cond 让多个协程等待某个任务的完成。任务完成后通过 Broadcast 方法通知所有等待的协程。
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">mu</span><span class="w">    </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
+<span class="w">    </span><span class="nx">cond</span><span class="w">  </span><span class="p">=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">NewCond</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">mu</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">done</span><span class="w">  </span><span class="kt">bool</span>
+<span class="p">)</span>
 
-func worker(id int) {
-    mu.Lock()
-    for !done {
-        cond.Wait()
-    }
-    fmt.Println(&quot;Worker&quot;, id, &quot;completed&quot;)
-    mu.Unlock()
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">worker</span><span class="p">(</span><span class="nx">id</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">mu</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">!</span><span class="nx">done</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">cond</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Worker&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;completed&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">mu</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
+<span class="p">}</span>
 
-func main() {
-    for i := 0; i &lt; 5; i++ {
-        go worker(i)
-    }
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">worker</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 模拟任务完成
-    mu.Lock()
-    done = true
-    cond.Broadcast()
-    mu.Unlock()
+<span class="w">    </span><span class="c1">// 模拟任务完成</span>
+<span class="w">    </span><span class="nx">mu</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">done</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="nx">cond</span><span class="p">.</span><span class="nx">Broadcast</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">mu</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
 
-    // 主程序等待一段时间，让协程完成输出
-    // 这里只是为了示例，实际情况可能需要更复杂的逻辑
-    select {}
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 主程序等待一段时间，让协程完成输出</span>
+<span class="w">    </span><span class="c1">// 这里只是为了示例，实际情况可能需要更复杂的逻辑</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h2 id="3-map-map">3. Map 并发安全的map</h2>
 <h3 id="31-syncmap">3.1. 关于sync.Map</h3>
 <p><code>sync.Map</code>就像普通的<code>map[any]any</code>，但是他是并发安全的。另外，加载、存储和删除操作都具有常数时间复杂度。</p>
@@ -3958,233 +3963,233 @@ func main() {
 </ul>
 <h3 id="33">3.3. 初始化</h3>
 <p><code>sync.Map</code>类型的零值是一个可以直接使用的空map，首次使用后就禁止被复制。</p>
-<pre><code class="language-go">var syncMap sync.Map
-syncMap.Store(&quot;key&quot;, &quot;value&quot;)
-fmt.Println(syncMap.Load(&quot;key&quot;))
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">syncMap</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span>
+<span class="nx">syncMap</span><span class="p">.</span><span class="nx">Store</span><span class="p">(</span><span class="s">&quot;key&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;value&quot;</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">syncMap</span><span class="p">.</span><span class="nx">Load</span><span class="p">(</span><span class="s">&quot;key&quot;</span><span class="p">))</span>
 
-// 输出
-value true
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="nx">value</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div>
 <h3 id="34">3.4. 结构体方法</h3>
 <h4 id="341-load">3.4.1. Load</h4>
 <p>Load方法返回存储在Map中的指定Key的值。
 * 如果Key在Map中不存在，返回nil
-* 第二个返回值ok，用于指定Map是否存储了该Key</p>
-<pre><code class="language-go">func (m *Map) Load(key any) (value any, ok bool) {
-...
-}
-</code></pre>
+* 第二个返回值ok，用于指定Map是否存储了该Key
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Map</span><span class="p">)</span><span class="w"> </span><span class="nx">Load</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="342-store">3.4.2. Store</h4>
 <p>Store方法项map中设置指定的键值对
-* 实际调用的时Swap方法</p>
-<pre><code class="language-go">func (m *Map) Store(key, value any) {
-    _, _ = m.Swap(key, value)
-}
-</code></pre>
+* 实际调用的时Swap方法
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Map</span><span class="p">)</span><span class="w"> </span><span class="nx">Store</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Swap</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="343-loadorstore">3.4.3. LoadOrStore</h4>
 <p>LoadOrStore方法用于检查指定Key是否存在并返回Key对应的值。
 * 如果指定Key在Map中存在，就返回原来的值。
 * 如果指定Key在Map中不存在，就将传入的键值对保存到Map中，并返回传入的值。
-* 第二个返回值用于标识原来是否有值（即是否load了原来的值）</p>
-<pre><code class="language-go">func (m *Map) LoadOrStore(key, value any) (actual any, loaded bool) {
-...
-}
-</code></pre>
+* 第二个返回值用于标识原来是否有值（即是否load了原来的值）
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Map</span><span class="p">)</span><span class="w"> </span><span class="nx">LoadOrStore</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">actual</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">loaded</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="344-loadanddelete">3.4.4. LoadAndDelete</h4>
 <p>LoadAndDelete方法用于加载并删除指定的Key。
 * 如果Key在Map中存在，就返回原来的值，并将该键值对从Map中删除。
 * 如果Key在Map中不存在，就返回nil。
-* 第二个返回值用于标识原来是否有值。</p>
-<pre><code class="language-go">func (m *Map) LoadAndDelete(key any) (value any, loaded bool) {
-...
-}
-</code></pre>
+* 第二个返回值用于标识原来是否有值。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Map</span><span class="p">)</span><span class="w"> </span><span class="nx">LoadAndDelete</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">loaded</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="345-delete">3.4.5. Delete</h4>
 <p>删除Map中指定的Key。
-* 实际上调用的是LoadAndDelete方法。</p>
-<pre><code class="language-go">func (m *Map) Delete(key any) {
-    m.LoadAndDelete(key)
-}
-</code></pre>
+* 实际上调用的是LoadAndDelete方法。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Map</span><span class="p">)</span><span class="w"> </span><span class="nx">Delete</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">LoadAndDelete</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="346-swap">3.4.6. Swap</h4>
 <p>Swap方法将指定的键值对存储到Map中，并返回原先存储的值。
 * 如果原先无值，就返回nil。
-* 第二个返回值用于标识原先是否有值。</p>
-<pre><code class="language-go">func (m *Map) Swap(key, value any) (previous any, loaded bool) {
-...
-}
-</code></pre>
+* 第二个返回值用于标识原先是否有值。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Map</span><span class="p">)</span><span class="w"> </span><span class="nx">Swap</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">previous</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">loaded</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="347-compareandswap">3.4.7. CompareAndSwap</h4>
 <p>CompareAndSwap方法比较Map中指定Key的值是否等于old，如果等于old就设置新的值。
 * old的值必须是可比较的类型。
-* 返回值用于标识是否执行了Swap。</p>
-<pre><code class="language-go">func (m *Map) CompareAndSwap(key, old, new any) bool {
-...
-}
-</code></pre>
+* 返回值用于标识是否执行了Swap。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Map</span><span class="p">)</span><span class="w"> </span><span class="nx">CompareAndSwap</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">old</span><span class="p">,</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="348-compareanddelete">3.4.8. CompareAndDelete</h4>
 <p>CompareAndDelete方法比较Map中指定Key的值是否等于old，如果等于old就删除指定的键值对。
 * old必须是可以比较的类型。
 * 返回值用于标识是否执行了删除操作。
-* 如果当前Map中没有指定的Key，返回始终返回false，即使传入的old为nil。</p>
-<pre><code class="language-go">func (m *Map) CompareAndDelete(key, old any) (deleted bool) {
-...
-}
-</code></pre>
+* 如果当前Map中没有指定的Key，返回始终返回false，即使传入的old为nil。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Map</span><span class="p">)</span><span class="w"> </span><span class="nx">CompareAndDelete</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">old</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">deleted</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="349-range">3.4.9. Range</h4>
 <p>Range 为映射中存在的每个键和值依次调用 f 。如果 f 返回 false，则 range 停止迭代。</p>
 <blockquote>
-<p>Range 不一定对应于 Map 内容的任何一致快照：不会多次访问任何键，但如果同时存储或删除任何键的值（包括通过 f），Range 可能会反映该键的任何映射Range 调用期间的任意点。 Range 不会阻塞接收器上的其他方法；甚至 f 本身也可以调用 m 上的任何方法。</p>
+<p>Range 不一定对应于 Map 内容的任何一致快照：不会多次访问任何键，但如果同时存储或删除任何键的值（包括通过 f），Range 可能会反映该键的任何映射Range 调用期间的任意点。 Range 不会阻塞接收器上的其他方法；甚至 f 本身也可以调用 m 上的任何方法。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Map</span><span class="p">)</span><span class="w"> </span><span class="nx">Range</span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 </blockquote>
-<pre><code class="language-go">func (m *Map) Range(f func(key, value any) bool) {
-...
-}
-</code></pre>
 <h3 id="35">3.5. 示例</h3>
 <h4 id="351">3.5.1. 并发读取和写入</h4>
-<pre><code class="language-go">func main() {
-    var m sync.Map
-    var wg sync.WaitGroup
-    numRoutines := 5
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">m</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">wg</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+<span class="w">    </span><span class="nx">numRoutines</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span>
 
-    // 并发写入
-    for i := 0; i &lt; numRoutines; i++ {
-        wg.Add(1)
-        go func(i int) {
-            defer wg.Done()
-            m.Store(i, fmt.Sprintf(&quot;value%d&quot;, i))
-        }(i)
-    }
+<span class="w">    </span><span class="c1">// 并发写入</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">numRoutines</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">defer</span><span class="w"> </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="w">            </span><span class="nx">m</span><span class="p">.</span><span class="nx">Store</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;value%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">))</span>
+<span class="w">        </span><span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 等待所有写入操作完成
-    wg.Wait()
+<span class="w">    </span><span class="c1">// 等待所有写入操作完成</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
 
-    // 并发读取
-    for i := 0; i &lt; numRoutines; i++ {
-        wg.Add(1)
-        go func(i int) {
-            defer wg.Done()
-            if value, ok := m.Load(i); ok {
-                fmt.Printf(&quot;Key: %v, Value: %v\n&quot;, i, value)
-            }
-        }(i)
-    }
+<span class="w">    </span><span class="c1">// 并发读取</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">numRoutines</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">defer</span><span class="w"> </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Load</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Key: %v, Value: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 等待所有读取操作完成
-    wg.Wait()
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 等待所有读取操作完成</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="353">3.5.3. 并发删除</h4>
-<pre><code class="language-go">func main() {
-    var m sync.Map
-    var wg sync.WaitGroup
-    numKeys := 5
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">m</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">wg</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+<span class="w">    </span><span class="nx">numKeys</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span>
 
-    // 初始化 sync.Map
-    for i := 0; i &lt; numKeys; i++ {
-        m.Store(i, fmt.Sprintf(&quot;value%d&quot;, i))
-    }
+<span class="w">    </span><span class="c1">// 初始化 sync.Map</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">numKeys</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">m</span><span class="p">.</span><span class="nx">Store</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;value%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 并发删除
-    for i := 0; i &lt; numKeys; i++ {
-        wg.Add(1)
-        go func(i int) {
-            defer wg.Done()
-            m.Delete(i)
-            fmt.Printf(&quot;Deleted key: %v\n&quot;, i)
-        }(i)
-    }
+<span class="w">    </span><span class="c1">// 并发删除</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">numKeys</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">defer</span><span class="w"> </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="w">            </span><span class="nx">m</span><span class="p">.</span><span class="nx">Delete</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Deleted key: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 等待所有删除操作完成
-    wg.Wait()
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 等待所有删除操作完成</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="4-mutex">4. Mutex互斥锁</h2>
 <h3 id="41-locker">4.1. Locker锁接口</h3>
 <p>Locker是所有“锁”的接口，如Mutex、RWMutex等。</p>
 <blockquote>
-<p>A Locker represents an object that can be locked and unlocked.</p>
+<p>A Locker represents an object that can be locked and unlocked.
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Locker</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Lock</span><span class="p">()</span><span class="w"> </span><span class="c1">// 获取锁</span>
+<span class="w">    </span><span class="nx">Unlock</span><span class="p">()</span><span class="w"> </span><span class="c1">// 释放锁</span>
+<span class="p">}</span>
+</code></pre></div></p>
 </blockquote>
-<pre><code class="language-go">type Locker interface {
-    Lock() // 获取锁
-    Unlock() // 释放锁
-}
-</code></pre>
 <h3 id="42-mutex">4.2. 关于Mutex</h3>
 <p>Mutex是一个互斥锁。
 * Mutex的零值是一个未锁定的互斥锁。</p>
 <blockquote>
-<p>特别注意：Mutex是不可重入的互斥锁！！！</p>
+<p>特别注意：Mutex是不可重入的互斥锁！！！
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Mutex</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">state</span><span class="w"> </span><span class="kt">int32</span>
+<span class="w">    </span><span class="nx">sema</span><span class="w">  </span><span class="kt">uint32</span>
+<span class="p">}</span>
+</code></pre></div></p>
 </blockquote>
-<pre><code class="language-go">type Mutex struct {
-    state int32
-    sema  uint32
-}
-</code></pre>
 <h3 id="43">4.3. 初始化</h3>
 <p>Mutex的零值是有个可以直接使用并且unlokced的互斥锁，首次使用后禁止复制。</p>
-<pre><code class="language-go">var lock sync.Mutex
-lock.Lock()
-defer lock.Unlock()
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">lock</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
+<span class="nx">lock</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="k">defer</span><span class="w"> </span><span class="nx">lock</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
+</code></pre></div>
 <h3 id="44">4.4. 结构体方法</h3>
 <h4 id="441-lock">4.4.1. Lock获取锁</h4>
-<p>Lock方法用于获取互斥锁，如果互斥锁已经被占用，调用者将被阻塞，直到互斥锁可用。</p>
-<pre><code class="language-go">func (m *Mutex) Lock() {
-    // Fast path: grab unlocked mutex.
-    if atomic.CompareAndSwapInt32(&amp;m.state, 0, mutexLocked) {
-        if race.Enabled {
-            race.Acquire(unsafe.Pointer(m))
-        }
-        return
-    }
-    // Slow path (outlined so that the fast path can be inlined)
-    m.lockSlow()
-}
-</code></pre>
+<p>Lock方法用于获取互斥锁，如果互斥锁已经被占用，调用者将被阻塞，直到互斥锁可用。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Mutex</span><span class="p">)</span><span class="w"> </span><span class="nx">Lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Fast path: grab unlocked mutex.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">CompareAndSwapInt32</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">m</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nx">mutexLocked</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">race</span><span class="p">.</span><span class="nx">Acquire</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span><span class="p">(</span><span class="nx">m</span><span class="p">))</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Slow path (outlined so that the fast path can be inlined)</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">lockSlow</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="442-trylock">4.4.2. TryLock尝试获取锁</h4>
 <p>TryLock方法会获取互斥锁，并返回是否获取互斥锁成功。</p>
 <blockquote>
-<p>请注意，虽然 TryLock 的正确使用确实存在，但很少见，并且 TryLock 的使用通常表明互斥体的特定使用中存在更深层次的问题。</p>
+<p>请注意，虽然 TryLock 的正确使用确实存在，但很少见，并且 TryLock 的使用通常表明互斥体的特定使用中存在更深层次的问题。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Mutex</span><span class="p">)</span><span class="w"> </span><span class="nx">TryLock</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">old</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">state</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">old</span><span class="o">&amp;</span><span class="p">(</span><span class="nx">mutexLocked</span><span class="o">|</span><span class="nx">mutexStarving</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// There may be a goroutine waiting for the mutex, but we are</span>
+<span class="w">    </span><span class="c1">// running now and can try to grab the mutex before that</span>
+<span class="w">    </span><span class="c1">// goroutine wakes up.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">atomic</span><span class="p">.</span><span class="nx">CompareAndSwapInt32</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">m</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">old</span><span class="p">,</span><span class="w"> </span><span class="nx">old</span><span class="o">|</span><span class="nx">mutexLocked</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">race</span><span class="p">.</span><span class="nx">Acquire</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span><span class="p">(</span><span class="nx">m</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div></p>
 </blockquote>
-<pre><code class="language-go">func (m *Mutex) TryLock() bool {
-    old := m.state
-    if old&amp;(mutexLocked|mutexStarving) != 0 {
-        return false
-    }
-
-    // There may be a goroutine waiting for the mutex, but we are
-    // running now and can try to grab the mutex before that
-    // goroutine wakes up.
-    if !atomic.CompareAndSwapInt32(&amp;m.state, old, old|mutexLocked) {
-        return false
-    }
-
-    if race.Enabled {
-        race.Acquire(unsafe.Pointer(m))
-    }
-    return true
-}
-</code></pre>
 <h4 id="443">4.4.3. 释放锁</h4>
 <p>Unlock方法将释放互斥锁（解锁）。
 * 如果调用Unlock方法时，互斥锁并没有被锁定，将会产生允许时错误。
-* 锁定的互斥锁不与特定的 goroutine 关联。允许一个 Goroutine 锁定一个 Mutex，然后安排另一个 Goroutine 解锁它。</p>
-<pre><code class="language-go">func (m *Mutex) Unlock() {
-    if race.Enabled {
-        _ = m.state
-        race.Release(unsafe.Pointer(m))
-    }
+* 锁定的互斥锁不与特定的 goroutine 关联。允许一个 Goroutine 锁定一个 Mutex，然后安排另一个 Goroutine 解锁它。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">Mutex</span><span class="p">)</span><span class="w"> </span><span class="nx">Unlock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">race</span><span class="p">.</span><span class="nx">Enabled</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">state</span>
+<span class="w">        </span><span class="nx">race</span><span class="p">.</span><span class="nx">Release</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span><span class="p">(</span><span class="nx">m</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // Fast path: drop lock bit.
-    new := atomic.AddInt32(&amp;m.state, -mutexLocked)
-    if new != 0 {
-        // Outlined slow path to allow inlining the fast path.
-        // To hide unlockSlow during tracing we skip one extra frame when tracing GoUnblock.
-        m.unlockSlow(new)
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// Fast path: drop lock bit.</span>
+<span class="w">    </span><span class="nx">new</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">AddInt32</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">m</span><span class="p">.</span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="nx">mutexLocked</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Outlined slow path to allow inlining the fast path.</span>
+<span class="w">        </span><span class="c1">// To hide unlockSlow during tracing we skip one extra frame when tracing GoUnblock.</span>
+<span class="w">        </span><span class="nx">m</span><span class="p">.</span><span class="nx">unlockSlow</span><span class="p">(</span><span class="nx">new</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h3 id="45-mutex">4.5. Mutex的互斥公平性</h3>
 <p>Mutex有两种操作模式：</p>
 <ul>
@@ -4204,35 +4209,35 @@ Go 标准库中的 sync.Mutex 实现了这样的模式切换机制，以兼顾�
 </blockquote>
 <h3 id="46">4.6. 示例</h3>
 <p>使用<code>sync.Mutex</code>来实现一个简单的并发安全的Map：</p>
-<pre><code class="language-go">type SafeMap struct {
-    m map[int]int
-    sync.Mutex
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">SafeMap</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">m</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
+<span class="p">}</span>
 
-func (m *SafeMap) Get(key int) int {
-    m.Lock()
-    defer m.Unlock()
-    return m.m[key]
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">SafeMap</span><span class="p">)</span><span class="w"> </span><span class="nx">Get</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">m</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+<span class="p">}</span>
 
-func (m *SafeMap) Set(key int, value int) {
-    m.Lock()
-    defer m.Unlock()
-    m.m[key] = value
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">SafeMap</span><span class="p">)</span><span class="w"> </span><span class="nx">Set</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">m</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">value</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="5-rwmutex">5. RWMutex读写锁</h2>
 <h3 id="51-rwmutex">5.1. 关于RWMutex</h3>
 <p>RWMutex是一个读写互斥锁，该锁可以被任意数量的读锁或者单个写锁持有。</p>
 <p>当由一个或多个goroutine持有一个RWMutex的读锁时，任意goroutine调用Lock方法，都会导致后续调用RLock方法的调用者被阻塞，直到写入者获取并释放锁，以确保锁最终可供写入者使用。</p>
-<pre><code class="language-go">type RWMutex struct {
-    w           Mutex        // held if there are pending writers
-    writerSem   uint32       // semaphore for writers to wait for completing readers
-    readerSem   uint32       // semaphore for readers to wait for completing writers
-    readerCount atomic.Int32 // number of pending readers
-    readerWait  atomic.Int32 // number of departing readers
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">RWMutex</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">w</span><span class="w">           </span><span class="nx">Mutex</span><span class="w">        </span><span class="c1">// held if there are pending writers</span>
+<span class="w">    </span><span class="nx">writerSem</span><span class="w">   </span><span class="kt">uint32</span><span class="w">       </span><span class="c1">// semaphore for writers to wait for completing readers</span>
+<span class="w">    </span><span class="nx">readerSem</span><span class="w">   </span><span class="kt">uint32</span><span class="w">       </span><span class="c1">// semaphore for readers to wait for completing writers</span>
+<span class="w">    </span><span class="nx">readerCount</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">Int32</span><span class="w"> </span><span class="c1">// number of pending readers</span>
+<span class="w">    </span><span class="nx">readerWait</span><span class="w">  </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">Int32</span><span class="w"> </span><span class="c1">// number of departing readers</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="52">5.2. 限制说明</h3>
 <p><strong>禁止递归读锁定：</strong></p>
 <ul>
@@ -4253,277 +4258,277 @@ func (m *SafeMap) Set(key int, value int) {
 </ul>
 <h3 id="53">5.3. 初始化</h3>
 <p>RWMutex的零值是一个未锁的互斥锁，首次使用后禁止复制。</p>
-<pre><code class="language-go">rwLock := sync.RWMutex{}
-rwLock.RLock()
-defer rwLock.RUnlock()
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">rwLock</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">RWMutex</span><span class="p">{}</span>
+<span class="nx">rwLock</span><span class="p">.</span><span class="nx">RLock</span><span class="p">()</span>
+<span class="k">defer</span><span class="w"> </span><span class="nx">rwLock</span><span class="p">.</span><span class="nx">RUnlock</span><span class="p">()</span>
+</code></pre></div>
 <h3 id="54">5.4. 结构体方法</h3>
 <h4 id="541-rlock">5.4.1. RLock获取读锁</h4>
 <p>RLock 锁定 rw 以进行读取。它不应该用于递归读锁定；阻塞的 Lock 调用会阻止新的读取者获取锁。
 * 如果当前有goroutine持有写锁，则阻塞。
 * 如果当前有goroutine持有读锁：
     * 如果有goroutine在等待写锁，则阻塞。
-    * 如果无goroutine在等待写锁，则持有读锁。</p>
-<pre><code class="language-go">func (rw *RWMutex) RLock() {
-    ...
-}
-</code></pre>
+    * 如果无goroutine在等待写锁，则持有读锁。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">rw</span><span class="w"> </span><span class="o">*</span><span class="nx">RWMutex</span><span class="p">)</span><span class="w"> </span><span class="nx">RLock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="542-tryrlock">5.4.2 TryRLock尝试获取读锁</h4>
-<p>TryRLock尝试获取读锁并返回是否获取成功。</p>
-<pre><code class="language-go">// Note that while correct uses of TryRLock do exist, they are rare,
-// and use of TryRLock is often a sign of a deeper problem
-// in a particular use of mutexes.
-func (rw *RWMutex) TryRLock() bool {
-    ...
-}
-</code></pre>
+<p>TryRLock尝试获取读锁并返回是否获取成功。
+<div class="highlight"><pre><span></span><code><span class="c1">// Note that while correct uses of TryRLock do exist, they are rare,</span>
+<span class="c1">// and use of TryRLock is often a sign of a deeper problem</span>
+<span class="c1">// in a particular use of mutexes.</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">rw</span><span class="w"> </span><span class="o">*</span><span class="nx">RWMutex</span><span class="p">)</span><span class="w"> </span><span class="nx">TryRLock</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="543-runlock">5.4.3. RUnlock 释放读锁</h4>
 <p>RUnlock释放单个读锁，对剩余的读者不影响。
-* 如果调用时，没有goroutine占有读锁，将会导致一个运行时错误。</p>
-<pre><code class="language-go">func (rw *RWMutex) RUnlock() {
-    ...
-}
-</code></pre>
+* 如果调用时，没有goroutine占有读锁，将会导致一个运行时错误。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">rw</span><span class="w"> </span><span class="o">*</span><span class="nx">RWMutex</span><span class="p">)</span><span class="w"> </span><span class="nx">RUnlock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="544-rlocker">5.4.4. RLocker获取读锁器</h4>
-<p>RLocker 返回一个 Locker 接口，通过调用 rw.RLock 和 rw.RUnlock 实现 Lock 和 Unlock 方法。</p>
-<pre><code class="language-go">func (rw *RWMutex) RLocker() Locker {
-    return (*rlocker)(rw)
-}
+<p>RLocker 返回一个 Locker 接口，通过调用 rw.RLock 和 rw.RUnlock 实现 Lock 和 Unlock 方法。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">rw</span><span class="w"> </span><span class="o">*</span><span class="nx">RWMutex</span><span class="p">)</span><span class="w"> </span><span class="nx">RLocker</span><span class="p">()</span><span class="w"> </span><span class="nx">Locker</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">rlocker</span><span class="p">)(</span><span class="nx">rw</span><span class="p">)</span>
+<span class="p">}</span>
 
-type rlocker RWMutex
+<span class="kd">type</span><span class="w"> </span><span class="nx">rlocker</span><span class="w"> </span><span class="nx">RWMutex</span>
 
-func (r *rlocker) Lock()   { (*RWMutex)(r).RLock() }
-func (r *rlocker) Unlock() { (*RWMutex)(r).RUnlock() }
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">rlocker</span><span class="p">)</span><span class="w"> </span><span class="nx">Lock</span><span class="p">()</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">RWMutex</span><span class="p">)(</span><span class="nx">r</span><span class="p">).</span><span class="nx">RLock</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">rlocker</span><span class="p">)</span><span class="w"> </span><span class="nx">Unlock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">RWMutex</span><span class="p">)(</span><span class="nx">r</span><span class="p">).</span><span class="nx">RUnlock</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div></p>
 <h4 id="545-lock">5.4.5. Lock获取写锁</h4>
-<p>Lock 锁定 rw 以进行写入。如果该锁已被锁定以进行读取或写入，则 Lock 会阻塞，直到该锁可用为止。</p>
-<pre><code class="language-go">func (rw *RWMutex) Lock() {
-...
-}
-</code></pre>
+<p>Lock 锁定 rw 以进行写入。如果该锁已被锁定以进行读取或写入，则 Lock 会阻塞，直到该锁可用为止。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">rw</span><span class="w"> </span><span class="o">*</span><span class="nx">RWMutex</span><span class="p">)</span><span class="w"> </span><span class="nx">Lock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="546-trylock">5.4.6. TryLock尝试获取写锁</h4>
-<p>TryLock 尝试锁定 rw 进行写入并报告是否成功。</p>
-<pre><code class="language-go">// Note that while correct uses of TryLock do exist, they are rare,
-// and use of TryLock is often a sign of a deeper problem
-// in a particular use of mutexes.
-func (rw *RWMutex) TryLock() bool {
-...
-}
-</code></pre>
+<p>TryLock 尝试锁定 rw 进行写入并报告是否成功。
+<div class="highlight"><pre><span></span><code><span class="c1">// Note that while correct uses of TryLock do exist, they are rare,</span>
+<span class="c1">// and use of TryLock is often a sign of a deeper problem</span>
+<span class="c1">// in a particular use of mutexes.</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">rw</span><span class="w"> </span><span class="o">*</span><span class="nx">RWMutex</span><span class="p">)</span><span class="w"> </span><span class="nx">TryLock</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="547-unlock">5.4.7. Unlock释放写锁</h4>
 <p>Unlock 释放写锁。
 * 如果 rw 被持有写锁，则会出现运行时错误。
-* 与互斥体一样，锁定的 RWMutex 不与特定的 goroutine 关联。一个 goroutine 可以 RLock（Lock）一个 RWMutex，然后安排另一个 goroutine 对其进行 RUnlock（Unlock）</p>
-<pre><code class="language-go">func (rw *RWMutex) Unlock() {
-    ...
-}
-</code></pre>
+* 与互斥体一样，锁定的 RWMutex 不与特定的 goroutine 关联。一个 goroutine 可以 RLock（Lock）一个 RWMutex，然后安排另一个 goroutine 对其进行 RUnlock（Unlock）
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">rw</span><span class="w"> </span><span class="o">*</span><span class="nx">RWMutex</span><span class="p">)</span><span class="w"> </span><span class="nx">Unlock</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h3 id="55">5.5. 示例</h3>
 <p>使用<code>sync.RWMutex</code>实现并发安全的Map：</p>
-<pre><code class="language-go">type SafeMap struct {
-    m map[int]int
-    sync.RWMutex
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">SafeMap</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">m</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">sync</span><span class="p">.</span><span class="nx">RWMutex</span>
+<span class="p">}</span>
 
-func NewSafeMap() *SafeMap {
-    return &amp;SafeMap{
-        m: map[int]int{},
-    }
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewSafeMap</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">SafeMap</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">SafeMap</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">m</span><span class="p">:</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span><span class="p">{},</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func (m *SafeMap) Get(key int) int {
-    m.RLock()
-    defer m.RUnlock()
-    return m.m[key]
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">SafeMap</span><span class="p">)</span><span class="w"> </span><span class="nx">Get</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">RLock</span><span class="p">()</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">RUnlock</span><span class="p">()</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">m</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+<span class="p">}</span>
 
-func (m *SafeMap) Set(key int, value int) {
-    m.Lock()
-    defer m.Unlock()
-    m.m[key] = value
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="o">*</span><span class="nx">SafeMap</span><span class="p">)</span><span class="w"> </span><span class="nx">Set</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">m</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">.</span><span class="nx">m</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">value</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="6-once">6. Once 单次执行</h2>
 <h3 id="61-once">6.1. 关于Once</h3>
-<p>sync.Once 可以确保在程序运行过程中某个操作只会执行一次，即使被多个 goroutine 同时调用。一旦操作执行完成，后续的调用会立即返回而不再执行。</p>
-<pre><code class="language-go">type Once struct {
-    done atomic.Uint32 // 指示动作是否被执行过
-    m    Mutex // 互斥锁
-}
-</code></pre>
+<p>sync.Once 可以确保在程序运行过程中某个操作只会执行一次，即使被多个 goroutine 同时调用。一旦操作执行完成，后续的调用会立即返回而不再执行。
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Once</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">done</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">Uint32</span><span class="w"> </span><span class="c1">// 指示动作是否被执行过</span>
+<span class="w">    </span><span class="nx">m</span><span class="w">    </span><span class="nx">Mutex</span><span class="w"> </span><span class="c1">// 互斥锁</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h3 id="62">6.2. 初始化</h3>
 <p><code>sync.Once</code>的零值是一个未执行的可以直接使用的值，初次使用后禁止复制。</p>
-<pre><code class="language-go">once := sync.Once{}
-once.Do(func() {
-  fmt.Println(&quot;init&quot;)
-})
-once.Do(func() {
-  fmt.Println(&quot;init&quot;)
-})
+<div class="highlight"><pre><span></span><code><span class="nx">once</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Once</span><span class="p">{}</span>
+<span class="nx">once</span><span class="p">.</span><span class="nx">Do</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;init&quot;</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">once</span><span class="p">.</span><span class="nx">Do</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;init&quot;</span><span class="p">)</span>
+<span class="p">})</span>
 
-// 输出
-init
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="nx">init</span>
+</code></pre></div>
 <h3 id="63-oncedo">6.3. once.Do()</h3>
 <p><code>sync.Once</code>只有一个方法<code>func (o *Once) Do(f func())</code>,其入参为一个无参函数。</p>
-<pre><code class="language-go">func (o *Once) Do(f func()) {
-    if o.done.Load() == 0 {
-        // Outlined slow-path to allow inlining of the fast-path.
-        o.doSlow(f)
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">o</span><span class="w"> </span><span class="o">*</span><span class="nx">Once</span><span class="p">)</span><span class="w"> </span><span class="nx">Do</span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="kd">func</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">o</span><span class="p">.</span><span class="nx">done</span><span class="p">.</span><span class="nx">Load</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Outlined slow-path to allow inlining of the fast-path.</span>
+<span class="w">        </span><span class="nx">o</span><span class="p">.</span><span class="nx">doSlow</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>对于一个Once，只有在第一次调用Once的Do方法时，才会执行传入的方法。
 * 对于一个Once对象，如果调用多次Do方法（不论是否在同一个协程中调用），都只会在第一次调用时，才会执行传入的方法。即使每次传入的参数不同。</p>
 <p><strong>特别注意：</strong></p>
 <ul>
 <li>因为<strong>在对 f 的一次调用返回之前，对 Do 的调用不会返回</strong>，所以如果在f中调用Do再次调用Do方法，就会出现死锁。在下面的示例中，外层传入的方法中，又一次调用了once.Do方法，这将导致死锁！</li>
 </ul>
-<pre><code class="language-go">func main() {
-    once := sync.Once{}
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">once</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Once</span><span class="p">{}</span>
 
-    once.Do(func() {
-        once.Do(func() { 
-            fmt.Println(&quot;HELLO WORLD&quot;)
-        })
-    })
-}
-// 输出
-fatal error: all goroutines are asleep - deadlock!
-</code></pre>
+<span class="w">    </span><span class="nx">once</span><span class="p">.</span><span class="nx">Do</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">once</span><span class="p">.</span><span class="nx">Do</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;HELLO WORLD&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+<span class="c1">// 输出</span>
+<span class="nx">fatal</span><span class="w"> </span><span class="kt">error</span><span class="p">:</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">goroutines</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">asleep</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">deadlock</span><span class="p">!</span>
+</code></pre></div>
 <h3 id="64-once">6.4. Once与函数字面量</h3>
 <p>Do 方法用于需要确保只运行一次的初始化操作。由于被执行的函数 f 是无参数的，因此有时候可能需要使用函数字面量（function literal）来捕获函数的参数，以便在 Do 方法中调用。</p>
 <blockquote>
-<p>函数字面量是匿名函数的一种形式，可以在声明时直接定义函数体。通过函数字面量，我们可以将需要传递给函数的参数捕获到闭包中，然后在 Do 方法中调用这个函数。</p>
+<p>函数字面量是匿名函数的一种形式，可以在声明时直接定义函数体。通过函数字面量，我们可以将需要传递给函数的参数捕获到闭包中，然后在 Do 方法中调用这个函数。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">once</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Once</span>
+
+<span class="w">    </span><span class="c1">// 准备一个带参数的函数</span>
+<span class="w">    </span><span class="nx">initFunc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">message</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Initializing with message:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">message</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 使用函数字面量来捕获参数并传递给初始化函数</span>
+<span class="w">    </span><span class="nx">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello, World!&quot;</span>
+<span class="w">    </span><span class="nx">once</span><span class="p">.</span><span class="nx">Do</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">initFunc</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+
+<span class="w">    </span><span class="c1">// 再次调用 Do 方法，函数将不会再次执行</span>
+<span class="w">    </span><span class="nx">once</span><span class="p">.</span><span class="nx">Do</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;This won&#39;t be executed again&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div></p>
 </blockquote>
-<pre><code class="language-go">func main() {
-    var once sync.Once
-
-    // 准备一个带参数的函数
-    initFunc := func(message string) {
-        fmt.Println(&quot;Initializing with message:&quot;, message)
-    }
-
-    // 使用函数字面量来捕获参数并传递给初始化函数
-    message := &quot;Hello, World!&quot;
-    once.Do(func() {
-        initFunc(message)
-    })
-
-    // 再次调用 Do 方法，函数将不会再次执行
-    once.Do(func() {
-        fmt.Println(&quot;This won't be executed again&quot;)
-    })
-}
-</code></pre>
 <h3 id="65">6.5. 使用示例</h3>
 <p>使用<code>sync.Once</code>来控制数据库初始化示例：</p>
-<pre><code class="language-go">import (
-    &quot;fmt&quot;
-    &quot;sync&quot;
-)
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;sync&quot;</span>
+<span class="p">)</span>
 
-// 数据库连接模拟
-type Database struct {
-    host string
-}
+<span class="c1">// 数据库连接模拟</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Database</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">host</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func (db *Database) Query(sql string) string {
-    return fmt.Sprintf(&quot;Executing %s on %s&quot;, sql, db.host)
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">Database</span><span class="p">)</span><span class="w"> </span><span class="nx">Query</span><span class="p">(</span><span class="nx">sql</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;Executing %s on %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">sql</span><span class="p">,</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">host</span><span class="p">)</span>
+<span class="p">}</span>
 
-var (
-    dbInstance *Database
-    once       sync.Once
-)
+<span class="kd">var</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">dbInstance</span><span class="w"> </span><span class="o">*</span><span class="nx">Database</span>
+<span class="w">    </span><span class="nx">once</span><span class="w">       </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Once</span>
+<span class="p">)</span>
 
-// GetDatabaseInstance 获取数据库实例，保证全局只有一个实例
-func GetDatabaseInstance() *Database {
-    once.Do(func() {
-        fmt.Println(&quot;Initializing database connection...&quot;)
-        // 模拟耗时的数据库连接初始化过程
-        dbInstance = &amp;Database{
-            host: &quot;localhost:5432&quot;,
-        }
-        // 这里的初始化操作只会执行一次
-    })
-    return dbInstance
-}
+<span class="c1">// GetDatabaseInstance 获取数据库实例，保证全局只有一个实例</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">GetDatabaseInstance</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">Database</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">once</span><span class="p">.</span><span class="nx">Do</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Initializing database connection...&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">// 模拟耗时的数据库连接初始化过程</span>
+<span class="w">        </span><span class="nx">dbInstance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Database</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;localhost:5432&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="c1">// 这里的初始化操作只会执行一次</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">dbInstance</span>
+<span class="p">}</span>
 
-func main() {
-    // 多个goroutine同时请求数据库实例
-    var wg sync.WaitGroup
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 多个goroutine同时请求数据库实例</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">wg</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
 
-    for i := 0; i &lt; 5; i++ {
-        wg.Add(1)
-        go func(id int) {
-            defer wg.Done()
-            db := GetDatabaseInstance()
-            result := db.Query(fmt.Sprintf(&quot;SELECT * FROM users WHERE id=%d&quot;, id))
-            fmt.Println(result)
-        }(i)
-    }
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">id</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">defer</span><span class="w"> </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="w">            </span><span class="nx">db</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">GetDatabaseInstance</span><span class="p">()</span>
+<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">Query</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;SELECT * FROM users WHERE id=%d&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">id</span><span class="p">))</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    wg.Wait()
-}
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="p">}</span>
 
-// 输出
-Initializing database connection...
-Executing SELECT * FROM users WHERE id=4 on localhost:5432
-Executing SELECT * FROM users WHERE id=2 on localhost:5432
-Executing SELECT * FROM users WHERE id=3 on localhost:5432
-Executing SELECT * FROM users WHERE id=0 on localhost:5432
-Executing SELECT * FROM users WHERE id=1 on localhost:5432
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="nx">Initializing</span><span class="w"> </span><span class="nx">database</span><span class="w"> </span><span class="nx">connection</span><span class="o">...</span>
+<span class="nx">Executing</span><span class="w"> </span><span class="nx">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">FROM</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="nx">WHERE</span><span class="w"> </span><span class="nx">id</span><span class="p">=</span><span class="mi">4</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost</span><span class="p">:</span><span class="mi">5432</span>
+<span class="nx">Executing</span><span class="w"> </span><span class="nx">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">FROM</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="nx">WHERE</span><span class="w"> </span><span class="nx">id</span><span class="p">=</span><span class="mi">2</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost</span><span class="p">:</span><span class="mi">5432</span>
+<span class="nx">Executing</span><span class="w"> </span><span class="nx">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">FROM</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="nx">WHERE</span><span class="w"> </span><span class="nx">id</span><span class="p">=</span><span class="mi">3</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost</span><span class="p">:</span><span class="mi">5432</span>
+<span class="nx">Executing</span><span class="w"> </span><span class="nx">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">FROM</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="nx">WHERE</span><span class="w"> </span><span class="nx">id</span><span class="p">=</span><span class="mi">0</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost</span><span class="p">:</span><span class="mi">5432</span>
+<span class="nx">Executing</span><span class="w"> </span><span class="nx">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">FROM</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="nx">WHERE</span><span class="w"> </span><span class="nx">id</span><span class="p">=</span><span class="mi">1</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost</span><span class="p">:</span><span class="mi">5432</span>
+</code></pre></div>
 <h3 id="66-once">6.6. Once相关</h3>
 <h4 id="661-oncefunc">6.6.1. OnceFunc</h4>
-<p>OnceFunc 返回一个仅调用 f 一次的函数。返回的函数可以被并发调用。如果 f 发生恐慌，则返回的函数将在每次调用时以相同的值发生恐慌。</p>
-<pre><code class="language-go">func OnceFunc(f func()) func() {
-    ...
-}
-</code></pre>
-<pre><code class="language-go">func main() {
-    onceFunc := sync.OnceFunc(func() {
-        fmt.Println(&quot;Hello World&quot;)
-    })
-    go onceFunc() 
-    go onceFunc()
-    go onceFunc()
-    go onceFunc()
-    time.Sleep(time.Second)
-}
-// 只会打印一次Hello World
-</code></pre>
+<p>OnceFunc 返回一个仅调用 f 一次的函数。返回的函数可以被并发调用。如果 f 发生恐慌，则返回的函数将在每次调用时以相同的值发生恐慌。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">OnceFunc</span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="kd">func</span><span class="p">())</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">onceFunc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">OnceFunc</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">onceFunc</span><span class="p">()</span><span class="w"> </span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">onceFunc</span><span class="p">()</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">onceFunc</span><span class="p">()</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">onceFunc</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 只会打印一次Hello World</span>
+</code></pre></div></p>
 <h4 id="662-oncevalue">6.6.2. OnceValue</h4>
 <p>OnceValue 返回一个仅调用 f 一次的函数，并返回 f 返回的值。返回的函数可以被并发调用。如果 f 发生恐慌，则返回的函数将在每次调用时以相同的值发生恐慌。
-* 如果第一次执行没有panic，后续调用会直接返回第一次执行的结果。</p>
-<pre><code class="language-go">func OnceValue[T any](f func() T) func() T {
-    ···
-}
-</code></pre>
-<pre><code class="language-go">func main() {
-    onceValue := sync.OnceValue[string](func() string {
-        return time.Now().Format(&quot;20060102150405&quot;)
-    })
+* 如果第一次执行没有panic，后续调用会直接返回第一次执行的结果。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">OnceValue</span><span class="p">[</span><span class="nx">T</span><span class="w"> </span><span class="kt">any</span><span class="p">](</span><span class="nx">f</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="nx">T</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="err">···</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">onceValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">OnceValue</span><span class="p">[</span><span class="kt">string</span><span class="p">](</span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">Format</span><span class="p">(</span><span class="s">&quot;20060102150405&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
 
-    print := func() {
-        fmt.Println(onceValue())
-    }
+<span class="w">    </span><span class="nx">print</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">onceValue</span><span class="p">())</span>
+<span class="w">    </span><span class="p">}</span>
 
-    go print()
-    go print()
-    go print()
-    time.Sleep(time.Second)
-}
-// 程序将打印三次同一个结果
-</code></pre>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nb">print</span><span class="p">()</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nb">print</span><span class="p">()</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nb">print</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 程序将打印三次同一个结果</span>
+</code></pre></div></p>
 <h4 id="663-oncevalues">6.6.3. OnceValues</h4>
 <p>OnceValues 返回一个仅调用 f 一次的函数，并返回 f 返回的值。返回的函数可以被并发调用。如果 f 发生恐慌，则返回的函数将在每次调用时以相同的值发生恐慌。
-*  如果第一次执行没有panic，后续调用会直接返回第一次执行的结果。</p>
-<pre><code class="language-go">func OnceValues[T1, T2 any](f func() (T1, T2)) func() (T1, T2) {
-    ...
-}
-</code></pre>
+*  如果第一次执行没有panic，后续调用会直接返回第一次执行的结果。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">OnceValues</span><span class="p">[</span><span class="nx">T1</span><span class="p">,</span><span class="w"> </span><span class="nx">T2</span><span class="w"> </span><span class="kt">any</span><span class="p">](</span><span class="nx">f</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">T1</span><span class="p">,</span><span class="w"> </span><span class="nx">T2</span><span class="p">))</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">T1</span><span class="p">,</span><span class="w"> </span><span class="nx">T2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <blockquote>
 <p>该方法与OnceValue方法差不多，只是返回值的数量为两个而已。</p>
 </blockquote>
@@ -4531,127 +4536,127 @@ Executing SELECT * FROM users WHERE id=1 on localhost:5432
 <h3 id="71-waitgroup">7.1. 关于WaitGroup</h3>
 <p>WaitGroup用于等待一组goroutine执行结束。</p>
 <blockquote>
-<p>要等待的主线程，通过调用Add方法来设定需要等待的goroutine数量。每个被等待的gorotine在执行完成时调用Done方法。等待的协程将阻塞，直到所有被等待的goroutine执行完成。</p>
-</blockquote>
-<pre><code class="language-go">type WaitGroup struct {
-    noCopy noCopy
+<p>要等待的主线程，通过调用Add方法来设定需要等待的goroutine数量。每个被等待的gorotine在执行完成时调用Done方法。等待的协程将阻塞，直到所有被等待的goroutine执行完成。
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">WaitGroup</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">noCopy</span><span class="w"> </span><span class="nx">noCopy</span>
 
-  // Bits (high to low):
-    //   bits[0:32]  counter
-    //   bits[32]    flag: synctest bubble membership
-    //   bits[33:64] wait count
-    state atomic.Uint64
-    sema  uint32
-}
-</code></pre>
+<span class="w">  </span><span class="c1">// Bits (high to low):</span>
+<span class="w">    </span><span class="c1">//   bits[0:32]  counter</span>
+<span class="w">    </span><span class="c1">//   bits[32]    flag: synctest bubble membership</span>
+<span class="w">    </span><span class="c1">//   bits[33:64] wait count</span>
+<span class="w">    </span><span class="nx">state</span><span class="w"> </span><span class="nx">atomic</span><span class="p">.</span><span class="nx">Uint64</span>
+<span class="w">    </span><span class="nx">sema</span><span class="w">  </span><span class="kt">uint32</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</blockquote>
 <h3 id="72">7.2. 初始化</h3>
 <p><code>sync.WaitGroup</code>的零值是一个可以直接使用的计数器为0的值，初次使用后禁止复制。</p>
-<pre><code class="language-go">func main() {
-    wg := sync.WaitGroup{}
-    wg.Add(1)
-    go func() {
-        defer wg.Done()
-        fmt.Println(&quot;Hello World!&quot;)
-    }()
-    wg.Wait()
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">wg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span><span class="p">{}</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}()</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="73">7.3. 结构体方法</h3>
 <h4 id="731-add">7.3.1. Add添加等待数量</h4>
 <p>Add方法向WaitGroup的计数器添加delta个等待数量。
 * delta可能为负数。
 * 如果WaitGroup的计数器变成0，所有在Wait该WaitGroup都将被唤醒。
-* 如果WaitGroup的计数器变成了负数，Add方法将panic。</p>
-<pre><code class="language-go">func (wg *WaitGroup) Add(delta int) {
-...
-}
-</code></pre>
+* 如果WaitGroup的计数器变成了负数，Add方法将panic。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">wg</span><span class="w"> </span><span class="o">*</span><span class="nx">WaitGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Add</span><span class="p">(</span><span class="nx">delta</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <blockquote>
 <p>当计数器为0时，Add一个正数的操作应该在Wait操作之前。反之，Wait操作将不会阻塞。
 当计数器大于0时，Add一个正数或负数可能发生在任何时候。
 通常，这意味着对 Add 的调用应该在创建 goroutine 或其他要等待的事件的语句之前执行。如果重复使用 WaitGroup 来等待多个独立的事件集，则必须在所有先前的 Wait 调用返回后发生新的 Add 调用。</p>
 </blockquote>
 <h4 id="732-done">7.3.2. Done减少一个等待数量</h4>
-<p>被等待的goroutine需要在执行完成后，调用Done方法来使WaitGroup的计数器减一。从源码可以看出，Done实际上是调用了Add方法。</p>
-<pre><code class="language-go">func (wg *WaitGroup) Done() {
-    wg.Add(-1)
-}
-</code></pre>
+<p>被等待的goroutine需要在执行完成后，调用Done方法来使WaitGroup的计数器减一。从源码可以看出，Done实际上是调用了Add方法。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">wg</span><span class="w"> </span><span class="o">*</span><span class="nx">WaitGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Done</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="733-wait">7.3.3. Wait等待</h4>
-<p>调用Wait方法的goroutine将被阻塞，直到WaitGroup的计数器变成0。</p>
-<pre><code class="language-go">func (wg *WaitGroup) Wait() {
-...
-}
-</code></pre>
+<p>调用Wait方法的goroutine将被阻塞，直到WaitGroup的计数器变成0。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">wg</span><span class="w"> </span><span class="o">*</span><span class="nx">WaitGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Wait</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="734-go">7.3.4. Go</h4>
 <p>Go 在新的 goroutine 中调用 f 并将该任务添加到 WaitGroup]中。当 f 返回时，该任务将从 WaitGroup 中删除。</p>
-<pre><code class="language-go">func (wg *WaitGroup) Go(f func()) {
-    wg.Add(1)
-    go func() {
-        defer wg.Done()
-        f()
-    }()
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">wg</span><span class="w"> </span><span class="o">*</span><span class="nx">WaitGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Go</span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="kd">func</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">defer</span><span class="w"> </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">f</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>这个方法可以在我们使用无参函数时，为我们提供便利：</p>
-<pre><code class="language-go">// 原写法
-func main() {
-    myFunc := func() {
-        fmt.Println(&quot;Hello, World!&quot;)
-    }
+<div class="highlight"><pre><span></span><code><span class="c1">// 原写法</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">myFunc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    wg := sync.WaitGroup{}
-    for i := 0; i &lt; 5; i++ {
-        wg.Add(1)
-        go func() {
-            defer wg.Done()
-            myFunc()
-        }()
-    }
+<span class="w">    </span><span class="nx">wg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span><span class="p">{}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">defer</span><span class="w"> </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="w">            </span><span class="nx">myFunc</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}()</span>
+<span class="w">    </span><span class="p">}</span>
 
-    wg.Wait()
-}
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="p">}</span>
 
-// 便利写法
-func main() {
-    myFunc := func() {
-        fmt.Println(&quot;Hello, World!&quot;)
-    }
+<span class="c1">// 便利写法</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">myFunc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    wg := sync.WaitGroup{}
-    for i := 0; i &lt; 5; i++ {
-        wg.Go(myFunc)
-    }
+<span class="w">    </span><span class="nx">wg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span><span class="p">{}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Go</span><span class="p">(</span><span class="nx">myFunc</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    wg.Wait()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="74">7.4. 示例</h3>
 <h4 id="741">7.4.1. 官方示例</h4>
-<pre><code class="language-go">// This example fetches several URLs concurrently,
-// using a WaitGroup to block until all the fetches are complete.
-func ExampleWaitGroup() {
-    var wg sync.WaitGroup
-    var urls = []string{
-        &quot;http://www.golang.org/&quot;,
-        &quot;http://www.google.com/&quot;,
-        &quot;http://www.example.com/&quot;,
-    }
-    for _, url := range urls {
-        // Increment the WaitGroup counter.
-        wg.Add(1)
-        // Launch a goroutine to fetch the URL.
-        go func(url string) {
-            // Decrement the counter when the goroutine completes.
-            defer wg.Done()
-            // Fetch the URL.
-            http.Get(url)
-        }(url)
-    }
-    // Wait for all HTTP fetches to complete.
-    wg.Wait()
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// This example fetches several URLs concurrently,</span>
+<span class="c1">// using a WaitGroup to block until all the fetches are complete.</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">ExampleWaitGroup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">wg</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">urls</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;http://www.golang.org/&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;http://www.google.com/&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;http://www.example.com/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">url</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">urls</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Increment the WaitGroup counter.</span>
+<span class="w">        </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">// Launch a goroutine to fetch the URL.</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">url</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Decrement the counter when the goroutine completes.</span>
+<span class="w">            </span><span class="k">defer</span><span class="w"> </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="w">            </span><span class="c1">// Fetch the URL.</span>
+<span class="w">            </span><span class="nx">http</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}(</span><span class="nx">url</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Wait for all HTTP fetches to complete.</span>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="8-pool">8. Pool池</h2>
 <h3 id="81-pool">8.1. 关于Pool</h3>
 <p>Pool是一组可以单独保存和检索的临时对象的集合。
@@ -4666,86 +4671,85 @@ func ExampleWaitGroup() {
 <li>池的其中一个适当用途是用来管理一组临时项，这些项在并发独立的客户端之间静默共享，并且有可能被重复使用。sync.Pool 提供了一种方式来在许多客户端之间分摊分配开销。</li>
 <li>在 fmt 包中，sync.Pool 被用来维护一个动态大小的临时输出缓冲区存储。这个存储会根据负载情况进行扩展（当有很多 goroutine 在活跃地进行打印操作时），并在空闲时收缩。</li>
 <li>对于生命周期短暂的对象，维护一个空闲列表可能会增加额外的开销，不适合使用 sync.Pool。
-在这种情况下，最好让对象自己实现空闲列表的管理，以更好地控制资源的分配和释放。</li>
+在这种情况下，最好让对象自己实现空闲列表的管理，以更好地控制资源的分配和释放。
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Pool</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">noCopy</span><span class="w"> </span><span class="nx">noCopy</span>
+
+<span class="w">    </span><span class="nx">local</span><span class="w">     </span><span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span><span class="w"> </span><span class="c1">// local fixed-size per-P pool, actual type is [P]poolLocal</span>
+<span class="w">    </span><span class="nx">localSize</span><span class="w"> </span><span class="kt">uintptr</span><span class="w">        </span><span class="c1">// size of the local array</span>
+
+<span class="w">    </span><span class="nx">victim</span><span class="w">     </span><span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span><span class="w"> </span><span class="c1">// local from previous cycle</span>
+<span class="w">    </span><span class="nx">victimSize</span><span class="w"> </span><span class="kt">uintptr</span><span class="w">        </span><span class="c1">// size of victims array</span>
+
+<span class="w">    </span><span class="c1">// New optionally specifies a function to generate</span>
+<span class="w">    </span><span class="c1">// a value when Get would otherwise return nil.</span>
+<span class="w">    </span><span class="c1">// It may not be changed concurrently with calls to Get.</span>
+<span class="w">    </span><span class="nx">New</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="kt">any</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
-<pre><code class="language-go">type Pool struct {
-    noCopy noCopy
-
-    local     unsafe.Pointer // local fixed-size per-P pool, actual type is [P]poolLocal
-    localSize uintptr        // size of the local array
-
-    victim     unsafe.Pointer // local from previous cycle
-    victimSize uintptr        // size of victims array
-
-    // New optionally specifies a function to generate
-    // a value when Get would otherwise return nil.
-    // It may not be changed concurrently with calls to Get.
-    New func() any
-}
-</code></pre>
 <h3 id="82">8.2. 结构体方法</h3>
 <h4 id="821-new">8.2.1. New生成对象</h4>
 <p>New用于指定一个函数，用于在 Get 方法返回 nil 时生成一个值。同时指出，New 方法不应该在并发调用 Get 方法的情况下被同时修改。</p>
 <blockquote>
 <p>在使用 sync.Pool 时，可以通过 New 方法指定一个函数，在 Get 方法无法返回值时，用于生成一个新的值。这样可以避免返回 nil，并且可以根据需要动态地生成新的值。需要注意的是，在调用 Get 方法的同时，不应该并发地修改 New 方法，以避免出现竞争条件和不确定的行为。</p>
-<p>New 方法为 sync.Pool 提供了一种灵活的方式来生成值，从而确保在需要时能够获取到有效的值。</p>
-</blockquote>
-<pre><code class="language-go">type Pool struct {
-    ...
+<p>New 方法为 sync.Pool 提供了一种灵活的方式来生成值，从而确保在需要时能够获取到有效的值。
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Pool</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">...</span>
 
-    // New optionally specifies a function to generate
-    // a value when Get would otherwise return nil.
-    // It may not be changed concurrently with calls to Get.
-    New func() any
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// New optionally specifies a function to generate</span>
+<span class="w">    </span><span class="c1">// a value when Get would otherwise return nil.</span>
+<span class="w">    </span><span class="c1">// It may not be changed concurrently with calls to Get.</span>
+<span class="w">    </span><span class="nx">New</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="kt">any</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</blockquote>
 <h4 id="822-put">8.2.2. Put</h4>
-<p>Put方法用于向池中添加以一个临时对象x。</p>
-<pre><code class="language-go">func (p *Pool) Put(x any) {
-    ...
-}
-</code></pre>
+<p>Put方法用于向池中添加以一个临时对象x。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">Pool</span><span class="p">)</span><span class="w"> </span><span class="nx">Put</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h4 id="823-get">8.2.3. Get</h4>
-<p>Get 方法用于从池中获取一个项，并将其移除。需要注意的是，Get 方法可能会忽略池中的内容并返回一个新的项。此外，调用方不应该假设放入池中的值与 Get 返回的值之间存在任何关系，因为 Get 方法的行为是无法预测的。</p>
-<pre><code class="language-go">func (p *Pool) Get() any {
-    ...
-}
-</code></pre>
+<p>Get 方法用于从池中获取一个项，并将其移除。需要注意的是，Get 方法可能会忽略池中的内容并返回一个新的项。此外，调用方不应该假设放入池中的值与 Get 返回的值之间存在任何关系，因为 Get 方法的行为是无法预测的。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="o">*</span><span class="nx">Pool</span><span class="p">)</span><span class="w"> </span><span class="nx">Get</span><span class="p">()</span><span class="w"> </span><span class="kt">any</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h3 id="83">8.3. 示例</h3>
 <h4 id="831">8.3.1. 官方示例</h4>
-<pre><code class="language-go">var bufPool = sync.Pool{
-    New: func() any {
-        // The Pool's New function should generally only return pointer
-        // types, since a pointer can be put into the return interface
-        // value without an allocation:
-        return new(bytes.Buffer)
-    },
-}
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">bufPool</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">Pool</span><span class="p">{</span>
+<span class="w">    </span><span class="nx">New</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="kt">any</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// The Pool&#39;s New function should generally only return pointer</span>
+<span class="w">        </span><span class="c1">// types, since a pointer can be put into the return interface</span>
+<span class="w">        </span><span class="c1">// value without an allocation:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span><span class="p">)</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="p">}</span>
 
-// timeNow is a fake version of time.Now for tests.
-func timeNow() time.Time {
-    return time.Unix(1136214245, 0)
-}
+<span class="c1">// timeNow is a fake version of time.Now for tests.</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">timeNow</span><span class="p">()</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Unix</span><span class="p">(</span><span class="mi">1136214245</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="p">}</span>
 
-func Log(w io.Writer, key, val string) {
-    b := bufPool.Get().(*bytes.Buffer)
-    b.Reset()
-    // Replace this with time.Now() in a real logger.
-    b.WriteString(timeNow().UTC().Format(time.RFC3339))
-    b.WriteByte(' ')
-    b.WriteString(key)
-    b.WriteByte('=')
-    b.WriteString(val)
-    w.Write(b.Bytes())
-    bufPool.Put(b)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">Log</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">bufPool</span><span class="p">.</span><span class="nx">Get</span><span class="p">().(</span><span class="o">*</span><span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">Reset</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">// Replace this with time.Now() in a real logger.</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="nx">timeNow</span><span class="p">().</span><span class="nx">UTC</span><span class="p">().</span><span class="nx">Format</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">RFC3339</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">WriteByte</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">WriteByte</span><span class="p">(</span><span class="sc">&#39;=&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">b</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">w</span><span class="p">.</span><span class="nx">Write</span><span class="p">(</span><span class="nx">b</span><span class="p">.</span><span class="nx">Bytes</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">bufPool</span><span class="p">.</span><span class="nx">Put</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
 
-func ExamplePool() {
-    Log(os.Stdout, &quot;path&quot;, &quot;/search?q=flowers&quot;)
-    // Output: 2006-01-02T15:04:05Z path=/search?q=flowers
-}
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">ExamplePool</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Log</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;path&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/search?q=flowers&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// Output: 2006-01-02T15:04:05Z path=/search?q=flowers</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 

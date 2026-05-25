@@ -2420,19 +2420,19 @@
 <li><strong>关键字限制</strong>：不能使用Go语言的关键字作为标识符</li>
 <li><strong>长度限制</strong>：理论上没有长度限制，但应保持合理长度</li>
 </ol>
-<pre><code class="language-go">// 合法的标识符
-myVariable
-_myVariable
-MyVariable123
-MAX_SIZE
-αβγ        // Unicode字母也是合法的
+<div class="highlight"><pre><span></span><code><span class="c1">// 合法的标识符</span>
+<span class="nx">myVariable</span>
+<span class="nx">_myVariable</span>
+<span class="nx">MyVariable123</span>
+<span class="nx">MAX_SIZE</span>
+<span class="nx">αβγ</span><span class="w">        </span><span class="c1">// Unicode字母也是合法的</span>
 
-// 非法的标识符（会导致编译错误）
-123myVar     // 错误：不能以数字开头
-my-variable   // 错误：不能包含连字符
-int          // 错误：不能使用关键字
-func         // 错误：不能使用关键字
-</code></pre>
+<span class="c1">// 非法的标识符（会导致编译错误）</span>
+<span class="mi">123</span><span class="nx">myVar</span><span class="w">     </span><span class="c1">// 错误：不能以数字开头</span>
+<span class="nx">my</span><span class="o">-</span><span class="nx">variable</span><span class="w">   </span><span class="c1">// 错误：不能包含连字符</span>
+<span class="kt">int</span><span class="w">          </span><span class="c1">// 错误：不能使用关键字</span>
+<span class="kd">func</span><span class="w">         </span><span class="c1">// 错误：不能使用关键字</span>
+</code></pre></div>
 <p>Go语言中的标识符包括：
 * 包名
 * 函数名
@@ -2448,30 +2448,30 @@ func         // 错误：不能使用关键字
 * 文件名</p>
 <h3 id="12">1.2. 关键字限制</h3>
 <p>Go语言有25个预定义的关键字，这些关键字不能用作标识符：</p>
-<pre><code class="language-go">// Go语言关键字列表
-break        default      func         interface    select
-case         defer        go           map          struct
-chan         else         goto         package      switch
-const        fallthrough  if           range        type
-continue     for          import       return       var
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// Go语言关键字列表</span>
+<span class="k">break</span><span class="w">        </span><span class="k">default</span><span class="w">      </span><span class="kd">func</span><span class="w">         </span><span class="kd">interface</span><span class="w">    </span><span class="k">select</span>
+<span class="k">case</span><span class="w">         </span><span class="k">defer</span><span class="w">        </span><span class="k">go</span><span class="w">           </span><span class="kd">map</span><span class="w">          </span><span class="kd">struct</span>
+<span class="kd">chan</span><span class="w">         </span><span class="k">else</span><span class="w">         </span><span class="k">goto</span><span class="w">         </span><span class="kn">package</span><span class="w">      </span><span class="k">switch</span>
+<span class="kd">const</span><span class="w">        </span><span class="k">fallthrough</span><span class="w">  </span><span class="k">if</span><span class="w">           </span><span class="k">range</span><span class="w">        </span><span class="kd">type</span>
+<span class="k">continue</span><span class="w">     </span><span class="k">for</span><span class="w">          </span><span class="kn">import</span><span class="w">       </span><span class="k">return</span><span class="w">       </span><span class="kd">var</span>
+</code></pre></div>
 <p>此外，还有一些预声明的标识符，虽然不是关键字，但建议避免用作自定义标识符：</p>
-<pre><code class="language-go">// 预声明标识符（建议避免使用）
-// 类型
-bool byte complex64 complex128 error float32 float64
-int int8 int16 int32 int64 rune string
-uint uint8 uint16 uint32 uint64 uintptr
+<div class="highlight"><pre><span></span><code><span class="c1">// 预声明标识符（建议避免使用）</span>
+<span class="c1">// 类型</span>
+<span class="kt">bool</span><span class="w"> </span><span class="kt">byte</span><span class="w"> </span><span class="kt">complex64</span><span class="w"> </span><span class="kt">complex128</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="kt">float32</span><span class="w"> </span><span class="kt">float64</span>
+<span class="kt">int</span><span class="w"> </span><span class="kt">int8</span><span class="w"> </span><span class="kt">int16</span><span class="w"> </span><span class="kt">int32</span><span class="w"> </span><span class="kt">int64</span><span class="w"> </span><span class="kt">rune</span><span class="w"> </span><span class="kt">string</span>
+<span class="kt">uint</span><span class="w"> </span><span class="kt">uint8</span><span class="w"> </span><span class="kt">uint16</span><span class="w"> </span><span class="kt">uint32</span><span class="w"> </span><span class="kt">uint64</span><span class="w"> </span><span class="kt">uintptr</span>
 
-// 常量
-true false iota
+<span class="c1">// 常量</span>
+<span class="kc">true</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="kc">iota</span>
 
-// 零值
-nil
+<span class="c1">// 零值</span>
+<span class="kc">nil</span>
 
-// 函数
-append cap close complex copy delete imag len
-make new panic print println real recover
-</code></pre>
+<span class="c1">// 函数</span>
+<span class="nx">append</span><span class="w"> </span><span class="nx">cap</span><span class="w"> </span><span class="nx">close</span><span class="w"> </span><span class="nx">complex</span><span class="w"> </span><span class="nx">copy</span><span class="w"> </span><span class="nx">delete</span><span class="w"> </span><span class="nx">imag</span><span class="w"> </span><span class="nx">len</span>
+<span class="nx">make</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">panic</span><span class="w"> </span><span class="nx">print</span><span class="w"> </span><span class="nx">println</span><span class="w"> </span><span class="nx">real</span><span class="w"> </span><span class="nx">recover</span>
+</code></pre></div>
 <h2 id="2-package">2. 包(Package)的命名规范</h2>
 <h3 id="21">2.1. 包名规范</h3>
 <p>包是Go语言中代码组织的基本单位，包名命名规范：
@@ -2481,28 +2481,27 @@ make new panic print println real recover
 4. <strong>避免连字符</strong>：不要在包名中使用连字符
 5. <strong>语义明确</strong>：包名应能清晰表达其功能
 6. <strong>包名应与目录名保持一致</strong>：确保包名与目录名一致（main包除外）</p>
-<pre><code class="language-go">// 好的包名示例
-package json
-package html
-package http
-package time
-package strings
-package bufio
-package httputil
+<div class="highlight"><pre><span></span><code><span class="c1">// 好的包名示例</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">json</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">html</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">http</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">time</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">strings</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">bufio</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">httputil</span>
 
-// 不好的包名示例
-package JSON          // 不要使用大写
-package html_parser   // 不要使用下划线
-package http-util     // 不要使用连字符
-package utilities     // 过于宽泛
-
-</code></pre>
+<span class="c1">// 不好的包名示例</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">JSON</span><span class="w">          </span><span class="c1">// 不要使用大写</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">html_parser</span><span class="w">   </span><span class="c1">// 不要使用下划线</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">http</span><span class="o">-</span><span class="nx">util</span><span class="w">     </span><span class="c1">// 不要使用连字符</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">utilities</span><span class="w">     </span><span class="c1">// 过于宽泛</span>
+</code></pre></div>
 <h3 id="22">2.2. 包名与目录名</h3>
 <ul>
 <li>Golang并不强制要求包名与目录名一致，但同一个目录下不能定义多个包名，即同一个目录下的所有go源文件只能使用相同的包名。否则会出现编译错误。</li>
 <li>处于规范性要求，除main包外，其他包名应该与目录名一致。</li>
 </ul>
-<pre><code>// 正确的目录结构
+<div class="highlight"><pre><span></span><code>// 正确的目录结构
 myproject/
 ├── encoding/
 │   └── json/
@@ -2514,7 +2513,7 @@ myproject/
 │    └── stringutil/
 │        └── stringutil.go  (package stringutil)
 └── main.go (package main)
-</code></pre>
+</code></pre></div>
 <h2 id="3-source-file">3. 源文件(Source File)命名规则</h2>
 <h3 id="31">3.1. 强制性要求</h3>
 <p>Go语言对源文件的名称强制性要求：
@@ -2528,92 +2527,92 @@ myproject/
 <li><strong>语义明确</strong>：文件名应能表达文件内容</li>
 <li><strong>避免特殊字符</strong>：不要使用连字符等特殊字符</li>
 </ol>
-<pre><code class="language-go">// 好的文件名
-main.go
-user_model.go
-http_handler.go
-json_parser.go
-string_utils.go
+<div class="highlight"><pre><span></span><code><span class="c1">// 好的文件名</span>
+<span class="nx">main</span><span class="p">.</span><span class="k">go</span>
+<span class="nx">user_model</span><span class="p">.</span><span class="k">go</span>
+<span class="nx">http_handler</span><span class="p">.</span><span class="k">go</span>
+<span class="nx">json_parser</span><span class="p">.</span><span class="k">go</span>
+<span class="nx">string_utils</span><span class="p">.</span><span class="k">go</span>
 
-// 不好的文件名
-Main.go         // 不要使用大写
-user-model.go   // 不要使用连字符
-StringUtils.go  // 不要使用大写和驼峰命名
-</code></pre>
+<span class="c1">// 不好的文件名</span>
+<span class="nx">Main</span><span class="p">.</span><span class="k">go</span><span class="w">         </span><span class="c1">// 不要使用大写</span>
+<span class="nx">user</span><span class="o">-</span><span class="nx">model</span><span class="p">.</span><span class="k">go</span><span class="w">   </span><span class="c1">// 不要使用连字符</span>
+<span class="nx">StringUtils</span><span class="p">.</span><span class="k">go</span><span class="w">  </span><span class="c1">// 不要使用大写和驼峰命名</span>
+</code></pre></div>
 <h3 id="33">3.3. 特殊文件名</h3>
 <p>Go语言中有一些具有特殊含义的文件名：</p>
-<pre><code class="language-go">// go.mod - 模块定义文件
-module github.com/user/project
+<div class="highlight"><pre><span></span><code><span class="c1">// go.mod - 模块定义文件</span>
+<span class="nx">module</span><span class="w"> </span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">user</span><span class="o">/</span><span class="nx">project</span>
 
-go 1.19
+<span class="k">go</span><span class="w"> </span><span class="mf">1.19</span>
 
-// go.sum - 依赖校验文件
-// 自动生成，包含依赖的校验和
+<span class="c1">// go.sum - 依赖校验文件</span>
+<span class="c1">// 自动生成，包含依赖的校验和</span>
 
-// *_test.go - 测试文件
-// user_test.go 包含 user.go 的测试代码
+<span class="c1">// *_test.go - 测试文件</span>
+<span class="c1">// user_test.go 包含 user.go 的测试代码</span>
 
-// doc.go - 包文档文件
-// 通常只包含包注释和 package 声明
-</code></pre>
+<span class="c1">// doc.go - 包文档文件</span>
+<span class="c1">// 通常只包含包注释和 package 声明</span>
+</code></pre></div>
 <h2 id="4-struct">4. 结构体(Struct)及其字段命名</h2>
 <h3 id="41">4.1. 结构体类型命名规范</h3>
 <p>结构体类型命名规范：
 * 使用驼峰命名法，首字母大小写控制结构体可见性。
 * 结构体名称应该简单明了，且能够描述结构体的作用。</p>
-<pre><code class="language-go">// 正确的结构体命名
-type User struct {
-    // 字段定义
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 正确的结构体命名</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 字段定义</span>
+<span class="p">}</span>
 
-type HTTPClient struct {
-    // 字段定义
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">HTTPClient</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 字段定义</span>
+<span class="p">}</span>
 
-type XMLParser struct {
-    // 字段定义
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">XMLParser</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 字段定义</span>
+<span class="p">}</span>
 
-// 不正确的结构体命名
-type http_client struct {} // 不要使用下划线
-</code></pre>
+<span class="c1">// 不正确的结构体命名</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">http_client</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">// 不要使用下划线</span>
+</code></pre></div>
 <h3 id="42">4.2. 结构体字段命名</h3>
 <p>结构体字段的命名规范：
 * 使用驼峰命名法，首字母大写控制字段可见性。
 * 应该简单明了，描述字段的用途。</p>
 <p>首字母大写的字段可以被其他包访问：</p>
-<pre><code class="language-go">type Person struct {
-    Name    string  // 公共字段
-    Age     int     // 公共字段
-    Address string  // 公共字段
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w">    </span><span class="kt">string</span><span class="w">  </span><span class="c1">// 公共字段</span>
+<span class="w">    </span><span class="nx">Age</span><span class="w">     </span><span class="kt">int</span><span class="w">     </span><span class="c1">// 公共字段</span>
+<span class="w">    </span><span class="nx">Address</span><span class="w"> </span><span class="kt">string</span><span class="w">  </span><span class="c1">// 公共字段</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>首字母小写的字段只能在当前包内访问：</p>
-<pre><code class="language-go">type Database struct {
-    host     string  // 私有字段
-    port     int     // 私有字段
-    username string  // 私有字段
-    password string  // 私有字段
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Database</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">host</span><span class="w">     </span><span class="kt">string</span><span class="w">  </span><span class="c1">// 私有字段</span>
+<span class="w">    </span><span class="nx">port</span><span class="w">     </span><span class="kt">int</span><span class="w">     </span><span class="c1">// 私有字段</span>
+<span class="w">    </span><span class="nx">username</span><span class="w"> </span><span class="kt">string</span><span class="w">  </span><span class="c1">// 私有字段</span>
+<span class="w">    </span><span class="nx">password</span><span class="w"> </span><span class="kt">string</span><span class="w">  </span><span class="c1">// 私有字段</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>字段命名最佳实践</p>
-<pre><code class="language-go">// 好的字段命名
-type User struct {
-    ID          int    // 简洁明了
-    FirstName   string // 使用大驼峰
-    LastName    string
-    Email       string
-    CreatedAt   time.Time // 包含类型信息
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 好的字段命名</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ID</span><span class="w">          </span><span class="kt">int</span><span class="w">    </span><span class="c1">// 简洁明了</span>
+<span class="w">    </span><span class="nx">FirstName</span><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="c1">// 使用大驼峰</span>
+<span class="w">    </span><span class="nx">LastName</span><span class="w">    </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">Email</span><span class="w">       </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">CreatedAt</span><span class="w">   </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="w"> </span><span class="c1">// 包含类型信息</span>
+<span class="p">}</span>
 
-// 不好的字段命名
-type User struct {
-    id          int    // 不要使用下划线
-    first_name  string // 不要使用下划线
-    LastName    string // 混合命名风格
-    emailAddress string // 冗余命名
-}
-</code></pre>
+<span class="c1">// 不好的字段命名</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">id</span><span class="w">          </span><span class="kt">int</span><span class="w">    </span><span class="c1">// 不要使用下划线</span>
+<span class="w">    </span><span class="nx">first_name</span><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="c1">// 不要使用下划线</span>
+<span class="w">    </span><span class="nx">LastName</span><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="c1">// 混合命名风格</span>
+<span class="w">    </span><span class="nx">emailAddress</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// 冗余命名</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="5-interface">5. 接口(Interface)命名规范</h2>
 <p>接口命名规范：</p>
 <ul>
@@ -2623,125 +2622,125 @@ type User struct {
 </ul>
 <h3 id="51">5.1. 单方法接口</h3>
 <p>对于只包含一个方法的接口，通常在方法名后加"-er"后缀：</p>
-<pre><code class="language-go">// 标准的单方法接口命名
-type Reader interface {
-    Read(p []byte) (n int, err error)
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 标准的单方法接口命名</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Reader</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Read</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
 
-type Writer interface {
-    Write(p []byte) (n int, err error)
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Writer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Write</span><span class="p">(</span><span class="nx">p</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="p">}</span>
 
-type Closer interface {
-    Close() error
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">Closer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Close</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span>
+<span class="p">}</span>
 
-type Stringer interface {
-    String() string
-}
-</code></pre>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Stringer</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">String</span><span class="p">()</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="52">5.2. 多方法接口</h3>
 <p>对于包含多个方法的接口，应使用描述性名称：</p>
-<pre><code class="language-go">// 多方法接口的命名
-type ReadWriter interface {
-    Reader
-    Writer
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 多方法接口的命名</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">ReadWriter</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Reader</span>
+<span class="w">    </span><span class="nx">Writer</span>
+<span class="p">}</span>
 
-type ReadWriteCloser interface {
-    Reader
-    Writer
-    Closer
-}
+<span class="kd">type</span><span class="w"> </span><span class="nx">ReadWriteCloser</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Reader</span>
+<span class="w">    </span><span class="nx">Writer</span>
+<span class="w">    </span><span class="nx">Closer</span>
+<span class="p">}</span>
 
-type FileSystem interface {
-    Open(name string) (File, error)
-    Stat(name string) (os.FileInfo, error)
-    Remove(name string) error
-}
-</code></pre>
+<span class="kd">type</span><span class="w"> </span><span class="nx">FileSystem</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Open</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">File</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">Stat</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">FileInfo</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">Remove</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="6">6. 函数和方法命名</h2>
 <h3 id="61">6.1. 函数命名规范</h3>
 <ul>
 <li>函数名应使用驼峰命名法，首字母大小写控制可见性。</li>
 <li>函数名应简单明了、描述其功能，而非实现细节。</li>
 </ul>
-<pre><code class="language-go">// 正确的函数命名
-func calculateTax(amount float64) float64 {
-    // 实现
-    return amount * 0.1
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 正确的函数命名</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">calculateTax</span><span class="p">(</span><span class="nx">amount</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="kt">float64</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 实现</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.1</span>
+<span class="p">}</span>
 
-func isValidEmail(email string) bool {
-    // 实现
-    return true
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">isValidEmail</span><span class="p">(</span><span class="nx">email</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 实现</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
 
-func newUser(name string) *User {
-    // 实现
-    return &amp;User{Name: name}
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">newUser</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 实现</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span><span class="w"> </span><span class="nx">name</span><span class="p">}</span>
+<span class="p">}</span>
 
-// 不正确的函数命名
-func is_valid_email(email string) bool {}    // 不要使用下划线
-</code></pre>
+<span class="c1">// 不正确的函数命名</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">is_valid_email</span><span class="p">(</span><span class="nx">email</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{}</span><span class="w">    </span><span class="c1">// 不要使用下划线</span>
+</code></pre></div>
 <h3 id="62">6.2. 方法命名规范</h3>
 <p>方法命名遵循与函数相同的规则：</p>
-<pre><code class="language-go">type User struct {
-    Name string
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-// 正确的方法命名
-func (u *User)SetName(name string) {
-    u.Name = name
-}
+<span class="c1">// 正确的方法命名</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="p">)</span><span class="nx">SetName</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">u</span><span class="p">.</span><span class="nx">Name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">name</span>
+<span class="p">}</span>
 
-func (u *User) IsValid() bool {
-    return u.Name != &quot;&quot;
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="nx">IsValid</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">u</span><span class="p">.</span><span class="nx">Name</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="p">}</span>
 
-// 不正确的方法命名
-func (u *User) set_name(name string) {} // 不要使用下划线
-func (u *User) IsValidUser() bool {}    // 冗余命名
-</code></pre>
+<span class="c1">// 不正确的方法命名</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="nx">set_name</span><span class="p">(</span><span class="nx">name</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">// 不要使用下划线</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="nx">IsValidUser</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{}</span><span class="w">    </span><span class="c1">// 冗余命名</span>
+</code></pre></div>
 <h3 id="63">6.3. 特殊函数命名</h3>
 <p>Go语言中有一些具有特殊含义的函数：</p>
-<pre><code class="language-go">// init 函数 - 包初始化函数
-func init() {
-    // 包初始化代码
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// init 函数 - 包初始化函数</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 包初始化代码</span>
+<span class="p">}</span>
 
-// main 函数 - 程序入口点
-func main() {
-    // 程序主逻辑
-}
+<span class="c1">// main 函数 - 程序入口点</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 程序主逻辑</span>
+<span class="p">}</span>
 
-// 测试函数 - 以 Test 开头
-func TestUserValidation(t *testing.T) {
-    // 测试代码
-}
+<span class="c1">// 测试函数 - 以 Test 开头</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TestUserValidation</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 测试代码</span>
+<span class="p">}</span>
 
-// 基准测试函数 - 以 Benchmark 开头
-func BenchmarkUserCreation(b *testing.B) {
-    // 基准测试代码
-}
-</code></pre>
+<span class="c1">// 基准测试函数 - 以 Benchmark 开头</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">BenchmarkUserCreation</span><span class="p">(</span><span class="nx">b</span><span class="w"> </span><span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">B</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 基准测试代码</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="7">7. 变量和常量命名</h2>
 <h3 id="71">7.1. 变量命名规范</h3>
 <ul>
 <li>全局变量名应使用驼峰命名法，首字母大小写控制可见性。</li>
 <li>函数内变量名应使用小驼峰命名法。</li>
 </ul>
-<pre><code class="language-go">// 正确的变量命名
-var userCount int
-var isLoggedIn bool
-var httpServer *http.Server
+<div class="highlight"><pre><span></span><code><span class="c1">// 正确的变量命名</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">userCount</span><span class="w"> </span><span class="kt">int</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">isLoggedIn</span><span class="w"> </span><span class="kt">bool</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">httpServer</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Server</span>
 
-// 不正确的变量命名
-var UserCount int        // 不要使用大驼峰（除非是导出变量）
-var is_logged_in bool    // 不要使用下划线
-var http_server *http.Server // 不要使用下划线
-</code></pre>
+<span class="c1">// 不正确的变量命名</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">UserCount</span><span class="w"> </span><span class="kt">int</span><span class="w">        </span><span class="c1">// 不要使用大驼峰（除非是导出变量）</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">is_logged_in</span><span class="w"> </span><span class="kt">bool</span><span class="w">    </span><span class="c1">// 不要使用下划线</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">http_server</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Server</span><span class="w"> </span><span class="c1">// 不要使用下划线</span>
+</code></pre></div>
 <h3 id="72">7.2. 常量命名规范</h3>
 <ul>
 <li>不导出的常量使用小驼峰命名法。</li>
@@ -2750,90 +2749,90 @@ var http_server *http.Server // 不要使用下划线
 <li>全大写加下划线（传统风格）</li>
 </ul>
 <h4 id="721">7.2.1. 大驼峰命名法（用于导出常量）</h4>
-<pre><code class="language-go">const (
-    MaxBufferSize = 1024
-    DefaultPort   = 8080
-    StatusOK      = 200
-)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">MaxBufferSize</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1024</span>
+<span class="w">    </span><span class="nx">DefaultPort</span><span class="w">   </span><span class="p">=</span><span class="w"> </span><span class="mi">8080</span>
+<span class="w">    </span><span class="nx">StatusOK</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="mi">200</span>
+<span class="p">)</span>
+</code></pre></div>
 <h4 id="722">7.2.2. 全大写加下划线（传统风格）</h4>
-<pre><code class="language-go">const (
-    MAX_BUFFER_SIZE = 1024
-    DEFAULT_PORT    = 8080
-    STATUS_OK       = 200
-)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">MAX_BUFFER_SIZE</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1024</span>
+<span class="w">    </span><span class="nx">DEFAULT_PORT</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="mi">8080</span>
+<span class="w">    </span><span class="nx">STATUS_OK</span><span class="w">       </span><span class="p">=</span><span class="w"> </span><span class="mi">200</span>
+<span class="p">)</span>
+</code></pre></div>
 <h3 id="73">7.3. 特殊变量命名</h3>
 <h4 id="731">7.3.1. 占位符</h4>
 <p>使用占位符下划线(_)表示忽略的值：</p>
-<pre><code class="language-go">// 忽略错误
-_, err := someFunction()
-if err != nil {
-    // 处理错误
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 忽略错误</span>
+<span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">someFunction</span><span class="p">()</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 处理错误</span>
+<span class="p">}</span>
 
-// 忽略索引
-for _, value := range slice {
-    fmt.Println(value)
-}
+<span class="c1">// 忽略索引</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">slice</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 忽略值
-for i, _ := range slice {
-    fmt.Println(i)
-}
-</code></pre>
+<span class="c1">// 忽略值</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">slice</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="732">7.3.2. 短变量名</h4>
 <p>在短作用域内可以使用短变量名：</p>
-<pre><code class="language-go">// 在循环中使用短变量名
-for i := 0; i &lt; 10; i++ {
-    // ...
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 在循环中使用短变量名</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
 
-// 在条件语句中使用短变量名
-if n := len(items); n &gt; 0 {
-    // ...
-}
-</code></pre>
+<span class="c1">// 在条件语句中使用短变量名</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="8">8. 命名最佳实践</h2>
 <h3 id="81">8.1. 选择有意义的名称</h3>
 <p>选择能够清晰表达意图的名称：</p>
-<pre><code class="language-go">// 好的命名
-var userCount int
-var isLoggedIn bool
-func calculateTax(amount float64) float64
+<div class="highlight"><pre><span></span><code><span class="c1">// 好的命名</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">userCount</span><span class="w"> </span><span class="kt">int</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">isLoggedIn</span><span class="w"> </span><span class="kt">bool</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">calculateTax</span><span class="p">(</span><span class="nx">amount</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="kt">float64</span>
 
-// 不好的命名
-var x int
-var flag bool
-func calc(x float64) float64
-</code></pre>
+<span class="c1">// 不好的命名</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="kt">int</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">flag</span><span class="w"> </span><span class="kt">bool</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">calc</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="kt">float64</span><span class="p">)</span><span class="w"> </span><span class="kt">float64</span>
+</code></pre></div>
 <h3 id="82">8.2. 避免冗余信息</h3>
 <p>避免在名称中包含类型信息或包名：</p>
-<pre><code class="language-go">// 好的命名
-type User struct {
-    Name string
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 好的命名</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func (u *User) Save() error
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="nx">Save</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span>
 
-// 不好的命名
-type UserStruct struct {
-    UserNameString string
-}
+<span class="c1">// 不好的命名</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">UserStruct</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">UserNameString</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-func (u *User) SaveUserToDatabase() error
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="nx">SaveUserToDatabase</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span>
+</code></pre></div>
 <h3 id="83">8.3. 保持一致性</h3>
 <p>在整个项目中保持命名风格的一致性：</p>
-<pre><code class="language-go">// 保持一致的命名风格
-var userName string
-var userAge int
-var userEmail string
+<div class="highlight"><pre><span></span><code><span class="c1">// 保持一致的命名风格</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">userName</span><span class="w"> </span><span class="kt">string</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">userAge</span><span class="w"> </span><span class="kt">int</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">userEmail</span><span class="w"> </span><span class="kt">string</span>
 
-func validateUser(user *User) bool
-func saveUser(user *User) error、
-func deleteUser(user *User) error
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">validateUser</span><span class="p">(</span><span class="nx">user</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">saveUser</span><span class="p">(</span><span class="nx">user</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="err">、</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">deleteUser</span><span class="p">(</span><span class="nx">user</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span>
+</code></pre></div>
 <h2 id="9">9. 总结</h2>
 <p>命名规范关键要点总结：</p>
 <ol>

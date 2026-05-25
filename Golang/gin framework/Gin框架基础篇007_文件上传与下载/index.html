@@ -1876,59 +1876,58 @@
 </li>
 </ul>
 <p><strong>示例：</strong></p>
-<pre><code class="language-go">func TestUpload(c *gin.Context) {
-    // 获取上传的文件
-    file, err := c.FormFile(&quot;file&quot;)
-    if err != nil {
-        c.JSON(200, gin.H{
-            &quot;message&quot;: &quot;上传失败&quot;,
-        })
-        return
-    }
-    // 保存文件
-    err = c.SaveUploadedFile(file, &quot;upload/&quot;+file.Filename)
-    if err != nil {
-        c.JSON(200, gin.H{
-            &quot;message&quot;: &quot;保存失败&quot;,
-        })
-        return
-    }
-    c.JSON(200, gin.H{
-        &quot;message&quot;: &quot;上传成功&quot;,
-    })
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">TestUpload</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 获取上传的文件</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">FormFile</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;上传失败&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 保存文件</span>
+<span class="w">    </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">SaveUploadedFile</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;upload/&quot;</span><span class="o">+</span><span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;保存失败&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;上传成功&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="12">1.2. 多文件上传</h3>
 <p>在需要同时上传多个文件的场景，如批量图片上传、多个文档上传等。可以使用 <code>c.MultipartForm()</code> 方法获取多个文件，然后遍历处理。</p>
 <p><strong>示例：</strong></p>
-<pre><code class="language-go">
-func TestUploadMulti(c *gin.Context) {
-    // 获取上传的文件
-    form, err := c.MultipartForm()
-    if err != nil {
-        c.JSON(200, gin.H{
-            &quot;message&quot;: &quot;解析失败&quot;,
-        })
-        return
-    }
-    files := form.File[&quot;files&quot;]
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">TestUploadMulti</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 获取上传的文件</span>
+<span class="w">    </span><span class="nx">form</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">MultipartForm</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;解析失败&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">files</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">form</span><span class="p">.</span><span class="nx">File</span><span class="p">[</span><span class="s">&quot;files&quot;</span><span class="p">]</span>
 
-    // 保存文件
-    for _, file := range files {
-        err = c.SaveUploadedFile(file, &quot;upload/&quot;+file.Filename)
-        if err != nil {
-            c.JSON(200, gin.H{
-                &quot;message&quot;: &quot;保存失败&quot;,
-            })
-            return
-        }
-    }
+<span class="w">    </span><span class="c1">// 保存文件</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">files</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">SaveUploadedFile</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;upload/&quot;</span><span class="o">+</span><span class="nx">file</span><span class="p">.</span><span class="nx">Filename</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;保存失败&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    c.JSON(200, gin.H{
-        &quot;message&quot;: &quot;上传成功&quot;,
-    })
-}
-</code></pre>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;上传成功&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="13">1.3. 内存大小限制</h3>
 <p><code>gin.Engine</code>中提供了一个<code>MaxMultipartMemory</code>属性，用于设置解析多部分表单时最大的内存限制。</p>
 <blockquote>
@@ -1936,11 +1935,11 @@ func TestUploadMulti(c *gin.Context) {
 </blockquote>
 <p><strong>特别注意：</strong> <code>MaxMultipartMemory</code>参数定义了将请求体存储到磁盘之前，内存中可以缓存的最大字节数。如果上传的文件大小低于该参数，文件会被加载到内存中处理；如果上传的文件大小高于该参数，文件会被直接写入临时磁盘文件，不会因为超过内存限制而失败。</p>
 <p>示例：</p>
-<pre><code class="language-go">router := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-// 设置内存限制
-router.MaxMultipartMemory = 8 &lt;&lt; 20
-</code></pre>
+<span class="c1">// 设置内存限制</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">MaxMultipartMemory</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">20</span>
+</code></pre></div>
 <h2 id="2">2. 文件下载</h2>
 <p>文件下载功能允许用户从服务器获取文件，Gin提供了多种方式实现文件下载：</p>
 <ul>
@@ -1954,99 +1953,99 @@ router.MaxMultipartMemory = 8 &lt;&lt; 20
 <p><code>c.File()</code>方法会将文件内容直接发送到HTTP响应。</p>
 <p>该方法会将指定路径的文件内容作为HTTP响应体发送给客户端。如果没有设置Content-Type，方法会根据文件扩展名自动设置Content-Type。方法不会自动设置Content-Disposition，这意味着浏览器可能会在新窗口中显示文件内容（如图片、PDF等），而不是下载。如果想要浏览器直接下载文件，需要手动设置Content-Disposition。</p>
 <p><strong>示例：</strong></p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;os&quot;
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;os&quot;</span>
 
-    &quot;github.com/gin-gonic/gin&quot;
-)
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    r := gin.Default()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-    // 提供文件下载
-    r.GET(&quot;/download/:filename&quot;, func(c *gin.Context) {
-        filename := c.Param(&quot;filename&quot;)
-        filepath := fmt.Sprintf(&quot;./uploads/%s&quot;, filename)
+<span class="w">    </span><span class="c1">// 提供文件下载</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/download/:filename&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">filename</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">filepath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;./uploads/%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">filename</span><span class="p">)</span>
 
-        // 检查文件是否存在
-        if _, err := os.Stat(filepath); os.IsNotExist(err) {
-            c.JSON(404, gin.H{
-                &quot;error&quot;: &quot;文件不存在&quot;,
-            })
-            return
-        }
+<span class="w">        </span><span class="c1">// 检查文件是否存在</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Stat</span><span class="p">(</span><span class="nx">filepath</span><span class="p">);</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">IsNotExist</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;文件不存在&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="p">})</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="p">}</span>
 
-        c.File(filepath)
-    })
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">File</span><span class="p">(</span><span class="nx">filepath</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.Run(&quot;:8080&quot;)
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="22-fileattachment">2.2. 强制下载 FileAttachment</h3>
 <p>与<code>c.File</code>方法类似，但 <code>c.FileAttachment()</code>方法会自动设置Content-Disposition为attachment，强制浏览器下载文件而不是在浏览器中打开。
 此方法特别适用于需要确保文件被下载而不是在浏览器中直接显示的场景。</p>
 <p><strong>示例：</strong></p>
-<pre><code class="language-go">r.GET(&quot;/download-attachment/:filename&quot;, func(c *gin.Context) {
-    filename := c.Param(&quot;filename&quot;)
-    filepath := fmt.Sprintf(&quot;./uploads/%s&quot;, filename)
+<div class="highlight"><pre><span></span><code><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/download-attachment/:filename&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">filename</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">filepath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;./uploads/%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">filename</span><span class="p">)</span>
 
-    // 检查文件是否存在
-    if _, err := os.Stat(filepath); os.IsNotExist(err) {
-        c.JSON(404, gin.H{
-            &quot;error&quot;: &quot;文件不存在&quot;,
-        })
-        return
-    }
+<span class="w">    </span><span class="c1">// 检查文件是否存在</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Stat</span><span class="p">(</span><span class="nx">filepath</span><span class="p">);</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">IsNotExist</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;文件不存在&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 使用FileAttachment自动设置下载头
-    c.FileAttachment(filepath, filename)
-})
-</code></pre>
+<span class="w">    </span><span class="c1">// 使用FileAttachment自动设置下载头</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">FileAttachment</span><span class="p">(</span><span class="nx">filepath</span><span class="p">,</span><span class="w"> </span><span class="nx">filename</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
 <h3 id="23-filefromfs">2.3. 从文件系统下载 FileFromFS</h3>
 <p>使用 c.FileFromFS()从指定的文件系统中提供文件下载，这在需要限制访问路径或使用虚拟文件系统时非常有用。
 该方法允许你使用 Go 的 <code>embed.FS</code> 或 <code>http.FileSystem</code> 接口来提供文件服务，可以更好地控制访问权限和安全性。</p>
 <p><strong>示例：</strong></p>
-<pre><code class="language-go">r.GET(&quot;/download-fs/*filepath&quot;, func(c *gin.Context) {
-    // 使用http.Dir创建一个文件系统
-    fs := http.Dir(&quot;./uploads&quot;)
+<div class="highlight"><pre><span></span><code><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/download-fs/*filepath&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 使用http.Dir创建一个文件系统</span>
+<span class="w">    </span><span class="nx">fs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">Dir</span><span class="p">(</span><span class="s">&quot;./uploads&quot;</span><span class="p">)</span>
 
-    // 获取请求的文件路径
-    requestedFile := c.Param(&quot;filepath&quot;)[1:] // 去掉开头的&quot;/&quot;
+<span class="w">    </span><span class="c1">// 获取请求的文件路径</span>
+<span class="w">    </span><span class="nx">requestedFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;filepath&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span><span class="w"> </span><span class="c1">// 去掉开头的&quot;/&quot;</span>
 
-    // 从文件系统提供文件 - 参数顺序应为 (filepath, fs)
-    c.FileFromFS(requestedFile, http.FS(fs))
-})
-</code></pre>
+<span class="w">    </span><span class="c1">// 从文件系统提供文件 - 参数顺序应为 (filepath, fs)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">FileFromFS</span><span class="p">(</span><span class="nx">requestedFile</span><span class="p">,</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">FS</span><span class="p">(</span><span class="nx">fs</span><span class="p">))</span>
+<span class="p">})</span>
+</code></pre></div>
 <h3 id="24-data">2.4. 从字节数组下载 Data</h3>
 <p>使用 <code>c.Data()</code>方法从字节数组提供文件内容，适用于需要在内存中生成内容后下载的场景。
 该方法接收状态码、内容类型和字节数组作为参数，直接将字节数组内容作为响应体发送。适用于小文件或已经加载到内存中的数据。</p>
 <p><strong>示例：</strong></p>
-<pre><code class="language-go">r.GET(&quot;/download-data/:filename&quot;, func(c *gin.Context) {
-    filename := c.Param(&quot;filename&quot;)
-    filepath := fmt.Sprintf(&quot;./uploads/%s&quot;, filename)
+<div class="highlight"><pre><span></span><code><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/download-data/:filename&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">filename</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">filepath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;./uploads/%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">filename</span><span class="p">)</span>
 
-    // 读取文件内容到字节数组
-    fileBytes, err := os.ReadFile(filepath)  // 使用 os.ReadFile 替代已废弃的 ioutil.ReadFile
-    if err != nil {
-        c.JSON(404, gin.H{
-            &quot;error&quot;: &quot;文件不存在&quot;,
-        })
-        return
-    }
+<span class="w">    </span><span class="c1">// 读取文件内容到字节数组</span>
+<span class="w">    </span><span class="nx">fileBytes</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="nx">filepath</span><span class="p">)</span><span class="w">  </span><span class="c1">// 使用 os.ReadFile 替代已废弃的 ioutil.ReadFile</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;文件不存在&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 设置响应头，强制下载
-    c.Header(&quot;Content-Description&quot;, &quot;File Transfer&quot;)
-    c.Header(&quot;Content-Transfer-Encoding&quot;, &quot;binary&quot;)
-    c.Header(&quot;Content-Disposition&quot;, &quot;attachment; filename=&quot;+filename)
-    c.Header(&quot;Content-Type&quot;, &quot;application/octet-stream&quot;)
+<span class="w">    </span><span class="c1">// 设置响应头，强制下载</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Header</span><span class="p">(</span><span class="s">&quot;Content-Description&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;File Transfer&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Header</span><span class="p">(</span><span class="s">&quot;Content-Transfer-Encoding&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;binary&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Header</span><span class="p">(</span><span class="s">&quot;Content-Disposition&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;attachment; filename=&quot;</span><span class="o">+</span><span class="nx">filename</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Header</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/octet-stream&quot;</span><span class="p">)</span>
 
-    // 使用Data方法发送字节数组
-    c.Data(200, &quot;application/octet-stream&quot;, fileBytes)
-})
-</code></pre>
+<span class="w">    </span><span class="c1">// 使用Data方法发送字节数组</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Data</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/octet-stream&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">fileBytes</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
 <h3 id="25-datafromreader">2.5. 流式下载 DataFromReader</h3>
 <p>与c.File和c.FileAttachment不同，c.DataFromReader()是真正的流式下载方法，可以从任何实现了io.Reader接口的对象读取数据并流式传输。
 该方法适用于需要完全控制数据流的场景，如处理大文件、网络流或其他数据源，有效避免内存溢出问题。</p>
@@ -2054,36 +2053,36 @@ func main() {
 <p>虽然c.File方法内部使用了Go标准库的http.ServeFile，通常会使用操作系统提供的零拷贝技术（如sendfile）来传输文件，不会将整个文件加载到内存中，但c.DataFromReader()提供了更灵活的流式传输方式，特别适合处理非文件类型的数据源。</p>
 </blockquote>
 <p><strong>示例：</strong></p>
-<pre><code class="language-go">r.GET(&quot;/stream-download/:filename&quot;, func(c *gin.Context) {
-    filename := c.Param(&quot;filename&quot;)
-    filepath := fmt.Sprintf(&quot;./uploads/%s&quot;, filename)
+<div class="highlight"><pre><span></span><code><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/stream-download/:filename&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">filename</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Param</span><span class="p">(</span><span class="s">&quot;filename&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">filepath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;./uploads/%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">filename</span><span class="p">)</span>
 
-    file, err := os.Open(filepath)
-    if err != nil {
-        c.JSON(404, gin.H{
-            &quot;error&quot;: &quot;文件不存在&quot;,
-        })
-        return
-    }
-    defer file.Close()
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="nx">filepath</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;文件不存在&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
-    // 获取文件信息
-    fileInfo, err := file.Stat()
-    if err != nil {
-        c.JSON(500, gin.H{
-            &quot;error&quot;: &quot;获取文件信息失败&quot;,
-        })
-        return
-    }
+<span class="w">    </span><span class="c1">// 获取文件信息</span>
+<span class="w">    </span><span class="nx">fileInfo</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Stat</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+<span class="w">            </span><span class="s">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;获取文件信息失败&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 设置响应头
-    c.Header(&quot;Content-Disposition&quot;, &quot;attachment; filename=&quot;+filename)
-    c.Header(&quot;Content-Type&quot;, &quot;application/octet-stream&quot;)
+<span class="w">    </span><span class="c1">// 设置响应头</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Header</span><span class="p">(</span><span class="s">&quot;Content-Disposition&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;attachment; filename=&quot;</span><span class="o">+</span><span class="nx">filename</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">Header</span><span class="p">(</span><span class="s">&quot;Content-Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/octet-stream&quot;</span><span class="p">)</span>
 
-    // 流式传输文件内容
-    c.DataFromReader(200, fileInfo.Size(), &quot;application/octet-stream&quot;, file, nil)
-})
-</code></pre>
+<span class="w">    </span><span class="c1">// 流式传输文件内容</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">DataFromReader</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">fileInfo</span><span class="p">.</span><span class="nx">Size</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;application/octet-stream&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
 
 
 

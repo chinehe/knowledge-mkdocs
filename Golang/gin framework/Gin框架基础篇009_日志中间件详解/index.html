@@ -1924,15 +1924,15 @@
 <p>Gin框架内置了日志中间件，它们记录HTTP请求的基本信息。</p>
 <h3 id="11">1.1. 默认日志中间件</h3>
 <p><code>gin.Default()</code>默认使用了<code>gin.Logger()</code>中间件。</p>
-<pre><code class="language-go">func Default(opts ...OptionFunc) *Engine {
-    debugPrintWARNINGDefault()
-    engine := New()
-    engine.Use(Logger(), Recovery()) // 默认使用了gin.Logger()中间件
-    return engine.With(opts...)
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">Default</span><span class="p">(</span><span class="nx">opts</span><span class="w"> </span><span class="o">...</span><span class="nx">OptionFunc</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">Engine</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">debugPrintWARNINGDefault</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">engine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">New</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">engine</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">Logger</span><span class="p">(),</span><span class="w"> </span><span class="nx">Recovery</span><span class="p">())</span><span class="w"> </span><span class="c1">// 默认使用了gin.Logger()中间件</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">engine</span><span class="p">.</span><span class="nx">With</span><span class="p">(</span><span class="nx">opts</span><span class="o">...</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>输出格式类似：</p>
-<pre><code>[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+<div class="highlight"><pre><span></span><code>[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
 
 [GIN-debug] [WARNING] Running in &quot;debug&quot; mode. Switch to &quot;release&quot; mode in production.
  - using env:   export GIN_MODE=release
@@ -1944,15 +1944,15 @@ Please check https://github.com/gin-gonic/gin/blob/master/docs/doc.md#dont-trust
 [GIN-debug] Environment variable PORT is undefined. Using port :8080 by default
 [GIN-debug] Listening and serving HTTP on :8080
 [GIN] 2025/12/29 - 15:40:59 | 200 |     256.625µs |       127.0.0.1 | GET      &quot;/test/ping&quot;
-</code></pre>
+</code></pre></div>
 <h3 id="12-debug">1.2. 禁用debug日志</h3>
 <p>gin框架默认使用<code>Debug</code>模式，所以上面的示例中会有很多<code>GIN-debug</code>日志。如果不想打印这些日志，可以将gin模式改为生产模式：</p>
-<pre><code class="language-go">gin.SetMode(gin.ReleaseMode) // 指定为生产模式
-router := gin.Default()
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">gin</span><span class="p">.</span><span class="nx">SetMode</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">ReleaseMode</span><span class="p">)</span><span class="w"> </span><span class="c1">// 指定为生产模式</span>
+<span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+</code></pre></div>
 <p>日志示例：</p>
-<pre><code class="language-go">[GIN] 2025/12/29 - 15:44:41 | 200 |     320.666µs |       127.0.0.1 | GET      &quot;/test/ping&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="nx">GIN</span><span class="p">]</span><span class="w"> </span><span class="mi">2025</span><span class="o">/</span><span class="mi">12</span><span class="o">/</span><span class="mi">29</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">15</span><span class="p">:</span><span class="mi">44</span><span class="p">:</span><span class="mi">41</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="mf">320.666</span><span class="nx">µs</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="mf">127.0.0.1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">GET</span><span class="w">      </span><span class="s">&quot;/test/ping&quot;</span>
+</code></pre></div>
 <p>可以看到，<code>GIN-debug</code>日志都消失了！</p>
 <h3 id="13">1.3. 控制日志颜色</h3>
 <p>根据检测到的 TTY，控制台的日志输出默认是有颜色的。</p>
@@ -1961,38 +1961,37 @@ router := gin.Default()
 <li><code>gin.DisableConsoleColor()</code>：禁用颜色打印。</li>
 <li><code>gin.ForceConsoleColor()</code>：强制颜色打印。</li>
 </ul>
-<pre><code class="language-go">// 禁用颜色打印
-gin.DisableConsoleColor()
-router := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="c1">// 禁用颜色打印</span>
+<span class="nx">gin</span><span class="p">.</span><span class="nx">DisableConsoleColor</span><span class="p">()</span>
+<span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
-// 强制颜色打印
-gin.ForceConsoleColor()
-router := gin.Default()
-
-</code></pre>
+<span class="c1">// 强制颜色打印</span>
+<span class="nx">gin</span><span class="p">.</span><span class="nx">ForceConsoleColor</span><span class="p">()</span>
+<span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+</code></pre></div>
 <h3 id="14">1.4. 自定义日志中间件</h3>
 <h4 id="141">1.4.1. 日志配置项</h4>
 <p><code>gin</code>框架底层，使用<code>gin.LoggerConfig</code>来配置日志中间件。</p>
-<pre><code class="language-go">// LoggerConfig 定义日志中间件的配置
-type LoggerConfig struct {
-    // 格式化方法，默认为gin.defaultLogFormatter
-    Formatter LogFormatter
+<div class="highlight"><pre><span></span><code><span class="c1">// LoggerConfig 定义日志中间件的配置</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">LoggerConfig</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 格式化方法，默认为gin.defaultLogFormatter</span>
+<span class="w">    </span><span class="nx">Formatter</span><span class="w"> </span><span class="nx">LogFormatter</span>
 
-    // 日志输出位置，默认为gin.DefaultWriter
-    Output io.Writer
+<span class="w">    </span><span class="c1">// 日志输出位置，默认为gin.DefaultWriter</span>
+<span class="w">    </span><span class="nx">Output</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span>
 
-    // 不输出日志的URL路径
-    SkipPaths []string
+<span class="w">    </span><span class="c1">// 不输出日志的URL路径</span>
+<span class="w">    </span><span class="nx">SkipPaths</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span>
 
-    // 自定义方法，用于判断哪些日志不需要输出
-    Skip Skipper
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 自定义方法，用于判断哪些日志不需要输出</span>
+<span class="w">    </span><span class="nx">Skip</span><span class="w"> </span><span class="nx">Skipper</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>默认的<code>gin.Logger()</code>中间件源码如下：</p>
-<pre><code class="language-go">func Logger() HandlerFunc {
-    return LoggerWithConfig(LoggerConfig{})
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">Logger</span><span class="p">()</span><span class="w"> </span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">LoggerWithConfig</span><span class="p">(</span><span class="nx">LoggerConfig</span><span class="p">{})</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>从源码看到，该日志中间件使用的是默认配置：</p>
 <ul>
 <li>格式化方法为<code>gin.defaultLogFormatter</code>。</li>
@@ -2007,183 +2006,183 @@ type LoggerConfig struct {
 <li><code>gin.LoggerWithWriter(out io.Writer, notlogged ...string)</code>：自定义日志输出位置，以及不需要输出日志的路径。</li>
 </ul>
 <p>源码：</p>
-<pre><code class="language-go">// LoggerWithFormatter instance a Logger middleware with the specified log format function.
-func LoggerWithFormatter(f LogFormatter) HandlerFunc {
-    return LoggerWithConfig(LoggerConfig{
-        Formatter: f,
-    })
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// LoggerWithFormatter instance a Logger middleware with the specified log format function.</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">LoggerWithFormatter</span><span class="p">(</span><span class="nx">f</span><span class="w"> </span><span class="nx">LogFormatter</span><span class="p">)</span><span class="w"> </span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">LoggerWithConfig</span><span class="p">(</span><span class="nx">LoggerConfig</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Formatter</span><span class="p">:</span><span class="w"> </span><span class="nx">f</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
 
-// LoggerWithWriter instance a Logger middleware with the specified writer buffer.
-// Example: os.Stdout, a file opened in write mode, a socket...
-func LoggerWithWriter(out io.Writer, notlogged ...string) HandlerFunc {
-    return LoggerWithConfig(LoggerConfig{
-        Output:    out,
-        SkipPaths: notlogged,
-    })
-}
-</code></pre>
+<span class="c1">// LoggerWithWriter instance a Logger middleware with the specified writer buffer.</span>
+<span class="c1">// Example: os.Stdout, a file opened in write mode, a socket...</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">LoggerWithWriter</span><span class="p">(</span><span class="nx">out</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span><span class="w"> </span><span class="nx">notlogged</span><span class="w"> </span><span class="o">...</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">HandlerFunc</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">LoggerWithConfig</span><span class="p">(</span><span class="nx">LoggerConfig</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Output</span><span class="p">:</span><span class="w">    </span><span class="nx">out</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">SkipPaths</span><span class="p">:</span><span class="w"> </span><span class="nx">notlogged</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>可以看到，另外两个方法底层，调用的依旧是<code>gin.LoggerWithConfig(conf LoggerConfig)</code>方法！</p>
 <h4 id="143">1.4.3. 自定义日志格式示例</h4>
 <p>如果需要自定义日志格式，可以使用<code>gin.LoggerWithFormatter()</code>：</p>
-<pre><code class="language-go">r.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
-    return fmt.Sprintf(&quot;%s - [%s] \&quot;%s %s %s %d %s \&quot;%s\&quot; %s\&quot;\n&quot;,
-        param.ClientIP,
-        param.TimeStamp.Format(time.RFC1123),
-        param.Method,
-        param.Path,
-        param.Request.Proto,
-        param.StatusCode,
-        param.Latency,
-        param.Request.UserAgent(),
-        param.ErrorMessage,
-    )
-}))
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">LoggerWithFormatter</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">param</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">LogFormatterParams</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;%s - [%s] \&quot;%s %s %s %d %s \&quot;%s\&quot; %s\&quot;\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">param</span><span class="p">.</span><span class="nx">ClientIP</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">param</span><span class="p">.</span><span class="nx">TimeStamp</span><span class="p">.</span><span class="nx">Format</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">RFC1123</span><span class="p">),</span>
+<span class="w">        </span><span class="nx">param</span><span class="p">.</span><span class="nx">Method</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">param</span><span class="p">.</span><span class="nx">Path</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">param</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">Proto</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">param</span><span class="p">.</span><span class="nx">StatusCode</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">param</span><span class="p">.</span><span class="nx">Latency</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">param</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">UserAgent</span><span class="p">(),</span>
+<span class="w">        </span><span class="nx">param</span><span class="p">.</span><span class="nx">ErrorMessage</span><span class="p">,</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">}))</span>
+</code></pre></div>
 <h4 id="144">1.4.4. 自定义日志输出位置示例</h4>
 <p>通过修改<code>gin.DefaultWriter</code>来设置输出位置：</p>
-<pre><code class="language-go">// 输出到文件
-f, _ := os.Create(&quot;gin.log&quot;)
-gin.DefaultWriter = io.MultiWriter(f)
-r := gin.Default()
+<div class="highlight"><pre><span></span><code><span class="c1">// 输出到文件</span>
+<span class="nx">f</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="s">&quot;gin.log&quot;</span><span class="p">)</span>
+<span class="nx">gin</span><span class="p">.</span><span class="nx">DefaultWriter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">MultiWriter</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
+<span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
 
 
 
-// 同时输出到控制台和文件
-f, _ := os.Create(&quot;gin.log&quot;)
-gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
-r := gin.Default()
-</code></pre>
+<span class="c1">// 同时输出到控制台和文件</span>
+<span class="nx">f</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Create</span><span class="p">(</span><span class="s">&quot;gin.log&quot;</span><span class="p">)</span>
+<span class="nx">gin</span><span class="p">.</span><span class="nx">DefaultWriter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">MultiWriter</span><span class="p">(</span><span class="nx">f</span><span class="p">,</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">)</span>
+<span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+</code></pre></div>
 <p>通过<code>gin.LoggerWithWriter(out io.Writer, notlogged ...string)</code>来设置输出位置：</p>
-<pre><code class="language-go">// 同时输出到控制台和文件
-logFile, _ := os.OpenFile(&quot;./logs/gin.log&quot;, os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)
-router := gin.New()
-router.Use(gin.LoggerWithWriter(io.MultiWriter(logFile, os.Stdout)))
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 同时输出到控制台和文件</span>
+<span class="nx">logFile</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">OpenFile</span><span class="p">(</span><span class="s">&quot;./logs/gin.log&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">O_CREATE</span><span class="o">|</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_RDWR</span><span class="o">|</span><span class="nx">os</span><span class="p">.</span><span class="nx">O_APPEND</span><span class="p">,</span><span class="w"> </span><span class="mo">0666</span><span class="p">)</span>
+<span class="nx">router</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">LoggerWithWriter</span><span class="p">(</span><span class="nx">io</span><span class="p">.</span><span class="nx">MultiWriter</span><span class="p">(</span><span class="nx">logFile</span><span class="p">,</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">)))</span>
+</code></pre></div>
 <h2 id="2">2. 集成第三方日志插件</h2>
 <p>Gin框架内置的日志中间件不直接支持日志级别控制等功能，但可以通过集成第三方日志插件实现，如<code>logrus</code>、<code>zap</code>等。</p>
 <h3 id="21-logrus">2.1. 集成 logrus</h3>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;github.com/sirupsen/logrus&quot;
-    &quot;os&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;github.com/sirupsen/logrus&quot;</span>
+<span class="w">    </span><span class="s">&quot;os&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    // 设置logrus格式
-    log := logrus.New()
-    log.SetFormatter(&amp;logrus.JSONFormatter{})
-    log.SetOutput(os.Stdout)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 设置logrus格式</span>
+<span class="w">    </span><span class="nx">log</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">logrus</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">SetFormatter</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">JSONFormatter</span><span class="p">{})</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">SetOutput</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">)</span>
 
-    // 设置日志级别
-    log.SetLevel(logrus.InfoLevel)
+<span class="w">    </span><span class="c1">// 设置日志级别</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">SetLevel</span><span class="p">(</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">InfoLevel</span><span class="p">)</span>
 
-    r := gin.New()
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
 
-    // 自定义日志中间件
-    r.Use(func(c *gin.Context) {
-        start := time.Now()
+<span class="w">    </span><span class="c1">// 自定义日志中间件</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">start</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">()</span>
 
-        c.Next()
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
 
-        latency := time.Since(start)
+<span class="w">        </span><span class="nx">latency</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Since</span><span class="p">(</span><span class="nx">start</span><span class="p">)</span>
 
-        clientIP := c.ClientIP()
-        method := c.Request.Method
-        statusCode := c.Writer.Status()
-        path := c.Request.URL.Path
+<span class="w">        </span><span class="nx">clientIP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">ClientIP</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">method</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">Method</span>
+<span class="w">        </span><span class="nx">statusCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Writer</span><span class="p">.</span><span class="nx">Status</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">path</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span>
 
-        if len(c.Errors) &gt; 0 {
-            // 错误日志
-            log.WithFields(logrus.Fields{
-                &quot;latency&quot;: latency,
-                &quot;client_ip&quot;: clientIP,
-                &quot;method&quot;: method,
-                &quot;status_code&quot;: statusCode,
-                &quot;path&quot;: path,
-                &quot;errors&quot;: c.Errors.ByType(gin.ErrorTypePrivate).Strings(),
-            }).Error(&quot;Request Error&quot;)
-        } else {
-            // 普通请求日志
-            log.WithFields(logrus.Fields{
-                &quot;latency&quot;: latency,
-                &quot;client_ip&quot;: clientIP,
-                &quot;method&quot;: method,
-                &quot;status_code&quot;: statusCode,
-                &quot;path&quot;: path,
-            }).Info(&quot;Request Info&quot;)
-        }
-    })
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 错误日志</span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">WithFields</span><span class="p">(</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">Fields</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;latency&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">latency</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;client_ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">clientIP</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">method</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;status_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">statusCode</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">path</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">.</span><span class="nx">ByType</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">ErrorTypePrivate</span><span class="p">).</span><span class="nx">Strings</span><span class="p">(),</span>
+<span class="w">            </span><span class="p">}).</span><span class="nx">Error</span><span class="p">(</span><span class="s">&quot;Request Error&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 普通请求日志</span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">WithFields</span><span class="p">(</span><span class="nx">logrus</span><span class="p">.</span><span class="nx">Fields</span><span class="p">{</span>
+<span class="w">                </span><span class="s">&quot;latency&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">latency</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;client_ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">clientIP</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">method</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;status_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">statusCode</span><span class="p">,</span>
+<span class="w">                </span><span class="s">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="nx">path</span><span class="p">,</span>
+<span class="w">            </span><span class="p">}).</span><span class="nx">Info</span><span class="p">(</span><span class="s">&quot;Request Info&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.GET(&quot;/hello&quot;, func(c *gin.Context) {
-        c.JSON(200, gin.H{&quot;message&quot;: &quot;Hello World&quot;})
-    })
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.GET(&quot;/error&quot;, func(c *gin.Context) {
-        c.AbortWithError(500, errors.New(&quot;internal error&quot;))
-    })
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/error&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">AbortWithError</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;internal error&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.Run()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="22-zap">2.2 集成 zap</h3>
 <p>Zap是Uber开源的高性能日志库，适合对性能要求较高的场景：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;github.com/gin-gonic/gin&quot;
-    &quot;go.uber.org/zap&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="w">    </span><span class="s">&quot;go.uber.org/zap&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    logger, _ := zap.NewProduction()
-    defer logger.Sync() // 确保缓冲区日志被刷新
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">logger</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">zap</span><span class="p">.</span><span class="nx">NewProduction</span><span class="p">()</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">logger</span><span class="p">.</span><span class="nx">Sync</span><span class="p">()</span><span class="w"> </span><span class="c1">// 确保缓冲区日志被刷新</span>
 
-    r := gin.New()
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
 
-    // 自定义zap日志中间件
-    r.Use(func(c *gin.Context) {
-        start := time.Now()
-        path := c.Request.URL.Path
-        raw := c.Request.URL.RawQuery
+<span class="w">    </span><span class="c1">// 自定义zap日志中间件</span>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">start</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">path</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span>
+<span class="w">        </span><span class="nx">raw</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">RawQuery</span>
 
-        c.Next()
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">Next</span><span class="p">()</span>
 
-        latency := time.Since(start)
-        clientIP := c.ClientIP()
-        method := c.Request.Method
-        statusCode := c.Writer.Status()
+<span class="w">        </span><span class="nx">latency</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Since</span><span class="p">(</span><span class="nx">start</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">clientIP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">ClientIP</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">method</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">Method</span>
+<span class="w">        </span><span class="nx">statusCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Writer</span><span class="p">.</span><span class="nx">Status</span><span class="p">()</span>
 
-        if raw != &quot;&quot; {
-            path = path + &quot;?&quot; + raw
-        }
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">raw</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;?&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">raw</span>
+<span class="w">        </span><span class="p">}</span>
 
-        fields := []zap.Field{
-            zap.Int(&quot;status&quot;, statusCode),
-            zap.String(&quot;method&quot;, method),
-            zap.String(&quot;path&quot;, path),
-            zap.String(&quot;ip&quot;, clientIP),
-            zap.Duration(&quot;latency&quot;, latency),
-            zap.String(&quot;user-agent&quot;, c.Request.UserAgent()),
-        }
+<span class="w">        </span><span class="nx">fields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nx">zap</span><span class="p">.</span><span class="nx">Field</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">zap</span><span class="p">.</span><span class="nx">Int</span><span class="p">(</span><span class="s">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">statusCode</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">zap</span><span class="p">.</span><span class="nx">String</span><span class="p">(</span><span class="s">&quot;method&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">method</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">zap</span><span class="p">.</span><span class="nx">String</span><span class="p">(</span><span class="s">&quot;path&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">zap</span><span class="p">.</span><span class="nx">String</span><span class="p">(</span><span class="s">&quot;ip&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">clientIP</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">zap</span><span class="p">.</span><span class="nx">Duration</span><span class="p">(</span><span class="s">&quot;latency&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">latency</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">zap</span><span class="p">.</span><span class="nx">String</span><span class="p">(</span><span class="s">&quot;user-agent&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">UserAgent</span><span class="p">()),</span>
+<span class="w">        </span><span class="p">}</span>
 
-        if len(c.Errors) &gt; 0 {
-            fields = append(fields, zap.String(&quot;error&quot;, c.Errors.ByType(gin.ErrorTypePrivate).String()))
-            logger.Error(&quot;Request Error&quot;, fields...)
-        } else {
-            logger.Info(&quot;Request Info&quot;, fields...)
-        }
-    })
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fields</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">fields</span><span class="p">,</span><span class="w"> </span><span class="nx">zap</span><span class="p">.</span><span class="nx">String</span><span class="p">(</span><span class="s">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">Errors</span><span class="p">.</span><span class="nx">ByType</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">ErrorTypePrivate</span><span class="p">).</span><span class="nx">String</span><span class="p">()))</span>
+<span class="w">            </span><span class="nx">logger</span><span class="p">.</span><span class="nx">Error</span><span class="p">(</span><span class="s">&quot;Request Error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">fields</span><span class="o">...</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">logger</span><span class="p">.</span><span class="nx">Info</span><span class="p">(</span><span class="s">&quot;Request Info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">fields</span><span class="o">...</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.GET(&quot;/hello&quot;, func(c *gin.Context) {
-        c.JSON(200, gin.H{&quot;message&quot;: &quot;Hello World&quot;})
-    })
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span><span class="p">})</span>
+<span class="w">    </span><span class="p">})</span>
 
-    r.Run()
-}
-</code></pre>
+<span class="w">    </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 

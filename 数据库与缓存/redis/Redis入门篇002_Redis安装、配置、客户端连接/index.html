@@ -1552,71 +1552,72 @@
 <p>进入要保存安装包的目录。</p>
 </li>
 </ol>
-<p><code>shell
-   cd /usr/src # 我将安装包保存/usr/src目录</code></p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/usr/src<span class="w"> </span><span class="c1"># 我将安装包保存/usr/src目录</span>
+</code></pre></div>
 <ol>
 <li>使用wget命令，下载安装包（使用第1步获取的下载地址）。</li>
 </ol>
-<p><code>shell
-   wget https://download.redis.io/releases/redis-7.4.0.tar.gz # 我这里下载最新的7.4.0版本</code></p>
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>https://download.redis.io/releases/redis-7.4.0.tar.gz<span class="w"> </span><span class="c1"># 我这里下载最新的7.4.0版本</span>
+</code></pre></div>
 <p>命令输出：</p>
-<p>```shell
-   --2026-01-04 17:55:22--  https://download.redis.io/releases/redis-7.4.0.tar.gz
-   正在解析主机 download.redis.io (download.redis.io)... 104.18.26.34, 104.18.27.34, 2606:4700::6812:1b22, ...
-   正在连接 download.redis.io (download.redis.io)|104.18.26.34|:443... 已连接。
-   已发出 HTTP 请求，正在等待回应... 200 OK
-   长度：3525325 (3.4M) [application/octet-stream]
-   正在保存至: “redis-7.4.0.tar.gz”</p>
-<p>100%[===============================================================&gt;] 3,525,325   2.62MB/s 用时 1.3s</p>
-<p>2026-01-04 17:55:24 (2.62 MB/s) - 已保存 “redis-7.4.0.tar.gz” [3525325/3525325])
-   ```</p>
+<div class="highlight"><pre><span></span><code>--2026-01-04<span class="w"> </span><span class="m">17</span>:55:22--<span class="w">  </span>https://download.redis.io/releases/redis-7.4.0.tar.gz
+正在解析主机<span class="w"> </span>download.redis.io<span class="w"> </span><span class="o">(</span>download.redis.io<span class="o">)</span>...<span class="w"> </span><span class="m">104</span>.18.26.34,<span class="w"> </span><span class="m">104</span>.18.27.34,<span class="w"> </span><span class="m">2606</span>:4700::6812:1b22,<span class="w"> </span>...
+正在连接<span class="w"> </span>download.redis.io<span class="w"> </span><span class="o">(</span>download.redis.io<span class="o">)</span><span class="p">|</span><span class="m">104</span>.18.26.34<span class="p">|</span>:443...<span class="w"> </span>已连接。
+已发出<span class="w"> </span>HTTP<span class="w"> </span>请求，正在等待回应...<span class="w"> </span><span class="m">200</span><span class="w"> </span>OK
+长度：3525325<span class="w"> </span><span class="o">(</span><span class="m">3</span>.4M<span class="o">)</span><span class="w"> </span><span class="o">[</span>application/octet-stream<span class="o">]</span>
+正在保存至:<span class="w"> </span>“redis-7.4.0.tar.gz”
+
+<span class="m">100</span>%<span class="o">[===============================================================</span>&gt;<span class="o">]</span><span class="w"> </span><span class="m">3</span>,525,325<span class="w">   </span><span class="m">2</span>.62MB/s<span class="w"> </span>用时<span class="w"> </span><span class="m">1</span>.3s
+
+<span class="m">2026</span>-01-04<span class="w"> </span><span class="m">17</span>:55:24<span class="w"> </span><span class="o">(</span><span class="m">2</span>.62<span class="w"> </span>MB/s<span class="o">)</span><span class="w"> </span>-<span class="w"> </span>已保存<span class="w"> </span>“redis-7.4.0.tar.gz”<span class="w"> </span><span class="o">[</span><span class="m">3525325</span>/3525325<span class="o">])</span>
+</code></pre></div>
 <ol>
 <li>下载完成后，检查当前目录，可以看到刚刚下载的Redis安装包</li>
 </ol>
-<p><code>shell
-   ls # 查看当前目录</code></p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span><span class="c1"># 查看当前目录</span>
+</code></pre></div>
 <p>输出：</p>
-<p><code>shell
-   redis-7.4.0.tar.gz # 下载的安装包</code></p>
+<div class="highlight"><pre><span></span><code>redis-7.4.0.tar.gz<span class="w"> </span><span class="c1"># 下载的安装包</span>
+</code></pre></div>
 <ol>
 <li>解压并查看结果</li>
 </ol>
-<p>```shell
-   tar zxvf redis-7.4.0.tar.gz # 解压</p>
-<p>ls # 查看当前目录
-   ```</p>
-<p><code>shell
-   # ls 输出
-   redis-7.4.0  redis-7.4.0.tar.gz</code></p>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>zxvf<span class="w"> </span>redis-7.4.0.tar.gz<span class="w"> </span><span class="c1"># 解压</span>
+
+ls<span class="w"> </span><span class="c1"># 查看当前目录</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ls 输出</span>
+redis-7.4.0<span class="w">  </span>redis-7.4.0.tar.gz
+</code></pre></div>
 <ol>
 <li>解压完成后，可以删除原安装包，当然也可以不删。</li>
 </ol>
-<p><code>shell
-   rm redis-7.4.0.tar.gz</code></p>
+<div class="highlight"><pre><span></span><code>rm<span class="w"> </span>redis-7.4.0.tar.gz
+</code></pre></div>
 <h3 id="12">1.2. 构建安装</h3>
 <p>基于上面的下载解压后，就可以正式进入构建安装环节：</p>
-<pre><code class="language-shell">## 进入文件夹
-cd /usr/src/redis-7.4.0
+<div class="highlight"><pre><span></span><code><span class="c1">## 进入文件夹</span>
+<span class="nb">cd</span><span class="w"> </span>/usr/src/redis-7.4.0
 
-## make
+<span class="c1">## make</span>
 make
 
-## 安装
-make install
-</code></pre>
+<span class="c1">## 安装</span>
+make<span class="w"> </span>install
+</code></pre></div>
 <p>安装过程中如果没有报错的话，就表示安装完成了。</p>
 <p>前往默认安装位置<code>/usr/local/bin/</code>，可以看到redis相关的可执行文件:</p>
-<pre><code class="language-shell">cd /usr/local/bin/
-ll 
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/usr/local/bin/
+ll<span class="w"> </span>
 
-## 输出
--rwxr-xr-x 1 root root  6820152 1月   4 17:53 redis-benchmark
-lrwxrwxrwx 1 root root       12 1月   4 17:53 redis-check-aof -&gt; redis-server
-lrwxrwxrwx 1 root root       12 1月   4 17:53 redis-check-rdb -&gt; redis-server
--rwxr-xr-x 1 root root  7801736 1月   4 17:53 redis-cli
-lrwxrwxrwx 1 root root       12 1月   4 17:53 redis-sentinel -&gt; redis-server
--rwxr-xr-x 1 root root 16177400 1月   4 17:53 redis-server
-</code></pre>
+<span class="c1">## 输出</span>
+-rwxr-xr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">6820152</span><span class="w"> </span>1月<span class="w">   </span><span class="m">4</span><span class="w"> </span><span class="m">17</span>:53<span class="w"> </span>redis-benchmark
+lrwxrwxrwx<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">       </span><span class="m">12</span><span class="w"> </span>1月<span class="w">   </span><span class="m">4</span><span class="w"> </span><span class="m">17</span>:53<span class="w"> </span>redis-check-aof<span class="w"> </span>-&gt;<span class="w"> </span>redis-server
+lrwxrwxrwx<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">       </span><span class="m">12</span><span class="w"> </span>1月<span class="w">   </span><span class="m">4</span><span class="w"> </span><span class="m">17</span>:53<span class="w"> </span>redis-check-rdb<span class="w"> </span>-&gt;<span class="w"> </span>redis-server
+-rwxr-xr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">7801736</span><span class="w"> </span>1月<span class="w">   </span><span class="m">4</span><span class="w"> </span><span class="m">17</span>:53<span class="w"> </span>redis-cli
+lrwxrwxrwx<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">       </span><span class="m">12</span><span class="w"> </span>1月<span class="w">   </span><span class="m">4</span><span class="w"> </span><span class="m">17</span>:53<span class="w"> </span>redis-sentinel<span class="w"> </span>-&gt;<span class="w"> </span>redis-server
+-rwxr-xr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">16177400</span><span class="w"> </span>1月<span class="w">   </span><span class="m">4</span><span class="w"> </span><span class="m">17</span>:53<span class="w"> </span>redis-server
+</code></pre></div>
 <p>执行 make install 后，生成的可执行文件如下：</p>
 <ul>
 <li><code>redis-server</code> ：Redis 服务器</li>
@@ -1629,50 +1630,54 @@ lrwxrwxrwx 1 root root       12 1月   4 17:53 redis-sentinel -&gt; redis-server
 <ol>
 <li>使用<code>redis-server</code> 启动Redis</li>
 </ol>
-<p>```shell
-   redis-server # 最简单的启动</p>
-<p># 以默认配置启动Redis
-   ```</p>
+<div class="highlight"><pre><span></span><code>redis-server<span class="w"> </span><span class="c1"># 最简单的启动</span>
+
+<span class="c1"># 以默认配置启动Redis</span>
+</code></pre></div>
 <p>示例：</p>
-<p><code>shell
-   [root@chinehe ~]# redis-server
-   3136:C 05 Jan 2026 09:26:22.540 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-   3136:C 05 Jan 2026 09:26:22.540 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-   3136:C 05 Jan 2026 09:26:22.540 * Redis version=7.4.0, bits=64, commit=00000000, modified=1, pid=3136, just started
-   3136:C 05 Jan 2026 09:26:22.540 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
-   3136:M 05 Jan 2026 09:26:22.541 * monotonic clock: POSIX clock_gettime
-                   _._
-              _.-``__ ''-._
-         _.-``    `.  `_.  ''-._           Redis Community Edition
-     .-`` .-</code>.  <code>`\/    _.,_ ''-._     7.4.0 (00000000/1) 64 bit
-    (    '      ,       .-`  | `,    )     Running in standalone mode
-    |`-._`-...-` __...-.</code>-.<em>|'<code>_.-'|     Port: 6379
-    |</code>-.</em>   <code>._    /     _.-'    |     PID: 3136</code>-.<em>    <code>-._</code>-./  </em>.-'    <em>.-'
-    |<code>-._</code>-.</em>    <code>-.__.-'    _.-'_.-'|
-    |</code>-.<em><code>-._        _.-'_.-'    |           https://redis.io</code>-.</em>    <code>-._</code>-.<strong>.-'<em>.-'    </em>.-'
-    |<code>-._</code>-.<em>    <code>-.__.-'    _.-'_.-'|
-    |</code>-.</em><code>-._        _.-'_.-'    |</code>-._    <code>-._</code>-.</strong>.-'<em>.-'    </em>.-'
-         <code>-._</code>-.<strong>.-'    _.-'
-             <code>-._        _.-'</code>-.</strong>.-'</p>
-<p>3136:M 05 Jan 2026 09:26:22.542 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
-   3136:M 05 Jan 2026 09:26:22.542 * Server initialized
-   3136:M 05 Jan 2026 09:26:22.542 * Ready to accept connections tcp
-   ```</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>root@chinehe<span class="w"> </span>~<span class="o">]</span><span class="c1"># redis-server</span>
+<span class="m">3136</span>:C<span class="w"> </span><span class="m">05</span><span class="w"> </span>Jan<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">09</span>:26:22.540<span class="w"> </span><span class="c1"># WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add &#39;vm.overcommit_memory = 1&#39; to /etc/sysctl.conf and then reboot or run the command &#39;sysctl vm.overcommit_memory=1&#39; for this to take effect.</span>
+<span class="m">3136</span>:C<span class="w"> </span><span class="m">05</span><span class="w"> </span>Jan<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">09</span>:26:22.540<span class="w"> </span>*<span class="w"> </span>oO0OoO0OoO0Oo<span class="w"> </span>Redis<span class="w"> </span>is<span class="w"> </span>starting<span class="w"> </span>oO0OoO0OoO0Oo
+<span class="m">3136</span>:C<span class="w"> </span><span class="m">05</span><span class="w"> </span>Jan<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">09</span>:26:22.540<span class="w"> </span>*<span class="w"> </span>Redis<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="m">7</span>.4.0,<span class="w"> </span><span class="nv">bits</span><span class="o">=</span><span class="m">64</span>,<span class="w"> </span><span class="nv">commit</span><span class="o">=</span><span class="m">00000000</span>,<span class="w"> </span><span class="nv">modified</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">pid</span><span class="o">=</span><span class="m">3136</span>,<span class="w"> </span>just<span class="w"> </span>started
+<span class="m">3136</span>:C<span class="w"> </span><span class="m">05</span><span class="w"> </span>Jan<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">09</span>:26:22.540<span class="w"> </span><span class="c1"># Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf</span>
+<span class="m">3136</span>:M<span class="w"> </span><span class="m">05</span><span class="w"> </span>Jan<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">09</span>:26:22.541<span class="w"> </span>*<span class="w"> </span>monotonic<span class="w"> </span>clock:<span class="w"> </span>POSIX<span class="w"> </span>clock_gettime
+<span class="w">                </span>_._
+<span class="w">           </span>_.-<span class="sb">``</span>__<span class="w"> </span><span class="s1">&#39;&#39;</span>-._
+<span class="w">      </span>_.-<span class="sb">``</span><span class="w">    </span><span class="sb">`</span>.<span class="w">  </span><span class="sb">`</span>_.<span class="w">  </span><span class="s1">&#39;&#39;</span>-._<span class="w">           </span>Redis<span class="w"> </span>Community<span class="w"> </span>Edition
+<span class="w">  </span>.-<span class="sb">``</span><span class="w"> </span>.-<span class="sb">```</span>.<span class="w">  </span><span class="sb">```</span><span class="se">\/</span><span class="w">    </span>_.,_<span class="w"> </span><span class="s1">&#39;&#39;</span>-._<span class="w">     </span><span class="m">7</span>.4.0<span class="w"> </span><span class="o">(</span><span class="m">00000000</span>/1<span class="o">)</span><span class="w"> </span><span class="m">64</span><span class="w"> </span>bit
+<span class="w"> </span><span class="o">(</span><span class="w">    </span><span class="s1">&#39;      ,       .-`  | `,    )     Running in standalone mode</span>
+<span class="s1"> |`-._`-...-` __...-.``-._|&#39;</span><span class="sb">`</span><span class="w"> </span>_.-<span class="s1">&#39;|     Port: 6379</span>
+<span class="s1"> |    `-._   `._    /     _.-&#39;</span><span class="w">    </span><span class="p">|</span><span class="w">     </span>PID:<span class="w"> </span><span class="m">3136</span>
+<span class="w">  </span><span class="sb">`</span>-._<span class="w">    </span><span class="sb">`</span>-._<span class="w">  </span><span class="sb">`</span>-./<span class="w">  </span>_.-<span class="s1">&#39;    _.-&#39;</span>
+<span class="w"> </span><span class="p">|</span><span class="sb">`</span>-._<span class="sb">`</span>-._<span class="w">    </span><span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>_.-<span class="s1">&#39;|</span>
+<span class="s1"> |    `-._`-._        _.-&#39;</span>_.-<span class="s1">&#39;    |           https://redis.io</span>
+<span class="s1">  `-._    `-._`-.__.-&#39;</span>_.-<span class="s1">&#39;    _.-&#39;</span>
+<span class="w"> </span><span class="p">|</span><span class="sb">`</span>-._<span class="sb">`</span>-._<span class="w">    </span><span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>_.-<span class="s1">&#39;|</span>
+<span class="s1"> |    `-._`-._        _.-&#39;</span>_.-<span class="s1">&#39;    |</span>
+<span class="s1">  `-._    `-._`-.__.-&#39;</span>_.-<span class="s1">&#39;    _.-&#39;</span>
+<span class="w">      </span><span class="sb">`</span>-._<span class="w">    </span><span class="sb">`</span>-.__.-<span class="s1">&#39;    _.-&#39;</span>
+<span class="w">          </span><span class="sb">`</span>-._<span class="w">        </span>_.-<span class="s1">&#39;</span>
+<span class="s1">              `-.__.-&#39;</span>
+
+<span class="m">3136</span>:M<span class="w"> </span><span class="m">05</span><span class="w"> </span>Jan<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">09</span>:26:22.542<span class="w"> </span><span class="c1"># WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.</span>
+<span class="m">3136</span>:M<span class="w"> </span><span class="m">05</span><span class="w"> </span>Jan<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">09</span>:26:22.542<span class="w"> </span>*<span class="w"> </span>Server<span class="w"> </span>initialized
+<span class="m">3136</span>:M<span class="w"> </span><span class="m">05</span><span class="w"> </span>Jan<span class="w"> </span><span class="m">2026</span><span class="w"> </span><span class="m">09</span>:26:22.542<span class="w"> </span>*<span class="w"> </span>Ready<span class="w"> </span>to<span class="w"> </span>accept<span class="w"> </span>connections<span class="w"> </span>tcp
+</code></pre></div>
 <ol>
 <li>使用<code>redis-cli</code> 客户端连接Redis</li>
 </ol>
-<p><code>shell
-   redis-cli # 默认连接本机的6379端口</code></p>
+<div class="highlight"><pre><span></span><code>redis-cli<span class="w"> </span><span class="c1"># 默认连接本机的6379端口</span>
+</code></pre></div>
 <ol>
 <li>发送测试命令</li>
 </ol>
-<p><code>shell
-   ping</code></p>
+<div class="highlight"><pre><span></span><code>ping
+</code></pre></div>
 <p>示例：</p>
-<p><code>shell
-   [root@chinehe ~]# redis-cli
-   127.0.0.1:6379&gt; ping
-   PONG</code></p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>root@chinehe<span class="w"> </span>~<span class="o">]</span><span class="c1"># redis-cli</span>
+<span class="m">127</span>.0.0.1:6379&gt;<span class="w"> </span>ping
+PONG
+</code></pre></div>
 <p>如果上面的测试符合预期，则表示Redis的安装工作正式结束！！！</p>
 <h2 id="2-redis">2. 配置Redis</h2>
 <p>参考官网：<a href="https://redis.io/docs/latest/operate/oss_and_stack/management/config/">Redis configuration</a></p>
@@ -1706,47 +1711,47 @@ lrwxrwxrwx 1 root root       12 1月   4 17:53 redis-sentinel -&gt; redis-server
 </ul>
 </blockquote>
 <p>每个配置文件包含若干指令，格式非常简单：</p>
-<pre><code class="language-shell">keyword argument1 argument2 ... argumentN
+<div class="highlight"><pre><span></span><code>keyword<span class="w"> </span>argument1<span class="w"> </span>argument2<span class="w"> </span>...<span class="w"> </span>argumentN
 
-## keyword: 指令名称
-## argument：指令参数
+<span class="c1">## keyword: 指令名称</span>
+<span class="c1">## argument：指令参数</span>
 
-## 示例
-replicaof 127.0.0.1 6380
-</code></pre>
+<span class="c1">## 示例</span>
+replicaof<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="m">6380</span>
+</code></pre></div>
 <p>可以使用双引号或单引号提供包含空格的字符串作为参数：</p>
-<pre><code class="language-shell">requirepass &quot;hello world&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>requirepass<span class="w"> </span><span class="s2">&quot;hello world&quot;</span>
+</code></pre></div>
 <p>单引号字符串可以包含反斜杠转义的字符，双引号字符串还可以包含任何用反斜杠十六进制符号“\xff”编码的 ASCII 符号。</p>
 <h4 id="222">2.2.2. 示例配置文件</h4>
 <p>配置指令列表、指令含义以及预期用途的注释，可以在Redis发行版附带的 <code>redis.conf</code> 和 <code>redis-full.conf</code> 文件中获得。以上文《安装Redis》章节中的安装步骤为例，解压目录中就包含<code>redis.conf</code>：</p>
-<pre><code class="language-shell">[root@chinehe redis-7.4.0]# pwd
-/usr/src/redis-7.4.0 # redis安装包解压目录
-[root@chinehe redis-7.4.0]# ll
-总用量 288
--rw-rw-r--  1 root root   9854 7月  29 2024 00-RELEASENOTES
--rw-rw-r--  1 root root     51 7月  29 2024 BUGS
--rw-rw-r--  1 root root   5023 7月  29 2024 CODE_OF_CONDUCT.md
--rw-rw-r--  1 root root   7178 7月  29 2024 CONTRIBUTING.md
-drwxrwxr-x  8 root root   4096 1月   4 17:48 deps
--rw-rw-r--  1 root root     11 7月  29 2024 INSTALL
--rw-rw-r--  1 root root  37493 7月  29 2024 LICENSE.txt
--rw-rw-r--  1 root root    151 7月  29 2024 Makefile
--rw-rw-r--  1 root root   6888 7月  29 2024 MANIFESTO
--rw-rw-r--  1 root root  23845 7月  29 2024 README.md
--rw-rw-r--  1 root root 108981 7月  29 2024 redis.conf # 配置文件
--rw-rw-r--  1 root root   1805 7月  29 2024 REDISCONTRIBUTIONS.txt
--rwxrwxr-x  1 root root    279 7月  29 2024 runtest
--rwxrwxr-x  1 root root    283 7月  29 2024 runtest-cluster
--rwxrwxr-x  1 root root   1804 7月  29 2024 runtest-moduleapi
--rwxrwxr-x  1 root root    285 7月  29 2024 runtest-sentinel
--rw-rw-r--  1 root root   1480 7月  29 2024 SECURITY.md
--rw-rw-r--  1 root root  14700 7月  29 2024 sentinel.conf
-drwxrwxr-x  4 root root  12288 1月   4 17:53 src
-drwxrwxr-x 11 root root   4096 7月  29 2024 tests
--rw-rw-r--  1 root root   3628 7月  29 2024 TLS.md
-drwxrwxr-x  9 root root   4096 7月  29 2024 utils
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>root@chinehe<span class="w"> </span>redis-7.4.0<span class="o">]</span><span class="c1"># pwd</span>
+/usr/src/redis-7.4.0<span class="w"> </span><span class="c1"># redis安装包解压目录</span>
+<span class="o">[</span>root@chinehe<span class="w"> </span>redis-7.4.0<span class="o">]</span><span class="c1"># ll</span>
+总用量<span class="w"> </span><span class="m">288</span>
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">9854</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span><span class="m">00</span>-RELEASENOTES
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">     </span><span class="m">51</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>BUGS
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">5023</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>CODE_OF_CONDUCT.md
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">7178</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>CONTRIBUTING.md
+drwxrwxr-x<span class="w">  </span><span class="m">8</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">4096</span><span class="w"> </span>1月<span class="w">   </span><span class="m">4</span><span class="w"> </span><span class="m">17</span>:48<span class="w"> </span>deps
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">     </span><span class="m">11</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>INSTALL
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">37493</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>LICENSE.txt
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">    </span><span class="m">151</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>Makefile
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">6888</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>MANIFESTO
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">23845</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>README.md
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">108981</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>redis.conf<span class="w"> </span><span class="c1"># 配置文件</span>
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">1805</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>REDISCONTRIBUTIONS.txt
+-rwxrwxr-x<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">    </span><span class="m">279</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>runtest
+-rwxrwxr-x<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">    </span><span class="m">283</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>runtest-cluster
+-rwxrwxr-x<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">1804</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>runtest-moduleapi
+-rwxrwxr-x<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">    </span><span class="m">285</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>runtest-sentinel
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">1480</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>SECURITY.md
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">14700</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>sentinel.conf
+drwxrwxr-x<span class="w">  </span><span class="m">4</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">12288</span><span class="w"> </span>1月<span class="w">   </span><span class="m">4</span><span class="w"> </span><span class="m">17</span>:53<span class="w"> </span>src
+drwxrwxr-x<span class="w"> </span><span class="m">11</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">4096</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>tests
+-rw-rw-r--<span class="w">  </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">3628</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>TLS.md
+drwxrwxr-x<span class="w">  </span><span class="m">9</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">   </span><span class="m">4096</span><span class="w"> </span>7月<span class="w">  </span><span class="m">29</span><span class="w"> </span><span class="m">2024</span><span class="w"> </span>utils
+</code></pre></div>
 <p>Redis官网也可以方便的查看各个版本的配置示例文件：</p>
 <ul>
 <li>Configuration files for Redis 8.4: <a href="https://raw.githubusercontent.com/redis/redis/8.4/redis-full.conf">redis-full.conf</a> and <a href="https://raw.githubusercontent.com/redis/redis/8.4/redis.conf">redis.conf</a>.</li>
@@ -1759,18 +1764,18 @@ drwxrwxr-x  9 root root   4096 7月  29 2024 utils
 </ul>
 <h4 id="223">2.2.3. 启用配置文件</h4>
 <p>编写好配置文件后，就可以通过在启动Redis服务时指定配置文件路径来启用配置文件了。</p>
-<pre><code class="language-shell">redis-server /path/to/redis.conf
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis-server<span class="w"> </span>/path/to/redis.conf
+</code></pre></div>
 <p>以上文《安装Redis》章节安装的Redis为例，我们可以通过一下的步骤来启用配置文件：</p>
 <ol>
 <li>将自带的示例配置文件复制到我们要保存<code>redis.conf</code>的目录。</li>
 </ol>
-<p>```shell
-   # 创建目标目录
-   mkdir /etc/redis/</p>
-<p># 复制文件
-   cp /usr/src/redis-7.4.0/redis.conf /etc/redis/
-   ```</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 创建目标目录</span>
+mkdir<span class="w"> </span>/etc/redis/
+
+<span class="c1"># 复制文件</span>
+cp<span class="w"> </span>/usr/src/redis-7.4.0/redis.conf<span class="w"> </span>/etc/redis/
+</code></pre></div>
 <ol>
 <li>修改配置文件。</li>
 </ol>
@@ -1778,14 +1783,14 @@ drwxrwxr-x  9 root root   4096 7月  29 2024 utils
 <ol>
 <li>通过配置文件启动。</li>
 </ol>
-<p><code>shell
-   # 启动Redis并指定配置文件
-   redis-server /etc/redis/redis.conf</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 启动Redis并指定配置文件</span>
+redis-server<span class="w"> </span>/etc/redis/redis.conf
+</code></pre></div>
 <h3 id="23">2.3. 命令行参数配置</h3>
 <p>你可以在启动Redis服务时，直接通过命令行传递 Redis 配置参数。这对测试非常有用。以下是一个示例:</p>
-<pre><code class="language-shell">./redis-server --port 6380 --replicaof 127.0.0.1 6379
-## 使用端口 6380 启动一个新的 Redis 实例，作为运行于 127.0.0.1 端口 6379 的实例的副本。
-</code></pre>
+<div class="highlight"><pre><span></span><code>./redis-server<span class="w"> </span>--port<span class="w"> </span><span class="m">6380</span><span class="w"> </span>--replicaof<span class="w"> </span><span class="m">127</span>.0.0.1<span class="w"> </span><span class="m">6379</span>
+<span class="c1">## 使用端口 6380 启动一个新的 Redis 实例，作为运行于 127.0.0.1 端口 6379 的实例的副本。</span>
+</code></pre></div>
 <ul>
 <li>
 <p>通过命令行传递的参数格式与 redis.conf 文件中完全相同，唯一不同的是关键字前缀是 <code>--</code>。</p>
@@ -1814,37 +1819,37 @@ drwxrwxr-x  9 root root   4096 7月  29 2024 utils
 <ol>
 <li>以配置文件启动Redis</li>
 </ol>
-<p><code>shell
-   redis-server /etc/redis/redis.conf # 该配置文件未做修改，所有配置项均为默认配置</code></p>
+<div class="highlight"><pre><span></span><code>redis-server<span class="w"> </span>/etc/redis/redis.conf<span class="w"> </span><span class="c1"># 该配置文件未做修改，所有配置项均为默认配置</span>
+</code></pre></div>
 <ol>
 <li>新开终端，连接Redis并测试命令</li>
 </ol>
-<p><code>shell
-   [root@chinehe ~]# redis-cli                          # 连接Redis
-   127.0.0.1:6379&gt; config get appendonly        # 获取 appendonly 配置
-   1) "appendonly"
-   2) "no"                                                                      # 默认配置为no
-   127.0.0.1:6379&gt; config set appendonly yes # 修改配置为yes
-   OK
-   127.0.0.1:6379&gt; config get appendonly            # 再次获取 appendonly 配置
-   1) "appendonly"
-   2) "yes"                                                                 # 修改后配置为yes
-   127.0.0.1:6379&gt; config rewrite                       # 重写配置文件
-   OK
-   127.0.0.1:6379&gt;</code></p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>root@chinehe<span class="w"> </span>~<span class="o">]</span><span class="c1"># redis-cli                          # 连接Redis</span>
+<span class="m">127</span>.0.0.1:6379&gt;<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span>appendonly<span class="w">        </span><span class="c1"># 获取 appendonly 配置</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;appendonly&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;no&quot;</span><span class="w">                                                                      </span><span class="c1"># 默认配置为no</span>
+<span class="m">127</span>.0.0.1:6379&gt;<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>appendonly<span class="w"> </span>yes<span class="w"> </span><span class="c1"># 修改配置为yes</span>
+OK
+<span class="m">127</span>.0.0.1:6379&gt;<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span>appendonly<span class="w">            </span><span class="c1"># 再次获取 appendonly 配置</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;appendonly&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;yes&quot;</span><span class="w">                                                                 </span><span class="c1"># 修改后配置为yes</span>
+<span class="m">127</span>.0.0.1:6379&gt;<span class="w"> </span>config<span class="w"> </span>rewrite<span class="w">                       </span><span class="c1"># 重写配置文件</span>
+OK
+<span class="m">127</span>.0.0.1:6379&gt;
+</code></pre></div>
 <ol>
 <li>检查配置文件</li>
 </ol>
-<p>```shell
-   [root@chinehe ~]# cat /etc/redis/redis.conf | grep appendonly</p>
-<p>appendonly yes   # 配置文件已经自动更新
-   # For example, if appendfilename is set to appendonly.aof, the following file
-   # - appendonly.aof.1.base.rdb as a base file.
-   # - appendonly.aof.1.incr.aof, appendonly.aof.2.incr.aof as incremental files.
-   # - appendonly.aof.manifest as a manifest file.
-   appendfilename "appendonly.aof"
-   appenddirname "appendonlydir"
-   ```</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>root@chinehe<span class="w"> </span>~<span class="o">]</span><span class="c1"># cat /etc/redis/redis.conf | grep appendonly</span>
+
+appendonly<span class="w"> </span>yes<span class="w">   </span><span class="c1"># 配置文件已经自动更新</span>
+<span class="c1"># For example, if appendfilename is set to appendonly.aof, the following file</span>
+<span class="c1"># - appendonly.aof.1.base.rdb as a base file.</span>
+<span class="c1"># - appendonly.aof.1.incr.aof, appendonly.aof.2.incr.aof as incremental files.</span>
+<span class="c1"># - appendonly.aof.manifest as a manifest file.</span>
+appendfilename<span class="w"> </span><span class="s2">&quot;appendonly.aof&quot;</span>
+appenddirname<span class="w"> </span><span class="s2">&quot;appendonlydir&quot;</span>
+</code></pre></div>
 <h2 id="3-redis">3. 连接Redis</h2>
 <p>在上文中，我们都是使用Redis自带的<code>redis-cli</code>客户端工具来连接Redis服务。</p>
 <p>除此之外，连接Redis服务的方式还有很多，常见的方式有：</p>

@@ -2043,407 +2043,394 @@ Ticker 用于间隔执行某个任务。</p>
 <p>不罗嗦了，我们直接开始看这两种定时器的具体定义和使用！</p>
 <h2 id="2-timer">2. Timer 单次定时器</h2>
 <h3 id="21-timer">2.1. 关于Timer</h3>
-<p>Timer结构体源码：</p>
-<pre><code class="language-go">type Timer struct {
-    C &lt;-chan Time
-    r runtimeTimer
-}
-</code></pre>
-<ul>
-<li>Timer代表了单个时间：当到达Timer指定的时间后，当前时间会被发送到<code>C &lt;-chan Time</code>通道上，除非Timer是由<code>AfterFunc</code>方法创建的。（后文会介绍）</li>
-<li>Timer必须由<code>NewTimer</code>或<code>AfterFunc</code>方法创建。</li>
-</ul>
+<p>Timer结构体源码：
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Timer</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">C</span><span class="w"> </span><span class="o">&lt;-</span><span class="kd">chan</span><span class="w"> </span><span class="nx">Time</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="nx">runtimeTimer</span>
+<span class="p">}</span>
+</code></pre></div>
+* Timer代表了单个时间：当到达Timer指定的时间后，当前时间会被发送到<code>C &lt;-chan Time</code>通道上，除非Timer是由<code>AfterFunc</code>方法创建的。（后文会介绍）
+* Timer必须由<code>NewTimer</code>或<code>AfterFunc</code>方法创建。</p>
 <h3 id="22">2.2. 初始化</h3>
 <p>Timer必须由<code>NewTimer</code>或<code>AfterFunc</code>方法创建。</p>
 <h4 id="221-newtimer">2.2.1. NewTimer 创建定时器</h4>
 <p>方法源码：</p>
-<pre><code class="language-go">func NewTimer(d Duration) *Timer {
-    c := make(chan Time, 1)
-    t := &amp;Timer{
-        C: c,
-        r: runtimeTimer{
-            when: when(d),
-            f:    sendTime,
-            arg:  c,
-        },
-    }
-    startTimer(&amp;t.r)
-    return t
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">NewTimer</span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="nx">Duration</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">Timer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="nx">Time</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Timer</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">C</span><span class="p">:</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">r</span><span class="p">:</span><span class="w"> </span><span class="nx">runtimeTimer</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">when</span><span class="p">:</span><span class="w"> </span><span class="nx">when</span><span class="p">(</span><span class="nx">d</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">f</span><span class="p">:</span><span class="w">    </span><span class="nx">sendTime</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">arg</span><span class="p">:</span><span class="w">  </span><span class="nx">c</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">startTimer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">t</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><code>NewTimer</code>返回一个Timer，在经过指定的时间间隔<code>d Duration</code>后，Timer会将当前时间发送到其C通道上。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">log.Printf(&quot;starting...\n&quot;)
+<div class="highlight"><pre><span></span><code><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;starting...\n&quot;</span><span class="p">)</span>
 
-t := time.NewTimer(time.Second * 2) // 创建两秒定时器
-&lt;-t.C // 等待定时器触发（两秒）
+<span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">NewTimer</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// 创建两秒定时器</span>
+<span class="o">&lt;-</span><span class="nx">t</span><span class="p">.</span><span class="nx">C</span><span class="w"> </span><span class="c1">// 等待定时器触发（两秒）</span>
 
-log.Printf(&quot;after 2 sencond...\n&quot;)
+<span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;after 2 sencond...\n&quot;</span><span class="p">)</span>
 
-// 输出
-2025/11/21 10:58:11 starting...
-2025/11/21 10:58:13 after 2 sencond...
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">10</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">11</span><span class="w"> </span><span class="nx">starting</span><span class="o">...</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">10</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">13</span><span class="w"> </span><span class="nx">after</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nx">sencond</span><span class="o">...</span>
+</code></pre></div>
 <h4 id="222-afterfunc">2.2.2. AfterFunc 指定时间间隔后执行</h4>
 <p>方法源码：</p>
-<pre><code class="language-go">func AfterFunc(d Duration, f func()) *Timer {
-    t := &amp;Timer{
-        r: runtimeTimer{
-            when: when(d),
-            f:    goFunc,
-            arg:  f,
-        },
-    }
-    startTimer(&amp;t.r)
-    return t
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">AfterFunc</span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="nx">Duration</span><span class="p">,</span><span class="w"> </span><span class="nx">f</span><span class="w"> </span><span class="kd">func</span><span class="p">())</span><span class="w"> </span><span class="o">*</span><span class="nx">Timer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Timer</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">r</span><span class="p">:</span><span class="w"> </span><span class="nx">runtimeTimer</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">when</span><span class="p">:</span><span class="w"> </span><span class="nx">when</span><span class="p">(</span><span class="nx">d</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">f</span><span class="p">:</span><span class="w">    </span><span class="nx">goFunc</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">arg</span><span class="p">:</span><span class="w">  </span><span class="nx">f</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">startTimer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">t</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><code>AfterFunc</code>方法在指定的时间间隔<code>d Duration</code>后，在自己的goroutine中自动调用指定的方法<code>f func()</code>。</li>
 <li><code>AfterFunc</code>方法返回的Timer可以用于取消调用（使用Stop方法）。</li>
 <li><code>AfterFunc</code>方法返回的Timer的C通道是nil的，禁止使用。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">log.Printf(&quot;starting...\n&quot;)
+<div class="highlight"><pre><span></span><code><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;starting...\n&quot;</span><span class="p">)</span>
 
-time.AfterFunc(time.Second*2, func() { // 两秒后打印
-  log.Printf(&quot;after 2 senconds...&quot;)
-})
+<span class="nx">time</span><span class="p">.</span><span class="nx">AfterFunc</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 两秒后打印</span>
+<span class="w">  </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;after 2 senconds...&quot;</span><span class="p">)</span>
+<span class="p">})</span>
 
-time.Sleep(time.Second * 3) // 主协程等待3秒
-log.Printf(&quot;done&quot;)
+<span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// 主协程等待3秒</span>
+<span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;done&quot;</span><span class="p">)</span>
 
-// 输出
-2025/11/21 11:06:11 starting...
-2025/11/21 11:06:13 after 2 senconds...
-2025/11/21 11:06:14 done
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mo">06</span><span class="p">:</span><span class="mi">11</span><span class="w"> </span><span class="nx">starting</span><span class="o">...</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mo">06</span><span class="p">:</span><span class="mi">13</span><span class="w"> </span><span class="nx">after</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nx">senconds</span><span class="o">...</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mo">06</span><span class="p">:</span><span class="mi">14</span><span class="w"> </span><span class="nx">done</span>
+</code></pre></div>
 <h4 id="223-after">2.2.3. After 创建定时器只返回通道</h4>
 <p>除了<code>NewTimer</code>和<code>AfterFunc</code>方法外，<code>After</code>方法可以创建定时器，但是After方法实际上是通过调用<code>NewTimer</code>方法创建的。看源码：</p>
-<pre><code class="language-go">func After(d Duration) &lt;-chan Time {
-    return NewTimer(d).C
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">After</span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="nx">Duration</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="kd">chan</span><span class="w"> </span><span class="nx">Time</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">NewTimer</span><span class="p">(</span><span class="nx">d</span><span class="p">).</span><span class="nx">C</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>从源码可以看到，<code>After</code>方法调用<code>NewTime</code>r方法创建了一个Timer，<strong>但是只返回了Timer的C通道</strong>。</p>
 <blockquote>
 <p>这意味着在指定时间到达之前，调用者没有无法通过调用<code>Timer.Stop</code>方法来停止计时，垃圾收集器不会回收底层定时器。</p>
 <p>所以如果担心效率，请改用 NewTimer，并在不再需要定时器时调用 Timer.Stop</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-go">log.Printf(&quot;starting...\n&quot;)
+<div class="highlight"><pre><span></span><code><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;starting...\n&quot;</span><span class="p">)</span>
 
-timerChan := time.After(time.Second * 2) // 创建2秒定时器（只返回通道）
-&lt;-timerChan // 等待定时器触发
+<span class="nx">timerChan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">After</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// 创建2秒定时器（只返回通道）</span>
+<span class="o">&lt;-</span><span class="nx">timerChan</span><span class="w"> </span><span class="c1">// 等待定时器触发</span>
 
-fmt.Println(&quot;after 2 seconds...&quot;)
-</code></pre>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;after 2 seconds...&quot;</span><span class="p">)</span>
+</code></pre></div>
 <h3 id="23-timer">2.3. Timer的结构体方法</h3>
 <h4 id="231-stop">2.3.1. Stop  停止定时器</h4>
-<p>源码：</p>
-<pre><code class="language-go">func (t *Timer) Stop() bool {
-    if t.r.f == nil {
-        panic(&quot;time: Stop called on uninitialized Timer&quot;)
-    }
-    return stopTimer(&amp;t.r)
-}
-</code></pre>
-<p>Stop方法用于停止定时器计时，从而防止定时器触发。
+<p>源码：
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">Timer</span><span class="p">)</span><span class="w"> </span><span class="nx">Stop</span><span class="p">()</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">.</span><span class="nx">f</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;time: Stop called on uninitialized Timer&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">stopTimer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+Stop方法用于停止定时器计时，从而防止定时器触发。
 * 如果调用Stop方法成功停止了定时器，方法返回true。如果定时器已经到期（触发过了）或者已经被Stop过了，返回false。
 * Stop方法不会关闭定时器的通道，以防止从通道错误地读取成功。
 * 为了确保调用Stop后定时器的通道是空的，可以检查Stop方法的返回值并排空通道：
-    <code>go
-    if !t.Stop() { // 如果Stop失败
-        &lt;-t.C // 排空通道
-    }</code>
+    <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">t</span><span class="p">.</span><span class="nx">Stop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 如果Stop失败</span>
+<span class="w">    </span><span class="o">&lt;-</span><span class="nx">t</span><span class="p">.</span><span class="nx">C</span><span class="w"> </span><span class="c1">// 排空通道</span>
+<span class="p">}</span>
+</code></pre></div>
 * 对于使用<code>AfterFunc(d, f)</code>创建的定时器，如果<code>t.Stop</code> 返回 false，则定时器已经到期，并且函数 f 已在其自己的 goroutine 中启动； Stop 不会等待 f 完成才返回。如果调用者需要知道 f 是否完成，它必须显式地与 f 协调。</p>
 <h4 id="222-reset">2.2.2. Reset 重置定时器</h4>
-<p>源码</p>
-<pre><code class="language-go">func (t *Timer) Reset(d Duration) bool {
-    if t.r.f == nil {
-        panic(&quot;time: Reset called on uninitialized Timer&quot;)
-    }
-    w := when(d)
-    return resetTimer(&amp;t.r, w)
-}
-</code></pre>
-<p>Reset方法将定时器的过期时间设置为新的，即当前时间过<code>d Duration</code>时间后.
+<p>源码
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">Timer</span><span class="p">)</span><span class="w"> </span><span class="nx">Reset</span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="nx">Duration</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">.</span><span class="nx">f</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;time: Reset called on uninitialized Timer&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">w</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">when</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">resetTimer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">w</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+Reset方法将定时器的过期时间设置为新的，即当前时间过<code>d Duration</code>时间后.
 * 如果定时器已激活（had been active），将返回true。如果定时器已经到期或者已经被停止，方法返回false。注意这里返回的true和false并不代表是否Reset成功！！！看示例：
-    ```go
-    func main() {
-        timer := time.NewTimer(time.Second * 5) // 计时5秒</p>
-<pre><code>    time.Sleep(time.Second)
-    log.Println(timer.Stop()) // 一秒后停止计时 ：true
+    <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">timer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">NewTimer</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c1">// 计时5秒</span>
 
-    time.Sleep(time.Second)
-    log.Println(timer.Reset(time.Second * 5)) // 再过一秒后Reset成5秒：false
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">timer</span><span class="p">.</span><span class="nx">Stop</span><span class="p">())</span><span class="w"> </span><span class="c1">// 一秒后停止计时 ：true</span>
 
-    log.Println(&lt;-timer.C) // 输出的是重新Reset，5秒后的时间。
-}
-```
-可以看到，Reset时由于定时器已经被Stop，返回了false。实际上还是设置了新的过期时间为5秒。
-&gt; 请注意，不可能正确使用 Reset 的返回值，因为在耗尽通道和新定时器到期之间存在竞争条件。如上所述，应始终在已停止或过期的通道上调用重置。返回值的存在是为了保持与现有程序的兼容性。
-</code></pre>
-<ul>
-<li>对于<code>NewTimer</code>方法创建的Timer，调用Reset方法时，应该确保Timer是一个通道中没有值的已过期或已停止的定时器。如果通道不为空，接收方可能会收到两个结果：一个原本的，一个新的。</li>
-<li>如果程序已经从 t.C 接收到一个值，则知道定时器已到期并且通道已耗尽，因此可以直接使用 t.Reset。但是，如果程序尚未从 t.C 接收到值，则必须停止定时器，并且如果 Stop 报告定时器在停止之前已过期，则通道需要显式耗尽：
-    <code>go
-    if !t.Stop() {
-        &lt;-t.C
-    }
-    t.Reset(d)</code></li>
-<li>对于使用<code>AfterFunc(d, f)</code> 创建的定时器，Reset 要么重新安排 f 运行的时间（在这种情况下 Reset 返回 true），要么安排 f 再次运行（在这种情况下返回 false）。当 Reset 返回 false 时，Reset 既不会等待前一个 f 完成才返回，也不保证后续运行 f 的 goroutine 不会与前一个 goroutine 并发运行。如果调用者需要知道 f 的先前执行是否完成，它必须显式地与 f 协调。</li>
-</ul>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">timer</span><span class="p">.</span><span class="nx">Reset</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">))</span><span class="w"> </span><span class="c1">// 再过一秒后Reset成5秒：false</span>
+
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">&lt;-</span><span class="nx">timer</span><span class="p">.</span><span class="nx">C</span><span class="p">)</span><span class="w"> </span><span class="c1">// 输出的是重新Reset，5秒后的时间。</span>
+<span class="p">}</span>
+</code></pre></div>
+    可以看到，Reset时由于定时器已经被Stop，返回了false。实际上还是设置了新的过期时间为5秒。
+    &gt; 请注意，不可能正确使用 Reset 的返回值，因为在耗尽通道和新定时器到期之间存在竞争条件。如上所述，应始终在已停止或过期的通道上调用重置。返回值的存在是为了保持与现有程序的兼容性。
+* 对于<code>NewTimer</code>方法创建的Timer，调用Reset方法时，应该确保Timer是一个通道中没有值的已过期或已停止的定时器。如果通道不为空，接收方可能会收到两个结果：一个原本的，一个新的。
+* 如果程序已经从 t.C 接收到一个值，则知道定时器已到期并且通道已耗尽，因此可以直接使用 t.Reset。但是，如果程序尚未从 t.C 接收到值，则必须停止定时器，并且如果 Stop 报告定时器在停止之前已过期，则通道需要显式耗尽：
+    <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">t</span><span class="p">.</span><span class="nx">Stop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">&lt;-</span><span class="nx">t</span><span class="p">.</span><span class="nx">C</span>
+<span class="p">}</span>
+<span class="nx">t</span><span class="p">.</span><span class="nx">Reset</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
+</code></pre></div>
+* 对于使用<code>AfterFunc(d, f)</code> 创建的定时器，Reset 要么重新安排 f 运行的时间（在这种情况下 Reset 返回 true），要么安排 f 再次运行（在这种情况下返回 false）。当 Reset 返回 false 时，Reset 既不会等待前一个 f 完成才返回，也不保证后续运行 f 的 goroutine 不会与前一个 goroutine 并发运行。如果调用者需要知道 f 的先前执行是否完成，它必须显式地与 f 协调。</p>
 <h3 id="24">2.4. 使用示例</h3>
 <h4 id="241-timer">2.4.1. 使用Timer实现延时执行</h4>
-<p>场景：在指定时间间隔后，开始执行指定任务。</p>
-<pre><code class="language-go">func main() {
-    // 创建一个5秒的定时器
-    timer := time.NewTimer(time.Second * 5)
+<p>场景：在指定时间间隔后，开始执行指定任务。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建一个5秒的定时器</span>
+<span class="w">    </span><span class="nx">timer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">NewTimer</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 
-    // 起一个协程,5秒后执行domSomeThing方法
-    go func() {
-        &lt;-timer.C
-        doSomeThing()
-    }()
+<span class="w">    </span><span class="c1">// 起一个协程,5秒后执行domSomeThing方法</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">&lt;-</span><span class="nx">timer</span><span class="p">.</span><span class="nx">C</span>
+<span class="w">        </span><span class="nx">doSomeThing</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    // 主线程继续执行其他的
-    // 这里睡眠等待子协程输出
-    time.Sleep(time.Second * 6)
-}
+<span class="w">    </span><span class="c1">// 主线程继续执行其他的</span>
+<span class="w">    </span><span class="c1">// 这里睡眠等待子协程输出</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span>
+<span class="p">}</span>
 
-func doSomeThing() {
-    log.Println(&quot;DO&quot;)
-}
-</code></pre>
-<p>上面的示例也可以将<code>NewTimer</code>替换成使用<code>After</code>方法：</p>
-<pre><code class="language-go">func main() {
-    // 创建一个5秒的定时器
-    c := time.After(time.Second * 5)
+<span class="kd">func</span><span class="w"> </span><span class="nx">doSomeThing</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;DO&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+上面的示例也可以将<code>NewTimer</code>替换成使用<code>After</code>方法：
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建一个5秒的定时器</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">After</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
 
-    // 起一个协程,5秒后执行domSomeThing方法
-    go func() {
-        &lt;-c
-        doSomeThing()
-    }()
+<span class="w">    </span><span class="c1">// 起一个协程,5秒后执行domSomeThing方法</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">&lt;-</span><span class="nx">c</span>
+<span class="w">        </span><span class="nx">doSomeThing</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    // 主线程继续执行其他的
-    // 这里睡眠等待子协程输出
-    time.Sleep(time.Second * 6)
-}
+<span class="w">    </span><span class="c1">// 主线程继续执行其他的</span>
+<span class="w">    </span><span class="c1">// 这里睡眠等待子协程输出</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span>
+<span class="p">}</span>
 
-func doSomeThing() {
-    log.Println(&quot;DO&quot;)
-}
-</code></pre>
-<p>当然，这里使用<code>AfterFunc方法</code>好像更加优雅</p>
-<pre><code class="language-go">func main() {
-    // AfterFunc方法将在5秒后执行doSomeThing方法
-    _ = time.AfterFunc(time.Second*5, doSomeThing)
+<span class="kd">func</span><span class="w"> </span><span class="nx">doSomeThing</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;DO&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+当然，这里使用<code>AfterFunc方法</code>好像更加优雅
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// AfterFunc方法将在5秒后执行doSomeThing方法</span>
+<span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">AfterFunc</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="nx">doSomeThing</span><span class="p">)</span>
 
-    // 主线程继续执行其他的
-    // 这里睡眠等待子协程输出
-    time.Sleep(time.Second * 6)
-}
+<span class="w">    </span><span class="c1">// 主线程继续执行其他的</span>
+<span class="w">    </span><span class="c1">// 这里睡眠等待子协程输出</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span>
+<span class="p">}</span>
 
-func doSomeThing() {
-    log.Println(&quot;DO&quot;)
-}
-````
-#### 2.4.2使用Timer实现超时控制
-场景：执行一个比较耗时的操作doSomeThing，如果执行耗时超过5秒，就打印超时日志。
-```go
-func main() {
-    // 定时器设置超时时间为4秒
-    timer := time.NewTimer(time.Second * 4)
+<span class="kd">func</span><span class="w"> </span><span class="nx">doSomeThing</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;DO&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="s">````</span>
+<span class="err">####</span><span class="w"> </span><span class="mf">2.4.2</span><span class="nx">使用Timer实现超时控制</span>
+<span class="nx">场景</span><span class="err">：</span><span class="nx">执行一个比较耗时的操作doSomeThing</span><span class="err">，</span><span class="nx">如果执行耗时超过5秒</span><span class="err">，</span><span class="nx">就打印超时日志</span><span class="err">。</span>
+<span class="s">``</span><span class="err">`</span><span class="k">go</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 定时器设置超时时间为4秒</span>
+<span class="w">    </span><span class="nx">timer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">NewTimer</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
 
-    // resultChan 用以接收返回结果
-    resultChan := make(chan int, 1)
+<span class="w">    </span><span class="c1">// resultChan 用以接收返回结果</span>
+<span class="w">    </span><span class="nx">resultChan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 
-    // 起一个协程去执行耗时操作
-    go func() {
-        resultChan &lt;- doSomeThing() // 执行结果放入结果通道
-    }()
+<span class="w">    </span><span class="c1">// 起一个协程去执行耗时操作</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">resultChan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">doSomeThing</span><span class="p">()</span><span class="w"> </span><span class="c1">// 执行结果放入结果通道</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    // 监听两个通道
-    select {
-    case &lt;-timer.C:
-        log.Println(&quot;doSomeThing timeout.&quot;)
-    case r := &lt;-resultChan:
-        log.Printf(&quot;doSomeThing got result:%d\n&quot;, r)
-    }
+<span class="w">    </span><span class="c1">// 监听两个通道</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">timer</span><span class="p">.</span><span class="nx">C</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;doSomeThing timeout.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">resultChan</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;doSomeThing got result:%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 这里等2秒,等待子协程输出
-    time.Sleep(2 * time.Second)
-}
+<span class="w">    </span><span class="c1">// 这里等2秒,等待子协程输出</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
 
-func doSomeThing() int {
-    log.Println(&quot;doSomeThing start.&quot;)
-    time.Sleep(5 * time.Second) // 模拟耗时操作
-    log.Println(&quot;doSomeThing end.&quot;)
-    return 100
-}
-
-</code></pre>
-<p>输出结果：</p>
-<pre><code class="language-shell">2024/07/24 09:49:07 doSomeThing start.
-2024/07/24 09:49:11 doSomeThing timeout.
-2024/07/24 09:49:12 doSomeThing end.
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">doSomeThing</span><span class="p">()</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;doSomeThing start.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w"> </span><span class="c1">// 模拟耗时操作</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;doSomeThing end.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">100</span>
+<span class="p">}</span>
+</code></pre></div>
+输出结果：
+<div class="highlight"><pre><span></span><code><span class="m">2024</span>/07/24<span class="w"> </span><span class="m">09</span>:49:07<span class="w"> </span>doSomeThing<span class="w"> </span>start.
+<span class="m">2024</span>/07/24<span class="w"> </span><span class="m">09</span>:49:11<span class="w"> </span>doSomeThing<span class="w"> </span>timeout.
+<span class="m">2024</span>/07/24<span class="w"> </span><span class="m">09</span>:49:12<span class="w"> </span>doSomeThing<span class="w"> </span>end.
+</code></pre></div></p>
 <h2 id="3-ticker">3. Ticker 周期定时器</h2>
 <h3 id="31-ticker">3.1. 关于Ticker</h3>
-<p>Ticker源码：</p>
-<pre><code class="language-go">type Ticker struct {
-    C &lt;-chan Time // The channel on which the ticks are delivered.
-    r runtimeTimer
-}
-</code></pre>
-<ul>
-<li>Ticker也持有一个C通道，每经过指定的时间间隔，Ticker就会向该通道上发送当前时间（时钟滴答声）。</li>
-<li>如果C通道的接收者不能及时取走通道上的数据（即接收者在新的时间到达时，还没有从通道取走上一次的时间），Ticker将调整时间间隔，或者废弃部分时间（时钟滴答声）：
-    <code>go
-    // sendTime does a non-blocking send of the current time on c.
-    func sendTime(c any, seq uintptr) {
-        select {
-        case c.(chan Time) &lt;- Now():
-        default:
-        }
-    }</code></li>
-</ul>
+<p>Ticker源码：
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">Ticker</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">C</span><span class="w"> </span><span class="o">&lt;-</span><span class="kd">chan</span><span class="w"> </span><span class="nx">Time</span><span class="w"> </span><span class="c1">// The channel on which the ticks are delivered.</span>
+<span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="nx">runtimeTimer</span>
+<span class="p">}</span>
+</code></pre></div>
+* Ticker也持有一个C通道，每经过指定的时间间隔，Ticker就会向该通道上发送当前时间（时钟滴答声）。
+* 如果C通道的接收者不能及时取走通道上的数据（即接收者在新的时间到达时，还没有从通道取走上一次的时间），Ticker将调整时间间隔，或者废弃部分时间（时钟滴答声）：
+    <div class="highlight"><pre><span></span><code><span class="c1">// sendTime does a non-blocking send of the current time on c.</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">sendTime</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">seq</span><span class="w"> </span><span class="kt">uintptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">c</span><span class="p">.(</span><span class="kd">chan</span><span class="w"> </span><span class="nx">Time</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">Now</span><span class="p">():</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h3 id="32-tiker">3.2. 创建Tiker</h3>
 <p>创建Ticker只有<code>NewTicker</code>一个方法：</p>
-<pre><code class="language-go">func NewTicker(d Duration) *Ticker {
-    if d &lt;= 0 {
-        panic(&quot;non-positive interval for NewTicker&quot;)
-    }
-    // Give the channel a 1-element time buffer.
-    // If the client falls behind while reading, we drop ticks
-    // on the floor until the client catches up.
-    c := make(chan Time, 1)
-    t := &amp;Ticker{
-        C: c,
-        r: runtimeTimer{
-            when:   when(d),
-            period: int64(d),
-            f:      sendTime,
-            arg:    c,
-        },
-    }
-    startTimer(&amp;t.r)
-    return t
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">NewTicker</span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="nx">Duration</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">Ticker</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">d</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;non-positive interval for NewTicker&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Give the channel a 1-element time buffer.</span>
+<span class="w">    </span><span class="c1">// If the client falls behind while reading, we drop ticks</span>
+<span class="w">    </span><span class="c1">// on the floor until the client catches up.</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="nx">Time</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">Ticker</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">C</span><span class="p">:</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">r</span><span class="p">:</span><span class="w"> </span><span class="nx">runtimeTimer</span><span class="p">{</span>
+<span class="w">            </span><span class="nx">when</span><span class="p">:</span><span class="w">   </span><span class="nx">when</span><span class="p">(</span><span class="nx">d</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">period</span><span class="p">:</span><span class="w"> </span><span class="nb">int64</span><span class="p">(</span><span class="nx">d</span><span class="p">),</span>
+<span class="w">            </span><span class="nx">f</span><span class="p">:</span><span class="w">      </span><span class="nx">sendTime</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">arg</span><span class="p">:</span><span class="w">    </span><span class="nx">c</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">startTimer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">t</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>时间间隔d必须大于0，否则将会panic。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-go">ticker := time.NewTicker(time.Second) // 创建周期为1秒的定时器
-for t := range ticker.C {
-  fmt.Printf(&quot;Tick at %s\n&quot;, t.Format(&quot;2006-01-02 15:04:05&quot;))
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">ticker</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">NewTicker</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w"> </span><span class="c1">// 创建周期为1秒的定时器</span>
+<span class="k">for</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">ticker</span><span class="p">.</span><span class="nx">C</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Tick at %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">Format</span><span class="p">(</span><span class="s">&quot;2006-01-02 15:04:05&quot;</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="33-tiker">3.3. Tiker的结构体方法</h3>
 <h4 id="331-stop">3.3.1. Stop 停止定时器</h4>
-<pre><code class="language-go">func (t *Ticker) Stop() {
-    stopTimer(&amp;t.r)
-}
-</code></pre>
-<ul>
-<li>Stop方法停止Ticker，Stop后，不会再往C通道上发送当前时间（时钟滴答声）。</li>
-<li>Stop方法不会关闭C通道，以防止接收者读取到错误的应答。</li>
-</ul>
-<pre><code class="language-go">log.Println(&quot;Start...&quot;)
+<p><div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">Ticker</span><span class="p">)</span><span class="w"> </span><span class="nx">Stop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">stopTimer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+* Stop方法停止Ticker，Stop后，不会再往C通道上发送当前时间（时钟滴答声）。
+* Stop方法不会关闭C通道，以防止接收者读取到错误的应答。</p>
+<div class="highlight"><pre><span></span><code><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Start...&quot;</span><span class="p">)</span>
 
-ticker := time.NewTicker(time.Second) // 创建周期为1秒的定时器
-go func() { // 新协程，每次定时器触发时打印
-  for t := range ticker.C {
-    log.Printf(&quot;Tick at %s\n&quot;, t.Format(&quot;2006-01-02 15:04:05&quot;))
-  }
-}()
+<span class="nx">ticker</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">NewTicker</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w"> </span><span class="c1">// 创建周期为1秒的定时器</span>
+<span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 新协程，每次定时器触发时打印</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">ticker</span><span class="p">.</span><span class="nx">C</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Tick at %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">Format</span><span class="p">(</span><span class="s">&quot;2006-01-02 15:04:05&quot;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}()</span>
 
-&lt;-time.After(time.Second * 5) // 主协程定时五秒
-ticker.Stop() // 关闭周期定时器
-log.Println(&quot;Ticker stopped&quot;)
+<span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nx">After</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c1">// 主协程定时五秒</span>
+<span class="nx">ticker</span><span class="p">.</span><span class="nx">Stop</span><span class="p">()</span><span class="w"> </span><span class="c1">// 关闭周期定时器</span>
+<span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Ticker stopped&quot;</span><span class="p">)</span>
 
-time.Sleep(5 * time.Second) // 主协程等待五秒，观察程序行为
-log.Println(&quot;End...&quot;)
+<span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w"> </span><span class="c1">// 主协程等待五秒，观察程序行为</span>
+<span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;End...&quot;</span><span class="p">)</span>
 
-// 输出
-2025/11/21 11:24:27 Start...
-2025/11/21 11:24:28 Tick at 2025-11-21 11:24:28
-2025/11/21 11:24:29 Tick at 2025-11-21 11:24:29
-2025/11/21 11:24:30 Tick at 2025-11-21 11:24:30
-2025/11/21 11:24:31 Tick at 2025-11-21 11:24:31
-2025/11/21 11:24:32 Tick at 2025-11-21 11:24:32
-2025/11/21 11:24:32 Ticker stopped
-2025/11/21 11:24:37 End...
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">27</span><span class="w"> </span><span class="nx">Start</span><span class="o">...</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">28</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">28</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">29</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">29</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">30</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">30</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">31</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">31</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">32</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">32</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">32</span><span class="w"> </span><span class="nx">Ticker</span><span class="w"> </span><span class="nx">stopped</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">37</span><span class="w"> </span><span class="nx">End</span><span class="o">...</span>
+</code></pre></div>
 <h4 id="322-reset">3.2.2. Reset 重置定时器</h4>
-<pre><code class="language-go">func (t *Ticker) Reset(d Duration) {
-    if d &lt;= 0 {
-        panic(&quot;non-positive interval for Ticker.Reset&quot;)
-    }
-    if t.r.f == nil {
-        panic(&quot;time: Reset called on uninitialized Ticker&quot;)
-    }
-    modTimer(&amp;t.r, when(d), int64(d), t.r.f, t.r.arg, t.r.seq)
-}
-
-</code></pre>
-<ul>
-<li>Reset方法stop Ticker，并将其时间间隔设置成新的时间间隔。</li>
-<li>下一个（时钟滴答声）将在新的时间间隔后发送。</li>
-<li>新的时间间隔必须大于0，否则会panic。</li>
-</ul>
+<p><div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="o">*</span><span class="nx">Ticker</span><span class="p">)</span><span class="w"> </span><span class="nx">Reset</span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="nx">Duration</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">d</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;non-positive interval for Ticker.Reset&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">.</span><span class="nx">f</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;time: Reset called on uninitialized Ticker&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">modTimer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">when</span><span class="p">(</span><span class="nx">d</span><span class="p">),</span><span class="w"> </span><span class="nb">int64</span><span class="p">(</span><span class="nx">d</span><span class="p">),</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">.</span><span class="nx">f</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">.</span><span class="nx">arg</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">r</span><span class="p">.</span><span class="nx">seq</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+* Reset方法stop Ticker，并将其时间间隔设置成新的时间间隔。
+* 下一个（时钟滴答声）将在新的时间间隔后发送。
+* 新的时间间隔必须大于0，否则会panic。</p>
 <p>示例：</p>
-<pre><code class="language-go">log.Println(&quot;Start...&quot;)
+<div class="highlight"><pre><span></span><code><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Start...&quot;</span><span class="p">)</span>
 
-ticker := time.NewTicker(time.Second) // 创建周期为一秒的周期定时器
-go func() { // 新协程：每次定时器触发时打印
-  for t := range ticker.C {
-    log.Printf(&quot;Tick at %s\n&quot;, t.Format(&quot;2006-01-02 15:04:05&quot;))
-  }
-}()
+<span class="nx">ticker</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">NewTicker</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w"> </span><span class="c1">// 创建周期为一秒的周期定时器</span>
+<span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 新协程：每次定时器触发时打印</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="nx">t</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">ticker</span><span class="p">.</span><span class="nx">C</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Tick at %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="p">.</span><span class="nx">Format</span><span class="p">(</span><span class="s">&quot;2006-01-02 15:04:05&quot;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}()</span>
 
-&lt;-time.After(time.Second * 5) // 主协程定时五秒
-ticker.Reset(time.Second * 2) // 重置周期定时器的周期为2秒
-log.Println(&quot;Change to 2 seconds&quot;)
+<span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nx">After</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c1">// 主协程定时五秒</span>
+<span class="nx">ticker</span><span class="p">.</span><span class="nx">Reset</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// 重置周期定时器的周期为2秒</span>
+<span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Change to 2 seconds&quot;</span><span class="p">)</span>
 
-time.Sleep(5 * time.Second) // 主协程等待五秒，观察程序输出
-log.Println(&quot;End...&quot;)
+<span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w"> </span><span class="c1">// 主协程等待五秒，观察程序输出</span>
+<span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;End...&quot;</span><span class="p">)</span>
 
-// 输出
-2025/11/21 11:27:22 Start...
-2025/11/21 11:27:23 Tick at 2025-11-21 11:27:23
-2025/11/21 11:27:24 Tick at 2025-11-21 11:27:24
-2025/11/21 11:27:25 Tick at 2025-11-21 11:27:25
-2025/11/21 11:27:26 Tick at 2025-11-21 11:27:26
-2025/11/21 11:27:27 Tick at 2025-11-21 11:27:27
-2025/11/21 11:27:27 Change to 2 seconds
-2025/11/21 11:27:29 Tick at 2025-11-21 11:27:29
-2025/11/21 11:27:31 Tick at 2025-11-21 11:27:31
-2025/11/21 11:27:32 End...
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">22</span><span class="w"> </span><span class="nx">Start</span><span class="o">...</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">23</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">23</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">24</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">25</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">25</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">26</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">26</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">27</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">27</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">27</span><span class="w"> </span><span class="nx">Change</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nx">seconds</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">29</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">29</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">31</span><span class="w"> </span><span class="nx">Tick</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">31</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">21</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">32</span><span class="w"> </span><span class="nx">End</span><span class="o">...</span>
+</code></pre></div>
 <h3 id="34">3.4. 使用示例</h3>
 <h4 id="341">3.4.1. 循环执行</h4>
-<p>场景：每过指定时间间隔，执行一次任务。</p>
-<pre><code class="language-go">func main() {
-    // 指定时间间隔为5秒
-    ticker := time.NewTicker(time.Second * 5)
-    for {
-        &lt;-ticker.C
-        // 每5秒执行一次
-        doSomeThing()
-    }
-}
+<p>场景：每过指定时间间隔，执行一次任务。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 指定时间间隔为5秒</span>
+<span class="w">    </span><span class="nx">ticker</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">NewTicker</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">&lt;-</span><span class="nx">ticker</span><span class="p">.</span><span class="nx">C</span>
+<span class="w">        </span><span class="c1">// 每5秒执行一次</span>
+<span class="w">        </span><span class="nx">doSomeThing</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func doSomeThing() {
-    log.Println(&quot;doSomeThing start.&quot;)
-    time.Sleep(1 * time.Second) // 模拟耗时操作
-    log.Println(&quot;doSomeThing end.&quot;)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">doSomeThing</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;doSomeThing start.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w"> </span><span class="c1">// 模拟耗时操作</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;doSomeThing end.&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
 
 
 

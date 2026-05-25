@@ -2267,39 +2267,39 @@
 <p>设置键值对相关命令，用于创建、修改、删除哈希字段值。</p>
 <h4 id="221-hset">2.2.1. HSET</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HSET key field value [field value ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HSET<span class="w"> </span>key<span class="w"> </span>field<span class="w"> </span>value<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>value<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>为哈希中指定的字段设置值。</p>
 <ul>
 <li>如果哈希中不存在该字段，将自动创建。</li>
 <li>如果哈希中存在该字段，将覆盖值。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">&gt; HSET myhash field1 &quot;Hello&quot;
-(integer) 1
-&gt; HGET myhash field1
-&quot;Hello&quot;
-&gt; HSET myhash field2 &quot;Hi&quot; field3 &quot;World&quot;
-(integer) 2
-&gt; HGET myhash field2
-&quot;Hi&quot;
-&gt; HGET myhash field3
-&quot;World&quot;
-&gt; HGETALL myhash
-1) &quot;field1&quot;
-2) &quot;Hello&quot;
-3) &quot;field2&quot;
-4) &quot;Hi&quot;
-5) &quot;field3&quot;
-6) &quot;World&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+&gt;<span class="w"> </span>HGET<span class="w"> </span>myhash<span class="w"> </span>field1
+<span class="s2">&quot;Hello&quot;</span>
+&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;Hi&quot;</span><span class="w"> </span>field3<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+&gt;<span class="w"> </span>HGET<span class="w"> </span>myhash<span class="w"> </span>field2
+<span class="s2">&quot;Hi&quot;</span>
+&gt;<span class="w"> </span>HGET<span class="w"> </span>myhash<span class="w"> </span>field3
+<span class="s2">&quot;World&quot;</span>
+&gt;<span class="w"> </span>HGETALL<span class="w"> </span>myhash
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field1&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field2&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hi&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field3&quot;</span>
+<span class="m">6</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+</code></pre></div>
 <h4 id="222-hsetex">2.2.2. HSETEX</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HSETEX key 
-    [FNX | FXX] 
-    [EX seconds | PX milliseconds | EXAT unix-time-seconds | PXAT unix-time-milliseconds | KEEPTTL]
-  FIELDS numfields field value [field value ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HSETEX<span class="w"> </span>key<span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>FNX<span class="w"> </span><span class="p">|</span><span class="w"> </span>FXX<span class="o">]</span><span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>EX<span class="w"> </span>seconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PX<span class="w"> </span>milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>EXAT<span class="w"> </span>unix-time-seconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PXAT<span class="w"> </span>unix-time-milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>KEEPTTL<span class="o">]</span>
+<span class="w">  </span>FIELDS<span class="w"> </span>numfields<span class="w"> </span>field<span class="w"> </span>value<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>value<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>为哈希中指定的字段设置值，并且设置有效时间（可选）。</p>
 <ul>
 <li>如果哈希中不存在该字段，将自动创建。</li>
@@ -2318,43 +2318,43 @@
 <li>KEEPTTL：保持原有的字段有效期不变。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSETEX mykey EXAT 1740470400 FIELDS 2 field1 &quot;Hello&quot; field2 &quot;World&quot;
-(integer) 1
-redis&gt; HTTL mykey FIELDS 2 field1 field2
-1) (integer) 55627
-2) (integer) 55627
-redis&gt; HSETEX mykey FNX EX 60 FIELDS 2 field1 &quot;Hello&quot; field2 &quot;World&quot;
-(integer) 0
-redis&gt; HSETEX mykey FXX EX 60 KEEPTTL FIELDS 2 field1 &quot;hello&quot; field2 &quot;world&quot;
-(error) ERR Only one of EX, PX, EXAT, PXAT or KEEPTTL arguments can be specified
-redis&gt; HSETEX mykey FXX KEEPTTL FIELDS 2 field1 &quot;hello&quot; field2 &quot;world&quot;
-(integer) 1
-redis&gt; HTTL mykey FIELDS 2 field1 field2
-1) (integer) 55481
-2) (integer) 55481
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSETEX<span class="w"> </span>mykey<span class="w"> </span>EXAT<span class="w"> </span><span class="m">1740470400</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HTTL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">55627</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">55627</span>
+redis&gt;<span class="w"> </span>HSETEX<span class="w"> </span>mykey<span class="w"> </span>FNX<span class="w"> </span>EX<span class="w"> </span><span class="m">60</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>HSETEX<span class="w"> </span>mykey<span class="w"> </span>FXX<span class="w"> </span>EX<span class="w"> </span><span class="m">60</span><span class="w"> </span>KEEPTTL<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>error<span class="o">)</span><span class="w"> </span>ERR<span class="w"> </span>Only<span class="w"> </span>one<span class="w"> </span>of<span class="w"> </span>EX,<span class="w"> </span>PX,<span class="w"> </span>EXAT,<span class="w"> </span>PXAT<span class="w"> </span>or<span class="w"> </span>KEEPTTL<span class="w"> </span>arguments<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span>specified
+redis&gt;<span class="w"> </span>HSETEX<span class="w"> </span>mykey<span class="w"> </span>FXX<span class="w"> </span>KEEPTTL<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HTTL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">55481</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">55481</span>
+</code></pre></div>
 <h4 id="223-hsetnx">2.2.3. HSETNX</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HSETNX key field value
-</code></pre>
+<div class="highlight"><pre><span></span><code>HSETNX<span class="w"> </span>key<span class="w"> </span>field<span class="w"> </span>value
+</code></pre></div>
 <p>当哈希中指定的字段不存在时，为字段设置值。</p>
 <ul>
 <li>如果哈希中不存在该字段，将自动创建。</li>
 <li>如果哈希中存在该字段，则不执行操作。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSETNX myhash field &quot;Hello&quot;
-(integer) 1
-redis&gt; HSETNX myhash field &quot;World&quot;
-(integer) 0
-redis&gt; HGET myhash field
-&quot;Hello&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSETNX<span class="w"> </span>myhash<span class="w"> </span>field<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HSETNX<span class="w"> </span>myhash<span class="w"> </span>field<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>HGET<span class="w"> </span>myhash<span class="w"> </span>field
+<span class="s2">&quot;Hello&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="224-hincrby">2.2.4. HINCRBY</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HINCRBY key field increment
-</code></pre>
+<div class="highlight"><pre><span></span><code>HINCRBY<span class="w"> </span>key<span class="w"> </span>field<span class="w"> </span>increment
+</code></pre></div>
 <p>将哈希中指定字段的整数值增加increment。</p>
 <ul>
 <li>如果字段不存在，当成0处理，结果为increment。</li>
@@ -2363,20 +2363,20 @@ redis&gt;
 <li>如果值不是数字，报错。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET myhash field 5
-(integer) 1
-redis&gt; HINCRBY myhash field 1
-(integer) 6
-redis&gt; HINCRBY myhash field -1
-(integer) 5
-redis&gt; HINCRBY myhash field -10
-(integer) -5
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field<span class="w"> </span><span class="m">5</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HINCRBY<span class="w"> </span>myhash<span class="w"> </span>field<span class="w"> </span><span class="m">1</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">6</span>
+redis&gt;<span class="w"> </span>HINCRBY<span class="w"> </span>myhash<span class="w"> </span>field<span class="w"> </span>-1
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
+redis&gt;<span class="w"> </span>HINCRBY<span class="w"> </span>myhash<span class="w"> </span>field<span class="w"> </span>-10
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-5
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="225-hincrbyfloat">2.2.5. HINCRBYFLOAT</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HINCRBYFLOAT key field increment
-</code></pre>
+<div class="highlight"><pre><span></span><code>HINCRBYFLOAT<span class="w"> </span>key<span class="w"> </span>field<span class="w"> </span>increment
+</code></pre></div>
 <p>将哈希中指定字段的浮点数值增加increment。</p>
 <ul>
 <li>如果字段不存在，当成0处理，结果为increment。</li>
@@ -2385,81 +2385,81 @@ redis&gt;
 <li>如果值不是双精度浮点数，报错。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET mykey field 10.50
-(integer) 1
-redis&gt; HINCRBYFLOAT mykey field 0.1
-&quot;10.6&quot;
-redis&gt; HINCRBYFLOAT mykey field -5
-&quot;5.6&quot;
-redis&gt; HSET mykey field 5.0e3
-(integer) 0
-redis&gt; HINCRBYFLOAT mykey field 2.0e2
-&quot;5200&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field<span class="w"> </span><span class="m">10</span>.50
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HINCRBYFLOAT<span class="w"> </span>mykey<span class="w"> </span>field<span class="w"> </span><span class="m">0</span>.1
+<span class="s2">&quot;10.6&quot;</span>
+redis&gt;<span class="w"> </span>HINCRBYFLOAT<span class="w"> </span>mykey<span class="w"> </span>field<span class="w"> </span>-5
+<span class="s2">&quot;5.6&quot;</span>
+redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field<span class="w"> </span><span class="m">5</span>.0e3
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>HINCRBYFLOAT<span class="w"> </span>mykey<span class="w"> </span>field<span class="w"> </span><span class="m">2</span>.0e2
+<span class="s2">&quot;5200&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="226-hdel">2.2.6 HDEL</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HDEL key field [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HDEL<span class="w"> </span>key<span class="w"> </span>field<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>从哈希中删除指定的一个或多个字段</p>
 <p>示例：</p>
-<pre><code class="language-shell">HSET myhash field1 &quot;foo&quot;
-(integer) 1
-HDEL myhash field1
-(integer) 1
-HDEL myhash field2
-(integer) 0
-</code></pre>
+<div class="highlight"><pre><span></span><code>HSET<span class="w"> </span>myhash<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;foo&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+HDEL<span class="w"> </span>myhash<span class="w"> </span>field1
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+HDEL<span class="w"> </span>myhash<span class="w"> </span>field2
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+</code></pre></div>
 <h3 id="23">2.3. 获取键值对</h3>
 <p>获取键值对命令用于获取哈希中的键/值/键值对及其信息。</p>
 <h4 id="231-hget">2.3.1. HGET</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HGET key field
-</code></pre>
+<div class="highlight"><pre><span></span><code>HGET<span class="w"> </span>key<span class="w"> </span>field
+</code></pre></div>
 <p>获取哈希中指定字段的值。</p>
 <p>示例：</p>
-<pre><code class="language-shell">&gt; HSET myhash field1 &quot;foo&quot;
-(integer) 1
-&gt; HGET myhash field1
-&quot;foo&quot;
-&gt; HGET myhash field2
-(nil)
-</code></pre>
+<div class="highlight"><pre><span></span><code>&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;foo&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+&gt;<span class="w"> </span>HGET<span class="w"> </span>myhash<span class="w"> </span>field1
+<span class="s2">&quot;foo&quot;</span>
+&gt;<span class="w"> </span>HGET<span class="w"> </span>myhash<span class="w"> </span>field2
+<span class="o">(</span>nil<span class="o">)</span>
+</code></pre></div>
 <h4 id="232-hgetdel">2.3.2. HGETDEL</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HGETDEL key FIELDS numfields field [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HGETDEL<span class="w"> </span>key<span class="w"> </span>FIELDS<span class="w"> </span>numfields<span class="w"> </span>field<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>获取并删除哈希中指定的一个或多个字段。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;Hello&quot; field2 &quot;World&quot; field3 &quot;!&quot;
-(integer) 3
-redis&gt; HGETALL mykey
-1) &quot;field1&quot;
-2) &quot;Hello&quot;
-3) &quot;field2&quot;
-4) &quot;World&quot;
-5) &quot;field3&quot;
-6) &quot;!&quot;
-redis&gt; HGETDEL mykey FIELDS 2 field3 field4
-1) &quot;!&quot;
-2) (nil)
-redis&gt; HGETALL mykey
-1) &quot;field1&quot;
-2) &quot;Hello&quot;
-3) &quot;field2&quot;
-4) &quot;World&quot;
-redis&gt; HGETDEL mykey FIELDS 2 field1 field2
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-redis&gt; KEYS *
-(empty array)
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;World&quot;</span><span class="w"> </span>field3<span class="w"> </span><span class="s2">&quot;!&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>HGETALL<span class="w"> </span>mykey
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field1&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field2&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field3&quot;</span>
+<span class="m">6</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;!&quot;</span>
+redis&gt;<span class="w"> </span>HGETDEL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field3<span class="w"> </span>field4
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;!&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span>
+redis&gt;<span class="w"> </span>HGETALL<span class="w"> </span>mykey
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field1&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field2&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+redis&gt;<span class="w"> </span>HGETDEL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+redis&gt;<span class="w"> </span>KEYS<span class="w"> </span>*
+<span class="o">(</span>empty<span class="w"> </span>array<span class="o">)</span>
+</code></pre></div>
 <h4 id="233-hgetex">2.3.3. HGETEX</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HGETEX key 
-    [EX seconds | PX milliseconds | EXAT unix-time-seconds | PXAT unix-time-milliseconds | PERSIST]     FIELDS numfields field
-  [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HGETEX<span class="w"> </span>key<span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>EX<span class="w"> </span>seconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PX<span class="w"> </span>milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>EXAT<span class="w"> </span>unix-time-seconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PXAT<span class="w"> </span>unix-time-milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PERSIST<span class="o">]</span><span class="w">     </span>FIELDS<span class="w"> </span>numfields<span class="w"> </span>field
+<span class="w">  </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>获取哈希中的一个或多个字段的值，并设置有效期（可选）。</p>
 <p>可选参数：</p>
 <ul>
@@ -2483,109 +2483,109 @@ redis&gt; KEYS *
 </li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;Hello&quot; field2 &quot;World&quot;
-(integer) 2
-redis&gt; HGETEX mykey EX 120 FIELDS 1 field1
-1) &quot;Hello&quot;
-redis&gt; HGETEX mykey EX 100 FIELDS 1 field2
-1) &quot;World&quot;
-redis&gt; HTTL mykey FIELDS 2 field1 field2
-1) (integer) 91
-2) (integer) 85
-redis&gt; HTTL mykey FIELDS 3 field1 field2 field3 
-1) (integer) 75
-2) (integer) 68
-3) (integer) -2
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>HGETEX<span class="w"> </span>mykey<span class="w"> </span>EX<span class="w"> </span><span class="m">120</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">1</span><span class="w"> </span>field1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+redis&gt;<span class="w"> </span>HGETEX<span class="w"> </span>mykey<span class="w"> </span>EX<span class="w"> </span><span class="m">100</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">1</span><span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+redis&gt;<span class="w"> </span>HTTL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">91</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">85</span>
+redis&gt;<span class="w"> </span>HTTL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">3</span><span class="w"> </span>field1<span class="w"> </span>field2<span class="w"> </span>field3<span class="w"> </span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">75</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">68</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-2
 ...
-redis&gt; HTTL mykey FIELDS 3 field1 field2 
-1) (integer) -2
-2) (integer) -2
-redis&gt; HGETALL myk
-</code></pre>
+redis&gt;<span class="w"> </span>HTTL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">3</span><span class="w"> </span>field1<span class="w"> </span>field2<span class="w"> </span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-2
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-2
+redis&gt;<span class="w"> </span>HGETALL<span class="w"> </span>myk
+</code></pre></div>
 <h4 id="234-hgetall">2.3.4. HGETALL</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HGETALL key
-</code></pre>
+<div class="highlight"><pre><span></span><code>HGETALL<span class="w"> </span>key
+</code></pre></div>
 <p>返回哈希中的所有字段和值。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET myhash field1 &quot;Hello&quot;
-(integer) 1
-redis&gt; HSET myhash field2 &quot;World&quot;
-(integer) 1
-redis&gt; HGETALL myhash
-1) &quot;field1&quot;
-2) &quot;Hello&quot;
-3) &quot;field2&quot;
-4) &quot;World&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HGETALL<span class="w"> </span>myhash
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field1&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field2&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+</code></pre></div>
 <h4 id="235-hmget">2.3.5. HMGET</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HMGET key field [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HMGET<span class="w"> </span>key<span class="w"> </span>field<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>获取哈希中指定的一个或多个字段的值。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET myhash field1 &quot;Hello&quot;
-(integer) 1
-redis&gt; HSET myhash field2 &quot;World&quot;
-(integer) 1
-redis&gt; HMGET myhash field1 field2 nofield
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-3) (nil)
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HMGET<span class="w"> </span>myhash<span class="w"> </span>field1<span class="w"> </span>field2<span class="w"> </span>nofield
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="236-hexists">2.3.6. HEXISTS</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HEXISTS key field
-</code></pre>
+<div class="highlight"><pre><span></span><code>HEXISTS<span class="w"> </span>key<span class="w"> </span>field
+</code></pre></div>
 <p>检查哈希中是否存在指定字段。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET myhash field1 &quot;foo&quot;
-(integer) 1
-redis&gt; HEXISTS myhash field1
-(integer) 1
-redis&gt; HEXISTS myhash field2
-(integer) 0
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;foo&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HEXISTS<span class="w"> </span>myhash<span class="w"> </span>field1
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HEXISTS<span class="w"> </span>myhash<span class="w"> </span>field2
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="237-hscan">2.3.7. HSCAN</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HSCAN key cursor [MATCH pattern] [COUNT count] [NOVALUES]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HSCAN<span class="w"> </span>key<span class="w"> </span>cursor<span class="w"> </span><span class="o">[</span>MATCH<span class="w"> </span>pattern<span class="o">]</span><span class="w"> </span><span class="o">[</span>COUNT<span class="w"> </span>count<span class="o">]</span><span class="w"> </span><span class="o">[</span>NOVALUES<span class="o">]</span>
+</code></pre></div>
 <p>对哈希值的键值对进行迭代。</p>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/scan/">Redis SCAN</a></p>
 <h4 id="238-hkeys">2.3.8. HKEYS</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HKEYS key
-</code></pre>
+<div class="highlight"><pre><span></span><code>HKEYS<span class="w"> </span>key
+</code></pre></div>
 <p>获取哈希中所有的字段名称。</p>
 <p>示例：</p>
-<pre><code class="language-shell">(integer) 1
-redis&gt; HSET myhash field2 &quot;World&quot;
-(integer) 1
-redis&gt; HKEYS myhash
-1) &quot;field1&quot;
-2) &quot;field2&quot;
+<div class="highlight"><pre><span></span><code><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HKEYS<span class="w"> </span>myhash
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field1&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;field2&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="239-hvals">2.3.9. HVALS</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HVALS key
-</code></pre>
+<div class="highlight"><pre><span></span><code>HVALS<span class="w"> </span>key
+</code></pre></div>
 <p>获取哈希中所有的字段值。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET myhash field1 &quot;Hello&quot;
-(integer) 1
-redis&gt; HSET myhash field2 &quot;World&quot;
-(integer) 1
-redis&gt; HVALS myhash
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HVALS<span class="w"> </span>myhash
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+</code></pre></div>
 <h4 id="2310-hrandfield">2.3.10. HRANDFIELD</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HRANDFIELD key [count [WITHVALUES]]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HRANDFIELD<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>count<span class="w"> </span><span class="o">[</span>WITHVALUES<span class="o">]]</span>
+</code></pre></div>
 <p>返回哈希中的一个随机字段名称。</p>
 <p>可选参数：</p>
 <ul>
@@ -2595,39 +2595,39 @@ redis&gt; HVALS myhash
 <li>WITHVALUES：指定需要同时返回对应字段的值。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET coin heads obverse tails reverse edge null
-(integer) 3
-redis&gt; HRANDFIELD coin
-&quot;edge&quot;
-redis&gt; HRANDFIELD coin
-&quot;heads&quot;
-redis&gt; HRANDFIELD coin -5 WITHVALUES
-1) &quot;tails&quot;
-2) &quot;reverse&quot;
-3) &quot;heads&quot;
-4) &quot;obverse&quot;
-5) &quot;tails&quot;
-6) &quot;reverse&quot;
-7) &quot;edge&quot;
-8) &quot;null&quot;
-9) &quot;tails&quot;
-10) &quot;reverse&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>coin<span class="w"> </span>heads<span class="w"> </span>obverse<span class="w"> </span>tails<span class="w"> </span>reverse<span class="w"> </span>edge<span class="w"> </span>null
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>HRANDFIELD<span class="w"> </span>coin
+<span class="s2">&quot;edge&quot;</span>
+redis&gt;<span class="w"> </span>HRANDFIELD<span class="w"> </span>coin
+<span class="s2">&quot;heads&quot;</span>
+redis&gt;<span class="w"> </span>HRANDFIELD<span class="w"> </span>coin<span class="w"> </span>-5<span class="w"> </span>WITHVALUES
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;tails&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;reverse&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;heads&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;obverse&quot;</span>
+<span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;tails&quot;</span>
+<span class="m">6</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;reverse&quot;</span>
+<span class="m">7</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;edge&quot;</span>
+<span class="m">8</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="m">9</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;tails&quot;</span>
+<span class="m">10</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;reverse&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="2311-hlen">2.3.11. HLEN</h4>
 <p>语法格式：</p>
-<pre><code class="language-shell">HLEN key
-</code></pre>
+<div class="highlight"><pre><span></span><code>HLEN<span class="w"> </span>key
+</code></pre></div>
 <p>获取哈希中的字段数量。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET myhash field1 &quot;Hello&quot;
-(integer) 1
-redis&gt; HSET myhash field2 &quot;World&quot;
-(integer) 1
-redis&gt; HLEN myhash
-(integer) 2
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HSET<span class="w"> </span>myhash<span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HLEN<span class="w"> </span>myhash
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h3 id="24">2.4. 字段有效期</h3>
 <h4 id="241">2.4.1. 关于字段有效期</h4>
 <p>Redis 7.4 引入了为哈希中单个字段设置到期时间的功能：</p>
@@ -2652,11 +2652,11 @@ redis&gt;
 <h4 id="242">2.4.2. 设置字段有效期</h4>
 <h5 id="2421-hexpire">2.4.2.1. HEXPIRE</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">HEXPIRE key seconds 
-    [NX | XX | GT | LT] 
-FIELDS numfields field
-  [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HEXPIRE<span class="w"> </span>key<span class="w"> </span>seconds<span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>NX<span class="w"> </span><span class="p">|</span><span class="w"> </span>XX<span class="w"> </span><span class="p">|</span><span class="w"> </span>GT<span class="w"> </span><span class="p">|</span><span class="w"> </span>LT<span class="o">]</span><span class="w"> </span>
+FIELDS<span class="w"> </span>numfields<span class="w"> </span>field
+<span class="w">  </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>设置哈希中一个或多个字段的有效期。</p>
 <p>可选参数：</p>
 <ul>
@@ -2667,162 +2667,162 @@ FIELDS numfields field
 <li>LT：对于每个字段，仅在新有效期小于当前有效期时设置。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">HEXPIRE no-key 20 NX FIELDS 2 field1 field2
-(nil)
-HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
-(integer) 2
-HEXPIRE mykey 10 FIELDS 3 field1 field2 field3
-1) (integer) 1
-2) (integer) 1
-3) (integer) -2
-HGETALL mykey
-</code></pre>
+<div class="highlight"><pre><span></span><code>HEXPIRE<span class="w"> </span>no-key<span class="w"> </span><span class="m">20</span><span class="w"> </span>NX<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="o">(</span>nil<span class="o">)</span>
+HSET<span class="w"> </span>mykey<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+HEXPIRE<span class="w"> </span>mykey<span class="w"> </span><span class="m">10</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">3</span><span class="w"> </span>field1<span class="w"> </span>field2<span class="w"> </span>field3
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-2
+HGETALL<span class="w"> </span>mykey
+</code></pre></div>
 <h5 id="2422-hexpireat">2.4.2.2. HEXPIREAT</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">EXPIREAT key unix-time-seconds 
-    [NX | XX | GT | LT] 
-FIELDS numfields field [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>EXPIREAT<span class="w"> </span>key<span class="w"> </span>unix-time-seconds<span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>NX<span class="w"> </span><span class="p">|</span><span class="w"> </span>XX<span class="w"> </span><span class="p">|</span><span class="w"> </span>GT<span class="w"> </span><span class="p">|</span><span class="w"> </span>LT<span class="o">]</span><span class="w"> </span>
+FIELDS<span class="w"> </span>numfields<span class="w"> </span>field<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>使用绝对Unix时间戳（秒）设置哈希中一个或多个字段的到期时间。</p>
 <blockquote>
 <p>可选参数的含义同HEXPIRE</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
-(integer) 2
-redis&gt; HEXPIREAT mykey 1715704971 FIELDS 2 field1 field2
-1) (integer) 1
-2) (integer) 1
-redis&gt; HTTL mykey FIELDS 2 field1 field2
-1) (integer) 567
-2) (integer) 567
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>HEXPIREAT<span class="w"> </span>mykey<span class="w"> </span><span class="m">1715704971</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HTTL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">567</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">567</span>
+</code></pre></div>
 <h5 id="2423-hpexpire">2.4.2.3. HPEXPIRE</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">HPEXPIRE key milliseconds 
-    [NX | XX | GT | LT] 
-FIELDS numfields field [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HPEXPIRE<span class="w"> </span>key<span class="w"> </span>milliseconds<span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>NX<span class="w"> </span><span class="p">|</span><span class="w"> </span>XX<span class="w"> </span><span class="p">|</span><span class="w"> </span>GT<span class="w"> </span><span class="p">|</span><span class="w"> </span>LT<span class="o">]</span><span class="w"> </span>
+FIELDS<span class="w"> </span>numfields<span class="w"> </span>field<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>设置哈希中一个或多个字段的有效期（毫秒）。</p>
 <blockquote>
 <p>可选参数的含义同HEXPIRE</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
-(integer) 2
-redis&gt; HPEXPIRE mykey 2000 FIELDS 2 field1 field2
-1) (integer) 1
-2) (integer) 1
-redis&gt; HGETALL mykey
-(empty array)
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>HPEXPIRE<span class="w"> </span>mykey<span class="w"> </span><span class="m">2000</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HGETALL<span class="w"> </span>mykey
+<span class="o">(</span>empty<span class="w"> </span>array<span class="o">)</span>
+</code></pre></div>
 <h5 id="2424-hpexpireat">2.4.2.4. HPEXPIREAT</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">HPEXPIREAT key unix-time-milliseconds 
-    [NX | XX | GT | LT]
-FIELDS numfields field [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HPEXPIREAT<span class="w"> </span>key<span class="w"> </span>unix-time-milliseconds<span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>NX<span class="w"> </span><span class="p">|</span><span class="w"> </span>XX<span class="w"> </span><span class="p">|</span><span class="w"> </span>GT<span class="w"> </span><span class="p">|</span><span class="w"> </span>LT<span class="o">]</span>
+FIELDS<span class="w"> </span>numfields<span class="w"> </span>field<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>使用该Unix时间戳（毫秒）设置哈希中一个或多个字段的有效期。</p>
 <blockquote>
 <p>可选参数的含义同HEXPIRE</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
-(integer) 2
-redis&gt; HPEXPIREAT mykey 1715704971000 FIELDS 2 field1 field2
-1) (integer) 1
-2) (integer) 1
-redis&gt; HPTTL mykey FIELDS 2 field1 field2
-1) (integer) 303340
-2) (integer) 303340
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>HPEXPIREAT<span class="w"> </span>mykey<span class="w"> </span><span class="m">1715704971000</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HPTTL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">303340</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">303340</span>
+</code></pre></div>
 <h5 id="2425-hpersist">2.4.2.5 HPERSIST</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">HPERSIST key FIELDS numfields field [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HPERSIST<span class="w"> </span>key<span class="w"> </span>FIELDS<span class="w"> </span>numfields<span class="w"> </span>field<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>移除哈希中指定字段的有效期，使其变成持久的。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
-(integer) 2
-redis&gt; HEXPIRE mykey 300 FIELDS 2 field1 field2
-1) (integer) 1
-2) (integer) 1
-redis&gt; HTTL mykey FIELDS 2 field1 field2
-1) (integer) 283
-2) (integer) 283
-redis&gt; HPERSIST mykey FIELDS 1 field2
-1) (integer) 1
-redis&gt; HTTL mykey FIELDS 2 field1 field2
-1) (integer) 268
-2) (integer) -1
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>HEXPIRE<span class="w"> </span>mykey<span class="w"> </span><span class="m">300</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HTTL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">283</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">283</span>
+redis&gt;<span class="w"> </span>HPERSIST<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">1</span><span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HTTL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">268</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-1
+</code></pre></div>
 <h4 id="243">2.4.3. 获取字段有效期</h4>
 <h5 id="2431-hexpiretime">2.4.3.1. HEXPIRETIME</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">HEXPIRETIME key FIELDS numfields field [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HEXPIRETIME<span class="w"> </span>key<span class="w"> </span>FIELDS<span class="w"> </span>numfields<span class="w"> </span>field<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>以Unix时间戳（秒）返回哈希字段的过期时间。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
-(integer) 2
-redis&gt; HEXPIRE mykey 300  FIELDS 2 field1 field2
-1) (integer) 1
-2) (integer) 1
-redis&gt; HEXPIRETIME mykey FIELDS 2 field1 field2
-1) (integer) 1715705914
-2) (integer) 1715705914
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>HEXPIRE<span class="w"> </span>mykey<span class="w"> </span><span class="m">300</span><span class="w">  </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HEXPIRETIME<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1715705914</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1715705914</span>
+</code></pre></div>
 <h5 id="2432-hpexpiretime">2.4.3.2. HPEXPIRETIME</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">HPEXPIRETIME key FIELDS numfields field [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HPEXPIRETIME<span class="w"> </span>key<span class="w"> </span>FIELDS<span class="w"> </span>numfields<span class="w"> </span>field<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>以Unix时间戳（毫秒）返回哈希字段的过期时间。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
-(integer) 2
-redis&gt; HEXPIRE mykey 300 FIELDS 2 field1 field2
-1) (integer) 1
-2) (integer) 1
-redis&gt; HPEXPIRETIME mykey FIELDS 2 field1 field2
-1) (integer) 1715705913659
-2) (integer) 1715705913659
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>HEXPIRE<span class="w"> </span>mykey<span class="w"> </span><span class="m">300</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>HPEXPIRETIME<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field2
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1715705913659</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1715705913659</span>
+</code></pre></div>
 <h5 id="2433-hpttl">2.4.3.3. HPTTL</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">HPTTL key FIELDS numfields field [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HPTTL<span class="w"> </span>key<span class="w"> </span>FIELDS<span class="w"> </span>numfields<span class="w"> </span>field<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>返回哈希字段的TTL（毫秒）。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HPTTL no-key FIELDS 3 field1 field2 field3
-(nil)
-redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
-(integer) 2
-redis&gt; HEXPIRE mykey 300 FIELDS 2 field1 field3
-1) (integer) 1
-2) (integer) -2
-redis&gt; HPTTL mykey FIELDS 3 field1 field2 field3
-1) (integer) 292202
-2) (integer) -1
-3) (integer) -2
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HPTTL<span class="w"> </span>no-key<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">3</span><span class="w"> </span>field1<span class="w"> </span>field2<span class="w"> </span>field3
+<span class="o">(</span>nil<span class="o">)</span>
+redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>HEXPIRE<span class="w"> </span>mykey<span class="w"> </span><span class="m">300</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field3
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-2
+redis&gt;<span class="w"> </span>HPTTL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">3</span><span class="w"> </span>field1<span class="w"> </span>field2<span class="w"> </span>field3
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">292202</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-1
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-2
+</code></pre></div>
 <h5 id="2434-httl">2.4.3.4. HTTL</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">HTTL key FIELDS numfields field [field ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>HTTL<span class="w"> </span>key<span class="w"> </span>FIELDS<span class="w"> </span>numfields<span class="w"> </span>field<span class="w"> </span><span class="o">[</span>field<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>返回哈希字段的TTL（秒）。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; HTTL no-key FIELDS 3 field1 field2 field3
-(nil)
-redis&gt; HSET mykey field1 &quot;hello&quot; field2 &quot;world&quot;
-(integer) 2
-redis&gt; HEXPIRE mykey 300 FIELDS 2 field1 field3
-1) (integer) 1
-2) (integer) -2
-redis&gt; HTTL mykey FIELDS 3 field1 field2 field3
-1) (integer) 283
-2) (integer) -1
-3) (integer) -2
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>HTTL<span class="w"> </span>no-key<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">3</span><span class="w"> </span>field1<span class="w"> </span>field2<span class="w"> </span>field3
+<span class="o">(</span>nil<span class="o">)</span>
+redis&gt;<span class="w"> </span>HSET<span class="w"> </span>mykey<span class="w"> </span>field1<span class="w"> </span><span class="s2">&quot;hello&quot;</span><span class="w"> </span>field2<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>HEXPIRE<span class="w"> </span>mykey<span class="w"> </span><span class="m">300</span><span class="w"> </span>FIELDS<span class="w"> </span><span class="m">2</span><span class="w"> </span>field1<span class="w"> </span>field3
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-2
+redis&gt;<span class="w"> </span>HTTL<span class="w"> </span>mykey<span class="w"> </span>FIELDS<span class="w"> </span><span class="m">3</span><span class="w"> </span>field1<span class="w"> </span>field2<span class="w"> </span>field3
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">283</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-1
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>integer<span class="o">)</span><span class="w"> </span>-2
+</code></pre></div>
 
 
 

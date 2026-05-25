@@ -1937,53 +1937,53 @@
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/set/">SET 命令</a></p>
 <p>SET是设置Redis键最基础的命令（还有其他设置Redis键的命令），它设置一个Redis键以保存字符串值。如果之前已经有相同的键，则无论其类型如何，都会被覆盖。</p>
 <p>命令格式：</p>
-<pre><code class="language-shell">SET key value [NX | XX | IFEQ ifeq-value | IFNE ifne-value |
-  IFDEQ ifdeq-digest | IFDNE ifdne-digest] [GET] [EX seconds |
-  PX milliseconds | EXAT unix-time-seconds |
-  PXAT unix-time-milliseconds | KEEPTTL]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SET<span class="w"> </span>key<span class="w"> </span>value<span class="w"> </span><span class="o">[</span>NX<span class="w"> </span><span class="p">|</span><span class="w"> </span>XX<span class="w"> </span><span class="p">|</span><span class="w"> </span>IFEQ<span class="w"> </span>ifeq-value<span class="w"> </span><span class="p">|</span><span class="w"> </span>IFNE<span class="w"> </span>ifne-value<span class="w"> </span><span class="p">|</span>
+<span class="w">  </span>IFDEQ<span class="w"> </span>ifdeq-digest<span class="w"> </span><span class="p">|</span><span class="w"> </span>IFDNE<span class="w"> </span>ifdne-digest<span class="o">]</span><span class="w"> </span><span class="o">[</span>GET<span class="o">]</span><span class="w"> </span><span class="o">[</span>EX<span class="w"> </span>seconds<span class="w"> </span><span class="p">|</span>
+<span class="w">  </span>PX<span class="w"> </span>milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>EXAT<span class="w"> </span>unix-time-seconds<span class="w"> </span><span class="p">|</span>
+<span class="w">  </span>PXAT<span class="w"> </span>unix-time-milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>KEEPTTL<span class="o">]</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET mykey &quot;Hello&quot;
-&quot;OK&quot;
-redis&gt; GET mykey
-&quot;Hello&quot;
-redis&gt; SET anotherkey &quot;will expire in a minute&quot; EX 60
-&quot;OK&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>mykey<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>mykey
+<span class="s2">&quot;Hello&quot;</span>
+redis&gt;<span class="w"> </span>SET<span class="w"> </span>anotherkey<span class="w"> </span><span class="s2">&quot;will expire in a minute&quot;</span><span class="w"> </span>EX<span class="w"> </span><span class="m">60</span>
+<span class="s2">&quot;OK&quot;</span>
+</code></pre></div>
 <h4 id="312-get">3.1.2. GET 获取键</h4>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/get/">GET 命令</a></p>
 <p>GET是获取Redis键所存储值（只处理字符串值）最基础的命令。如果键不存在，则返回特殊值nil，如果键所存储值不是字符串，则会返回错误。</p>
 <p>命令格式：</p>
-<pre><code class="language-shell">GET key
-</code></pre>
+<div class="highlight"><pre><span></span><code>GET<span class="w"> </span>key
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; GET nonexisting
-(nil)
-redis&gt; SET mykey &quot;Hello&quot;
-&quot;OK&quot;
-redis&gt; GET mykey
-&quot;Hello&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>GET<span class="w"> </span>nonexisting
+<span class="o">(</span>nil<span class="o">)</span>
+redis&gt;<span class="w"> </span>SET<span class="w"> </span>mykey<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>mykey
+<span class="s2">&quot;Hello&quot;</span>
+</code></pre></div>
 <h4 id="313-type">3.1.3. TYPE 获取键值的类型</h4>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/type/">TYPE 命令</a></p>
 <p>TYPE命令用于获取指定键所存储值类型的字符串标识，返回不同的类型包括：<code>string</code>, <code>list</code>, <code>set</code>, <code>zset</code>, <code>hash</code>, <code>stream</code>, and <code>vectorset</code>.</p>
 <p>命令格式：</p>
-<pre><code class="language-shell">TYPE key
-</code></pre>
+<div class="highlight"><pre><span></span><code>TYPE<span class="w"> </span>key
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET key1 &quot;value&quot;
-&quot;OK&quot;
-redis&gt; LPUSH key2 &quot;value&quot;
-(integer) 1
-redis&gt; SADD key3 &quot;value&quot;
-(integer) 1
-redis&gt; TYPE key1
-&quot;string&quot;
-redis&gt; TYPE key2
-&quot;list&quot;
-redis&gt; TYPE key3
-&quot;set&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;value&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>LPUSH<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;value&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>SADD<span class="w"> </span>key3<span class="w"> </span><span class="s2">&quot;value&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>TYPE<span class="w"> </span>key1
+<span class="s2">&quot;string&quot;</span>
+redis&gt;<span class="w"> </span>TYPE<span class="w"> </span>key2
+<span class="s2">&quot;list&quot;</span>
+redis&gt;<span class="w"> </span>TYPE<span class="w"> </span>key3
+<span class="s2">&quot;set&quot;</span>
+</code></pre></div>
 <h4 id="314-exists">3.1.4. EXISTS 检查键是否存在</h4>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/exists/">EXISTS 命令</a></p>
 <p>TYPE命令用于检查指定键是否存在。其参数可以指定多个Key，返回值为这些Key存在的数量。</p>
@@ -1991,48 +1991,48 @@ redis&gt; TYPE key3
 <p>如果一个存在的Key在参数列表中多次出现，会被多次计数。</p>
 </blockquote>
 <p>命令格式：</p>
-<pre><code class="language-shell">EXISTS key [key ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>EXISTS<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET key1 &quot;Hello&quot;
-&quot;OK&quot;
-redis&gt; EXISTS key1
-(integer) 1
-redis&gt; EXISTS nosuchkey
-(integer) 0
-redis&gt; SET key2 &quot;World&quot;
-&quot;OK&quot;
-redis&gt; EXISTS key1 key2 nosuchkey
-(integer) 2
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>EXISTS<span class="w"> </span>key1
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>EXISTS<span class="w"> </span>nosuchkey
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>SET<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>EXISTS<span class="w"> </span>key1<span class="w"> </span>key2<span class="w"> </span>nosuchkey
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div>
 <h4 id="315-del">3.1.5. DEL删除键</h4>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/del/">DEL 命令</a></p>
 <p>DEL命令移除指定的Key。如果Key不存在，则该Key被忽略。</p>
 <p>命令格式：</p>
-<pre><code class="language-shell">DEL key [key ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>DEL<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET key1 &quot;Hello&quot;
-&quot;OK&quot;
-redis&gt; SET key2 &quot;World&quot;
-&quot;OK&quot;
-redis&gt; DEL key1 key2 key3
-(integer) 2
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>SET<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>DEL<span class="w"> </span>key1<span class="w"> </span>key2<span class="w"> </span>key3
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div>
 <h3 id="32-scan">3.2. SCAN 键的扫描</h3>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/scan/">SCAN 命令</a></p>
 <p>SCAN是一个基于游标的迭代命令，用于增量地遍历键空间，相比KEYS命令更安全，不会阻塞服务器。</p>
-<p>语法：</p>
-<pre><code>SCAN cursor [MATCH pattern] [COUNT count] [TYPE type]
-</code></pre>
+<p>语法：
+<div class="highlight"><pre><span></span><code>SCAN cursor [MATCH pattern] [COUNT count] [TYPE type]
+</code></pre></div></p>
 <ul>
 <li>cursor: 游标值，首次调用使用0</li>
 <li>MATCH: 可选，匹配模式</li>
 <li>COUNT: 可选，每次迭代返回的元素数量估计</li>
 <li>TYPE: 可选，限制返回特定类型的键</li>
 </ul>
-<p>示例：</p>
-<pre><code>redis&gt; scan 0 match user:*
+<p>示例：
+<div class="highlight"><pre><span></span><code>redis&gt; scan 0 match user:*
 1) &quot;28&quot;
 2) 1) &quot;user:1000&quot;
    2) &quot;user:1001&quot;
@@ -2041,7 +2041,7 @@ redis&gt; scan 28
 1) &quot;0&quot;
 2) 1) &quot;user:1003&quot;
    2) &quot;user:1004&quot;
-</code></pre>
+</code></pre></div></p>
 <h3 id="33-keys">3.3. KEYS 遍历键</h3>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/keys/">KEYS 命令</a></p>
 <p>虽然SCAN是推荐的方式，但KEYS命令在小数据集上仍有用处。它返回所有匹配给定模式的键。</p>
@@ -2053,8 +2053,8 @@ redis&gt; scan 28
 - <code>*</code> 匹配零个或多个字符
 - <code>[...]</code> 匹配方括号内的任意字符
 - <code>\x</code> 转义字符x</p>
-<p>示例：</p>
-<pre><code>redis&gt; SET user:1000 &quot;Alice&quot;
+<p>示例：
+<div class="highlight"><pre><span></span><code>redis&gt; SET user:1000 &quot;Alice&quot;
 OK
 redis&gt; SET user:1001 &quot;Bob&quot;
 OK
@@ -2067,7 +2067,7 @@ redis&gt; KEYS *
 1) &quot;user:1000&quot;
 2) &quot;user:1001&quot;
 3) &quot;product:100&quot;
-</code></pre>
+</code></pre></div></p>
 <h3 id="34">3.4. 键的重命名</h3>
 <p>键的重命名有两个命令：</p>
 <ul>
@@ -2083,33 +2083,33 @@ redis&gt; KEYS *
 <li>在集群模式下，新旧Key必须处于同一个哈希槽中，也就是说实际上只有具有相同hash tag的key才能在集群中被可靠地重命名。</li>
 </ul>
 <p>命令格式：</p>
-<pre><code class="language-shell">RENAME key newkey
-</code></pre>
+<div class="highlight"><pre><span></span><code>RENAME<span class="w"> </span>key<span class="w"> </span>newkey
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET mykey &quot;Hello&quot;
-&quot;OK&quot;
-redis&gt; RENAME mykey myotherkey
-&quot;OK&quot;
-redis&gt; GET myotherkey
-&quot;Hello&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>mykey<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>RENAME<span class="w"> </span>mykey<span class="w"> </span>myotherkey
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>myotherkey
+<span class="s2">&quot;Hello&quot;</span>
+</code></pre></div>
 <hr />
 <p><strong>RENAMENX命令：</strong></p>
 <p>如果新Key不存在，RENAME命令将指定的Key重命名为新的Key。</p>
 <p>如果新Key已经存在，则命令不会执行操作。（这是与RENAME命令区别所在）</p>
 <p>命令格式：</p>
-<pre><code class="language-shell">RENAMENX key newkey
-</code></pre>
+<div class="highlight"><pre><span></span><code>RENAMENX<span class="w"> </span>key<span class="w"> </span>newkey
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET mykey &quot;Hello&quot;
-&quot;OK&quot;
-redis&gt; SET myotherkey &quot;World&quot;
-&quot;OK&quot;
-redis&gt; RENAMENX mykey myotherkey
-(integer) 0
-redis&gt; GET myotherkey
-&quot;World&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>mykey<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>SET<span class="w"> </span>myotherkey<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>RENAMENX<span class="w"> </span>mykey<span class="w"> </span>myotherkey
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>myotherkey
+<span class="s2">&quot;World&quot;</span>
+</code></pre></div>
 <h2 id="4">4. 键的过期时间</h2>
 <h3 id="41-key-expiration">4.1. key expiration概述</h3>
 <p>Redis还有一个重要的特性：<strong>key expiration 键过期</strong>。</p>
@@ -2130,55 +2130,55 @@ redis&gt; GET myotherkey
 <h4 id="421-expire">4.2.1. EXPIRE 命令</h4>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/expire/">EXPIRE 命令</a></p>
 <p>EXPIRE命令用于为已存在的键设置过期时间（以秒为单位）。如果键存在，则设置成功返回1，如果键不存在则返回0。</p>
-<p>命令格式：</p>
-<pre><code>EXPIRE key seconds
-</code></pre>
-<p>示例：</p>
-<pre><code>redis&gt; SET mykey &quot;Hello&quot;
+<p>命令格式：
+<div class="highlight"><pre><span></span><code>EXPIRE key seconds
+</code></pre></div></p>
+<p>示例：
+<div class="highlight"><pre><span></span><code>redis&gt; SET mykey &quot;Hello&quot;
 OK
 redis&gt; EXPIRE mykey 10
 (integer) 1
 redis&gt; TTL mykey
 (integer) 9
-</code></pre>
+</code></pre></div></p>
 <h4 id="422-pexpire">4.2.2. PEXPIRE 命令</h4>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/pexpire/">PEXPIRE 命令</a></p>
 <p>PEXPIRE命令与EXPIRE命令类似，但以毫秒为单位设置过期时间。如果键存在，则设置成功返回1，如果键不存在则返回0。</p>
-<p>命令格式：</p>
-<pre><code>PEXPIRE key milliseconds
-</code></pre>
-<p>示例：</p>
-<pre><code>redis&gt; SET mykey &quot;Hello&quot;
+<p>命令格式：
+<div class="highlight"><pre><span></span><code>PEXPIRE key milliseconds
+</code></pre></div></p>
+<p>示例：
+<div class="highlight"><pre><span></span><code>redis&gt; SET mykey &quot;Hello&quot;
 OK
 redis&gt; PEXPIRE mykey 5000
 (integer) 1
 redis&gt; PTTL mykey
 (integer) 4999
-</code></pre>
+</code></pre></div></p>
 <h4 id="423-expireat">4.2.3. EXPIREAT 命令</h4>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/expireat/">EXPIREAT 命令</a></p>
 <p>EXPIREAT命令用于为已存在的键设置过期时间戳（以秒为单位的Unix时间戳）。当Redis服务器的当前时间大于等于设置的时间戳时，键将被删除。</p>
-<p>命令格式：</p>
-<pre><code>EXPIREAT key unix-time-seconds
-</code></pre>
-<p>示例：</p>
-<pre><code>redis&gt; SET mykey &quot;Hello&quot;
+<p>命令格式：
+<div class="highlight"><pre><span></span><code>EXPIREAT key unix-time-seconds
+</code></pre></div></p>
+<p>示例：
+<div class="highlight"><pre><span></span><code>redis&gt; SET mykey &quot;Hello&quot;
 OK
 redis&gt; EXPIREAT mykey 1672531200  # 2023年1月1日的时间戳
 (integer) 1
-</code></pre>
+</code></pre></div></p>
 <h4 id="424-pexpireat">4.2.4. PEXPIREAT 命令</h4>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/pexpireat/">PEXPIREAT 命令</a></p>
 <p>PEXPIREAT命令与EXPIREAT命令类似，但使用毫秒级Unix时间戳作为过期时间。</p>
-<p>命令格式：</p>
-<pre><code>PEXPIREAT key unix-time-milliseconds
-</code></pre>
-<p>示例：</p>
-<pre><code>redis&gt; SET mykey &quot;Hello&quot;
+<p>命令格式：
+<div class="highlight"><pre><span></span><code>PEXPIREAT key unix-time-milliseconds
+</code></pre></div></p>
+<p>示例：
+<div class="highlight"><pre><span></span><code>redis&gt; SET mykey &quot;Hello&quot;
 OK
 redis&gt; PEXPIREAT mykey 1672531200000  # 2023年1月1日的毫秒时间戳
 (integer) 1
-</code></pre>
+</code></pre></div></p>
 <h4 id="425-set">4.2.5. SET命令中的过期选项</h4>
 <p>在SET命令中可以直接设置过期时间，这种方式可以原子性地设置键值对和过期时间，避免了两次操作的开销。</p>
 <ul>
@@ -2187,22 +2187,22 @@ redis&gt; PEXPIREAT mykey 1672531200000  # 2023年1月1日的毫秒时间戳
 <li><code>EXAT timestamp</code>：设置键的过期时间戳（秒）</li>
 <li><code>PXAT timestamp</code>：设置键的过期时间戳（毫秒）</li>
 </ul>
-<p>示例：</p>
-<pre><code>redis&gt; SET mykey &quot;Hello&quot; EX 60
+<p>示例：
+<div class="highlight"><pre><span></span><code>redis&gt; SET mykey &quot;Hello&quot; EX 60
 OK
 redis&gt; SET anotherkey &quot;World&quot; PX 5000
 OK
 redis&gt; SET sessionid &quot;123456&quot; EXAT 1672531200
 OK
-</code></pre>
+</code></pre></div></p>
 <h3 id="43-persist">4.3. PERSIST 移除过期时间</h3>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/persist/">PERSIST 命令</a></p>
 <p>PERSIST命令用于移除键的过期时间，使键变为永久有效（永不过期）。如果键存在且设置了过期时间，则移除成功返回1；如果键不存在或没有设置过期时间，则返回0。</p>
-<p>命令格式：</p>
-<pre><code>PERSIST key
-</code></pre>
-<p>示例：</p>
-<pre><code>redis&gt; SET mykey &quot;Hello&quot;
+<p>命令格式：
+<div class="highlight"><pre><span></span><code>PERSIST key
+</code></pre></div></p>
+<p>示例：
+<div class="highlight"><pre><span></span><code>redis&gt; SET mykey &quot;Hello&quot;
 OK
 redis&gt; EXPIRE mykey 60
 (integer) 1
@@ -2212,7 +2212,7 @@ redis&gt; PERSIST mykey
 (integer) 1
 redis&gt; TTL mykey
 (integer) -1
-</code></pre>
+</code></pre></div></p>
 <h3 id="44">4.4. 检查过期时间</h3>
 <h4 id="441-ttl">4.4.1. TTL 命令</h4>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/ttl/">TTL 命令</a></p>
@@ -2222,11 +2222,11 @@ redis&gt; TTL mykey
 <li>-1：键存在但没有设置过期时间</li>
 <li>-2：键不存在</li>
 </ul>
-<p>命令格式：</p>
-<pre><code>TTL key
-</code></pre>
-<p>示例：</p>
-<pre><code>redis&gt; SET mykey &quot;Hello&quot;
+<p>命令格式：
+<div class="highlight"><pre><span></span><code>TTL key
+</code></pre></div></p>
+<p>示例：
+<div class="highlight"><pre><span></span><code>redis&gt; SET mykey &quot;Hello&quot;
 OK
 redis&gt; EXPIRE mykey 60
 (integer) 1
@@ -2238,7 +2238,7 @@ redis&gt; TTL mykey
 (integer) -1
 redis&gt; TTL nonexisting
 (integer) -2
-</code></pre>
+</code></pre></div></p>
 <h4 id="442-pttl">4.4.2. PTTL 命令</h4>
 <p>参考官方文档：<a href="https://redis.io/docs/latest/commands/pttl/">PTTL 命令</a></p>
 <p>PTTL命令与TTL命令类似，但返回剩余生存时间以毫秒为单位。返回值含义如下：</p>
@@ -2247,11 +2247,11 @@ redis&gt; TTL nonexisting
 <li>-1：键存在但没有设置过期时间</li>
 <li>-2：键不存在</li>
 </ul>
-<p>命令格式：</p>
-<pre><code>PTTL key
-</code></pre>
-<p>示例：</p>
-<pre><code>redis&gt; SET mykey &quot;Hello&quot;
+<p>命令格式：
+<div class="highlight"><pre><span></span><code>PTTL key
+</code></pre></div></p>
+<p>示例：
+<div class="highlight"><pre><span></span><code>redis&gt; SET mykey &quot;Hello&quot;
 OK
 redis&gt; PEXPIRE mykey 5000
 (integer) 1
@@ -2263,7 +2263,7 @@ redis&gt; PTTL mykey
 (integer) -1
 redis&gt; PTTL nonexisting
 (integer) -2
-</code></pre>
+</code></pre></div></p>
 <h3 id="45">4.5. 过期键的删除策略</h3>
 <p>Redis使用两种策略来删除过期键：</p>
 <ol>

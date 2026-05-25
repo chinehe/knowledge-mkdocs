@@ -2166,79 +2166,79 @@
 <hr />
 <h5 id="2211-lpush">2.2.1.1. LPUSH命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LPUSH key element [element ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>LPUSH<span class="w"> </span>key<span class="w"> </span>element<span class="w"> </span><span class="o">[</span>element<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>从左侧向列表中添加一个或多个元素。</p>
 <blockquote>
 <p>从 Redis 2.4.0 版本开始接受多个<code>element</code>参数。</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; LPUSH mylist &quot;world&quot;
-(integer) 1
-redis&gt; LPUSH mylist &quot;hello&quot;
-(integer) 2
-redis&gt; LRANGE mylist 0 -1
-1) &quot;hello&quot;
-2) &quot;world&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>LPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>LPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;world&quot;</span>
+</code></pre></div>
 <hr />
 <h5 id="2212-lpushx">2.2.1.2. LPUSHX命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LPUSHX key element [element ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>LPUSHX<span class="w"> </span>key<span class="w"> </span>element<span class="w"> </span><span class="o">[</span>element<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>从左侧向列表中添加一个或多个元素，只有列表存在时才执行。</p>
 <blockquote>
 <p>从 Redis 4.0.0 版本开始接受多个<code>element</code>参数。</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; LPUSH mylist &quot;World&quot;
-(integer) 1
-redis&gt; LPUSHX mylist &quot;Hello&quot;
-(integer) 2
-redis&gt; LPUSHX myotherlist &quot;Hello&quot;
-(integer) 0
-redis&gt; LRANGE mylist 0 -1
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-redis&gt; LRANGE myotherlist 0 -1
-(empty array)
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>LPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>LPUSHX<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>LPUSHX<span class="w"> </span>myotherlist<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>myotherlist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="o">(</span>empty<span class="w"> </span>array<span class="o">)</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <hr />
 <h5 id="2213-rpush">2.2.1.3. RPUSH命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">RPUSH key element [element ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>RPUSH<span class="w"> </span>key<span class="w"> </span>element<span class="w"> </span><span class="o">[</span>element<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>从右侧向列表中添加一个或多个元素。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;hello&quot;
-(integer) 1
-redis&gt; RPUSH mylist &quot;world&quot;
-(integer) 2
-redis&gt; LRANGE mylist 0 -1
-1) &quot;hello&quot;
-2) &quot;world&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;world&quot;</span>
+</code></pre></div>
 <hr />
 <h5 id="2214-rpushx">2.2.1.4. RPUSHX命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">RPUSHX key element [element ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>RPUSHX<span class="w"> </span>key<span class="w"> </span>element<span class="w"> </span><span class="o">[</span>element<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p>从右侧向列表中添加一个或多个元素，只有列表存在时才执行。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;Hello&quot;
-(integer) 1
-redis&gt; RPUSHX mylist &quot;World&quot;
-(integer) 2
-redis&gt; RPUSHX myotherlist &quot;World&quot;
-(integer) 0
-redis&gt; LRANGE mylist 0 -1
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-redis&gt; LRANGE myotherlist 0 -1
-(empty array)
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>RPUSHX<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>RPUSHX<span class="w"> </span>myotherlist<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>myotherlist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="o">(</span>empty<span class="w"> </span>array<span class="o">)</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="222-pop">2.2.2. POP元素</h4>
 <p>POP元素命令用于从列表中弹出元素。</p>
 <blockquote>
@@ -2247,27 +2247,27 @@ redis&gt;
 <hr />
 <h5 id="2221-lpop">2.2.2.1. LPOP命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LPOP key [count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>LPOP<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>count<span class="o">]</span>
+</code></pre></div>
 <p>从列表中弹出第一个元素（也就是左侧第一个元素）。</p>
 <p>可选参数<code>count</code>用于指定要弹出的元素数量，默认为1。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot; &quot;two&quot; &quot;three&quot; &quot;four&quot; &quot;five&quot;
-(integer) 5
-redis&gt; LPOP mylist
-&quot;one&quot;
-redis&gt; LPOP mylist 2
-1) &quot;two&quot;
-2) &quot;three&quot;
-redis&gt; LRANGE mylist 0 -1
-1) &quot;four&quot;
-2) &quot;five&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="w"> </span><span class="s2">&quot;two&quot;</span><span class="w"> </span><span class="s2">&quot;three&quot;</span><span class="w"> </span><span class="s2">&quot;four&quot;</span><span class="w"> </span><span class="s2">&quot;five&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
+redis&gt;<span class="w"> </span>LPOP<span class="w"> </span>mylist
+<span class="s2">&quot;one&quot;</span>
+redis&gt;<span class="w"> </span>LPOP<span class="w"> </span>mylist<span class="w"> </span><span class="m">2</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;five&quot;</span>
+</code></pre></div>
 <hr />
 <h5 id="2222-lmpop">2.2.2.2. LMPOP命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LMPOP numkeys key [key ...] &lt;LEFT | RIGHT&gt; [COUNT count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>LMPOP<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>&lt;LEFT<span class="w"> </span><span class="p">|</span><span class="w"> </span>RIGHT&gt;<span class="w"> </span><span class="o">[</span>COUNT<span class="w"> </span>count<span class="o">]</span>
+</code></pre></div>
 <p>从多个列表中弹出第一个元素。元素会根据传递的列表参数，从第一个非空列表的左侧或右侧弹出。弹出元素的数量小于等于非空列表长度和计数参数（默认为1）。</p>
 <ul>
 <li>numkeys 参数用于指定key的数量。</li>
@@ -2275,70 +2275,70 @@ redis&gt; LRANGE mylist 0 -1
 <li><code>COUNT count</code> 参数用于指定弹出的元素数量。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; LMPOP 2 non1 non2 LEFT COUNT 10
-(nil)
-redis&gt; LPUSH mylist &quot;one&quot; &quot;two&quot; &quot;three&quot; &quot;four&quot; &quot;five&quot;
-(integer) 5
-redis&gt; LMPOP 1 mylist LEFT
-1) &quot;mylist&quot;
-2) 1) &quot;five&quot;
-redis&gt; LRANGE mylist 0 -1
-1) &quot;four&quot;
-2) &quot;three&quot;
-3) &quot;two&quot;
-4) &quot;one&quot;
-redis&gt; LMPOP 1 mylist RIGHT COUNT 10
-1) &quot;mylist&quot;
-2) 1) &quot;one&quot;
-   2) &quot;two&quot;
-   3) &quot;three&quot;
-   4) &quot;four&quot;
-redis&gt; LPUSH mylist &quot;one&quot; &quot;two&quot; &quot;three&quot; &quot;four&quot; &quot;five&quot;
-(integer) 5
-redis&gt; LPUSH mylist2 &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;
-(integer) 5
-redis&gt; LMPOP 2 mylist mylist2 right count 3
-1) &quot;mylist&quot;
-2) 1) &quot;one&quot;
-   2) &quot;two&quot;
-   3) &quot;three&quot;
-redis&gt; LRANGE mylist 0 -1
-1) &quot;five&quot;
-2) &quot;four&quot;
-redis&gt; LMPOP 2 mylist mylist2 right count 5
-1) &quot;mylist&quot;
-2) 1) &quot;four&quot;
-   2) &quot;five&quot;
-redis&gt; LMPOP 2 mylist mylist2 right count 10
-1) &quot;mylist2&quot;
-2) 1) &quot;a&quot;
-   2) &quot;b&quot;
-   3) &quot;c&quot;
-   4) &quot;d&quot;
-   5) &quot;e&quot;
-redis&gt; EXISTS mylist mylist2
-(integer) 0
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>LMPOP<span class="w"> </span><span class="m">2</span><span class="w"> </span>non1<span class="w"> </span>non2<span class="w"> </span>LEFT<span class="w"> </span>COUNT<span class="w"> </span><span class="m">10</span>
+<span class="o">(</span>nil<span class="o">)</span>
+redis&gt;<span class="w"> </span>LPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="w"> </span><span class="s2">&quot;two&quot;</span><span class="w"> </span><span class="s2">&quot;three&quot;</span><span class="w"> </span><span class="s2">&quot;four&quot;</span><span class="w"> </span><span class="s2">&quot;five&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
+redis&gt;<span class="w"> </span>LMPOP<span class="w"> </span><span class="m">1</span><span class="w"> </span>mylist<span class="w"> </span>LEFT
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;mylist&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;five&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+redis&gt;<span class="w"> </span>LMPOP<span class="w"> </span><span class="m">1</span><span class="w"> </span>mylist<span class="w"> </span>RIGHT<span class="w"> </span>COUNT<span class="w"> </span><span class="m">10</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;mylist&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="w">   </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="w">   </span><span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="w">   </span><span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;four&quot;</span>
+redis&gt;<span class="w"> </span>LPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="w"> </span><span class="s2">&quot;two&quot;</span><span class="w"> </span><span class="s2">&quot;three&quot;</span><span class="w"> </span><span class="s2">&quot;four&quot;</span><span class="w"> </span><span class="s2">&quot;five&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
+redis&gt;<span class="w"> </span>LPUSH<span class="w"> </span>mylist2<span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="w"> </span><span class="s2">&quot;b&quot;</span><span class="w"> </span><span class="s2">&quot;c&quot;</span><span class="w"> </span><span class="s2">&quot;d&quot;</span><span class="w"> </span><span class="s2">&quot;e&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
+redis&gt;<span class="w"> </span>LMPOP<span class="w"> </span><span class="m">2</span><span class="w"> </span>mylist<span class="w"> </span>mylist2<span class="w"> </span>right<span class="w"> </span>count<span class="w"> </span><span class="m">3</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;mylist&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="w">   </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="w">   </span><span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;five&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;four&quot;</span>
+redis&gt;<span class="w"> </span>LMPOP<span class="w"> </span><span class="m">2</span><span class="w"> </span>mylist<span class="w"> </span>mylist2<span class="w"> </span>right<span class="w"> </span>count<span class="w"> </span><span class="m">5</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;mylist&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="w">   </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;five&quot;</span>
+redis&gt;<span class="w"> </span>LMPOP<span class="w"> </span><span class="m">2</span><span class="w"> </span>mylist<span class="w"> </span>mylist2<span class="w"> </span>right<span class="w"> </span>count<span class="w"> </span><span class="m">10</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;mylist2&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;a&quot;</span>
+<span class="w">   </span><span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;b&quot;</span>
+<span class="w">   </span><span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;c&quot;</span>
+<span class="w">   </span><span class="m">4</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;d&quot;</span>
+<span class="w">   </span><span class="m">5</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;e&quot;</span>
+redis&gt;<span class="w"> </span>EXISTS<span class="w"> </span>mylist<span class="w"> </span>mylist2
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <hr />
 <h5 id="2223-rpop">2.2.2.3. RPOP命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">RPOP key [count]
-</code></pre>
+<div class="highlight"><pre><span></span><code>RPOP<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>count<span class="o">]</span>
+</code></pre></div>
 <p>弹出列表的最后一个元素（也就是右侧第一个元素）。</p>
 <p>可选参数<code>count</code>用于指定要弹出的元素数量，默认为1。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot; &quot;two&quot; &quot;three&quot; &quot;four&quot; &quot;five&quot;
-(integer) 5
-redis&gt; RPOP mylist
-&quot;five&quot;
-redis&gt; RPOP mylist 2
-1) &quot;four&quot;
-2) &quot;three&quot;
-redis&gt; LRANGE mylist 0 -1
-1) &quot;one&quot;
-2) &quot;two&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;one&quot;</span><span class="w"> </span><span class="s2">&quot;two&quot;</span><span class="w"> </span><span class="s2">&quot;three&quot;</span><span class="w"> </span><span class="s2">&quot;four&quot;</span><span class="w"> </span><span class="s2">&quot;five&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
+redis&gt;<span class="w"> </span>RPOP<span class="w"> </span>mylist
+<span class="s2">&quot;five&quot;</span>
+redis&gt;<span class="w"> </span>RPOP<span class="w"> </span>mylist<span class="w"> </span><span class="m">2</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+</code></pre></div>
 <h4 id="223">2.2.3. 移动元素</h4>
 <p>移动元素命令，从一个列表中弹出元素，并PUSH到另一个列表，最后返回该元素。</p>
 <ul>
@@ -2348,8 +2348,8 @@ redis&gt; LRANGE mylist 0 -1
 <hr />
 <h5 id="2231-lmove">2.2.3.1. LMOVE 命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LMOVE source destination &lt;LEFT | RIGHT&gt; &lt;LEFT | RIGHT&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code>LMOVE<span class="w"> </span><span class="nb">source</span><span class="w"> </span>destination<span class="w"> </span>&lt;LEFT<span class="w"> </span><span class="p">|</span><span class="w"> </span>RIGHT&gt;<span class="w"> </span>&lt;LEFT<span class="w"> </span><span class="p">|</span><span class="w"> </span>RIGHT&gt;
+</code></pre></div>
 <ul>
 <li>source 参数：源列表</li>
 <li>destination 参数：目标列表</li>
@@ -2363,23 +2363,23 @@ redis&gt; LRANGE mylist 0 -1
 <li>如果源列表和目标列表相同，操作等同于从列表的指定侧移动到第二个指定侧。可将其视为列表旋转命令（如果两个指定侧不一样），或视为无操作（如果两个指定侧一样）。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot;
-(integer) 1
-redis&gt; RPUSH mylist &quot;two&quot;
-(integer) 2
-redis&gt; RPUSH mylist &quot;three&quot;
-(integer) 3
-redis&gt; LMOVE mylist myotherlist RIGHT LEFT
-&quot;three&quot;
-redis&gt; LMOVE mylist myotherlist LEFT RIGHT
-&quot;one&quot;
-redis&gt; LRANGE mylist 0 -1
-1) &quot;two&quot;
-redis&gt; LRANGE myotherlist 0 -1
-1) &quot;three&quot;
-2) &quot;one&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>LMOVE<span class="w"> </span>mylist<span class="w"> </span>myotherlist<span class="w"> </span>RIGHT<span class="w"> </span>LEFT
+<span class="s2">&quot;three&quot;</span>
+redis&gt;<span class="w"> </span>LMOVE<span class="w"> </span>mylist<span class="w"> </span>myotherlist<span class="w"> </span>LEFT<span class="w"> </span>RIGHT
+<span class="s2">&quot;one&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>myotherlist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="224">2.2.4. 访问元素</h4>
 <p>访问元素的命令，用于获取列表元素信息：</p>
 <ul>
@@ -2390,47 +2390,47 @@ redis&gt;
 <hr />
 <h5 id="2241-lpos">2.2.4.1. LPOS命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LPOS key element [RANK rank] [COUNT num-matches] [MAXLEN len]
-</code></pre>
+<div class="highlight"><pre><span></span><code>LPOS<span class="w"> </span>key<span class="w"> </span>element<span class="w"> </span><span class="o">[</span>RANK<span class="w"> </span>rank<span class="o">]</span><span class="w"> </span><span class="o">[</span>COUNT<span class="w"> </span>num-matches<span class="o">]</span><span class="w"> </span><span class="o">[</span>MAXLEN<span class="w"> </span>len<span class="o">]</span>
+</code></pre></div>
 <p>该命令返回列表中指定元素的索引。</p>
 <p>默认情况下，会从头到尾扫描整个列表，寻找第一个匹配的元素。如果找到该元素，则返回其索引（以0开始）。如果没有找到，就返回nil。</p>
-<pre><code class="language-shell">## 默认示例
-&gt; RPUSH mylist a b c 1 2 3 c c
-&gt; LPOS mylist c
-2
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">## 默认示例</span>
+&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span>a<span class="w"> </span>b<span class="w"> </span>c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>c<span class="w"> </span>c
+&gt;<span class="w"> </span>LPOS<span class="w"> </span>mylist<span class="w"> </span>c
+<span class="m">2</span>
+</code></pre></div>
 <p><strong>可选参数 RANK</strong>：</p>
 <p>RANK参数指定第一个要返回元素的等级，以防有多个匹配。为1表示返回第一个匹配，为2表示返回第二个匹配，以此类推。</p>
 <p>示例：</p>
-<pre><code class="language-shell">## RANK 参数示例
-&gt; RPUSH mylist a b c 1 2 3 c c
-&gt; LPOS mylist c RANK 2
-6
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">## RANK 参数示例</span>
+&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span>a<span class="w"> </span>b<span class="w"> </span>c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>c<span class="w"> </span>c
+&gt;<span class="w"> </span>LPOS<span class="w"> </span>mylist<span class="w"> </span>c<span class="w"> </span>RANK<span class="w"> </span><span class="m">2</span>
+<span class="m">6</span>
+</code></pre></div>
 <p>RANK参数如果为负数，则表示从尾部向头部反向搜索。</p>
 <p>示例：</p>
-<pre><code class="language-shell">## RANK 参数示例
-&gt; RPUSH mylist a b c 1 2 3 c c
-&gt; LPOS mylist c RANK -1
-7
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">## RANK 参数示例</span>
+&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span>a<span class="w"> </span>b<span class="w"> </span>c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>c<span class="w"> </span>c
+&gt;<span class="w"> </span>LPOS<span class="w"> </span>mylist<span class="w"> </span>c<span class="w"> </span>RANK<span class="w"> </span>-1
+<span class="m">7</span>
+</code></pre></div>
 <p><strong>可选参数COUNT：</strong></p>
 <p>有时我们不仅要返回第 N 个匹配元素，还要返回所有前 N 个匹配元素的位置。这可以通过 <code>COUNT</code> 选项实现。</p>
-<pre><code class="language-shell">## 示例1
-&gt; RPUSH mylist a b c 1 2 3 c c
-&gt; LPOS mylist c COUNT 2
-[2,6]
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">## 示例1</span>
+&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span>a<span class="w"> </span>b<span class="w"> </span>c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>c<span class="w"> </span>c
+&gt;<span class="w"> </span>LPOS<span class="w"> </span>mylist<span class="w"> </span>c<span class="w"> </span>COUNT<span class="w"> </span><span class="m">2</span>
+<span class="o">[</span><span class="m">2</span>,6<span class="o">]</span>
+</code></pre></div>
 <p>我们可以结合 <code>COUNT</code> 和 <code>RANK</code>:</p>
-<pre><code class="language-shell">## 示例2
-&gt; RPUSH mylist a b c 1 2 3 c c
-&gt; LPOS mylist c RANK -1 COUNT 2
-[7,6]
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">## 示例2</span>
+&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span>a<span class="w"> </span>b<span class="w"> </span>c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>c<span class="w"> </span>c
+&gt;<span class="w"> </span>LPOS<span class="w"> </span>mylist<span class="w"> </span>c<span class="w"> </span>RANK<span class="w"> </span>-1<span class="w"> </span>COUNT<span class="w"> </span><span class="m">2</span>
+<span class="o">[</span><span class="m">7</span>,6<span class="o">]</span>
+</code></pre></div>
 <p>当使用 <code>COUNT</code> 时，可以指定 0 作为匹配数量，以此告诉命令我们希望所有匹配以索引数组的形式返回。这比给出很大的 <code>COUNT</code> 选项更好，因为它更通用。</p>
-<pre><code class="language-shell">&gt; LPOS mylist c COUNT 0
-[2,6,7]
-</code></pre>
+<div class="highlight"><pre><span></span><code>&gt;<span class="w"> </span>LPOS<span class="w"> </span>mylist<span class="w"> </span>c<span class="w"> </span>COUNT<span class="w"> </span><span class="m">0</span>
+<span class="o">[</span><span class="m">2</span>,6,7<span class="o">]</span>
+</code></pre></div>
 <p>当使用 <code>COUNT</code> 且未找到匹配时，返回一个空数组。但当未使用 <code>COUNT</code> 且无匹配时，命令返回<code>为零</code>。</p>
 <p><strong>可选参数MAXLEN：</strong></p>
 <p>这个参数有助于限制命令的最大复杂度。当我们觉得很快就能找到目标值，又不想花费太多时间来确保他不匹配时，这很有用。</p>
@@ -2438,54 +2438,54 @@ redis&gt;
 <hr />
 <h5 id="2242-lindex">2.2.4.2. LINDEX命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LINDEX key index
-</code></pre>
+<div class="highlight"><pre><span></span><code>LINDEX<span class="w"> </span>key<span class="w"> </span>index
+</code></pre></div>
 <p>获取列表中指定索引的元素，索引从0开始计算。</p>
 <ul>
 <li>如果index为负数，标识从列表尾部开始计算，如-1表示倒数第一个元素。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; LPUSH mylist &quot;World&quot;
-(integer) 1
-redis&gt; LPUSH mylist &quot;Hello&quot;
-(integer) 2
-redis&gt; LINDEX mylist 0
-&quot;Hello&quot;
-redis&gt; LINDEX mylist -1
-&quot;World&quot;
-redis&gt; LINDEX mylist 3
-(nil)
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>LPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>LPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>LINDEX<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span>
+<span class="s2">&quot;Hello&quot;</span>
+redis&gt;<span class="w"> </span>LINDEX<span class="w"> </span>mylist<span class="w"> </span>-1
+<span class="s2">&quot;World&quot;</span>
+redis&gt;<span class="w"> </span>LINDEX<span class="w"> </span>mylist<span class="w"> </span><span class="m">3</span>
+<span class="o">(</span>nil<span class="o">)</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <hr />
 <h5 id="2243-lrange">2.2.4.3. LRANGE命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LRANGE key start stop
-</code></pre>
+<div class="highlight"><pre><span></span><code>LRANGE<span class="w"> </span>key<span class="w"> </span>start<span class="w"> </span>stop
+</code></pre></div>
 <p>返回列表中从start到stop范围的元素。偏移量从0开始计算；如果为负数表示从后往前计算，-1表示倒数第一个元素。</p>
 <blockquote>
 <p>超出范围的索引不会产生错误。如果 <code>start</code> 大于 列表的末尾，则返回一个空列表。如果<code>stop</code>比列表的实际末尾大，Redis 会把它当作列表的最后一个元素来处理。</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot;
-(integer) 1
-redis&gt; RPUSH mylist &quot;two&quot;
-(integer) 2
-redis&gt; RPUSH mylist &quot;three&quot;
-(integer) 3
-redis&gt; LRANGE mylist 0 0
-1) &quot;one&quot;
-redis&gt; LRANGE mylist -3 2
-1) &quot;one&quot;
-2) &quot;two&quot;
-3) &quot;three&quot;
-redis&gt; LRANGE mylist -100 100
-1) &quot;one&quot;
-2) &quot;two&quot;
-3) &quot;three&quot;
-redis&gt; LRANGE mylist 5 10
-(empty array)
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span>-3<span class="w"> </span><span class="m">2</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span>-100<span class="w"> </span><span class="m">100</span>
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">10</span>
+<span class="o">(</span>empty<span class="w"> </span>array<span class="o">)</span>
+</code></pre></div>
 <h4 id="225">2.2.5. 其他基础命令</h4>
 <p>还有其他的基础命令如下：</p>
 <ul>
@@ -2498,26 +2498,26 @@ redis&gt; LRANGE mylist 5 10
 <hr />
 <h5 id="2251-llen">2.2.5.1. LLEN命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LLEN key
-</code></pre>
+<div class="highlight"><pre><span></span><code>LLEN<span class="w"> </span>key
+</code></pre></div>
 <p>返回列表的长度。</p>
 <ul>
 <li>如果列表不存在，则返回0.</li>
 <li>如果对应值不是列表，则返回错误。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; LPUSH mylist &quot;World&quot;
-(integer) 1
-redis&gt; LPUSH mylist &quot;Hello&quot;
-(integer) 2
-redis&gt; LLEN mylist
-(integer) 2
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>LPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>LPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>LLEN<span class="w"> </span>mylist
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div>
 <hr />
 <h5 id="2252-lrem">2.2.5.2. LREM命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LREM key count element
-</code></pre>
+<div class="highlight"><pre><span></span><code>LREM<span class="w"> </span>key<span class="w"> </span>count<span class="w"> </span>element
+</code></pre></div>
 <p>从列表中移除指定的元素。count参数用于指定移除的个数：</p>
 <ul>
 <li>count大于0：从头到尾顺序移除。</li>
@@ -2525,49 +2525,49 @@ redis&gt; LLEN mylist
 <li>count等于0：移除所有等于指定值的元素。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;hello&quot;
-(integer) 1
-redis&gt; RPUSH mylist &quot;hello&quot;
-(integer) 2
-redis&gt; RPUSH mylist &quot;foo&quot;
-(integer) 3
-redis&gt; RPUSH mylist &quot;hello&quot;
-(integer) 4
-redis&gt; LREM mylist -2 &quot;hello&quot;
-(integer) 2
-redis&gt; LRANGE mylist 0 -1
-1) &quot;hello&quot;
-2) &quot;foo&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;foo&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">4</span>
+redis&gt;<span class="w"> </span>LREM<span class="w"> </span>mylist<span class="w"> </span>-2<span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;foo&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <hr />
 <h5 id="2253-lset">2.2.5.3. LSET命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LSET key index element
-</code></pre>
+<div class="highlight"><pre><span></span><code>LSET<span class="w"> </span>key<span class="w"> </span>index<span class="w"> </span>element
+</code></pre></div>
 <p>将列表中指定索引的元素设置为指定的值，对于超出范围的索引会。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot;
-(integer) 1
-redis&gt; RPUSH mylist &quot;two&quot;
-(integer) 2
-redis&gt; RPUSH mylist &quot;three&quot;
-(integer) 3
-redis&gt; LSET mylist 0 &quot;four&quot;
-&quot;OK&quot;
-redis&gt; LSET mylist -2 &quot;five&quot;
-&quot;OK&quot;
-redis&gt; LRANGE mylist 0 -1
-1) &quot;four&quot;
-2) &quot;five&quot;
-3) &quot;three&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>LSET<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>LSET<span class="w"> </span>mylist<span class="w"> </span>-2<span class="w"> </span><span class="s2">&quot;five&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;four&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;five&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <hr />
 <h5 id="2254-ltrim">2.2.5.4. LTRIM命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LTRIM key start stop
-</code></pre>
+<div class="highlight"><pre><span></span><code>LTRIM<span class="w"> </span>key<span class="w"> </span>start<span class="w"> </span>stop
+</code></pre></div>
 <p>修剪列表，使其只包含指定范围的元素。偏移量从0开始计算，如果为负数表示逆序。</p>
 <p>偏移量超出列表范围时不会报错：</p>
 <ul>
@@ -2575,42 +2575,42 @@ redis&gt;
 <li>如果end大于列表范围，将被当成列表末尾处理。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;one&quot;
-(integer) 1
-redis&gt; RPUSH mylist &quot;two&quot;
-(integer) 2
-redis&gt; RPUSH mylist &quot;three&quot;
-(integer) 3
-redis&gt; LTRIM mylist 1 -1
-&quot;OK&quot;
-redis&gt; LRANGE mylist 0 -1
-1) &quot;two&quot;
-2) &quot;three&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;one&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;three&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>LTRIM<span class="w"> </span>mylist<span class="w"> </span><span class="m">1</span><span class="w"> </span>-1
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;two&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;three&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <hr />
 <h5 id="2255-linsert">2.2.5.5. LINSERT命令</h5>
 <p>语法格式：</p>
-<pre><code class="language-shell">LINSERT key &lt;BEFORE | AFTER&gt; pivot element
-</code></pre>
+<div class="highlight"><pre><span></span><code>LINSERT<span class="w"> </span>key<span class="w"> </span>&lt;BEFORE<span class="w"> </span><span class="p">|</span><span class="w"> </span>AFTER&gt;<span class="w"> </span>pivot<span class="w"> </span>element
+</code></pre></div>
 <p>在列表中pivot值的前面或后面（<code>&lt;BEFORE | AFTER&gt;</code>）插入指定的元素:</p>
 <ul>
 <li>如果列表不存在，不执行操作。</li>
 <li>如果列表存在，但是不包含pivot值，返回错误。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; RPUSH mylist &quot;Hello&quot;
-(integer) 1
-redis&gt; RPUSH mylist &quot;World&quot;
-(integer) 2
-redis&gt; LINSERT mylist BEFORE &quot;World&quot; &quot;There&quot;
-(integer) 3
-redis&gt; LRANGE mylist 0 -1
-1) &quot;Hello&quot;
-2) &quot;There&quot;
-3) &quot;World&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>RPUSH<span class="w"> </span>mylist<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">2</span>
+redis&gt;<span class="w"> </span>LINSERT<span class="w"> </span>mylist<span class="w"> </span>BEFORE<span class="w"> </span><span class="s2">&quot;World&quot;</span><span class="w"> </span><span class="s2">&quot;There&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">3</span>
+redis&gt;<span class="w"> </span>LRANGE<span class="w"> </span>mylist<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;There&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h3 id="23">2.3. 阻塞式操作命令</h3>
 <h4 id="231">2.3.1. 关于阻塞式操作</h4>
 <p>列表的阻塞式操作，使其非常适合用于实现队列。通常作为进程间通信系统的构建模块。下面我们简单介绍何为阻塞式操作。</p>

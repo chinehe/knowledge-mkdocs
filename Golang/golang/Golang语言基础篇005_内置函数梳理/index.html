@@ -2144,41 +2144,41 @@
 <h3 id="1">1. 内存管理函数</h3>
 <p>内存管理函数用于分配和初始化内存。</p>
 <h4 id="11-new">1.1. new</h4>
-<pre><code class="language-go">func new(Type) *Type
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">Type</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="nx">Type</span>
+</code></pre></div>
 <p>new内置函数用于分配内存。第一个参数是类型，而不是值，返回的值是指向该类型新分配的零值的指针。</p>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    // 使用new分配内存
-    p := new(int)  // *int类型，指向int的零值0
-    fmt.Println(*p) // 输出: 0
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 使用new分配内存</span>
+<span class="w">    </span><span class="nx">p</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w">  </span><span class="c1">// *int类型，指向int的零值0</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="c1">// 输出: 0</span>
 
-    // 修改值
-    *p = 5
-    fmt.Println(*p) // 输出: 5
+<span class="w">    </span><span class="c1">// 修改值</span>
+<span class="w">    </span><span class="o">*</span><span class="nx">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">p</span><span class="p">)</span><span class="w"> </span><span class="c1">// 输出: 5</span>
 
-    // 对比直接声明变量
-    var i int      // int类型，值为0
-    fmt.Println(i) // 输出: 0
+<span class="w">    </span><span class="c1">// 对比直接声明变量</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="w">      </span><span class="c1">// int类型，值为0</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span><span class="w"> </span><span class="c1">// 输出: 0</span>
 
-    // 对比make函数（用于slice, map, channel）
-    s := make([]int, 5) // 创建长度为5的slice
-    fmt.Println(s)      // 输出: [0 0 0 0 0]
+<span class="w">    </span><span class="c1">// 对比make函数（用于slice, map, channel）</span>
+<span class="w">    </span><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c1">// 创建长度为5的slice</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span><span class="w">      </span><span class="c1">// 输出: [0 0 0 0 0]</span>
 
-    // 使用new创建结构体
-    type Person struct {
-        Name string
-        Age  int
-    }
+<span class="w">    </span><span class="c1">// 使用new创建结构体</span>
+<span class="w">    </span><span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">        </span><span class="nx">Age</span><span class="w">  </span><span class="kt">int</span>
+<span class="w">    </span><span class="p">}</span>
 
-    personPtr := new(Person)
-    fmt.Printf(&quot;Name: %s, Age: %d\n&quot;, personPtr.Name, personPtr.Age) // 输出: Name: , Age: 0
-}
-</code></pre>
+<span class="w">    </span><span class="nx">personPtr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">new</span><span class="p">(</span><span class="nx">Person</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Name: %s, Age: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">personPtr</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">personPtr</span><span class="p">.</span><span class="nx">Age</span><span class="p">)</span><span class="w"> </span><span class="c1">// 输出: Name: , Age: 0</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项：</p>
 <ul>
 <li>new返回的是指针类型</li>
@@ -2186,71 +2186,71 @@ func main() {
 <li>new与make不同，new用于值类型和结构体，make用于slice、map和channel</li>
 </ul>
 <h4 id="12-make">1.2. make</h4>
-<pre><code class="language-go">func make(t Type, size ...IntegerType) Type
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="nx">t</span><span class="w"> </span><span class="nx">Type</span><span class="p">,</span><span class="w"> </span><span class="nx">size</span><span class="w"> </span><span class="o">...</span><span class="nx">IntegerType</span><span class="p">)</span><span class="w"> </span><span class="nx">Type</span>
+</code></pre></div>
 <p>make 内置函数分配并初始化类型为 slice、map 或 chan的对象。与 new 一样，第一个参数是类型，而不是值。与 new 不同，make 的返回类型与其参数的类型相同，而不是指向它的指针。结果的规格取决于类型。</p>
 <ul>
 <li>slice</li>
 </ul>
 <p>参数size用于指定长度，切片的容量等于其长度。可以提供第二个整数参数来指定不同的容量（容量必须不小于长度）。</p>
-<pre><code class="language-go">make([]数据类型,切片长度,切片容量)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nb">make</span><span class="p">([]</span><span class="nx">数据类型</span><span class="p">,</span><span class="nx">切片长度</span><span class="p">,</span><span class="nx">切片容量</span><span class="p">)</span>
+</code></pre></div>
 <p>例如，<code>make([]int, 0, 10)</code>分配大小为 10 的基础数组，并返回由该基础数组支持的长度为 0、容量为 10 的切片。</p>
 <ul>
 <li>Map</li>
 </ul>
 <p>为空映射分配足够的空间来容纳指定数量的元素。该大小可以省略，在这种情况下会分配较小的起始大小。</p>
-<pre><code>make(map[键类型]值类型,初始容量)
-</code></pre>
+<div class="highlight"><pre><span></span><code>make(map[键类型]值类型,初始容量)
+</code></pre></div>
 <ul>
 <li>Channel</li>
 </ul>
 <p>通道的缓冲区使用指定的缓冲区容量进行初始化。如果为零或省略大小，则通道是无缓冲的。</p>
-<pre><code class="language-go">make(chan 数据类型,缓冲区容量)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="nx">数据类型</span><span class="p">,</span><span class="nx">缓冲区容量</span><span class="p">)</span>
+</code></pre></div>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;time&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    // 创建切片
-    slice1 := make([]int, 5)        // 长度5，容量5
-    slice2 := make([]int, 3, 10)    // 长度3，容量10
-    fmt.Printf(&quot;slice1: len=%d cap=%d %v\n&quot;, len(slice1), cap(slice1), slice1)
-    fmt.Printf(&quot;slice2: len=%d cap=%d %v\n&quot;, len(slice2), cap(slice2), slice2)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建切片</span>
+<span class="w">    </span><span class="nx">slice1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">        </span><span class="c1">// 长度5，容量5</span>
+<span class="w">    </span><span class="nx">slice2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w">    </span><span class="c1">// 长度3，容量10</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;slice1: len=%d cap=%d %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice1</span><span class="p">),</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice1</span><span class="p">),</span><span class="w"> </span><span class="nx">slice1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;slice2: len=%d cap=%d %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice2</span><span class="p">),</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice2</span><span class="p">),</span><span class="w"> </span><span class="nx">slice2</span><span class="p">)</span>
 
-    // 创建映射
-    map1 := make(map[string]int)           // 空映射
-    map2 := make(map[string]int, 100)      // 初始容量100
-    map1[&quot;key&quot;] = 1
-    map2[&quot;key&quot;] = 2
-    fmt.Printf(&quot;map1: %v\n&quot;, map1)
-    fmt.Printf(&quot;map2: %v\n&quot;, map2)
+<span class="w">    </span><span class="c1">// 创建映射</span>
+<span class="w">    </span><span class="nx">map1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span><span class="w">           </span><span class="c1">// 空映射</span>
+<span class="w">    </span><span class="nx">map2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w">      </span><span class="c1">// 初始容量100</span>
+<span class="w">    </span><span class="nx">map1</span><span class="p">[</span><span class="s">&quot;key&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nx">map2</span><span class="p">[</span><span class="s">&quot;key&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;map1: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">map1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;map2: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">map2</span><span class="p">)</span>
 
-    // 创建通道
-    ch1 := make(chan int)        // 无缓冲通道
-    ch2 := make(chan int, 5)     // 缓冲通道，容量5
+<span class="w">    </span><span class="c1">// 创建通道</span>
+<span class="w">    </span><span class="nx">ch1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w">        </span><span class="c1">// 无缓冲通道</span>
+<span class="w">    </span><span class="nx">ch2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w">     </span><span class="c1">// 缓冲通道，容量5</span>
 
-    // 启动goroutine向缓冲通道发送数据
-    go func() {
-        for i := 1; i &lt;= 3; i++ {
-            ch2 &lt;- i
-            fmt.Printf(&quot;发送: %d\n&quot;, i)
-        }
-        close(ch2)
-    }()
+<span class="w">    </span><span class="c1">// 启动goroutine向缓冲通道发送数据</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">ch2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;发送: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nb">close</span><span class="p">(</span><span class="nx">ch2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    // 从通道接收数据
-    time.Sleep(time.Millisecond) // 等待goroutine执行
-    for value := range ch2 {
-        fmt.Printf(&quot;接收: %d\n&quot;, value)
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 从通道接收数据</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">)</span><span class="w"> </span><span class="c1">// 等待goroutine执行</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">ch2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;接收: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项：</p>
 <ul>
 <li>make只能用于slice、map和channel</li>
@@ -2261,8 +2261,8 @@ func main() {
 <h3 id="2">2. 容器操作函数</h3>
 <p>容器操作函数用于操作各种容器类型，如数组、切片、映射等。</p>
 <h4 id="21-len">2.1. len</h4>
-<pre><code class="language-go">func len(v Type) int
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">v</span><span class="w"> </span><span class="nx">Type</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span>
+</code></pre></div>
 <p>len 内置函数根据参数 v 的类型返回 v 的长度：</p>
 <ul>
 <li>数组：返回数组的长度。</li>
@@ -2273,51 +2273,51 @@ func main() {
 <li>通道Channel：返回通道缓冲区中排队（未读）的元素数量；如果通道为nil，返回0。</li>
 </ul>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    // 数组的len
-    arr := [5]int{1, 2, 3, 4, 5}
-    fmt.Printf(&quot;数组 len: %d\n&quot;, len(arr)) // 输出: 5
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 数组的len</span>
+<span class="w">    </span><span class="nx">arr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;数组 len: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">arr</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 5</span>
 
-    // 切片的len
-    slice1 := make([]int, 3, 10) // 长度为3，容量为10
-    fmt.Printf(&quot;切片1 len: %d\n&quot;, len(slice1)) // 输出: 3
+<span class="w">    </span><span class="c1">// 切片的len</span>
+<span class="w">    </span><span class="nx">slice1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="c1">// 长度为3，容量为10</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;切片1 len: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice1</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 3</span>
 
-    slice2 := arr[1:3] // 从数组创建切片
-    fmt.Printf(&quot;切片2 len: %d\n&quot;, len(slice2)) // 输出: 2
+<span class="w">    </span><span class="nx">slice2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="c1">// 从数组创建切片</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;切片2 len: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice2</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 2</span>
 
-    // nil切片的len
-    var nilSlice []int
-    fmt.Printf(&quot;nil切片 len: %d\n&quot;, len(nilSlice)) // 输出: 0
+<span class="w">    </span><span class="c1">// nil切片的len</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">nilSlice</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;nil切片 len: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">nilSlice</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 0</span>
 
-    // 映射的len
-    m := make(map[string]int)
-    m[&quot;apple&quot;] = 5
-    m[&quot;banana&quot;] = 3
-    fmt.Printf(&quot;映射 len: %d\n&quot;, len(m)) // 输出: 2
+<span class="w">    </span><span class="c1">// 映射的len</span>
+<span class="w">    </span><span class="nx">m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">[</span><span class="s">&quot;apple&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">[</span><span class="s">&quot;banana&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;映射 len: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">m</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 2</span>
 
-    // nil映射的len
-    var nilMap map[string]int
-    fmt.Printf(&quot;nil映射 len: %d\n&quot;, len(nilMap)) // 输出: 0
+<span class="w">    </span><span class="c1">// nil映射的len</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">nilMap</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;nil映射 len: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">nilMap</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 0</span>
 
-    // 字符串的len
-    str := &quot;Hello世界&quot;
-    fmt.Printf(&quot;字符串 len: %d\n&quot;, len(str)) // 输出: 11 (英文1字节，中文3字节)
+<span class="w">    </span><span class="c1">// 字符串的len</span>
+<span class="w">    </span><span class="nx">str</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello世界&quot;</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;字符串 len: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">str</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 11 (英文1字节，中文3字节)</span>
 
-    // 通道的len
-    ch := make(chan int, 5)
-    ch &lt;- 1
-    ch &lt;- 2
-    fmt.Printf(&quot;通道 len: %d\n&quot;, len(ch)) // 输出: 2
+<span class="w">    </span><span class="c1">// 通道的len</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;通道 len: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">ch</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 2</span>
 
-    // nil通道的len
-    var nilCh chan int
-    fmt.Printf(&quot;nil通道 len: %d\n&quot;, len(nilCh)) // 输出: 0
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// nil通道的len</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">nilCh</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;nil通道 len: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">nilCh</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 0</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项：</p>
 <ul>
 <li>len返回的是当前元素的数量，而不是容量</li>
@@ -2325,8 +2325,8 @@ func main() {
 <li>len操作的时间复杂度是O(1)</li>
 </ul>
 <h4 id="22-cap">2.2. cap</h4>
-<pre><code class="language-go">func cap(v Type) int
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">v</span><span class="w"> </span><span class="nx">Type</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span>
+</code></pre></div>
 <p>cap 内置函数根据参数 v 的类型返回 v 的容量：</p>
 <ul>
 <li>
@@ -2343,38 +2343,38 @@ func main() {
 </li>
 </ul>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    // 数组的cap
-    arr := [5]int{1, 2, 3, 4, 5}
-    fmt.Printf(&quot;数组 cap: %d\n&quot;, cap(arr)) // 输出: 5
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 数组的cap</span>
+<span class="w">    </span><span class="nx">arr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;数组 cap: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">arr</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 5</span>
 
-    // 切片的cap
-    slice1 := make([]int, 3, 10) // 长度为3，容量为10
-    fmt.Printf(&quot;切片1 cap: %d\n&quot;, cap(slice1)) // 输出: 10
+<span class="w">    </span><span class="c1">// 切片的cap</span>
+<span class="w">    </span><span class="nx">slice1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="c1">// 长度为3，容量为10</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;切片1 cap: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice1</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 10</span>
 
-    slice2 := arr[1:3] // 从数组创建切片
-    fmt.Printf(&quot;切片2 cap: %d\n&quot;, cap(slice2)) // 输出: 4 (从索引1到数组末尾)
+<span class="w">    </span><span class="nx">slice2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="c1">// 从数组创建切片</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;切片2 cap: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice2</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 4 (从索引1到数组末尾)</span>
 
-    // nil切片的cap
-    var nilSlice []int
-    fmt.Printf(&quot;nil切片 cap: %d\n&quot;, cap(nilSlice)) // 输出: 0
+<span class="w">    </span><span class="c1">// nil切片的cap</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">nilSlice</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;nil切片 cap: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">nilSlice</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 0</span>
 
-    // 通道的cap
-    ch1 := make(chan int, 5) // 缓冲通道，容量为5
-    fmt.Printf(&quot;缓冲通道 cap: %d\n&quot;, cap(ch1)) // 输出: 5
+<span class="w">    </span><span class="c1">// 通道的cap</span>
+<span class="w">    </span><span class="nx">ch1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="c1">// 缓冲通道，容量为5</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;缓冲通道 cap: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">ch1</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 5</span>
 
-    ch2 := make(chan int) // 无缓冲通道
-    fmt.Printf(&quot;无缓冲通道 cap: %d\n&quot;, cap(ch2)) // 输出: 0
+<span class="w">    </span><span class="nx">ch2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="c1">// 无缓冲通道</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;无缓冲通道 cap: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">ch2</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 0</span>
 
-    // nil通道的cap
-    var nilCh chan int
-    fmt.Printf(&quot;nil通道 cap: %d\n&quot;, cap(nilCh)) // 输出: 0
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// nil通道的cap</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">nilCh</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;nil通道 cap: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">nilCh</span><span class="p">))</span><span class="w"> </span><span class="c1">// 输出: 0</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项：</p>
 <ul>
 <li>对于切片，cap表示底层数组的容量</li>
@@ -2382,8 +2382,8 @@ func main() {
 <li>通过cap可以了解切片在不重新分配内存的情况下可以增长到多大</li>
 </ul>
 <h4 id="23-append">2.3. append</h4>
-<pre><code class="language-go">func append(slice []Type, elems ...Type) []Type
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="w"> </span><span class="p">[]</span><span class="nx">Type</span><span class="p">,</span><span class="w"> </span><span class="nx">elems</span><span class="w"> </span><span class="o">...</span><span class="nx">Type</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="nx">Type</span>
+</code></pre></div>
 <p>append 内置函数将元素追加到切片的末尾。</p>
 <ul>
 <li>如果目的地有足够的容量，则会对目的地进行重新切片以容纳新元素。</li>
@@ -2391,40 +2391,40 @@ func main() {
 <li>作为一种特殊情况，可以合法的将字符串附加到字节切片</li>
 </ul>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    // 追加单个元素
-    slice := make([]int, 0, 5)
-    fmt.Printf(&quot;初始切片: len=%d cap=%d %v\n&quot;, len(slice), cap(slice), slice)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 追加单个元素</span>
+<span class="w">    </span><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;初始切片: len=%d cap=%d %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">),</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">),</span><span class="w"> </span><span class="nx">slice</span><span class="p">)</span>
 
-    slice = append(slice, 1)
-    fmt.Printf(&quot;追加1后: len=%d cap=%d %v\n&quot;, len(slice), cap(slice), slice)
+<span class="w">    </span><span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;追加1后: len=%d cap=%d %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">),</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">),</span><span class="w"> </span><span class="nx">slice</span><span class="p">)</span>
 
-    // 追加多个元素
-    slice = append(slice, 2, 3, 4)
-    fmt.Printf(&quot;追加2,3,4后: len=%d cap=%d %v\n&quot;, len(slice), cap(slice), slice)
+<span class="w">    </span><span class="c1">// 追加多个元素</span>
+<span class="w">    </span><span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;追加2,3,4后: len=%d cap=%d %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">),</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">),</span><span class="w"> </span><span class="nx">slice</span><span class="p">)</span>
 
-    // 追加另一个切片
-    more := []int{5, 6, 7}
-    slice = append(slice, more...)
-    fmt.Printf(&quot;追加切片后: len=%d cap=%d %v\n&quot;, len(slice), cap(slice), slice)
+<span class="w">    </span><span class="c1">// 追加另一个切片</span>
+<span class="w">    </span><span class="nx">more</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">slice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span><span class="w"> </span><span class="nx">more</span><span class="o">...</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;追加切片后: len=%d cap=%d %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">),</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">),</span><span class="w"> </span><span class="nx">slice</span><span class="p">)</span>
 
-    // 追加字符串到字节切片
-    byteSlice := []byte(&quot;Hello&quot;)
-    byteSlice = append(byteSlice, &quot; World&quot;...)
-    fmt.Printf(&quot;追加字符串后: %s\n&quot;, byteSlice)
+<span class="w">    </span><span class="c1">// 追加字符串到字节切片</span>
+<span class="w">    </span><span class="nx">byteSlice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">byteSlice</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">byteSlice</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; World&quot;</span><span class="o">...</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;追加字符串后: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">byteSlice</span><span class="p">)</span>
 
-    // 容量增长示例
-    s := make([]int, 0)
-    for i := 1; i &lt;= 10; i++ {
-        s = append(s, i)
-        fmt.Printf(&quot;长度: %d 容量: %d %v\n&quot;, len(s), cap(s), s)
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 容量增长示例</span>
+<span class="w">    </span><span class="nx">s</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;长度: %d 容量: %d %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">),</span><span class="w"> </span><span class="nb">cap</span><span class="p">(</span><span class="nx">s</span><span class="p">),</span><span class="w"> </span><span class="nx">s</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项</p>
 <ul>
 <li>append返回一个新的切片，必须保存返回值</li>
@@ -2440,8 +2440,8 @@ func main() {
 </li>
 </ul>
 <h4 id="24-copy">2.4. copy</h4>
-<pre><code class="language-go">func copy(dst, src []Type) int
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">copy</span><span class="p">(</span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">src</span><span class="w"> </span><span class="p">[]</span><span class="nx">Type</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span>
+</code></pre></div>
 <p>copy 内置函数将源切片中的元素复制到目标切片中。（作为一种特殊情况，它还将字节从字符串复制到字节切片。）源和目标可能重叠。Copy 返回复制的元素数量，该数量将是 len(src) 和 len(dst) 中的最小值。</p>
 <ul>
 <li>dst 参数用于指定目标切片，其类型只能为切片，不能为数组/字符串。</li>
@@ -2449,41 +2449,41 @@ func main() {
 <li>dst 与 src 的类型必须相同。当src为字符串时，dst必须为[]byte。</li>
 </ul>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    // 基本复制
-    src := []int{1, 2, 3, 4, 5}
-    dst := make([]int, 5)
-    n := copy(dst, src)
-    fmt.Printf(&quot;复制了 %d 个元素: %v\n&quot;, n, dst)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 基本复制</span>
+<span class="w">    </span><span class="nx">src</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">dst</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">copy</span><span class="p">(</span><span class="nx">dst</span><span class="p">,</span><span class="w"> </span><span class="nx">src</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;复制了 %d 个元素: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">n</span><span class="p">,</span><span class="w"> </span><span class="nx">dst</span><span class="p">)</span>
 
-    // 目标切片较短
-    src1 := []int{1, 2, 3, 4, 5}
-    dst1 := make([]int, 3)
-    n1 := copy(dst1, src1)
-    fmt.Printf(&quot;复制了 %d 个元素: %v\n&quot;, n1, dst1) // 只复制前3个元素
+<span class="w">    </span><span class="c1">// 目标切片较短</span>
+<span class="w">    </span><span class="nx">src1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">dst1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">n1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">copy</span><span class="p">(</span><span class="nx">dst1</span><span class="p">,</span><span class="w"> </span><span class="nx">src1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;复制了 %d 个元素: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">n1</span><span class="p">,</span><span class="w"> </span><span class="nx">dst1</span><span class="p">)</span><span class="w"> </span><span class="c1">// 只复制前3个元素</span>
 
-    // 源切片较短
-    src2 := []int{1, 2, 3}
-    dst2 := make([]int, 5)
-    n2 := copy(dst2, src2)
-    fmt.Printf(&quot;复制了 %d 个元素: %v\n&quot;, n2, dst2) // 复制3个元素，其余为零值
+<span class="w">    </span><span class="c1">// 源切片较短</span>
+<span class="w">    </span><span class="nx">src2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">dst2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">n2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">copy</span><span class="p">(</span><span class="nx">dst2</span><span class="p">,</span><span class="w"> </span><span class="nx">src2</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;复制了 %d 个元素: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">n2</span><span class="p">,</span><span class="w"> </span><span class="nx">dst2</span><span class="p">)</span><span class="w"> </span><span class="c1">// 复制3个元素，其余为零值</span>
 
-    // 字符串复制到字节切片
-    str := &quot;Hello, 世界&quot;
-    byteSlice := make([]byte, len(str))
-    n3 := copy(byteSlice, str)
-    fmt.Printf(&quot;复制了 %d 个字节: %s\n&quot;, n3, byteSlice)
+<span class="w">    </span><span class="c1">// 字符串复制到字节切片</span>
+<span class="w">    </span><span class="nx">str</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello, 世界&quot;</span>
+<span class="w">    </span><span class="nx">byteSlice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">str</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">n3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">copy</span><span class="p">(</span><span class="nx">byteSlice</span><span class="p">,</span><span class="w"> </span><span class="nx">str</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;复制了 %d 个字节: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">n3</span><span class="p">,</span><span class="w"> </span><span class="nx">byteSlice</span><span class="p">)</span>
 
-    // 重叠切片复制
-    slice := []int{1, 2, 3, 4, 5}
-    n4 := copy(slice[1:], slice) // 向右复制
-    fmt.Printf(&quot;重叠复制后: %v\n&quot;, slice)
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 重叠切片复制</span>
+<span class="w">    </span><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">n4</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">copy</span><span class="p">(</span><span class="nx">slice</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span><span class="w"> </span><span class="nx">slice</span><span class="p">)</span><span class="w"> </span><span class="c1">// 向右复制</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;重叠复制后: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">slice</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项：</p>
 <ul>
 <li>copy返回实际复制的元素数量</li>
@@ -2492,39 +2492,39 @@ func main() {
 <li>当源是字符串时，目标必须是[]byte类型</li>
 </ul>
 <h4 id="25-delete">2.5. delete</h4>
-<pre><code class="language-go">func delete(m map[Type]Type1, key Type)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">delete</span><span class="p">(</span><span class="nx">m</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="nx">Type</span><span class="p">]</span><span class="nx">Type1</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="nx">Type</span><span class="p">)</span>
+</code></pre></div>
 <p>delete 内置函数用于从映射中删除具有指定键 (m[key]) 的元素:</p>
 <ul>
 <li>如果 m 为 nil 或者不存在这样的元素，则删除是无操作。</li>
 </ul>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    // 创建一个映射
-    m := make(map[string]int)
-    m[&quot;apple&quot;] = 5
-    m[&quot;banana&quot;] = 3
-    m[&quot;orange&quot;] = 7
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建一个映射</span>
+<span class="w">    </span><span class="nx">m</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">[</span><span class="s">&quot;apple&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">[</span><span class="s">&quot;banana&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">    </span><span class="nx">m</span><span class="p">[</span><span class="s">&quot;orange&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">7</span>
 
-    fmt.Println(&quot;删除前:&quot;, m)
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;删除前:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">m</span><span class="p">)</span>
 
-    // 删除键为&quot;banana&quot;的元素
-    delete(m, &quot;banana&quot;)
-    fmt.Println(&quot;删除后:&quot;, m)
+<span class="w">    </span><span class="c1">// 删除键为&quot;banana&quot;的元素</span>
+<span class="w">    </span><span class="nb">delete</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;banana&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;删除后:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">m</span><span class="p">)</span>
 
-    // 删除不存在的键（无操作）
-    delete(m, &quot;grape&quot;)
-    fmt.Println(&quot;删除不存在的键:&quot;, m)
+<span class="w">    </span><span class="c1">// 删除不存在的键（无操作）</span>
+<span class="w">    </span><span class="nb">delete</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;grape&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;删除不存在的键:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">m</span><span class="p">)</span>
 
-    // 对nil映射执行删除操作（无操作）
-    var nilMap map[string]int
-    delete(nilMap, &quot;apple&quot;) // 不会产生错误
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 对nil映射执行删除操作（无操作）</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">nilMap</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span>
+<span class="w">    </span><span class="nb">delete</span><span class="p">(</span><span class="nx">nilMap</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;apple&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 不会产生错误</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项：</p>
 <ul>
 <li>delete操作是幂等的，多次删除同一个键不会产生错误</li>
@@ -2534,8 +2534,8 @@ func main() {
 <h3 id="3">3. 并发控制函数</h3>
 <p>并发控制函数主要用于goroutine和channel的操作。</p>
 <h4 id="31-close">3.1. close</h4>
-<pre><code class="language-go">func close(c chan&lt;- Type)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">close</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="kd">chan</span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">Type</span><span class="p">)</span>
+</code></pre></div>
 <p>close 内置函数用于关闭通道:</p>
 <ul>
 <li>它只能由发送方执行（该通道必须是双向的或仅发送的），而不能由接收方执行，并且具有在收到最后发送的值后关闭通道的效果。</li>
@@ -2543,35 +2543,35 @@ func main() {
 <li>对于关闭的通道，形式 x, ok := &lt;-c 也会将 ok 设置为 false。</li>
 </ul>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;time&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    ch := make(chan int, 3)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
 
-    // 发送数据到通道
-    ch &lt;- 1
-    ch &lt;- 2
-    ch &lt;- 3
+<span class="w">    </span><span class="c1">// 发送数据到通道</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span>
 
-    // 关闭通道
-    close(ch)
+<span class="w">    </span><span class="c1">// 关闭通道</span>
+<span class="w">    </span><span class="nb">close</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
 
-    // 从已关闭的通道接收数据
-    for i := 0; i &lt; 5; i++ {
-        if value, ok := &lt;-ch; ok {
-            fmt.Println(&quot;接收到:&quot;, value)
-        } else {
-            fmt.Println(&quot;通道已关闭&quot;)
-            break
-        }
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 从已关闭的通道接收数据</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch</span><span class="p">;</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;接收到:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;通道已关闭&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项：</p>
 <ul>
 <li>对已关闭的通道执行关闭操作会产生恐慌（panic）</li>
@@ -2581,34 +2581,34 @@ func main() {
 <h3 id="4">4. 错误处理函数</h3>
 <p>错误处理函数用于处理程序中的异常情况。</p>
 <h4 id="41-panic">4.1. panic</h4>
-<pre><code class="language-go">func panic(v any)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">panic</span><span class="p">(</span><span class="nx">v</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span>
+</code></pre></div>
 <p>内置函数panic会停止当前goroutine的正常执行:</p>
 <ul>
 <li>当函数 F 调用恐慌时，F 的正常执行立即停止。任何被 F 推迟执行的函数都会以正常的方式运行，然后 F 返回到它的调用者。</li>
 <li>对于调用者 G 来说，F 的调用就像调用恐慌一样，终止 G 的执行并运行任何延迟的函数。这将继续下去，直到执行中的 goroutine 中的所有函数都以相反的顺序停止。此时，程序将以非零退出代码终止。这个终止序列称为恐慌，可以通过内置函数recover来控制。</li>
 </ul>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    defer fmt.Println(&quot;main函数中的defer&quot;)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;main函数中的defer&quot;</span><span class="p">)</span>
 
-    fmt.Println(&quot;开始执行main函数&quot;)
-    foo()
-    fmt.Println(&quot;main函数执行结束&quot;) // 这行不会被执行
-}
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;开始执行main函数&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">foo</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;main函数执行结束&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 这行不会被执行</span>
+<span class="p">}</span>
 
-func foo() {
-    defer fmt.Println(&quot;foo函数中的defer&quot;)
+<span class="kd">func</span><span class="w"> </span><span class="nx">foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;foo函数中的defer&quot;</span><span class="p">)</span>
 
-    fmt.Println(&quot;开始执行foo函数&quot;)
-    panic(&quot;发生了一个错误&quot;)
-    fmt.Println(&quot;foo函数执行结束&quot;) // 这行不会被执行
-}
-</code></pre>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;开始执行foo函数&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;发生了一个错误&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;foo函数执行结束&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 这行不会被执行</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项：</p>
 <ul>
 <li>panic应该只在真正严重错误时使用</li>
@@ -2616,45 +2616,45 @@ func foo() {
 <li>panic会终止当前goroutine的执行</li>
 </ul>
 <h4 id="42-recover">4.2. recover</h4>
-<pre><code class="language-go">func recover() any
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">recover</span><span class="p">()</span><span class="w"> </span><span class="kt">any</span>
+</code></pre></div>
 <p>recover 内置函数允许程序管理恐慌 goroutine 的行为:</p>
 <ul>
 <li>在延迟函数（但不是它调用的任何函数）内执行恢复调用可以通过恢复正常执行来停止恐慌序列，并检索传递给恐慌调用的错误值</li>
 <li>如果在延迟函数之外调用恢复，它不会停止恐慌序列。在这种情况下，或者当 goroutine 没有恐慌时，或者如果提供给恐慌的参数为 nil，recover 将返回 nil。因此，recover 的返回值报告 goroutine 是否处于恐慌状态。</li>
 </ul>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    fmt.Println(&quot;程序开始&quot;)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;程序开始&quot;</span><span class="p">)</span>
 
-    // 使用recover捕获panic
-    defer func() {
-        if r := recover(); r != nil {
-            fmt.Println(&quot;捕获到panic:&quot;, r)
-        }
-    }()
+<span class="w">    </span><span class="c1">// 使用recover捕获panic</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">recover</span><span class="p">();</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;捕获到panic:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    fmt.Println(&quot;执行一些操作&quot;)
-    panic(&quot;出现错误&quot;)
-    fmt.Println(&quot;这行不会被执行&quot;) // 这行不会被执行
-}
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;执行一些操作&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;出现错误&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;这行不会被执行&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 这行不会被执行</span>
+<span class="p">}</span>
 
-func divide(a, b int) (result int) {
-    defer func() {
-        if r := recover(); r != nil {
-            fmt.Println(&quot;捕获到除零错误:&quot;, r)
-            result = 0
-        }
-    }()
+<span class="kd">func</span><span class="w"> </span><span class="nx">divide</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">recover</span><span class="p">();</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;捕获到除零错误:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    result = a / b
-    return result
-}
-</code></pre>
+<span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">b</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项：</p>
 <ul>
 <li>recover只能在defer函数中使用才能生效</li>
@@ -2664,28 +2664,28 @@ func divide(a, b int) (result int) {
 <h3 id="5">5. 调试辅助函数</h3>
 <p>调试辅助函数主要用于程序调试阶段的简单输出。</p>
 <h4 id="51-print-println">5.1. print / println</h4>
-<pre><code class="language-go">func print(args ...Type)
-func println(args ...Type)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">print</span><span class="p">(</span><span class="nx">args</span><span class="w"> </span><span class="o">...</span><span class="nx">Type</span><span class="p">)</span>
+<span class="kd">func</span><span class="w"> </span><span class="nb">println</span><span class="p">(</span><span class="nx">args</span><span class="w"> </span><span class="o">...</span><span class="nx">Type</span><span class="p">)</span>
+</code></pre></div>
 <p>print 内置函数以特定于实现的方式格式化其参数并将结果写入标准错误。print对于引导和调试很有用；不能保证它会保留在该语言中。</p>
 <p>println 内置函数以特定于实现的方式格式化其参数并将结果写入标准错误。参数之间始终添加空格并附加换行符。println对于引导和调试很有用；不能保证它会保留在该语言中。</p>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-func main() {
-    // 使用print
-    print(&quot;Hello &quot;)
-    print(&quot;World!&quot;)
-    print(42)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 使用print</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s">&quot;Hello &quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s">&quot;World!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 
-    // 使用println
-    println() // 输出空行
-    println(&quot;Hello World!&quot;)
-    println(&quot;Number:&quot;, 42)
-    println(&quot;Boolean:&quot;, true)
-    println(&quot;String:&quot;, &quot;Go语言&quot;)
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 使用println</span>
+<span class="w">    </span><span class="nb">println</span><span class="p">()</span><span class="w"> </span><span class="c1">// 输出空行</span>
+<span class="w">    </span><span class="nb">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">println</span><span class="p">(</span><span class="s">&quot;Number:&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">println</span><span class="p">(</span><span class="s">&quot;Boolean:&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">println</span><span class="p">(</span><span class="s">&quot;String:&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Go语言&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项：</p>
 <ul>
 <li>print和println函数主要用于调试，不应该在生产代码中使用</li>
@@ -2695,36 +2695,36 @@ func main() {
 <h3 id="6">6. 复数处理函数</h3>
 <p>复数处理函数用于处理复数类型的数据。</p>
 <h4 id="61-complex">6.1. complex</h4>
-<pre><code class="language-go">func complex(r, i FloatType) ComplexType
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">complex</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="nx">FloatType</span><span class="p">)</span><span class="w"> </span><span class="nx">ComplexType</span>
+</code></pre></div>
 <p>complex 内置函数根据两个浮点值构造一个复数值。实部和虚部必须具有相同的大小，可以是 float32 或 float64（或可分配给它们），并且返回值将是相应的复数类型（float32 为complex64，float64 为complex128）。</p>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;math/cmplx&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;math/cmplx&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    // 创建复数
-    c1 := complex(float32(3.0), float32(4.0)) // complex64
-    c2 := complex(3.0, 4.0)                   // complex128
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建复数</span>
+<span class="w">    </span><span class="nx">c1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">complex</span><span class="p">(</span><span class="nb">float32</span><span class="p">(</span><span class="mf">3.0</span><span class="p">),</span><span class="w"> </span><span class="nb">float32</span><span class="p">(</span><span class="mf">4.0</span><span class="p">))</span><span class="w"> </span><span class="c1">// complex64</span>
+<span class="w">    </span><span class="nx">c2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">complex</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">)</span><span class="w">                   </span><span class="c1">// complex128</span>
 
-    fmt.Printf(&quot;c1: %v, 类型: %T\n&quot;, c1, c1)
-    fmt.Printf(&quot;c2: %v, 类型: %T\n&quot;, c2, c2)
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c1: %v, 类型: %T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">c1</span><span class="p">,</span><span class="w"> </span><span class="nx">c1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c2: %v, 类型: %T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">c2</span><span class="p">,</span><span class="w"> </span><span class="nx">c2</span><span class="p">)</span>
 
-    // 复数运算
-    sum := c1 + c2
-    fmt.Printf(&quot;和: %v\n&quot;, sum)
+<span class="w">    </span><span class="c1">// 复数运算</span>
+<span class="w">    </span><span class="nx">sum</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">c1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">c2</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;和: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">sum</span><span class="p">)</span>
 
-    // 使用复数函数
-    fmt.Printf(&quot;实部: %v\n&quot;, real(c2))
-    fmt.Printf(&quot;虚部: %v\n&quot;, imag(c2))
-    fmt.Printf(&quot;模长: %v\n&quot;, cmplx.Abs(c2))
-    fmt.Printf(&quot;共轭: %v\n&quot;, cmplx.Conj(c2))
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 使用复数函数</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;实部: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">real</span><span class="p">(</span><span class="nx">c2</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;虚部: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">imag</span><span class="p">(</span><span class="nx">c2</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;模长: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">cmplx</span><span class="p">.</span><span class="nx">Abs</span><span class="p">(</span><span class="nx">c2</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;共轭: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">cmplx</span><span class="p">.</span><span class="nx">Conj</span><span class="p">(</span><span class="nx">c2</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>注意事项：</p>
 <ul>
 <li>实部和虚部必须是相同类型的浮点数</li>
@@ -2732,53 +2732,53 @@ func main() {
 <li>complex128由两个float64组成</li>
 </ul>
 <h4 id="62-real">6.2. real</h4>
-<pre><code class="language-go">func real(c ComplexType) FloatType
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">real</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">ComplexType</span><span class="p">)</span><span class="w"> </span><span class="nx">FloatType</span>
+</code></pre></div>
 <p>real 内置函数返回复数 c 的实部。返回值将是与 c 类型对应的浮点类型。</p>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    c1 := 3 + 4i         // complex128
-    c2 := complex64(1 + 2i) // complex64
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">4i</span><span class="w">         </span><span class="c1">// complex128</span>
+<span class="w">    </span><span class="nx">c2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">complex64</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2i</span><span class="p">)</span><span class="w"> </span><span class="c1">// complex64</span>
 
-    fmt.Printf(&quot;c1的实部: %v\n&quot;, real(c1)) // 3
-    fmt.Printf(&quot;c2的实部: %v\n&quot;, real(c2)) // 1
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c1的实部: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">real</span><span class="p">(</span><span class="nx">c1</span><span class="p">))</span><span class="w"> </span><span class="c1">// 3</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c2的实部: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">real</span><span class="p">(</span><span class="nx">c2</span><span class="p">))</span><span class="w"> </span><span class="c1">// 1</span>
 
-    // 实部类型与复数类型匹配
-    fmt.Printf(&quot;c1实部类型: %T\n&quot;, real(c1)) // float64
-    fmt.Printf(&quot;c2实部类型: %T\n&quot;, real(c2)) // float32
+<span class="w">    </span><span class="c1">// 实部类型与复数类型匹配</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c1实部类型: %T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">real</span><span class="p">(</span><span class="nx">c1</span><span class="p">))</span><span class="w"> </span><span class="c1">// float64</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c2实部类型: %T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">real</span><span class="p">(</span><span class="nx">c2</span><span class="p">))</span><span class="w"> </span><span class="c1">// float32</span>
 
-    // 使用实部和虚部重建复数
-    realPart := real(c1)
-    imagPart := imag(c1)
-    reconstructed := complex(realPart, imagPart)
-    fmt.Printf(&quot;重建的复数: %v\n&quot;, reconstructed)
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 使用实部和虚部重建复数</span>
+<span class="w">    </span><span class="nx">realPart</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">real</span><span class="p">(</span><span class="nx">c1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">imagPart</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">imag</span><span class="p">(</span><span class="nx">c1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">reconstructed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">complex</span><span class="p">(</span><span class="nx">realPart</span><span class="p">,</span><span class="w"> </span><span class="nx">imagPart</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;重建的复数: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">reconstructed</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="63-imag">6.3. imag</h4>
-<pre><code class="language-go">func imag(c ComplexType) FloatType
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nb">imag</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">ComplexType</span><span class="p">)</span><span class="w"> </span><span class="nx">FloatType</span>
+</code></pre></div>
 <p>imag 内置函数返回复数 c 的虚部。返回值将是与 c 类型对应的浮点类型。</p>
 <p>使用示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    c1 := 3 + 4i         // complex128
-    c2 := complex64(1 + 2i) // complex64
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">4i</span><span class="w">         </span><span class="c1">// complex128</span>
+<span class="w">    </span><span class="nx">c2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">complex64</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">2i</span><span class="p">)</span><span class="w"> </span><span class="c1">// complex64</span>
 
-    fmt.Printf(&quot;c1的虚部: %v\n&quot;, imag(c1)) // 4
-    fmt.Printf(&quot;c2的虚部: %v\n&quot;, imag(c2)) // 2
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c1的虚部: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">imag</span><span class="p">(</span><span class="nx">c1</span><span class="p">))</span><span class="w"> </span><span class="c1">// 4</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c2的虚部: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">imag</span><span class="p">(</span><span class="nx">c2</span><span class="p">))</span><span class="w"> </span><span class="c1">// 2</span>
 
-    // 虚部类型与复数类型匹配
-    fmt.Printf(&quot;c1虚部类型: %T\n&quot;, imag(c1)) // float64
-    fmt.Printf(&quot;c2虚部类型: %T\n&quot;, imag(c2)) // float32
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 虚部类型与复数类型匹配</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c1虚部类型: %T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">imag</span><span class="p">(</span><span class="nx">c1</span><span class="p">))</span><span class="w"> </span><span class="c1">// float64</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;c2虚部类型: %T\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">imag</span><span class="p">(</span><span class="nx">c2</span><span class="p">))</span><span class="w"> </span><span class="c1">// float32</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 

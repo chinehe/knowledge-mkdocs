@@ -1991,37 +1991,36 @@
 <p>在Go语言编程中你不需要去自己写进程、线程、协程，你的技能包里只有一个技能–goroutine，当你需要让某个任务并发执行的时候，你只需要把这个任务包装成一个函数，开启一个goroutine去执行这个函数就可以了，就是这么简单粗暴。</p>
 <h3 id="22-goroutine">2.2. 使用Goroutine</h3>
 <p>使用Goroutine也非常的简单：只需要在调用函数时，在调用语句前面加上<code>go</code>关键字，即可开启一个协程去执行。</p>
-<pre><code class="language-go">// 开启协程去执行一个普通函数
-go function_1()
+<div class="highlight"><pre><span></span><code><span class="c1">// 开启协程去执行一个普通函数</span>
+<span class="k">go</span><span class="w"> </span><span class="nx">function_1</span><span class="p">()</span>
 
-// 开启一个协程去执行一个匿名函数
-go func(){
-  fmt.Println(&quot;Hello World&quot;)
-}()
-</code></pre>
+<span class="c1">// 开启一个协程去执行一个匿名函数</span>
+<span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(){</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">)</span>
+<span class="p">}()</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-go">func printInt(value int) {
-    fmt.Printf(&quot;%d\n&quot;, value)
-}
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">printInt</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    for i := 0; i &lt; 5; i++ {
-        // 开启多协程去执行
-        go printInt(i)
-    }
-    fmt.Println(&quot;main goroutine done.&quot;)
-    // main 协程等待其他协程执行完
-    time.Sleep(time.Second)
-}
-// 输出
-main goroutine done.
-0
-1
-3
-4
-2
-
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 开启多协程去执行</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="nx">printInt</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;main goroutine done.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// main 协程等待其他协程执行完</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 输出</span>
+<span class="nx">main</span><span class="w"> </span><span class="nx">goroutine</span><span class="w"> </span><span class="nx">done</span><span class="p">.</span>
+<span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">2</span>
+</code></pre></div>
 <p>在上面的示例中，我们在循环中开启了五个协程去分别执行打印任务。</p>
 <p>从输出结果可知，任务执行确实是异步的。</p>
 <p>那么为什么我们要在main函数中睡眠一秒呢，这其实是为了等待其他协程执行完成。</p>
@@ -2035,37 +2034,36 @@ main goroutine done.
 <p>如果说goroutine是Go程序并发的执行体，channel就是它们之间的连接。channel是可以让一个goroutine发送特定值到另一个goroutine的通信机制。Channel像一个传送带或者队列，总是遵循先入先出（First In First Out）的规则，保证收发数据的顺序。每一个通道都是一个具体类型的导管，也就是声明channel的时候需要为其指定元素类型。</p>
 <h3 id="32">3.2. 声明</h3>
 <p>声明通道的语法格式如下：</p>
-<pre><code class="language-go">// 格式
-var &lt;channel_name&gt; chan &lt;type&gt;
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 格式</span>
+<span class="kd">var</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">channel_name</span><span class="p">&gt;</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="p">&lt;</span><span class="kd">type</span><span class="p">&gt;</span>
+</code></pre></div>
 <p>示例：</p>
-<pre><code class="language-go">// 声明一个int通道
-var intChannel chan int
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明一个int通道</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">intChannel</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span>
 
-// 声明一个string通道
-var strChannel chan int
+<span class="c1">// 声明一个string通道</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">strChannel</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span>
 
-// 声明一个结构体通道
-type Person struct {
-    Name string
-}
+<span class="c1">// 声明一个结构体通道</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Person</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">Name</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-var personChan chan Person
-
-</code></pre>
+<span class="kd">var</span><span class="w"> </span><span class="nx">personChan</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="nx">Person</span>
+</code></pre></div>
 <h3 id="33">3.3. 初始化</h3>
 <p>Channel是一种引用类型，其零值为nil，声明后不能直接使用，而必须先进行初始化。</p>
 <p>初始化Channel的语法格式如下：</p>
-<pre><code class="language-go">&lt;channelName&gt; = make(chan &lt;type&gt;,&lt;buffer_size&gt;)
-// buffer_size表示缓冲区大小，可以忽略
-</code></pre>
-<pre><code class="language-go">// 声明一个无缓冲区的int通道
-var intChannel chan int
-intChannel = make(chan int)
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nx">channelName</span><span class="p">&gt;</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="p">&lt;</span><span class="kd">type</span><span class="p">&gt;,&lt;</span><span class="nx">buffer_size</span><span class="p">&gt;)</span>
+<span class="c1">// buffer_size表示缓冲区大小，可以忽略</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// 声明一个无缓冲区的int通道</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">intChannel</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span>
+<span class="nx">intChannel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span>
 
-// 声明一个缓冲区大小为5的string通道
-strChannel := make(chan string,5)
-</code></pre>
+<span class="c1">// 声明一个缓冲区大小为5的string通道</span>
+<span class="nx">strChannel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
 <h3 id="34">3.4. 缓冲区</h3>
 <h4 id="341">3.4.1. 概念</h4>
 <p>Channel中的缓冲区是Channel内部存储元素的空间，用于临时存储数据。</p>
@@ -2097,7 +2095,7 @@ strChannel := make(chan string,5)
 <p>使用无缓冲通道进行通信将导致发送和接收的goroutine同步化。因此，无缓冲通道也被称为同步通道。</p>
 </blockquote>
 <p>示例时序图：</p>
-<pre><code class="language-mermaid">sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
     participant S as 发送方
     participant C as 通道(无缓冲区)
     participant R as 接收者
@@ -2112,62 +2110,61 @@ strChannel := make(chan string,5)
     C-&gt;&gt;C: 接收方等待
     S-&gt;&gt;C: 发送数据:2
     C-&gt;&gt;R: 返回数据：2
-    C-&gt;&gt;S: success
-</code></pre>
+    C-&gt;&gt;S: success</code></pre>
 <p>代码示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;log&quot;
-    &quot;time&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;log&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-// 无缓冲通道
-var intChannel = make(chan int)
+<span class="c1">// 无缓冲通道</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">intChannel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span>
 
-// 发送方
-func send(i int) {
-    log.Println(&quot;readyToSend &quot;, i)
-    intChannel &lt;- i
-    log.Println(&quot;send finish &quot;, i)
-}
+<span class="c1">// 发送方</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">send</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;readyToSend &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">intChannel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;send finish &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 接收方
-func receive() {
-    log.Println(&quot;readyToReceive&quot;)
-    i := &lt;-intChannel
-    log.Println(&quot;receive finish&quot;, i)
-}
+<span class="c1">// 接收方</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">receive</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;readyToReceive&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">intChannel</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;receive finish&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="p">}</span>
 
-// main函数
-func main() {
-    go send(1)
-    time.Sleep(time.Second)
-    go receive()
-    time.Sleep(time.Second)
-}
+<span class="c1">// main函数</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">send</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">receive</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 输出
-2025/11/19 15:58:28 readyToSend  1
-2025/11/19 15:58:29 readyToReceive
-2025/11/19 15:58:29 receive finish 1
-2025/11/19 15:58:29 send finish  1
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">15</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">28</span><span class="w"> </span><span class="nx">readyToSend</span><span class="w">  </span><span class="mi">1</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">15</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">29</span><span class="w"> </span><span class="nx">readyToReceive</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">15</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">29</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="nx">finish</span><span class="w"> </span><span class="mi">1</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">15</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">29</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="nx">finish</span><span class="w">  </span><span class="mi">1</span>
+</code></pre></div>
 <p>代码示例2：死锁</p>
-<pre><code class="language-go">func main() {
-    myChannel := make(chan int)
-    myChannel &lt;- 1
-}
-// 输出
-fatal error: all goroutines are asleep - deadlock!   
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">myChannel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">myChannel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">}</span>
+<span class="c1">// 输出</span>
+<span class="nx">fatal</span><span class="w"> </span><span class="kt">error</span><span class="p">:</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">goroutines</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">asleep</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">deadlock</span><span class="p">!</span><span class="w">   </span>
+</code></pre></div>
 <p>示例中，只有发送者，没有接收者，main函数将一致阻塞，导致死锁！</p>
 <h4 id="343">3.4.3. 有缓冲区通道</h4>
 <p>如果创建的Channel具有缓冲区，那么它可以在发送数据时暂时存储一定数量的数据，而不需要阻塞发送方。这使得发送方能够继续执行，而不必等待接收方接收数据。</p>
 <blockquote>
 <p>只有当缓冲区已满时，发送方才会被阻塞。只有当缓冲区为空时，接收方才会被阻塞。</p>
 </blockquote>
-<pre><code class="language-mermaid">sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
     participant S as 发送方
     participant C as 通道(缓冲区大小为2)
     participant R as 接收者
@@ -2195,86 +2192,85 @@ fatal error: all goroutines are asleep - deadlock!
     C-&gt;&gt;C: 缓存4[4]
     C-&gt;&gt;S: success
     C-&gt;&gt;C: 取出4[]
-    C-&gt;&gt;R: 返回数据：4
-</code></pre>
+    C-&gt;&gt;R: 返回数据：4</code></pre>
 <p>代码示例：</p>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;log&quot;
-    &quot;time&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;log&quot;</span>
+<span class="w">    </span><span class="s">&quot;time&quot;</span>
+<span class="p">)</span>
 
-var intChannel = make(chan int, 2)
+<span class="kd">var</span><span class="w"> </span><span class="nx">intChannel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 
-func send() {
-    for i := 0; i &lt; 5; i++ {
-        log.Println(&quot;readyToSend &quot;, i)
-        intChannel &lt;- i
-        log.Println(&quot;send finish &quot;, i)
-    }
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">send</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;readyToSend &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">intChannel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;send finish &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func receive() {
-    for i := 0; i &lt; 5; i++ {
-        log.Println(&quot;readyToReceive&quot;)
-        i := &lt;-intChannel
-        log.Println(&quot;receive finish&quot;, i)
-    }
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">receive</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;readyToReceive&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">intChannel</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;receive finish&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    go send()
-    time.Sleep(100 * time.Millisecond)
-    go receive()
-    log.Println(&quot;main finish&quot;)
-    time.Sleep(time.Second)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">send</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">receive</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;main finish&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 输出
-2025/11/19 16:40:09 readyToSend  0
-2025/11/19 16:40:09 send finish  0
-2025/11/19 16:40:09 readyToSend  1
-2025/11/19 16:40:09 send finish  1
-2025/11/19 16:40:09 readyToSend  2
-2025/11/19 16:40:09 main finish
-2025/11/19 16:40:09 readyToReceive
-2025/11/19 16:40:09 receive finish 0
-2025/11/19 16:40:09 readyToReceive
-2025/11/19 16:40:09 receive finish 1
-2025/11/19 16:40:09 readyToReceive
-2025/11/19 16:40:09 receive finish 2
-2025/11/19 16:40:09 readyToReceive
-2025/11/19 16:40:09 send finish  2
-2025/11/19 16:40:09 readyToSend  3
-2025/11/19 16:40:09 send finish  3
-2025/11/19 16:40:09 readyToSend  4
-2025/11/19 16:40:09 send finish  4
-2025/11/19 16:40:09 receive finish 3
-2025/11/19 16:40:09 readyToReceive
-2025/11/19 16:40:09 receive finish 4
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">readyToSend</span><span class="w">  </span><span class="mi">0</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="nx">finish</span><span class="w">  </span><span class="mi">0</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">readyToSend</span><span class="w">  </span><span class="mi">1</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="nx">finish</span><span class="w">  </span><span class="mi">1</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">readyToSend</span><span class="w">  </span><span class="mi">2</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">main</span><span class="w"> </span><span class="nx">finish</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">readyToReceive</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="nx">finish</span><span class="w"> </span><span class="mi">0</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">readyToReceive</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="nx">finish</span><span class="w"> </span><span class="mi">1</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">readyToReceive</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="nx">finish</span><span class="w"> </span><span class="mi">2</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">readyToReceive</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="nx">finish</span><span class="w">  </span><span class="mi">2</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">readyToSend</span><span class="w">  </span><span class="mi">3</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="nx">finish</span><span class="w">  </span><span class="mi">3</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">readyToSend</span><span class="w">  </span><span class="mi">4</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="nx">finish</span><span class="w">  </span><span class="mi">4</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="nx">finish</span><span class="w"> </span><span class="mi">3</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">readyToReceive</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">09</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="nx">finish</span><span class="w"> </span><span class="mi">4</span>
+</code></pre></div>
 <h3 id="35">3.5. 通道操作</h3>
 <p>在上面章节的示例中，我们其实已经演示了如何发送数据到通道中，以及如何从通道中取出数据。</p>
 <p>本章节将介绍更多通道操作。</p>
 <h4 id="351">3.5.1. 发送/接收数据</h4>
 <p>发送数据到通道、从通道取出数据的基本语法格式如下：</p>
-<pre><code class="language-go">// 发送数据到通道
-&lt;channelName&gt; &lt;- &lt;data&gt;
+<div class="highlight"><pre><span></span><code><span class="c1">// 发送数据到通道</span>
+<span class="p">&lt;</span><span class="nx">channelName</span><span class="p">&gt;</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">data</span><span class="p">&gt;</span>
 
-intChannel &lt;- 1 // 将1放入通道intChannel
-stringChannel &lt;- &quot;Hello&quot; // 将Hello放入通道stringChannel
+<span class="nx">intChannel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// 将1放入通道intChannel</span>
+<span class="nx">stringChannel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="w"> </span><span class="c1">// 将Hello放入通道stringChannel</span>
 
 
-// 取数据
-&lt;数据变量&gt; &lt;- &lt;channelName&gt;  // 从通道接收数据，并赋值给接收变量
-&lt;- &lt;channelName&gt; // 从通道接收数据，并丢弃
-&lt;数据变量&gt;,&lt;布尔变量&gt; &lt;- &lt;channelName&gt; // 从通道接收数据赋值给接收变量，并将是否取得数据布尔结果赋值给布尔变量
+<span class="c1">// 取数据</span>
+<span class="p">&lt;</span><span class="nx">数据变量</span><span class="p">&gt;</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">channelName</span><span class="p">&gt;</span><span class="w">  </span><span class="c1">// 从通道接收数据，并赋值给接收变量</span>
+<span class="o">&lt;-</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">channelName</span><span class="p">&gt;</span><span class="w"> </span><span class="c1">// 从通道接收数据，并丢弃</span>
+<span class="p">&lt;</span><span class="nx">数据变量</span><span class="p">&gt;,&lt;</span><span class="nx">布尔变量</span><span class="p">&gt;</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">&lt;</span><span class="nx">channelName</span><span class="p">&gt;</span><span class="w"> </span><span class="c1">// 从通道接收数据赋值给接收变量，并将是否取得数据布尔结果赋值给布尔变量</span>
 
-n := &lt;- intChannel // 从intChannel中取出数据并赋值给新变量n
-&lt;- stringChannel // 从stringChannel取出数据并丢弃
-n,ok := &lt;-intChannel // 从intChannel取出数据，赋值给新变量n，并设置标识符ok
-</code></pre>
+<span class="nx">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">intChannel</span><span class="w"> </span><span class="c1">// 从intChannel中取出数据并赋值给新变量n</span>
+<span class="o">&lt;-</span><span class="w"> </span><span class="nx">stringChannel</span><span class="w"> </span><span class="c1">// 从stringChannel取出数据并丢弃</span>
+<span class="nx">n</span><span class="p">,</span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">intChannel</span><span class="w"> </span><span class="c1">// 从intChannel取出数据，赋值给新变量n，并设置标识符ok</span>
+</code></pre></div>
 <p>发送数据流程：</p>
 <ul>
 <li>如果通道缓冲区还有空间，就将该元素保存到缓冲区。</li>
@@ -2289,10 +2285,10 @@ n,ok := &lt;-intChannel // 从intChannel取出数据，赋值给新变量n，并
 </ul>
 <h4 id="352">3.5.2. 关闭通道</h4>
 <p>关闭通道的语法格式如下：</p>
-<pre><code class="language-go">close(&lt;channelName&gt;)
+<div class="highlight"><pre><span></span><code><span class="nb">close</span><span class="p">(&lt;</span><span class="nx">channelName</span><span class="p">&gt;)</span>
 
-close(myChannel) // 关闭myChannel通道
-</code></pre>
+<span class="nb">close</span><span class="p">(</span><span class="nx">myChannel</span><span class="p">)</span><span class="w"> </span><span class="c1">// 关闭myChannel通道</span>
+</code></pre></div>
 <p><strong>关闭通道的操作不是必须的</strong>，通道可以被垃圾回收机制回收。它和关闭文件是不一样的，在结束操作之后关闭文件是必须要做的，但关闭通道不是必须的。</p>
 <p>通常在发送方发送完所有数据后才需要关闭通道（即使这个时候关闭通道也不是必须的）。</p>
 <p>对一个已被关闭的通道执行操作时：</p>
@@ -2304,54 +2300,53 @@ close(myChannel) // 关闭myChannel通道
 <li>如果通道缓冲区没有数据（或没有缓冲区）：接收到数据零值，返回的标识符为false。</li>
 </ul>
 <p>代码示例：</p>
-<pre><code class="language-go">
-var intChannel = make(chan int, 2)
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">intChannel</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 
-func send() {
-    for i := 0; i &lt; 5; i++ {
-        intChannel &lt;- i
-        log.Printf(&quot;send %d\n&quot;, i)
-    }
-    close(intChannel)
-    log.Println(&quot;close channel&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">send</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">intChannel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;send %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nb">close</span><span class="p">(</span><span class="nx">intChannel</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;close channel&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func receive() {
-    for {
-        time.Sleep(100 * time.Millisecond)
-        i, ok := &lt;-intChannel
-        if ok {
-            log.Printf(&quot;receive %d\n&quot;, i)
-            continue
-        }
-        log.Println(&quot;receive finish&quot;)
-        break
-    }
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">receive</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">i</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">intChannel</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;receive %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">            </span><span class="k">continue</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;receive finish&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">break</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    go send()
-    time.Sleep(100 * time.Millisecond)
-    go receive()
-    log.Println(&quot;main finish&quot;)
-    time.Sleep(time.Second)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">send</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">receive</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;main finish&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
 
-// 输出
-2025/11/19 17:09:24 send 0
-2025/11/19 17:09:24 send 1
-2025/11/19 17:09:24 main finish
-2025/11/19 17:09:24 receive 0
-2025/11/19 17:09:24 send 2
-2025/11/19 17:09:24 receive 1
-2025/11/19 17:09:24 send 3
-2025/11/19 17:09:24 receive 2
-2025/11/19 17:09:24 send 4
-2025/11/19 17:09:24 close channel
-2025/11/19 17:09:24 receive 3
-2025/11/19 17:09:24 receive 4
-2025/11/19 17:09:25 receive finish
-</code></pre>
+<span class="c1">// 输出</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="mi">0</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="mi">1</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">main</span><span class="w"> </span><span class="nx">finish</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="mi">0</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="mi">2</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="mi">1</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="mi">3</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="mi">2</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="mi">4</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">close</span><span class="w"> </span><span class="nx">channel</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="mi">3</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">24</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="mi">4</span>
+<span class="mi">2025</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">19</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">25</span><span class="w"> </span><span class="nx">receive</span><span class="w"> </span><span class="nx">finish</span>
+</code></pre></div>
 <h4 id="353">3.5.3. 通道状态与操作总结</h4>
 <table>
 <thead>
@@ -2459,50 +2454,49 @@ func main() {
 <blockquote>
 <p>当通道被关闭时，往该通道发送值会引发panic，从该通道里接收的值一直都是类型零值。</p>
 </blockquote>
-<p>那如何判断一个通道是否被关闭了呢？按前面的方法可以这样写：</p>
-<pre><code class="language-go">
-func receive(c chan int) {
-    for {
-        v, ok := &lt;-c // 当通道关闭时，ok值为false
-        if ok {
-            fmt.Printf(&quot;receive %d\n&quot;, v)
-        } else {
-            fmt.Printf(&quot;receive end\n&quot;)
-            return // 当ok为false，表示通道关闭，直接返回
-        }
-    }
-}
-</code></pre>
-<p>可以使用for-range来优雅第从通道中循环取值。</p>
-<pre><code class="language-go">func receiveWithRange(c chan int) {
-    for i := range c {
-        fmt.Printf(&quot;receive %d\n&quot;, i)
-    }
-    fmt.Printf(&quot;receive end\n&quot;)
-}
-</code></pre>
-<p>在这种方式中，如果通道缓冲区无值且已经关闭，会直接结束for-range循环。</p>
+<p>那如何判断一个通道是否被关闭了呢？按前面的方法可以这样写：
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">receive</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">v</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">c</span><span class="w"> </span><span class="c1">// 当通道关闭时，ok值为false</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;receive %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">v</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;receive end\n&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="c1">// 当ok为false，表示通道关闭，直接返回</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p>可以使用for-range来优雅第从通道中循环取值。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">receiveWithRange</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">c</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;receive %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;receive end\n&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+在这种方式中，如果通道缓冲区无值且已经关闭，会直接结束for-range循环。</p>
 <h4 id="355-select">3.5.5. select 多路复用</h4>
 <p>在某些场景下我们需要同时从多个通道接收数据。通道在接收数据时，如果没有数据可以接收将会发生阻塞。你也许会写出如下代码使用遍历的方式来实现：</p>
-<pre><code class="language-go">for{
-    // 尝试从ch1接收值
-    data, ok := &lt;-ch1
-    // 尝试从ch2接收值
-    data, ok := &lt;-ch2
-    …
-}
-</code></pre>
-<p>这种方式虽然可以实现从多个通道接收值的需求，但是运行性能会差很多。为了应对这种场景，Go内置了select关键字，可以同时响应多个通道的操作。select的使用类似于switch语句：</p>
-<pre><code class="language-go">select {
-    case 通道操作1：
-        // doSomething
-    case 通道操作2:
-        // doSomething
-    default:
-        // doSomething
-}
-</code></pre>
-<p>select语句包含一系列的case分支和一个默认分支（case分支和default分支都可以省略），每个case分支对应一个通道操作（接收/发送）。</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">for</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 尝试从ch1接收值</span>
+<span class="w">    </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch1</span>
+<span class="w">    </span><span class="c1">// 尝试从ch2接收值</span>
+<span class="w">    </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch2</span>
+<span class="w">    </span><span class="err">…</span>
+<span class="p">}</span>
+</code></pre></div>
+这种方式虽然可以实现从多个通道接收值的需求，但是运行性能会差很多。为了应对这种场景，Go内置了select关键字，可以同时响应多个通道的操作。select的使用类似于switch语句：</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">通道操作1</span><span class="err">：</span>
+<span class="w">        </span><span class="c1">// doSomething</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">通道操作2</span><span class="p">:</span>
+<span class="w">        </span><span class="c1">// doSomething</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="c1">// doSomething</span>
+<span class="p">}</span>
+</code></pre></div>
+select语句包含一系列的case分支和一个默认分支（case分支和default分支都可以省略），每个case分支对应一个通道操作（接收/发送）。</p>
 <p>select语句的执行流程如下：</p>
 <ul>
 <li>检查case中的所有通道操作：</li>
@@ -2522,22 +2516,22 @@ func receive(c chan int) {
 </li>
 </ul>
 <p>单向通道在并发编程中非常有用，因为它们可以帮助提高代码的清晰度和可靠性。例如，下面的示例展示了如何使用单向通道：</p>
-<pre><code class="language-go">func send(ch chan&lt;- int, value int) {
-    ch &lt;- value
-}
+<p><div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">send</span><span class="p">(</span><span class="nx">ch</span><span class="w"> </span><span class="kd">chan</span><span class="o">&lt;-</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">value</span>
+<span class="p">}</span>
 
-func receive(ch &lt;-chan int) {
-    value := &lt;-ch
-    fmt.Println(&quot;Received:&quot;, value)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">receive</span><span class="p">(</span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Received:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    ch := make(chan int)
-    go send(ch, 42)
-    receive(ch)
-}
-</code></pre>
-<p>在上述示例中，send 函数接受一个发送操作的单向通道 <code>chan&lt;- int</code>，而 receive 函数接受一个接收操作的单向通道<code>&lt;-chan int</code>。这样，编译器会在编译时检查是否在正确的地方使用了通道的发送或接收操作。</p>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">send</span><span class="p">(</span><span class="nx">ch</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">receive</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+在上述示例中，send 函数接受一个发送操作的单向通道 <code>chan&lt;- int</code>，而 receive 函数接受一个接收操作的单向通道<code>&lt;-chan int</code>。这样，编译器会在编译时检查是否在正确的地方使用了通道的发送或接收操作。</p>
 <p>特别注意：</p>
 <ul>
 <li>双向通道可以转换为任意类型的单向通道。</li>

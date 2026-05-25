@@ -1823,11 +1823,11 @@
 <p>上面提到了四个设置字符串值的命令：<code>PSETEX</code>、<code>SETEX</code>、<code>SETNX</code>、<code>SET</code>。</p>
 <p>其中前三个都已经被视为弃用，其功能都可以使用<code>SET</code>命令参数来实现，因此本文只讲解<code>SET</code>命令。</p>
 <p><strong>语法格式：</strong></p>
-<pre><code class="language-shell">SET key value 
-        [NX | XX | IFEQ ifeq-value | IFNE ifne-value | IFDEQ ifdeq-digest | IFDNE ifdne-digest]                 
-        [GET] 
-        [EX seconds | PX milliseconds | EXAT unix-time-seconds | PXAT unix-time-milliseconds | KEEPTTL]
-</code></pre>
+<div class="highlight"><pre><span></span><code>SET<span class="w"> </span>key<span class="w"> </span>value<span class="w"> </span>
+<span class="w">        </span><span class="o">[</span>NX<span class="w"> </span><span class="p">|</span><span class="w"> </span>XX<span class="w"> </span><span class="p">|</span><span class="w"> </span>IFEQ<span class="w"> </span>ifeq-value<span class="w"> </span><span class="p">|</span><span class="w"> </span>IFNE<span class="w"> </span>ifne-value<span class="w"> </span><span class="p">|</span><span class="w"> </span>IFDEQ<span class="w"> </span>ifdeq-digest<span class="w"> </span><span class="p">|</span><span class="w"> </span>IFDNE<span class="w"> </span>ifdne-digest<span class="o">]</span><span class="w">                 </span>
+<span class="w">        </span><span class="o">[</span>GET<span class="o">]</span><span class="w"> </span>
+<span class="w">        </span><span class="o">[</span>EX<span class="w"> </span>seconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PX<span class="w"> </span>milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>EXAT<span class="w"> </span>unix-time-seconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PXAT<span class="w"> </span>unix-time-milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>KEEPTTL<span class="o">]</span>
+</code></pre></div>
 <blockquote>
 <p>这里可能需要解释一下如何理解这个语法格式：</p>
 <ol>
@@ -1864,32 +1864,32 @@
 <li>从 Redis 8.4.0 版本开始：增加了 'IFEQ'、'IFNE'、'IFDEQ'、'IFDNE' 选项。</li>
 </ul>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET mykey &quot;Hello&quot;
-&quot;OK&quot;
-redis&gt; GET mykey
-&quot;Hello&quot;
-redis&gt; SET anotherkey &quot;will expire in a minute&quot; EX 60
-&quot;OK&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>mykey<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>mykey
+<span class="s2">&quot;Hello&quot;</span>
+redis&gt;<span class="w"> </span>SET<span class="w"> </span>anotherkey<span class="w"> </span><span class="s2">&quot;will expire in a minute&quot;</span><span class="w"> </span>EX<span class="w"> </span><span class="m">60</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h4 id="222">2.2.2. 获取字符串值</h4>
 <p>上面提到了四个获取字符串值的命令：<code>GET</code>、<code>GETDEL</code>、<code>GETEX</code>、<code>GETSET</code>。</p>
 <p>其中<code>GETSET</code>已经被视为弃用，本文将不做讲解。</p>
 <hr />
 <p><strong>GET 语法格式：</strong></p>
-<pre><code class="language-shell">GET key
-</code></pre>
+<div class="highlight"><pre><span></span><code>GET<span class="w"> </span>key
+</code></pre></div>
 <p>GET命令获取指定<code>key</code>存储的字符串值。如果<code>key</code>不存在，返回nil；如果<code>key</code>存储的值不是字符串类型，则会返回错误。</p>
 <hr />
 <p><strong>GETDEL 语法格式：</strong></p>
-<pre><code class="language-shell">GETDEL key
-</code></pre>
+<div class="highlight"><pre><span></span><code>GETDEL<span class="w"> </span>key
+</code></pre></div>
 <p>与<code>GET</code>命令类似，但<code>GETDEL</code>会在获取成功时同步删除该键（当且仅当键值类型是字符串时）。</p>
 <hr />
 <p><strong>GETEX 语法格式：</strong></p>
-<pre><code class="language-shell">GETEX key 
-    [EX seconds | PX milliseconds | EXAT unix-time-seconds | PXAT unix-time-milliseconds | PERSIST]
-</code></pre>
+<div class="highlight"><pre><span></span><code>GETEX<span class="w"> </span>key<span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>EX<span class="w"> </span>seconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PX<span class="w"> </span>milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>EXAT<span class="w"> </span>unix-time-seconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PXAT<span class="w"> </span>unix-time-milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PERSIST<span class="o">]</span>
+</code></pre></div>
 <p>与<code>GET</code>命令类似，但<code>GETEX</code>可以选择在获取成功时，为该键设置过期时间。</p>
 <p>可选参数如下：</p>
 <ul>
@@ -1904,42 +1904,42 @@ redis&gt;
 <p>批量操作命令允许一次操作多个键，非常便捷且高效！</p>
 <hr />
 <p><strong>MGET 语法格式:</strong></p>
-<pre><code class="language-shell">MGET key [key ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>MGET<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p><code>MGET</code>命令一次获取多个指定<code>key</code>所存储的字符串值。</p>
 <p>如果指定的<code>key</code>列表中，存在key不存在或对应键值不是字符串类型的请求，则对应的应答会是nil，而不会报错。因此该命令不会执行失败。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET key1 &quot;Hello&quot;
-&quot;OK&quot;
-redis&gt; SET key2 &quot;World&quot;
-&quot;OK&quot;
-redis&gt; MGET key1 key2 nonexisting
-1) &quot;Hello&quot;
-2) &quot;World&quot;
-3) (nil)
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>SET<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>MGET<span class="w"> </span>key1<span class="w"> </span>key2<span class="w"> </span>nonexisting
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <hr />
 <p><strong>MSET 语法格式:</strong></p>
-<pre><code class="language-shell">MSET key value [key value ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>MSET<span class="w"> </span>key<span class="w"> </span>value<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>value<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p><code>MSET</code>命令一次性设置多个指定<code>key</code>所存储的字符串值，它会使用新值替换旧值，就像普通SET命令一样。</p>
 <p>MSET命令是原子的，所以其中指定的键是同时设置的。对客户端来说，不存在部分更新的情况。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; MSET key1 &quot;Hello&quot; key2 &quot;World&quot;
-&quot;OK&quot;
-redis&gt; GET key1
-&quot;Hello&quot;
-redis&gt; GET key2
-&quot;World&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>MSET<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;World&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>key1
+<span class="s2">&quot;Hello&quot;</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>key2
+<span class="s2">&quot;World&quot;</span>
+</code></pre></div>
 <hr />
 <p><strong>MSETEX 语法格式:</strong></p>
-<pre><code class="language-shell">MSETEX numkeys key value 
-    [key value ...] 
-    [NX | XX] 
-    [EX seconds | PX milliseconds | EXAT unix-time-seconds | PXAT unix-time-milliseconds | KEEPTTL]
-</code></pre>
+<div class="highlight"><pre><span></span><code>MSETEX<span class="w"> </span>numkeys<span class="w"> </span>key<span class="w"> </span>value<span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>key<span class="w"> </span>value<span class="w"> </span>...<span class="o">]</span><span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>NX<span class="w"> </span><span class="p">|</span><span class="w"> </span>XX<span class="o">]</span><span class="w"> </span>
+<span class="w">    </span><span class="o">[</span>EX<span class="w"> </span>seconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PX<span class="w"> </span>milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>EXAT<span class="w"> </span>unix-time-seconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>PXAT<span class="w"> </span>unix-time-milliseconds<span class="w"> </span><span class="p">|</span><span class="w"> </span>KEEPTTL<span class="o">]</span>
+</code></pre></div>
 <p><code>MSETEX</code>命令与<code>MSET</code>命令类似，但提供了额外的可选参数，用于指定设置操作的前提条件和键的过期时间。</p>
 <ul>
 <li>
@@ -1954,93 +1954,93 @@ redis&gt; GET key2
 </blockquote>
 <hr />
 <p><strong>MSETNX 语法格式:</strong></p>
-<pre><code class="language-shell">MSETNX key value [key value ...]
-</code></pre>
+<div class="highlight"><pre><span></span><code>MSETNX<span class="w"> </span>key<span class="w"> </span>value<span class="w"> </span><span class="o">[</span>key<span class="w"> </span>value<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
 <p><code>MSETNX</code>命令与<code>MSET</code>命令类似，但多了一个执行条件：所有指定的键都不存在时才执行操作。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; MSETNX key1 &quot;Hello&quot; key2 &quot;there&quot;
-(integer) 1
-redis&gt; MSETNX key2 &quot;new&quot; key3 &quot;world&quot;
-(integer) 0
-redis&gt; MGET key1 key2 key3
-1) &quot;Hello&quot;
-2) &quot;there&quot;
-3) (nil)
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>MSETNX<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;Hello&quot;</span><span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;there&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">1</span>
+redis&gt;<span class="w"> </span>MSETNX<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;new&quot;</span><span class="w"> </span>key3<span class="w"> </span><span class="s2">&quot;world&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>MGET<span class="w"> </span>key1<span class="w"> </span>key2<span class="w"> </span>key3
+<span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="m">2</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;there&quot;</span>
+<span class="m">3</span><span class="o">)</span><span class="w"> </span><span class="o">(</span>nil<span class="o">)</span>
 redis&gt;
-</code></pre>
+</code></pre></div>
 <h4 id="224">2.2.4. 子串操作</h4>
 <p>上面提到了<code>APPEND</code>、<code>SUBSTR</code>、<code>GETRANGE</code>、<code>SETRANGE</code>四个子串操作命令。</p>
 <p>其中<code>SUBSTR</code>已经被视为弃用，因此本文只讲解其他三个命令。</p>
 <hr />
 <p><strong>APPEND 语法格式：</strong></p>
-<pre><code class="language-shell">APPEND key value
-</code></pre>
+<div class="highlight"><pre><span></span><code>APPEND<span class="w"> </span>key<span class="w"> </span>value
+</code></pre></div>
 <p>APPEND命令在指定<code>key</code>存储的字符串键值后面追加字符串。如果key不存在，则会自动创建并将其初始值设置为空字符串（这种场景下功能根SET命令一样了）。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; EXISTS mykey
-(integer) 0
-redis&gt; APPEND mykey &quot;Hello&quot;
-(integer) 5
-redis&gt; APPEND mykey &quot; World&quot;
-(integer) 11
-redis&gt; GET mykey
-&quot;Hello World&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>EXISTS<span class="w"> </span>mykey
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>APPEND<span class="w"> </span>mykey<span class="w"> </span><span class="s2">&quot;Hello&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">5</span>
+redis&gt;<span class="w"> </span>APPEND<span class="w"> </span>mykey<span class="w"> </span><span class="s2">&quot; World&quot;</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">11</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>mykey
+<span class="s2">&quot;Hello World&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <hr />
 <p><strong>GETRANGE 语法格式：</strong></p>
-<pre><code class="language-shell">GETRANGE key start end
-</code></pre>
+<div class="highlight"><pre><span></span><code>GETRANGE<span class="w"> </span>key<span class="w"> </span>start<span class="w"> </span>end
+</code></pre></div>
 <p><code>GETRANGE</code>命令返回指定key所存储字符串键值的指定范围[start,end]子串。如果偏移量为负数，则表示从字符串末端开始的偏移，比如-1表示最后一个字符串，-2表示倒数第二个字符。</p>
 <p>当参数指定的偏移量超出了范围时，会自动将其限制为实际的字符串长度。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET mykey &quot;This is a string&quot;
-&quot;OK&quot;
-redis&gt; GETRANGE mykey 0 3
-&quot;This&quot;
-redis&gt; GETRANGE mykey -3 -1
-&quot;ing&quot;
-redis&gt; GETRANGE mykey 0 -1
-&quot;This is a string&quot;
-redis&gt; GETRANGE mykey 10 100
-&quot;string&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>mykey<span class="w"> </span><span class="s2">&quot;This is a string&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>GETRANGE<span class="w"> </span>mykey<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">3</span>
+<span class="s2">&quot;This&quot;</span>
+redis&gt;<span class="w"> </span>GETRANGE<span class="w"> </span>mykey<span class="w"> </span>-3<span class="w"> </span>-1
+<span class="s2">&quot;ing&quot;</span>
+redis&gt;<span class="w"> </span>GETRANGE<span class="w"> </span>mykey<span class="w"> </span><span class="m">0</span><span class="w"> </span>-1
+<span class="s2">&quot;This is a string&quot;</span>
+redis&gt;<span class="w"> </span>GETRANGE<span class="w"> </span>mykey<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">100</span>
+<span class="s2">&quot;string&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <hr />
 <p><strong>SETRANGE 语法格式：</strong></p>
-<pre><code class="language-shell">SETRANGE key offset value
-</code></pre>
+<div class="highlight"><pre><span></span><code>SETRANGE<span class="w"> </span>key<span class="w"> </span>offset<span class="w"> </span>value
+</code></pre></div>
 <p><code>SETRANGE</code>命令从指定的偏移量开始，使用指定的值来覆盖指定key存储的字符串。</p>
 <p>如果偏移量大于当前字符串值的长度，则字符串会填充零字节到足够的长度。</p>
 <p>如果key不存在，则会被视为空字符串处理。该命令会确保持有一个足够大的字符串，能够在偏移量处设置值。</p>
 <p>基本示例：</p>
-<pre><code class="language-shell">redis&gt;  SET words &quot;hello world&quot;
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w">  </span>SET<span class="w"> </span>words<span class="w"> </span><span class="s2">&quot;hello world&quot;</span>
 OK
-redis&gt;  SETRANGE words 6 redis
-(integer) 11
-redis&gt;  GET words
-&quot;hello redis&quot;
-redis&gt;  SETRANGE words 6 go
-(integer) 11
-redis&gt;  GET words
-&quot;hello godis&quot;
-redis&gt;  SETRANGE words 6 lalalalalalala
-(integer) 20
-redis&gt;  GET words
-&quot;hello lalalalalalala&quot;
-</code></pre>
+redis&gt;<span class="w">  </span>SETRANGE<span class="w"> </span>words<span class="w"> </span><span class="m">6</span><span class="w"> </span>redis
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">11</span>
+redis&gt;<span class="w">  </span>GET<span class="w"> </span>words
+<span class="s2">&quot;hello redis&quot;</span>
+redis&gt;<span class="w">  </span>SETRANGE<span class="w"> </span>words<span class="w"> </span><span class="m">6</span><span class="w"> </span>go
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">11</span>
+redis&gt;<span class="w">  </span>GET<span class="w"> </span>words
+<span class="s2">&quot;hello godis&quot;</span>
+redis&gt;<span class="w">  </span>SETRANGE<span class="w"> </span>words<span class="w"> </span><span class="m">6</span><span class="w"> </span>lalalalalalala
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">20</span>
+redis&gt;<span class="w">  </span>GET<span class="w"> </span>words
+<span class="s2">&quot;hello lalalalalalala&quot;</span>
+</code></pre></div>
 <p>零填充示例：</p>
-<pre><code class="language-shell">redis&gt; get words2 
-(nil) # words2 不存在
-redis&gt; setrange words2 6 world
-(integer) 11
-redis&gt; get words2
-&quot;\x00\x00\x00\x00\x00\x00world&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>get<span class="w"> </span>words2<span class="w"> </span>
+<span class="o">(</span>nil<span class="o">)</span><span class="w"> </span><span class="c1"># words2 不存在</span>
+redis&gt;<span class="w"> </span>setrange<span class="w"> </span>words2<span class="w"> </span><span class="m">6</span><span class="w"> </span>world
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">11</span>
+redis&gt;<span class="w"> </span>get<span class="w"> </span>words2
+<span class="s2">&quot;\x00\x00\x00\x00\x00\x00world&quot;</span>
+</code></pre></div>
 <h4 id="225">2.2.5. 其他命令</h4>
 <p><strong>STRLEN 语法格式：</strong></p>
-<pre><code class="language-shell">STRLEN key
-</code></pre>
+<div class="highlight"><pre><span></span><code>STRLEN<span class="w"> </span>key
+</code></pre></div>
 <p><code>STRLEN</code>命令用于获取指定键对应字符串值的长度（字节为单位）。如果键不存在或键值为空字符串，则返回0。该操作时间复杂度为<code>O(1)</code>，因为Redis的SDS（Simple Dynamic String）结构中直接存储了字符串长度。</p>
 <blockquote>
 <ul>
@@ -2049,18 +2049,18 @@ redis&gt; get words2
 </ul>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET mykey &quot;Hello World&quot;
-&quot;OK&quot;
-redis&gt; STRLEN mykey
-(integer) 11
-redis&gt; STRLEN nonexisting
-(integer) 0
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>mykey<span class="w"> </span><span class="s2">&quot;Hello World&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>STRLEN<span class="w"> </span>mykey
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">11</span>
+redis&gt;<span class="w"> </span>STRLEN<span class="w"> </span>nonexisting
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <hr />
 <p><strong>LCS 语法格式：</strong></p>
-<pre><code class="language-shell">LCS key1 key2 [LEN] [IDX] [MINMATCHLEN len] [WITHMATCHLEN]
-</code></pre>
+<div class="highlight"><pre><span></span><code>LCS<span class="w"> </span>key1<span class="w"> </span>key2<span class="w"> </span><span class="o">[</span>LEN<span class="o">]</span><span class="w"> </span><span class="o">[</span>IDX<span class="o">]</span><span class="w"> </span><span class="o">[</span>MINMATCHLEN<span class="w"> </span>len<span class="o">]</span><span class="w"> </span><span class="o">[</span>WITHMATCHLEN<span class="o">]</span>
+</code></pre></div>
 <p><code>LCS</code>（Longest Common Subsequence）命令用于计算两个字符串之间的最长公共子序列。与最长公共子串不同，子序列中的字符不需要连续，只需保持相对顺序。</p>
 <p><strong>可选参数解释：</strong></p>
 <ul>
@@ -2076,20 +2076,20 @@ redis&gt;
 </ul>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET key1 &quot;ohmytext&quot;
-&quot;OK&quot;
-redis&gt; SET key2 &quot;mynewtext&quot;
-&quot;OK&quot;
-redis&gt; LCS key1 key2
-&quot;mytext&quot;
-redis&gt; LCS key1 key2 LEN
-(integer) 6
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>key1<span class="w"> </span><span class="s2">&quot;ohmytext&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>SET<span class="w"> </span>key2<span class="w"> </span><span class="s2">&quot;mynewtext&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>LCS<span class="w"> </span>key1<span class="w"> </span>key2
+<span class="s2">&quot;mytext&quot;</span>
+redis&gt;<span class="w"> </span>LCS<span class="w"> </span>key1<span class="w"> </span>key2<span class="w"> </span>LEN
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">6</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <hr />
 <p><strong>DELEX 语法格式：</strong></p>
-<pre><code class="language-shell">DELEX key [IFEQ ifeq-value | IFNE ifne-value | IFDEQ ifdeq-digest | IFDNE ifdne-digest]
-</code></pre>
+<div class="highlight"><pre><span></span><code>DELEX<span class="w"> </span>key<span class="w"> </span><span class="o">[</span>IFEQ<span class="w"> </span>ifeq-value<span class="w"> </span><span class="p">|</span><span class="w"> </span>IFNE<span class="w"> </span>ifne-value<span class="w"> </span><span class="p">|</span><span class="w"> </span>IFDEQ<span class="w"> </span>ifdeq-digest<span class="w"> </span><span class="p">|</span><span class="w"> </span>IFDNE<span class="w"> </span>ifdne-digest<span class="o">]</span>
+</code></pre></div>
 <p><code>DELEX</code>（Delete with Existence Check）命令基于条件判断来删除指定键。只有当满足指定条件时，才会执行删除操作。该命令提供了一种安全的删除机制，避免误删数据。</p>
 <p><strong>可选参数解释：</strong>
 - <code>IFEQ</code>：仅当键的当前值等于指定值时才删除。
@@ -2103,20 +2103,20 @@ redis&gt;
 </ul>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET mykey &quot;current_value&quot;
-&quot;OK&quot;
-redis&gt; DELEX mykey IFEQ &quot;wrong_value&quot;
-(nil)
-redis&gt; DELEX mykey IFEQ &quot;current_value&quot;
-&quot;current_value&quot;
-redis&gt; EXISTS mykey
-(integer) 0
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>mykey<span class="w"> </span><span class="s2">&quot;current_value&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>DELEX<span class="w"> </span>mykey<span class="w"> </span>IFEQ<span class="w"> </span><span class="s2">&quot;wrong_value&quot;</span>
+<span class="o">(</span>nil<span class="o">)</span>
+redis&gt;<span class="w"> </span>DELEX<span class="w"> </span>mykey<span class="w"> </span>IFEQ<span class="w"> </span><span class="s2">&quot;current_value&quot;</span>
+<span class="s2">&quot;current_value&quot;</span>
+redis&gt;<span class="w"> </span>EXISTS<span class="w"> </span>mykey
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">0</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <hr />
 <p><strong>DIGEST 语法格式：</strong></p>
-<pre><code class="language-shell">DIGEST key
-</code></pre>
+<div class="highlight"><pre><span></span><code>DIGEST<span class="w"> </span>key
+</code></pre></div>
 <p><code>DIGEST</code>命令用于获取指定键中存储值的哈希摘要（SHA1算法生成的40位十六进制字符串）。该命令主要用于快速比较两个键值是否相等，而无需传输完整的值内容。</p>
 <blockquote>
 <ul>
@@ -2125,79 +2125,79 @@ redis&gt;
 </ul>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET mykey &quot;Hello World&quot;
-&quot;OK&quot;
-redis&gt; DIGEST mykey
-&quot;be65a15cd8f9c3ee5757c1c0b2aa493e28eb8d2a&quot;
-redis&gt; 
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>mykey<span class="w"> </span><span class="s2">&quot;Hello World&quot;</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>DIGEST<span class="w"> </span>mykey
+<span class="s2">&quot;be65a15cd8f9c3ee5757c1c0b2aa493e28eb8d2a&quot;</span>
+redis&gt;<span class="w"> </span>
+</code></pre></div>
 <h3 id="23">2.3. 计数器管理</h3>
 <p>Redis 字符串类型支持将键值用作原子计数器，这些命令在键不存在时会自动初始化为0，非常适合实现页面访问计数、库存管理、限流器等场景。所有计数器操作都是原子的，即使在高并发环境下也能保证准确性。</p>
 <hr />
 <p><strong>INCR 语法格式：</strong></p>
-<pre><code class="language-shell">INCR key
-</code></pre>
+<div class="highlight"><pre><span></span><code>INCR<span class="w"> </span>key
+</code></pre></div>
 <p><code>INCR</code>命令将指定键的整数值加1。如果键不存在，Redis会将其初始值设为0后再执行加1操作。这是最简单的计数器实现方式，适用于每次递增1的场景。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET article:123:views 100
-&quot;OK&quot;
-redis&gt; INCR article:123:views
-(integer) 101
-redis&gt; GET article:123:views
-&quot;101&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>article:123:views<span class="w"> </span><span class="m">100</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>INCR<span class="w"> </span>article:123:views
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">101</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>article:123:views
+<span class="s2">&quot;101&quot;</span>
+</code></pre></div>
 <hr />
 <p><strong>INCRBY 语法格式：</strong></p>
-<pre><code class="language-shell">INCRBY key increment
-</code></pre>
+<div class="highlight"><pre><span></span><code>INCRBY<span class="w"> </span>key<span class="w"> </span>increment
+</code></pre></div>
 <p><code>INCRBY</code> 命令将指定键的整数值增加给定的增量值（increment）。如果键不存在，Redis会将其初始值设为0后再执行增量操作。这提供了比INCR更灵活的控制，适用于需要不同步长的计数场景。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET article:123:views 100
-&quot;OK&quot;
-redis&gt; INCRBY article:123:views 5
-(integer) 105
-redis&gt; GET article:123:views
-&quot;105&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>article:123:views<span class="w"> </span><span class="m">100</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>INCRBY<span class="w"> </span>article:123:views<span class="w"> </span><span class="m">5</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">105</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>article:123:views
+<span class="s2">&quot;105&quot;</span>
+</code></pre></div>
 <hr />
 <p><strong>INCRBYFLOAT 语法格式：</strong></p>
-<pre><code class="language-shell">INCRBYFLOAT key increment
-</code></pre>
+<div class="highlight"><pre><span></span><code>INCRBYFLOAT<span class="w"> </span>key<span class="w"> </span>increment
+</code></pre></div>
 <p><code>INCRBYFLOAT</code> 命令将指定键的浮点数值增加给定的增量值（可以是整数或浮点数）。如果键不存在，Redis会将其初始值设为0后再执行增量操作。这是处理需要小数精度的计数场景的唯一选择。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET temperature 25.0
-&quot;OK&quot;
-redis&gt; INCRBYFLOAT temperature 0.5
-&quot;25.5&quot;
-redis&gt; INCRBYFLOAT temperature -1.2
-&quot;24.3&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>temperature<span class="w"> </span><span class="m">25</span>.0
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>INCRBYFLOAT<span class="w"> </span>temperature<span class="w"> </span><span class="m">0</span>.5
+<span class="s2">&quot;25.5&quot;</span>
+redis&gt;<span class="w"> </span>INCRBYFLOAT<span class="w"> </span>temperature<span class="w"> </span>-1.2
+<span class="s2">&quot;24.3&quot;</span>
+</code></pre></div>
 <hr />
 <p><strong>DECR 语法格式：</strong></p>
-<pre><code class="language-shell">DECR key
-</code></pre>
+<div class="highlight"><pre><span></span><code>DECR<span class="w"> </span>key
+</code></pre></div>
 <p><code>DECR</code> 命令将指定键的整数值减1。如果键不存在，Redis会将其初始值设为0后再执行减1操作。这是最简单的递减计数器实现方式，适用于库存减少、倒计时等需要递减计数的场景。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET stock 100
-&quot;OK&quot;
-redis&gt; DECR stock
-(integer) 99
-redis&gt; GET stock
-&quot;99&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>stock<span class="w"> </span><span class="m">100</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>DECR<span class="w"> </span>stock
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">99</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>stock
+<span class="s2">&quot;99&quot;</span>
+</code></pre></div>
 <hr />
 <p><strong>DECRBY 语法格式：</strong></p>
-<pre><code class="language-shell">DECRBY key decrement
-</code></pre>
+<div class="highlight"><pre><span></span><code>DECRBY<span class="w"> </span>key<span class="w"> </span>decrement
+</code></pre></div>
 <p><code>DECRBY</code> 命令将指定键的整数值减少给定的减量值（decrement）。如果键不存在，Redis会将其初始值设为0后再执行减量操作。这提供了比DECR更灵活的控制，适用于需要不同步长的递减场景。</p>
 <p>示例：</p>
-<pre><code class="language-shell">redis&gt; SET stock 100
-&quot;OK&quot;
-redis&gt; DECRBY stock 5
-(integer) 95
-redis&gt; GET stock
-&quot;95&quot;
-</code></pre>
+<div class="highlight"><pre><span></span><code>redis&gt;<span class="w"> </span>SET<span class="w"> </span>stock<span class="w"> </span><span class="m">100</span>
+<span class="s2">&quot;OK&quot;</span>
+redis&gt;<span class="w"> </span>DECRBY<span class="w"> </span>stock<span class="w"> </span><span class="m">5</span>
+<span class="o">(</span>integer<span class="o">)</span><span class="w"> </span><span class="m">95</span>
+redis&gt;<span class="w"> </span>GET<span class="w"> </span>stock
+<span class="s2">&quot;95&quot;</span>
+</code></pre></div>
 <h3 id="24">2.4. 按位运算（略）</h3>
 <p>要对字符串进行按位作，请参见<a href="https://redis.io/docs/latest/develop/data-types/bitmaps/">位图数据类型</a>文档。</p>
 <p>本文不去讲解这部分，后续可能会写专门的博客讲解。</p>
@@ -2205,14 +2205,13 @@ redis&gt; GET stock
 <p>建议参考这篇文章：<a href="https://www.cnblogs.com/lonely-wolf/p/14261486.html">一个简单的字符串，为什么 Redis 要设计的如此特别 </a></p>
 <h3 id="31-sds">3.1 SDS 结构解析</h3>
 <p>Redis 使用 <strong>Simple Dynamic String (SDS)</strong> 替代 C 原生字符串，核心结构：</p>
-<pre><code class="language-c">struct __attribute__ ((__packed__)) sdshdr8 {
-    uint8_t len;     // 当前长度
-    uint8_t alloc;   // 分配的内存总量
-    uint8_t flags;   // 类型标识（8/16/32/64位）
-    char buf[];      // 柔性数组存储实际数据
-};
-
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">__attribute__</span><span class="w"> </span><span class="p">((</span><span class="n">__packed__</span><span class="p">))</span><span class="w"> </span><span class="n">sdshdr8</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">len</span><span class="p">;</span><span class="w">     </span><span class="c1">// 当前长度</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">alloc</span><span class="p">;</span><span class="w">   </span><span class="c1">// 分配的内存总量</span>
+<span class="w">    </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">flags</span><span class="p">;</span><span class="w">   </span><span class="c1">// 类型标识（8/16/32/64位）</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[];</span><span class="w">      </span><span class="c1">// 柔性数组存储实际数据</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="32-c">3.2 与 C 字符串的对比</h3>
 <table>
 <thead>
@@ -2245,15 +2244,14 @@ redis&gt; GET stock
 </tr>
 </tbody>
 </table>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid"><code>graph LR
     A[C字符串] --&gt;|需要遍历| B[获取长度 O（n）]
     A --&gt;|无长度记录| C[缓冲区溢出风险]
     C --&gt; D[程序崩溃]
 
     E[SDS] --&gt;|存储len字段| F[获取长度 O（1）]
     E --&gt;|alloc &gt; len| G[空间预分配]
-    G --&gt; H[减少内存分配次数]
-</code></pre>
+    G --&gt; H[减少内存分配次数]</code></pre>
 <h3 id="33">3.3 内存管理机制</h3>
 <ul>
 <li><strong>空间预分配</strong>：当字符串增长时，额外分配 1x~2x 空间</li>

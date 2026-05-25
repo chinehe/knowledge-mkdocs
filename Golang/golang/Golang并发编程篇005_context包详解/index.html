@@ -2387,24 +2387,24 @@
 * 请求作用域数据传递：在请求声明周期内传递键值对数据。</p>
 <h3 id="13-context">1.3. context核心接口</h3>
 <p>contex包的核心是Context接口：</p>
-<pre><code class="language-go">// Context 携带截止时间、取消信号、以及其他跨API边界的数据。
-// Context的方法可以被多协程同时调用（并发安全）。
-type Context interface {
-  // 返回截止时间（代表上下文应该被取消的时间）
-  // 如果没有设置截止时间，返回的ok为false
-    Deadline() (deadline time.Time, ok bool)
+<div class="highlight"><pre><span></span><code><span class="c1">// Context 携带截止时间、取消信号、以及其他跨API边界的数据。</span>
+<span class="c1">// Context的方法可以被多协程同时调用（并发安全）。</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">Context</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 返回截止时间（代表上下文应该被取消的时间）</span>
+<span class="w">  </span><span class="c1">// 如果没有设置截止时间，返回的ok为false</span>
+<span class="w">    </span><span class="nx">Deadline</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">deadline</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span>
 
-  // 返回一个通道，充当context的取消信息，当上下文被取消或者超时时关闭。
-  // 如果context不能被取消（超时），返回nil通道。
-    Done() &lt;-chan struct{}
+<span class="w">  </span><span class="c1">// 返回一个通道，充当context的取消信息，当上下文被取消或者超时时关闭。</span>
+<span class="w">  </span><span class="c1">// 如果context不能被取消（超时），返回nil通道。</span>
+<span class="w">    </span><span class="nx">Done</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;-</span><span class="kd">chan</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
 
-  // 返回Done通道关闭的原因
-    Err() error
+<span class="w">  </span><span class="c1">// 返回Done通道关闭的原因</span>
+<span class="w">    </span><span class="nx">Err</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span>
 
-  // 获取指定键的值
-    Value(key any) any
-}
-</code></pre>
+<span class="w">  </span><span class="c1">// 获取指定键的值</span>
+<span class="w">    </span><span class="nx">Value</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="kt">any</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>接口方法解释：</strong></p>
 <ul>
 <li>
@@ -2459,42 +2459,42 @@ type Context interface {
 <p>从后文的源码解析可以知道，这两个方法创建的context是一模一样的，只是官方对其定义不同。</p>
 </blockquote>
 <p><strong>源码：</strong></p>
-<pre><code class="language-go">// 空Context：无法取消、没有携带值、没有截止时间。
-// 作为backgroundCtx和todoCtx的共同基础
-type emptyCtx struct{}
+<div class="highlight"><pre><span></span><code><span class="c1">// 空Context：无法取消、没有携带值、没有截止时间。</span>
+<span class="c1">// 作为backgroundCtx和todoCtx的共同基础</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">emptyCtx</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span>
 
-func (emptyCtx) Deadline() (deadline time.Time, ok bool) {
-    return
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">emptyCtx</span><span class="p">)</span><span class="w"> </span><span class="nx">Deadline</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">deadline</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="p">}</span>
 
-func (emptyCtx) Done() &lt;-chan struct{} {
-    return nil
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">emptyCtx</span><span class="p">)</span><span class="w"> </span><span class="nx">Done</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;-</span><span class="kd">chan</span><span class="w"> </span><span class="kd">struct</span><span class="p">{}</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-func (emptyCtx) Err() error {
-    return nil
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">emptyCtx</span><span class="p">)</span><span class="w"> </span><span class="nx">Err</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-func (emptyCtx) Value(key any) any {
-    return nil
-}
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">emptyCtx</span><span class="p">)</span><span class="w"> </span><span class="nx">Value</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="kt">any</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-// 返回一个非nil的空Context：无法取消、没有携带值、没有截止时间。
-// 通常用在main函数、初始化代码、测试代码中，作为进来的请求的顶层Context。
-func Background() Context {
-    return backgroundCtx{}
-}
+<span class="c1">// 返回一个非nil的空Context：无法取消、没有携带值、没有截止时间。</span>
+<span class="c1">// 通常用在main函数、初始化代码、测试代码中，作为进来的请求的顶层Context。</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">Background</span><span class="p">()</span><span class="w"> </span><span class="nx">Context</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">backgroundCtx</span><span class="p">{}</span>
+<span class="p">}</span>
 
-type backgroundCtx struct{ emptyCtx }
+<span class="kd">type</span><span class="w"> </span><span class="nx">backgroundCtx</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span><span class="w"> </span><span class="nx">emptyCtx</span><span class="w"> </span><span class="p">}</span>
 
-// 返回一个非nil的空Context：无法取消、没有携带值、没有截止时间。
-// 当不知道使用哪一种上下文时，使用该方法创建上下文来占位
-func TODO() Context {
-    return todoCtx{}
-}
+<span class="c1">// 返回一个非nil的空Context：无法取消、没有携带值、没有截止时间。</span>
+<span class="c1">// 当不知道使用哪一种上下文时，使用该方法创建上下文来占位</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">TODO</span><span class="p">()</span><span class="w"> </span><span class="nx">Context</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">todoCtx</span><span class="p">{}</span>
+<span class="p">}</span>
 
-type todoCtx struct{ emptyCtx }
-</code></pre>
+<span class="kd">type</span><span class="w"> </span><span class="nx">todoCtx</span><span class="w"> </span><span class="kd">struct</span><span class="p">{</span><span class="w"> </span><span class="nx">emptyCtx</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
 <p>从源码可以看到：这两种方式创建的都是空的根Context，不具备任何功能。要实现具体功能时，还需要根据需求，从根Context派生具体的Context。</p>
 <h3 id="22-context">2.2. Context派生方法</h3>
 <p>所谓Context派生：指的是使用context包中提供的相关派生方法，基于一个父Context，创建一个子Context。</p>
@@ -2510,22 +2510,22 @@ type todoCtx struct{ emptyCtx }
 * WithCancel：返回派生上下文和一个用于取消上下文的CancelFunc。
 * WithCancelCause：与WithCancel类似，返回派生上下文和一个用于取消上下文的CancelCauseFunc（可以指定取消原因）。</p>
 <p><code>WithCancel</code>源码：</p>
-<pre><code class="language-go">func WithCancel(parent Context) (ctx Context, cancel CancelFunc) {
-    c := withCancel(parent)
-    return c, func() { c.cancel(true, Canceled, nil) }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">WithCancel</span><span class="p">(</span><span class="nx">parent</span><span class="w"> </span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">cancel</span><span class="w"> </span><span class="nx">CancelFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">withCancel</span><span class="p">(</span><span class="nx">parent</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">cancel</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">Canceled</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><code>WithCancel</code>返回一个可以被取消的派生context，以及一个用于取消该context的方法。</li>
 <li>该context指向其父context，但有一个新的Done通道。当调用返回的CancelFunc或者关闭父上下文的Done通道时，该context的Done通道将关闭。</li>
 <li>取消该上下文会释放语气关联的资源，因此在该context中运行的操作完成后，代码应该立即调用取消。</li>
 </ul>
 <p><code>WithCancelCause</code>源码：</p>
-<pre><code class="language-go">func WithCancelCause(parent Context) (ctx Context, cancel CancelCauseFunc) {
-    c := withCancel(parent)
-    return c, func(cause error) { c.cancel(true, Canceled, cause) }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">WithCancelCause</span><span class="p">(</span><span class="nx">parent</span><span class="w"> </span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">cancel</span><span class="w"> </span><span class="nx">CancelCauseFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">withCancel</span><span class="p">(</span><span class="nx">parent</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">cause</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">cancel</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">Canceled</span><span class="p">,</span><span class="w"> </span><span class="nx">cause</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li><code>WithCancelCause</code>返回一个可以被取消的派生context，以及一个可以指定原因的用于取消该context的方法。</li>
 <li>调用返回的<code>CancelCauseFunc</code>方法时，可以传入一个error用于表示取消的原因，如果传入nil，该原因默认为<code>context canceled</code>。</li>
@@ -2535,45 +2535,45 @@ type todoCtx struct{ emptyCtx }
 <p>相关方法：
 * WithDeadline：返回派生上下文和一个用于取消上下文的CancelFunc。
 * WithDeadlineCause：与WithDeadline类似，返回派生上下文和一个用于取消上下文的CancelFunc（不可以指定取消原因）。</p>
-<p><code>WithDeadline</code>源码：</p>
-<pre><code class="language-go">func WithDeadline(parent Context, d time.Time) (Context, CancelFunc) {
-    return WithDeadlineCause(parent, d, nil)
-}
-</code></pre>
+<p><code>WithDeadline</code>源码：
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">WithDeadline</span><span class="p">(</span><span class="nx">parent</span><span class="w"> </span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">CancelFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">WithDeadlineCause</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <ul>
 <li><code>WithDeadline</code>返回一个带截止时间的派生context，以及一个用于取消该context的方法。</li>
 <li>该context指向其父context，但有一个新的Done通道。当到达截止时间、调用返回的CancelFunc或关闭父context的Done通道时，该context的Done通道将关闭。</li>
 <li>取消该上下文会释放其关联的资源，因此在该context中运行的操作完成后，代码应该立即调用取消。</li>
 <li>如果父context的截止时间早于d，则返回的context等同于通过<code>WithCancel</code>创建的context。</li>
 </ul>
-<p><code>WithDeadlineCause</code>源码：</p>
-<pre><code class="language-go">func WithDeadlineCause(parent Context, d time.Time, cause error) (Context, CancelFunc) {
-    if parent == nil {
-        panic(&quot;cannot create context from nil parent&quot;)
-    }
-    if cur, ok := parent.Deadline(); ok &amp;&amp; cur.Before(d) {
-        // The current deadline is already sooner than the new one.
-        return WithCancel(parent)
-    }
-    c := &amp;timerCtx{
-        deadline: d,
-    }
-    c.cancelCtx.propagateCancel(parent, c)
-    dur := time.Until(d)
-    if dur &lt;= 0 {
-        c.cancel(true, DeadlineExceeded, cause) // deadline has already passed
-        return c, func() { c.cancel(false, Canceled, nil) }
-    }
-    c.mu.Lock()
-    defer c.mu.Unlock()
-    if c.err == nil {
-        c.timer = time.AfterFunc(dur, func() {
-            c.cancel(true, DeadlineExceeded, cause)
-        })
-    }
-    return c, func() { c.cancel(true, Canceled, nil) }
-}
-</code></pre>
+<p><code>WithDeadlineCause</code>源码：
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">WithDeadlineCause</span><span class="p">(</span><span class="nx">parent</span><span class="w"> </span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">d</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">,</span><span class="w"> </span><span class="nx">cause</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">CancelFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">parent</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;cannot create context from nil parent&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">cur</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">parent</span><span class="p">.</span><span class="nx">Deadline</span><span class="p">();</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">cur</span><span class="p">.</span><span class="nx">Before</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// The current deadline is already sooner than the new one.</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">WithCancel</span><span class="p">(</span><span class="nx">parent</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">timerCtx</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">deadline</span><span class="p">:</span><span class="w"> </span><span class="nx">d</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">cancelCtx</span><span class="p">.</span><span class="nx">propagateCancel</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">dur</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Until</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">dur</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">cancel</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">DeadlineExceeded</span><span class="p">,</span><span class="w"> </span><span class="nx">cause</span><span class="p">)</span><span class="w"> </span><span class="c1">// deadline has already passed</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">cancel</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nx">Canceled</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">c</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nx">Lock</span><span class="p">()</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">mu</span><span class="p">.</span><span class="nx">Unlock</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">timer</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">AfterFunc</span><span class="p">(</span><span class="nx">dur</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">c</span><span class="p">.</span><span class="nx">cancel</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">DeadlineExceeded</span><span class="p">,</span><span class="w"> </span><span class="nx">cause</span><span class="p">)</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">cancel</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">Canceled</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <ul>
 <li><code>WithDeadlineCause</code>返回一个带截止时间的派生context，以及一个用于取消该context的方法（不能指定取消原因）。</li>
 <li>可以用<code>Cause</code>方法来获取context被取消的原因，如果未设置原因，则返回<code>ctx.Err()</code>。</li>
@@ -2595,21 +2595,21 @@ type todoCtx struct{ emptyCtx }
 <p>相关方法：
 * WithTimeout：返回派生上下文和一个用于取消上下文的CancelFunc。
 * WithTimeoutCause：与WithTimeout类似，返回派生上下文和一个用于取消上下文的CancelFunc。</p>
-<p><code>WithTimeout</code>源码：</p>
-<pre><code class="language-go">func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc) {
-    return WithDeadline(parent, time.Now().Add(timeout))
-}
-</code></pre>
+<p><code>WithTimeout</code>源码：
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">WithTimeout</span><span class="p">(</span><span class="nx">parent</span><span class="w"> </span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">timeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">CancelFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">WithDeadline</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">Add</span><span class="p">(</span><span class="nx">timeout</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <ul>
 <li><code>WithTimeout</code>是<code>WithDeadline</code>的便捷封装，用于设置相对超时时间。</li>
 <li>它实际上调用<code>WithDeadline</code>并计算截止时间为当前时间加上timeout。</li>
 <li>行为与<code>WithDeadline</code>完全一致，只是参数形式不同。</li>
 </ul>
-<p><code>WithTimeoutCause</code>源码：</p>
-<pre><code class="language-go">func WithTimeoutCause(parent Context, timeout time.Duration, cause error) (Context, CancelFunc) {
-    return WithDeadlineCause(parent, time.Now().Add(timeout), cause)
-}
-</code></pre>
+<p><code>WithTimeoutCause</code>源码：
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">WithTimeoutCause</span><span class="p">(</span><span class="nx">parent</span><span class="w"> </span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">timeout</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="p">,</span><span class="w"> </span><span class="nx">cause</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">CancelFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">WithDeadlineCause</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">Add</span><span class="p">(</span><span class="nx">timeout</span><span class="p">),</span><span class="w"> </span><span class="nx">cause</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <ul>
 <li><code>WithTimeoutCause</code>是<code>WithDeadlineCause</code>的便捷封装，用于设置相对超时时间并指定取消原因。</li>
 <li>它实际上调用<code>WithDeadlineCause</code>并计算截止时间为当前时间加上timeout。</li>
@@ -2618,20 +2618,20 @@ type todoCtx struct{ emptyCtx }
 <h4 id="224-withvalue">2.2.4. WithValue相关的派生方法</h4>
 <p>相关方法：
 * WithValue：返回携带键值对数据的派生context。</p>
-<p><code>WithValue</code>源码：</p>
-<pre><code class="language-go">func WithValue(parent Context, key, val any) Context {
-    if parent == nil {
-        panic(&quot;cannot create context from nil parent&quot;)
-    }
-    if key == nil {
-        panic(&quot;nil key&quot;)
-    }
-    if !reflectlite.TypeOf(key).Comparable() {
-        panic(&quot;key is not comparable&quot;)
-    }
-    return &amp;valueCtx{parent, key, val}
-}
-</code></pre>
+<p><code>WithValue</code>源码：
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">WithValue</span><span class="p">(</span><span class="nx">parent</span><span class="w"> </span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="nx">Context</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">parent</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;cannot create context from nil parent&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;nil key&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">!</span><span class="nx">reflectlite</span><span class="p">.</span><span class="nx">TypeOf</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">Comparable</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="s">&quot;key is not comparable&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">valueCtx</span><span class="p">{</span><span class="nx">parent</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">val</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <ul>
 <li><code>WithValue</code>返回一个携带键值对数据的新context，该context基于提供的父context。</li>
 <li>返回的context对于<code>Value(key)</code>调用会先检查是否是存储的key，如果是则返回对应的val，否则会递归调用父context的<code>Value</code>方法。</li>
@@ -2642,7 +2642,7 @@ type todoCtx struct{ emptyCtx }
 <h3 id="23-context">2.3. Context树</h3>
 <p>context的派生机制形成了一个树形结构，每个Context都源自一个父Context，并可以派生出多个子Context。这种树状结构保证了取消信号、截止时间和请求数据能够在整个调用链中正确传播。</p>
 <h4 id="231-context">2.3.1. Context树形结构</h4>
-<pre><code class="language-mermaid">graph TB
+<pre class="mermaid"><code>graph TB
     A[context.Background] --&gt; B[WithCancel]
     A --&gt; C[WithValue]
     A --&gt; D[WithDeadline]
@@ -2664,8 +2664,7 @@ type todoCtx struct{ emptyCtx }
     style B fill:#2196F3,stroke:#1976D2,color:white
     style C fill:#FF9800,stroke:#F57C00,color:white
     style D fill:#9C27B0,stroke:#7B1FA2,color:white
-    style E fill:#795548,stroke:#5D4037,color:white
-</code></pre>
+    style E fill:#795548,stroke:#5D4037,color:white</code></pre>
 <p>如上图所示，Context树的结构特点包括：</p>
 <ul>
 <li><strong>根节点</strong>：所有Context都起源于<code>context.Background()</code>或<code>context.TODO()</code>创建的根Context</li>
@@ -2683,35 +2682,35 @@ type todoCtx struct{ emptyCtx }
 <li><strong>类型安全的Key</strong>：使用自定义的未导出类型作为key，避免不同包之间的key冲突</li>
 </ol>
 <h4 id="233">2.3.3 实际应用示例</h4>
-<pre><code class="language-go">func handleRequest(ctx context.Context, req Request) error {
-    // 基于请求Context创建取消Context
-    ctx, cancel := context.WithCancel(ctx)
-    defer cancel()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">handleRequest</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="w"> </span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 基于请求Context创建取消Context</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">cancel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithCancel</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">cancel</span><span class="p">()</span>
 
-    // 添加请求特定的值
-    ctx = context.WithValue(ctx, &quot;requestID&quot;, req.ID)
-    ctx = context.WithValue(ctx, &quot;userID&quot;, req.UserID)
+<span class="w">    </span><span class="c1">// 添加请求特定的值</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;requestID&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">ID</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;userID&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">UserID</span><span class="p">)</span>
 
-    // 设置业务处理超时
-    ctx, timeoutCancel := context.WithTimeout(ctx, 30*time.Second)
-    defer timeoutCancel()
+<span class="w">    </span><span class="c1">// 设置业务处理超时</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">timeoutCancel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithTimeout</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">timeoutCancel</span><span class="p">()</span>
 
-    // 并发执行多个子任务
-    var wg sync.WaitGroup
-    for i := 0; i &lt; len(req.Tasks); i++ {
-        wg.Add(1)
-        // 每个子任务都有自己的Context
-        taskCtx := context.WithValue(ctx, &quot;taskNum&quot;, i)
-        go func(taskCtx context.Context, task Task) {
-            defer wg.Done()
-            processTask(taskCtx, task)
-        }(taskCtx, req.Tasks[i])
-    }
+<span class="w">    </span><span class="c1">// 并发执行多个子任务</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">wg</span><span class="w"> </span><span class="nx">sync</span><span class="p">.</span><span class="nx">WaitGroup</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Tasks</span><span class="p">);</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">// 每个子任务都有自己的Context</span>
+<span class="w">        </span><span class="nx">taskCtx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;taskNum&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">taskCtx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">task</span><span class="w"> </span><span class="nx">Task</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">defer</span><span class="w"> </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="w">            </span><span class="nx">processTask</span><span class="p">(</span><span class="nx">taskCtx</span><span class="p">,</span><span class="w"> </span><span class="nx">task</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}(</span><span class="nx">taskCtx</span><span class="p">,</span><span class="w"> </span><span class="nx">req</span><span class="p">.</span><span class="nx">Tasks</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+<span class="w">    </span><span class="p">}</span>
 
-    wg.Wait()
-    return nil
-}
-</code></pre>
+<span class="w">    </span><span class="nx">wg</span><span class="p">.</span><span class="nx">Wait</span><span class="p">()</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在这个示例中：</p>
 <ol>
 <li>从传入的请求Context开始</li>
@@ -2732,13 +2731,13 @@ type todoCtx struct{ emptyCtx }
 <p>使用context的<code>Value(key any) any</code>方法，可以从context中获取指定key的数据。</p>
 </li>
 </ul>
-<p><code>go
-  func (c *valueCtx) Value(key any) any {
-    if c.key == key {
-        return c.val
-    }
-    return value(c.Context, key)
-  }</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="o">*</span><span class="nx">valueCtx</span><span class="p">)</span><span class="w"> </span><span class="nx">Value</span><span class="p">(</span><span class="nx">key</span><span class="w"> </span><span class="kt">any</span><span class="p">)</span><span class="w"> </span><span class="kt">any</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">val</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">value</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>如果当前context中找到了key，就返回对应值。 如果当前context中没有找到key，就从父context中找，以此类推。 如果在context及其所有父context中都没有找到key，返回nil。</li>
 </ul>
@@ -2773,284 +2772,282 @@ type todoCtx struct{ emptyCtx }
 </li>
 </ul>
 <h3 id="33">3.3. 官方推荐示例</h3>
-<pre><code class="language-go">// User 要存储到context中的值的类型
-type User struct {
-    UserID   string
-    UserName string
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// User 要存储到context中的值的类型</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">User</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">UserID</span><span class="w">   </span><span class="kt">string</span>
+<span class="w">    </span><span class="nx">UserName</span><span class="w"> </span><span class="kt">string</span>
+<span class="p">}</span>
 
-// key 定义一个未导出的key类型
-// 这可以防止与其他包中定义的key发生冲突。
-type key int
+<span class="c1">// key 定义一个未导出的key类型</span>
+<span class="c1">// 这可以防止与其他包中定义的key发生冲突。</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="kt">int</span>
 
-// userKey context中存储用户信息的key.
-// 它也是未导出的
-// 客户端使用提供的安全访问器user.NewContext and user.FromContext来访问,而不是直接使用它
-var userKey key
+<span class="c1">// userKey context中存储用户信息的key.</span>
+<span class="c1">// 它也是未导出的</span>
+<span class="c1">// 客户端使用提供的安全访问器user.NewContext and user.FromContext来访问,而不是直接使用它</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">userKey</span><span class="w"> </span><span class="nx">key</span>
 
-// NewContext 返回一个携带用户信息的新context
-func NewContext(ctx context.Context, u *User) context.Context {
-    return context.WithValue(ctx, userKey, u)
-}
+<span class="c1">// NewContext 返回一个携带用户信息的新context</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">NewContext</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="o">*</span><span class="nx">User</span><span class="p">)</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">userKey</span><span class="p">,</span><span class="w"> </span><span class="nx">u</span><span class="p">)</span>
+<span class="p">}</span>
 
-// FromContext 返回存储在context中的用户信息
-func FromContext(ctx context.Context) (*User, bool) {
-    u, ok := ctx.Value(userKey).(*User)
-    return u, ok
-}
+<span class="c1">// FromContext 返回存储在context中的用户信息</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">FromContext</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">User</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">u</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Value</span><span class="p">(</span><span class="nx">userKey</span><span class="p">).(</span><span class="o">*</span><span class="nx">User</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">u</span><span class="p">,</span><span class="w"> </span><span class="nx">ok</span>
+<span class="p">}</span>
 
-func main() {
-    c := context.Background()
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">()</span>
 
-    // 存储用户信息
-    c = NewContext(c, &amp;User{
-        UserID:   &quot;001&quot;,
-        UserName: &quot;admin&quot;,
-    })
+<span class="w">    </span><span class="c1">// 存储用户信息</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">NewContext</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span>
+<span class="w">        </span><span class="nx">UserID</span><span class="p">:</span><span class="w">   </span><span class="s">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">UserName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">})</span>
 
-    // 读取用户信息
-    user, exist := FromContext(c)
-    if exist {
-        log.Printf(&quot;%+v&quot;, user)
-        return
-    }
-    log.Println(&quot;user not found.&quot;)
-}
-
-</code></pre>
+<span class="w">    </span><span class="c1">// 读取用户信息</span>
+<span class="w">    </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">exist</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">FromContext</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">exist</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%+v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">user</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;user not found.&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="34">3.4. 笔者示例</h3>
-<pre><code class="language-go">type requestKeyType string  // 请求Key类型
-type businessKeyType string // 业务Key类型
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">requestKeyType</span><span class="w"> </span><span class="kt">string</span><span class="w">  </span><span class="c1">// 请求Key类型</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">businessKeyType</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// 业务Key类型</span>
 
-const (
-    traceIDRequestKey  requestKeyType = &quot;traceID&quot; // 请求跟踪号
-    userNameRequestKey requestKeyType = &quot;admin&quot;   // 请求用户
+<span class="kd">const</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="nx">traceIDRequestKey</span><span class="w">  </span><span class="nx">requestKeyType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;traceID&quot;</span><span class="w"> </span><span class="c1">// 请求跟踪号</span>
+<span class="w">    </span><span class="nx">userNameRequestKey</span><span class="w"> </span><span class="nx">requestKeyType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="w">   </span><span class="c1">// 请求用户</span>
 
-    traceIDBusinessKey  businessKeyType = &quot;traceID&quot; // 业务跟踪号
-    userNameBusinessKey businessKeyType = &quot;admin&quot;   // 业务用户
-)
+<span class="w">    </span><span class="nx">traceIDBusinessKey</span><span class="w">  </span><span class="nx">businessKeyType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;traceID&quot;</span><span class="w"> </span><span class="c1">// 业务跟踪号</span>
+<span class="w">    </span><span class="nx">userNameBusinessKey</span><span class="w"> </span><span class="nx">businessKeyType</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="w">   </span><span class="c1">// 业务用户</span>
+<span class="p">)</span>
 
-func main() {
-    // 创建根Context
-    c := context.Background()
-    // 携带请求数据
-    c = context.WithValue(c, traceIDRequestKey, &quot;das454asd564a6s1da165d4a1a3s1d6a413&quot;)
-    c = context.WithValue(c, userNameRequestKey, &quot;admin&quot;)
-    // 携带业务数据
-    c = context.WithValue(c, traceIDBusinessKey, &quot;das556da1d35de31as1d65a1da4ew15q46q&quot;)
-    c = context.WithValue(c, userNameBusinessKey, &quot;genAdmin&quot;)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建根Context</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">()</span>
+<span class="w">    </span><span class="c1">// 携带请求数据</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">traceIDRequestKey</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;das454asd564a6s1da165d4a1a3s1d6a413&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">userNameRequestKey</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;admin&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 携带业务数据</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">traceIDBusinessKey</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;das556da1d35de31as1d65a1da4ew15q46q&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithValue</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span><span class="w"> </span><span class="nx">userNameBusinessKey</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;genAdmin&quot;</span><span class="p">)</span>
 
-    // 请求处理
-    DoRequest(c)
-    // 业务处理
-    DoBusiness(c)
-}
+<span class="w">    </span><span class="c1">// 请求处理</span>
+<span class="w">    </span><span class="nx">DoRequest</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 业务处理</span>
+<span class="w">    </span><span class="nx">DoBusiness</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="p">}</span>
 
-func DoRequest(c context.Context) {
-    fmt.Println(c.Value(traceIDRequestKey))  // das454asd564a6s1da165d4a1a3s1d6a413
-    fmt.Println(c.Value(userNameRequestKey)) // admin
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">DoRequest</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Value</span><span class="p">(</span><span class="nx">traceIDRequestKey</span><span class="p">))</span><span class="w">  </span><span class="c1">// das454asd564a6s1da165d4a1a3s1d6a413</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Value</span><span class="p">(</span><span class="nx">userNameRequestKey</span><span class="p">))</span><span class="w"> </span><span class="c1">// admin</span>
+<span class="p">}</span>
 
-func DoBusiness(c context.Context) {
-    fmt.Println(c.Value(traceIDBusinessKey))  // das556da1d35de31as1d65a1da4ew15q46q
-    fmt.Println(c.Value(userNameBusinessKey)) // genAdmin
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">DoBusiness</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Value</span><span class="p">(</span><span class="nx">traceIDBusinessKey</span><span class="p">))</span><span class="w">  </span><span class="c1">// das556da1d35de31as1d65a1da4ew15q46q</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Value</span><span class="p">(</span><span class="nx">userNameBusinessKey</span><span class="p">))</span><span class="w"> </span><span class="c1">// genAdmin</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>示例中，我们遵循官方的建议，自定义了key的类型，避免了key的冲突。在上述的场景中，如果我们不自定义key类型，而是直接使用string，就会因为key冲突从而导致程序允许不正确。</p>
 </blockquote>
 <h2 id="4-context">4. 使用Context实现超时控制</h2>
 <p>使用<code>WithDeadline</code>相关方法和<code>WithTimeout</code>相关方法，可以很好滴实现goroutine的超时控制。如果不嫌麻烦的话，使用time包中的定时器，搭配<code>WithCancel</code>相关方法，也可以实现goroutine的超时控制。</p>
 <h3 id="41-withdeadline">4.1. WithDeadline使用示例</h3>
-<p>执行一个比较耗时的函数，并设置超时时间为5秒。如果5秒内执行完成，就打印执行结果，否则打印执行超时错误。</p>
-<pre><code class="language-go">func main() {
-    // 设置超时时间为5秒钟
-    ctx, cancelFunc := context.WithDeadline(context.Background(), time.Now().Add(time.Second*5))
-    defer cancelFunc()
+<p>执行一个比较耗时的函数，并设置超时时间为5秒。如果5秒内执行完成，就打印执行结果，否则打印执行超时错误。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 设置超时时间为5秒钟</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">cancelFunc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithDeadline</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">Add</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="mi">5</span><span class="p">))</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">cancelFunc</span><span class="p">()</span>
 
-    // resultChan 结果通道
-    resultChan := make(chan int,1)
+<span class="w">    </span><span class="c1">// resultChan 结果通道</span>
+<span class="w">    </span><span class="nx">resultChan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
-    // 异步执行计算方法
-    go func() {
-        resultChan &lt;- cal(5)
-    }()
+<span class="w">    </span><span class="c1">// 异步执行计算方法</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">resultChan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">cal</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    // 等待
-    select {
-    case &lt;-ctx.Done():
-        // 打印超时信息
-        fmt.Println(ctx.Err()) // 最终输出了：context deadline exceeded
-        fmt.Println(context.Cause(ctx)) // 最终输出了：context deadline exceeded
-    case n := &lt;-resultChan:
-        // 打印结果信息
-        fmt.Println(n)
-    }
-}
+<span class="w">    </span><span class="c1">// 等待</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Done</span><span class="p">():</span>
+<span class="w">        </span><span class="c1">// 打印超时信息</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Err</span><span class="p">())</span><span class="w"> </span><span class="c1">// 最终输出了：context deadline exceeded</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Cause</span><span class="p">(</span><span class="nx">ctx</span><span class="p">))</span><span class="w"> </span><span class="c1">// 最终输出了：context deadline exceeded</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">resultChan</span><span class="p">:</span>
+<span class="w">        </span><span class="c1">// 打印结果信息</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-// cal 方法睡眠6秒后返回
-func cal(n int) int {
-    time.Sleep(time.Second * 6)
-    return n * n
-}
-</code></pre>
+<span class="c1">// cal 方法睡眠6秒后返回</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">cal</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">n</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h3 id="42-withdeadlinecause">4.2. WithDeadlineCause使用示例</h3>
-<p>本示例就在WithDeadline示例的基础上进行少量改造：</p>
-<pre><code class="language-go">func main() {
-    // 设置超时时间为5秒钟
-    // 设置超时原因为timeout
-    ctx, cancelFunc := context.WithDeadlineCause(context.Background(), time.Now().Add(time.Second*5), errors.New(&quot;timeout&quot;))
-    defer cancelFunc()
+<p>本示例就在WithDeadline示例的基础上进行少量改造：
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 设置超时时间为5秒钟</span>
+<span class="w">    </span><span class="c1">// 设置超时原因为timeout</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">cancelFunc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithDeadlineCause</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">Add</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;timeout&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">cancelFunc</span><span class="p">()</span>
 
-    // resultChan 结果通道
-    resultChan := make(chan int, 1)
+<span class="w">    </span><span class="c1">// resultChan 结果通道</span>
+<span class="w">    </span><span class="nx">resultChan</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 
-    // 异步执行计算方法
-    go func() {
-        resultChan &lt;- cal(5)
-    }()
+<span class="w">    </span><span class="c1">// 异步执行计算方法</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">resultChan</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">cal</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    // 等待
-    select {
-    case &lt;-ctx.Done():
-        // 打印超时信息
-        fmt.Println(ctx.Err())          // 最终输出了：context deadline exceeded
-        fmt.Println(context.Cause(ctx)) // 最终输出了：timeout
-    case n := &lt;-resultChan:
-        // 打印结果信息
-        fmt.Println(n)
-    }
-}
+<span class="w">    </span><span class="c1">// 等待</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Done</span><span class="p">():</span>
+<span class="w">        </span><span class="c1">// 打印超时信息</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Err</span><span class="p">())</span><span class="w">          </span><span class="c1">// 最终输出了：context deadline exceeded</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Cause</span><span class="p">(</span><span class="nx">ctx</span><span class="p">))</span><span class="w"> </span><span class="c1">// 最终输出了：timeout</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">resultChan</span><span class="p">:</span>
+<span class="w">        </span><span class="c1">// 打印结果信息</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-// cal 方法睡眠6秒后返回
-func cal(n int) int {
-    time.Sleep(time.Second * 6)
-    return n * n
-}
-</code></pre>
+<span class="c1">// cal 方法睡眠6秒后返回</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">cal</span><span class="p">(</span><span class="nx">n</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">n</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h3 id="43-withtimeout-withtimeoutcause">4.3. WithTimeout &amp; WithTimeoutCause</h3>
 <p>可以看到，WithTimeout、WithTimeoutCause实际上分别是WithDeadline、WithDeadlineCause方法的简单变形。对于调用者来说，只是传参方式不一样而已，其他地方完全一致。因此这里不再赘述。</p>
 <h2 id="5-contextgoroutine">5. 使用Context取消goroutine执行</h2>
 <h3 id="51-withcancel">5.1 WithCancel使用示例</h3>
-<p>在下面的示例中，我们将启动一个协程去不断生成随机数。主协程负责读取生成的随机数，并在生成的随机数等于0时，取消随机数的生成。</p>
-<pre><code class="language-go">func main() {
-    // 创建取消上下文
-    ctx, cancelFunc := context.WithCancel(context.Background())
+<p>在下面的示例中，我们将启动一个协程去不断生成随机数。主协程负责读取生成的随机数，并在生成的随机数等于0时，取消随机数的生成。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建取消上下文</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">cancelFunc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithCancel</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">())</span>
 
-    // 启动一个协程去生成随机数
-    c := genRandomNum(ctx)
+<span class="w">    </span><span class="c1">// 启动一个协程去生成随机数</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">genRandomNum</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
 
-    // 读取生成的随机数
-    for {
-        i := &lt;-c
-        log.Printf(&quot;receive %d\n&quot;, i)
+<span class="w">    </span><span class="c1">// 读取生成的随机数</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">c</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;receive %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
 
-        // 如果生成的随机数等于0,就取消随机数生成
-        if i == 0 {
-            cancelFunc()
-            break
-        }
-    }
+<span class="w">        </span><span class="c1">// 如果生成的随机数等于0,就取消随机数生成</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">cancelFunc</span><span class="p">()</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    log.Println(&quot;end&quot;)
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;end&quot;</span><span class="p">)</span>
 
-    // 这是为了等待被取消的协程打印日志,正常是不需要的
-    time.Sleep(time.Second)
-}
+<span class="w">    </span><span class="c1">// 这是为了等待被取消的协程打印日志,正常是不需要的</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
 
-// genRandomNum 用于不断生成随机数,知道上下文取消
-func genRandomNum(ctx context.Context) &lt;-chan int {
-    res := make(chan int)
-    go func() {
-        for {
-            select {
-            case &lt;-ctx.Done():
-                log.Println(ctx.Err()) // 将打印：context canceled
-                return
-            case res &lt;- rand.Intn(100):
-            }
-        }
-    }()
-    return res
-}
-</code></pre>
+<span class="c1">// genRandomNum 用于不断生成随机数,知道上下文取消</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">genRandomNum</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Done</span><span class="p">():</span>
+<span class="w">                </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Err</span><span class="p">())</span><span class="w"> </span><span class="c1">// 将打印：context canceled</span>
+<span class="w">                </span><span class="k">return</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">rand</span><span class="p">.</span><span class="nx">Intn</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}()</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h3 id="52-withcancelcause">5.2. WithCancelCause使用示例</h3>
-<p>在下面的示例中，我们将启动一个协程去不断生成随机数。主协程负责读取生成的随机数，并在生成的随机数等于0，或者生成的随机数数量达到100时，取消随机数的生成，同时设置取消的原因。</p>
-<pre><code class="language-go">func main() {
-    // 创建取消上下文
-    ctx, cancelFunc := context.WithCancelCause(context.Background())
+<p>在下面的示例中，我们将启动一个协程去不断生成随机数。主协程负责读取生成的随机数，并在生成的随机数等于0，或者生成的随机数数量达到100时，取消随机数的生成，同时设置取消的原因。
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建取消上下文</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">cancelFunc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithCancelCause</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">())</span>
 
-    // 启动一个协程去生成随机数
-    c := genRandomNum(ctx)
+<span class="w">    </span><span class="c1">// 启动一个协程去生成随机数</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">genRandomNum</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
 
-    count := 0
+<span class="w">    </span><span class="nx">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
 
-    // 读取生成的随机数
-    for {
-        i := &lt;-c
-        log.Printf(&quot;receive %d\n&quot;, i)
+<span class="w">    </span><span class="c1">// 读取生成的随机数</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">c</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;receive %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="p">)</span>
 
-        // 如果生成的随机数等于0,就取消随机数生成
-        if i == 0 {
-            cancelFunc(errors.New(&quot;generated num is zero&quot;))
-            break
-        }
+<span class="w">        </span><span class="c1">// 如果生成的随机数等于0,就取消随机数生成</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">cancelFunc</span><span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;generated num is zero&quot;</span><span class="p">))</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
 
-        // 如果生成的随机数数量达到100个,就取消随机数生成
-        count++
-        if count == 100 {
-            cancelFunc(errors.New(&quot;the number of generated numbers equals 100&quot;))
-            break
-        }
+<span class="w">        </span><span class="c1">// 如果生成的随机数数量达到100个,就取消随机数生成</span>
+<span class="w">        </span><span class="nx">count</span><span class="o">++</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">cancelFunc</span><span class="p">(</span><span class="nx">errors</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;the number of generated numbers equals 100&quot;</span><span class="p">))</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
 
-    }
+<span class="w">    </span><span class="p">}</span>
 
-    log.Println(&quot;end&quot;)
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;end&quot;</span><span class="p">)</span>
 
-    // 这是为了等待被取消的协程打印日志,正常是不需要的
-    time.Sleep(time.Second)
-}
+<span class="w">    </span><span class="c1">// 这是为了等待被取消的协程打印日志,正常是不需要的</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
 
-// genRandomNum 用于不断生成随机数,知道上下文取消
-func genRandomNum(ctx context.Context) &lt;-chan int {
-    res := make(chan int)
-    go func() {
-        for {
-            select {
-            case &lt;-ctx.Done():
-                log.Println(ctx.Err()) // 总会打印：context canceled
-                // 可能打印：generated num is zero
-                // 可能打印：the number of generated numbers equals 100
-                log.Println(context.Cause(ctx))
-                return
-            case res &lt;- rand.Intn(100):
-            }
-        }
-    }()
-    return res
-}
-
-</code></pre>
+<span class="c1">// genRandomNum 用于不断生成随机数,知道上下文取消</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">genRandomNum</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">res</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Done</span><span class="p">():</span>
+<span class="w">                </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Err</span><span class="p">())</span><span class="w"> </span><span class="c1">// 总会打印：context canceled</span>
+<span class="w">                </span><span class="c1">// 可能打印：generated num is zero</span>
+<span class="w">                </span><span class="c1">// 可能打印：the number of generated numbers equals 100</span>
+<span class="w">                </span><span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Cause</span><span class="p">(</span><span class="nx">ctx</span><span class="p">))</span>
+<span class="w">                </span><span class="k">return</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="nx">res</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">rand</span><span class="p">.</span><span class="nx">Intn</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}()</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span>
+<span class="p">}</span>
+</code></pre></div></p>
 <h2 id="6-afterfunc">6. AfterFunc方法</h2>
 <p><code>context.AfterFunc</code> 是 Go 1.21 版本引入的一个强大工具，它简化了在 Context 被取消或超时后执行清理工作的模式。它允许你注册一个回调函数，当 Context 完成时，该函数会自动在独立的 goroutine 中被调用。</p>
 <h3 id="61">6.1. 核心功能与优势</h3>
 <p><strong>传统方式 vs AfterFunc</strong></p>
 <p>在 <code>AfterFunc</code> 出现之前，我们通常需要手动启动一个 goroutine 来监听 <code>ctx.Done()</code>：</p>
-<pre><code class="language-go">// 传统方式：繁琐且容易出错
-select {
-case &lt;-ctx.Done():
-    // 执行清理工作
-    cleanup()
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 传统方式：繁琐且容易出错</span>
+<span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Done</span><span class="p">():</span>
+<span class="w">    </span><span class="c1">// 执行清理工作</span>
+<span class="w">    </span><span class="nx">cleanup</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>这种方式不仅代码冗长，还可能因忘记处理而造成资源泄漏。<code>AfterFunc</code> 将这一模式封装起来，使代码更简洁、安全：</p>
-<pre><code class="language-go">// 使用 AfterFunc：简洁明了
-stop := context.AfterFunc(ctx, func() {
-    // 执行清理工作
-    cleanup()
-})
-// 如果需要，可以在后续逻辑中调用 stop() 来取消注册
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1">// 使用 AfterFunc：简洁明了</span>
+<span class="nx">stop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">AfterFunc</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 执行清理工作</span>
+<span class="w">    </span><span class="nx">cleanup</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="c1">// 如果需要，可以在后续逻辑中调用 stop() 来取消注册</span>
+</code></pre></div>
 <p><strong>关键特性：</strong></p>
 <ol>
 <li><strong>异步执行</strong>：<code>f</code> 函数总是在一个新的 goroutine 中运行，不会阻塞主流程。</li>
@@ -3061,153 +3058,153 @@ stop := context.AfterFunc(ctx, func() {
 <h3 id="62">6.2. 实际应用示例</h3>
 <h4 id="621">6.2.1. 文件操作中的清理示例</h4>
 <p>以下示例展示如何使用 <code>AfterFunc</code> 确保临时文件在请求取消时被删除。</p>
-<pre><code class="language-go">func processFileWithCleanup(ctx context.Context, filename string) error {
-    // 创建临时文件
-    tempFile, err := os.CreateTemp(&quot;&quot;, &quot;temp-*.txt&quot;)
-    if err != nil {
-        return err
-    }
-    defer tempFile.Close()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">processFileWithCleanup</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">filename</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建临时文件</span>
+<span class="w">    </span><span class="nx">tempFile</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">CreateTemp</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;temp-*.txt&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">tempFile</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
 
-    // 使用 AfterFunc 注册清理函数，确保Context取消时删除临时文件
-    stop := context.AfterFunc(ctx, func() {
-        // 在独立的goroutine中执行清理
-        go func() {
-            if err := os.Remove(tempFile.Name()); err != nil {
-                log.Printf(&quot;无法删除临时文件 %s: %v&quot;, tempFile.Name(), err)
-            } else {
-                log.Printf(&quot;已删除临时文件: %s&quot;, tempFile.Name())
-            }
-        }()
-    })
-    defer stop() // 确保正常退出时也移除回调
+<span class="w">    </span><span class="c1">// 使用 AfterFunc 注册清理函数，确保Context取消时删除临时文件</span>
+<span class="w">    </span><span class="nx">stop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">AfterFunc</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// 在独立的goroutine中执行清理</span>
+<span class="w">        </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Remove</span><span class="p">(</span><span class="nx">tempFile</span><span class="p">.</span><span class="nx">Name</span><span class="p">());</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;无法删除临时文件 %s: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">tempFile</span><span class="p">.</span><span class="nx">Name</span><span class="p">(),</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;已删除临时文件: %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">tempFile</span><span class="p">.</span><span class="nx">Name</span><span class="p">())</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}()</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">stop</span><span class="p">()</span><span class="w"> </span><span class="c1">// 确保正常退出时也移除回调</span>
 
-    // 模拟耗时的文件处理
-    for i := 0; i &lt; 5; i++ {
-        select {
-        case &lt;-time.After(1 * time.Second):
-            fmt.Printf(&quot;处理进度: %d/5\n&quot;, i+1)
-            // 写入一些数据到临时文件
-            tempFile.WriteString(fmt.Sprintf(&quot;Processing step %d\n&quot;, i+1))
-        case &lt;-ctx.Done():
-            // 主流程收到取消信号
-            fmt.Println(&quot;文件处理被用户取消&quot;)
-            return ctx.Err()
-        }
-    }
+<span class="w">    </span><span class="c1">// 模拟耗时的文件处理</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nx">After</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">):</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;处理进度: %d/5\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="c1">// 写入一些数据到临时文件</span>
+<span class="w">            </span><span class="nx">tempFile</span><span class="p">.</span><span class="nx">WriteString</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;Processing step %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Done</span><span class="p">():</span>
+<span class="w">            </span><span class="c1">// 主流程收到取消信号</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;文件处理被用户取消&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Err</span><span class="p">()</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    fmt.Println(&quot;文件处理完成！&quot;)
-    return nil
-}
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;文件处理完成！&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-func main() {
-    // 场景1: 正常完成
-    fmt.Println(&quot;--- 场景1: 正常完成 ---&quot;)
-    ctx1, cancel1 := context.WithTimeout(context.Background(), 10*time.Second)
-    defer cancel1()
-    processFileWithCleanup(ctx1, &quot;normal.txt&quot;)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 场景1: 正常完成</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;--- 场景1: 正常完成 ---&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ctx1</span><span class="p">,</span><span class="w"> </span><span class="nx">cancel1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="mi">10</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">cancel1</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">processFileWithCleanup</span><span class="p">(</span><span class="nx">ctx1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;normal.txt&quot;</span><span class="p">)</span>
 
-    // 等待场景1完成
-    time.Sleep(6 * time.Second)
+<span class="w">    </span><span class="c1">// 等待场景1完成</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">6</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
 
-    // 场景2: 提前取消
-    fmt.Println(&quot;\n--- 场景2: 提前取消 ---&quot;)
-    ctx2, cancel2 := context.WithCancel(context.Background())
-    defer cancel2()
+<span class="w">    </span><span class="c1">// 场景2: 提前取消</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n--- 场景2: 提前取消 ---&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">ctx2</span><span class="p">,</span><span class="w"> </span><span class="nx">cancel2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithCancel</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">())</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">cancel2</span><span class="p">()</span>
 
-    done := make(chan error, 1)
-    go func() {
-        done &lt;- processFileWithCleanup(ctx2, &quot;canceled.txt&quot;)
-    }()
+<span class="w">    </span><span class="nx">done</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">error</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">done</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">processFileWithCleanup</span><span class="p">(</span><span class="nx">ctx2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;canceled.txt&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    // 3秒后模拟用户取消
-    time.Sleep(3 * time.Second)
-    fmt.Println(&quot;用户请求取消!&quot;)
-    cancel2()
+<span class="w">    </span><span class="c1">// 3秒后模拟用户取消</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;用户请求取消!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">cancel2</span><span class="p">()</span>
 
-    // 等待goroutine返回
-    &lt;-done
-    time.Sleep(2 * time.Second) // 等待清理日志输出
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 等待goroutine返回</span>
+<span class="w">    </span><span class="o">&lt;-</span><span class="nx">done</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span><span class="w"> </span><span class="c1">// 等待清理日志输出</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="622">6.2.2. 数据库连接池管理示例</h4>
 <p>在微服务架构中，<code>AfterFunc</code> 可以用于优雅地关闭数据库连接。</p>
-<pre><code class="language-go">type DatabaseManager struct {
-    db *sql.DB
-}
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">DatabaseManager</span><span class="w"> </span><span class="kd">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span>
+<span class="p">}</span>
 
-func (dm *DatabaseManager) QueryWithTimeout(ctx context.Context, query string) (*sql.Rows, error) {
-    // 使用传入的ctx执行查询
-    rows, err := dm.db.QueryContext(ctx, query)
-    if err != nil {
-        return nil, err
-    }
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">dm</span><span class="w"> </span><span class="o">*</span><span class="nx">DatabaseManager</span><span class="p">)</span><span class="w"> </span><span class="nx">QueryWithTimeout</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">query</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">Rows</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 使用传入的ctx执行查询</span>
+<span class="w">    </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">dm</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nx">QueryContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">query</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 当ctx被取消时，主动关闭结果集，避免资源占用
-    stop := context.AfterFunc(ctx, func() {
-        log.Printf(&quot;查询上下文取消，正在关闭数据库结果集...&quot;)
-        if closeErr := rows.Close(); closeErr != nil {
-            log.Printf(&quot;关闭rows时出错: %v&quot;, closeErr)
-        }
-    })
+<span class="w">    </span><span class="c1">// 当ctx被取消时，主动关闭结果集，避免资源占用</span>
+<span class="w">    </span><span class="nx">stop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">AfterFunc</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;查询上下文取消，正在关闭数据库结果集...&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">closeErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Close</span><span class="p">();</span><span class="w"> </span><span class="nx">closeErr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;关闭rows时出错: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">closeErr</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">})</span>
 
-    // 注意：这里不能defer stop()，因为我们需要stop来保持注册状态
-    // 应该在外部逻辑中根据情况决定何时调用stop()
-    return rows, nil
-}
+<span class="w">    </span><span class="c1">// 注意：这里不能defer stop()，因为我们需要stop来保持注册状态</span>
+<span class="w">    </span><span class="c1">// 应该在外部逻辑中根据情况决定何时调用stop()</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
 
-// 返回一个包装器，包含rows和stop函数
-func (dm *DatabaseManager) QueryWrapper(ctx context.Context, query string) (rows *sql.Rows, cleanup func(), err error) {
-    rows, err = dm.QueryWithTimeout(ctx, query)
-    if err != nil {
-        return nil, nil, err
-    }
+<span class="c1">// 返回一个包装器，包含rows和stop函数</span>
+<span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">dm</span><span class="w"> </span><span class="o">*</span><span class="nx">DatabaseManager</span><span class="p">)</span><span class="w"> </span><span class="nx">QueryWrapper</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span><span class="w"> </span><span class="nx">query</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">rows</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">Rows</span><span class="p">,</span><span class="w"> </span><span class="nx">cleanup</span><span class="w"> </span><span class="kd">func</span><span class="p">(),</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">dm</span><span class="p">.</span><span class="nx">QueryWithTimeout</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">query</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 返回一个cleanup函数，调用者可以选择提前清理
-    cleanup = func() {
-        rows.Close()
-        // 这里不调用stop，让AfterFunc在ctx取消时自然触发
-    }
+<span class="w">    </span><span class="c1">// 返回一个cleanup函数，调用者可以选择提前清理</span>
+<span class="w">    </span><span class="nx">cleanup</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">rows</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
+<span class="w">        </span><span class="c1">// 这里不调用stop，让AfterFunc在ctx取消时自然触发</span>
+<span class="w">    </span><span class="p">}</span>
 
-    return rows, cleanup, nil
-}
-</code></pre>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">rows</span><span class="p">,</span><span class="w"> </span><span class="nx">cleanup</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="623">6.2.3. 动态控制回调注册示例</h4>
 <p>展示如何使用返回的 <code>stop()</code> 函数来动态控制是否执行回调。</p>
-<pre><code class="language-go">func demonstrateStopFunction() {
-    ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-    defer cancel()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">demonstrateStopFunction</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">cancel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">(),</span><span class="w"> </span><span class="mi">5</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">cancel</span><span class="p">()</span>
 
-    var fCalled bool
-    var stopCalled bool
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">fCalled</span><span class="w"> </span><span class="kt">bool</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">stopCalled</span><span class="w"> </span><span class="kt">bool</span>
 
-    // 注册回调
-    stop := context.AfterFunc(ctx, func() {
-        fCalled = true
-        fmt.Println(&quot;回调函数 f 已执行！&quot;)
-    })
+<span class="w">    </span><span class="c1">// 注册回调</span>
+<span class="w">    </span><span class="nx">stop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">AfterFunc</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fCalled</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;回调函数 f 已执行！&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
 
-    // 情况1: 在ctx完成前调用stop()
-    time.Sleep(1 * time.Second)
-    stopped := stop()
-    stopCalled = true
-    fmt.Printf(&quot;首次调用stop(): %t (应该为true)\n&quot;, stopped) // true
+<span class="w">    </span><span class="c1">// 情况1: 在ctx完成前调用stop()</span>
+<span class="w">    </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">stopped</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">stop</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">stopCalled</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;首次调用stop(): %t (应该为true)\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">stopped</span><span class="p">)</span><span class="w"> </span><span class="c1">// true</span>
 
-    // 情况2: 再次调用stop() - 应该返回false
-    stoppedAgain := stop()
-    fmt.Printf(&quot;再次调用stop(): %t (应该为false)\n&quot;, stoppedAgain) // false
+<span class="w">    </span><span class="c1">// 情况2: 再次调用stop() - 应该返回false</span>
+<span class="w">    </span><span class="nx">stoppedAgain</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">stop</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;再次调用stop(): %t (应该为false)\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">stoppedAgain</span><span class="p">)</span><span class="w"> </span><span class="c1">// false</span>
 
-    // 情况3: 尝试重新注册（AfterFunc允许多次注册）
-    context.AfterFunc(ctx, func() {
-        fmt.Println(&quot;这是第二个回调函数，即使stop被调用也会执行！&quot;)
-    })
+<span class="w">    </span><span class="c1">// 情况3: 尝试重新注册（AfterFunc允许多次注册）</span>
+<span class="w">    </span><span class="nx">context</span><span class="p">.</span><span class="nx">AfterFunc</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;这是第二个回调函数，即使stop被调用也会执行！&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
 
-    // 继续等待，观察行为
-    &lt;-ctx.Done()
-    fmt.Printf(&quot;最终状态 - fCalled: %t, stopCalled: %t\n&quot;, fCalled, stopCalled)
-    // 输出：fCalled 应为false，因为stop成功阻止了第一次注册的f执行
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 继续等待，观察行为</span>
+<span class="w">    </span><span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Done</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;最终状态 - fCalled: %t, stopCalled: %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">fCalled</span><span class="p">,</span><span class="w"> </span><span class="nx">stopCalled</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 输出：fCalled 应为false，因为stop成功阻止了第一次注册的f执行</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="63">6.3. 最佳实践与注意事项</h3>
 <p><strong>何时使用 <code>AfterFunc</code>：</strong></p>
 <ul>
@@ -3226,16 +3223,16 @@ func (dm *DatabaseManager) QueryWrapper(ctx context.Context, query string) (rows
 </ul>
 <p><strong>错误处理：</strong></p>
 <p><code>AfterFunc</code> 本身不提供错误处理机制。如果 <code>f</code> 函数内部发生 panic，会导致整个程序崩溃。因此，务必在 <code>f</code> 内部进行适当的错误捕获：</p>
-<pre><code class="language-go">stop := context.AfterFunc(ctx, func() {
-    defer func() {
-        if r := recover(); r != nil {
-            log.Printf(&quot;recover from panic in AfterFunc: %v&quot;, r)
-        }
-    }()
-    // 可能出错的操作
-    riskyOperation()
-})
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nx">stop</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">AfterFunc</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">recover</span><span class="p">();</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;recover from panic in AfterFunc: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}()</span>
+<span class="w">    </span><span class="c1">// 可能出错的操作</span>
+<span class="w">    </span><span class="nx">riskyOperation</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre></div>
 
 
 

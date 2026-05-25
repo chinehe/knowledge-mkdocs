@@ -2258,23 +2258,22 @@
 <h3 id="11-serial">1.1. 串行(Serial)</h3>
 <p><strong>CPU按照顺序依次处理任务或指令，一次只能处理一个任务或指令。</strong></p>
 <p>在串行处理中，任务按顺序依次执行，每个任务必须等待前一个任务完成后才能开始执行。这意味着任务的执行是相互依赖的，无法同时进行。</p>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid"><code>graph LR
     CPU[CPU] --&gt;|执行|A[任务1] --&gt; B[任务2] --&gt; C[任务3]
     style A fill:#f96,stroke:#333
     style B fill:#69f,stroke:#333
-    style C fill:#9f6,stroke:#333
-</code></pre>
+    style C fill:#9f6,stroke:#333</code></pre>
 <blockquote>
 <p>💡 想象你在餐厅点餐，只有一个服务员，他必须先完成你的点单，再为下一位顾客服务，这就是串行处理。虽然简单，但效率较低。</p>
 </blockquote>
 <h3 id="12-parallel">1.2. 并行(Parallel)</h3>
 <p><strong>多个CPU同时处理多个任务或指令的方式。</strong></p>
 <p>在并行处理中，多个任务可以同时进行，每个任务都有独立的处理资源。这样可以显著提高处理速度和效率。并行处理通常需要多个处理器或多个计算单元。</p>
-<pre><code class="language-mermaid">graph TD
-    subgraph &quot;CPU1&quot;
+<pre class="mermaid"><code>graph TD
+    subgraph "CPU1"
         A[任务1] --&gt; B[任务2] --&gt; C[任务3]
     end
-    subgraph &quot;CPU2&quot;
+    subgraph "CPU2"
         D[任务4] --&gt; E[任务5] --&gt; F[任务6]
     end
     style A fill:#f96,stroke:#333
@@ -2282,8 +2281,7 @@
     style C fill:#9f6,stroke:#333
     style D fill:#f96,stroke:#333
     style E fill:#69f,stroke:#333
-    style F fill:#9f6,stroke:#333
-</code></pre>
+    style F fill:#9f6,stroke:#333</code></pre>
 <blockquote>
 <p>💡 就像餐厅有多个服务员，可以同时为多位顾客服务，每位服务员负责一位或多位顾客，这就是并行处理。它需要更多资源（服务员），但效率更高。</p>
 </blockquote>
@@ -2298,18 +2296,17 @@
 </ul>
 </blockquote>
 <p>单CPU执行两个任务示例：</p>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid"><code>graph LR
     CPU[CPU] --&gt;|时间片1|A1[任务1-1] --&gt;|时间片2|B1[任务2-1] --&gt;|时间片3|A2[任务1-2] --&gt;|时间片4|B2[任务2-2]
     style A1 fill:#f96,stroke:#333
     style B1 fill:#69f,stroke:#333
     style A2 fill:#f96,stroke:#333
-    style B2 fill:#69f,stroke:#333
-</code></pre>
+    style B2 fill:#69f,stroke:#333</code></pre>
 <blockquote>
 <p>💡 想象一个厨师要同时做两道菜，他先切第一道菜的材料（时间片1），然后切第二道菜的材料（时间片2），再回来看第一道菜（时间片3）...虽然看起来他同时在做两道菜，但实际上是在交替进行。</p>
 </blockquote>
 <p>双CPU执行三个任务示例：</p>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid"><code>graph LR
     CPU1[CPU1] --&gt;|时间片1|A1[任务1-1] --&gt;|时间片2|B2[任务2-2] --&gt;|时间片3|C2[任务3-2]
     CPU2[CPU2] --&gt;|时间片1|B1[任务2-1] --&gt;|时间片2|C1[任务3-1] --&gt;|时间片3|A2[任务1-2]
     style A1 fill:#f96,stroke:#333
@@ -2317,8 +2314,7 @@
     style A2 fill:#f96,stroke:#333
     style B2 fill:#69f,stroke:#333
     style C1 fill:#9f6,stroke:#333
-    style C2 fill:#9f6,stroke:#333
-</code></pre>
+    style C2 fill:#9f6,stroke:#333</code></pre>
 <p>在程序中，往往有很多很耗时的工作，比如上传文件、下载文件、跟客户聊天需要长时间建立连接。这种时候，一个线程是服务不了多个用户的，会产生因为资源独占产生的等待问题。并发的实质是一个物理CPU(也可以多个物理CPU) 在若干道程序之间多路复用，并发性是对有限物理资源强制行使多用户共享以提高效率。</p>
 <h3 id="14">1.4. 总结</h3>
 <p>并发和并行是即相似又有区别的两个概念，并行是指两个或者多个事件在同一时刻发生；而并发是指两个或多个事件在同一时间间隔内发生。在多道程序环境下，并发性是指在一段时间内宏观上有多个程序在同时运行，但在单处理机系统中，每一时刻却仅能有一道程序执行，故微观上这些程序只能是分时地交替执行。倘若在计算机系统中有多个处理机，则这些可以并发执行的程序便可被分配到多个处理机上，实现并行执行，即利用每个处理机来处理一个可并发执行的程序，这样，多个程序便可以同时执行。</p>
@@ -2359,7 +2355,7 @@
 <li>进程之间相互独立，但同一进程下的各个线程之间共享程序的内存空间(包括代码段、数据集、堆等)及一些进程级的资源(如打开文件和信号)，某进程内的线程在其它进程不可见</li>
 <li>调度和切换：线程上下文切换比进程上下文切换要快得多</li>
 </ul>
-<pre><code class="language-mermaid">graph TD
+<pre class="mermaid"><code>graph TD
     P[进程] --&gt; T1[线程1]
     P --&gt; T2[线程2]
     P --&gt; T3[线程3]
@@ -2370,8 +2366,7 @@
     style T1 fill:#69f,stroke:#333
     style T2 fill:#69f,stroke:#333
     style T3 fill:#69f,stroke:#333
-    style MEM fill:#9f6,stroke:#333
-</code></pre>
+    style MEM fill:#9f6,stroke:#333</code></pre>
 <blockquote>
 <p>💡一个进程可以理解为一个应用程序（如Chrome浏览器），而线程则是这个应用程序中不同的工作单元（如一个标签页一个线程）。进程创建开销大，线程创建开销小。</p>
 </blockquote>
@@ -2385,7 +2380,7 @@
 <li><strong>阻塞</strong>：也叫等待状态，等待某一事件(如IO或另一个线程)执行完</li>
 <li><strong>退出</strong>：一个线程完成任务或者其他终止条件发生，该线程终止进入退出状态，退出状态释放该线程所分配的资源</li>
 </ul>
-<pre><code class="language-mermaid">stateDiagram-v2
+<pre class="mermaid"><code>stateDiagram-v2
     [*] --&gt; 创建
     创建 --&gt; 就绪 : start()
     就绪 --&gt; 运行 : 获得CPU时间片
@@ -2393,8 +2388,7 @@
     运行 --&gt; 阻塞 : 等待资源
     阻塞 --&gt; 就绪 : 资源可用
     运行 --&gt; 退出 : 任务完成
-    阻塞 --&gt; 退出 : 中断
-</code></pre>
+    阻塞 --&gt; 退出 : 中断</code></pre>
 <blockquote>
 <p>💡 线程就像一个员工，创建=招聘，就绪=准备好工作但等待任务，运行=正在工作，阻塞=等待其他同事完成某项工作，退出=完成工作离开。</p>
 </blockquote>
@@ -2413,10 +2407,10 @@
 <li><strong>由Go运行时调度</strong>：Go的调度器可以在操作系统线程上复用成千上万个goroutine</li>
 <li><strong>创建简单</strong>：使用<code>go</code>关键字即可启动一个新的goroutine</li>
 </ul>
-<pre><code class="language-go">func main() {
-    go someFunction() // 启动一个goroutine
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="nx">someFunction</span><span class="p">()</span><span class="w"> </span><span class="c1">// 启动一个goroutine</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="33">3.3. 协程与线程的比较</h3>
 <table>
 <thead>
@@ -2454,42 +2448,39 @@
 </tr>
 </tbody>
 </table>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid"><code>graph LR
     Thread[线程] --&gt;|操作系统调度| OS[操作系统]
     Coroutine[协程] --&gt;|用户程序调度| App[应用程序]
     style Thread fill:#f96,stroke:#333
     style Coroutine fill:#69f,stroke:#333
     style OS fill:#9f6,stroke:#333
-    style App fill:#9f6,stroke:#333
-</code></pre>
+    style App fill:#9f6,stroke:#333</code></pre>
 <blockquote>
 <p>💡线程是操作系统管理的，切换需要系统调用，开销大；协程是程序自己管理的，切换只需保存/恢复少量寄存器，开销小。Go的goroutine是协程的高效实现。</p>
 </blockquote>
 <h2 id="4">4. 同步与异步</h2>
 <h3 id="41-synchronous">4.1. 同步(Synchronous)</h3>
 <p>同步操作是指任务按照顺序依次执行，当前任务必须等待前一个任务完成后才能开始。在同步模式下，调用者会一直等待被调用者返回结果。</p>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid"><code>flowchart LR
     A[调用开始] --&gt; B[等待结果]
     B --&gt; C{结果返回?}
     C --&gt;|是| D[继续执行]
     C --&gt;|否| B
     style A fill:#f96,stroke:#333
-    style D fill:#69f,stroke:#333
-</code></pre>
+    style D fill:#69f,stroke:#333</code></pre>
 <blockquote>
 <p>💡想象你在银行柜台办理业务，必须排队等待前面的人办完，然后你开始办理业务并全程等待工作人员处理，期间你不能离开去做其他事情，直到业务完成。（～～事实上你可以干点小事情，比如往头上套丝袜～～）</p>
 </blockquote>
 <h3 id="42-asynchronous">4.2. 异步(Asynchronous)</h3>
 <p>异步操作是指任务可以不必等待前一个任务完成就开始执行。在异步模式下，调用者发出调用后立即返回，不需要等待结果，结果通过回调、事件或轮询等方式获取。</p>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid"><code>flowchart LR
     A[发起调用] --&gt; B[继续执行]
     B --&gt; C[做其他工作]
     C --&gt; D{结果返回?}
     D --&gt;|是| E[处理结果]
     D --&gt;|否| C
     style A fill:#f96,stroke:#333
-    style E fill:#69f,stroke:#333
-</code></pre>
+    style E fill:#69f,stroke:#333</code></pre>
 <blockquote>
 <p>💡 异步就像发电子邮件——你发送邮件后可以立即去做其他事情，不需要一直盯着收件箱，当对方回复时你会收到通知再去处理。</p>
 <p>🌰 就像你在餐厅点餐后拿到一个呼叫器，你可以去逛街或工作，当食物准备好时呼叫器会震动提醒你，这期间你可以自由做其他事情。</p>
@@ -2499,7 +2490,7 @@
 <li><strong>阻塞</strong>：调用者在等待结果返回期间不能执行其他任务</li>
 <li><strong>非阻塞</strong>：调用者在等待结果返回期间可以执行其他任务</li>
 </ul>
-<pre><code class="language-mermaid">flowchart BT
+<pre class="mermaid"><code>flowchart BT
     subgraph 阻塞
         A[发起调用] --&gt; B[等待结果]
         B --&gt; C[不能做其他事]
@@ -2512,42 +2503,39 @@
         H --&gt;|是| I[处理结果]
     end
     style 阻塞 fill:#f96,stroke:#333
-    style 非阻塞 fill:#69f,stroke:#333
-</code></pre>
+    style 非阻塞 fill:#69f,stroke:#333</code></pre>
 <blockquote>
 <p>💡阻塞就像堵车时你在车里干等着；非阻塞就像你发现堵车后，可以下车去旁边咖啡店坐坐，时不时出来看看路况。</p>
 </blockquote>
 <h3 id="44">4.4. 组合模式</h3>
 <h4 id="441">4.4.1. 同步阻塞</h4>
 <p>调用者等待结果，期间不能做其他事情。</p>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid"><code>flowchart LR
     A[发起调用] --&gt; B[等待结果]
     B --&gt; C{结果返回?}
     C --&gt;|是| D[继续执行]
     C --&gt;|否| B
     style A fill:#f96,stroke:#333
-    style D fill:#69f,stroke:#333
-</code></pre>
+    style D fill:#69f,stroke:#333</code></pre>
 <blockquote>
 <p>💡 <strong>初学者小贴士</strong>：就像在ATM机取钱，你必须一直站在机器前等待，直到交易完成才能离开。Go中channel的默认操作就是同步阻塞的。</p>
 </blockquote>
 <h4 id="442">4.4.2. 同步非阻塞</h4>
 <p>调用者发起调用后立即返回，但需要定期检查结果是否可用，期间可以做其他事情。</p>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid"><code>flowchart LR
     A[发起调用] --&gt; B[立即返回]
     B --&gt; C[做其他事]
     C --&gt; D{检查结果}
     D --&gt;|结果可用| E[处理结果]
     D --&gt;|结果不可用| C
     style A fill:#f96,stroke:#333
-    style E fill:#69f,stroke:#333
-</code></pre>
+    style E fill:#69f,stroke:#333</code></pre>
 <blockquote>
 <p>💡 就像煮鸡蛋时你设了个定时器，可以去做其他事，但每隔一段时间要检查一下鸡蛋是否煮好。</p>
 </blockquote>
 <h4 id="443">4.4.3. 异步非阻塞</h4>
 <p>调用者发起调用后立即返回，不需要主动检查结果，结果通过回调或事件通知方式获取。</p>
-<pre><code class="language-mermaid">flowchart LR
+<pre class="mermaid"><code>flowchart LR
     A[发起调用] --&gt; B[注册回调]
     B --&gt; C[继续执行]
     C --&gt; D[做其他事]
@@ -2555,69 +2543,68 @@
     E --&gt; F[自动触发回调]
     F --&gt; G[处理结果]
     style A fill:#f96,stroke:#333
-    style G fill:#69f,stroke:#333
-</code></pre>
+    style G fill:#69f,stroke:#333</code></pre>
 <blockquote>
 <p>💡 就像网购商品，下单后你继续工作，当快递到达时会有短信通知你，你只需等待通知然后去取快递即可。</p>
 </blockquote>
 <h3 id="45-go">4.5. Go语言中的实现</h3>
 <p>在Go中，这些模式主要通过channel和select实现：</p>
 <h4 id="451">4.5.1. 同步阻塞示例</h4>
-<pre><code class="language-go">func main() {
-    ch := make(chan int)
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span>
 
-    // 启动一个goroutine执行任务
-    go func() {
-        result := doSomething()
-        ch &lt;- result // 发送结果，如果无接收者则阻塞
-    }()
+<span class="w">    </span><span class="c1">// 启动一个goroutine执行任务</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">doSomething</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="c1">// 发送结果，如果无接收者则阻塞</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    result := &lt;-ch // 接收结果，如果无发送者则阻塞
-    fmt.Println(&quot;Result:&quot;, result)
-}
-</code></pre>
+<span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch</span><span class="w"> </span><span class="c1">// 接收结果，如果无发送者则阻塞</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Result:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="452">4.5.2. 同步非阻塞示例</h4>
-<pre><code class="language-go">func main() {
-    ch := make(chan int)
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span>
 
-    go func() {
-        result := doSomething()
-        ch &lt;- result
-    }()
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">doSomething</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">result</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    // 定期检查结果是否可用
-    for {
-        select {
-        case result := &lt;-ch:
-            fmt.Println(&quot;Result:&quot;, result)
-            return
-        default:
-            // 结果不可用，做其他事情
-            fmt.Println(&quot;Doing other work...&quot;)
-            time.Sleep(100 * time.Millisecond)
-        }
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 定期检查结果是否可用</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch</span><span class="p">:</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Result:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="w">        </span><span class="k">default</span><span class="p">:</span>
+<span class="w">            </span><span class="c1">// 结果不可用，做其他事情</span>
+<span class="w">            </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Doing other work...&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">time</span><span class="p">.</span><span class="nx">Sleep</span><span class="p">(</span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Millisecond</span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="453">4.5.3. 异步非阻塞示例</h4>
-<pre><code class="language-go">func main() {
-    ch := make(chan int)
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">ch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span>
 
-    // 启动一个goroutine执行任务
-    go func() {
-        result := doSomething()
-        ch &lt;- result
-    }()
+<span class="w">    </span><span class="c1">// 启动一个goroutine执行任务</span>
+<span class="w">    </span><span class="k">go</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">doSomething</span><span class="p">()</span>
+<span class="w">        </span><span class="nx">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nx">result</span>
+<span class="w">    </span><span class="p">}()</span>
 
-    // 使用select语句实现超时控制
-    select {
-    case result := &lt;-ch:
-        fmt.Println(&quot;Result:&quot;, result)
-    case &lt;-time.After(2 * time.Second):
-        fmt.Println(&quot;Timeout!&quot;)
-    }
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 使用select语句实现超时控制</span>
+<span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">ch</span><span class="p">:</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Result:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">)</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nx">After</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">):</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Timeout!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <blockquote>
 <p>💡 在Go中，channel的默认操作是同步阻塞的，但通过select语句可以轻松实现同步非阻塞和异步非阻塞模式。理解这些模式对编写高效的并发程序至关重要。</p>
 </blockquote>
@@ -2628,28 +2615,27 @@
 <p>💡 就像两个人同时尝试从同一张银行卡取钱，如果系统没有正确处理，可能会导致账户余额错误。</p>
 </blockquote>
 <h3 id="52">5.2. 示例</h3>
-<pre><code class="language-go">var counter int
+<div class="highlight"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">counter</span><span class="w"> </span><span class="kt">int</span>
 
-func increment() {
-    counter++ // 非原子操作
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">increment</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">counter</span><span class="o">++</span><span class="w"> </span><span class="c1">// 非原子操作</span>
+<span class="p">}</span>
 
-// 多个goroutine同时调用increment可能导致计数不准确
-</code></pre>
+<span class="c1">// 多个goroutine同时调用increment可能导致计数不准确</span>
+</code></pre></div>
 <blockquote>
 <p>💡counter++实际包含三步操作：读取值、加1、写回。如果两个goroutine同时执行，可能会导致其中一个的增加操作被覆盖。</p>
 </blockquote>
 <h3 id="53-critical-section">5.3. 临界区(Critical Section)</h3>
 <p>临界区是指访问共享资源的代码段，同一时间只能有一个goroutine或线程执行。保护临界区是避免竞态条件的关键。</p>
-<pre><code class="language-mermaid">graph LR
+<pre class="mermaid"><code>graph LR
     G1[Goroutine1] --&gt;|尝试进入| CS[临界区]
     G2[Goroutine2] --&gt;|尝试进入| CS
     CS --&gt;|执行中| G1
     CS -.-&gt;|等待| G2
     style CS fill:#f96,stroke:#333
     style G1 fill:#69f,stroke:#333
-    style G2 fill:#9f6,stroke:#333
-</code></pre>
+    style G2 fill:#9f6,stroke:#333</code></pre>
 <blockquote>
 <p>💡临界区就像公共厕所的单间，一次只能有一个人使用，其他人需要等待。在Go中，可以使用sync.Mutex来保护临界区。</p>
 </blockquote>

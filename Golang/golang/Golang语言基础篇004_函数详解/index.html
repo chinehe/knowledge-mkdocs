@@ -2541,10 +2541,10 @@
 <h2 id="2">2. 函数的声明和定义</h2>
 <h3 id="21">2.1. 基本语法</h3>
 <p>Go语言中声明函数的基本格式如下：</p>
-<pre><code class="language-go">func 函数名称(参数列表)(返回值列表){
-    // 函数
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">函数名称</span><span class="p">(</span><span class="nx">参数列表</span><span class="p">)(</span><span class="nx">返回值列表</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// 函数</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="22">2.2. 函数名称</h3>
 <ul>
 <li>Go语言中不支持函数重载，同一个包中函数名称不能重复，即使参数列表不一样。</li>
@@ -2559,52 +2559,52 @@
 <p>当两个或多个连续的函数命名参数是同一类型，则除了最后一个类型之外，其他都可以省略。</p>
 </li>
 </ul>
-<p>```go
-  // 标准写法
-  func add(a int, b int) int {
-      return a + b
-  }</p>
-<p>// 简写形式
-  func add(a, b int) int {
-      return a + b
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 标准写法</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="c1">// 简写形式</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>支持不定参数</li>
 </ul>
-<p><code>go
-  func test(s string, args ...int) {}</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="w"> </span><span class="o">...</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+</code></pre></div>
 <ul>
 <li>参数列表中的参数名称可以忽略（必须同时忽略所有参数名称）</li>
 </ul>
-<p><code>go
-  func maxInt(int, int) int {
-    return math.MaxInt
-  }</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">maxInt</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">math</span><span class="p">.</span><span class="nx">MaxInt</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="24">2.4. 返回值列表</h3>
 <ul>
 <li>函数可以返回任意数量的返回值。如果返回值为0或1个，括号可以省略。</li>
 </ul>
-<p>```go
-  // 返回单个值
-  func add(a, b int) int {
-      return b + a
-  }</p>
-<p>// 返回多个值
-  func swap(a, b string) (string, string) {
-      return b, a
-  }
-  ```</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 返回单个值</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">a</span>
+<span class="p">}</span>
+
+<span class="c1">// 返回多个值</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">swap</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>返回值列表中，可以对返回值进行命名。命名后返回值变量将被初始化为对应类型的零值。</li>
 </ul>
-<p><code>go
-  // 命名返回值
-  func divideWithRemainder(dividend, divisor int) (quotient, remainder int) {
-      quotient = dividend / divisor
-      remainder = dividend % divisor
-      return  // 自动返回命名的返回值
-  }</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// 命名返回值</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">divideWithRemainder</span><span class="p">(</span><span class="nx">dividend</span><span class="p">,</span><span class="w"> </span><span class="nx">divisor</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">quotient</span><span class="p">,</span><span class="w"> </span><span class="nx">remainder</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">quotient</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">dividend</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">divisor</span>
+<span class="w">    </span><span class="nx">remainder</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">dividend</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nx">divisor</span>
+<span class="w">    </span><span class="k">return</span><span class="w">  </span><span class="c1">// 自动返回命名的返回值</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>
 <p>返回值要么全都命名，要么全都不命名，不能混用。</p>
@@ -2615,58 +2615,58 @@
 </ul>
 <h2 id="3">3. 函数的调用</h2>
 <h3 id="31">3.1. 基本调用</h3>
-<pre><code class="language-go">func main() {
-    // 调用无返回值函数
-    sayHello()
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 调用无返回值函数</span>
+<span class="w">    </span><span class="nx">sayHello</span><span class="p">()</span>
 
-    // 调用有返回值函数
-    result := add(3, 5)
-    fmt.Println(result)  // 8
+<span class="w">    </span><span class="c1">// 调用有返回值函数</span>
+<span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span><span class="w">  </span><span class="c1">// 8</span>
 
-    // 调用多返回值函数
-    quotient, err := divide(10, 3)
-    if err != nil {
-        fmt.Println(&quot;错误:&quot;, err)
-    } else {
-        fmt.Printf(&quot;商: %d\n&quot;, quotient)
-    }
+<span class="w">    </span><span class="c1">// 调用多返回值函数</span>
+<span class="w">    </span><span class="nx">quotient</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;错误:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;商: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">quotient</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 调用命名返回值函数
-    q, r := divideWithRemainder(10, 3)
-    fmt.Printf(&quot;商: %d, 余数: %d\n&quot;, q, r)
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 调用命名返回值函数</span>
+<span class="w">    </span><span class="nx">q</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">divideWithRemainder</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;商: %d, 余数: %d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">q</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="32">3.2. 忽略返回值</h3>
-<pre><code class="language-go">// 忽略所有返回值
-divide(10, 2)
+<div class="highlight"><pre><span></span><code><span class="c1">// 忽略所有返回值</span>
+<span class="nx">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 
-// 忽略部分返回值（使用下划线）
-_, err := divide(10, 0)
-if err != nil {
-    fmt.Println(&quot;除法运算出错:&quot;, err)
-}
-</code></pre>
+<span class="c1">// 忽略部分返回值（使用下划线）</span>
+<span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;除法运算出错:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="33">3.3. 可变参数函数</h3>
 <p>Go语言支持可变参数函数，可以接受不定数量的参数：</p>
-<pre><code class="language-go">// 可变参数函数
-func sum(numbers ...int) int {
-    total := 0
-    for _, num := range numbers {
-        total += num
-    }
-    return total
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 可变参数函数</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">sum</span><span class="p">(</span><span class="nx">numbers</span><span class="w"> </span><span class="o">...</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">total</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">num</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">numbers</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">total</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">num</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">total</span>
+<span class="p">}</span>
 
-// 调用可变参数函数
-func main() {
-    fmt.Println(sum(1, 2, 3))        // 6
-    fmt.Println(sum(1, 2, 3, 4, 5))  // 15
+<span class="c1">// 调用可变参数函数</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w">        </span><span class="c1">// 6</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">))</span><span class="w">  </span><span class="c1">// 15</span>
 
-    // 传递切片给可变参数函数
-    nums := []int{1, 2, 3, 4}
-    fmt.Println(sum(nums...))  // 10
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 传递切片给可变参数函数</span>
+<span class="w">    </span><span class="nx">nums</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">sum</span><span class="p">(</span><span class="nx">nums</span><span class="o">...</span><span class="p">))</span><span class="w">  </span><span class="c1">// 10</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>注意：</strong></p>
 <ul>
 <li>
@@ -2682,15 +2682,15 @@ func main() {
 <p>Golang 可变参数本质上就是 slice。</p>
 </li>
 </ul>
-<p><code>go
-  func test(args ...string) {
-    fmt.Printf("%T", args)
-  }
-  func main() {
-    a := []string{"A", "B", "C"}
-    test(a...) // []string
-    test() // []string
-  }</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">test</span><span class="p">(</span><span class="nx">args</span><span class="w"> </span><span class="o">...</span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%T&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="nx">test</span><span class="p">(</span><span class="nx">a</span><span class="o">...</span><span class="p">)</span><span class="w"> </span><span class="c1">// []string</span>
+<span class="w">  </span><span class="nx">test</span><span class="p">()</span><span class="w"> </span><span class="c1">// []string</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="34">3.4. 参数传递</h3>
 <h4 id="341">3.4.1 形参与实参</h4>
 <ul>
@@ -2701,17 +2701,17 @@ func main() {
 <li>实参</li>
 </ul>
 <p>调用函数，传递过来的变量就是函数的实参.</p>
-<pre><code class="language-go">// 函数定义时的参数a，b为形参
-func add(a, b int) int {
-    return a + b
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 函数定义时的参数a，b为形参</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func main() {
-  // 调用函数时，传递的变量为函数的实参
-    c := add(1, 2)
-    println(c)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 调用函数时，传递的变量为函数的实参</span>
+<span class="w">    </span><span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">println</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="342">3.4.2. 值传递与引用传递</h4>
 <p>函数可以通过两种方式来传递参数：</p>
 <ul>
@@ -2727,291 +2727,291 @@ func main() {
 <p>map、slice、chan、指针、interface默认以引用的方式传递。</p>
 </blockquote>
 <p>示例：</p>
-<pre><code class="language-go">// 变更数组内容
-func changeArr(arr [5]int) {
-    for i := 0; i &lt; 5; i++ {
-        arr[i] = i
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 变更数组内容</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">changeArr</span><span class="p">(</span><span class="nx">arr</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-// 变更切片内容
-func changeSlice(slice []int) {
-    for i := 0; i &lt; 5; i++ {
-        slice[i] = i
-    }
-}
+<span class="c1">// 变更切片内容</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">changeSlice</span><span class="p">(</span><span class="nx">slice</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">slice</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-  // 数组测试
-    arr := [5]int{0, 0, 0, 0, 0}
-    fmt.Println(arr) // [0 0 0 0 0]
-    changeArr(arr) // 数组为值传递
-  // change函数修改数组内容后，原数组内容不变
-    fmt.Println(arr) // [0 0 0 0 0]
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 数组测试</span>
+<span class="w">    </span><span class="nx">arr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span><span class="w"> </span><span class="c1">// [0 0 0 0 0]</span>
+<span class="w">    </span><span class="nx">changeArr</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span><span class="w"> </span><span class="c1">// 数组为值传递</span>
+<span class="w">  </span><span class="c1">// change函数修改数组内容后，原数组内容不变</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span><span class="w"> </span><span class="c1">// [0 0 0 0 0]</span>
 
-  // 切片测试
-    slice := []int{0, 0, 0, 0, 0}
-    fmt.Println(slice) // [0 0 0 0 0]
-    changeSlice(slice) // 切片为引用传递
-  // change函数修改切片内容后，原数组内容变更
-    fmt.Println(slice) // [0 1 2 3 4]
-}
-</code></pre>
+<span class="w">  </span><span class="c1">// 切片测试</span>
+<span class="w">    </span><span class="nx">slice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span><span class="w"> </span><span class="c1">// [0 0 0 0 0]</span>
+<span class="w">    </span><span class="nx">changeSlice</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span><span class="w"> </span><span class="c1">// 切片为引用传递</span>
+<span class="w">  </span><span class="c1">// change函数修改切片内容后，原数组内容变更</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span><span class="w"> </span><span class="c1">// [0 1 2 3 4]</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="4-return">4. 函数返回return</h2>
 <h3 id="41-return">4.1. 常规return</h3>
 <p>使用return关键字进行函数的返回操作：</p>
-<pre><code class="language-go">func test()(x,y int){
-    // 某些操作
-    return x,y // 函数返回
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">test</span><span class="p">()(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="w"> </span><span class="kt">int</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// 某些操作</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="w"> </span><span class="c1">// 函数返回</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>return 关键字后面返回的值类型和数量必须与返回值列表相同。</p>
 <h3 id="42-return">4.2. 无return</h3>
 <p>如果一个函数没有返回值列表，则函数体内，可以使用return，而自动结束：</p>
-<pre><code class="language-go">func changeSlice(slice []int) {
-    for i := 0; i &lt; 5; i++ {
-        slice[i] = i
-    }
-  // 自动结束
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">changeSlice</span><span class="p">(</span><span class="nx">slice</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">slice</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// 自动结束</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>如果需要中途结束，还是需要显式return：</p>
-<pre><code class="language-go">func changeSlice(slice []int) {
-  if len(slice) == 0 || len(slice) &gt; 100{
-    return // 提前结束
-  }
-    for i := 0; i &lt; 5; i++ {
-        slice[i] = i
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">changeSlice</span><span class="p">(</span><span class="nx">slice</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="c1">// 提前结束</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">slice</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="43-return">4.3. 无参数return</h3>
 <p>没有参数的 return 语句被称作“裸”返回。这只能用于以下两种场景：</p>
 <ul>
 <li>函数没有返回值列表：此时return表示函数执行结束。</li>
 </ul>
-<p><code>go
-  func changeSlice(slice []int) {
-    if len(slice) == 0 || len(slice) &gt; 100{
-      return // 提前结束
-    }
-    for i := 0; i &lt; 5; i++ {
-        slice[i] = i
-    }
-  }</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">changeSlice</span><span class="p">(</span><span class="nx">slice</span><span class="w"> </span><span class="p">[]</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="c1">// 提前结束</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">slice</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">i</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <ul>
 <li>函数返回值都命名了：此时return返回值列表中各个变量的当前值</li>
 </ul>
-<p><code>go
-  func divide(a, b int) (res, mod int) {
-    res = a / b
-    mod = a % b
-    return
-  }</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">divide</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">mod</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">res</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">b</span>
+<span class="w">  </span><span class="nx">mod</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nx">b</span>
+<span class="w">  </span><span class="k">return</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>命名返回参数可被同名局部变量遮蔽，此时需要显式返回。</p>
-<pre><code class="language-go">func add(x, y int) (z int) {
-    { // 不能在一个级别，引发 &quot;z redeclared in this block&quot; 错误。
-        var z = x + y
-        // return   // Error: z is shadowed during return
-        return z // 必须显式返回。
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nx">z</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="c1">// 不能在一个级别，引发 &quot;z redeclared in this block&quot; 错误。</span>
+<span class="w">        </span><span class="kd">var</span><span class="w"> </span><span class="nx">z</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">y</span>
+<span class="w">        </span><span class="c1">// return   // Error: z is shadowed during return</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">z</span><span class="w"> </span><span class="c1">// 必须显式返回。</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="5">5. 函数也是一种类型</h2>
 <h3 id="51">5.1. 函数赋值给变量</h3>
 <p>可以定义函数类型的变量，将函数赋值给变量：</p>
-<pre><code class="language-go">func add(a, b int) int {
-    return a + b
-}
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func subtract(a, b int) int {
-    return a - b
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">subtract</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func main() {
-    // 函数赋值给变量
-    var operation func(int, int) int
-    operation = add
-    fmt.Println(operation(5, 3))  // 8
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 函数赋值给变量</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">operation</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span>
+<span class="w">    </span><span class="nx">operation</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">add</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">operation</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w">  </span><span class="c1">// 8</span>
 
-    // 短变量声明
-    op := subtract
-    fmt.Println(op(5, 3))  // 2
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 短变量声明</span>
+<span class="w">    </span><span class="nx">op</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">subtract</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">op</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w">  </span><span class="c1">// 2</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="52">5.2. 函数作为参数</h3>
 <p>函数的参数可以为函数类型，调用时将具体的函数传入：</p>
-<pre><code class="language-go">// 函数作为参数
-func calculate(a, b int, op func(int, int) int) int {
-    return op(a, b)
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 函数作为参数</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">calculate</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">op</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">op</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
 
-func multiply(a, b int) int {
-    return a * b
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">multiply</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func main() {
-    result := calculate(5, 3, multiply)
-    fmt.Println(result)  // 15
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">calculate</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span><span class="w">  </span><span class="c1">// 15</span>
 
-    // 使用匿名函数
-    result2 := calculate(5, 3, func(a, b int) int {
-        return a / b
-    })
-    fmt.Println(result2)  // 1
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 使用匿名函数</span>
+<span class="w">    </span><span class="nx">result2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">calculate</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">b</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">result2</span><span class="p">)</span><span class="w">  </span><span class="c1">// 1</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="53">5.3. 函数作为返回值</h3>
 <p>函数的返回值可以为函数类型，返回时将具体的函数作为结果返回：</p>
-<pre><code class="language-go">// 函数作为返回值
-func getOperation(op string) func(int, int) int {
-    switch op {
-    case &quot;add&quot;:
-        return func(a, b int) int { return a + b }
-    case &quot;subtract&quot;:
-        return func(a, b int) int { return a - b }
-    case &quot;multiply&quot;:
-        return func(a, b int) int { return a * b }
-    default:
-        return func(a, b int) int { return 0 }
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 函数作为返回值</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">getOperation</span><span class="p">(</span><span class="nx">op</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="nx">op</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;add&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;subtract&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;multiply&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="k">default</span><span class="p">:</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    addOp := getOperation(&quot;add&quot;)
-    fmt.Println(addOp(5, 3))  // 8
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">addOp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">getOperation</span><span class="p">(</span><span class="s">&quot;add&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">addOp</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w">  </span><span class="c1">// 8</span>
 
-    mulOp := getOperation(&quot;multiply&quot;)
-    fmt.Println(mulOp(5, 3))  // 15
-}
-</code></pre>
+<span class="w">    </span><span class="nx">mulOp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">getOperation</span><span class="p">(</span><span class="s">&quot;multiply&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">mulOp</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span><span class="w">  </span><span class="c1">// 15</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="54">5.4. 定义函数类型</h3>
 <p>还可以将一个函数声明定义为一个类型：</p>
-<pre><code class="language-go">type OperateFunc func(a, b int)int
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="kd">type</span><span class="w"> </span><span class="nx">OperateFunc</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="kt">int</span>
+</code></pre></div>
 <p>定义函数类型后，拥有相同参数列表和返回值列表的函数，都被视为该类型：</p>
-<pre><code class="language-go">// 定义函数类型
-type OperateFunc func(a, b int) int
+<div class="highlight"><pre><span></span><code><span class="c1">// 定义函数类型</span>
+<span class="kd">type</span><span class="w"> </span><span class="nx">OperateFunc</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span>
 
-func add(a, b int) int {
-    return a + b
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func sub(a, b int) int {
-    return a - b
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">sub</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func multiply(a, b int) int {
-    return a * b
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">multiply</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-func divide(a, b int) int {
-    return a / b
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">divide</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nx">b</span>
+<span class="p">}</span>
 
-// 该方法传入一个OperateFunc类型
-func operate(a, b int, operate OperateFunc) int {
-    return operate(a, b)
-}
+<span class="c1">// 该方法传入一个OperateFunc类型</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">operate</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="nx">operate</span><span class="w"> </span><span class="nx">OperateFunc</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">operate</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-  // 调用时，可以将所有拥有相同参数列表和返回值的函数当成OperateFunc类型传入
-    fmt.Println(operate(1, 2, add))
-    fmt.Println(operate(1, 2, sub))
-    fmt.Println(operate(1, 2, multiply))
-    fmt.Println(operate(1, 2, divide))
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 调用时，可以将所有拥有相同参数列表和返回值的函数当成OperateFunc类型传入</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">operate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nx">add</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">operate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nx">sub</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">operate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nx">multiply</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">operate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nx">divide</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="6">6. 匿名函数和闭包</h2>
 <h3 id="61">6.1. 匿名函数</h3>
 <p>匿名函数是指不需要定义函数名的一种函数实现方式。1958年LISP首先采用匿名函数。Go语言支持随时在代码里定义匿名函数。</p>
 <p>匿名函数由一个不带函数名的函数声明和函数体组成。匿名函数的优越性在于可以直接使用函数内的变量，不必申明：</p>
-<pre><code class="language-go">func main() {
-    // 定义并立即执行匿名函数
-    result := func(a, b int) int {
-        return a + b
-    }(3, 5)
-    fmt.Println(result)  // 8
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 定义并立即执行匿名函数</span>
+<span class="w">    </span><span class="nx">result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span>
+<span class="w">    </span><span class="p">}(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span><span class="w">  </span><span class="c1">// 8</span>
 
-    // 将匿名函数赋值给变量
-    square := func(x int) int {
-        return x * x
-    }
-    fmt.Println(square(4))  // 16
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 将匿名函数赋值给变量</span>
+<span class="w">    </span><span class="nx">square</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">x</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">square</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span><span class="w">  </span><span class="c1">// 16</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="62">6.2. 闭包</h3>
 <p>闭包是由函数及其相关引用环境组合而成的实体(即：闭包=函数+引用环境)。</p>
 <blockquote>
 <p>官方定义：一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数），因而这些变量也是该表达式的一部分。</p>
 </blockquote>
 <p>闭包是匿名函数与其外部环境的组合，可以访问外层函数的变量：</p>
-<pre><code class="language-go">// 闭包示例
-func counter() func() int {
-    count := 0
-    return func() int {
-        count++
-        return count
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 闭包示例</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">counter</span><span class="p">()</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">count</span><span class="o">++</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">count</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    // 创建计数器
-    c1 := counter()
-    fmt.Println(c1())  // 1
-    fmt.Println(c1())  // 2
-    fmt.Println(c1())  // 3
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 创建计数器</span>
+<span class="w">    </span><span class="nx">c1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">counter</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">c1</span><span class="p">())</span><span class="w">  </span><span class="c1">// 1</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">c1</span><span class="p">())</span><span class="w">  </span><span class="c1">// 2</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">c1</span><span class="p">())</span><span class="w">  </span><span class="c1">// 3</span>
 
-    // 创建另一个独立的计数器
-    c2 := counter()
-    fmt.Println(c2())  // 1
-    fmt.Println(c1())  // 4
-}
-</code></pre>
+<span class="w">    </span><span class="c1">// 创建另一个独立的计数器</span>
+<span class="w">    </span><span class="nx">c2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">counter</span><span class="p">()</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">c2</span><span class="p">())</span><span class="w">  </span><span class="c1">// 1</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">c1</span><span class="p">())</span><span class="w">  </span><span class="c1">// 4</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>在该例子中，变量count就是“被绑定的环境变量”，返回的函数就是“绑定变量的函数”。</p>
 <p>除了闭包中定义的环境变量外，还可以使用参数传递环境变量：</p>
-<pre><code class="language-go">// 闭包捕获变量
-func createMultiplier(factor int) func(int) int {
-    return func(value int) int {
-        return value * factor
-    }
-}
+<div class="highlight"><pre><span></span><code><span class="c1">// 闭包捕获变量</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">createMultiplier</span><span class="p">(</span><span class="nx">factor</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">factor</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 
-func main() {
-    double := createMultiplier(2)
-    triple := createMultiplier(3)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">double</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">createMultiplier</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">triple</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">createMultiplier</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
-    fmt.Println(double(5))   // 10
-    fmt.Println(triple(5))   // 15
-}
-</code></pre>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">double</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="w">   </span><span class="c1">// 10</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">triple</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="w">   </span><span class="c1">// 15</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="7-defer">7. defer语句</h2>
 <p>defer语句用于延迟函数的执行，直到包含defer语句的函数即将返回时才执行（常用来做资源清理工作）：</p>
-<pre><code class="language-go">func readFile(filename string) {
-    file, err := os.Open(filename)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer file.Close()  // 确保文件在函数结束时关闭
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">readFile</span><span class="p">(</span><span class="nx">filename</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="nx">filename</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span><span class="w">  </span><span class="c1">// 确保文件在函数结束时关闭</span>
 
-    // 处理文件...
-    // 即使发生错误，file.Close()也会被执行
-}
+<span class="w">    </span><span class="c1">// 处理文件...</span>
+<span class="w">    </span><span class="c1">// 即使发生错误，file.Close()也会被执行</span>
+<span class="p">}</span>
 
-func main() {
-    // defer的执行顺序是后进先出(LIFO)
-    defer fmt.Println(&quot;最后执行&quot;)
-    defer fmt.Println(&quot;第二执行&quot;)
-    defer fmt.Println(&quot;最先执行&quot;)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// defer的执行顺序是后进先出(LIFO)</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;最后执行&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;第二执行&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;最先执行&quot;</span><span class="p">)</span>
 
-    fmt.Println(&quot;函数主体&quot;)
-    // 输出顺序：
-    // 函数主体
-    // 最先执行
-    // 第二执行
-    // 最后执行
-}
-</code></pre>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;函数主体&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 输出顺序：</span>
+<span class="w">    </span><span class="c1">// 函数主体</span>
+<span class="w">    </span><span class="c1">// 最先执行</span>
+<span class="w">    </span><span class="c1">// 第二执行</span>
+<span class="w">    </span><span class="c1">// 最后执行</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong>特性：</strong></p>
 <ul>
 <li>
@@ -3024,21 +3024,21 @@ func main() {
 <p>defer语句中的变量，在defer声明时就决定了。</p>
 </li>
 </ul>
-<p><code>go
-  func main() {
-    a := 1
-    fmt.Printf("%s-%d\n", "start", a)
-    a++
-    defer func(a int) {
-        fmt.Printf("%s-%d\n", "defer", a)
-    }(a)
-    a++
-    fmt.Printf("%s-%d\n", "end", a)
-  }
-  // 输出
-  start-1
-  end-3  
-  defer-2</code></p>
+<div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s-%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;start&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">)</span>
+<span class="w">  </span><span class="nx">a</span><span class="o">++</span>
+<span class="w">  </span><span class="k">defer</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s-%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;defer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}(</span><span class="nx">a</span><span class="p">)</span>
+<span class="w">  </span><span class="nx">a</span><span class="o">++</span>
+<span class="w">  </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s-%d\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;end&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">// 输出</span>
+<span class="nx">start</span><span class="o">-</span><span class="mi">1</span>
+<span class="nx">end</span><span class="o">-</span><span class="mi">3</span><span class="w">  </span>
+<span class="k">defer</span><span class="o">-</span><span class="mi">2</span>
+</code></pre></div>
 <h2 id="8-maininit">8. main函数与init函数</h2>
 <p>在Go语言中，main函数和init函数是两个特殊的函数，它们在程序执行过程中扮演着重要角色。main函数是程序的入口点，而init函数用于包的初始化。</p>
 <h3 id="81-main">8.1. main函数</h3>
@@ -3052,16 +3052,16 @@ func main() {
 <li>每个可执行程序有且仅有一个main函数</li>
 <li>main函数在所有init函数执行完毕后才会执行</li>
 </ul>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func main() {
-    fmt.Println(&quot;程序开始执行&quot;)
-    // 程序的主要逻辑写在这里
-    fmt.Println(&quot;程序执行结束&quot;)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;程序开始执行&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 程序的主要逻辑写在这里</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;程序执行结束&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="812-main">8.1.2. main函数的作用</h4>
 <p>main函数是程序执行的起点，所有的业务逻辑通常从这里开始展开。在main函数中，我们可以：</p>
 <ul>
@@ -3070,27 +3070,27 @@ func main() {
 <li>启动服务器</li>
 <li>处理程序的主循环等</li>
 </ul>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import (
-    &quot;fmt&quot;
-    &quot;log&quot;
-    &quot;net/http&quot;
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;log&quot;</span>
+<span class="w">    </span><span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
 
-func main() {
-    // 初始化配置
-    fmt.Println(&quot;初始化应用程序...&quot;)
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 初始化配置</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;初始化应用程序...&quot;</span><span class="p">)</span>
 
-    // 启动Web服务器
-    http.HandleFunc(&quot;/&quot;, func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, &quot;Hello, World!&quot;)
-    })
+<span class="w">    </span><span class="c1">// 启动Web服务器</span>
+<span class="w">    </span><span class="nx">http</span><span class="p">.</span><span class="nx">HandleFunc</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">w</span><span class="w"> </span><span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="w"> </span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">})</span>
 
-    fmt.Println(&quot;服务器启动在 :8080&quot;)
-    log.Fatal(http.ListenAndServe(&quot;:8080&quot;, nil))
-}
-</code></pre>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;服务器启动在 :8080&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8080&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="82-init">8.2. init函数</h3>
 <p>init函数是Go语言中用于包级别初始化的特殊函数。它在程序启动时自动执行，用于执行包的初始化操作。</p>
 <h4 id="821-init">8.2.1. init函数的特点</h4>
@@ -3104,23 +3104,23 @@ func main() {
 <p>init函数在main函数执行之前，自动被调用，不能被其他函数调用。</p>
 </li>
 </ul>
-<pre><code class="language-go">package main
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-// 全局变量
-var globalVar string
+<span class="c1">// 全局变量</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">globalVar</span><span class="w"> </span><span class="kt">string</span>
 
-// init函数在main函数之前执行
-func init() {
-    globalVar = &quot;初始化完成&quot;
-    fmt.Println(&quot;init函数执行&quot;)
-}
+<span class="c1">// init函数在main函数之前执行</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">globalVar</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;初始化完成&quot;</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;init函数执行&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    fmt.Println(globalVar)
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">globalVar</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="822-go">8.2.2. Go初始化执行顺序</h4>
 <p>Go程序的初始化过程遵循特定的顺序：</p>
 <ol>
@@ -3129,33 +3129,33 @@ func main() {
 <li>执行init函数</li>
 <li>执行main函数</li>
 </ol>
-<pre><code class="language-go">// utils.go
-package main
+<div class="highlight"><pre><span></span><code><span class="c1">// utils.go</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func init() {
-    fmt.Println(&quot;utils包的init函数&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;utils包的init函数&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// main.go
-package main
+<span class="c1">// main.go</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func init() {
-    fmt.Println(&quot;main包的init函数&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;main包的init函数&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    fmt.Println(&quot;main函数执行&quot;)
-}
-</code></pre>
-<p>输出结果：</p>
-<pre><code>utils包的init函数
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;main函数执行&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>输出结果：
+<div class="highlight"><pre><span></span><code>utils包的init函数
 main包的init函数
 main函数执行
-</code></pre>
+</code></pre></div></p>
 <h4 id="823-init">8.2.3. init函数的用途</h4>
 <p>init函数通常用于以下场景：</p>
 <ul>
@@ -3164,35 +3164,35 @@ main函数执行
 <li>注册资源</li>
 <li>执行一次性设置任务</li>
 </ul>
-<pre><code class="language-go">package database
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">database</span>
 
-import (
-    &quot;database/sql&quot;
-    &quot;fmt&quot;
-    _ &quot;github.com/lib/pq&quot; // PostgreSQL驱动
-)
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;database/sql&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="nx">_</span><span class="w"> </span><span class="s">&quot;github.com/lib/pq&quot;</span><span class="w"> </span><span class="c1">// PostgreSQL驱动</span>
+<span class="p">)</span>
 
-var db *sql.DB
+<span class="kd">var</span><span class="w"> </span><span class="nx">db</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span>
 
-func init() {
-    var err error
-    db, err = sql.Open(&quot;postgres&quot;, &quot;user=username dbname=mydb sslmode=disable&quot;)
-    if err != nil {
-        panic(fmt.Sprintf(&quot;数据库连接失败: %v&quot;, err))
-    }
+<span class="kd">func</span><span class="w"> </span><span class="nx">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="kt">error</span>
+<span class="w">    </span><span class="nx">db</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">sql</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="s">&quot;postgres&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user=username dbname=mydb sslmode=disable&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;数据库连接失败: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // 测试连接
-    if err = db.Ping(); err != nil {
-        panic(fmt.Sprintf(&quot;数据库连接测试失败: %v&quot;, err))
-    }
+<span class="w">    </span><span class="c1">// 测试连接</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">db</span><span class="p">.</span><span class="nx">Ping</span><span class="p">();</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;数据库连接测试失败: %v&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="p">))</span>
+<span class="w">    </span><span class="p">}</span>
 
-    fmt.Println(&quot;数据库连接成功&quot;)
-}
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;数据库连接成功&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func GetDB() *sql.DB {
-    return db
-}
-</code></pre>
+<span class="kd">func</span><span class="w"> </span><span class="nx">GetDB</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">db</span>
+<span class="p">}</span>
+</code></pre></div>
 <h4 id="824-init">8.2.4. 多个init函数的执行顺序</h4>
 <ul>
 <li>
@@ -3214,55 +3214,55 @@ func GetDB() *sql.DB {
 </blockquote>
 <h3 id="83-maininit">8.3. main函数与init函数的协作</h3>
 <p>main函数和init函数在程序启动过程中协同工作，各自承担不同的职责：</p>
-<pre><code class="language-go">// config.go
-package main
+<div class="highlight"><pre><span></span><code><span class="c1">// config.go</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-var config map[string]string
+<span class="kd">var</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span>
 
-func init() {
-    fmt.Println(&quot;初始化配置...&quot;)
-    config = make(map[string]string)
-    config[&quot;app_name&quot;] = &quot;MyApp&quot;
-    config[&quot;version&quot;] = &quot;1.0.0&quot;
-    fmt.Println(&quot;配置初始化完成&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;初始化配置...&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">config</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">config</span><span class="p">[</span><span class="s">&quot;app_name&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;MyApp&quot;</span>
+<span class="w">    </span><span class="nx">config</span><span class="p">[</span><span class="s">&quot;version&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;配置初始化完成&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// logger.go
-package main
+<span class="c1">// logger.go</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func init() {
-    fmt.Println(&quot;初始化日志系统...&quot;)
-    // 日志系统初始化代码
-    fmt.Println(&quot;日志系统初始化完成&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;初始化日志系统...&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 日志系统初始化代码</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;日志系统初始化完成&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-// main.go
-package main
+<span class="c1">// main.go</span>
+<span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-import &quot;fmt&quot;
+<span class="kn">import</span><span class="w"> </span><span class="s">&quot;fmt&quot;</span>
 
-func init() {
-    fmt.Println(&quot;main包初始化...&quot;)
-}
+<span class="kd">func</span><span class="w"> </span><span class="nx">init</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;main包初始化...&quot;</span><span class="p">)</span>
+<span class="p">}</span>
 
-func main() {
-    fmt.Printf(&quot;启动应用: %s 版本: %s\n&quot;, config[&quot;app_name&quot;], config[&quot;version&quot;])
-    fmt.Println(&quot;应用程序主逻辑执行&quot;)
-}
-</code></pre>
-<p>输出结果：</p>
-<pre><code class="language-shell">初始化配置...
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;启动应用: %s 版本: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="p">[</span><span class="s">&quot;app_name&quot;</span><span class="p">],</span><span class="w"> </span><span class="nx">config</span><span class="p">[</span><span class="s">&quot;version&quot;</span><span class="p">])</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;应用程序主逻辑执行&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>输出结果：
+<div class="highlight"><pre><span></span><code>初始化配置...
 配置初始化完成
 初始化日志系统...
 日志系统初始化完成
 main包初始化...
-启动应用: MyApp 版本: 1.0.0
+启动应用:<span class="w"> </span>MyApp<span class="w"> </span>版本:<span class="w"> </span><span class="m">1</span>.0.0
 应用程序主逻辑执行
-</code></pre>
+</code></pre></div></p>
 <p>通过合理使用main函数和init函数，可以让Go程序具有清晰的启动流程和良好的初始化机制。</p>
 
 
