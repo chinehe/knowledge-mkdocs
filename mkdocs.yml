@@ -2,6 +2,9 @@ site_name: ChineHe Knowledge
 site_url: https://chinehe.github.io/knowledge-mkdocs/
 nav:
   - Home: index.md
+  - 计算机与网络:
+    - 网络杂谈:
+      - Ping能测端口吗?: Computer&Network/NetworkNotes/Ping能测端口吗?.md
   - Golang:
     - Golang语言入门篇:
       - Golang简介: Golang/golang/Golang语言入门篇001_Golang简介.md
@@ -93,6 +96,8 @@ theme:
     - navigation.prune  # 导航剪枝
     - toc.follow # 锚点跟随
     - navigation.top # 返回顶部
+    # 代码相关
+    - content.code.copy # 代码复制
 
   # 颜色
   palette:
