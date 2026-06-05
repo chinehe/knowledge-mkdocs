@@ -85,8 +85,8 @@ nav:
       - 详解SortedSets有序集合类型及其命令: 数据库与缓存/redis/Redis数据类型篇006_详解SortedSets有序集合类型及其命令.md
       - 详解Stream流类型及其命令: 数据库与缓存/redis/Redis数据类型篇007_详解Stream流类型及其命令.md
       - JSON类型详解（草稿）: 数据库与缓存/redis/Redis数据类型篇008_JSON类型详解（草稿）.md
-  - DevOps
-    - Docker
+  - DevOps:
+    - Docker:
       - Docker入门指南: DevOps/Docker/Docker入门指南.md
   - About: about.md
 
