@@ -3,6 +3,21 @@ site_url: https://chinehe.github.io/knowledge-mkdocs/
 nav:
   - Home: index.md
   - 计算机与网络:
+    - 加解密算法:
+      - 加解密算法概述: Computer&Network/加密算法/加密算法概述.md
+      - DES: Computer&Network/加密算法/DES.md
+      - 3DES: Computer&Network/加密算法/3DES.md
+      - AES: Computer&Network/加密算法/AES.md
+      - 国密SM1: Computer&Network/加密算法/国密SM1.md
+      - 国密SM4: Computer&Network/加密算法/国密SM4.md
+      - RSA: Computer&Network/加密算法/RSA.md
+      - ECC: Computer&Network/加密算法/ECC.md
+    - 摘要算法:
+      - MD5: Computer&Network/摘要算法/MD5.md
+      - SHA-1: Computer&Network/摘要算法/SHA-1.md
+      - SHA-3: Computer&Network/摘要算法/SHA-3.md
+      - SHA-256: Computer&Network/摘要算法/SHA-256.md
+      - 国密SM3: Computer&Network/摘要算法/国密SM3.md
     - Web:
       - 互联网Web服务认证技术发展史: Computer&Network/Web/互联网Web服务认证技术发展史：从HTTP Basic到OpenID Connect.md
     - 网络杂谈:
