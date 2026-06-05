@@ -1,0 +1,2759 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Computer%26Network/%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95/%E5%9B%BD%E5%AF%86SM3/">
+      
+      
+        <link rel="prev" href="../SHA-256/">
+      
+      
+        <link rel="next" href="../../Web/%E4%BA%92%E8%81%94%E7%BD%91Web%E6%9C%8D%E5%8A%A1%E8%AE%A4%E8%AF%81%E6%8A%80%E6%9C%AF%E5%8F%91%E5%B1%95%E5%8F%B2%EF%BC%9A%E4%BB%8EHTTP%20Basic%E5%88%B0OpenID%20Connect/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>国密SM3 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sm3" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              国密SM3
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    计算机与网络
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    加解密算法
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    摘要算法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    摘要算法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MD5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MD5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SHA-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SHA-1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SHA-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SHA-3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SHA-256/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SHA-256
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国密SM3
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国密SM3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 算法概述
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 算法概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 基本参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-sm3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 SM3 在国密体系中的角色
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 算法原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 算法原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 整体流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-iv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 初始值 IV
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 常量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 布尔函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 置换函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 消息扩展
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 压缩函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-sm3-vs-sha-256" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 SM3 vs SHA-256 结构对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 安全性分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 安全性分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 安全强度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 公开分析结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-sha-256" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 与 SHA-256 的安全性对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 代码实现
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 代码实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Go 语言实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Python 实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Python 纯实现（教学用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Java 实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 应用场景
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 应用场景">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 核心应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-ssltls-sm3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 国密 SSL/TLS 中的 SM3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-sm2-sm3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 SM2 + SM3 联合使用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 推荐库与工具
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../Web/%E4%BA%92%E8%81%94%E7%BD%91Web%E6%9C%8D%E5%8A%A1%E8%AE%A4%E8%AF%81%E6%8A%80%E6%9C%AF%E5%8F%91%E5%B1%95%E5%8F%B2%EF%BC%9A%E4%BB%8EHTTP%20Basic%E5%88%B0OpenID%20Connect/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../NetworkNotes/Ping%E8%83%BD%E6%B5%8B%E7%AB%AF%E5%8F%A3%E5%90%97%3F/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    网络杂谈
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 算法概述
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 算法概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 基本参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-sm3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 SM3 在国密体系中的角色
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 算法原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 算法原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 整体流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-iv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 初始值 IV
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 常量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 布尔函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 置换函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 消息扩展
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 压缩函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-sm3-vs-sha-256" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 SM3 vs SHA-256 结构对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 安全性分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 安全性分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 安全强度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 公开分析结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-sha-256" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 与 SHA-256 的安全性对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 代码实现
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 代码实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Go 语言实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Python 实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Python 纯实现（教学用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Java 实现
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 应用场景
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 应用场景">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 核心应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-ssltls-sm3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 国密 SSL/TLS 中的 SM3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-sm2-sm3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 SM2 + SM3 联合使用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 推荐库与工具
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    计算机与网络
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../MD5/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    摘要算法
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sm3">国密SM3摘要算法</h1>
+<h2 id="1">1. 算法概述</h2>
+<p><strong>SM3</strong> 是中国国家密码管理局于 2010 年发布的密码散列函数标准（GM/T 0004-2012），由王小云院士团队设计。SM3 输出 256 位（32 字节）的哈希值，安全性与 SHA-256 相当。</p>
+<p>SM3 已被纳入 ISO/IEC 10118-3:2018 国际标准，是中国商用密码体系中的核心哈希算法，在数字签名、消息认证、密钥派生等场景中广泛使用。</p>
+<h3 id="11">1.1 基本参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>算法类型</td>
+<td>密码散列函数</td>
+</tr>
+<tr>
+<td>输出长度</td>
+<td>256 位（64 个十六进制字符）</td>
+</tr>
+<tr>
+<td>输入长度</td>
+<td>&lt; 2⁶⁴ 位</td>
+</tr>
+<tr>
+<td>分组大小</td>
+<td>512 位（64 字节）</td>
+</tr>
+<tr>
+<td>字长</td>
+<td>32 位</td>
+</tr>
+<tr>
+<td>计算轮数</td>
+<td>64 轮</td>
+</tr>
+<tr>
+<td>结构</td>
+<td>Merkle-Damgård（改进型）</td>
+</tr>
+<tr>
+<td>标准</td>
+<td>GM/T 0004-2012, ISO/IEC 10118-3:2018</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-sm3">1.2 SM3 在国密体系中的角色</h3>
+<pre class="mermaid"><code>flowchart TD
+    subgraph 国密密码体系
+        B[SM2签名] --&gt; E["SM3 哈希（基础组件）"]
+        C[SM4加密] --&gt; E
+        D[其他应用] --&gt; E
+    end</code></pre>
+<p>SM3 是 SM2 数字签名的前置步骤：</p>
+<div class="highlight"><pre><span></span><code>签名 = SM2_Sign(SM3(ZA || M))
+其中 ZA 为签名者标识信息
+</code></pre></div>
+<h2 id="2">2. 算法原理</h2>
+<h3 id="21">2.1 整体流程</h3>
+<pre class="mermaid"><code>flowchart TD
+    A[原始消息] --&gt; B["消息填充&lt;br&gt;长度 ≡ 448 mod 512"]
+    B --&gt; C["附加长度（64位大端序）"]
+    C --&gt; D["迭代压缩&lt;br&gt;每块512位 → 64轮压缩函数"]
+    D --&gt; E[256 位哈希值]</code></pre>
+<h3 id="22-iv">2.2 初始值 IV</h3>
+<div class="highlight"><pre><span></span><code>IV = 7380166f 4914b2b9 172442d7 da8a0600 a96f30bc 163138aa e38dee4d b0fb0e4e
+</code></pre></div>
+<h3 id="23">2.3 常量</h3>
+<div class="highlight"><pre><span></span><code>T_j = 79cc4519  (0 ≤ j ≤ 15)
+T_j = 7a879d8a  (16 ≤ j ≤ 63)
+</code></pre></div>
+<h3 id="24">2.4 布尔函数</h3>
+<div class="highlight"><pre><span></span><code>FF_j(X, Y, Z) = X ⊕ Y ⊕ Z                          (0 ≤ j ≤ 15)
+FF_j(X, Y, Z) = (X ∧ Y) ∨ (X ∧ Z) ∨ (Y ∧ Z)       (16 ≤ j ≤ 63)
+
+GG_j(X, Y, Z) = X ⊕ Y ⊕ Z                          (0 ≤ j ≤ 15)
+GG_j(X, Y, Z) = (X ∧ Y) ∨ (¬X ∧ Z)                 (16 ≤ j ≤ 63)
+</code></pre></div>
+<h3 id="25">2.5 置换函数</h3>
+<div class="highlight"><pre><span></span><code>P0(X) = X ⊕ (X &lt;&lt;&lt; 9) ⊕ (X &lt;&lt;&lt; 17)    // 压缩函数中使用
+P1(X) = X ⊕ (X &lt;&lt;&lt; 15) ⊕ (X &lt;&lt;&lt; 23)   // 消息扩展中使用
+</code></pre></div>
+<h3 id="26">2.6 消息扩展</h3>
+<p>将 512 位消息块扩展为 132 个 32 位字（W₀~W₆₇ 和 W'₀~W'₆₃）：</p>
+<div class="highlight"><pre><span></span><code>步骤1：前16个字直接来自消息块
+W_0, W_1, ..., W_15 = 消息块的 16 个字
+
+步骤2：扩展到 68 个字
+W_j = P1(W_{j-16} ⊕ W_{j-9} ⊕ (W_{j-3} &lt;&lt;&lt; 15)) ⊕ (W_{j-13} &lt;&lt;&lt; 7) ⊕ W_{j-6}
+(16 ≤ j ≤ 67)
+
+步骤3：生成 W&#39; 序列
+W&#39;_j = W_j ⊕ W_{j+4}
+(0 ≤ j ≤ 63)
+</code></pre></div>
+<h3 id="27">2.7 压缩函数</h3>
+<div class="highlight"><pre><span></span><code>初始化: A=V_i[0], B=V_i[1], ..., H=V_i[7]
+
+对 j = 0 到 63:
+    SS1 = ((A &lt;&lt;&lt; 12) + E + (T_j &lt;&lt;&lt; j)) &lt;&lt;&lt; 7
+    SS2 = SS1 ⊕ (A &lt;&lt;&lt; 12)
+    TT1 = FF_j(A, B, C) + D + SS2 + W&#39;_j
+    TT2 = GG_j(E, F, G) + H + SS1 + W_j
+    D = C
+    C = B &lt;&lt;&lt; 9
+    B = A
+    A = TT1
+    H = G
+    G = F &lt;&lt;&lt; 19
+    F = E
+    E = P0(TT2)
+
+输出: V_{i+1} = (A⊕V_i[0]) || (B⊕V_i[1]) || ... || (H⊕V_i[7])
+</code></pre></div>
+<h3 id="28-sm3-vs-sha-256">2.8 SM3 vs SHA-256 结构对比</h3>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>SM3</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输出长度</td>
+<td>256 位</td>
+<td>256 位</td>
+</tr>
+<tr>
+<td>分组大小</td>
+<td>512 位</td>
+<td>512 位</td>
+</tr>
+<tr>
+<td>轮数</td>
+<td>64 轮</td>
+<td>64 轮</td>
+</tr>
+<tr>
+<td>消息扩展</td>
+<td>更复杂（P1 置换）</td>
+<td>线性组合 + σ 函数</td>
+</tr>
+<tr>
+<td>布尔函数</td>
+<td>分段使用不同函数</td>
+<td>Ch 和 Maj</td>
+</tr>
+<tr>
+<td>压缩函数</td>
+<td>含 P0 置换</td>
+<td>纯加法和移位</td>
+</tr>
+<tr>
+<td>常量来源</td>
+<td>直接给定</td>
+<td>质数的立方根</td>
+</tr>
+</tbody>
+</table>
+<p>SM3 的消息扩展比 SHA-256 更复杂，引入了额外的非线性变换，理论上可提供更好的扩散效果。</p>
+<h2 id="3">3. 安全性分析</h2>
+<h3 id="31">3.1 安全强度</h3>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>理论强度</th>
+<th>当前状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>碰撞抗性</td>
+<td>128 位</td>
+<td>✅ 安全</td>
+</tr>
+<tr>
+<td>原像抗性</td>
+<td>256 位</td>
+<td>✅ 安全</td>
+</tr>
+<tr>
+<td>第二原像抗性</td>
+<td>256 位</td>
+<td>✅ 安全</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32">3.2 公开分析结果</h3>
+<table>
+<thead>
+<tr>
+<th>研究</th>
+<th>结果</th>
+<th>影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>缩减轮数碰撞</td>
+<td>最高达到约 20+ 轮</td>
+<td>不影响完整 64 轮</td>
+</tr>
+<tr>
+<td>差分分析</td>
+<td>仅对缩减轮数有效</td>
+<td>完整版本安全</td>
+</tr>
+<tr>
+<td>原像攻击</td>
+<td>仅对缩减轮数</td>
+<td>完整版本安全</td>
+</tr>
+<tr>
+<td>线性密码分析</td>
+<td>安全余量充足</td>
+<td>无实际威胁</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-sha-256">3.3 与 SHA-256 的安全性对比</h3>
+<p>SM3 和 SHA-256 在设计上具有相似的安全目标：</p>
+<ul>
+<li>两者都针对 128 位碰撞安全性</li>
+<li>两者当前都没有被实际攻破</li>
+<li>SM3 的消息扩展更复杂，可能具有更好的安全余量</li>
+<li>两者都可能受到长度扩展攻击（需使用 HMAC）</li>
+</ul>
+<h2 id="4">4. 代码实现</h2>
+<h3 id="41-go">4.1 Go 语言实现</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;encoding/hex&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;io&quot;</span>
+<span class="w">    </span><span class="s">&quot;os&quot;</span>
+
+<span class="w">    </span><span class="s">&quot;github.com/emmansun/gmsm/sm3&quot;</span>
+<span class="p">)</span>
+
+<span class="c1">// 计算字符串的 SM3</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">SM3String</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">hash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sm3</span><span class="p">.</span><span class="nx">Sum</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">s</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hash</span><span class="p">[:])</span>
+<span class="p">}</span>
+
+<span class="c1">// 计算文件的 SM3</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">SM3File</span><span class="p">(</span><span class="nx">filepath</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="nx">filepath</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nx">hasher</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sm3</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Copy</span><span class="p">(</span><span class="nx">hasher</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hasher</span><span class="p">.</span><span class="nx">Sum</span><span class="p">(</span><span class="kc">nil</span><span class="p">)),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="c1">// HMAC-SM3</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">HMACSM3</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 使用 crypto/hmac + sm3</span>
+<span class="w">    </span><span class="kn">import</span><span class="w"> </span><span class="s">&quot;crypto/hmac&quot;</span>
+<span class="w">    </span><span class="nx">mac</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">hmac</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="nx">sm3</span><span class="p">.</span><span class="nx">New</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">mac</span><span class="p">.</span><span class="nx">Write</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">mac</span><span class="p">.</span><span class="nx">Sum</span><span class="p">(</span><span class="kc">nil</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;=== SM3 哈希示例 ===&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">testCases</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
+<span class="w">        </span><span class="s">&quot;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;hello&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;abc&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s">&quot;Hello, SM3!&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">tc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">testCases</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">hash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM3String</span><span class="p">(</span><span class="nx">tc</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SM3(\&quot;%s\&quot;)\n  = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">tc</span><span class="p">,</span><span class="w"> </span><span class="nx">hash</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 标准测试向量</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n=== 标准测试向量 ===&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// SM3(&quot;abc&quot;) 的标准结果</span>
+<span class="w">    </span><span class="nx">expected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0&quot;</span>
+<span class="w">    </span><span class="nx">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM3String</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SM3(\&quot;abc\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">actual</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;验证: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">actual</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">expected</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// 另一个标准测试向量</span>
+<span class="w">    </span><span class="c1">// SM3(&quot;abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd&quot;)</span>
+<span class="w">    </span><span class="c1">// 即 &quot;abcd&quot; 重复 16 次</span>
+<span class="w">    </span><span class="nx">msg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">msg</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;abcd&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">expected2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;debe9ff92275b8a138604889c18e5a4d6fdb70e5387e5765293dcba39c0c5732&quot;</span>
+<span class="w">    </span><span class="nx">actual2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM3String</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;\nSM3(\&quot;abcd\&quot;×16) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">actual2</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;验证: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">actual2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">expected2</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// 雪崩效应</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n=== 雪崩效应 ===&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">h1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM3String</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">h2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM3String</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SM3(\&quot;Hello\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">h1</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SM3(\&quot;hello\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">h2</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>注意</strong>：需要安装 <code>github.com/emmansun/gmsm</code> 包：<code>go get github.com/emmansun/gmsm</code></p>
+</blockquote>
+<h3 id="42-python">4.2 Python 实现</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 方法1：使用 gmssl 库</span>
+<span class="c1"># pip install gmssl</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">gmssl</span><span class="w"> </span><span class="kn">import</span> <span class="n">sm3</span><span class="p">,</span> <span class="n">func</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sm3_string</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;计算字符串的 SM3&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+    <span class="n">hash_value</span> <span class="o">=</span> <span class="n">sm3</span><span class="o">.</span><span class="n">sm3_hash</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">hash_value</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sm3_bytes</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;计算字节数据的 SM3&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">sm3</span><span class="o">.</span><span class="n">sm3_hash</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sm3_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;计算文件的 SM3&quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">sm3</span><span class="o">.</span><span class="n">sm3_hash</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== SM3 哈希示例 ===&quot;</span><span class="p">)</span>
+
+    <span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;hello&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;abc&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Hello, SM3!&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">tc</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SM3(&quot;</span><span class="si">{</span><span class="n">tc</span><span class="si">}</span><span class="s1">&quot;)&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  = </span><span class="si">{</span><span class="n">sm3_string</span><span class="p">(</span><span class="n">tc</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># 标准测试向量验证</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== 标准测试向量 ===&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">sm3_string</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">)</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="s2">&quot;66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SM3(</span><span class="se">\&quot;</span><span class="s2">abc</span><span class="se">\&quot;</span><span class="s2">) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;验证: </span><span class="si">{</span><span class="s1">&#39;通过 ✓&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">expected</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;失败 ✗&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 第二个测试向量</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;abcd&quot;</span> <span class="o">*</span> <span class="mi">16</span>
+    <span class="n">result2</span> <span class="o">=</span> <span class="n">sm3_string</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="n">expected2</span> <span class="o">=</span> <span class="s2">&quot;debe9ff92275b8a138604889c18e5a4d6fdb70e5387e5765293dcba39c0c5732&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">SM3(</span><span class="se">\&quot;</span><span class="s2">abcd</span><span class="se">\&quot;</span><span class="s2">×16) = </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;验证: </span><span class="si">{</span><span class="s1">&#39;通过 ✓&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">result2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">expected2</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;失败 ✗&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 雪崩效应</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== 雪崩效应 ===&quot;</span><span class="p">)</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">sm3_string</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">sm3_string</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SM3(&quot;Hello&quot;) = </span><span class="si">{</span><span class="n">h1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SM3(&quot;hello&quot;) = </span><span class="si">{</span><span class="n">h2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">h1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">^</span> <span class="nb">int</span><span class="p">(</span><span class="n">h2</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;不同位数: </span><span class="si">{</span><span class="n">diff</span><span class="si">}</span><span class="s2">/256 (</span><span class="si">{</span><span class="n">diff</span><span class="o">/</span><span class="mi">256</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="43-python">4.3 Python 纯实现（教学用）</h3>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">SM3 算法的纯 Python 实现（仅供教学理解，生产环境请使用 gmssl 库）</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">struct</span>
+
+<span class="c1"># 初始值</span>
+<span class="n">IV</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mh">0x7380166f</span><span class="p">,</span> <span class="mh">0x4914b2b9</span><span class="p">,</span> <span class="mh">0x172442d7</span><span class="p">,</span> <span class="mh">0xda8a0600</span><span class="p">,</span>
+    <span class="mh">0xa96f30bc</span><span class="p">,</span> <span class="mh">0x163138aa</span><span class="p">,</span> <span class="mh">0xe38dee4d</span><span class="p">,</span> <span class="mh">0xb0fb0e4e</span>
+<span class="p">]</span>
+
+<span class="c1"># 常量 T</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">T</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mh">0x79cc4519</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">16</span> <span class="k">else</span> <span class="mh">0x7a879d8a</span>
+
+<span class="c1"># 循环左移</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rotl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="mi">32</span> <span class="o">-</span> <span class="n">n</span><span class="p">)))</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span>
+
+<span class="c1"># 布尔函数</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">FF</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">X</span> <span class="o">^</span> <span class="n">Y</span> <span class="o">^</span> <span class="n">Z</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">X</span> <span class="o">&amp;</span> <span class="n">Y</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">X</span> <span class="o">&amp;</span> <span class="n">Z</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">Y</span> <span class="o">&amp;</span> <span class="n">Z</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">GG</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">X</span> <span class="o">^</span> <span class="n">Y</span> <span class="o">^</span> <span class="n">Z</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">X</span> <span class="o">&amp;</span> <span class="n">Y</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="o">~</span><span class="n">X</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Z</span><span class="p">)</span>
+
+<span class="c1"># 置换函数</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">P0</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">X</span> <span class="o">^</span> <span class="n">rotl</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span> <span class="o">^</span> <span class="n">rotl</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">P1</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">X</span> <span class="o">^</span> <span class="n">rotl</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="o">^</span> <span class="n">rotl</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">23</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sm3_hash</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;SM3 哈希&quot;&quot;&quot;</span>
+    <span class="c1"># 消息填充</span>
+    <span class="n">msg_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">+=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x80</span><span class="s1">&#39;</span>
+    <span class="n">message</span> <span class="o">+=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="p">((</span><span class="mi">55</span> <span class="o">-</span> <span class="n">msg_len</span><span class="p">)</span> <span class="o">%</span> <span class="mi">64</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">+=</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;Q&#39;</span><span class="p">,</span> <span class="n">msg_len</span> <span class="o">*</span> <span class="mi">8</span><span class="p">)</span>
+
+    <span class="c1"># 迭代压缩</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">IV</span><span class="p">[:]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">),</span> <span class="mi">64</span><span class="p">):</span>
+        <span class="n">block</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">64</span><span class="p">]</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">compress</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">block</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s1">08x</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">V</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compress</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">block</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;压缩函数&quot;&quot;&quot;</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;16I&#39;</span><span class="p">,</span> <span class="n">block</span><span class="p">))</span>
+
+    <span class="c1"># 消息扩展</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">68</span><span class="p">):</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">P1</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span> <span class="o">^</span> <span class="n">W</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span> <span class="o">^</span> <span class="n">rotl</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="mi">15</span><span class="p">))</span> <span class="o">^</span> <span class="n">rotl</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">13</span><span class="p">],</span> <span class="mi">7</span><span class="p">)</span> <span class="o">^</span> <span class="n">W</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">6</span><span class="p">]</span>
+        <span class="n">W</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span>
+
+    <span class="n">W_prime</span> <span class="o">=</span> <span class="p">[</span><span class="n">W</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">^</span> <span class="n">W</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">4</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">64</span><span class="p">)]</span>
+
+    <span class="c1"># 压缩</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="n">V</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">64</span><span class="p">):</span>
+        <span class="n">SS1</span> <span class="o">=</span> <span class="n">rotl</span><span class="p">((</span><span class="n">rotl</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="n">E</span> <span class="o">+</span> <span class="n">rotl</span><span class="p">(</span><span class="n">T</span><span class="p">(</span><span class="n">j</span><span class="p">),</span> <span class="n">j</span> <span class="o">%</span> <span class="mi">32</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+        <span class="n">SS2</span> <span class="o">=</span> <span class="n">SS1</span> <span class="o">^</span> <span class="n">rotl</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+        <span class="n">TT1</span> <span class="o">=</span> <span class="p">(</span><span class="n">FF</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span> <span class="o">+</span> <span class="n">SS2</span> <span class="o">+</span> <span class="n">W_prime</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span>
+        <span class="n">TT2</span> <span class="o">=</span> <span class="p">(</span><span class="n">GG</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span> <span class="o">+</span> <span class="n">H</span> <span class="o">+</span> <span class="n">SS1</span> <span class="o">+</span> <span class="n">W</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">C</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">rotl</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">A</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">TT1</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">G</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="n">rotl</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="mi">19</span><span class="p">)</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="n">E</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">P0</span><span class="p">(</span><span class="n">TT2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">A</span> <span class="o">^</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span> <span class="p">(</span><span class="n">B</span> <span class="o">^</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">C</span> <span class="o">^</span> <span class="n">V</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span> <span class="p">(</span><span class="n">D</span> <span class="o">^</span> <span class="n">V</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">E</span> <span class="o">^</span> <span class="n">V</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span> <span class="p">(</span><span class="n">F</span> <span class="o">^</span> <span class="n">V</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">G</span> <span class="o">^</span> <span class="n">V</span><span class="p">[</span><span class="mi">6</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span> <span class="p">(</span><span class="n">H</span> <span class="o">^</span> <span class="n">V</span><span class="p">[</span><span class="mi">7</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span>
+    <span class="p">]</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># 验证标准测试向量</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">sm3_hash</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;abc&quot;</span><span class="p">)</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="s2">&quot;66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SM3(</span><span class="se">\&quot;</span><span class="s2">abc</span><span class="se">\&quot;</span><span class="s2">) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;期望值:      </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;验证: </span><span class="si">{</span><span class="s1">&#39;通过 ✓&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">expected</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;失败 ✗&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="44-java">4.4 Java 实现</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.crypto.digests.SM3Digest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.jce.provider.BouncyCastleProvider</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.MessageDigest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.Security</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HexFormat</span><span class="p">;</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SM3Example</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Security</span><span class="p">.</span><span class="na">addProvider</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BouncyCastleProvider</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 方法1：使用 JCE</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">sm3String</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">MessageDigest</span><span class="w"> </span><span class="n">md</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MessageDigest</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;SM3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;BC&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">md</span><span class="p">.</span><span class="na">digest</span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="s">&quot;UTF-8&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">hash</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 方法2：直接使用 BouncyCastle API</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">sm3Bytes</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SM3Digest</span><span class="w"> </span><span class="n">digest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SM3Digest</span><span class="p">();</span>
+<span class="w">        </span><span class="n">digest</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">digest</span><span class="p">.</span><span class="na">getDigestSize</span><span class="p">()</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="n">digest</span><span class="p">.</span><span class="na">doFinal</span><span class="p">(</span><span class="n">hash</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">hash</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;=== SM3 哈希示例 ===&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">testCases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;abc&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Hello, SM3!&quot;</span><span class="p">};</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">tc</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">testCases</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;SM3(\&quot;%s\&quot;)%n  = %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tc</span><span class="p">,</span><span class="w"> </span><span class="n">sm3String</span><span class="p">(</span><span class="n">tc</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// 标准测试向量</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;\n=== 标准测试向量 ===&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sm3String</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">expected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;SM3(\&quot;abc\&quot;) = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">result</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;验证: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;通过 ✓&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;失败 ✗&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>依赖</strong>：需要添加 BouncyCastle 库：<code>org.bouncycastle:bcprov-jdk18on</code></p>
+</blockquote>
+<h2 id="5">5. 应用场景</h2>
+<h3 id="51">5.1 核心应用</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>用法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SM2 数字签名</td>
+<td>签名前的消息哈希</td>
+<td>SM3 是 SM2 的必需前置步骤</td>
+</tr>
+<tr>
+<td>数据完整性校验</td>
+<td>文件校验、消息认证</td>
+<td>替代 SHA-256</td>
+</tr>
+<tr>
+<td>密钥派生</td>
+<td>KDF 内部哈希函数</td>
+<td>国密密钥派生</td>
+</tr>
+<tr>
+<td>随机数生成</td>
+<td>DRBG 内部函数</td>
+<td>国密随机数</td>
+</tr>
+<tr>
+<td>口令存储</td>
+<td>SM3(salt + password)</td>
+<td>需配合 KDF 使用</td>
+</tr>
+<tr>
+<td>区块链</td>
+<td>国密联盟链</td>
+<td>如 FISCO BCOS</td>
+</tr>
+<tr>
+<td>SSL/TLS</td>
+<td>国密 SSL (GMTLS)</td>
+<td>握手和记录层</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-ssltls-sm3">5.2 国密 SSL/TLS 中的 SM3</h3>
+<p>在国密 TLS 协议中，SM3 用于：</p>
+<ul>
+<li>握手消息的完整性保护</li>
+<li>PRF（伪随机函数）的内部哈希</li>
+<li>证书验证</li>
+<li>Finished 消息计算</li>
+</ul>
+<h3 id="53-sm2-sm3">5.3 SM2 + SM3 联合使用</h3>
+<p>SM2 签名必须配合 SM3 使用：</p>
+<div class="highlight"><pre><span></span><code>1. 计算用户标识哈希 ZA = SM3(ENTLA || IDA || a || b || xG || yG || xA || yA)
+2. 计算消息摘要 e = SM3(ZA || M)
+3. 对 e 进行 SM2 签名
+</code></pre></div>
+<h2 id="6">6. 推荐库与工具</h2>
+<table>
+<thead>
+<tr>
+<th>语言/平台</th>
+<th>库</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Go</td>
+<td>github.com/emmansun/gmsm</td>
+<td>高性能，支持 SM2/SM3/SM4</td>
+</tr>
+<tr>
+<td>Go</td>
+<td>github.com/tjfoc/gmsm</td>
+<td>另一选择</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>gmssl</td>
+<td>纯 Python 实现</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>pysmx</td>
+<td>支持 SM2/SM3/SM4</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>BouncyCastle</td>
+<td>成熟的密码库</td>
+</tr>
+<tr>
+<td>C</td>
+<td>OpenSSL 1.1.1+</td>
+<td>内置 SM3 支持</td>
+</tr>
+<tr>
+<td>C</td>
+<td>GmSSL</td>
+<td>专门的国密实现</td>
+</tr>
+<tr>
+<td>Rust</td>
+<td>libsm</td>
+<td>SM 系列算法</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7">7. 总结</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>评价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>安全性</td>
+<td>⭐⭐⭐⭐⭐ 与 SHA-256 同级，无已知攻击</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>⭐⭐⭐⭐ 与 SHA-256 相当</td>
+</tr>
+<tr>
+<td>合规性</td>
+<td>⭐⭐⭐⭐⭐ 中国国密标准 + ISO 国际标准</td>
+</tr>
+<tr>
+<td>生态</td>
+<td>⭐⭐⭐⭐ 主流语言均有成熟实现</td>
+</tr>
+<tr>
+<td>推荐度</td>
+<td>⭐⭐⭐⭐⭐ 国密场景首选哈希算法</td>
+</tr>
+</tbody>
+</table>
+<p>SM3 是中国国密体系的核心哈希算法，在安全性上与 SHA-256 相当，且已获得国际标准认可。对于需要满足国密合规的系统，SM3 是必选的哈希算法。在非合规场景中，SM3 同样是一个安全可靠的选择。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

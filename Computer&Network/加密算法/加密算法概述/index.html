@@ -1,0 +1,2678 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/">
+      
+      
+        <link rel="prev" href="../../..">
+      
+      
+        <link rel="next" href="../DES/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>加解密算法概述 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              加解密算法概述
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    计算机与网络
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    加解密算法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    加解密算法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    加解密算法概述
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    加解密算法概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 什么是加密算法？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 对称加密
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 对称加密">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 基本原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 对称加密的优缺点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 分组密码与流密码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 分组密码的工作模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 填充方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 主要对称加密算法一览
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 非对称加密
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 非对称加密">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 基本原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 非对称加密的优缺点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 主要非对称加密算法一览
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-ecc-rsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 为什么 ECC 密钥比 RSA 短得多？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 对称加密 vs 非对称加密
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 混合加密：实际系统的选择
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 量子计算的影响
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 算法选型建议
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 算法选型建议">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 通用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 国密合规场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 选型决策流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 常见安全陷阱
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3DES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3DES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../AES/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AES
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9B%BD%E5%AF%86SM1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国密SM1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9B%BD%E5%AF%86SM4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国密SM4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RSA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RSA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ECC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95/MD5/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    摘要算法
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../Web/%E4%BA%92%E8%81%94%E7%BD%91Web%E6%9C%8D%E5%8A%A1%E8%AE%A4%E8%AF%81%E6%8A%80%E6%9C%AF%E5%8F%91%E5%B1%95%E5%8F%B2%EF%BC%9A%E4%BB%8EHTTP%20Basic%E5%88%B0OpenID%20Connect/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../NetworkNotes/Ping%E8%83%BD%E6%B5%8B%E7%AB%AF%E5%8F%A3%E5%90%97%3F/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    网络杂谈
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 什么是加密算法？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 对称加密
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 对称加密">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 基本原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 对称加密的优缺点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 分组密码与流密码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 分组密码的工作模式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 填充方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 主要对称加密算法一览
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 非对称加密
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 非对称加密">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 基本原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 非对称加密的优缺点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 主要非对称加密算法一览
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-ecc-rsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 为什么 ECC 密钥比 RSA 短得多？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 对称加密 vs 非对称加密
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 混合加密：实际系统的选择
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 量子计算的影响
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 算法选型建议
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 算法选型建议">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 通用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 国密合规场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 选型决策流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 常见安全陷阱
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    计算机与网络
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    加解密算法
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">加密算法概述</h1>
+<h2 id="1">1. 什么是加密算法？</h2>
+<p>加解密算法是将<strong>明文转换为密文</strong>（加密）以及将<strong>密文还原为明文</strong>（解密）的数学方法。它的核心目的是保护信息的<strong>机密性</strong>——确保数据即使被截获也无法被未授权者读取。</p>
+<p>加解密算法分为两大类：</p>
+<ul>
+<li>对称加密：使用同一密钥进行加密和解密。</li>
+<li>非对称加密：使用不同密钥进行加密和解密（公钥用于加密，私钥用于解密）。</li>
+</ul>
+<pre class="mermaid"><code>flowchart TD
+    A[加密算法]
+    A1[对称加密]
+    A2[非对称加密]
+    A --&gt; A1
+    A --&gt; A2
+
+    A1 --&gt; DES[DES]
+    A1 --&gt; 3DES[3DES]
+    A1 --&gt; AES[AES]
+    A1 --&gt; SM[国密SM1、国密SM4]
+    A1 --&gt; O[...]
+
+    A2 --&gt; RSA[RSA]
+    A2 --&gt; ECC[ECC]
+    A2 --&gt; O2[...]</code></pre>
+<h2 id="2">2. 对称加密</h2>
+<h3 id="21">2.1 基本原理</h3>
+<p>对称加密中，加密和解密使用<strong>同一个密钥</strong>（或可以互相推导的密钥）。通信双方必须事先安全地共享这个密钥。</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph 加密场景
+        P1[明文] --&gt;|"密钥 K"| E[加密] --&gt; C1[密文]
+    end
+    subgraph 解密场景
+        C2[密文] --&gt;|"相同密钥 K"| D[解密]--&gt; P2[明文]
+    end</code></pre>
+<h3 id="22">2.2 对称加密的优缺点</h3>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加解密速度极快</td>
+<td>密钥分发困难（如何安全传递密钥？）</td>
+</tr>
+<tr>
+<td>适合加密大量数据</td>
+<td>密钥管理复杂（n 人通信需 n(n-1)/2 个密钥）</td>
+</tr>
+<tr>
+<td>有硬件加速支持（AES-NI）</td>
+<td>无法实现数字签名和身份认证</td>
+</tr>
+<tr>
+<td>算法成熟、实现广泛</td>
+<td>无法解决不可否认性问题</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23">2.3 分组密码与流密码</h3>
+<p>对称加密根据数据处理方式可进一步分为：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>分组密码 (Block Cipher)</th>
+<th>流密码 (Stream Cipher)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>处理方式</td>
+<td>将明文分成固定大小的块，逐块加密</td>
+<td>生成密钥流，逐位/逐字节与明文异或</td>
+</tr>
+<tr>
+<td>典型代表</td>
+<td>AES、SM4、DES、3DES</td>
+<td>ChaCha20、RC4（已废弃）</td>
+</tr>
+<tr>
+<td>填充需求</td>
+<td>需要填充（PKCS7 等），或使用流式模式</td>
+<td>不需要填充</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>文件加密、数据库加密、磁盘加密</td>
+<td>实时通信、TLS 数据传输</td>
+</tr>
+</tbody>
+</table>
+<p>本目录下的算法（DES、3DES、AES、SM4、SM1）均属于<strong>分组密码</strong>。</p>
+<h3 id="24">2.4 分组密码的工作模式</h3>
+<p>由于分组密码一次只处理固定大小的块（如 AES 为 128 位），处理更长的数据需要<strong>工作模式</strong>来定义块之间如何关联：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>全称</th>
+<th>特点</th>
+<th>推荐度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ECB</td>
+<td>Electronic Codebook</td>
+<td>各块独立加密；相同明文块 → 相同密文块</td>
+<td>❌ 不安全</td>
+</tr>
+<tr>
+<td>CBC</td>
+<td>Cipher Block Chaining</td>
+<td>每块与前一密文块异或后加密；需 IV</td>
+<td>⚠️ 需搭配 MAC</td>
+</tr>
+<tr>
+<td>CTR</td>
+<td>Counter</td>
+<td>加密递增计数器生成密钥流；支持并行</td>
+<td>⚠️ 需搭配 MAC</td>
+</tr>
+<tr>
+<td><strong>GCM</strong></td>
+<td>Galois/Counter Mode</td>
+<td>CTR 加密 + GMAC 认证；AEAD 模式</td>
+<td>✅ <strong>首选</strong></td>
+</tr>
+<tr>
+<td>CCM</td>
+<td>Counter with CBC-MAC</td>
+<td>CTR 加密 + CBC-MAC；适合资源受限环境</td>
+<td>✅ 物联网场景</td>
+</tr>
+<tr>
+<td>XTS</td>
+<td>XEX Tweaked-codebook</td>
+<td>每块使用不同 tweak 值</td>
+<td>✅ 磁盘加密专用</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>flowchart TD
+    Q{选择工作模式}
+    Q --&gt;|"需要加密+认证（首选）"| GCM["GCM 模式"]
+    Q --&gt;|"兼容旧系统"| CBC["CBC + HMAC"]
+    Q --&gt;|"磁盘/存储加密"| XTS["XTS 模式"]
+    Q --&gt;|"资源受限+认证"| CCM["CCM 模式"]</code></pre>
+<blockquote>
+<p><strong>💡 AEAD 是最佳实践</strong></p>
+<p><strong>AEAD</strong>（Authenticated Encryption with Associated Data）模式同时提供加密和完整性认证。GCM 是最常用的 AEAD 模式。单独使用加密而不认证（如裸 CBC）会导致填充预言攻击等漏洞。</p>
+</blockquote>
+<h3 id="25">2.5 填充方式</h3>
+<p>当明文长度不是块大小的整数倍时（CBC 等模式），需要填充：</p>
+<table>
+<thead>
+<tr>
+<th>填充方式</th>
+<th>规则</th>
+<th>示例（块大小 8，数据 5 字节）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PKCS7/PKCS5</td>
+<td>填充 n 字节，每字节值为 n</td>
+<td><code>DD DD DD DD DD 03 03 03</code></td>
+</tr>
+<tr>
+<td>Zero Padding</td>
+<td>填充 0x00</td>
+<td><code>DD DD DD DD DD 00 00 00</code></td>
+</tr>
+<tr>
+<td>ISO 10126</td>
+<td>填充随机字节，最后一字节为填充长度</td>
+<td><code>DD DD DD DD DD xx xx 03</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>GCM/CTR 等流式模式不需要填充。</p>
+</blockquote>
+<h3 id="26">2.6 主要对称加密算法一览</h3>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>密钥长度</th>
+<th>分组大小</th>
+<th>轮数</th>
+<th>结构</th>
+<th>安全状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../DES/">DES</a></td>
+<td>56 位</td>
+<td>64 位</td>
+<td>16</td>
+<td>Feistel</td>
+<td>❌ 已破解，禁止使用</td>
+</tr>
+<tr>
+<td><a href="../3DES/">3DES</a></td>
+<td>112/168 位</td>
+<td>64 位</td>
+<td>48</td>
+<td>Feistel×3</td>
+<td>⚠️ 已弃用</td>
+</tr>
+<tr>
+<td><a href="../AES/">AES</a></td>
+<td>128/192/256 位</td>
+<td>128 位</td>
+<td>10/12/14</td>
+<td>SPN</td>
+<td>✅ 当前标准</td>
+</tr>
+<tr>
+<td><a href="../%E5%9B%BD%E5%AF%86SM1/">SM1</a></td>
+<td>128 位</td>
+<td>128 位</td>
+<td>未公开</td>
+<td>未公开</td>
+<td>✅ 国密（不公开，仅硬件）</td>
+</tr>
+<tr>
+<td><a href="../%E5%9B%BD%E5%AF%86SM4/">SM4</a></td>
+<td>128 位</td>
+<td>128 位</td>
+<td>32</td>
+<td>广义 Feistel</td>
+<td>✅ 国密（公开）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3">3. 非对称加密</h2>
+<h3 id="31">3.1 基本原理</h3>
+<p>非对称加密使用数学上相关但不同的<strong>一对密钥</strong>：</p>
+<ul>
+<li><strong>公钥</strong>（Public Key）：公开分发，任何人可获取</li>
+<li><strong>私钥</strong>（Private Key）：严格保密，仅持有者拥有</li>
+</ul>
+<p>核心特性：公钥加密的内容只有私钥能解密，私钥签名的内容公钥可验证。</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph 加密场景
+        direction LR
+        P1[明文] --&gt;|"接收方公钥加密"| C1[密文]
+        C1 --&gt;|"接收方私钥解密"| P1R[明文]
+    end
+
+    subgraph 签名场景
+        direction LR
+        M[消息摘要] --&gt;|"发送方私钥签名"| SIG[签名]
+        SIG --&gt;|"发送方公钥验签"| V["✓ / ✗"]
+    end</code></pre>
+<h3 id="32">3.2 非对称加密的优缺点</h3>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不需要预先安全地共享密钥</td>
+<td>计算速度极慢（比对称加密慢 1000+ 倍）</td>
+</tr>
+<tr>
+<td>n 人通信只需 n 对密钥</td>
+<td>不适合直接加密大量数据</td>
+</tr>
+<tr>
+<td>支持数字签名和身份认证</td>
+<td>密钥长度较长（RSA 需 2048+ 位）</td>
+</tr>
+<tr>
+<td>支持不可否认性</td>
+<td>需要公钥基础设施（PKI）支撑</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33">3.3 主要非对称加密算法一览</h3>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>数学基础</th>
+<th>128 位安全等效密钥长度</th>
+<th>主要用途</th>
+<th>安全状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../RSA/">RSA</a></td>
+<td>大整数因式分解</td>
+<td>3072 位</td>
+<td>加密 + 签名</td>
+<td>✅（受量子计算威胁）</td>
+</tr>
+<tr>
+<td><a href="../ECC/">ECC</a></td>
+<td>椭圆曲线离散对数</td>
+<td>256 位</td>
+<td>签名 + 密钥协商</td>
+<td>✅ 推荐</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-ecc-rsa">3.4 为什么 ECC 密钥比 RSA 短得多？</h3>
+<p>同等安全强度下的密钥长度对比：</p>
+<table>
+<thead>
+<tr>
+<th>对称等效安全性</th>
+<th>RSA 密钥长度</th>
+<th>ECC 密钥长度</th>
+<th>比值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>80 位</td>
+<td>1024 位</td>
+<td>160 位</td>
+<td>6.4×</td>
+</tr>
+<tr>
+<td>112 位</td>
+<td>2048 位</td>
+<td>224 位</td>
+<td>9.1×</td>
+</tr>
+<tr>
+<td>128 位</td>
+<td>3072 位</td>
+<td>256 位</td>
+<td>12×</td>
+</tr>
+<tr>
+<td>192 位</td>
+<td>7680 位</td>
+<td>384 位</td>
+<td>20×</td>
+</tr>
+<tr>
+<td>256 位</td>
+<td>15360 位</td>
+<td>521 位</td>
+<td>29.5×</td>
+</tr>
+</tbody>
+</table>
+<p>ECC 基于的<strong>椭圆曲线离散对数问题</strong>比 RSA 基于的<strong>整数分解问题</strong>在计算上更困难，因此用更短的密钥就能达到同样的安全性。</p>
+<h2 id="4-vs">4. 对称加密 vs 非对称加密</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>对称加密</th>
+<th>非对称加密</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>密钥</td>
+<td>加密解密用同一密钥</td>
+<td>公钥加密，私钥解密</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>极快（GB/s 级别）</td>
+<td>极慢（KB/s 级别）</td>
+</tr>
+<tr>
+<td>密钥分发</td>
+<td>困难</td>
+<td>简单（公钥可公开）</td>
+</tr>
+<tr>
+<td>适合数据量</td>
+<td>大数据</td>
+<td>小数据（通常仅加密密钥）</td>
+</tr>
+<tr>
+<td>数字签名</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>典型密钥长度</td>
+<td>128-256 位</td>
+<td>2048-4096 位 (RSA) / 256 位 (ECC)</td>
+</tr>
+<tr>
+<td>代表算法</td>
+<td>AES、SM4</td>
+<td>RSA、ECC</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5">5. 混合加密：实际系统的选择</h2>
+<p>实际生产系统中，对称加密和非对称加密几乎从不单独使用，而是<strong>结合使用</strong>（混合加密）：</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph 发送方
+        A["生成随机对称密钥 K"] --&gt; B["用 AES-GCM + K 加密数据"]
+        A --&gt; C["用接收方公钥加密 K"]
+    end
+
+    B --&gt; D["传输：加密后的数据 + 加密后的密钥 K"]
+    C --&gt; D
+
+    subgraph 接收方
+        D --&gt; E["用私钥解密得到 K"]
+        E --&gt; F["用 AES-GCM + K 解密数据"]
+    end</code></pre>
+<p><strong>混合加密的逻辑</strong>：</p>
+<ol>
+<li>用非对称加密解决<strong>密钥分发</strong>问题（安全传递对称密钥）</li>
+<li>用对称加密解决<strong>性能</strong>问题（高效加密大量数据）</li>
+</ol>
+<p><strong>典型应用</strong>：</p>
+<ul>
+<li><strong>TLS/HTTPS</strong>：ECDHE 协商对称密钥 → AES-GCM 加密通信数据</li>
+<li><strong>PGP 邮件加密</strong>：RSA 加密会话密钥 → AES 加密邮件内容</li>
+<li><strong>Signal/微信</strong>：X25519 密钥协商 → AES-256 或 ChaCha20 加密消息</li>
+</ul>
+<h2 id="6">6. 量子计算的影响</h2>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>量子计算威胁</th>
+<th>应对</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AES-128</td>
+<td>Grover 算法将安全性降至 64 位</td>
+<td>使用 AES-256（仍有 128 位安全性）</td>
+</tr>
+<tr>
+<td>AES-256</td>
+<td>Grover 算法后仍有 128 位安全性</td>
+<td>✅ 继续使用</td>
+</tr>
+<tr>
+<td>SM4</td>
+<td>同 AES-128，安全性降至 64 位</td>
+<td>关注国密后量子方案</td>
+</tr>
+<tr>
+<td>RSA</td>
+<td>❌ Shor 算法可多项式时间破解</td>
+<td>迁移到后量子密码</td>
+</tr>
+<tr>
+<td>ECC</td>
+<td>❌ Shor 算法可多项式时间破解</td>
+<td>迁移到后量子密码</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>⚠️ 后量子迁移</strong></p>
+<p>所有基于因式分解和离散对数的非对称算法（RSA、ECC）在量子计算面前<strong>不堪一击</strong>。NIST 已发布后量子密码标准（ML-KEM/ML-DSA），对需要长期保密的数据，现在就应规划迁移。对称加密只需加倍密钥长度即可应对。</p>
+</blockquote>
+<h2 id="7">7. 算法选型建议</h2>
+<h3 id="71">7.1 通用场景</h3>
+<table>
+<thead>
+<tr>
+<th>需求</th>
+<th>推荐</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据加密</td>
+<td>AES-256-GCM</td>
+<td>安全、快速、AEAD、硬件加速</td>
+</tr>
+<tr>
+<td>密钥交换</td>
+<td>X25519 (ECDH)</td>
+<td>高性能、短密钥、抗侧信道</td>
+</tr>
+<tr>
+<td>数字签名</td>
+<td>Ed25519</td>
+<td>快速、确定性、短签名</td>
+</tr>
+<tr>
+<td>兼容性优先</td>
+<td>RSA-2048 + AES-128-GCM</td>
+<td>广泛支持</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72">7.2 国密合规场景</h3>
+<table>
+<thead>
+<tr>
+<th>需求</th>
+<th>推荐</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据加密</td>
+<td>SM4-GCM</td>
+<td>国密标准，公开可实现</td>
+</tr>
+<tr>
+<td>高安全加密</td>
+<td>SM1（硬件）</td>
+<td>算法不公开，硬件保护</td>
+</tr>
+<tr>
+<td>密钥交换/签名</td>
+<td>SM2</td>
+<td>基于 ECC，国密标准</td>
+</tr>
+</tbody>
+</table>
+<h3 id="73">7.3 选型决策流程</h3>
+<pre class="mermaid"><code>flowchart TD
+    START[需要加密数据] --&gt; Q1{国密合规要求?}
+
+    Q1 --&gt;|是| Q2{安全等级?}
+    Q1 --&gt;|否| Q3{数据量?}
+
+    Q2 --&gt;|极高，有硬件| SM1["SM1（硬件加密）"]
+    Q2 --&gt;|通用| SM4GCM["SM4-GCM"]
+
+    Q3 --&gt;|大数据| AES["AES-256-GCM"]
+    Q3 --&gt;|仅密钥/小数据| Q4{性能 vs 兼容?}
+
+    Q4 --&gt;|性能优先| ECC_["ECIES / X25519"]
+    Q4 --&gt;|兼容优先| RSA_["RSA-OAEP"]</code></pre>
+<h2 id="8">8. 常见安全陷阱</h2>
+<table>
+<thead>
+<tr>
+<th>陷阱</th>
+<th>风险</th>
+<th>正确做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>使用 ECB 模式</td>
+<td>明文模式泄露</td>
+<td>使用 GCM 模式</td>
+</tr>
+<tr>
+<td>Nonce/IV 重复</td>
+<td>密钥流重复，明文泄露</td>
+<td>每次加密使用随机唯一值</td>
+</tr>
+<tr>
+<td>仅加密不认证</td>
+<td>无法检测篡改（Padding Oracle 等）</td>
+<td>使用 AEAD 模式</td>
+</tr>
+<tr>
+<td>硬编码密钥在代码中</td>
+<td>密钥随代码泄露</td>
+<td>使用 KMS 或环境变量</td>
+</tr>
+<tr>
+<td>使用 DES/3DES</td>
+<td>密钥过短或性能差</td>
+<td>迁移到 AES-256</td>
+</tr>
+<tr>
+<td>自己实现加密算法</td>
+<td>几乎必然存在漏洞</td>
+<td>使用经审计的成熟密码库</td>
+</tr>
+<tr>
+<td>用 RSA 直接加密大数据</td>
+<td>性能极差、有长度限制</td>
+<td>混合加密方案</td>
+</tr>
+<tr>
+<td>不验证公钥来源</td>
+<td>中间人攻击</td>
+<td>使用 PKI 证书体系</td>
+</tr>
+</tbody>
+</table>
+<h2 id="9">9. 总结</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>对称加密</th>
+<th>非对称加密</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心价值</td>
+<td>高效加密大量数据</td>
+<td>安全交换密钥、身份认证</td>
+</tr>
+<tr>
+<td>代表算法</td>
+<td>AES-256、SM4</td>
+<td>RSA、ECC/Ed25519、SM2</td>
+</tr>
+<tr>
+<td>推荐模式</td>
+<td>GCM（AEAD）</td>
+<td>OAEP（加密）、PSS（签名）</td>
+</tr>
+<tr>
+<td>量子安全性</td>
+<td>加倍密钥即可</td>
+<td>需迁移到后量子方案</td>
+</tr>
+<tr>
+<td>实际使用</td>
+<td>与非对称加密配合使用</td>
+<td>与对称加密配合使用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心理念</strong>：现代安全系统使用<strong>混合加密</strong>——非对称加密解决"信任建立"问题（密钥交换、身份认证），对称加密解决"高效保护"问题（数据加密）。两者缺一不可。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
