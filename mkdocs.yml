@@ -3,6 +3,8 @@ site_url: https://chinehe.github.io/knowledge-mkdocs/
 nav:
   - Home: index.md
   - 计算机与网络:
+    - Web:
+      - 互联网Web服务认证技术发展史: Computer&Network/Web/互联网Web服务认证技术发展史：从HTTP Basic到OpenID Connect.md
     - 网络杂谈:
       - Ping能测端口吗?: Computer&Network/NetworkNotes/Ping能测端口吗?.md
   - Golang:
