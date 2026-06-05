@@ -1,0 +1,2889 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">
+      
+      
+        <link rel="prev" href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87008_JSON%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3%EF%BC%88%E8%8D%89%E7%A8%BF%EF%BC%89/">
+      
+      
+        <link rel="next" href="../../../about/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Docker入门指南 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-docker" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Docker入门指南
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/NetworkNotes/Ping%E8%83%BD%E6%B5%8B%E7%AB%AF%E5%8F%A3%E5%90%97%3F/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/NetworkNotes/Ping%E8%83%BD%E6%B5%8B%E7%AB%AF%E5%8F%A3%E5%90%97%3F/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DevOps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker入门指南
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker入门指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 什么是Docker？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 可以用Docker做什么？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. 可以用Docker做什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1. 快速、持续交付
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.2. 响应式部署与拓展
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.3. 在同一台硬件上运行多个工作负载
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 安装Docker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. 底层技术
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 什么是Docker？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 可以用Docker做什么？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. 可以用Docker做什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.1. 快速、持续交付
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.2. 响应式部署与拓展
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2.3. 在同一台硬件上运行多个工作负载
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 安装Docker
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. 底层技术
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    DevOps
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Docker
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>Docker是一个用于开发、发布和运行应用程序的开放平台。</p>
+<p>《Docker入门指南》将循序渐进且详细地讲解Docker的基本概念和使用方式。力求让初学者从0开始，对Docker有一个基本的初步印象，并能够简单地使用Docker。</p>
+<p>文章主要内容包括：</p>
+<ol>
+<li>Docker概述：讲解什么是Docker？Docker有什么用？</li>
+<li>Docker架构：讲解Docker的基本架构。</li>
+<li>Docker核心概念：讲解Docker中的集合核心概念及其作用。</li>
+<li>Docker基础使用：讲解镜像和容器的基础操作。</li>
+<li>完整实例：通过一个完整的实例，将前面的内容串联起来.</li>
+</ol>
+<p>关于本文：</p>
+<ul>
+<li>文章基于官方文档<a href="https://docs.docker.com/get-started/">Get started</a>编写，所以基本可以不用担心其正确性。</li>
+<li>文章内容基本源自上述的官方文档，但对其顺序和讲解方式做了全面的调整，使其更适合国内开发者阅读。</li>
+</ul>
+<h1 id="1-docker">1. Docker概述</h1>
+<h2 id="11-docker">1.1. 什么是Docker？</h2>
+<p>Docker是一个用于开发、发布和运行应用程序的开放平台。使我们能够将应用与基础设施分离，从而快速交付软件。通过Docker，我们可以像管理应用程序一样管理基础设施。</p>
+<p>使用Docker，可以大幅缩短从编写代码到生产发布之间的耗时。</p>
+<hr />
+<p>Docker 提供了在隔离的环境（称为<strong>容器</strong>）中打包和运行应用程序的能力。</p>
+<blockquote>
+<p>这里的隔离并非完全隔离，Docker允许一定程度上的资源共享，后文会讲。</p>
+</blockquote>
+<p><strong>核心特性：</strong></p>
+<ul>
+<li>
+<p><strong>隔离性：</strong>提供进程级别的隔离保护，使得系统更加安全，且可以在一个主机上运行多个容器。</p>
+</li>
+<li>
+<p><strong>轻量级：</strong>容器体积小，启动快。但包含了应用运行所需要的一切，所以可以不依赖主机上安装的内容。</p>
+</li>
+<li><strong>可分发：</strong>可以在工作中向其他人分享容器，且能够确保所有人得到相同的容器。</li>
+</ul>
+<hr />
+<p>Docker 提供了完整的工具链和平台，用于管理容器的整个生命周期：</p>
+<ul>
+<li>
+<p><strong>开发阶段：</strong>使用容器构建应用程序及其支撑组件，创建标准化的开发环境。</p>
+</li>
+<li>
+<p><strong>分发与测试：</strong>容器作为应用程序分发的基本单位，提供统一的测试环境。</p>
+</li>
+<li>
+<p><strong>生产部署：</strong>将应用程序作为容器部署到生产环境，支持容器编排服务，可以跨越不同基础设施（本地数据中心、云服务或混合环境）。</p>
+</li>
+</ul>
+<h2 id="12-docker">1.2. 可以用Docker做什么？</h2>
+<h3 id="121">1.2.1. 快速、持续交付</h3>
+<p>Docker使用本地容器为应用程序和服务提供服务，让开发者在一个标准化的环境中工作，从而优化开发生命周期。非常适合持续集成和持续交付（CI/CD）工作流。</p>
+<p>示例场景：</p>
+<ol>
+<li>开发者在本地编写代码，使用Docker容器与同事们协同。</li>
+<li>开发者使用Docker来将应用程序推送到测试环境中，并执行自动化测试或手动测试。</li>
+<li>发现BUG后，开发者在开发环境中修复BUG，并重新部署到测试环境中进行测试和验证。</li>
+<li>测试完成后，将修复后的镜像推送到生产环境，即可完成修复方案的交付。</li>
+</ol>
+<h3 id="122">1.2.2. 响应式部署与拓展</h3>
+<p>Docker基于容器，具备高度的可移植性。</p>
+<p>Docker容器可以在开发者本地笔记本上运行，也可以在数据中心、云服务、或混合环境的物理机或虚拟机上运行。</p>
+<p>Docker的可移植性和轻量性，可以非常方便地动态管理工作负载，开发者可以根据业务需求几乎实时地拓展或关闭应用和服务。</p>
+<h3 id="123">1.2.3. 在同一台硬件上运行多个工作负载</h3>
+<p>Docker是轻量且快速的，它提供了一种可行的、经济的方案来替代虚拟机。</p>
+<p>Docker非常适合高密度环境以及需要使用更少资源来做更多工作的中小型部署.</p>
+<h2 id="13-docker">1.3. 安装Docker</h2>
+<p>安装docker非常简单，我这里就不去赘述了~</p>
+<p>可以参考官网：<a href="https://docs.docker.com/get-started/get-docker/">Get Docker</a></p>
+<h2 id="14">1.4. 底层技术</h2>
+<p>Docker使用Go语言编写，利用了Linux内核中多种特性来实现其功能。</p>
+<p>Docker使用一种名为<code>namespace</code>命名空间的技术，来提供隔离的工作空间（也就是容器）。当运行容器时，Docker会为其创建一组<code>namespace</code>命名空间。</p>
+<p>这些命名空间为容器提供了一层隔离，容器运行在一个独立的命名空间中，其访问受限于该命名空间。</p>
+<h1 id="2-docker">2. Docker架构</h1>
+<p>Docker采用客户端-服务器架构。Docker客户端与Docker守护进程通信，后者负责构建、运行和分发Docker容器等繁重工作。</p>
+<p>Docker客户端和守护进程可以运行在同一套系统上，也可以使用Docker客户端连接远程的Docker守护进程。Docker客户端和守护进程通过REST API、Unix套接字或者网络接口进行通信。</p>
+<p>还有一个Docker客户端是Docker Compose，它让我们可以处理由一组容器组成的应用程序。</p>
+<p><strong>Docker架构图：</strong></p>
+<p><img alt="image-20260113171600013" src="../../.public//image-20260113171600013.png" /></p>
+<p><strong>图中元素讲解：</strong></p>
+<ul>
+<li>
+<p><strong>Client 客户端</strong>：用户与 Docker 交互的入口，通过命令行或 API 发送指令给 Docker Daemon。<code>docker</code> 命令使用 Docker API，Docker 客户端可以与多个守护进程通信。</p>
+</li>
+<li>
+<p><code>docker run</code> ：用于运行一个容器。它会从本地 Images 中查找指定镜像，若不存在则从 Registry 拉取，然后启动容器</p>
+</li>
+<li>
+<p><code>docker build</code>：用于构建镜像。通常基于 Dockerfile 构建，生成的镜像会被存储在本地 Images 中。</p>
+</li>
+<li>
+<p><code>docker pull</code> ：用于从远程 Registry 拉取镜像到本地 Images 中。</p>
+</li>
+<li>
+<p><strong>Docker Host 主机</strong>：Docker 的核心运行环境，包含 Docker daemon、本地镜像库和容器实例。</p>
+</li>
+<li>
+<p><strong>Docker daemon</strong>：是 Docker 的后台服务进程，负责接收客户端请求并管理镜像、容器、网络和存储等资源。守护进程还可以与其他守护进程通信以管理Docker服务。</p>
+</li>
+<li>
+<p><strong>Images 注册表</strong>：存储本地的镜像集合，图中展示了几个常见的镜像：Python应用、Redis、Alpine（轻量级Linux发行版）。</p>
+</li>
+<li>
+<p><strong>Containers 容器</strong>：基于镜像启动的运行实例。</p>
+</li>
+<li>
+<p><strong>Registry 注册表</strong>：这是远程镜像存储中心，用于存放和分发 Docker 镜像。</p>
+</li>
+<li>
+<p><strong>Images 镜像</strong>：远程镜像。</p>
+</li>
+<li>
+<p><strong>Extensions 拓展</strong>：Docker拓展。</p>
+</li>
+<li>
+<p><strong>Plugins 插件</strong>：Docker插件。</p>
+</li>
+</ul>
+<p><strong>整体流程总结：</strong></p>
+<ol>
+<li>用户通过<code>docker build</code>构建镜像 → 存入本地 Images。</li>
+<li>用户通过 <code>docker pull</code> 从 注册表 拉取镜像 → 存入本地 Images。</li>
+<li>用户通过 <code>docker run</code>启动容器 → 从本地 Images 创建 Containers。</li>
+<li>若本地无对应镜像，Docker daemon 会自动从 Registry 拉取。</li>
+<li>用户可将本地镜像推送到 Registry，供他人使用。</li>
+</ol>
+<h1 id="3-docker">3. Docker核心概念</h1>
+<p>本章节将介绍几乎所有的Docker相关的核心概念。</p>
+<p>如果实在不理解也没有关系，随着学习的深入，自然而然地就能够理解了~</p>
+<h2 id="31-container">3.1. Container 容器</h2>
+<p>Container容器是Docker中最核心的概念：</p>
+<p><strong>Container容器是Docker中基于Image镜像创建的可执行应用程序实例，它将应用及其所有依赖打包在一个轻量级、可移植的运行环境中。</strong></p>
+<p><strong>核心特点：</strong></p>
+<ul>
+<li><strong>轻量级虚拟化：</strong>基于Linux内核特性实现进程隔离，比虚拟机开销小得多。</li>
+<li><strong>可移植性</strong>：具备环境一致性，在不同环境上行为统一。可以在任何地方运行，不论是在开发机、数据中心、云端，还是在任何其他地方。</li>
+<li><strong>自成一体：</strong> 容器包含应用及其运行所需的一切依赖，无需依赖主机上预装的依赖。</li>
+<li><strong>资源隔离：</strong> 容器隔离运行，具有独立的文件系统、网络和资源配额。对主机和其他容器的影响极小，提升了应用的安全性。</li>
+</ul>
+<blockquote>
+<p>想象一下，我们正在开发一个网页应用（React 前端、Python API 和 PostgreSQL 数据库）。如果要参与这个项目，就必须安装Node、Python和PostgreSQL。你如何确保团队中的开发者使用相同的版本呢？你如何确保你的Python、Node、数据库，不会受你机器上其他的内容影响呢？你如何管理潜在的冲突？</p>
+<p>这时候容器出现了！简单来说，容器是应用中每个组件的隔离进程，每个组件都运行在独立的环境中，与机器上其它的内容完全隔离。</p>
+</blockquote>
+<p><strong>容器和虚拟机的区别：</strong></p>
+<ul>
+<li>虚拟机是一个拥有内核、硬件驱动、程序和应用程序的完整操作系统。如果使用虚拟机来隔离单个应用程序，将是一笔很大的开销。</li>
+<li>容器是一个独立进程，包含运行所需的所有文件。如果运行多个容器，他们共享一个内核，这样就能在更少的基础设施上运行更多的应用。</li>
+</ul>
+<h2 id="32-image">3.2. Image 镜像</h2>
+<p><strong>Image 镜像是只读的容器模板</strong>，包含了运行应用程序所需的所有文件、依赖库、环境变量和配置信息。</p>
+<p>Image 镜像作为容器运行的基础模板，确保应用环境的一致性和可移植性，支持快速构建和部署应用程序。</p>
+<p><strong>核心特点：</strong></p>
+<ul>
+<li><strong>分层存储：</strong> 每个镜像由多个<strong>层（layer）</strong>组成，每个层包含一组文件系统的变更（新增、删除或修改文件）。</li>
+<li><strong>不可变性：</strong> 镜像一旦创建就不能修改。只能基于现有镜像创建新的镜像并进行拓展。</li>
+<li><strong>可复用性：</strong> 同一个镜像可以创建多个容器实例。</li>
+</ul>
+<blockquote>
+<p>上文中提到，容器是一个孤立的进程，那么他是从哪里获取文件和配置呢？我们又如何分享这些环境呢？</p>
+<p>答案是使用<strong>镜像</strong>。</p>
+<p>容器镜像是一个标准化包，包含了容器运行所需的所有文件、二进制文件、库和配置。</p>
+<p>比如PostgreSQL镜像，会包含数据库二进制文件、配置文件和其他依赖。</p>
+<p>比如Python Web应用的镜像，会包含Python运行时环境、应用代码及其所有依赖。</p>
+</blockquote>
+<p><strong>镜像拓展：</strong></p>
+<p>镜像的分层存储和不可变特性，使得我们可以拓展现有镜像：比如要开发一个Python应用，可以从Python镜像开始，添加额外的层（layer）来安装应用的依赖并添加代码。这样就可以专注于应用，而不是Python本身。</p>
+<h2 id="33-layer">3.3. Layer 层</h2>
+<p>上文中提过，容器镜像是由多层layer组成的，而这些层一旦形成，就不可变。</p>
+<p>镜像中的每一<strong>Layer 层</strong>都包含一组文件系统的变更（添加、删除或修改）。</p>
+<p>理论上一个镜像：</p>
+<ol>
+<li>第一层增加了基本命了和包管理器，比如apt。</li>
+<li>第二层安装了Python运行时和用于依赖管理的PIP。</li>
+<li>第三层包含应用程序指定的requirements.txt 文件中。</li>
+<li>第四层安装该应用的特定依赖。</li>
+<li>第五层包含应用程序的实际源代码。</li>
+</ol>
+<p>上例中的关系图：</p>
+<pre class="mermaid"><code>graph LR
+    S[app源代码] --&gt; D[app依赖] --&gt; R[app必需文件] --&gt; P[Python and pip] --&gt; DB[Debian base]</code></pre>
+<p>这种方式有很大的好处：允许镜像之间重用镜像层。</p>
+<p>比如需要再创建一个Python程序，由于分层，可以直接使用相同的Python基础。这样就能减少分发镜像所需的存储和带宽，加快构建速度。示例图：</p>
+<pre class="mermaid"><code>graph LR
+    S1[app源代码_1] --&gt; D1[app依赖_1] --&gt; R1[app必需文件_1] --&gt; P[Python and pip] --&gt; DB[Debian base]
+    S2[app源代码_2] --&gt; D2[app依赖_2] --&gt; R2[app必需文件_2] --&gt; P[Python and pip] </code></pre>
+<p>分层是通过内容寻址和联合文件系统实现的，具体流程如下：</p>
+<ol>
+<li>每个层下载完成后，会被解压到主机文件系统中的独立目录中。</li>
+<li>每次从镜像运行容器时，会创建一个联合文件系统，将镜像的层叠加在一起形成一个统一视图。</li>
+<li>容器启东市，其根目录设置为该统一目录的位置，使用<code>chroot</code></li>
+</ol>
+<p>当创建联合文件系统时，处理镜像的层外，还会专门为运行中的容器创建一个目录。这使得容器能够进行文件系统更改，同时保持原镜像的层不变。这使得我们可以从同一个底层镜像运行多个容器。</p>
+<h2 id="34-registry">3.4. Registry 注册表</h2>
+<p>Registry 注册表是<strong>集中存储和分发Docker镜像</strong>的地方，允许用户推送、拉取和管理容器镜像。</p>
+<p><strong>核心特点：</strong></p>
+<ul>
+<li><strong>集中存储：</strong>是集中存储Docker镜像的地方，有点类似于GitHub存储代码。</li>
+<li><strong>镜像托管</strong>：允许镜像的上传、下载和版本管理。</li>
+<li><strong>访问控制：</strong> 支持公有和私有仓库的权限管理。</li>
+</ul>
+<blockquote>
+<p>前面已经了解了什么是镜像以及它是如何工作的，那么这些镜像存储在哪里呢？</p>
+<p>如果把容器镜像存储在本地电脑系统上，该如何与其他人分享，或是在另一台机器上使用呢？</p>
+<p>我们可以把镜像存储到<strong>注册表</strong>中：</p>
+<p>注册表是一个集中存储和共享容器镜像的地方。它可以是公开的，也可以是私密的。</p>
+</blockquote>
+<p><strong>常见类型：</strong></p>
+<ul>
+<li><strong>Docker Hub：</strong>官方公共注册表。</li>
+</ul>
+<blockquote>
+<p>Docker Hub是全球默认的镜像仓库和分发平台，提供多种支持和认可的镜像（称为Docker可信内容）。</p>
+<p>Docker Hub提供全托管服务或者为我们创建自己的镜像提供了很好的起始工具，包括：</p>
+<ul>
+<li>Docker官方镜像：Docker仓库中一些经过精心策划的镜像，是大多数用户起始工具，也是Docker Hub上最安全的镜像。</li>
+<li>Docker验证镜像：Docker官方验证过的，由商业发布者发布的高质量镜像。</li>
+<li>Docker赞助的开源镜像：由Docker赞助的开源项目发布和维护的镜像。</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>云服务商注册表：</strong>云服务商提供的注册表。</li>
+</ul>
+<blockquote>
+<p>比如阿里云容器镜像服务、<a href="https://aws.amazon.com/ecr/">亚马逊弹性容器注册表（ECR）</a>、<a href="https://azure.microsoft.com/en-in/products/container-registry">Azure 容器注册表（ACR）</a> 、<a href="https://cloud.google.com/artifact-registry">谷歌容器注册表（GCR）</a> 。</p>
+</blockquote>
+<ul>
+<li><strong>私有注册表：</strong>个人或企业内部部署的容器镜像注册表。</li>
+</ul>
+<blockquote>
+<p>比如 Harbor、JFrog Artifactory、GitLab Container registry 等。</p>
+</blockquote>
+<p><strong>注册表与仓库：</strong></p>
+<p>在使用注册表时，可能会听到或想到，注册表和仓库这两个概念好像是一样的。</p>
+<p>虽然它们有所关联，但并不完全相同。注册表是一个集中存储和管理容器镜像的地方，而仓库则是注册表内相关容器镜像的集合。可以把它想象成一个文件夹，用来根据项目整理你的镜像。每个仓库包含一个或多个容器镜像。</p>
+<p>关系图：</p>
+<pre class="mermaid"><code>graph LR
+    img_a_1[Image:project-a:v1.0]
+    img_a_2[Image:project-a:v2.0]
+  img_b_1[Image:project-b:v1.0]
+  img_b_2[Image:project-b:v2.0]
+  img_b_3[Image:project-b:v3.0]
+
+  subgraph ra[Repository A]
+  img_a_1
+  img_a_2
+  end
+
+  subgraph rb[Repository B]
+  img_b_1
+  img_b_2
+  img_b_3
+  end
+
+  subgraph r[Registry]
+  ra
+  rb
+  end</code></pre>
+<h2 id="35-docker-compose">3.5. Docker Compose</h2>
+<p>Compose是一个用户<strong>定义和运行多容器Docker应用程序的声明式工具</strong>，通过一个YAML文件（Compose file）配置整个应用栈。</p>
+<p><strong>核心特性：</strong></p>
+<ul>
+<li><strong>多容器管理：</strong> 同时启动、停止和管理多个容器。</li>
+<li><strong>声明式：</strong> 使用<code>docker-compose.yml</code>文件定义服务关系。</li>
+<li><strong>环境一致性：</strong> 确保多容器应用在不同环境上部署一致。</li>
+</ul>
+<p>Compose是一个声明式工具，只需要定义它，就可以开始使用。</p>
+<p>如果做了修改，重新运行<code>docker compose up</code>命令，就能自动对比文件变更并只能应用。</p>
+<h2 id="36-dockerfilecompose-file">3.6. Dockerfile、Compose file</h2>
+<p><strong>Dockerfile：</strong> Dockerfile是一种用于创建容器镜像的文本文档，为镜像构建器提供执行、复制文件、启动等命令。用于在构建阶段自定义镜像，其中包含一系列用于构建Docker镜像的指令。专注于单一镜像的构建过程。</p>
+<p><strong>Compose file：</strong> 定义多容器应用的配置，用于启动和管理多容器应用，处理服务间依赖、网络、卷等配置。</p>
+<p><strong>两者关系：</strong></p>
+<ul>
+<li><strong>职责互补：</strong>Dockerfile 负责镜像构建，Compose File 负责服务编排。</li>
+<li><strong>协同工作</strong>：Compose File 可以引用 Dockerfile 来构建自定义镜像</li>
+<li><strong>生命周期不同：</strong>Dockerfile 用于构建阶段，Compose File 用于运行阶段</li>
+</ul>
+<h2 id="37-volumebind-mount">3.7 Volume卷、Bind Mount 绑定挂载</h2>
+<blockquote>
+<p>容器启动时，使用镜像提供的文件和配置。每个容器都会创建、修改和删除数据，且不会影响其他容器。当容器被删除时，这些文件的变更也被删除。</p>
+<p>虽然容器这种临时性很好，但在想持久保存数据时却是个问题。比如，重启数据库容器时，肯定不希望从一个空数据开始，那么文件如何持久保存呢？</p>
+</blockquote>
+<p><strong>Volume 卷：</strong> Volume是Docker中由Docker引擎管理的数据持久化存储卷。</p>
+<p>它是一种个存储机制，能够将数据持久化到容器的生命周期之外。可以把它想象成一个快捷方式或符号链接（从容器内部到外部）。</p>
+<p><strong>核心特性：</strong></p>
+<ul>
+<li>Docker管理：由Docker引擎自动创建和维护。</li>
+<li>数据持久化：独立于容器生命周期之外，确保卷数据不丢失。</li>
+<li>跨容器共享：可以将同一个卷绑定到多个容器上，以便在容器间共享文件。这在日志聚合、数据管道或者其他时间驱动应用中可能很有帮助。</li>
+</ul>
+<blockquote>
+<p>每个容器都具备运行所需的一切，无需依赖主机上预装的依赖。</p>
+<p>由于容器是孤立运行的，对宿主机和其他容器影响极小。这种隔离带来了一个巨大的好处：容器最大限度地减小了与主机系统及其他容器的冲突。然而这种隔离也意味着容器默认无法直接访问主机上的数据。</p>
+<p>比如一个场景：有一个网络应用容器，需要访问主机系统文件中的配置。该文件可能包含敏感数据，如数据库凭证或API秘钥。直接在容器镜像中存储此类敏感信息存在安全风险，尤其是镜像共享过程中。</p>
+<p>为了应对这一问题，docker提供了存储选项，弥补容器隔离与主机数据共享的问题。</p>
+<p>Docker提供两种主要的存储方式，用于持久化数据和在主机与容器之间共享数据：卷和绑定挂载（bind mounts）。</p>
+<p>如果想确保容器内部生成或修改的数据即使在容器停止后依然存在，应该选择使用卷。</p>
+<p>如果主机系统上有特定的文件或目录，要直接与容器共享，比如配置文件或开发代码，应该使用绑定挂载。这就像在主机和容器之间打开了一个直接的门户以便分享。绑定挂载非常适用于开发环境，因为主机和容器之间需要实时文件访问和共享。</p>
+</blockquote>
+<p><strong>Bind Mount 绑定挂载：</strong> Bind Mount是Docker中将宿主机文件系统中的文件或目录直接挂载到容器内的挂载方法，实现宿主机和容器之间的实时文件共享。</p>
+<p><strong>核心特性：</strong></p>
+<ul>
+<li>路径映射：将宿主机实际路径映射到容器指定路径。</li>
+<li>实时同步：宿主机和容器间文件变更实时可见。</li>
+<li>双向访问：宿主机和容器都可以直接访问。</li>
+<li>用户管理：由用户而非Docker管理挂载路径。</li>
+</ul>
+<p><strong>Volume VS Bind Mount：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Volume 卷</th>
+<th>Bind Mount 绑定挂载</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>管理方式</td>
+<td>由 Docker 引擎统一管理，自动创建和维护</td>
+<td>由用户直接管理，映射宿主机实际路径</td>
+</tr>
+<tr>
+<td>存储位置</td>
+<td>存储在 Docker 的受管目录中（通常 /var/lib/docker/volumes/）</td>
+<td>使用宿主机任意指定的文件系统路径</td>
+</tr>
+<tr>
+<td>数据持久化</td>
+<td>独立于容器生命周期，数据持久性更强</td>
+<td>依赖宿主机路径的存在，容器删除不影响数据</td>
+</tr>
+<tr>
+<td>跨平台兼容性</td>
+<td>更好的跨平台兼容性</td>
+<td>可能存在路径格式差异</td>
+</tr>
+<tr>
+<td>性能表现</td>
+<td>在某些系统上提供更优的 I/O 性能</td>
+<td>性能取决于宿主机文件系统</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>数据库数据存储、应用状态持久化等需要高可靠性的场景</td>
+<td>配置文件映射、日志输出、开发环境代码同步等需要实时访问宿主机文件的场景</td>
+</tr>
+</tbody>
+</table>
+<h2 id="38-image-tag">3.8 Image Tag镜像标签</h2>
+<p>使用不带标签的基本构建命令时，没有指定镜像名称，默认会输出镜像ID。比如：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>.
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Building<span class="w"> </span><span class="m">3</span>.5s<span class="w"> </span><span class="o">(</span><span class="m">11</span>/11<span class="o">)</span><span class="w"> </span>FINISHED<span class="w">                                       </span>docker:desktop-linux
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>build<span class="w"> </span>definition<span class="w"> </span>from<span class="w"> </span>Dockerfile<span class="w">                                   </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>transferring<span class="w"> </span>dockerfile:<span class="w"> </span>308B<span class="w">                                                   </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>metadata<span class="w"> </span><span class="k">for</span><span class="w"> </span>docker.io/library/python:3.12<span class="w">                         </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>.dockerignore<span class="w">                                                      </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>transferring<span class="w"> </span>context:<span class="w"> </span>2B<span class="w">                                                        </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">1</span>/6<span class="o">]</span><span class="w"> </span>FROM<span class="w"> </span>docker.io/library/python:3.12<span class="w">                                           </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>build<span class="w"> </span>context<span class="w">                                                      </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>transferring<span class="w"> </span>context:<span class="w"> </span>123B<span class="w">                                                      </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">2</span>/6<span class="o">]</span><span class="w"> </span>WORKDIR<span class="w"> </span>/usr/local/app<span class="w">                                                       </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">3</span>/6<span class="o">]</span><span class="w"> </span>RUN<span class="w"> </span>useradd<span class="w"> </span>app<span class="w">                                                              </span><span class="m">0</span>.1s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">4</span>/6<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>./requirements.txt<span class="w"> </span>./requirements.txt<span class="w">                                   </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">5</span>/6<span class="o">]</span><span class="w"> </span>RUN<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>--upgrade<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w">                 </span><span class="m">3</span>.2s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">6</span>/6<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>./app<span class="w"> </span>./app<span class="w">                                                             </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>exporting<span class="w"> </span>to<span class="w"> </span>image<span class="w">                                                                 </span><span class="m">0</span>.1s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>exporting<span class="w"> </span>layers<span class="w">                                                                </span><span class="m">0</span>.1s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>writing<span class="w"> </span>image<span class="w"> </span>sha256:9924dfd9350407b3df01d1a0e1033b1e543523ce7d5d5e2c83a724480ebe8f00<span class="w">    </span><span class="m">0</span>.0s
+</code></pre></div>
+<p>根据输出的镜像ID，可以使用下面的命令来启动容器：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>sha256:9924dfd9350407b3df01d1a0e1033b1e543523ce7d5d5e2c83a724480ebe8f00
+</code></pre></div>
+<p>为了易于记忆，可以为镜像添加标签，这是一种为镜像命名的方法。</p>
+<p>镜像名称是有结构的，完整镜像名称的结构如下：</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>HOST<span class="o">[</span>:PORT_NUMBER<span class="o">]</span>/<span class="o">]</span>PATH<span class="o">[</span>:TAG<span class="o">]</span>
+</code></pre></div>
+<ul>
+<li>HOST：镜像所在的注册表主机名，如果没有指定主机，则使用默认的<code>docker.io</code>公共注册表。</li>
+<li>PORT_NUMBER：注册表端口号。</li>
+<li>PATH：镜像的路径，使用<code>/</code>分隔。对于Docker Hub，格式应该遵循<code>[NAMESPACE/]REPOSITORY</code>格式， 其中NAMESPACE是用户名或组织名。如果没有指定命名空间，则使用<code>library</code>，<code>library</code>是 Docker 官方镜像的命名空间。</li>
+<li>TAG：一种定制的、具有可读性的标识符。通常用于识别镜像的不同版本或变体。如果没有指定标签，默认使用<code>latest</code>标签。</li>
+</ul>
+<p>镜像名称示例：</p>
+<p>Some examples of image names include:
+一些图片名称的例子包括：</p>
+<ul>
+<li><code>nginx</code>：等同于 <code>docker.io/library/nginx:latest</code> ，它从 <code>docker.io</code> 注册表、<code>library</code>命名空间、<code>nginx</code> 映像仓库和<code>latest</code>标签中拉取镜像。</li>
+<li><code>docker/welcome-to-docker</code>：等同于 <code>docker.io/docker/welcome-to-docker:latest</code> </li>
+<li><code>ghcr.io/dockersamples/example-voting-app-vote:pr-311</code>。</li>
+</ul>
+<h1 id="4">4. 基本操作</h1>
+<h2 id="41">4.1. 拉取与推送镜像</h2>
+<ol>
+<li>拉取镜像：从注册表拉取镜像到本地。</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>pull
+</code></pre></div>
+<ol>
+<li>推送镜像：推送本地镜像到注册表</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>push
+</code></pre></div>
+<h2 id="42">4.2. 镜像构建</h2>
+<h3 id="421">4.2.1. 构建镜像</h3>
+<p>大多数情况下，镜像是通过Dockerfile构建的，最基本的构建命令如下：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>.
+</code></pre></div>
+<blockquote>
+<p><code>.</code>指定构建上下文的路径或url。在指定的位置，构建器可以找到Dockerfile和其他引用文件。</p>
+</blockquote>
+<p>运行构建时，构建器会拉取基础镜像（如果需要的话），然后执行Dockerfile文件中的指令。</p>
+<p>使用前面的基本构建命令时，没有指定镜像名称，会输出镜像ID。比如：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>.
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Building<span class="w"> </span><span class="m">3</span>.5s<span class="w"> </span><span class="o">(</span><span class="m">11</span>/11<span class="o">)</span><span class="w"> </span>FINISHED<span class="w">                                       </span>docker:desktop-linux
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>build<span class="w"> </span>definition<span class="w"> </span>from<span class="w"> </span>Dockerfile<span class="w">                                   </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>transferring<span class="w"> </span>dockerfile:<span class="w"> </span>308B<span class="w">                                                   </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>metadata<span class="w"> </span><span class="k">for</span><span class="w"> </span>docker.io/library/python:3.12<span class="w">                         </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>.dockerignore<span class="w">                                                      </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>transferring<span class="w"> </span>context:<span class="w"> </span>2B<span class="w">                                                        </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">1</span>/6<span class="o">]</span><span class="w"> </span>FROM<span class="w"> </span>docker.io/library/python:3.12<span class="w">                                           </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>internal<span class="o">]</span><span class="w"> </span>load<span class="w"> </span>build<span class="w"> </span>context<span class="w">                                                      </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>transferring<span class="w"> </span>context:<span class="w"> </span>123B<span class="w">                                                      </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">2</span>/6<span class="o">]</span><span class="w"> </span>WORKDIR<span class="w"> </span>/usr/local/app<span class="w">                                                       </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">3</span>/6<span class="o">]</span><span class="w"> </span>RUN<span class="w"> </span>useradd<span class="w"> </span>app<span class="w">                                                              </span><span class="m">0</span>.1s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">4</span>/6<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>./requirements.txt<span class="w"> </span>./requirements.txt<span class="w">                                   </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">5</span>/6<span class="o">]</span><span class="w"> </span>RUN<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>--upgrade<span class="w"> </span>-r<span class="w"> </span>requirements.txt<span class="w">                 </span><span class="m">3</span>.2s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span><span class="m">6</span>/6<span class="o">]</span><span class="w"> </span>COPY<span class="w"> </span>./app<span class="w"> </span>./app<span class="w">                                                             </span><span class="m">0</span>.0s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>exporting<span class="w"> </span>to<span class="w"> </span>image<span class="w">                                                                 </span><span class="m">0</span>.1s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>exporting<span class="w"> </span>layers<span class="w">                                                                </span><span class="m">0</span>.1s
+<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>writing<span class="w"> </span>image<span class="w"> </span>sha256:9924dfd9350407b3df01d1a0e1033b1e543523ce7d5d5e2c83a724480ebe8f00<span class="w">    </span><span class="m">0</span>.0s
+</code></pre></div>
+<p>根据输出的镜像ID，可以使用下面的命令来启动容器：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>sha256:9924dfd9350407b3df01d1a0e1033b1e543523ce7d5d5e2c83a724480ebe8f00
+</code></pre></div>
+<h3 id="422">4.2.2. 镜像标签</h3>
+<p>要在构建过程中给镜像打标签，可以使用<code>-t</code>或<code>--tag</code>参数：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>my-username/my-image<span class="w"> </span>.
+</code></pre></div>
+<p>要给一个已经构建好的镜像添加新的标签，可以使用<code>docker image tag</code>命令：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>image<span class="w"> </span>tag<span class="w"> </span>my-username/my-image<span class="w"> </span>another-username/another-image:v1
+</code></pre></div>
+<h3 id="423">4.2.3. 使用构建缓存</h3>
+<p>当运行<code>docker build</code>命令构建新的镜像时，Docker会执行Dockerfile中的每条命令，按照顺序为每个命令创建一个层。对于每个命令，Docker会检查是否可以复用之前构建的指令。如果发现你之前已经执行过类似的命令，Docker就不会重新执行，而是直接使用缓存的结果。这样，构建过程就会更快更高效，可以节省宝贵的时间和资源。</p>
+<p>为了最大化缓存使用率并避免资源你急且耗时的重建，就有必要了解缓存失效的工作原理。</p>
+<p>一下是一些可能导致缓存失效的情况：</p>
+<ul>
+<li>任何对<code>RUN</code>指令的修改，都可能导致该层失效。Docker会检查变更，如果Docker文件中的<code>RUN</code>命令被修改，构建缓存会失效。</li>
+<li>修改任何使用<code>COPY</code>或<code>ADD</code>复制文件到镜像的指令。Docker会监控项目目录中文件的任何变更。无论是内容变更还是权限等属性变更，Docker都会讲这些修改视为触发缓存失效的条件。</li>
+<li>一旦一个层失效，后续的所有层都会失效。如果前面的任意层失效，包括基础镜像或中间层，Docker会确保后续依赖它的层也失效。这样可以保证构建过程的同步，防止不一致。</li>
+</ul>
+<p>在编写或编辑Dockerfile是，注意不必要的缓存未命中，可以确保构建运行尽可能的快和高效。</p>
+<h3 id="424">4.2.4. 多阶段构建</h3>
+<p>传统构建过程中，所有构建指令按照顺序执行，且在一个构建容器中执行：下载依赖、编译代码和打包应用程序。所有这些层最终都会形成最终镜像。这种方法有效，但是会是的镜像体积庞大，增加不必要的负担，增加安全风险。</p>
+<p>这时候多阶段构建就派上用场了。</p>
+<p>多阶段构建会在你的Dockerfile中引入多个阶段，每个阶段都有特定的用途。可以把它想象成能同时在多个不同环境中运行构建的不同部分。通过将构建环境与最终运行环境分离，你可以显著缩小镜像大小和共计面。这对依赖较大的构建应用非常有利。</p>
+<p>多阶段构建适用于所有类型的应用：</p>
+<ul>
+<li>对于解释型语言，比如JS、Ruby、Python，可以在一个阶段构建并压缩代码，然后将生产准备文件复制到更小的运行时镜像。这会优化部署的镜像。</li>
+<li>对于编译型语言，比如C、Go、Rust，多阶段构建可以在一个阶段编译，并将编译后的二进制文件复制到最终的运行时镜像中。不需要把整个编译器打包到最终镜像里。</li>
+</ul>
+<p>这里有一个使用伪代码的多阶段构建示例：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Stage 1: Build Environment</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">builder-image</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build-stage</span><span class="w"> </span>
+<span class="c"># Install build tools (e.g., Maven, Gradle)</span>
+<span class="c"># Copy source code</span>
+<span class="c"># Build commands (e.g., compile, package)</span>
+
+<span class="c"># Stage 2: Runtime environment</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">runtime-image</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">final-stage</span><span class="w">  </span>
+<span class="c">#  Copy application artifacts from the build stage (e.g., JAR file)</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>build-stage<span class="w"> </span>/path/in/build/stage<span class="w"> </span>/path/to/place/in/final/stage
+<span class="c"># Define runtime configuration (e.g., CMD, ENTRYPOINT) </span>
+</code></pre></div>
+<p>该Dockerfile使用两个阶段：</p>
+<ol>
+<li>构建阶段使用包含编译应用所需的构建工具的基础进行镜像。包含安装构建工具、复制源代码和执行构建命令。</li>
+<li>最后阶段使用一个适合运行应用的较小的基础镜像。他从构建阶段复制编译出来的成果（如JAR文件）。最后，它定义了运行时配置用于启动应用程序。</li>
+</ol>
+<h2 id="43">4.3. 运行容器</h2>
+<h3 id="431">4.3.1. 启动容器</h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run
+</code></pre></div>
+<h3 id="432">4.3.2. 发布与暴露端口</h3>
+<p>容器会为应用的每个组件提供独立的进程。每个组件（React前端、Python API、PLSQL数据库）运行在自己的沙箱环境中，与主机上的一切完全隔离。这种隔离对安全和依赖管理非常有帮助，但是也一位置无法直接访问它们。比如，无法在浏览器中访问网页应用。</p>
+<p>这时就需要发布端口了。</p>
+<h4 id="4321">4.3.2.1. 发布端口</h4>
+<p>发布端口是通过设置转发规则，突破网络隔离。比如，可以指定主机<code>8080</code>端口的请求应该转发到容器的<code>80</code>端口。</p>
+<p>发布端口是在容器创建时使用<code>docker run</code>的<code>-p</code>或<code>--pulish</code>参数进行的，语法如下：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span>HOST_PORT:CONTAINER_PORT<span class="w"> </span>nginx
+</code></pre></div>
+<ul>
+<li>HOST_PORT：主机端口号</li>
+<li>CONTAINER_PORT：容器端口号。</li>
+</ul>
+<p>示例：将容器端口80发布到主机端口8080上</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:80<span class="w"> </span>nginx
+</code></pre></div>
+<p>这样，任何发送到主机8080端口上的流量都会被转发到容器的80端口。</p>
+<blockquote>
+<p>端口发布时，默认会发布到所有网络接口。这意味着任何到达主机的流量都可以访问已发布的应用程序。注意不要发布数据库或其他的敏感信息。</p>
+</blockquote>
+<h4 id="4322">4.3.2.2. 发布临时端口</h4>
+<p>有时候，可能只想发布端口，而不在乎使用哪个主机端口。这时，可以让Docker帮你选端口。只需要省略<code>HOST_PORT</code>配置即可。</p>
+<p>比如，下面的示例将容器80端口发布到主机的临时端口上：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">80</span><span class="w"> </span>nginx
+</code></pre></div>
+<p>容器运行后，使用<code>docker ps</code>命令可以看到选择的端口：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>ps
+CONTAINER<span class="w"> </span>ID<span class="w"> </span>IMAGE<span class="w"> </span>COMMAND<span class="w">                                </span>CREATED<span class="w">           </span>STATUS<span class="w">              </span>PORTS<span class="w">                               </span>NAMES
+a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2">&quot;/docker-entrypoint.â¦&quot;</span><span class="w"> </span><span class="m">4</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w"> </span>Up<span class="w"> </span><span class="m">3</span><span class="w"> </span>seconds<span class="w">  </span><span class="m">0</span>.0.0.0:54772-&gt;80/tcp<span class="w"> </span>romantic_williamson
+</code></pre></div>
+<h4 id="4323">4.3.2.3. 发布全部端口</h4>
+<p>创建容器镜像时，可以使用<code>EXPOSE</code>命令指定打包好应用程序将要使用的端口。这些端口不会默认发布。</p>
+<p>使用<code>-P</code>或<code>--pulish-all</code>参数，可以自动将所有暴露端口发布到临时端口。这在像避免开发或测试环境端口冲突时非常有用。</p>
+<p>下面的示例中，将发布由镜像配置的所有暴露端口：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-P<span class="w"> </span>nginx
+</code></pre></div>
+<h3 id="433">4.3.3. 覆盖容器默认值</h3>
+<p>Docker容器启动时，会执行一个应用程序或命令。容器通过镜像配置获取该可执行文件（脚本或文件）。容器使用默认配置时通常会正常运行，但有时我们可能需要修改这些默认配置，以使容器按照想要的方式运行。</p>
+<p>比如，如果现在有一个数据库容器在标准端口监听，而我们想运行统一数据库容器的新实例，就需要修改新容器监听的端口设置，以避免与现有容器冲突。</p>
+<p>比如，有时候程序可能需要更多的资源来处理繁重的负载，就需要增加容器的可用内存。</p>
+<p>再比如，可能需要设置环境变量以提供程序正常运行所需的具体配置细节。</p>
+<p><code>docker run</code>命令提供了一种强大的方式来覆盖这些默认配置，该命令提供多个参数以实时自定义容器行为。</p>
+<h4 id="4331">4.3.3.1. 覆盖网络端口</h4>
+<p>上文已经提过，可以使用<code>-p</code>参数将容器端口发布到主机端口。</p>
+<p>比如：</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span>HOST_PORT:CONTAINER_PORT<span class="w"> </span>postgres
+</code></pre></div>
+<h4 id="4332">4.3.3.2. 设置环境变量</h4>
+<p>使用<code>-e</code>参数可以设置环境变量。</p>
+<p>比如：</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span><span class="nv">foo</span><span class="o">=</span>bar<span class="w"> </span>postgres<span class="w"> </span>env
+</code></pre></div>
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code><span class="nv">HOSTNAME</span><span class="o">=</span>2042f2e6ebe4
+<span class="nv">foo</span><span class="o">=</span>bar
+</code></pre></div>
+<p>另外，还可以使用<code>.env</code>文件来设置Docker环境变量，这样更加方便，可以避免命令行中大量的<code>-e</code>参数。</p>
+<p>要使用<code>.env</code>文件，可以使用<code>--env-file</code>参数，比如：</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--env-file<span class="w"> </span>.env<span class="w"> </span>postgres<span class="w"> </span>env
+</code></pre></div>
+<h4 id="4333">4.3.3.3. 限制容器资源消耗</h4>
+<p>使用<code>--memory</code>和<code>--cups</code>参数可以限制容器占用多少CPU和内存。</p>
+<p>比如，可以为<code>Python API</code>容器设置内存限制，以防止它在主机上占用过多的资源：</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>secret<span class="w"> </span>--memory<span class="o">=</span><span class="s2">&quot;512m&quot;</span><span class="w"> </span>--cpus<span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="w"> </span>postgres
+</code></pre></div>
+<p>这个命令限制容器使用的内存为512MB，并设置CPU配额为0.5.</p>
+<blockquote>
+<p>可以使用<code>docker stats</code>命令来监控运行容器的实时资源使用情况。者有助于了解分配的资源是否足够和是否需要调整。</p>
+</blockquote>
+<h3 id="434">4.3.4. 持久化容器数据</h3>
+<p>容器启动时，使用镜像提供的文件和配置。每个容器都会创建、修改和删除数据，且不会影响其他容器。当容器被删除时，这些文件的变更也被删除。</p>
+<p>虽然容器这种临时性很好，但在想持久保存数据时却是个问题。比如，重启数据库容器时，肯定不希望从一个空数据开始，那么文件如何持久保存呢？</p>
+<h4 id="4341">4.3.4.1. 容器卷</h4>
+<p>卷时一种个存储机制，能够将数据持久化到容器的生命周期之外。可以把它想象成一个快捷方式或符号链接（从容器内部到外部）。</p>
+<p>比如，创建一个名为log-data的卷：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>log-data
+</code></pre></div>
+<p>使用下面的命令启动容器时，该卷会被挂载（或者附带）到<code>/logs</code>的容器中：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">80</span>:80<span class="w"> </span>-v<span class="w"> </span>log-data:/logs<span class="w"> </span>docker/welcome-to-docker
+</code></pre></div>
+<p>如果卷<code>log-data</code>不存在，Docker将自动创建。</p>
+<p>容器运行时，所有写入<code>/logs</code>文件夹的所有文件都会被保存到这个卷里，放在容器之外。如果你删除容器并使用同一个卷新建一个容器，文件依然会在那里。</p>
+<blockquote>
+<p><strong>使用卷共享文件：</strong></p>
+<p>可以将同一个卷绑定到多个容器上，以便在容器间共享文件。这在日志聚合、数据管道或者其他时间驱动应用中可能很有帮助。</p>
+</blockquote>
+<h4 id="4342">4.3.4.2. 管理卷</h4>
+<p>卷的生命周期在容器的生命周期之外，且根据使用的数据和应用类型，其规模可能相当大。</p>
+<p>以下命令有助于管理卷：</p>
+<ul>
+<li><code>docker volume ls</code>：列出所有卷</li>
+<li><code>docker volume rm &lt;volume-name-or-id&gt;</code>：删除指定卷（仅在卷未连接任何容器时有效）</li>
+<li><code>docker volume prune</code>：移除所有未使用的卷。</li>
+</ul>
+<h3 id="435">4.3.5. 与容器共享本地文件</h3>
+<p>每个容器都具备运行所需的一切，无需依赖主机上预装的依赖。</p>
+<p>由于容器是孤立运行的，对宿主机和其他容器影响极小。这种隔离带来了一个巨大的好处：容器最大限度地减小了与主机系统及其他容器的冲突。然而这种隔离也意味着容器默认无法直接访问主机上的数据。</p>
+<p>比如一个场景：有一个网络应用容器，需要访问主机系统文件中的配置。该文件可能包含敏感数据，如数据库凭证或API秘钥。直接在容器镜像中存储此类敏感信息存在安全风险，尤其是镜像共享过程中。</p>
+<p>为了应对这一问题，docker提供了存储选项，弥补容器隔离与主机数据之间的差距。</p>
+<p>Docker提供两种主要的存储方式，用于持久化数据和在主机与容器之间共享数据：卷和绑定挂载（bind mounts）。</p>
+<h4 id="4351">4.3.5.1. 卷与绑定挂载</h4>
+<p>如果想确保容器内部生成或修改的数据即使在容器停止后依然存在，应该选择使用卷。</p>
+<p>如果主机系统上有特定的文件或目录，要直接与容器共享，比如配置文件或开发代码，应该使用绑定挂载。这就像在主机和容器之间打开了一个直接的门户以便分享。绑定挂载非常适用于开发环境，因为主机和容器之间需要实时文件访问和共享。</p>
+<h4 id="4352">4.3.5.2. 与容器共享本机文件</h4>
+<p>使用<code>docker run</code>命令的<code>-v</code>（或者<code>--volume</code>）和<code>--mount</code>参数，都可以在主机和Docker容器之间共享文件和目录。</p>
+<p>但是它们在行为和使用上存在一些差异。</p>
+<p><code>-v</code>参数更加简单，也更方便用于基本的卷或绑定挂载操作。如果使用<code>-v</code>（或者<code>--volume</code>）时主机目录不存在，会自动创建一个目录。</p>
+<p>想象你是一个正在做项目的开发者。你的开发机上有一个源目录，代码就存放在那里。当你编译或构建代码时，生成的产物（已编译的代码、可执行文件、图片等）会被保存在源目录中的另一个子目录中。在以下示例中，该子目录是 <code>/HOST/PATH。</code> 现在你希望这些构建成果能在运行你的应用的 Docker 容器中被访问。此外，你希望容器在重建代码时自动访问最新的构建工件。</p>
+<p>可以用 <code>docker run</code> 启动容器，使用绑定挂载，并将其映射到容器文件位置。</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span>/HOST/PATH:/CONTAINER/PATH<span class="w"> </span>-it<span class="w"> </span>nginx
+</code></pre></div>
+<p><code>--mount</code> 标志提供了更先进的功能和细致控制，适合复杂的挂载场景或生产部署。如果你用 <code>--mount</code> 绑定挂载一个尚未在 Docker 主机上存在的文件或目录，<code>docker run</code> 命令不会自动帮你创建，而是会生成错误。</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,source<span class="o">=</span>/HOST/PATH,target<span class="o">=</span>/CONTAINER/PATH,readonly<span class="w"> </span>nginx
+</code></pre></div>
+<blockquote>
+<p>Docker 建议使用 <code>--mount</code> 语法代替 <code>-v</code>。它能更好地控制挂载过程，避免目录缺失带来的潜在问题。</p>
+</blockquote>
+<h4 id="4353-docker">4.3.5.3. Docker访问主机的文件权限</h4>
+<p>使用绑定挂载时，需要确保Docker拥有访问主机目录的必要权限。要授予读写权限，可以在容器创建时使用<code>:ro</code>只读标志，或者使用<code>:rw</code>（读写）标志与<code>-v</code>或<code>--mount</code>一起搭配使用。</p>
+<p>比如下面的命令授予读写访问权限：</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span>HOST-DIRECTORY:/CONTAINER-DIRECTORY:rw<span class="w"> </span>nginx
+</code></pre></div>
+<p>只读绑定挂载允许容器访问主机上挂载的文件进行读取，但不能更改或删除文件。通过读写绑定挂载，容器可以修改或删除已挂载文件，这些更改或删除也会反映在主机系统上。只读绑定挂载确保主机上的文件不会被容器意外修改或删除。</p>
+<blockquote>
+<p><strong>同步文件共享：</strong></p>
+<p>随着代码库的扩大，传统文件共享方式（如绑定挂载）可能变得低效或缓慢，尤其是在需要频繁访问文件的开发环境中。同步文件共享(Synchronized file shares)通过利用同步文件系统缓存来提升绑定挂载的性能。这种优化确保了主机与虚拟机（VM）这这件的文件访问快速高效。</p>
+</blockquote>
+<h2 id="44">4.4. 多容器应用</h2>
+<p>启动单一容器应用非常简单。例如，执行特定数据处理任务的 Python 脚本运行在带有所有依赖的容器中。同样，一个 Node.js 应用服务于静态网站，且 API 端点较小，可以有效地容器化，包含所有必要的库和依赖。然而，随着应用规模的扩大，将它们作为单独容器管理变得越来越困难。</p>
+<p>想象一下，Python 脚本需要连接到数据库的数据处理。突然之间，你不仅要管理脚本，还要管理同一容器内的数据库服务器。如果脚本需要用户登录，你就需要认证机制，这会进一步增加容器体积。</p>
+<p>容器的一个最佳实践是，每个容器都应该做好一件事。虽然有例外，但避免让一个容器同时做多项任务。</p>
+<p>你可能会问，“我需要分别运行这些容器吗？如果我分别运行它们，我该如何连接它们？”</p>
+<p>虽然 <code>docker run</code> 是启动容器的便捷工具，但管理不断增长的应用栈变得困难。原因如下：</p>
+<ul>
+<li>想象一下，运行多个 docker<code>命令</code>（前端、后端和数据库），并以不同的配置分别用于开发、测试和生产环境。它容易出错且耗时。</li>
+<li>应用程序之间往往相互依赖。随着堆栈扩展，手动按特定顺序启动容器和管理网络连接变得困难。</li>
+<li>每个应用程序都需要其 <code>docker run</code> 命令，这使得扩展单个服务变得困难。扩展整个应用意味着可能会浪费资源在不需要提升的组件上。</li>
+<li>为每个应用程序持久化数据需要在每个 <code>Docker 运行</code>命令内分别进行卷挂载或配置。这就形成了一种分散的数据管理方式。</li>
+<li>通过分别的 <code>Docker 运行</code>命令为每个应用设置环境变量既繁琐又容易出错。</li>
+</ul>
+<p>这时，Docker Compose 就派上用场了。</p>
+<p>Docker Compose 在一个叫 <code>compose.yml</code> 的 YAML 文件中定义了整个多容器应用。这个文件会指定你所有容器的配置、依赖、环境变量，甚至卷和网络。使用 Docker Compose：</p>
+<ul>
+<li>你不需要运行多个 <code>docker run</code>命令。你只需要在一个 YAML 文件中定义整个多容器应用。这使配置集中，管理更为简化。</li>
+<li>你可以按特定顺序运行容器，轻松管理网络连接。</li>
+<li>你可以在多容器设置中简单地扩展或缩减单个服务。这使得基于实时需求实现高效的分配。</li>
+<li>你可以轻松实现持久卷。</li>
+<li>只要在 Docker Compose 文件里设置环境变量就很容易。</li>
+</ul>
+<p>通过利用 Docker Compose 运行多容器设置，你可以构建以模块化、可扩展性和一致性为核心的复杂应用。</p>
+<h1 id="5-docker">5. Docker工作坊（完整实例）</h1>
+<p>本章节参考官网<a href="https://docs.docker.com/get-started/workshop/">Docker workshop</a>，提供了一个Docker使用的完整实例。</p>
+<p>对前面所学的概念和操作进行实践，将大大有助于对Docker相关概念的理解。</p>
+<p><strong>先决条件：</strong> </p>
+<ul>
+<li>安装了Docker Desktop</li>
+<li>安装了Git</li>
+<li>安装了IDE，这里推荐使用Visual Studio Code。</li>
+</ul>
+<h2 id="51">5.1. 容器化应用</h2>
+<p>第一步，我们需要将普通的应用代码，转换成容器。</p>
+<h3 id="511">5.1.1. 克隆应用代码</h3>
+<p>将指定的代码仓库克隆到本机上。</p>
+<ol>
+<li>clone代码（使用官网示例代码）</li>
+</ol>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/docker/getting-started-app.git
+</code></pre></div>
+<ol>
+<li>查看代码仓库内容</li>
+</ol>
+<div class="highlight"><pre><span></span><code>├──<span class="w"> </span>getting-started-app/
+│<span class="w"> </span>├──<span class="w"> </span>.dockerignore
+│<span class="w"> </span>├──<span class="w"> </span>package.json
+│<span class="w"> </span>├──<span class="w"> </span>README.md
+│<span class="w"> </span>├──<span class="w"> </span>spec/
+│<span class="w"> </span>├──<span class="w"> </span>src/
+│<span class="w"> </span>└──<span class="w"> </span>yarn.lock
+</code></pre></div>
+<h3 id="512">5.1.2. 构建应用镜像</h3>
+<p>要构建应用镜像，需要使用Dockerfile。Docker使用Dockerfile来构建容器镜像。</p>
+<ol>
+<li>在getting-started-app目录下，创建<code>Dockerfile</code>文件，并写入以下内容：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c"># 定义 Dockerfile 语法版本，确保使用最新的 Docker 构建特性</span>
+<span class="c"># syntax=docker/dockerfile:1</span>
+
+<span class="c"># 使用官方 Node.js LTS Alpine 版本作为基础镜像</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">node:lts-alpine</span><span class="w"> </span>
+
+<span class="c"># 设置工作目录，在容器内创建并切换到 /app 目录</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># 将当前构建上下文中的所有文件复制到容器的工作目录中</span>
+<span class="c"># 第一个 &quot;.&quot; 表示源路径（主机上的当前目录）</span>
+<span class="c"># 第二个 &quot;.&quot; 表示目标路径（容器内的 /app 目录）</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+
+<span class="c"># 安装项目依赖，只安装 production 依赖项（不包括 devDependencies）</span>
+<span class="c"># 这可以减小最终镜像的大小</span>
+<span class="k">RUN</span><span class="w"> </span>yarn<span class="w"> </span>install<span class="w"> </span>--production
+
+<span class="c"># 定义容器启动时运行的命令</span>
+<span class="c"># 当容器运行时，将执行 &quot;node src/index.js&quot; 来启动应用</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;src/index.js&quot;</span><span class="p">]</span>
+
+<span class="c"># 声明容器在运行时会监听的端口</span>
+<span class="c"># 该应用监听 3000 端口，Docker 会在容器运行时映射此端口</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">3000</span>
+</code></pre></div>
+<p>这个 Dockerfile 使用 <code>node：lts-alpine</code> 基础镜像作为起始（<code>node：lts-alpine</code> 是一个轻量级的 Linux 镜像，预装了 Node.js 和 Yarn 包管理器）。它会将所有源代码复制到镜像中，安装必要的依赖，然后启动应用程序。</p>
+<ol>
+<li>构建镜像</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>getting-started-app
+
+<span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>getting-started<span class="w"> </span>.
+</code></pre></div>
+<p><code>docker build</code> 命令使用 Dockerfile 来构建新镜像。</p>
+<ul>
+<li>你可能注意到 Docker 下载了很多“层”。这是因为你指示构建器你想从 <code>node：lts-alpine</code> 镜像开始。但既然你的机器上没有这个，Docker 就需要下载镜像。</li>
+<li><code>-t</code> 参数为镜像命令（标签）为 <code>getting-start</code>，运行容器时可以通过名称（标签）引用那个镜像。</li>
+<li>
+<p>命令末尾的 <code>.</code>告诉 Docker 应该在当前目录中寻找 <code>Dockerfile</code>。</p>
+</li>
+<li>
+<p>查看构建的镜像</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>image<span class="w"> </span>ls
+
+<span class="c1"># 输出</span>
+IMAGE<span class="w">                                     </span>ID<span class="w">             </span>DISK<span class="w"> </span>USAGE<span class="w">   </span>CONTENT<span class="w"> </span>SIZE<span class="w">   </span>EXTRA
+getting-started:latest<span class="w">                    </span>9f8f22455b09<span class="w">   </span>391MB<span class="w">        </span>0B<span class="w">   </span>
+</code></pre></div>
+<h3 id="513">5.1.3. 启动应用容器</h3>
+<p>现在已经有了镜像，可以用 <code>docker run</code> 命令在容器中运行应用。</p>
+<ol>
+<li>用 <code>docker run</code> 命令运行你的容器：</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:3000:3000<span class="w"> </span>getting-started
+</code></pre></div>
+<ul>
+<li><code>-d</code> 参数（--<code>detach</code> 的缩写）：表示在后台运行容器。这意味着 Docker 启动你的容器，并返回终端提示符。此外，终端里不会显示日志。</li>
+<li>-p 参数（--publish 的缩写）：表示发布端口。该命令会发布容器的3000端口到主机上的3000端口。</li>
+<li>
+<p>getting-started：镜像的名称（标签）。</p>
+</li>
+<li>
+<p>启动完成后，打开浏览器 <a href="http://localhost:3000/">http://localhost:3000</a>，就可以看到运行的应用：</p>
+</li>
+</ul>
+<p><img alt="Empty todo list" src="../../.public/todo-list-empty.png" /></p>
+<ol>
+<li>试试添加几个条目，看看效果是否如你所愿。</li>
+</ol>
+<h3 id="514">5.1.4. 容器检查</h3>
+<p>现在，已经成功启动了getting-started容器。</p>
+<p>要查看容器，可以使用CLI或者Docker Desktop 的图形界面。</p>
+<p><strong>CLI：</strong></p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>ps
+</code></pre></div>
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code>CONTAINER<span class="w"> </span>ID<span class="w"> </span>IMAGE<span class="w">                   </span>COMMAND<span class="w">                </span>CREATED<span class="w">       </span>STATUS<span class="w">       </span>PORTS<span class="w">           </span>NAMES
+e0790b5b51a8<span class="w"> </span>getting-started<span class="w"> </span><span class="s2">&quot;docker-entrypoint.s…&quot;</span><span class="w"> </span><span class="m">6</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w"> </span>Up<span class="w"> </span><span class="m">6</span><span class="w"> </span>minutes<span class="w"> </span><span class="m">127</span>.0.0.1:3000-&gt;3000/tcp<span class="w">   </span>kind_ganguly
+</code></pre></div>
+<p><strong>Docker Desktop 图形界面:</strong></p>
+<p><img alt="image-20260116112701919" src="../../.public//image-20260116112701919.png" /></p>
+<h2 id="52">5.2. 更新应用</h2>
+<p>第二步，我们演示如何更新源代码并启动新容器。</p>
+<h3 id="521">5.2.1. 更新代码</h3>
+<ol>
+<li>在 <code>src/static/js/app.js</code> 文件中，更新第 56 行以使用新的空文本。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="o">-</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">p</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;text-center&quot;</span><span class="o">&gt;</span><span class="nx">No</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="nx">yet</span><span class="o">!</span><span class="w"> </span><span class="nx">Add</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">above</span><span class="o">!&lt;</span><span class="err">/p&gt;</span>
+<span class="o">+</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">p</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;text-center&quot;</span><span class="o">&gt;</span><span class="nx">You</span><span class="w"> </span><span class="nx">have</span><span class="w"> </span><span class="nx">no</span><span class="w"> </span><span class="nx">todo</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="nx">yet</span><span class="o">!</span><span class="w"> </span><span class="nx">Add</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">above</span><span class="o">!&lt;</span><span class="err">/p&gt;</span>
+</code></pre></div>
+<ol>
+<li>用 <code>docker build</code> 命令构建你更新后的镜像版本。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>getting-started<span class="w"> </span>.
+</code></pre></div>
+<ol>
+<li>尝试启动新容器</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </span><span class="m">127</span>.0.0.1:3000:3000<span class="w"> </span>getting-started
+
+<span class="c1"># docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint gallant_khorana (cc54ea74a73270723245328108ec25ecf1f8b69e4d6c164b2e02a57198f81820): Bind for 127.0.0.1:3000 failed: port is already allocated</span>
+</code></pre></div>
+<p>最后一步报错，是因为旧容器已经在使用主机的3000端口了，机器上只有一个进程（包括容器）能监听某个端口。要解决这个问题，需要移除旧容器。</p>
+<h3 id="522">5.2.2. 移除旧容器</h3>
+<ol>
+<li>移除旧容器前，需要先停止它。</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>ps<span class="w"> </span><span class="c1"># 查看运行容器</span>
+
+<span class="c1"># 输出</span>
+CONTAINER<span class="w"> </span>ID<span class="w">   </span>IMAGE<span class="w">          </span>COMMAND<span class="w">                          </span>PORTS<span class="w">                      </span>NAMES
+e0790b5b51a8<span class="w">   </span>9f8f22455b09<span class="w">   </span><span class="s2">&quot;docker-entrypoint.s…&quot;</span><span class="w"> </span><span class="m">127</span>.0.0.1:3000-&gt;3000/tcp<span class="w">   </span>kind_ganguly
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># 根据容器ID停止容器</span>
+docker<span class="w"> </span>stop<span class="w"> </span>e0790b5b51a8
+</code></pre></div>
+<ol>
+<li>移除容器</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>rm<span class="w"> </span>e0790b5b51a8
+</code></pre></div>
+<blockquote>
+<p>通过在 <code>docker rm</code> 命令中添加 <code>force</code> 选项，可以在一个命令中停止并移除容器。例如： <code>docker rm -f &lt;the-container-id&gt;</code> </p>
+</blockquote>
+<h3 id="523">5.2.3. 启动新容器</h3>
+<ol>
+<li>启动新容器</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </span><span class="m">127</span>.0.0.1:3000:3000<span class="w"> </span>getting-started
+</code></pre></div>
+<ol>
+<li>刷新浏览器，就能看到更新后的文本。</li>
+</ol>
+<h2 id="53">5.3. 分享应用</h2>
+<p>在前面的步骤中，我们已经创建好了Docker镜像，现在可以将它分享出去了。</p>
+<p>分享Docker镜像需要使用Docker注册表，而Docker Hub是默认的全球最大的注册表，所以我们将已有的镜像分享到Docker Hub上。</p>
+<ol>
+<li>
+<p>注册并登录<a href="https://hub.docker.com">Docker Hub</a></p>
+</li>
+<li>
+<p>在Docker Hub上创建公开仓库<code>getting-started</code>。</p>
+</li>
+<li>
+<p>设置镜像标签：前面说过，对于Docker Hub，镜像名称应该遵循<code>[NAMESPACE/]REPOSITORY</code>格式，其中NAMESPACE是DockerHub的用户名。所以我们需要先设置镜像名称（标签）。</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>tag<span class="w"> </span>getting-started<span class="w"> </span>chinehe/getting-started
+<span class="w"> </span><span class="c1"># 将chinehe替换为你自己的用户名</span>
+</code></pre></div>
+<ol>
+<li>推送镜像</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>push<span class="w"> </span>chinehe/getting-started
+</code></pre></div>
+<ol>
+<li>等待推送完成，就能在Docker Hub中看到镜像了。</li>
+</ol>
+<p><img alt="image-20260116135220885" src="../../.public//image-20260116135220885.png" /></p>
+<h2 id="54">5.4 持久化数据库</h2>
+<p>如果多次尝试从镜像启动容器（删除旧容器），你会发现每次新启动的应用的待办列表都是空的。这是因为容器每次都是从镜像开始的，虽然容器可以创建、更新和删除文件，但当容器被移除时，这些数据文件变更也会丢失。</p>
+<p>另外，容器间是隔离的，彼此不能访问对方的文件系统，即使两个容器可能是从同一个镜像创建的。</p>
+<p>这也就是我们上文中说说过的持久化和文件共享的内容。</p>
+<p>这一步，我们将尝试使用卷来持久化数据库数据。</p>
+<h3 id="541">5.4.1. 要持久化的数据</h3>
+<p>默认情况下，上面的应用将数据存储在SQLite数据库中，位于容器文件系统的<code>/etc/todos/todo.db</code>路径。</p>
+<blockquote>
+<p>不知道SQLite也没有关系，只需要知道它是一个小型关系型数据库就可以了。</p>
+<p>SQLite将所有数据存储在一个文件中。</p>
+</blockquote>
+<p>数据库文件是一个单一文件。如果将上一个容器的数据库文件持久化到主机上，并在启动下一个容器时，指定其使用该持久化文件。这样就可以实现持久化。</p>
+<h3 id="542">5.4.2. 创建卷并启动容器</h3>
+<p>Docker 完全管理卷，包括磁盘上的存储位置。你只需要记住卷名。</p>
+<ol>
+<li>创建<code>todo-db</code>卷</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>todo-db
+</code></pre></div>
+<ol>
+<li>停止并移除旧容器</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查看运行中的容器</span>
+docker<span class="w"> </span>ps
+
+<span class="c1"># 停止并移除指定容器（ID）</span>
+docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>4b1c5c8cd26b
+</code></pre></div>
+<ol>
+<li>启动容器并将卷挂载到容器的<code>/etc/todos</code></li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># 卷挂载</span>
+docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </span><span class="m">127</span>.0.0.1:3000:3000<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>volume,src<span class="o">=</span>todo-db,target<span class="o">=</span>/etc/todos<span class="w"> </span>getting-started
+</code></pre></div>
+<h3 id="543">5.4.3. 验证持久化</h3>
+<p>现在我们来验证一下是否实现了持久化。</p>
+<ol>
+<li>打开网址 <a href="http://localhost:3000/">http://localhost:3000</a>并设置一些事项。</li>
+</ol>
+<p><img alt="image-20260116143020802" src="../../.public//image-20260116143020802.png" /></p>
+<ol>
+<li>停止并移除旧容器</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查看运行中的容器</span>
+docker<span class="w"> </span>ps
+
+<span class="c1"># 停止并移除指定容器（ID）</span>
+docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>4b1c5c8cd26b
+</code></pre></div>
+<ol>
+<li>启动容器并将卷挂载到容器的<code>/etc/todos</code></li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># 卷挂载</span>
+docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </span><span class="m">127</span>.0.0.1:3000:3000<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>volume,src<span class="o">=</span>todo-db,target<span class="o">=</span>/etc/todos<span class="w"> </span>getting-started
+</code></pre></div>
+<ol>
+<li>打开网址 <a href="http://localhost:3000/">http://localhost:3000</a>并检查事项是否存在。</li>
+</ol>
+<p><img alt="image-20260116143146267" src="../../.public//image-20260116143146267.png" /></p>
+<h3 id="544">5.4.4. 查看卷</h3>
+<p>在上面的操作中，我们并没有设置卷在主机的路径，那么Docker将数据存在哪里了呢？</p>
+<p>可以使用下面的命令查看：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>inspect<span class="w"> </span>todo-db
+</code></pre></div>
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;CreatedAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-16T06:26:43Z&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Driver&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;local&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Labels&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Mountpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/var/lib/docker/volumes/todo-db/_data&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;todo-db&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Options&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;local&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div>
+<p><code>Mountpoint</code>是数据在磁盘上的实际位置。</p>
+<p>注意，在大多数机器上，你需要有 root 权限才能从主机访问该目录。</p>
+<h2 id="55">5.5. 使用绑定挂载</h2>
+<p>上一步中，我们使用卷来持久化数据库中的数据。当用作一个持久化应用数据的地方时，使用卷是一个很好的选择。</p>
+<p>还有另外一种挂载方式：绑定挂载。</p>
+<p>绑定挂载将主机文件系统中的一个目录共享给容器。在开发应用程序是，可以使用绑定挂载将源代码挂载到容器中。容器会在保存文件时，实时监测到代码的变更。这样在容器中运行应用时，能够建东文件系统的变化并自动做出响应。</p>
+<p>在这一步中，我们将演示如何使用绑定挂载和一个叫做nodemon的工具来监控文件变更，并自动重启应用程序。</p>
+<blockquote>
+<p>大多数其他语言和框架也有类似的工具。</p>
+</blockquote>
+<h3 id="551-volume-vs-bind-mount">5.5.1. volume卷 vs bind mount绑定挂载</h3>
+<p>使用<code>--mount</code>命名卷和绑定挂载的示例：</p>
+<ul>
+<li>卷：<code>type=volume,src=my-volume,target=/usr/local/data</code></li>
+<li>绑定挂载：<code>type=bind,src=/path/to/data,target=/usr/local/data</code></li>
+</ul>
+<p>比较：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>卷</th>
+<th>绑定挂载</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>宿主机路径</td>
+<td>Docker自动选择</td>
+<td>用户指定</td>
+</tr>
+<tr>
+<td>初始化行为</td>
+<td>当创建新卷时，会自动复制容器中对应路径的内容到卷中</td>
+<td>不会复制容器内容，而是直接映射到主机目录</td>
+</tr>
+<tr>
+<td>驱动支持</td>
+<td>支持各种卷驱动程序，可用于远程存储、加密等高级功能</td>
+<td>不支持卷驱动程序</td>
+</tr>
+</tbody>
+</table>
+<h3 id="552">5.5.2. 尝试绑定挂载</h3>
+<ol>
+<li>进入项目目录</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>getting-started-app
+</code></pre></div>
+<ol>
+<li>启动容器（绑定挂载）</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>,target<span class="o">=</span>/src<span class="w"> </span>ubuntu<span class="w"> </span>bash
+</code></pre></div>
+<ol>
+<li>命令执行后，Docker会在容器文件系统的根目录中启动交互式<code>bash</code>会话。</li>
+</ol>
+<div class="highlight"><pre><span></span><code>root@87add2f4b201:/#<span class="w"> </span><span class="nb">pwd</span>
+/
+root@87add2f4b201:/#<span class="w"> </span>ls
+bin<span class="w">  </span>boot<span class="w">  </span>dev<span class="w">  </span>etc<span class="w">  </span>home<span class="w">  </span>lib<span class="w">  </span>media<span class="w">  </span>mnt<span class="w">  </span>opt<span class="w">  </span>proc<span class="w">  </span>root<span class="w">  </span>run<span class="w">  </span>sbin<span class="w">  </span>src<span class="w">  </span>srv<span class="w">  </span>sys<span class="w">  </span>tmp<span class="w">  </span>usr<span class="w">  </span>var
+</code></pre></div>
+<ol>
+<li>进入<code>src</code>目录并创建一个<code>myfile.txt</code>文件</li>
+</ol>
+<div class="highlight"><pre><span></span><code>root@87add2f4b201:/#<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>src/
+root@87add2f4b201:/src#<span class="w"> </span>ls
+Dockerfile<span class="w">  </span>README.md<span class="w">  </span>package.json<span class="w">  </span>spec<span class="w">  </span>src<span class="w">  </span>yarn.lock
+root@87add2f4b201:/src#<span class="w"> </span>touch<span class="w"> </span>myfile.txt
+root@87add2f4b201:/src#<span class="w"> </span>ls
+Dockerfile<span class="w">  </span>README.md<span class="w">  </span>myfile.txt<span class="w">  </span>package.json<span class="w">  </span>spec<span class="w">  </span>src<span class="w">  </span>yarn.lock
+</code></pre></div>
+<ol>
+<li>
+<p>打开宿主机上的项目目录，可以看到创建的<code>myfile.txt</code>文件。</p>
+</li>
+<li>
+<p>删除宿主机上的<code>myfile.txt</code>文件。</p>
+</li>
+<li>
+<p>再次检查容器中的<code>src</code>目录，可以看到<code>myfile.txt</code>文件消失了。</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code>root@87add2f4b201:/src#<span class="w"> </span>ls
+Dockerfile<span class="w">  </span>README.md<span class="w">  </span>package.json<span class="w">  </span>spec<span class="w">  </span>src<span class="w">  </span>yarn.lock
+</code></pre></div>
+<ol>
+<li>用 <code>Ctrl</code> + <code>D</code> 停止交互式容器会话。</li>
+</ol>
+<p>上述过程展示了文件如何在主机和容器之间共享，以及变更如何立即反映在双方之间。</p>
+<h3 id="553">5.5.3. 容器开发</h3>
+<p>本地开发环境中常用绑定挂载。优点是开发机器不需要安装所有构建工具和环境。只需一个 docker run 命令，Docker 就能拉取依赖和工具。</p>
+<p>下面将样式如何运行一个带有绑定挂载的开发容器，该容器能实现以下功能：</p>
+<ul>
+<li>将源代码挂载到容器里。</li>
+<li>安装所有依赖</li>
+<li>启动nodemon以监控文件系统变化。</li>
+</ul>
+<p><strong>操作步骤：</strong></p>
+<ol>
+<li>确保目前没有任何启动的<code>getting-started</code>容器。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查看启动的docker 容器</span>
+docker<span class="w"> </span>ps
+
+<span class="c1"># 如果有getting-started容器，使用下面的命令停止并移除</span>
+docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>&lt;容器ID&gt;
+</code></pre></div>
+<ol>
+<li>执行以下命令</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </span><span class="m">127</span>.0.0.1:3000:3000<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-w<span class="w"> </span>/app<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>,target<span class="o">=</span>/app<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>node:lts-alpine<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;yarn install &amp;&amp; yarn run dev&quot;</span>
+</code></pre></div>
+<p>命令解释：</p>
+<ul>
+<li><code>-dp 127.0.0.1:3000:3000</code>：跟之前一样，后台运行并发布端口。</li>
+<li><code>-w /app</code>：设置工作目录。</li>
+<li><code>--mount type=bind,src="$(pwd)",target=/app</code>：绑定挂载当前目录到容器的<code>app</code>目录。</li>
+<li><code>node:lts-alpine</code>：使用的镜像。注意这是应用在Dockerfile中使用的基础镜像。</li>
+<li><code>sh -c "yarn install &amp;&amp; yarn run dev"</code>：使用<code>sh</code>启动一个shell，然后运行<code>yarn install</code>安装包，再运行<code>yarn run dev</code>来启动开发服务器。</li>
+</ul>
+<blockquote>
+<p>从<code>packag.json</code>文件，可以发现<code>dev</code>脚本启动了<code>nodemon</code>。</p>
+</blockquote>
+<ol>
+<li>使用<code>docker logs &lt;container-id&gt;</code>命令监控日志。</li>
+</ol>
+<div class="highlight"><pre><span></span><code>administrator@administratordeMacBook-Air<span class="w"> </span>getting-started-app<span class="w"> </span>%<span class="w"> </span>docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>0bb0c4b1ff0e
+yarn<span class="w"> </span>install<span class="w"> </span>v1.22.22
+<span class="o">[</span><span class="m">1</span>/4<span class="o">]</span><span class="w"> </span>Resolving<span class="w"> </span>packages...
+<span class="o">(</span>node:8<span class="o">)</span><span class="w"> </span><span class="o">[</span>DEP0169<span class="o">]</span><span class="w"> </span>DeprecationWarning:<span class="w"> </span><span class="sb">`</span>url.parse<span class="o">()</span><span class="sb">`</span><span class="w"> </span>behavior<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>standardized<span class="w"> </span>and<span class="w"> </span>prone<span class="w"> </span>to<span class="w"> </span>errors<span class="w"> </span>that<span class="w"> </span>have<span class="w"> </span>security<span class="w"> </span>implications.<span class="w"> </span>Use<span class="w"> </span>the<span class="w"> </span>WHATWG<span class="w"> </span>URL<span class="w"> </span>API<span class="w"> </span>instead.<span class="w"> </span>CVEs<span class="w"> </span>are<span class="w"> </span>not<span class="w"> </span>issued<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="sb">`</span>url.parse<span class="o">()</span><span class="sb">`</span><span class="w"> </span>vulnerabilities.
+<span class="o">(</span>Use<span class="w"> </span><span class="sb">`</span>node<span class="w"> </span>--trace-deprecation<span class="w"> </span>...<span class="sb">`</span><span class="w"> </span>to<span class="w"> </span>show<span class="w"> </span>where<span class="w"> </span>the<span class="w"> </span>warning<span class="w"> </span>was<span class="w"> </span>created<span class="o">)</span>
+<span class="o">[</span><span class="m">2</span>/4<span class="o">]</span><span class="w"> </span>Fetching<span class="w"> </span>packages...
+<span class="o">[</span><span class="m">3</span>/4<span class="o">]</span><span class="w"> </span>Linking<span class="w"> </span>dependencies...
+<span class="o">[</span><span class="m">4</span>/4<span class="o">]</span><span class="w"> </span>Building<span class="w"> </span>fresh<span class="w"> </span>packages...
+Done<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">32</span>.25s.
+yarn<span class="w"> </span>run<span class="w"> </span>v1.22.22
+$<span class="w"> </span>nodemon<span class="w"> </span>-L<span class="w"> </span>src/index.js
+<span class="o">[</span>nodemon<span class="o">]</span><span class="w"> </span><span class="m">2</span>.0.20
+<span class="o">[</span>nodemon<span class="o">]</span><span class="w"> </span>to<span class="w"> </span>restart<span class="w"> </span>at<span class="w"> </span>any<span class="w"> </span>time,<span class="w"> </span>enter<span class="w"> </span><span class="sb">`</span>rs<span class="sb">`</span>
+<span class="o">[</span>nodemon<span class="o">]</span><span class="w"> </span>watching<span class="w"> </span>path<span class="o">(</span>s<span class="o">)</span>:<span class="w"> </span>*.*
+<span class="o">[</span>nodemon<span class="o">]</span><span class="w"> </span>watching<span class="w"> </span>extensions:<span class="w"> </span>js,mjs,json
+<span class="o">[</span>nodemon<span class="o">]</span><span class="w"> </span>starting<span class="w"> </span><span class="sb">`</span>node<span class="w"> </span>src/index.js<span class="sb">`</span>
+Using<span class="w"> </span>sqlite<span class="w"> </span>database<span class="w"> </span>at<span class="w"> </span>/etc/todos/todo.db
+Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> </span><span class="m">3000</span>
+</code></pre></div>
+<ol>
+<li>
+<p><code>Ctrl</code>+<code>C</code>退出</p>
+</li>
+<li>
+<p>修改 <code>src/static/js/app.js</code> 文件的109行把那个保存。</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code>-<span class="w"> </span><span class="o">{</span>submitting<span class="w"> </span>?<span class="w"> </span><span class="s1">&#39;Adding...&#39;</span><span class="w"> </span>:<span class="w"> </span><span class="s1">&#39;Add Item&#39;</span><span class="o">}</span>
++<span class="w"> </span><span class="o">{</span>submitting<span class="w"> </span>?<span class="w"> </span><span class="s1">&#39;Adding...&#39;</span><span class="w"> </span>:<span class="w"> </span><span class="s1">&#39;Add&#39;</span><span class="o">}</span>
+</code></pre></div>
+<ol>
+<li>刷新浏览器，可以看到页面更新了。</li>
+</ol>
+<p><img alt="image-20260116152739702" src="../../.public//image-20260116152739702.png" /></p>
+<ol>
+<li>
+<p>如果你想做的其他改动，可以随时修改。每次你做更改并保存文件时，由于绑定挂载，这些更改都会反映在容器里。当 Nodemon 检测到变化时，它会自动在容器内重启应用。</p>
+</li>
+<li>
+<p>构建新镜像。</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>getting-started<span class="w"> </span>.
+</code></pre></div>
+<h2 id="56">5.6. 多容器应用</h2>
+<p>上面的示例中，我们都在使用单一容器应用。</p>
+<p>现在如果想把MySQL加入应用栈。MySQL运行在哪里？是安装在同一个容器里，还是分开运行在不同的容器里。</p>
+<p>一般来说，每个容器都应该只做一件事情。以下是分开运行容器的一些理由：</p>
+<ul>
+<li>可能需要以不同的方式拓展API和前端。</li>
+<li>分开运行容器，可以单独进行版本管理和更新。</li>
+<li>可能本地使用数据库容器，但在生产环境中，你可能希望使用数据库托管服务。那么你就不想把数据库引擎和应用一起发版了。</li>
+<li>运行多个进程需要进程管理器（容器只启动一个进程），这会增加容器启动和关闭的复杂性。</li>
+</ul>
+<p>所以，最好还是在多个容器中运行。</p>
+<h3 id="561">5.6.1. 容器网络</h3>
+<p>容器默认时孤立运行的，与同一台机器上的其他进程或容器完全隔离。</p>
+<p>那么，如何让一个容器与另一个容器通信呢？</p>
+<p>答案是建立网络：把两个容器放到同一个网络上，它们就可以互相通信了。</p>
+<h3 id="562-mysql">5.6.2. 启动MySQL</h3>
+<p>把容器放置到网络上有两种方式：</p>
+<ul>
+<li>启动容器时分配网络。</li>
+<li>把已经运行的容器连接到网络。</li>
+</ul>
+<p>接下来，先创建网络，然后启动MySQL时连接网络：</p>
+<ol>
+<li>建立网络</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>todo-app
+</code></pre></div>
+<ol>
+<li>启动MySQL容器并将其连接到网络。</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--network<span class="w"> </span>todo-app<span class="w"> </span>--network-alias<span class="w"> </span>mysql<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span>todo-mysql-data:/var/lib/mysql<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>secret<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">MYSQL_DATABASE</span><span class="o">=</span>todos<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mysql:8.0
+</code></pre></div>
+<blockquote>
+<p>你会注意到在上述命令中有一个名为 <code>todo-mysql-data</code> 的卷，挂载于 <code>/var/lib/mysql，MySQL</code> 存储数据的地方。不过，你从未运行过 <code>docker 卷创建</code>命令。</p>
+<p>Docker 能识别你想使用命名卷，并自动为你创建一个。</p>
+</blockquote>
+<ol>
+<li>连接到数据库并确认是否连接，以确认数据库是否已经开始运行。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;mysql-container-id&gt;<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
+</code></pre></div>
+<p>当出现密码提示时，输入<code>secret</code>。</p>
+<p>在MySQL Shell中列出数据库，并确认看到了<code>todos</code>数据库：</p>
+<div class="highlight"><pre><span></span><code>mysql&gt;<span class="w"> </span>SHOW<span class="w"> </span>DATABASES<span class="p">;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># 输出</span>
++--------------------+
+<span class="p">|</span><span class="w"> </span>Database<span class="w">           </span><span class="p">|</span>
++--------------------+
+<span class="p">|</span><span class="w"> </span>information_schema<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>mysql<span class="w">              </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>performance_schema<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>sys<span class="w">                </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>todos<span class="w">              </span><span class="p">|</span>
++--------------------+
+<span class="m">5</span><span class="w"> </span>rows<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">(</span><span class="m">0</span>.00<span class="w"> </span>sec<span class="o">)</span>
+</code></pre></div>
+<ol>
+<li>退出MySQL Shell，返回机器的Shell。</li>
+</ol>
+<div class="highlight"><pre><span></span><code>mysql&gt;<span class="w"> </span><span class="nb">exit</span>
+</code></pre></div>
+<p>现在，你拥有了一个<code>todos</code>数据库，并且随时可以使用。</p>
+<h3 id="563-mysql">5.6.3. 连接MySQL</h3>
+<p>现在，我们应该怎么使用MySQL数据库呢？</p>
+<p>如果在同一个网络上运行另一个容器，怎么找到那个容器呢？每个容器都有自己的IP地址。</p>
+<p>为了回答上述问题并更好的理解容器网络，需要使用<code>nicolaka/netshoot</code>容器。它自带许多有用的工具，用于排查或调试网络问题。</p>
+<ol>
+<li>使用<code>nicolaka/netshoot</code>镜像创建一个新的容器。确保连接到同一个网络。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--network<span class="w"> </span>todo-app<span class="w"> </span>nicolaka/netshoot
+</code></pre></div>
+<ol>
+<li>在容器内部，可以使用<code>dig</code>命令（这是一个DNS工具）查找MySQL主机的IP地址。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>dig<span class="w"> </span>mysql
+</code></pre></div>
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code><span class="p">;</span><span class="w"> </span>&lt;&lt;&gt;&gt;<span class="w"> </span>DiG<span class="w"> </span><span class="m">9</span>.20.17<span class="w"> </span>&lt;&lt;&gt;&gt;<span class="w"> </span>mysql
+<span class="p">;;</span><span class="w"> </span>global<span class="w"> </span>options:<span class="w"> </span>+cmd
+<span class="p">;;</span><span class="w"> </span>Got<span class="w"> </span>answer:
+<span class="p">;;</span><span class="w"> </span>-&gt;&gt;HEADER<span class="s">&lt;&lt;- opco</span>de:<span class="w"> </span>QUERY,<span class="w"> </span>status:<span class="w"> </span>NOERROR,<span class="w"> </span>id:<span class="w"> </span><span class="m">4839</span>
+<span class="p">;;</span><span class="w"> </span>flags:<span class="w"> </span>qr<span class="w"> </span>rd<span class="w"> </span>ra<span class="p">;</span><span class="w"> </span>QUERY:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>ANSWER:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>AUTHORITY:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>ADDITIONAL:<span class="w"> </span><span class="m">0</span>
+
+<span class="p">;;</span><span class="w"> </span>QUESTION<span class="w"> </span>SECTION:
+<span class="p">;</span>mysql.<span class="w">                         </span>IN<span class="w">      </span>A
+
+<span class="p">;;</span><span class="w"> </span>ANSWER<span class="w"> </span>SECTION:
+mysql.<span class="w">                  </span><span class="m">600</span><span class="w">     </span>IN<span class="w">      </span>A<span class="w">       </span><span class="m">172</span>.18.0.2
+
+<span class="p">;;</span><span class="w"> </span>Query<span class="w"> </span>time:<span class="w"> </span><span class="m">1</span><span class="w"> </span>msec
+<span class="p">;;</span><span class="w"> </span>SERVER:<span class="w"> </span><span class="m">127</span>.0.0.11#53<span class="o">(</span><span class="m">127</span>.0.0.11<span class="o">)</span><span class="w"> </span><span class="o">(</span>UDP<span class="o">)</span>
+<span class="p">;;</span><span class="w"> </span>WHEN:<span class="w"> </span>Fri<span class="w"> </span>Jan<span class="w"> </span><span class="m">16</span><span class="w"> </span><span class="m">09</span>:14:30<span class="w"> </span>UTC<span class="w"> </span><span class="m">2026</span>
+<span class="p">;;</span><span class="w"> </span>MSG<span class="w"> </span>SIZE<span class="w">  </span>rcvd:<span class="w"> </span><span class="m">44</span>
+</code></pre></div>
+<p>在应答中，可以看到MySQL的A记录，解析为172.18.0.2（你的IP地址很可能不同）。</p>
+<p>虽然mysql通常不是一个有效的主机名，Docker可以将其解析为有指定网络别名的容器的IP地址。（记得吗？前面使用了<code>--network-alias</code>）。</p>
+<p>这意味着应用只需要连接到一个叫<code>mysql</code>的主机，就能与数据库进行通信了。</p>
+<ol>
+<li><code>Ctrl</code>+<code>D</code>退出Shell。</li>
+</ol>
+<h3 id="564-mysql">5.6.4 使用MySQL运行应用</h3>
+<p>Todo 应用支持设置一些环境变量来指定 MySQL 连接设置。它们是：</p>
+<ul>
+<li><code>MYSQL_HOST</code> - 运行中的 MySQL 服务器的主机名</li>
+<li><code>MYSQL_USER</code> - 用于连接的用户名</li>
+<li><code>MYSQL_PASSWORD</code> - 连接时使用的密码</li>
+<li><code>MYSQL_DB</code> - 连接后使用的数据库</li>
+</ul>
+<p>现在，可以启动容器了：</p>
+<ol>
+<li>指定之前的每个环境变量，并将容器连接到应用网络。</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </span><span class="m">127</span>.0.0.1:3000:3000<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-w<span class="w"> </span>/app<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/app&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network<span class="w"> </span>todo-app<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">MYSQL_HOST</span><span class="o">=</span>mysql<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">MYSQL_USER</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>secret<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">MYSQL_DB</span><span class="o">=</span>todos<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>node:lts-alpine<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;yarn install &amp;&amp; yarn run dev&quot;</span>
+</code></pre></div>
+<ol>
+<li>查看容器日志.</li>
+</ol>
+<p>使用<code>docker logs -f &lt;container-id&gt;</code>命令查看容器日志：</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>nodemon<span class="o">]</span><span class="w"> </span><span class="m">2</span>.0.20
+<span class="o">[</span>nodemon<span class="o">]</span><span class="w"> </span>to<span class="w"> </span>restart<span class="w"> </span>at<span class="w"> </span>any<span class="w"> </span>time,<span class="w"> </span>enter<span class="w"> </span><span class="sb">`</span>rs<span class="sb">`</span>
+<span class="o">[</span>nodemon<span class="o">]</span><span class="w"> </span>watching<span class="w"> </span>path<span class="o">(</span>s<span class="o">)</span>:<span class="w"> </span>*.*
+<span class="o">[</span>nodemon<span class="o">]</span><span class="w"> </span>watching<span class="w"> </span>extensions:<span class="w"> </span>js,mjs,json
+<span class="o">[</span>nodemon<span class="o">]</span><span class="w"> </span>starting<span class="w"> </span><span class="sb">`</span>node<span class="w"> </span>src/index.js<span class="sb">`</span>
+Waiting<span class="w"> </span><span class="k">for</span><span class="w"> </span>mysql:3306.
+Connected!
+Connected<span class="w"> </span>to<span class="w"> </span>mysql<span class="w"> </span>db<span class="w"> </span>at<span class="w"> </span>host<span class="w"> </span>mysql
+Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> </span><span class="m">3000</span>
+</code></pre></div>
+<p>可以看到正在使用mysql数据库。</p>
+<ol>
+<li>
+<p>打开浏览器 <a href="http://localhost:3000/">http://localhost:3000</a>，插入几条待办事项。</p>
+</li>
+<li>
+<p>连接mysql数据库，看看这些项目是否写到了数据库。</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;mysql-container-id&gt;<span class="w"> </span>mysql<span class="w"> </span>-p<span class="w"> </span>todos
+</code></pre></div>
+<p>在mysql shell中运行以下命令：</p>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">todo_items</span><span class="p">;</span>
+<span class="o">+--------------------------------------+------+-----------+</span>
+<span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">                                   </span><span class="o">|</span><span class="w"> </span><span class="k">name</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">completed</span><span class="w"> </span><span class="o">|</span>
+<span class="o">+--------------------------------------+------+-----------+</span>
+<span class="o">|</span><span class="w"> </span><span class="mf">42e3</span><span class="n">f944</span><span class="o">-</span><span class="n">b7a5</span><span class="o">-</span><span class="mf">4e6</span><span class="n">f</span><span class="o">-</span><span class="n">8a48</span><span class="o">-</span><span class="n">b467a047bbc7</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">111</span><span class="w">  </span><span class="o">|</span><span class="w">         </span><span class="mi">0</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">01d0794e</span><span class="o">-</span><span class="n">f6c7</span><span class="o">-</span><span class="n">4dbf</span><span class="o">-</span><span class="n">aa08</span><span class="o">-</span><span class="n">9ef36aca1aa3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">222</span><span class="w">  </span><span class="o">|</span><span class="w">         </span><span class="mi">0</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="n">fbace862</span><span class="o">-</span><span class="n">cd33</span><span class="o">-</span><span class="n">4ff9</span><span class="o">-</span><span class="n">98a8</span><span class="o">-</span><span class="mf">4155416e72</span><span class="n">c0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">333</span><span class="w">  </span><span class="o">|</span><span class="w">         </span><span class="mi">0</span><span class="w"> </span><span class="o">|</span>
+<span class="o">+--------------------------------------+------+-----------+</span>
+<span class="mi">3</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="kt">set</span><span class="w"> </span><span class="p">(</span><span class="mf">0.00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
+</code></pre></div>
+<p>可以看到，数据库中确实有数据了。</p>
+<h2 id="57-docker-compose">5.7. 使用Docker Compose</h2>
+<p>Docker Compose是一个帮助定义和分享多容器应用的工具。使用Compose时，就可以使用一个yaml文件来定义服务，只需要一个命令，就能全部启动或移除。</p>
+<p>使用Compose最大的优势是可以在文件中定义应用栈，将其放在项目仓库的根节点（这样就可以进行版本控制）。其他人只需要克隆仓库，然后使用Compose启动应用就可以了。</p>
+<h3 id="571-compose">5.7.1. 创建Compose文件</h3>
+<p>在项目根目录下，创建<code>compose.yaml</code>文件：</p>
+<div class="highlight"><pre><span></span><code>├──<span class="w"> </span>getting-started-app/
+│<span class="w"> </span>├──<span class="w"> </span>Dockerfile
+│<span class="w"> </span>├──<span class="w"> </span>compose.yaml
+│<span class="w"> </span>├──<span class="w"> </span>node_modules/
+│<span class="w"> </span>├──<span class="w"> </span>package.json
+│<span class="w"> </span>├──<span class="w"> </span>spec/
+│<span class="w"> </span>├──<span class="w"> </span>src/
+│<span class="w"> </span>└──<span class="w"> </span>yarn.lock
+</code></pre></div>
+<h3 id="572">5.7.2. 定义应用服务</h3>
+<p>在上面的示例中，我们使用下面的命令来启动应用服务：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </span><span class="m">127</span>.0.0.1:3000:3000<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-w<span class="w"> </span>/app<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/app&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network<span class="w"> </span>todo-app<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">MYSQL_HOST</span><span class="o">=</span>mysql<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">MYSQL_USER</span><span class="o">=</span>root<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>secret<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">MYSQL_DB</span><span class="o">=</span>todos<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>node:lts-alpine<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;yarn install &amp;&amp; yarn run dev&quot;</span>
+</code></pre></div>
+<p>现在我们在<code>compose.yaml</code>文件中定义这个服务：</p>
+<ol>
+<li>编辑<code>compose.yaml</code>文件，先定义应用运行的子一个服务（或容器）的名称和镜像。这个名称会自动变成网络别名。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:lts-alpine</span>
+</code></pre></div>
+<ol>
+<li>通常，镜像定义的后面有一个<code>command</code>（尽管没有顺序要求），现在将<code>command</code>命令添加到文件中。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:lts-alpine</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;</span>
+</code></pre></div>
+<ol>
+<li>定义服务的<code>ports</code>，以完成命令的 <code>-p 127.0.0.1：3000：3000</code> 部分。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:lts-alpine</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:3000:3000</span>
+</code></pre></div>
+<ol>
+<li>定义<code>working_dir</code>和<code>volumes</code>，来完成命令的<code>-w /app</code>和<code>-v "$(pwd):/app"</code>部分。</li>
+</ol>
+<blockquote>
+<p>Docker Compose 卷定义的一个优点是可以使用当前目录的相对路径。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:lts-alpine</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:3000:3000</span>
+<span class="w">    </span><span class="nt">working_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./:/app</span>
+</code></pre></div>
+<ol>
+<li>使用<code>environment</code>来定义环境变量。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:lts-alpine</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:3000:3000</span>
+<span class="w">    </span><span class="nt">working_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./:/app</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">MYSQL_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql</span>
+<span class="w">      </span><span class="nt">MYSQL_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root</span>
+<span class="w">      </span><span class="nt">MYSQL_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret</span>
+<span class="w">      </span><span class="nt">MYSQL_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todos</span>
+</code></pre></div>
+<h3 id="573-mysql">5.7.3. 定义MySQL服务</h3>
+<p>上文中，我们使用以下的命令来定义MySQL服务：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--network<span class="w"> </span>todo-app<span class="w"> </span>--network-alias<span class="w"> </span>mysql<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>todo-mysql-data:/var/lib/mysql<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>secret<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">MYSQL_DATABASE</span><span class="o">=</span>todos<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>mysql:8.0
+</code></pre></div>
+<p>现在，我们使用<code>compose.yaml</code>文件来定义：</p>
+<ol>
+<li>定义<code>mysql</code>服务，这样他会自动获得网络别名。指定要使用的镜像。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># The app service definition</span>
+<span class="w">  </span><span class="nt">mysql</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:8.0</span>
+</code></pre></div>
+<ol>
+<li>定义卷。</li>
+</ol>
+<p>使用<code>docker run</code>命令运行容器时，Docker会自动创建指定名称的卷。但使用Compose时不会自动创建，所以需要在顶层的<code>volumes</code>部分定义卷，然后在服务配置中指定挂载点。</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># The app service definition</span>
+<span class="w">  </span><span class="nt">mysql</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:8.0</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todo-mysql-data:/var/lib/mysql</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">todo-mysql-data</span><span class="p">:</span>
+</code></pre></div>
+<ol>
+<li>指定环境变量。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># The app service definition</span>
+<span class="w">  </span><span class="nt">mysql</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:8.0</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todo-mysql-data:/var/lib/mysql</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret</span>
+<span class="w">      </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todos</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">todo-mysql-data</span><span class="p">:</span>
+</code></pre></div>
+<p>此时，完整的文件内容应该是这样的：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node:lts-alpine</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sh -c &quot;yarn install &amp;&amp; yarn run dev&quot;</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1:3000:3000</span>
+<span class="w">    </span><span class="nt">working_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./:/app</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">MYSQL_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql</span>
+<span class="w">      </span><span class="nt">MYSQL_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root</span>
+<span class="w">      </span><span class="nt">MYSQL_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret</span>
+<span class="w">      </span><span class="nt">MYSQL_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todos</span>
+
+<span class="w">  </span><span class="nt">mysql</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mysql:8.0</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todo-mysql-data:/var/lib/mysql</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret</span>
+<span class="w">      </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todos</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">todo-mysql-data</span><span class="p">:</span>
+</code></pre></div>
+<h3 id="574">5.7.4. 运行应用栈</h3>
+<p>上面，我们创建并编写完成了<code>compose.yaml</code>文件。现在可以启动应用程序了：</p>
+<ol>
+<li>确保没有其他容器副本运行。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查看运行的容器</span>
+docker<span class="w"> </span>ps
+
+<span class="c1"># 停止并移除指定的容器</span>
+docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>&lt;容器Id&gt;
+</code></pre></div>
+<ol>
+<li>启动应用栈。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span><span class="c1"># -d选项表示后台运行一切</span>
+</code></pre></div>
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>+<span class="o">]</span><span class="w"> </span>up<span class="w"> </span><span class="m">4</span>/4
+<span class="w"> </span>✔<span class="w"> </span>Network<span class="w"> </span>getting-started-app_default<span class="w">        </span>Created<span class="w">                  </span><span class="m">0</span>.0s<span class="w"> </span>
+<span class="w"> </span>✔<span class="w"> </span>Volume<span class="w"> </span>getting-started-app_todo-mysql-data<span class="w"> </span>Created<span class="w">                  </span><span class="m">0</span>.0s<span class="w"> </span>
+<span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>getting-started-app-mysql-1<span class="w">      </span>Created<span class="w">                  </span><span class="m">0</span>.0s<span class="w"> </span>
+<span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>getting-started-app-app-1<span class="w">        </span>Created<span class="w">                                 </span><span class="m">0</span>.0s<span class="w"> </span>
+</code></pre></div>
+<p>可以看到Docker Compose创建了卷和网络。</p>
+<p>默认情况下，Docker Compose会自动为应用栈专门创建一个网络（所以我们没有在Composefile中定义）。</p>
+<ol>
+<li>查看日志</li>
+</ol>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f
+</code></pre></div>
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code>mysql_1<span class="w">  </span><span class="p">|</span><span class="w"> </span><span class="m">2019</span>-10-03T03:07:16.083639Z<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">[</span>Note<span class="o">]</span><span class="w"> </span>mysqld:<span class="w"> </span>ready<span class="w"> </span><span class="k">for</span><span class="w"> </span>connections.
+mysql_1<span class="w">  </span><span class="p">|</span><span class="w"> </span>Version:<span class="w"> </span><span class="s1">&#39;8.0.31&#39;</span><span class="w">  </span>socket:<span class="w"> </span><span class="s1">&#39;/var/run/mysqld/mysqld.sock&#39;</span><span class="w">  </span>port:<span class="w"> </span><span class="m">3306</span><span class="w">  </span>MySQL<span class="w"> </span>Community<span class="w"> </span>Server<span class="w"> </span><span class="o">(</span>GPL<span class="o">)</span>
+app_1<span class="w">    </span><span class="p">|</span><span class="w"> </span>Connected<span class="w"> </span>to<span class="w"> </span>mysql<span class="w"> </span>db<span class="w"> </span>at<span class="w"> </span>host<span class="w"> </span>mysql
+app_1<span class="w">    </span><span class="p">|</span><span class="w"> </span>Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> </span><span class="m">3000</span>
+</code></pre></div>
+<p>可以看到，日志行首是服务名称。</p>
+<p>如果想看特定服务的日志：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>app
+</code></pre></div>
+<ol>
+<li>浏览器 <a href="http://localhost:3000/">http://localhost:3000</a> 查看</li>
+</ol>
+<h3 id="575">5.7.5. 查看应用栈</h3>
+<p>在Docker Desktop的仪表盘中，会有一个叫<code>getting-started-app</code>的组。这是Docker Compose的项目名称，用来将容器分组在一起。默认情况下，项目名称也就是<code>compose.yaml</code>文件所在的目录名称。</p>
+<p><img alt="image-20260116180129682" src="../../.public//image-20260116180129682.png" /></p>
+<p>如果你展开这个组，就能看到在<code>compose.yaml</code>文件中定义的两个容器。</p>
+<p>这些名称也更加具有辨识性，因为它们遵循 <code>&lt;service-name&gt;-&lt;replica-number&gt;</code> 模式。可以很容易看出来哪个容器是应用，哪个是 mysql 数据库。</p>
+<h3 id="576">5.7.6. 全部移除</h3>
+<p>当你准备移除所有时，只需运行 docker <code>compose down</code>，或者在 Docker 桌面仪表盘中移除整个应用即可。</p>
+<div class="highlight"><pre><span></span><code>administrator@administratordeMacBook-Air<span class="w"> </span>getting-started-app<span class="w"> </span>%<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>down
+<span class="o">[</span>+<span class="o">]</span><span class="w"> </span>down<span class="w"> </span><span class="m">3</span>/3
+<span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>getting-started-app-mysql-1<span class="w"> </span>Removed<span class="w">                                         </span><span class="m">1</span>.2s<span class="w"> </span>
+<span class="w"> </span>✔<span class="w"> </span>Container<span class="w"> </span>getting-started-app-app-1<span class="w">   </span>Removed<span class="w">                                         </span><span class="m">0</span>.2s<span class="w"> </span>
+<span class="w"> </span>✔<span class="w"> </span>Network<span class="w"> </span>getting-started-app_default<span class="w">   </span>Removed<span class="w">                                                                 </span><span class="m">0</span>.2s
+</code></pre></div>
+<p>容器将停止，网络将被移除。</p>
+<blockquote>
+<p>默认情况下，当你运行<code>docker compose down</code>时，compose 文件中的命名卷不会被移除。如果你想移除这些卷，你需要添加 <code>--volumes</code> 标志。</p>
+<p>删除应用栈时，Docker Desktop 仪表盘不会移除卷。</p>
+</blockquote>
+<h2 id="58">5.8. 镜像构建最佳实践</h2>
+<h3 id="581">5.8.1. 镜像分层</h3>
+<p>使用<code>docker image history</code>命令，可以看到镜像中每个层的创建命令。</p>
+<p>比如：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>image<span class="w"> </span><span class="nb">history</span><span class="w"> </span>getting-started
+</code></pre></div>
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code>IMAGE<span class="w">          </span>CREATED<span class="w">        </span>CREATED<span class="w"> </span>BY<span class="w">                                      </span>SIZE<span class="w">      </span>COMMENT
+4a71146bc000<span class="w">   </span><span class="m">3</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">    </span>EXPOSE<span class="w"> </span><span class="o">[</span><span class="m">3000</span>/tcp<span class="o">]</span><span class="w">                               </span>0B<span class="w">        </span>buildkit.dockerfile.v0
+&lt;missing&gt;<span class="w">      </span><span class="m">3</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">    </span>CMD<span class="w"> </span><span class="o">[</span><span class="s2">&quot;node&quot;</span><span class="w"> </span><span class="s2">&quot;src/index.js&quot;</span><span class="o">]</span><span class="w">                     </span>0B<span class="w">        </span>buildkit.dockerfile.v0
+&lt;missing&gt;<span class="w">      </span><span class="m">3</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">    </span>RUN<span class="w"> </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>yarn<span class="w"> </span>install<span class="w"> </span>--production<span class="w"> </span><span class="c1"># b…   117MB     buildkit.dockerfile.v0</span>
+&lt;missing&gt;<span class="w">      </span><span class="m">3</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">    </span>COPY<span class="w"> </span>.<span class="w"> </span>.<span class="w"> </span><span class="c1"># buildkit                             6.69MB    buildkit.dockerfile.v0</span>
+&lt;missing&gt;<span class="w">      </span><span class="m">7</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">    </span>WORKDIR<span class="w"> </span>/app<span class="w">                                    </span><span class="m">8</span>.19kB<span class="w">    </span>buildkit.dockerfile.v0
+&lt;missing&gt;<span class="w">      </span><span class="m">40</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">   </span>CMD<span class="w"> </span><span class="o">[</span><span class="s2">&quot;node&quot;</span><span class="o">]</span><span class="w">                                    </span>0B<span class="w">        </span>buildkit.dockerfile.v0
+&lt;missing&gt;<span class="w">      </span><span class="m">40</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">   </span>ENTRYPOINT<span class="w"> </span><span class="o">[</span><span class="s2">&quot;docker-entrypoint.sh&quot;</span><span class="o">]</span><span class="w">             </span>0B<span class="w">        </span>buildkit.dockerfile.v0
+&lt;missing&gt;<span class="w">      </span><span class="m">40</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">   </span>COPY<span class="w"> </span>docker-entrypoint.sh<span class="w"> </span>/usr/local/bin/<span class="w"> </span><span class="c1"># …   20.5kB    buildkit.dockerfile.v0</span>
+&lt;missing&gt;<span class="w">      </span><span class="m">40</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">   </span>RUN<span class="w"> </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>apk<span class="w"> </span>add<span class="w"> </span>--no-cache<span class="w"> </span>--virtual<span class="w"> </span>…<span class="w">   </span><span class="m">5</span>.48MB<span class="w">    </span>buildkit.dockerfile.v0
+&lt;missing&gt;<span class="w">      </span><span class="m">40</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">   </span>ENV<span class="w"> </span><span class="nv">YARN_VERSION</span><span class="o">=</span><span class="m">1</span>.22.22<span class="w">                        </span>0B<span class="w">        </span>buildkit.dockerfile.v0
+&lt;missing&gt;<span class="w">      </span><span class="m">40</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">   </span>RUN<span class="w"> </span>/bin/sh<span class="w"> </span>-c<span class="w"> </span>addgroup<span class="w"> </span>-g<span class="w"> </span><span class="m">1000</span><span class="w"> </span>node<span class="w">     </span><span class="o">&amp;&amp;</span><span class="w"> </span>…<span class="w">   </span>154MB<span class="w">     </span>buildkit.dockerfile.v0
+&lt;missing&gt;<span class="w">      </span><span class="m">40</span><span class="w"> </span>hours<span class="w"> </span>ago<span class="w">   </span>ENV<span class="w"> </span><span class="nv">NODE_VERSION</span><span class="o">=</span><span class="m">24</span>.13.0<span class="w">                        </span>0B<span class="w">        </span>buildkit.dockerfile.v0
+&lt;missing&gt;<span class="w">      </span><span class="m">4</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">    </span>CMD<span class="w"> </span><span class="o">[</span><span class="s2">&quot;/bin/sh&quot;</span><span class="o">]</span><span class="w">                                 </span>0B<span class="w">        </span>buildkit.dockerfile.v0
+&lt;missing&gt;<span class="w">      </span><span class="m">4</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">    </span>ADD<span class="w"> </span>alpine-minirootfs-3.23.2-aarch64.tar.gz<span class="w"> </span>…<span class="w">   </span><span class="m">9</span>.36MB<span class="w">    </span>buildkit.dockerfile.v0
+</code></pre></div>
+<p>每行输出表示镜像中的一层。最新层在顶部，旧的层在底部。可以快速查看每层的大小、帮助排查大镜像（哪一层导致的大镜像）。</p>
+<p>在上面的输出中，有几条线被截断了，使用<code>--no-trunc</code>选项，可以看到完整的输出：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>image<span class="w"> </span><span class="nb">history</span><span class="w"> </span>--no-trunc<span class="w"> </span>getting-started
+</code></pre></div>
+<h3 id="582">5.8.2. 层缓存</h3>
+<p>通过上述的操作，我们看到了镜像分层。如何减少容器镜像的构建时间，是一个很重要的课题。</p>
+<blockquote>
+<p>一旦镜像的一个层发生变化，所有下游的层也必须重建。</p>
+</blockquote>
+<p>结合镜像历史输出和之前编写的Dockerfile，可以看到Dockerfile中的每个命令，都会变成镜像中的一个新图层。</p>
+<p>如果有留意的话，会发现之前每次修改镜像时，yarn依赖都会重新安装。这样每次构建都重新安装这些依赖其实没什么意义。</p>
+<p>要解决这个问题，需要重构Dockerfile，以支持依赖缓存。</p>
+<p>对于基于node的应用，这些依赖在<code>package.json</code>文件中定义。你可以先复制这个文件，安装依赖，然后再复制其他文件。这样之后，只有在<code>package.json</code>文件发生变化时，才重新创建yarn依赖。</p>
+<p>实例：</p>
+<ol>
+<li>更新Dockerfile，先复制<code>package.json</code>文件，然后再复制其他文件。</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">node:lts-alpine</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>package.json<span class="w"> </span>yarn.lock<span class="w"> </span>./
+<span class="k">RUN</span><span class="w"> </span>yarn<span class="w"> </span>install<span class="w"> </span>--production
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;node&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;src/index.js&quot;</span><span class="p">]</span>
+</code></pre></div>
+<ol>
+<li>使用<code>docker build</code>构建新镜像</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>getting-started<span class="w"> </span>.
+</code></pre></div>
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<ol>
+<li>
+<p>修改源代码<code>src/static/index.html</code>文件，将<code>&lt;title&gt;</code>内容改成<code>The Awesome Todo App</code></p>
+</li>
+<li>
+<p>再次构建</p>
+</li>
+</ol>
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<p>有几个步骤使用了之前缓存的镜像层！</p>
+<p>有没有发现，构建速度快了很多？推送和拉取这个镜像以及镜像更新也会变快很多！</p>
+<h3 id="583">5.8.3. 多阶段构建</h3>
+<p>多阶段构建是一种及其强大的工具，可以帮助我们使用多阶段去构建镜像。</p>
+<p>优势如下：</p>
+<ul>
+<li>将构建时依赖与运行时依赖分开。</li>
+<li>通过只包含应用运行时必须的内容，来减小整体镜像大小。</li>
+</ul>
+<p><strong>Maven&amp;Tomcat示例：</strong></p>
+<p>在构建Java应用程序时，需要使用JDK来将源代码编译成字节码，但JDK在生产中是不需要的。</p>
+<p>另外，可能还使用了Maven来帮忙构建应用，这在最终镜像中也是不需要的。</p>
+<p>这时候使用多阶段构建就很有帮助：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># syntax=docker/dockerfile:1</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">maven</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">build</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>mvn<span class="w"> </span>package
+
+<span class="k">FROM</span><span class="w"> </span><span class="s">tomcat</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>build<span class="w"> </span>/app/target/file.war<span class="w"> </span>/usr/local/tomcat/webapps<span class="w"> </span>
+</code></pre></div>
+<p>在这个例子中，第一个阶段（build阶段）使用Maven来执行时机的Java构建；第二个阶段（从FROM tomcat开始），从build阶段复制文件。</p>
+<p>最终镜像仅包含最后阶段创建的内容（可以使用<code>--target</code>来覆盖）。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
