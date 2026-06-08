@@ -2,9 +2,9 @@
 
 ## 1. 算法概述
 
-**MD5**（Message-Digest Algorithm 5）是由 Ronald Rivest（RSA 中的 R）于 1991 年设计的密码散列函数，输出 128 位（16 字节）的哈希值。它是 MD4 的改进版本，曾广泛用于验证数据完整性。
+**MD5**（Message-Digest Algorithm 5）是由 Ronald Rivest（RSA 中的 R）于 1991 年设计的密码散列函数，输出 128 位（16 字节）的哈希值。它曾是互联网上使用最广泛的哈希算法之一。
 
-MD5 定义在 RFC 1321 中，曾是互联网上使用最广泛的哈希算法之一，但由于已发现严重的碰撞漏洞，现已**不推荐用于任何安全用途**。
+> **⚠️ 安全警告：MD5 的碰撞攻击已完全实用化（秒级破解），不应用于任何安全用途。** 如果你的项目中 MD5 用于数字签名、证书验证、密码存储等安全场景，必须立即迁移。
 
 ### 1.1 基本参数
 
@@ -12,139 +12,108 @@ MD5 定义在 RFC 1321 中，曾是互联网上使用最广泛的哈希算法之
 |------|-----|
 | 算法类型 | 密码散列函数 |
 | 输出长度 | 128 位（32 个十六进制字符） |
-| 输入长度 | 任意（理论上无限制） |
+| 输入长度 | 任意 |
 | 分组大小 | 512 位（64 字节） |
-| 计算轮数 | 4 轮 × 16 步 = 64 步 |
 | 结构 | Merkle-Damgård |
 | 标准 | RFC 1321 |
+| 安全状态 | ❌ **碰撞已破解，禁止用于安全场景** |
 
-### 1.2 散列函数的基本性质
-
-一个安全的密码散列函数应满足：
+### 1.2 散列函数应满足的性质
 
 | 性质 | 说明 | MD5 状态 |
 |------|------|----------|
-| 抗原像攻击 | 给定 H(x)，难以找到 x | ⚠️ 弱化但尚未完全破解 |
+| 抗碰撞攻击 | 难以找到任意 x≠x' 使 H(x)=H(x') | ❌ **已彻底破解（秒级）** |
+| 抗原像攻击 | 给定 H(x)，难以找到 x | ⚠️ 弱化但未完全破解 |
 | 抗第二原像攻击 | 给定 x，难以找到 x' 使 H(x)=H(x') | ⚠️ 理论弱化 |
-| 抗碰撞攻击 | 难以找到任意 x≠x' 使 H(x)=H(x') | ❌ **已彻底破解** |
-| 雪崩效应 | 输入微小变化导致输出巨大变化 | ✅ 满足 |
 | 确定性 | 相同输入总产生相同输出 | ✅ 满足 |
+| 雪崩效应 | 输入微小变化导致输出巨大变化 | ✅ 满足 |
 
-## 2. 算法原理
+## 2. 算法原理（简述）
 
-### 2.1 整体流程
+MD5 基于 **Merkle-Damgård** 结构：
 
 ```mermaid
 flowchart TD
-    A[原始消息] --> B["消息填充<br>使消息长度 ≡ 448 mod 512"]
-    B --> C["附加长度<br>追加原始消息长度（64位小端序）"]
-    C --> D["分块处理（每块 512 位）<br>4 轮 × 16 步压缩"]
+    A[原始消息] --> B["消息填充（使长度 ≡ 448 mod 512）"]
+    B --> C["附加原始长度（64位小端序）"]
+    C --> D["分块处理（每块 512 位）<br>4 轮 × 16 步 = 64 步压缩"]
     D --> E[128 位哈希值]
 ```
 
-### 2.2 消息填充
+**核心流程**：
 
-1. 在消息末尾追加一个 `1` 位
-2. 追加若干 `0` 位，使消息长度 ≡ 448 (mod 512)
-3. 追加原始消息长度的 64 位小端序表示
+1. **消息填充**：追加 `1` 位和若干 `0` 位，再追加原始长度，使总长度为 512 的倍数
+2. **初始化 4 个 32 位寄存器**（A、B、C、D）
+3. **对每个 512 位分块**：通过 4 轮（每轮 16 步）非线性函数运算，混合消息和常量
+4. **输出**：将 4 个寄存器按小端序拼接为 128 位哈希值
 
-填充后消息总长度为 512 的倍数。
-
-### 2.3 初始化向量
-
-4 个 32 位寄存器的初始值（小端序）：
-
-```
-A = 0x67452301
-B = 0xEFCDAB89
-C = 0x98BADCFE
-D = 0x10325476
-```
-
-### 2.4 压缩函数
-
-对每个 512 位消息块，执行 4 轮操作，每轮 16 步：
-
-#### 四个非线性函数
-
-```
-F(B, C, D) = (B ∧ C) ∨ (¬B ∧ D)     // 轮1: 选择函数
-G(B, C, D) = (B ∧ D) ∨ (C ∧ ¬D)     // 轮2: 条件函数
-H(B, C, D) = B ⊕ C ⊕ D              // 轮3: 奇偶函数
-I(B, C, D) = C ⊕ (B ∨ ¬D)           // 轮4: 逻辑函数
-```
-
-#### 每步操作
-
-```
-设当前步使用的非线性函数为 func，则：
-temp = A + func(B, C, D) + M[k] + T[i]
-A = D
-D = C
-C = B
-B = B + leftrotate(temp, s)
-
-其中：
-- M[k] 为当前消息块的第 k 个 32 位字
-- T[i] 为常量表（基于 sin 函数生成）
-- s 为每步的循环左移位数
-```
-
-#### 常量表 T
-
-```
-T[i] = floor(2³² × |sin(i)|)，i = 1, 2, ..., 64
-```
-
-### 2.5 输出
-
-处理完所有消息块后，将 A、B、C、D 四个寄存器按小端序拼接，得到 128 位哈希值。
+> 开发者无需了解内部细节。重要的是知道：MD5 输出固定 128 位，计算速度快，但碰撞抗性已被彻底破解。
 
 ## 3. 安全性分析
 
-### 3.1 碰撞攻击历史
+### 3.1 为什么 MD5 不安全？
 
-| 时间 | 事件 | 研究者 |
-|------|------|--------|
-| 1996 | 发现 MD5 压缩函数碰撞 | Dobbertin |
-| 2004 | 首次构造完整碰撞 | 王小云等 |
-| 2005 | 碰撞攻击实用化 | 多个研究组 |
-| 2008 | 利用 MD5 碰撞伪造 CA 证书 | Sotirov 等 |
-| 2012 | Flame 恶意软件利用 MD5 碰撞 | 国家级攻击 |
+| 时间 | 事件 | 影响 |
+|------|------|------|
+| 2004 | 王小云等首次构造完整碰撞 | 碰撞复杂度从 2⁶⁴ 降至 2³⁹ |
+| 2005 | 碰撞攻击实用化 | 普通计算机数秒内找到碰撞 |
+| 2008 | 利用 MD5 碰撞伪造 CA 证书 | 证明可伪造 HTTPS 证书 |
+| 2012 | Flame 恶意软件利用 MD5 碰撞 | 国家级攻击实例 |
 
-### 3.2 王小云的突破
+### 3.2 实际危害
 
-2004 年，中国密码学家**王小云**等人发表了对 MD5 的实用碰撞攻击：
+- **可以构造两个不同文件，具有相同的 MD5 值**
+- **可以伪造数字证书**（已有真实案例）
+- **密码存储用 MD5 极易被彩虹表破解**
+- **长度扩展攻击**：已知 H(M) 和 |M|，无需知道 M 即可计算 H(M || padding || M')
 
-- 找到碰撞的计算复杂度从理论的 2⁶⁴ 降低到约 2³⁹
-- 在普通计算机上可在**数秒内**找到碰撞
-- 这一成果震动了整个密码学界
+## 4. 开发者实践指南
 
-### 3.3 碰撞示例
+### 4.1 MD5 的使用决策
 
-以下两个不同的输入产生相同的 MD5 值（前缀碰撞攻击）：
+| 场景 | 能否使用 MD5 | 应该用什么 |
+|------|-------------|-----------|
+| 密码存储 | ❌ 绝对禁止 | Argon2id / bcrypt |
+| 数字签名 | ❌ 绝对禁止 | SHA-256 + RSA/ECDSA |
+| 消息认证（MAC） | ❌ 绝对禁止 | HMAC-SHA-256 |
+| 证书指纹 | ❌ 绝对禁止 | SHA-256 |
+| 文件完整性（防篡改） | ❌ 不安全 | SHA-256 / BLAKE3 |
+| 文件校验和（防传输错误） | ✅ 可以 | 但 SHA-256 也不慢 |
+| 数据去重 | ✅ 可以 | 不涉及安全 |
+| 缓存键/分片键 | ✅ 可以 | 不涉及安全 |
+| ETag / 内容标识 | ✅ 可以 | 非安全用途 |
+
+**一条原则**：如果存在"恶意对手可能构造碰撞来欺骗系统"的可能，就不能用 MD5。
+
+### 4.2 遗留系统迁移
+
+如果你的系统中仍在安全场景使用 MD5：
 
 ```
-一个实际例子：两个不同的可执行文件可以被构造为具有相同的 MD5 哈希
-这意味着 MD5 不能用于验证文件完整性或真实性
+迁移路径：
+
+密码存储：MD5(password) → Argon2id(password, salt)
+  - 不能直接替换，需要用户下次登录时重新哈希
+  - 过渡期可用：Argon2id(MD5(password), salt)
+
+文件校验：MD5 → SHA-256
+  - 重新计算所有文件的 SHA-256
+  - 新旧哈希并存一段时间
+
+消息认证：H(key||msg) → HMAC-SHA-256(key, msg)
+  - 注意 HMAC 的正确用法
 ```
 
-### 3.4 当前安全状态
+### 4.3 为什么有些地方还在用 MD5？
 
-| 安全性质 | 状态 | 影响 |
-|----------|------|------|
-| 碰撞攻击 | ❌ 秒级破解 | 不能用于数字签名、证书 |
-| 前缀碰撞 | ❌ 实用化 | 不能用于任何认证场景 |
-| 原像攻击 | ⚠️ 理论弱化 | 不建议依赖 |
-| 长度扩展攻击 | ❌ 存在 | 不能用于 MAC（直接构造） |
+- **历史惯性**：老系统迁移成本高
+- **非安全场景**：不需要碰撞抗性时，MD5 速度快、输出短
+- **协议要求**：某些旧协议（如部分 HTTP 认证）指定 MD5
+- **开发者不了解风险**：这正是本文存在的意义
 
-> **🚨 安全警告**
->
-> **MD5 已被密码学界彻底抛弃用于安全用途。** 任何依赖 MD5 碰撞抗性的应用都是不安全的。
+## 5. Go 语言实现
 
-## 4. 代码实现
-
-### 4.1 Go 语言实现
+> ⚠️ 以下代码仅用于非安全场景（校验和、去重等）。安全场景请使用 `crypto/sha256`。
 
 ```go
 package main
@@ -155,7 +124,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"strings"
 )
 
 // 计算字符串的 MD5
@@ -164,7 +132,7 @@ func MD5String(s string) string {
 	return hex.EncodeToString(hash[:])
 }
 
-// 计算文件的 MD5
+// 计算文件的 MD5（流式处理，适合大文件）
 func MD5File(filepath string) (string, error) {
 	file, err := os.Open(filepath)
 	if err != nil {
@@ -176,186 +144,48 @@ func MD5File(filepath string) (string, error) {
 	if _, err := io.Copy(hasher, file); err != nil {
 		return "", err
 	}
-
-	return hex.EncodeToString(hasher.Sum(nil)), nil
-}
-
-// 流式计算 MD5（适合大数据）
-func MD5Stream(reader io.Reader) (string, error) {
-	hasher := md5.New()
-	if _, err := io.Copy(hasher, reader); err != nil {
-		return "", err
-	}
 	return hex.EncodeToString(hasher.Sum(nil)), nil
 }
 
 func main() {
 	// 基本用法
 	fmt.Println("=== MD5 哈希示例 ===")
-
 	testCases := []string{
-		"",
 		"hello",
 		"Hello, MD5!",
 		"The quick brown fox jumps over the lazy dog",
 	}
 
 	for _, tc := range testCases {
-		hash := MD5String(tc)
-		fmt.Printf("MD5(\"%s\")\n  = %s\n", tc, hash)
+		fmt.Printf("MD5(\"%s\") = %s\n", tc, MD5String(tc))
 	}
 
-	// 验证雪崩效应
-	fmt.Println("\n=== 雪崩效应演示 ===")
-	s1 := "Hello"
-	s2 := "hello" // 仅一个字母大小写不同
-	fmt.Printf("MD5(\"%s\") = %s\n", s1, MD5String(s1))
-	fmt.Printf("MD5(\"%s\") = %s\n", s2, MD5String(s2))
-
-	// 流式计算
-	fmt.Println("\n=== 流式计算 ===")
-	reader := strings.NewReader("Hello, streaming MD5!")
-	hash, _ := MD5Stream(reader)
-	fmt.Printf("流式 MD5 = %s\n", hash)
+	// 雪崩效应演示
+	fmt.Println("\n=== 雪崩效应 ===")
+	fmt.Printf("MD5(\"Hello\") = %s\n", MD5String("Hello"))
+	fmt.Printf("MD5(\"hello\") = %s\n", MD5String("hello"))
 }
 ```
-
-### 4.2 Python 实现
-
-```python
-import hashlib
-
-def md5_string(s: str) -> str:
-    """计算字符串的 MD5"""
-    return hashlib.md5(s.encode('utf-8')).hexdigest()
-
-def md5_file(filepath: str) -> str:
-    """计算文件的 MD5"""
-    hasher = hashlib.md5()
-    with open(filepath, 'rb') as f:
-        for chunk in iter(lambda: f.read(4096), b''):
-            hasher.update(chunk)
-    return hasher.hexdigest()
-
-def md5_bytes(data: bytes) -> str:
-    """计算字节数据的 MD5"""
-    return hashlib.md5(data).hexdigest()
-
-if __name__ == "__main__":
-    print("=== MD5 哈希示例 ===")
-
-    test_cases = [
-        "",
-        "hello",
-        "Hello, MD5!",
-        "The quick brown fox jumps over the lazy dog",
-    ]
-
-    for tc in test_cases:
-        hash_value = md5_string(tc)
-        print(f'MD5("{tc}")')
-        print(f'  = {hash_value}')
-
-    # 验证雪崩效应
-    print("\n=== 雪崩效应演示 ===")
-    s1, s2 = "Hello", "hello"
-    h1, h2 = md5_string(s1), md5_string(s2)
-    print(f'MD5("{s1}") = {h1}')
-    print(f'MD5("{s2}") = {h2}')
-
-    # 计算不同位数
-    bits_diff = bin(int(h1, 16) ^ int(h2, 16)).count('1')
-    print(f"不同的位数: {bits_diff}/128 ({bits_diff/128*100:.1f}%)")
-
-    # 增量计算
-    print("\n=== 增量计算 ===")
-    hasher = hashlib.md5()
-    hasher.update(b"Hello, ")
-    hasher.update(b"MD5!")
-    print(f"增量计算结果: {hasher.hexdigest()}")
-    print(f"一次性计算:   {md5_string('Hello, MD5!')}")
-```
-
-### 4.3 Java 实现
-
-```java
-import java.security.MessageDigest;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.HexFormat;
-
-public class MD5Example {
-
-    public static String md5String(String input) throws Exception {
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] hash = md.digest(input.getBytes("UTF-8"));
-        return HexFormat.of().formatHex(hash);
-    }
-
-    public static String md5File(String filepath) throws Exception {
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] fileBytes = Files.readAllBytes(Path.of(filepath));
-        byte[] hash = md.digest(fileBytes);
-        return HexFormat.of().formatHex(hash);
-    }
-
-    public static void main(String[] args) throws Exception {
-        System.out.println("=== MD5 哈希示例 ===");
-
-        String[] testCases = {
-            "",
-            "hello",
-            "Hello, MD5!",
-            "The quick brown fox jumps over the lazy dog"
-        };
-
-        for (String tc : testCases) {
-            String hash = md5String(tc);
-            System.out.printf("MD5(\"%s\")%n  = %s%n", tc, hash);
-        }
-
-        // 雪崩效应
-        System.out.println("\n=== 雪崩效应演示 ===");
-        System.out.printf("MD5(\"Hello\") = %s%n", md5String("Hello"));
-        System.out.printf("MD5(\"hello\") = %s%n", md5String("hello"));
-    }
-}
-```
-
-## 5. 当前合理用途
-
-虽然 MD5 不能用于安全场景，但在以下**非安全**场景仍可使用：
-
-| 用途 | 说明 | 是否合适 |
-|------|------|----------|
-| 文件校验和 | 检测传输错误（非恶意篡改） | ✅ 可接受 |
-| 数据去重 | 快速判断文件是否相同 | ✅ 可接受 |
-| 缓存键生成 | 生成缓存标识符 | ✅ 可接受 |
-| 数据库分片 | 均匀分布哈希 | ✅ 可接受 |
-| 密码存储 | - | ❌ 绝对禁止 |
-| 数字签名 | - | ❌ 绝对禁止 |
-| 消息认证 | - | ❌ 绝对禁止 |
-| 证书指纹 | - | ❌ 绝对禁止 |
 
 ## 6. 替代方案
 
-| 场景 | 推荐算法 | 输出长度 |
-|------|----------|----------|
-| 通用哈希 | SHA-256 | 256 位 |
-| 高性能哈希 | BLAKE3 | 256 位 |
-| 密码存储 | Argon2id / bcrypt | 可配置 |
-| HMAC | HMAC-SHA-256 | 256 位 |
-| 文件校验 | SHA-256 或 BLAKE3 | 256 位 |
-| 需要 128 位输出 | BLAKE3(128) 或截断 SHA-256 | 128 位 |
+| 场景 | 推荐算法 | 说明 |
+|------|----------|------|
+| 通用哈希 | SHA-256 | 当前标准，全平台支持 |
+| 高性能哈希 | BLAKE3 | 比 SHA-256 快 10 倍+ |
+| 密码存储 | Argon2id / bcrypt | 专为密码设计，慢哈希 |
+| 消息认证 | HMAC-SHA-256 | 标准 MAC 方案 |
+| 国密合规 | SM3 | 国密哈希标准 |
+| 需要 128 位输出 | 截断 SHA-256 或 BLAKE3 | 比 MD5 安全 |
 
 ## 7. 总结
 
 | 维度 | 评价 |
 |------|------|
-| 历史意义 | ⭐⭐⭐⭐⭐ 曾是互联网最广泛使用的哈希算法 |
 | 安全性 | ❌ 碰撞攻击已完全实用化 |
 | 性能 | ⭐⭐⭐⭐ 计算速度快 |
-| 现代安全适用性 | ❌ 不应用于任何安全相关场景 |
-| 非安全用途 | ⭐⭐⭐ 仍可用于校验和、去重等非安全场景 |
+| 现代安全适用性 | ❌ 不应用于任何安全场景 |
+| 非安全用途 | ✅ 校验和、去重、缓存键等仍可用 |
+| 开发者建议 | 安全场景用 SHA-256，新项目不要选 MD5 |
 
-MD5 的故事是密码学发展的一个重要教训：没有永远安全的算法，密码标准需要与时俱进。当发现算法弱点时，应及时迁移到更安全的替代方案。
+**一句话总结**：MD5 在安全用途上已经"死"了，但作为快速校验和工具在非安全场景仍有一席之地。如果你在代码审查中看到 MD5 用于安全场景，应该立刻标记为安全隐患。
