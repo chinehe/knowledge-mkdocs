@@ -8,7 +8,6 @@ nav:
       - DES: Computer&Network/加密算法/DES.md
       - 3DES: Computer&Network/加密算法/3DES.md
       - AES: Computer&Network/加密算法/AES.md
-      - 国密SM1: Computer&Network/加密算法/国密SM1.md
       - 国密SM4: Computer&Network/加密算法/国密SM4.md
       - RSA: Computer&Network/加密算法/RSA.md
       - ECC: Computer&Network/加密算法/ECC.md

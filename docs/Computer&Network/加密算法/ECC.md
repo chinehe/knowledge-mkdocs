@@ -199,9 +199,7 @@ EdDSA 是一种确定性签名方案，基于 Twisted Edwards 曲线：
 
 与 RSA 类似，ECC 也会被 Shor 算法破解。由于 ECC 密钥更短，理论上比 RSA 更容易受到量子攻击。后量子时代需迁移到格基密码等方案。
 
-## 5. 代码实现
-
-### 5.1 Go 语言实现
+## 5. Go 语言实现
 
 ```go
 package main
@@ -288,7 +286,7 @@ func main() {
 }
 ```
 
-### 5.2 Go 语言实现（Ed25519）
+## 6. Go 语言实现（Ed25519）
 
 ```go
 package main
@@ -331,164 +329,7 @@ func main() {
 }
 ```
 
-### 5.3 Python 实现
-
-```python
-from cryptography.hazmat.primitives.asymmetric import ec, ed25519
-from cryptography.hazmat.primitives import hashes, serialization
-from cryptography.hazmat.primitives.kdf.hkdf import HKDF
-
-# ===== ECDSA 签名/验签 =====
-def ecdsa_demo():
-    print("=== ECDSA 签名/验签 ===")
-
-    # 生成密钥对（P-256 曲线）
-    private_key = ec.generate_private_key(ec.SECP256R1())
-    public_key = private_key.public_key()
-
-    # 签名
-    message = b"Hello, ECDSA Signature!"
-    signature = private_key.sign(message, ec.ECDSA(hashes.SHA256()))
-
-    print(f"消息: {message.decode()}")
-    print(f"签名长度: {len(signature)} 字节")
-    print(f"签名(hex): {signature.hex()[:64]}...")
-
-    # 验签
-    try:
-        public_key.verify(signature, message, ec.ECDSA(hashes.SHA256()))
-        print("验签结果: 成功 ✓")
-    except Exception:
-        print("验签结果: 失败 ✗")
-
-# ===== ECDH 密钥协商 =====
-def ecdh_demo():
-    print("\n=== ECDH 密钥协商 ===")
-
-    # Alice
-    alice_private = ec.generate_private_key(ec.SECP256R1())
-    alice_public = alice_private.public_key()
-
-    # Bob
-    bob_private = ec.generate_private_key(ec.SECP256R1())
-    bob_public = bob_private.public_key()
-
-    # 计算共享密钥
-    alice_shared = alice_private.exchange(ec.ECDH(), bob_public)
-    bob_shared = bob_private.exchange(ec.ECDH(), alice_public)
-
-    # 使用 HKDF 派生最终密钥
-    alice_key = HKDF(
-        algorithm=hashes.SHA256(), length=32,
-        salt=None, info=b"ecdh derived key"
-    ).derive(alice_shared)
-
-    bob_key = HKDF(
-        algorithm=hashes.SHA256(), length=32,
-        salt=None, info=b"ecdh derived key"
-    ).derive(bob_shared)
-
-    print(f"Alice 派生密钥: {alice_key.hex()[:32]}...")
-    print(f"Bob   派生密钥: {bob_key.hex()[:32]}...")
-    print(f"密钥一致: {alice_key == bob_key}")
-
-# ===== Ed25519 签名 =====
-def ed25519_demo():
-    print("\n=== Ed25519 签名/验签 ===")
-
-    private_key = ed25519.Ed25519PrivateKey.generate()
-    public_key = private_key.public_key()
-
-    message = b"Hello, Ed25519 Signature!"
-    signature = private_key.sign(message)
-
-    print(f"消息: {message.decode()}")
-    print(f"签名长度: {len(signature)} 字节")
-
-    try:
-        public_key.verify(signature, message)
-        print("验签结果: 成功 ✓")
-    except Exception:
-        print("验签结果: 失败 ✗")
-
-if __name__ == "__main__":
-    ecdsa_demo()
-    ecdh_demo()
-    ed25519_demo()
-```
-
-### 5.4 Java 实现
-
-```java
-import java.security.*;
-import java.security.spec.*;
-import javax.crypto.KeyAgreement;
-import java.util.HexFormat;
-
-public class ECCExample {
-
-    // ECDSA 签名
-    public static byte[] sign(PrivateKey privateKey, byte[] message) throws Exception {
-        Signature sig = Signature.getInstance("SHA256withECDSA");
-        sig.initSign(privateKey);
-        sig.update(message);
-        return sig.sign();
-    }
-
-    // ECDSA 验签
-    public static boolean verify(PublicKey publicKey, byte[] message, byte[] signature) 
-            throws Exception {
-        Signature sig = Signature.getInstance("SHA256withECDSA");
-        sig.initVerify(publicKey);
-        sig.update(message);
-        return sig.verify(signature);
-    }
-
-    // ECDH 密钥协商
-    public static byte[] performECDH(PrivateKey privateKey, PublicKey publicKey) throws Exception {
-        KeyAgreement keyAgreement = KeyAgreement.getInstance("ECDH");
-        keyAgreement.init(privateKey);
-        keyAgreement.doPhase(publicKey, true);
-        return keyAgreement.generateSecret();
-    }
-
-    public static void main(String[] args) throws Exception {
-        // 生成 EC 密钥对（P-256）
-        KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("EC");
-        keyPairGen.initialize(new ECGenParameterSpec("secp256r1"));
-
-        // === ECDSA ===
-        System.out.println("=== ECDSA 签名/验签 ===");
-        KeyPair keyPair = keyPairGen.generateKeyPair();
-
-        byte[] message = "Hello, ECDSA Signature!".getBytes();
-        byte[] signature = sign(keyPair.getPrivate(), message);
-
-        System.out.println("消息: " + new String(message));
-        System.out.println("签名长度: " + signature.length + " 字节");
-
-        boolean valid = verify(keyPair.getPublic(), message, signature);
-        System.out.println("验签结果: " + (valid ? "成功 ✓" : "失败 ✗"));
-
-        // === ECDH ===
-        System.out.println("\n=== ECDH 密钥协商 ===");
-        KeyPair aliceKeyPair = keyPairGen.generateKeyPair();
-        KeyPair bobKeyPair = keyPairGen.generateKeyPair();
-
-        byte[] aliceShared = performECDH(aliceKeyPair.getPrivate(), bobKeyPair.getPublic());
-        byte[] bobShared = performECDH(bobKeyPair.getPrivate(), aliceKeyPair.getPublic());
-
-        System.out.println("Alice 共享密钥: " + 
-            HexFormat.of().formatHex(aliceShared).substring(0, 32) + "...");
-        System.out.println("Bob   共享密钥: " + 
-            HexFormat.of().formatHex(bobShared).substring(0, 32) + "...");
-        System.out.println("密钥一致: " + 
-            HexFormat.of().formatHex(aliceShared).equals(HexFormat.of().formatHex(bobShared)));
-    }
-}
-```
-
-## 6. 曲线选择指南
+## 7. 曲线选择指南
 
 | 需求 | 推荐曲线 | 原因 |
 |------|----------|------|
@@ -498,7 +339,7 @@ public class ECCExample {
 | 区块链 | secp256k1 | 行业标准 |
 | 高安全需求 | P-384 或 Ed448 | 192+ 位安全 |
 
-## 7. 实际应用
+## 8. 实际应用
 
 | 场景 | 使用的 ECC 方案 |
 |------|----------------|
@@ -510,7 +351,7 @@ public class ECCExample {
 | iOS/macOS 签名 | P-256 ECDSA |
 | FIDO2/WebAuthn | P-256 ECDSA |
 
-## 8. 总结
+## 9. 总结
 
 | 维度 | 评价 |
 |------|------|
