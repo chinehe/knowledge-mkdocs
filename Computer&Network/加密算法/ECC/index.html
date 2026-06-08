@@ -707,34 +707,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E5%9B%BD%E5%AF%86SM1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    国密SM1
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../%E5%9B%BD%E5%AF%86SM4/" class="md-nav__link">
         
   
@@ -893,19 +865,19 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 数学基础
+        2. 算法原理（简述）
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 数学基础">
+    <nav class="md-nav" aria-label="2. 算法原理（简述）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 椭圆曲线定义
+        2.1 核心思想
       
     </span>
   </a>
@@ -916,19 +888,7 @@
   <a href="#22" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 椭圆曲线上的点运算
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2.2 椭圆曲线上的点运算">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#p-q" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        点加法（P + Q）
+        2.2 密钥对
       
     </span>
   </a>
@@ -936,48 +896,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#p-p-2p" class="md-nav__link">
+  <a href="#23" class="md-nav__link">
     <span class="md-ellipsis">
       
-        点倍乘（P + P = 2P）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#k-p" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        标量乘法（k × P）
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-ecdlp" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3 椭圆曲线离散对数问题（ECDLP）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4 常用椭圆曲线
+        2.3 三大应用方案
       
     </span>
   </a>
@@ -990,22 +912,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-ecc" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. ECC 密码方案
+        3. 曲线选择指南（开发者重点）
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. ECC 密码方案">
+    <nav class="md-nav" aria-label="3. 曲线选择指南（开发者重点）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-ecdh-diffie-hellman" class="md-nav__link">
+  <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1 ECDH（椭圆曲线 Diffie-Hellman 密钥协商）
+        3.1 主流曲线对比
       
     </span>
   </a>
@@ -1013,22 +935,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-ecdsa" class="md-nav__link">
+  <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 ECDSA（椭圆曲线数字签名算法）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3.2 ECDSA（椭圆曲线数字签名算法）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        签名过程
+        3.2 选型决策
       
     </span>
   </a>
@@ -1036,37 +946,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#33-curve25519" class="md-nav__link">
     <span class="md-ellipsis">
       
-        验签过程
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-eddsaedwards" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 EdDSA（Edwards 曲线数字签名算法）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34-ecies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4 ECIES（椭圆曲线集成加密方案）
+        3.3 为什么推荐 Curve25519 系列？
       
     </span>
   </a>
@@ -1091,10 +974,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-ecdlp" class="md-nav__link">
+  <a href="#41" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 ECDLP 的攻击复杂度
+        4.1 当前安全状态
       
     </span>
   </a>
@@ -1105,7 +988,7 @@
   <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 实现中的安全隐患
+        4.2 实现中的致命陷阱
       
     </span>
   </a>
@@ -1132,19 +1015,19 @@
   <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 代码实现
+        5. 开发者实践指南
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. 代码实现">
+    <nav class="md-nav" aria-label="5. 开发者实践指南">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-go" class="md-nav__link">
+  <a href="#51" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1 Go 语言实现
+        5.1 使用要点
       
     </span>
   </a>
@@ -1152,10 +1035,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-go-ed25519" class="md-nav__link">
+  <a href="#52-ecdh-aes-gcm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2 Go 语言实现（Ed25519）
+        5.2 ECDH + AES-GCM 典型流程
       
     </span>
   </a>
@@ -1163,21 +1046,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-python" class="md-nav__link">
+  <a href="#53" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3 Python 实现
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#54-java" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.4 Java 实现
+        5.3 各语言使用方式
       
     </span>
   </a>
@@ -1190,13 +1062,52 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
+  <a href="#6-go" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. 曲线选择指南
+        6. Go 语言实现
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="6. Go 语言实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-ed25519" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Ed25519 签名/验签（推荐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-ecdh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 ECDH 密钥协商
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-ecdsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 ECDSA 签名（合规场景）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1204,7 +1115,7 @@
   <a href="#7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. 实际应用
+        7. 实际应用场景
       
     </span>
   </a>
@@ -1777,19 +1688,19 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 数学基础
+        2. 算法原理（简述）
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. 数学基础">
+    <nav class="md-nav" aria-label="2. 算法原理（简述）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 椭圆曲线定义
+        2.1 核心思想
       
     </span>
   </a>
@@ -1800,19 +1711,7 @@
   <a href="#22" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 椭圆曲线上的点运算
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2.2 椭圆曲线上的点运算">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#p-q" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        点加法（P + Q）
+        2.2 密钥对
       
     </span>
   </a>
@@ -1820,48 +1719,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#p-p-2p" class="md-nav__link">
+  <a href="#23" class="md-nav__link">
     <span class="md-ellipsis">
       
-        点倍乘（P + P = 2P）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#k-p" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        标量乘法（k × P）
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-ecdlp" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3 椭圆曲线离散对数问题（ECDLP）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4 常用椭圆曲线
+        2.3 三大应用方案
       
     </span>
   </a>
@@ -1874,22 +1735,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-ecc" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. ECC 密码方案
+        3. 曲线选择指南（开发者重点）
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. ECC 密码方案">
+    <nav class="md-nav" aria-label="3. 曲线选择指南（开发者重点）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-ecdh-diffie-hellman" class="md-nav__link">
+  <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1 ECDH（椭圆曲线 Diffie-Hellman 密钥协商）
+        3.1 主流曲线对比
       
     </span>
   </a>
@@ -1897,22 +1758,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-ecdsa" class="md-nav__link">
+  <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 ECDSA（椭圆曲线数字签名算法）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3.2 ECDSA（椭圆曲线数字签名算法）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        签名过程
+        3.2 选型决策
       
     </span>
   </a>
@@ -1920,37 +1769,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#33-curve25519" class="md-nav__link">
     <span class="md-ellipsis">
       
-        验签过程
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-eddsaedwards" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 EdDSA（Edwards 曲线数字签名算法）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34-ecies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4 ECIES（椭圆曲线集成加密方案）
+        3.3 为什么推荐 Curve25519 系列？
       
     </span>
   </a>
@@ -1975,10 +1797,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-ecdlp" class="md-nav__link">
+  <a href="#41" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 ECDLP 的攻击复杂度
+        4.1 当前安全状态
       
     </span>
   </a>
@@ -1989,7 +1811,7 @@
   <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 实现中的安全隐患
+        4.2 实现中的致命陷阱
       
     </span>
   </a>
@@ -2016,19 +1838,19 @@
   <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 代码实现
+        5. 开发者实践指南
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. 代码实现">
+    <nav class="md-nav" aria-label="5. 开发者实践指南">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51-go" class="md-nav__link">
+  <a href="#51" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1 Go 语言实现
+        5.1 使用要点
       
     </span>
   </a>
@@ -2036,10 +1858,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-go-ed25519" class="md-nav__link">
+  <a href="#52-ecdh-aes-gcm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2 Go 语言实现（Ed25519）
+        5.2 ECDH + AES-GCM 典型流程
       
     </span>
   </a>
@@ -2047,21 +1869,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#53-python" class="md-nav__link">
+  <a href="#53" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.3 Python 实现
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#54-java" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5.4 Java 实现
+        5.3 各语言使用方式
       
     </span>
   </a>
@@ -2074,13 +1885,52 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
+  <a href="#6-go" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. 曲线选择指南
+        6. Go 语言实现
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="6. Go 语言实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-ed25519" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Ed25519 签名/验签（推荐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-ecdh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 ECDH 密钥协商
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-ecdsa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 ECDSA 签名（合规场景）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2088,7 +1938,7 @@
   <a href="#7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. 实际应用
+        7. 实际应用场景
       
     </span>
   </a>
@@ -2200,7 +2050,7 @@
 <h1 id="ecc">ECC非对称加解密算法</h1>
 <h2 id="1">1. 算法概述</h2>
 <p><strong>ECC</strong>（Elliptic Curve Cryptography，椭圆曲线密码学）是一类基于<strong>椭圆曲线离散对数问题（ECDLP）</strong>的公钥密码体制。它由 Neal Koblitz 和 Victor Miller 于 1985 年各自独立提出。</p>
-<p>与 RSA 相比，ECC 在相同安全强度下使用更短的密钥，从而获得更好的性能和更小的存储开销。如今，ECC 已广泛应用于 TLS、SSH、加密货币等领域。</p>
+<p>与 RSA 相比，ECC 在相同安全强度下使用<strong>更短的密钥</strong>，从而获得更好的性能和更小的存储开销。如今，ECC 已广泛应用于 TLS、SSH、加密货币等领域，是<strong>新项目公钥密码学的首选方案</strong>。</p>
 <h3 id="11">1.1 基本参数</h3>
 <table>
 <thead>
@@ -2223,12 +2073,12 @@
 <td>椭圆曲线离散对数问题</td>
 </tr>
 <tr>
-<td>核心操作</td>
-<td>椭圆曲线上的点乘法</td>
+<td>主要标准</td>
+<td>NIST P-256, Curve25519, secp256k1</td>
 </tr>
 <tr>
-<td>主要标准</td>
-<td>NIST P-256/P-384/P-521, Curve25519, secp256k1</td>
+<td>安全状态</td>
+<td>✅ <strong>当前推荐，性能优于 RSA</strong></td>
 </tr>
 </tbody>
 </table>
@@ -2239,345 +2089,283 @@
 <th>ECC 密钥长度</th>
 <th>RSA 等效密钥长度</th>
 <th>对称加密等效</th>
+<th>密钥大小比</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>160 位</td>
-<td>1024 位</td>
-<td>80 位</td>
-</tr>
-<tr>
-<td>224 位</td>
-<td>2048 位</td>
-<td>112 位</td>
-</tr>
-<tr>
 <td>256 位</td>
 <td>3072 位</td>
 <td>128 位</td>
+<td>RSA 的 1/12</td>
 </tr>
 <tr>
 <td>384 位</td>
 <td>7680 位</td>
 <td>192 位</td>
+<td>RSA 的 1/20</td>
 </tr>
 <tr>
 <td>521 位</td>
 <td>15360 位</td>
 <td>256 位</td>
+<td>RSA 的 1/30</td>
 </tr>
 </tbody>
 </table>
-<p>ECC 256 位 ≈ RSA 3072 位的安全强度，但密钥仅为 RSA 的 1/12。</p>
-<h2 id="2">2. 数学基础</h2>
-<h3 id="21">2.1 椭圆曲线定义</h3>
-<p>在有限域 GF(p) 上，椭圆曲线定义为满足以下方程的点集加上无穷远点 O：</p>
-<div class="highlight"><pre><span></span><code>y² ≡ x³ + ax + b (mod p)
-
-其中：4a³ + 27b² ≠ 0 (mod p)（确保曲线无奇点）
-</code></pre></div>
-<h3 id="22">2.2 椭圆曲线上的点运算</h3>
-<h4 id="p-q">点加法（P + Q）</h4>
-<p>给定曲线上两个不同点 P(x₁, y₁) 和 Q(x₂, y₂)：</p>
-<div class="highlight"><pre><span></span><code>斜率 λ = (y₂ - y₁) / (x₂ - x₁) mod p
-
-R = P + Q:
-  x₃ = λ² - x₁ - x₂ mod p
-  y₃ = λ(x₁ - x₃) - y₁ mod p
-</code></pre></div>
-<h4 id="p-p-2p">点倍乘（P + P = 2P）</h4>
-<div class="highlight"><pre><span></span><code>斜率 λ = (3x₁² + a) / (2y₁) mod p
-
-R = 2P:
-  x₃ = λ² - 2x₁ mod p
-  y₃ = λ(x₁ - x₃) - y₁ mod p
-</code></pre></div>
-<h4 id="k-p">标量乘法（k × P）</h4>
-<p>将点 P 与自身相加 k 次：<code>Q = k × P = P + P + ... + P (k 次)</code></p>
-<ul>
-<li>已知 k 和 P，计算 Q 很容易（使用"倍加-加"算法）</li>
-<li>已知 P 和 Q，求 k <strong>极其困难</strong> → 这就是 ECDLP</li>
-</ul>
-<h3 id="23-ecdlp">2.3 椭圆曲线离散对数问题（ECDLP）</h3>
-<div class="highlight"><pre><span></span><code>已知：基点 G、公钥 Q = k × G
+<p><strong>这意味着</strong>：ECC-256 只需 32 字节的密钥就能达到 RSA-3072（384 字节）的安全强度。在带宽受限、存储受限的场景（移动端、IoT、区块链）中优势明显。</p>
+<h2 id="2">2. 算法原理（简述）</h2>
+<h3 id="21">2.1 核心思想</h3>
+<p>ECC 的安全性基于椭圆曲线上的<strong>离散对数问题</strong>：</p>
+<div class="highlight"><pre><span></span><code>已知：基点 G、公钥 Q = k × G（k 次点加法）
 求解：私钥 k = ?
 
-对于适当大小的曲线（如 256 位），目前无已知的多项式时间算法可以求解 ECDLP。
+&quot;正向计算&quot;（已知 k 和 G 求 Q）很容易
+&quot;反向求解&quot;（已知 G 和 Q 求 k）极其困难
 </code></pre></div>
-<h3 id="24">2.4 常用椭圆曲线</h3>
-<table>
-<thead>
-<tr>
-<th>曲线名称</th>
-<th>位数</th>
-<th>标准</th>
-<th>应用场景</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>NIST P-256 (secp256r1)</td>
-<td>256</td>
-<td>NIST/FIPS</td>
-<td>TLS, 政府应用</td>
-</tr>
-<tr>
-<td>NIST P-384 (secp384r1)</td>
-<td>384</td>
-<td>NIST/FIPS</td>
-<td>高安全需求</td>
-</tr>
-<tr>
-<td>NIST P-521 (secp521r1)</td>
-<td>521</td>
-<td>NIST/FIPS</td>
-<td>极高安全需求</td>
-</tr>
-<tr>
-<td>Curve25519</td>
-<td>255</td>
-<td>Bernstein</td>
-<td>SSH, Signal, WireGuard</td>
-</tr>
-<tr>
-<td>Curve448</td>
-<td>448</td>
-<td>Goldilocks</td>
-<td>需要更高安全性</td>
-</tr>
-<tr>
-<td>secp256k1</td>
-<td>256</td>
-<td>SECG</td>
-<td>比特币、以太坊</td>
-</tr>
-<tr>
-<td>Ed25519</td>
-<td>255</td>
-<td>Bernstein</td>
-<td>数字签名</td>
-</tr>
-</tbody>
-</table>
-<h2 id="3-ecc">3. ECC 密码方案</h2>
-<h3 id="31-ecdh-diffie-hellman">3.1 ECDH（椭圆曲线 Diffie-Hellman 密钥协商）</h3>
-<div class="highlight"><pre><span></span><code>Alice:
-  私钥: a（随机整数）
-  公钥: A = a × G
-
-Bob:
-  私钥: b（随机整数）
-  公钥: B = b × G
-
-密钥协商：
-  Alice 计算: S = a × B = a × b × G
-  Bob 计算:   S = b × A = b × a × G
-
-共享密钥: S（双方计算结果相同）
-</code></pre></div>
-<h3 id="32-ecdsa">3.2 ECDSA（椭圆曲线数字签名算法）</h3>
-<h4 id="_1">签名过程</h4>
-<div class="highlight"><pre><span></span><code>输入: 消息哈希 e, 私钥 d, 曲线参数 (G, n)
-
-1. 选择随机数 k ∈ [1, n-1]
-2. 计算 (x₁, y₁) = k × G
-3. 计算 r = x₁ mod n（若 r = 0 则重新选 k）
-4. 计算 s = k⁻¹(e + r·d) mod n（若 s = 0 则重新选 k）
-5. 签名为 (r, s)
-</code></pre></div>
-<h4 id="_2">验签过程</h4>
-<div class="highlight"><pre><span></span><code>输入: 消息哈希 e, 签名 (r, s), 公钥 Q
-
-1. 计算 u₁ = e·s⁻¹ mod n
-2. 计算 u₂ = r·s⁻¹ mod n
-3. 计算 (x₁, y₁) = u₁×G + u₂×Q
-4. 验证: r ≡ x₁ (mod n) 则签名有效
-</code></pre></div>
-<h3 id="33-eddsaedwards">3.3 EdDSA（Edwards 曲线数字签名算法）</h3>
-<p>EdDSA 是一种确定性签名方案，基于 Twisted Edwards 曲线：</p>
+<p>椭圆曲线定义在有限域上：<code>y² ≡ x³ + ax + b (mod p)</code>，曲线上的点构成一个群，支持"点加法"运算。</p>
+<h3 id="22">2.2 密钥对</h3>
 <ul>
-<li><strong>Ed25519</strong>：基于 Curve25519，用于签名</li>
-<li><strong>Ed448</strong>：基于 Curve448，更高安全性</li>
+<li><strong>私钥</strong>：一个随机大整数 k</li>
+<li><strong>公钥</strong>：椭圆曲线上的一个点 Q = k × G（G 为标准基点）</li>
 </ul>
-<p>特点：
-- <strong>确定性</strong>：不需要随机数（避免 k 值重用漏洞）
-- <strong>快速</strong>：签名和验签性能极高
-- <strong>抗侧信道</strong>：设计上避免了许多实现陷阱</p>
-<h3 id="34-ecies">3.4 ECIES（椭圆曲线集成加密方案）</h3>
-<p>用于加密的混合方案：</p>
-<div class="highlight"><pre><span></span><code>加密：
-1. 生成临时密钥对: (k, R = k×G)
-2. 计算共享秘密: S = k × Q_受方公钥
-3. 通过 KDF 派生对称密钥: (K_enc, K_mac) = KDF(S)
-4. 对称加密: C = AES_K_enc(M)
-5. 计算 MAC: T = MAC_K_mac(C)
-6. 输出: (R, C, T)
-
-解密：
-1. 计算共享秘密: S = d × R（d 为私钥）
-2. 派生密钥: (K_enc, K_mac) = KDF(S)
-3. 验证 MAC
-4. 对称解密: M = AES_K_enc⁻¹(C)
-</code></pre></div>
-<h2 id="4">4. 安全性分析</h2>
-<h3 id="41-ecdlp">4.1 ECDLP 的攻击复杂度</h3>
+<h3 id="23">2.3 三大应用方案</h3>
 <table>
 <thead>
 <tr>
-<th>攻击方法</th>
-<th>复杂度</th>
+<th>方案</th>
+<th>用途</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Baby-step Giant-step</td>
-<td>O(√n)</td>
-<td>通用方法</td>
+<td><strong>ECDH</strong></td>
+<td>密钥协商</td>
+<td>双方交换公钥，各自计算出相同的共享密钥</td>
 </tr>
 <tr>
-<td>Pollard's rho</td>
-<td>O(√n)</td>
-<td>最优通用攻击</td>
+<td><strong>ECDSA</strong></td>
+<td>数字签名</td>
+<td>椭圆曲线版的 DSA 签名算法</td>
 </tr>
 <tr>
-<td>MOV 攻击</td>
-<td>依赖嵌入度</td>
-<td>将 ECDLP 转化为有限域 DLP</td>
-</tr>
-<tr>
-<td>特殊曲线攻击</td>
-<td>多项式时间</td>
-<td>仅对特定弱曲线有效</td>
+<td><strong>EdDSA</strong></td>
+<td>数字签名</td>
+<td>基于 Edwards 曲线的确定性签名（Ed25519）</td>
 </tr>
 </tbody>
 </table>
-<p>对于 256 位曲线，最优攻击复杂度约为 2¹²⁸，目前不可行。</p>
-<h3 id="42">4.2 实现中的安全隐患</h3>
+<blockquote>
+<p>开发者不需要理解椭圆曲线的数学细节（点加法、标量乘法的具体实现），只需知道选择哪条曲线、调用哪个 API。</p>
+</blockquote>
+<h2 id="3">3. 曲线选择指南（开发者重点）</h2>
+<h3 id="31">3.1 主流曲线对比</h3>
 <table>
 <thead>
 <tr>
-<th>隐患</th>
+<th>曲线名称</th>
+<th>位数</th>
+<th>推荐场景</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ed25519</strong></td>
+<td>255</td>
+<td>数字签名（首选）</td>
+<td>快速、确定性、抗侧信道</td>
+</tr>
+<tr>
+<td><strong>X25519</strong></td>
+<td>255</td>
+<td>密钥协商（首选）</td>
+<td>高性能、设计安全</td>
+</tr>
+<tr>
+<td><strong>NIST P-256</strong></td>
+<td>256</td>
+<td>政府/合规场景</td>
+<td>FIPS 认证，TLS 广泛使用</td>
+</tr>
+<tr>
+<td><strong>NIST P-384</strong></td>
+<td>384</td>
+<td>高安全需求</td>
+<td>192 位安全强度</td>
+</tr>
+<tr>
+<td><strong>secp256k1</strong></td>
+<td>256</td>
+<td>区块链</td>
+<td>比特币、以太坊标准</td>
+</tr>
+<tr>
+<td><strong>Ed448</strong></td>
+<td>448</td>
+<td>超高安全需求</td>
+<td>224 位安全强度</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32">3.2 选型决策</h3>
+<div class="highlight"><pre><span></span><code>新项目签名 → Ed25519
+新项目密钥协商 → X25519
+需要 FIPS 合规 → P-256
+区块链相关 → secp256k1
+需要 192+ 位安全 → P-384 或 Ed448
+</code></pre></div>
+<h3 id="33-curve25519">3.3 为什么推荐 Curve25519 系列？</h3>
+<table>
+<thead>
+<tr>
+<th>优势</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>常数时间实现</td>
+<td>设计上避免时序攻击</td>
+</tr>
+<tr>
+<td>无需随机数（EdDSA）</td>
+<td>避免 k 值重用导致私钥泄露</td>
+</tr>
+<tr>
+<td>性能优异</td>
+<td>签名/验签速度快于 P-256</td>
+</tr>
+<tr>
+<td>密钥简短</td>
+<td>公钥 32 字节，签名 64 字节</td>
+</tr>
+<tr>
+<td>安全曲线参数</td>
+<td>参数选择透明，无后门疑虑</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4">4. 安全性分析</h2>
+<h3 id="41">4.1 当前安全状态</h3>
+<p>对于 256 位曲线，最优攻击复杂度约为 2¹²⁸，当前完全不可行。</p>
+<h3 id="42">4.2 实现中的致命陷阱</h3>
+<table>
+<thead>
+<tr>
+<th>陷阱</th>
 <th>后果</th>
 <th>防护</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>k 值重用</td>
-<td>私钥泄露</td>
-<td>使用确定性签名（RFC 6979）或 EdDSA</td>
+<td><strong>k 值重用</strong></td>
+<td>私钥直接泄露</td>
+<td>使用 EdDSA（确定性）或 RFC 6979</td>
 </tr>
 <tr>
 <td>无效曲线攻击</td>
 <td>私钥泄露</td>
-<td>验证点在曲线上</td>
+<td>验证点在曲线上（标准库已处理）</td>
 </tr>
 <tr>
 <td>侧信道泄露</td>
 <td>私钥泄露</td>
-<td>常数时间实现</td>
+<td>使用 Curve25519（常数时间设计）</td>
 </tr>
 <tr>
-<td>弱曲线选择</td>
-<td>安全性降低</td>
-<td>使用标准曲线</td>
+<td>弱随机数</td>
+<td>私钥泄露</td>
+<td>使用 <code>crypto/rand</code></td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p><strong>🚨 k 值重用的致命后果</strong></p>
-<p>在 ECDSA 中，如果两次签名使用了相同的 k 值，攻击者可以直接计算出私钥。2010 年索尼 PS3 被破解正是因为固定 k 值。</p>
+<p><strong>🚨 k 值重用的致命后果</strong>：在 ECDSA 中，如果两次签名使用了相同的随机数 k，攻击者可以直接计算出私钥。2010 年索尼 PS3 被破解正是因为固定 k 值。这是选择 EdDSA（确定性签名，不需要随机 k）的重要原因。</p>
 </blockquote>
 <h3 id="43">4.3 量子计算威胁</h3>
-<p>与 RSA 类似，ECC 也会被 Shor 算法破解。由于 ECC 密钥更短，理论上比 RSA 更容易受到量子攻击。后量子时代需迁移到格基密码等方案。</p>
-<h2 id="5">5. 代码实现</h2>
-<h3 id="51-go">5.1 Go 语言实现</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="s">&quot;crypto/ecdh&quot;</span>
-<span class="w">    </span><span class="s">&quot;crypto/ecdsa&quot;</span>
-<span class="w">    </span><span class="s">&quot;crypto/elliptic&quot;</span>
-<span class="w">    </span><span class="s">&quot;crypto/rand&quot;</span>
-<span class="w">    </span><span class="s">&quot;crypto/sha256&quot;</span>
-<span class="w">    </span><span class="s">&quot;encoding/hex&quot;</span>
-<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
-<span class="w">    </span><span class="s">&quot;math/big&quot;</span>
-<span class="p">)</span>
-
-<span class="c1">// ===== ECDSA 签名/验签 =====</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="nx">ecdsaDemo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;=== ECDSA 签名/验签 ===&quot;</span><span class="p">)</span>
-
-<span class="w">    </span><span class="c1">// 生成密钥对（P-256 曲线）</span>
-<span class="w">    </span><span class="nx">privateKey</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ecdsa</span><span class="p">.</span><span class="nx">GenerateKey</span><span class="p">(</span><span class="nx">elliptic</span><span class="p">.</span><span class="nx">P256</span><span class="p">(),</span><span class="w"> </span><span class="nx">rand</span><span class="p">.</span><span class="nx">Reader</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">publicKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">privateKey</span><span class="p">.</span><span class="nx">PublicKey</span>
-
-<span class="w">    </span><span class="c1">// 签名</span>
-<span class="w">    </span><span class="nx">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hello, ECDSA Signature!&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">hash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sha256</span><span class="p">.</span><span class="nx">Sum256</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
-
-<span class="w">    </span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ecdsa</span><span class="p">.</span><span class="nx">Sign</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nx">Reader</span><span class="p">,</span><span class="w"> </span><span class="nx">privateKey</span><span class="p">,</span><span class="w"> </span><span class="nx">hash</span><span class="p">[:])</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;消息: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">message</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;签名 r: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Text</span><span class="p">(</span><span class="mi">16</span><span class="p">)[:</span><span class="mi">32</span><span class="p">]</span><span class="o">+</span><span class="s">&quot;...&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;签名 s: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">.</span><span class="nx">Text</span><span class="p">(</span><span class="mi">16</span><span class="p">)[:</span><span class="mi">32</span><span class="p">]</span><span class="o">+</span><span class="s">&quot;...&quot;</span><span class="p">)</span>
-
-<span class="w">    </span><span class="c1">// 验签</span>
-<span class="w">    </span><span class="nx">valid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ecdsa</span><span class="p">.</span><span class="nx">Verify</span><span class="p">(</span><span class="nx">publicKey</span><span class="p">,</span><span class="w"> </span><span class="nx">hash</span><span class="p">[:],</span><span class="w"> </span><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">s</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;验签结果: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">valid</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// ===== ECDH 密钥协商 =====</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="nx">ecdhDemo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n=== ECDH 密钥协商 ===&quot;</span><span class="p">)</span>
-
-<span class="w">    </span><span class="c1">// Alice 生成密钥对</span>
-<span class="w">    </span><span class="nx">alicePrivate</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ecdh</span><span class="p">.</span><span class="nx">P256</span><span class="p">().</span><span class="nx">GenerateKey</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nx">Reader</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">alicePublic</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">alicePrivate</span><span class="p">.</span><span class="nx">PublicKey</span><span class="p">()</span>
-
-<span class="w">    </span><span class="c1">// Bob 生成密钥对</span>
-<span class="w">    </span><span class="nx">bobPrivate</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ecdh</span><span class="p">.</span><span class="nx">P256</span><span class="p">().</span><span class="nx">GenerateKey</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nx">Reader</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">bobPublic</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">bobPrivate</span><span class="p">.</span><span class="nx">PublicKey</span><span class="p">()</span>
-
-<span class="w">    </span><span class="c1">// 双方计算共享密钥</span>
-<span class="w">    </span><span class="nx">aliceShared</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">alicePrivate</span><span class="p">.</span><span class="nx">ECDH</span><span class="p">(</span><span class="nx">bobPublic</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">bobShared</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">bobPrivate</span><span class="p">.</span><span class="nx">ECDH</span><span class="p">(</span><span class="nx">alicePublic</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Alice 共享密钥: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">aliceShared</span><span class="p">[:</span><span class="mi">16</span><span class="p">])</span><span class="o">+</span><span class="s">&quot;...&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Bob   共享密钥: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">bobShared</span><span class="p">[:</span><span class="mi">16</span><span class="p">])</span><span class="o">+</span><span class="s">&quot;...&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;密钥一致: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">aliceShared</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">bobShared</span><span class="p">))</span>
-<span class="p">}</span>
-
-<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">ecdsaDemo</span><span class="p">()</span>
-<span class="w">    </span><span class="nx">ecdhDemo</span><span class="p">()</span>
-<span class="p">}</span>
+<p>与 RSA 相同，ECC 也会被 Shor 算法破解。由于 ECC 密钥更短，理论上比 RSA 更容易受到量子攻击。后量子时代需迁移到格基密码等方案（NIST ML-KEM / ML-DSA）。</p>
+<h2 id="5">5. 开发者实践指南</h2>
+<h3 id="51">5.1 使用要点</h3>
+<table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>签名首选 Ed25519</td>
+<td>确定性签名，无 k 值重用风险</td>
+</tr>
+<tr>
+<td>密钥协商首选 X25519</td>
+<td>常数时间实现，抗侧信道</td>
+</tr>
+<tr>
+<td>不要自选曲线参数</td>
+<td>使用标准曲线，不要自定义 a、b、p</td>
+</tr>
+<tr>
+<td>验证对方公钥</td>
+<td>确保收到的公钥在曲线上（标准库通常已处理）</td>
+</tr>
+<tr>
+<td>ECDH 后要 KDF</td>
+<td>共享密钥不能直接用作对称密钥，需经 KDF 派生</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-ecdh-aes-gcm">5.2 ECDH + AES-GCM 典型流程</h3>
+<div class="highlight"><pre><span></span><code>密钥协商后加密通信：
+1. Alice 和 Bob 各生成 X25519 密钥对
+2. 交换公钥
+3. 各自计算 ECDH 共享密钥 S
+4. 通过 HKDF 从 S 派生 AES-256 密钥 K
+5. 使用 AES-256-GCM + K 加密通信数据
 </code></pre></div>
-<h3 id="52-go-ed25519">5.2 Go 语言实现（Ed25519）</h3>
+<h3 id="53">5.3 各语言使用方式</h3>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>Ed25519 签名</th>
+<th>X25519 密钥协商</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Go</td>
+<td><code>crypto/ed25519</code></td>
+<td><code>crypto/ecdh</code></td>
+</tr>
+<tr>
+<td>Java</td>
+<td><code>EdDSA</code> (JDK 15+)</td>
+<td><code>XDH</code> (JDK 11+)</td>
+</tr>
+<tr>
+<td>Python</td>
+<td><code>cryptography</code> 库</td>
+<td><code>cryptography</code> 库</td>
+</tr>
+<tr>
+<td>Node.js</td>
+<td><code>crypto.sign('ed25519', ...)</code></td>
+<td><code>crypto.diffieHellman(...)</code></td>
+</tr>
+<tr>
+<td>Rust</td>
+<td><code>ed25519-dalek</code></td>
+<td><code>x25519-dalek</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-go">6. Go 语言实现</h2>
+<h3 id="61-ed25519">6.1 Ed25519 签名/验签（推荐）</h3>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
@@ -2599,12 +2387,11 @@ Bob:
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;公钥(hex): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">publicKey</span><span class="p">))</span>
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;公钥长度: %d 字节\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">publicKey</span><span class="p">))</span>
 
-<span class="w">    </span><span class="c1">// 签名</span>
+<span class="w">    </span><span class="c1">// 签名（确定性，无需随机数）</span>
 <span class="w">    </span><span class="nx">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hello, Ed25519 Signature!&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="nx">signature</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ed25519</span><span class="p">.</span><span class="nx">Sign</span><span class="p">(</span><span class="nx">privateKey</span><span class="p">,</span><span class="w"> </span><span class="nx">message</span><span class="p">)</span>
 
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;消息: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">message</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;签名(hex): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">signature</span><span class="p">))</span>
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;签名长度: %d 字节\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">signature</span><span class="p">))</span>
 
 <span class="w">    </span><span class="c1">// 验签</span>
@@ -2617,230 +2404,137 @@ Bob:
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;篡改后验签: %v (预期 false)\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">valid</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="53-python">5.3 Python 实现</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives.asymmetric</span><span class="w"> </span><span class="kn">import</span> <span class="n">ec</span><span class="p">,</span> <span class="n">ed25519</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives</span><span class="w"> </span><span class="kn">import</span> <span class="n">hashes</span><span class="p">,</span> <span class="n">serialization</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives.kdf.hkdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">HKDF</span>
+<h3 id="62-ecdh">6.2 ECDH 密钥协商</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
-<span class="c1"># ===== ECDSA 签名/验签 =====</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">ecdsa_demo</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== ECDSA 签名/验签 ===&quot;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;crypto/ecdh&quot;</span>
+<span class="w">    </span><span class="s">&quot;crypto/rand&quot;</span>
+<span class="w">    </span><span class="s">&quot;crypto/sha256&quot;</span>
+<span class="w">    </span><span class="s">&quot;encoding/hex&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
 
-    <span class="c1"># 生成密钥对（P-256 曲线）</span>
-    <span class="n">private_key</span> <span class="o">=</span> <span class="n">ec</span><span class="o">.</span><span class="n">generate_private_key</span><span class="p">(</span><span class="n">ec</span><span class="o">.</span><span class="n">SECP256R1</span><span class="p">())</span>
-    <span class="n">public_key</span> <span class="o">=</span> <span class="n">private_key</span><span class="o">.</span><span class="n">public_key</span><span class="p">()</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;=== X25519 ECDH 密钥协商 ===&quot;</span><span class="p">)</span>
 
-    <span class="c1"># 签名</span>
-    <span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Hello, ECDSA Signature!&quot;</span>
-    <span class="n">signature</span> <span class="o">=</span> <span class="n">private_key</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">ec</span><span class="o">.</span><span class="n">ECDSA</span><span class="p">(</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()))</span>
+<span class="w">    </span><span class="c1">// Alice 生成密钥对</span>
+<span class="w">    </span><span class="nx">alicePrivate</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ecdh</span><span class="p">.</span><span class="nx">X25519</span><span class="p">().</span><span class="nx">GenerateKey</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nx">Reader</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">alicePublic</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">alicePrivate</span><span class="p">.</span><span class="nx">PublicKey</span><span class="p">()</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;消息: </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;签名长度: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span><span class="si">}</span><span class="s2"> 字节&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;签名(hex): </span><span class="si">{</span><span class="n">signature</span><span class="o">.</span><span class="n">hex</span><span class="p">()[:</span><span class="mi">64</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// Bob 生成密钥对</span>
+<span class="w">    </span><span class="nx">bobPrivate</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ecdh</span><span class="p">.</span><span class="nx">X25519</span><span class="p">().</span><span class="nx">GenerateKey</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nx">Reader</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">bobPublic</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">bobPrivate</span><span class="p">.</span><span class="nx">PublicKey</span><span class="p">()</span>
 
-    <span class="c1"># 验签</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">public_key</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">signature</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">ec</span><span class="o">.</span><span class="n">ECDSA</span><span class="p">(</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;验签结果: 成功 ✓&quot;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;验签结果: 失败 ✗&quot;</span><span class="p">)</span>
-
-<span class="c1"># ===== ECDH 密钥协商 =====</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">ecdh_demo</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== ECDH 密钥协商 ===&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Alice</span>
-    <span class="n">alice_private</span> <span class="o">=</span> <span class="n">ec</span><span class="o">.</span><span class="n">generate_private_key</span><span class="p">(</span><span class="n">ec</span><span class="o">.</span><span class="n">SECP256R1</span><span class="p">())</span>
-    <span class="n">alice_public</span> <span class="o">=</span> <span class="n">alice_private</span><span class="o">.</span><span class="n">public_key</span><span class="p">()</span>
-
-    <span class="c1"># Bob</span>
-    <span class="n">bob_private</span> <span class="o">=</span> <span class="n">ec</span><span class="o">.</span><span class="n">generate_private_key</span><span class="p">(</span><span class="n">ec</span><span class="o">.</span><span class="n">SECP256R1</span><span class="p">())</span>
-    <span class="n">bob_public</span> <span class="o">=</span> <span class="n">bob_private</span><span class="o">.</span><span class="n">public_key</span><span class="p">()</span>
-
-    <span class="c1"># 计算共享密钥</span>
-    <span class="n">alice_shared</span> <span class="o">=</span> <span class="n">alice_private</span><span class="o">.</span><span class="n">exchange</span><span class="p">(</span><span class="n">ec</span><span class="o">.</span><span class="n">ECDH</span><span class="p">(),</span> <span class="n">bob_public</span><span class="p">)</span>
-    <span class="n">bob_shared</span> <span class="o">=</span> <span class="n">bob_private</span><span class="o">.</span><span class="n">exchange</span><span class="p">(</span><span class="n">ec</span><span class="o">.</span><span class="n">ECDH</span><span class="p">(),</span> <span class="n">alice_public</span><span class="p">)</span>
-
-    <span class="c1"># 使用 HKDF 派生最终密钥</span>
-    <span class="n">alice_key</span> <span class="o">=</span> <span class="n">HKDF</span><span class="p">(</span>
-        <span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">(),</span> <span class="n">length</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
-        <span class="n">salt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;ecdh derived key&quot;</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">derive</span><span class="p">(</span><span class="n">alice_shared</span><span class="p">)</span>
-
-    <span class="n">bob_key</span> <span class="o">=</span> <span class="n">HKDF</span><span class="p">(</span>
-        <span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">(),</span> <span class="n">length</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
-        <span class="n">salt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;ecdh derived key&quot;</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">derive</span><span class="p">(</span><span class="n">bob_shared</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Alice 派生密钥: </span><span class="si">{</span><span class="n">alice_key</span><span class="o">.</span><span class="n">hex</span><span class="p">()[:</span><span class="mi">32</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bob   派生密钥: </span><span class="si">{</span><span class="n">bob_key</span><span class="o">.</span><span class="n">hex</span><span class="p">()[:</span><span class="mi">32</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;密钥一致: </span><span class="si">{</span><span class="n">alice_key</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">bob_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="c1"># ===== Ed25519 签名 =====</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">ed25519_demo</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Ed25519 签名/验签 ===&quot;</span><span class="p">)</span>
-
-    <span class="n">private_key</span> <span class="o">=</span> <span class="n">ed25519</span><span class="o">.</span><span class="n">Ed25519PrivateKey</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
-    <span class="n">public_key</span> <span class="o">=</span> <span class="n">private_key</span><span class="o">.</span><span class="n">public_key</span><span class="p">()</span>
-
-    <span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Hello, Ed25519 Signature!&quot;</span>
-    <span class="n">signature</span> <span class="o">=</span> <span class="n">private_key</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;消息: </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;签名长度: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span><span class="si">}</span><span class="s2"> 字节&quot;</span><span class="p">)</span>
-
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">public_key</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">signature</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;验签结果: 成功 ✓&quot;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;验签结果: 失败 ✗&quot;</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">ecdsa_demo</span><span class="p">()</span>
-    <span class="n">ecdh_demo</span><span class="p">()</span>
-    <span class="n">ed25519_demo</span><span class="p">()</span>
-</code></pre></div>
-<h3 id="54-java">5.4 Java 实现</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.security.*</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.spec.*</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.crypto.KeyAgreement</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HexFormat</span><span class="p">;</span>
-
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ECCExample</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="c1">// ECDSA 签名</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">sign</span><span class="p">(</span><span class="n">PrivateKey</span><span class="w"> </span><span class="n">privateKey</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Signature</span><span class="w"> </span><span class="n">sig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Signature</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;SHA256withECDSA&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sig</span><span class="p">.</span><span class="na">initSign</span><span class="p">(</span><span class="n">privateKey</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sig</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">sig</span><span class="p">.</span><span class="na">sign</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// 双方计算共享密钥</span>
+<span class="w">    </span><span class="nx">aliceShared</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">alicePrivate</span><span class="p">.</span><span class="nx">ECDH</span><span class="p">(</span><span class="nx">bobPublic</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// ECDSA 验签</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">verify</span><span class="p">(</span><span class="n">PublicKey</span><span class="w"> </span><span class="n">publicKey</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">signature</span><span class="p">)</span><span class="w"> </span>
-<span class="w">            </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Signature</span><span class="w"> </span><span class="n">sig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Signature</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;SHA256withECDSA&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sig</span><span class="p">.</span><span class="na">initVerify</span><span class="p">(</span><span class="n">publicKey</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sig</span><span class="p">.</span><span class="na">update</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">sig</span><span class="p">.</span><span class="na">verify</span><span class="p">(</span><span class="n">signature</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">bobShared</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">bobPrivate</span><span class="p">.</span><span class="nx">ECDH</span><span class="p">(</span><span class="nx">alicePublic</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// ECDH 密钥协商</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">performECDH</span><span class="p">(</span><span class="n">PrivateKey</span><span class="w"> </span><span class="n">privateKey</span><span class="p">,</span><span class="w"> </span><span class="n">PublicKey</span><span class="w"> </span><span class="n">publicKey</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">KeyAgreement</span><span class="w"> </span><span class="n">keyAgreement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyAgreement</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;ECDH&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">keyAgreement</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">privateKey</span><span class="p">);</span>
-<span class="w">        </span><span class="n">keyAgreement</span><span class="p">.</span><span class="na">doPhase</span><span class="p">(</span><span class="n">publicKey</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">keyAgreement</span><span class="p">.</span><span class="na">generateSecret</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Alice 共享密钥: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">aliceShared</span><span class="p">[:</span><span class="mi">16</span><span class="p">])</span><span class="o">+</span><span class="s">&quot;...&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Bob   共享密钥: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">bobShared</span><span class="p">[:</span><span class="mi">16</span><span class="p">])</span><span class="o">+</span><span class="s">&quot;...&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;密钥一致: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">aliceShared</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">bobShared</span><span class="p">))</span>
 
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="c1">// 生成 EC 密钥对（P-256）</span>
-<span class="w">        </span><span class="n">KeyPairGenerator</span><span class="w"> </span><span class="n">keyPairGen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyPairGenerator</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;EC&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">keyPairGen</span><span class="p">.</span><span class="na">initialize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ECGenParameterSpec</span><span class="p">(</span><span class="s">&quot;secp256r1&quot;</span><span class="p">));</span>
-
-<span class="w">        </span><span class="c1">// === ECDSA ===</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;=== ECDSA 签名/验签 ===&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">KeyPair</span><span class="w"> </span><span class="n">keyPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyPairGen</span><span class="p">.</span><span class="na">generateKeyPair</span><span class="p">();</span>
-
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, ECDSA Signature!&quot;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">();</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sign</span><span class="p">(</span><span class="n">keyPair</span><span class="p">.</span><span class="na">getPrivate</span><span class="p">(),</span><span class="w"> </span><span class="n">message</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;消息: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">message</span><span class="p">));</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;签名长度: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">signature</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; 字节&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">verify</span><span class="p">(</span><span class="n">keyPair</span><span class="p">.</span><span class="na">getPublic</span><span class="p">(),</span><span class="w"> </span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">signature</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;验签结果: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">valid</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;成功 ✓&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;失败 ✗&quot;</span><span class="p">));</span>
-
-<span class="w">        </span><span class="c1">// === ECDH ===</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;\n=== ECDH 密钥协商 ===&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">KeyPair</span><span class="w"> </span><span class="n">aliceKeyPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyPairGen</span><span class="p">.</span><span class="na">generateKeyPair</span><span class="p">();</span>
-<span class="w">        </span><span class="n">KeyPair</span><span class="w"> </span><span class="n">bobKeyPair</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keyPairGen</span><span class="p">.</span><span class="na">generateKeyPair</span><span class="p">();</span>
-
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">aliceShared</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">performECDH</span><span class="p">(</span><span class="n">aliceKeyPair</span><span class="p">.</span><span class="na">getPrivate</span><span class="p">(),</span><span class="w"> </span><span class="n">bobKeyPair</span><span class="p">.</span><span class="na">getPublic</span><span class="p">());</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">bobShared</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">performECDH</span><span class="p">(</span><span class="n">bobKeyPair</span><span class="p">.</span><span class="na">getPrivate</span><span class="p">(),</span><span class="w"> </span><span class="n">aliceKeyPair</span><span class="p">.</span><span class="na">getPublic</span><span class="p">());</span>
-
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Alice 共享密钥: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">            </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">aliceShared</span><span class="p">).</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;...&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Bob   共享密钥: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">            </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">bobShared</span><span class="p">).</span><span class="na">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;...&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;密钥一致: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">            </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">aliceShared</span><span class="p">).</span><span class="na">equals</span><span class="p">(</span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">bobShared</span><span class="p">)));</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// 实际使用时，应通过 KDF 派生对称密钥</span>
+<span class="w">    </span><span class="c1">// 这里简单用 SHA-256 演示</span>
+<span class="w">    </span><span class="nx">aesKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sha256</span><span class="p">.</span><span class="nx">Sum256</span><span class="p">(</span><span class="nx">aliceShared</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;派生 AES 密钥: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">aesKey</span><span class="p">[:</span><span class="mi">16</span><span class="p">])</span><span class="o">+</span><span class="s">&quot;...&quot;</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="6">6. 曲线选择指南</h2>
-<table>
-<thead>
-<tr>
-<th>需求</th>
-<th>推荐曲线</th>
-<th>原因</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>通用签名（新项目）</td>
-<td>Ed25519</td>
-<td>快速、安全、确定性</td>
-</tr>
-<tr>
-<td>政府/合规要求</td>
-<td>NIST P-256</td>
-<td>FIPS 认证</td>
-</tr>
-<tr>
-<td>密钥协商</td>
-<td>X25519</td>
-<td>高性能、抗侧信道</td>
-</tr>
-<tr>
-<td>区块链</td>
-<td>secp256k1</td>
-<td>行业标准</td>
-</tr>
-<tr>
-<td>高安全需求</td>
-<td>P-384 或 Ed448</td>
-<td>192+ 位安全</td>
-</tr>
-</tbody>
-</table>
-<h2 id="7">7. 实际应用</h2>
+<h3 id="63-ecdsa">6.3 ECDSA 签名（合规场景）</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;crypto/ecdsa&quot;</span>
+<span class="w">    </span><span class="s">&quot;crypto/elliptic&quot;</span>
+<span class="w">    </span><span class="s">&quot;crypto/rand&quot;</span>
+<span class="w">    </span><span class="s">&quot;crypto/sha256&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;=== ECDSA P-256 签名/验签 ===&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// 生成密钥对（P-256 曲线）</span>
+<span class="w">    </span><span class="nx">privateKey</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ecdsa</span><span class="p">.</span><span class="nx">GenerateKey</span><span class="p">(</span><span class="nx">elliptic</span><span class="p">.</span><span class="nx">P256</span><span class="p">(),</span><span class="w"> </span><span class="nx">rand</span><span class="p">.</span><span class="nx">Reader</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">publicKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">privateKey</span><span class="p">.</span><span class="nx">PublicKey</span>
+
+<span class="w">    </span><span class="c1">// 签名</span>
+<span class="w">    </span><span class="nx">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hello, ECDSA Signature!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">hash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sha256</span><span class="p">.</span><span class="nx">Sum256</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">signature</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ecdsa</span><span class="p">.</span><span class="nx">SignASN1</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nx">Reader</span><span class="p">,</span><span class="w"> </span><span class="nx">privateKey</span><span class="p">,</span><span class="w"> </span><span class="nx">hash</span><span class="p">[:])</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;消息: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">message</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;签名长度: %d 字节\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">signature</span><span class="p">))</span>
+
+<span class="w">    </span><span class="c1">// 验签</span>
+<span class="w">    </span><span class="nx">valid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ecdsa</span><span class="p">.</span><span class="nx">VerifyASN1</span><span class="p">(</span><span class="nx">publicKey</span><span class="p">,</span><span class="w"> </span><span class="nx">hash</span><span class="p">[:],</span><span class="w"> </span><span class="nx">signature</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;验签结果: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">valid</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="7">7. 实际应用场景</h2>
 <table>
 <thead>
 <tr>
 <th>场景</th>
 <th>使用的 ECC 方案</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>TLS 1.3</td>
-<td>ECDHE (X25519) + ECDSA/EdDSA</td>
+<td>X25519 + Ed25519/ECDSA</td>
+<td>密钥协商 + 证书签名</td>
 </tr>
 <tr>
-<td>SSH</td>
-<td>Ed25519 密钥认证</td>
+<td>SSH 密钥</td>
+<td>Ed25519</td>
+<td><code>ssh-keygen -t ed25519</code></td>
 </tr>
 <tr>
-<td>比特币</td>
+<td>比特币/以太坊</td>
 <td>secp256k1 + ECDSA</td>
+<td>交易签名</td>
 </tr>
 <tr>
 <td>Signal/WhatsApp</td>
 <td>X25519 + Ed25519</td>
+<td>端到端加密</td>
 </tr>
 <tr>
-<td>WireGuard</td>
+<td>WireGuard VPN</td>
 <td>Curve25519</td>
-</tr>
-<tr>
-<td>iOS/macOS 签名</td>
-<td>P-256 ECDSA</td>
+<td>密钥协商</td>
 </tr>
 <tr>
 <td>FIDO2/WebAuthn</td>
 <td>P-256 ECDSA</td>
+<td>无密码认证</td>
+</tr>
+<tr>
+<td>iOS/macOS 签名</td>
+<td>P-256 ECDSA</td>
+<td>应用签名</td>
 </tr>
 </tbody>
 </table>
@@ -2863,7 +2557,7 @@ Bob:
 </tr>
 <tr>
 <td>密钥大小</td>
-<td>⭐⭐⭐⭐⭐ 极为紧凑</td>
+<td>⭐⭐⭐⭐⭐ 极为紧凑（公钥 32 字节）</td>
 </tr>
 <tr>
 <td>生态</td>
@@ -2875,7 +2569,14 @@ Bob:
 </tr>
 </tbody>
 </table>
-<p>ECC 是当前公钥密码学的<strong>最优选择</strong>——在相同安全级别下，它比 RSA 更快、密钥更短、带宽更省。对于新系统，<strong>Ed25519（签名）+ X25519（密钥协商）</strong>是最推荐的组合。</p>
+<p><strong>开发者决策指南</strong>：</p>
+<ul>
+<li><strong>数字签名</strong> → Ed25519（首选）或 ECDSA P-256（合规需求）</li>
+<li><strong>密钥协商</strong> → X25519（首选）或 ECDH P-256（合规需求）</li>
+<li><strong>区块链</strong> → secp256k1</li>
+<li><strong>需要加密</strong> → ECDH 协商密钥 + AES-256-GCM 加密数据</li>
+<li><strong>RSA 迁移</strong> → Ed25519 替代 RSA 签名，X25519+AES 替代 RSA 加密</li>
+</ul>
 
 
 

@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%9B%BD%E5%AF%86SM4/">
       
       
-        <link rel="prev" href="../%E5%9B%BD%E5%AF%86SM1/">
+        <link rel="prev" href="../AES/">
       
       
         <link rel="next" href="../RSA/">
@@ -704,34 +704,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../%E5%9B%BD%E5%AF%86SM1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    国密SM1
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -837,127 +809,10 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 算法原理
+        2. 算法原理（简述）
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="2. 算法原理">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1 整体结构
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-t" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2 轮函数 T
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2.2 轮函数 T">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#221-s-" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2.1 非线性变换 τ（S-盒替换）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#222-l" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2.2 线性变换 L
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3 密钥扩展
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2.3 密钥扩展">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#231-fk" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3.1 系统参数 FK
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#232-ck" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3.2 常量 CK
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#233" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3.3 密钥扩展过程
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4 解密过程
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -985,10 +840,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32" class="md-nav__link">
+  <a href="#32-aes-128" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 公开分析结果
+        3.2 与 AES-128 的安全性对比
       
     </span>
   </a>
@@ -996,21 +851,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-aes-128" class="md-nav__link">
+  <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3 与 AES-128 的安全性对比
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34-s-" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4 S-盒特性
+        3.3 量子计算影响
       
     </span>
   </a>
@@ -1026,19 +870,19 @@
   <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 代码实现
+        4. 开发者实践指南
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. 代码实现">
+    <nav class="md-nav" aria-label="4. 开发者实践指南">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-go" class="md-nav__link">
+  <a href="#41-sm4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 Go 语言实现
+        4.1 何时使用 SM4
       
     </span>
   </a>
@@ -1046,10 +890,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-python" class="md-nav__link">
+  <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 Python 实现
+        4.2 工作模式选择
       
     </span>
   </a>
@@ -1057,10 +901,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-java" class="md-nav__link">
+  <a href="#43" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3 Java 实现
+        4.3 使用要点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 国密全家桶搭配
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-aes-sm4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 从 AES 迁移到 SM4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 性能参考
       
     </span>
   </a>
@@ -1073,22 +950,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#5-go" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 标准测试向量
+        5. Go 语言实现
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. 标准测试向量">
+    <nav class="md-nav" aria-label="5. Go 语言实现">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51" class="md-nav__link">
+  <a href="#51-sm4-gcm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1 单次加密
+        5.1 SM4-GCM（推荐）
       
     </span>
   </a>
@@ -1096,10 +973,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-1000000" class="md-nav__link">
+  <a href="#52-sm4-cbc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2 加密 1000000 次（相同密钥）
+        5.2 SM4-CBC（兼容场景）
       
     </span>
   </a>
@@ -1112,41 +989,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
+  <a href="#6-sm4-vs-aes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. 性能分析
+        6. SM4 vs AES 选型指南
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="6. 性能分析">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#61" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.1 性能对比
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#62" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.2 性能优化
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1154,68 +1003,7 @@
   <a href="#7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. 应用场景
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. 应用场景">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#71" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7.1 合规场景
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#72" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7.2 与国际算法的双算法支持
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. 推荐库
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-sm4-vs-aes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        9. SM4 vs AES 选型指南
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        10. 总结
+        7. 总结
       
     </span>
   </a>
@@ -1833,127 +1621,10 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 算法原理
+        2. 算法原理（简述）
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="2. 算法原理">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1 整体结构
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-t" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2 轮函数 T
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2.2 轮函数 T">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#221-s-" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2.1 非线性变换 τ（S-盒替换）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#222-l" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2.2 线性变换 L
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3 密钥扩展
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2.3 密钥扩展">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#231-fk" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3.1 系统参数 FK
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#232-ck" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3.2 常量 CK
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#233" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3.3 密钥扩展过程
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4 解密过程
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1981,10 +1652,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32" class="md-nav__link">
+  <a href="#32-aes-128" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 公开分析结果
+        3.2 与 AES-128 的安全性对比
       
     </span>
   </a>
@@ -1992,21 +1663,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-aes-128" class="md-nav__link">
+  <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3 与 AES-128 的安全性对比
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34-s-" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4 S-盒特性
+        3.3 量子计算影响
       
     </span>
   </a>
@@ -2022,19 +1682,19 @@
   <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 代码实现
+        4. 开发者实践指南
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. 代码实现">
+    <nav class="md-nav" aria-label="4. 开发者实践指南">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-go" class="md-nav__link">
+  <a href="#41-sm4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 Go 语言实现
+        4.1 何时使用 SM4
       
     </span>
   </a>
@@ -2042,10 +1702,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-python" class="md-nav__link">
+  <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 Python 实现
+        4.2 工作模式选择
       
     </span>
   </a>
@@ -2053,10 +1713,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-java" class="md-nav__link">
+  <a href="#43" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3 Java 实现
+        4.3 使用要点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 国密全家桶搭配
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-aes-sm4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 从 AES 迁移到 SM4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 性能参考
       
     </span>
   </a>
@@ -2069,22 +1762,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#5-go" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 标准测试向量
+        5. Go 语言实现
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. 标准测试向量">
+    <nav class="md-nav" aria-label="5. Go 语言实现">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#51" class="md-nav__link">
+  <a href="#51-sm4-gcm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.1 单次加密
+        5.1 SM4-GCM（推荐）
       
     </span>
   </a>
@@ -2092,10 +1785,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#52-1000000" class="md-nav__link">
+  <a href="#52-sm4-cbc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5.2 加密 1000000 次（相同密钥）
+        5.2 SM4-CBC（兼容场景）
       
     </span>
   </a>
@@ -2108,41 +1801,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
+  <a href="#6-sm4-vs-aes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. 性能分析
+        6. SM4 vs AES 选型指南
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="6. 性能分析">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#61" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.1 性能对比
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#62" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6.2 性能优化
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2150,68 +1815,7 @@
   <a href="#7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. 应用场景
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="7. 应用场景">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#71" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7.1 合规场景
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#72" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7.2 与国际算法的双算法支持
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. 推荐库
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-sm4-vs-aes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        9. SM4 vs AES 选型指南
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        10. 总结
+        7. 总结
       
     </span>
   </a>
@@ -2313,6 +1917,9 @@
 <h2 id="1">1. 算法概述</h2>
 <p><strong>SM4</strong>（原名 SMS4）是中国国家密码管理局于 2012 年发布的分组对称加密算法标准（GM/T 0002-2012）。它最初作为无线局域网安全标准 WAPI 的加密算法设计，后来成为通用的国密对称加密标准。</p>
 <p>SM4 是<strong>完全公开</strong>的算法（区别于不公开的 SM1），可以在软件和硬件中自由实现。其安全性与 AES-128 相当，是国密体系中使用最广泛的对称加密算法。</p>
+<blockquote>
+<p>对于需要满足<strong>国密合规</strong>要求的系统（政务、金融、电信等），SM4 是对称加密的首选算法。</p>
+</blockquote>
 <h3 id="11">1.1 基本参数</h3>
 <table>
 <thead>
@@ -2343,12 +1950,12 @@
 <td>非平衡 Feistel（广义 Feistel）</td>
 </tr>
 <tr>
-<td>S-盒大小</td>
-<td>8×8（256 字节查找表）</td>
+<td>标准</td>
+<td>GM/T 0002-2012, GB/T 32907-2016, ISO/IEC 18033-3:2010</td>
 </tr>
 <tr>
-<td>标准</td>
-<td>GM/T 0002-2012, ISO/IEC 18033-3:2010</td>
+<td>安全状态</td>
+<td>✅ <strong>安全，国密对称加密标准</strong></td>
 </tr>
 </tbody>
 </table>
@@ -2357,145 +1964,23 @@
 <li><strong>2006年</strong>：作为 WAPI 的加密算法首次公开</li>
 <li><strong>2012年</strong>：发布为国家密码行业标准 GM/T 0002-2012</li>
 <li><strong>2016年</strong>：成为国家标准 GB/T 32907-2016</li>
-<li><strong>2021年</strong>：纳入 ISO/IEC 18033-3:2010 国际标准</li>
+<li><strong>2021年</strong>：纳入 ISO/IEC 18033-3:2010 国际标准（国际认可）</li>
 </ul>
-<h2 id="2">2. 算法原理</h2>
-<h3 id="21">2.1 整体结构</h3>
-<p>SM4 采用 32 轮的非平衡 Feistel 结构：</p>
+<h2 id="2">2. 算法原理（简述）</h2>
+<p>SM4 采用 32 轮的<strong>非平衡 Feistel 结构</strong>：</p>
 <pre class="mermaid"><code>flowchart TD
     A["明文(128 bit) = (X₀, X₁, X₂, X₃)&lt;br&gt;每部分 32 位"] --&gt; B["32轮迭代&lt;br&gt;X_{i+4} = X_i ⊕ T(X_{i+1} ⊕ X_{i+2} ⊕ X_{i+3} ⊕ rk_i)"]
     RK["轮密钥 rk₀ ~ rk₃₁"] --&gt; B
-    B --&gt; C["反序变换 R&lt;br&gt;(Y₀, Y₁, Y₂, Y₃) = (X₃₅, X₃₄, X₃₃, X₃₂)"]
-    C --&gt; D["密文(128 bit) = (Y₀, Y₁, Y₂, Y₃)"]</code></pre>
-<h3 id="22-t">2.2 轮函数 T</h3>
-<p>轮函数 T 是一个可逆变换，由<strong>非线性变换 τ</strong> 和<strong>线性变换 L</strong> 复合而成：</p>
-<div class="highlight"><pre><span></span><code>T(A) = L(τ(A))
-</code></pre></div>
-<h4 id="221-s-">2.2.1 非线性变换 τ（S-盒替换）</h4>
-<p>将 32 位输入分为 4 个字节，每个字节通过 S-盒替换：</p>
-<div class="highlight"><pre><span></span><code>τ(A) = (Sbox(a₀), Sbox(a₁), Sbox(a₂), Sbox(a₃))
-</code></pre></div>
-<p>SM4 的 S-盒（16×16，十六进制表示）：</p>
-<div class="highlight"><pre><span></span><code>     0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F
-0:  D6 90 E9 FE CC E1 3D B7 16 B6 14 C2 28 FB 2C 05
-1:  2B 67 9A 76 2A BE 04 C3 AA 44 13 26 49 86 06 99
-2:  9C 42 50 F4 91 EF 98 7A 33 54 0B 43 ED CF AC 62
-3:  E4 B3 1C A9 C9 08 E8 95 80 DF 94 FA 75 8F 3F A6
-4:  47 07 A7 FC F3 73 17 BA 83 59 3C 19 E6 85 4F A8
-5:  68 6B 81 B2 71 64 DA 8B F8 EB 0F 4B 70 56 9D 35
-6:  1E 24 0E 5E 63 58 D1 A2 25 22 7C 3B 01 21 78 87
-7:  D4 00 46 57 9F D3 27 52 4C 36 02 E7 A0 C4 C8 9E
-8:  EA BF 8A D2 40 C7 38 B5 A3 F7 F2 CE F9 61 15 A1
-9:  E0 AE 5D A4 9B 34 1A 55 AD 93 32 30 F5 8C B1 E3
-A:  1D F6 E2 2E 82 66 CA 60 C0 29 23 AB 0D 53 4E 6F
-B:  D5 DB 37 45 DE FD 8E 2F 03 FF 6A 72 6D 6C 5B 51
-C:  8D 1B AF 92 BB DD BC 7F 11 D9 5C 41 1F 10 5A D8
-D:  0A C1 31 88 A5 CD 7B BD 2D 74 D0 12 B8 E5 B4 B0
-E:  89 69 97 4A 0C 96 77 7E 65 B9 F1 09 C5 6E C6 84
-F:  18 F0 7D EC 3A DC 4D 20 79 EE 5F 3E D7 CB 39 48
-</code></pre></div>
-<h4 id="222-l">2.2.2 线性变换 L</h4>
-<div class="highlight"><pre><span></span><code>L(B) = B ⊕ (B &lt;&lt;&lt; 2) ⊕ (B &lt;&lt;&lt; 10) ⊕ (B &lt;&lt;&lt; 18) ⊕ (B &lt;&lt;&lt; 24)
-</code></pre></div>
-<p>其中 <code>&lt;&lt;&lt;</code> 表示 32 位循环左移。</p>
-<h3 id="23">2.3 密钥扩展</h3>
-<h4 id="231-fk">2.3.1 系统参数 FK</h4>
-<div class="highlight"><pre><span></span><code>FK₀ = A3B1BAC6
-FK₁ = 56AA3350
-FK₂ = 677D9197
-FK₃ = B27022DC
-</code></pre></div>
-<h4 id="232-ck">2.3.2 常量 CK</h4>
-<div class="highlight"><pre><span></span><code>CK_i 的生成方式：
-ck_{i,j} = (4i + j) × 7 (mod 256)
-
-其中 i = 0, 1, ..., 31; j = 0, 1, 2, 3
-</code></pre></div>
-<p>32 个 CK 值：</p>
-<div class="highlight"><pre><span></span><code>00070e15, 1c232a31, 383f464d, 545b6269,
-70777e85, 8c939aa1, a8afb6bd, c4cbd2d9,
-e0e7eef5, fc030a11, 181f262d, 343b4249,
-50575e65, 6c737a81, 888f969d, a4abb2b9,
-c0c7ced5, dce3eaf1, f8ff060d, 141b2229,
-30373e45, 4c535a61, 686f767d, 848b9299,
-a0a7aeb5, bcc3cad1, d8dfe6ed, f4fb0209,
-10171e25, 2c333a41, 484f565d, 646b7279
-</code></pre></div>
-<h4 id="233">2.3.3 密钥扩展过程</h4>
-<div class="highlight"><pre><span></span><code>1. 将128位密钥 MK 分为4个32位字: MK = (MK₀, MK₁, MK₂, MK₃)
-2. 计算: K_i = MK_i ⊕ FK_i, (i = 0, 1, 2, 3)
-3. 生成轮密钥:
-   rk_i = K_{i+4} = K_i ⊕ T&#39;(K_{i+1} ⊕ K_{i+2} ⊕ K_{i+3} ⊕ CK_i)
-   (i = 0, 1, ..., 31)
-
-其中 T&#39; = L&#39;(τ(·))，L&#39; 是密钥扩展专用线性变换：
-L&#39;(B) = B ⊕ (B &lt;&lt;&lt; 13) ⊕ (B &lt;&lt;&lt; 23)
-</code></pre></div>
-<h3 id="24">2.4 解密过程</h3>
-<p>SM4 的解密与加密算法结构相同，只需将<strong>轮密钥使用顺序逆序</strong>：</p>
-<div class="highlight"><pre><span></span><code>解密时使用: rk₃₁, rk₃₀, ..., rk₁, rk₀
-</code></pre></div>
-<h2 id="3">3. 安全性分析</h2>
-<h3 id="31">3.1 安全强度</h3>
-<table>
-<thead>
-<tr>
-<th>性质</th>
-<th>理论强度</th>
-<th>当前状态</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>暴力攻击</td>
-<td>2¹²⁸</td>
-<td>不可行</td>
-</tr>
-<tr>
-<td>差分分析</td>
-<td>安全</td>
-<td>完整 32 轮安全</td>
-</tr>
-<tr>
-<td>线性分析</td>
-<td>安全</td>
-<td>完整 32 轮安全</td>
-</tr>
-</tbody>
-</table>
-<h3 id="32">3.2 公开分析结果</h3>
-<table>
-<thead>
-<tr>
-<th>攻击类型</th>
-<th>最优结果</th>
-<th>影响</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>差分密码分析</td>
-<td>约 23 轮</td>
-<td>不影响完整版本</td>
-</tr>
-<tr>
-<td>线性密码分析</td>
-<td>约 24 轮</td>
-<td>不影响完整版本</td>
-</tr>
-<tr>
-<td>不可能差分</td>
-<td>约 14 轮</td>
-<td>不影响完整版本</td>
-</tr>
-<tr>
-<td>积分攻击</td>
-<td>约 13 轮</td>
-<td>不影响完整版本</td>
-</tr>
-</tbody>
-</table>
-<h3 id="33-aes-128">3.3 与 AES-128 的安全性对比</h3>
+    B --&gt; C["反序变换&lt;br&gt;(Y₀, Y₁, Y₂, Y₃) = (X₃₅, X₃₄, X₃₃, X₃₂)"]
+    C --&gt; D["密文(128 bit)"]</code></pre>
+<p><strong>核心流程</strong>：</p>
+<ol>
+<li>将 128 位明文分为 4 个 32 位字</li>
+<li>每轮通过<strong>轮函数 T</strong> 进行变换：T = 线性变换 L ∘ 非线性变换 τ（S-盒替换）</li>
+<li>经过 32 轮迭代后反序输出得到密文</li>
+<li>解密与加密结构相同，只需将轮密钥使用顺序逆序</li>
+</ol>
+<p><strong>与 AES 的结构对比</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -2506,43 +1991,346 @@ L&#39;(B) = B ⊕ (B &lt;&lt;&lt; 13) ⊕ (B &lt;&lt;&lt; 23)
 </thead>
 <tbody>
 <tr>
-<td>密钥长度</td>
-<td>128 位</td>
-<td>128 位</td>
+<td>结构</td>
+<td>广义 Feistel</td>
+<td>SPN</td>
 </tr>
 <tr>
-<td>安全目标</td>
-<td>128 位</td>
-<td>128 位</td>
+<td>轮数</td>
+<td>32 轮</td>
+<td>10 轮</td>
 </tr>
 <tr>
-<td>最佳公开攻击</td>
-<td>~23 轮</td>
-<td>~7 轮（Biclique）</td>
+<td>分组/密钥</td>
+<td>128 位 / 128 位</td>
+<td>128 位 / 128~256 位</td>
 </tr>
 <tr>
-<td>轮数/攻击轮数 比</td>
-<td>32/23 ≈ 1.39</td>
-<td>10/7 ≈ 1.43</td>
+<td>S-盒</td>
+<td>8×8（固定）</td>
+<td>8×8（基于 GF(2⁸) 逆元）</td>
 </tr>
 <tr>
 <td>安全余量</td>
-<td>充足</td>
-<td>充足</td>
+<td>32/23 ≈ 1.39</td>
+<td>10/7 ≈ 1.43</td>
 </tr>
 </tbody>
 </table>
-<p>两者在当前技术水平下都是安全的。</p>
-<h3 id="34-s-">3.4 S-盒特性</h3>
-<p>SM4 的 S-盒具有良好的密码学性质：</p>
+<p>两者安全余量相当，均为当前安全的算法。</p>
+<h2 id="3">3. 安全性分析</h2>
+<h3 id="31">3.1 安全强度</h3>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>评估</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>暴力攻击</td>
+<td>2¹²⁸，当前不可行</td>
+</tr>
+<tr>
+<td>差分分析</td>
+<td>完整 32 轮安全（最优攻击约 23 轮）</td>
+</tr>
+<tr>
+<td>线性分析</td>
+<td>完整 32 轮安全（最优攻击约 24 轮）</td>
+</tr>
+<tr>
+<td>国际认可</td>
+<td>ISO/IEC 18033-3 收录</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-aes-128">3.2 与 AES-128 的安全性对比</h3>
+<p>SM4 与 AES-128 在当前技术水平下<strong>安全性相当</strong>：</p>
 <ul>
-<li>差分均匀性：δ = 4</li>
-<li>非线性度：N_f = 112</li>
-<li>代数次数：7</li>
+<li>两者密钥长度相同（128 位）</li>
+<li>两者安全目标相同（128 位安全强度）</li>
+<li>两者安全余量充足</li>
+<li>SM4 已通过国际标准化审查</li>
 </ul>
-<p>这些指标与 AES 的 S-盒相当。</p>
-<h2 id="4">4. 代码实现</h2>
-<h3 id="41-go">4.1 Go 语言实现</h3>
+<h3 id="33">3.3 量子计算影响</h3>
+<p>与 AES-128 相同，Grover 算法会将 SM4 安全性降至 64 位（可能不够安全）。对于后量子安全：
+- 短期：SM4 仍然安全（量子计算机尚不成熟）
+- 长期：关注国密后量子方案的发展</p>
+<h2 id="4">4. 开发者实践指南</h2>
+<h3 id="41-sm4">4.1 何时使用 SM4</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>是否使用 SM4</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>政务系统</td>
+<td>✅ 必须</td>
+<td>国密合规要求</td>
+</tr>
+<tr>
+<td>金融系统（国内）</td>
+<td>✅ 推荐</td>
+<td>监管要求逐步强制</td>
+</tr>
+<tr>
+<td>电信系统</td>
+<td>✅ 推荐</td>
+<td>行业规范要求</td>
+</tr>
+<tr>
+<td>国际化项目</td>
+<td>❌ 用 AES</td>
+<td>AES 全球通用</td>
+</tr>
+<tr>
+<td>双合规需求</td>
+<td>✅ SM4 + AES</td>
+<td>同时满足国内国际标准</td>
+</tr>
+<tr>
+<td>替换 DES/3DES</td>
+<td>✅ 可以</td>
+<td>SM4 工作模式与 AES 兼容，可直接替换</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42">4.2 工作模式选择</h3>
+<p>SM4 支持与 AES 相同的工作模式：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>推荐度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SM4-GCM</strong></td>
+<td>✅ 首选</td>
+<td>AEAD 模式，加密+认证</td>
+</tr>
+<tr>
+<td>SM4-CBC + HMAC-SM3</td>
+<td>⚠️ 可用</td>
+<td>需额外做 MAC</td>
+</tr>
+<tr>
+<td>SM4-ECB</td>
+<td>❌ 禁止</td>
+<td>相同明文块产生相同密文块</td>
+</tr>
+<tr>
+<td>SM4-CTR</td>
+<td>⚠️ 需搭配 MAC</td>
+<td>需要额外完整性保护</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43">4.3 使用要点</h3>
+<table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>密钥长度</td>
+<td>固定 16 字节（128 位）</td>
+</tr>
+<tr>
+<td>分组大小</td>
+<td>16 字节（与 AES 相同）</td>
+</tr>
+<tr>
+<td>Nonce/IV</td>
+<td>GCM 用 12 字节，CBC 用 16 字节</td>
+</tr>
+<tr>
+<td>填充方式</td>
+<td>CBC 模式用 PKCS7，GCM/CTR 不需要填充</td>
+</tr>
+<tr>
+<td>Go 推荐库</td>
+<td><code>github.com/emmansun/gmsm/sm4</code></td>
+</tr>
+<tr>
+<td>Java 推荐库</td>
+<td>Bouncy Castle（<code>org.bouncycastle</code>）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="44">4.4 国密全家桶搭配</h3>
+<p>完整的国密方案通常包含：</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>国密算法</th>
+<th>等价国际算法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>对称加密</td>
+<td>SM4</td>
+<td>AES</td>
+</tr>
+<tr>
+<td>摘要/哈希</td>
+<td>SM3</td>
+<td>SHA-256</td>
+</tr>
+<tr>
+<td>非对称加密/签名</td>
+<td>SM2</td>
+<td>ECDSA / ECIES</td>
+</tr>
+<tr>
+<td>密钥协商</td>
+<td>SM2</td>
+<td>ECDH</td>
+</tr>
+<tr>
+<td>随机数</td>
+<td>国密随机数生成器</td>
+<td>CSPRNG</td>
+</tr>
+</tbody>
+</table>
+<h3 id="45-aes-sm4">4.5 从 AES 迁移到 SM4</h3>
+<p>SM4 与 AES 的工作模式完全兼容，迁移非常简单：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// AES-GCM 代码</span>
+<span class="nx">block</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">aes</span><span class="p">.</span><span class="nx">NewCipher</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w">  </span><span class="c1">// 16/24/32 字节密钥</span>
+
+<span class="c1">// 迁移到 SM4-GCM，只需替换 NewCipher</span>
+<span class="nx">block</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sm4</span><span class="p">.</span><span class="nx">NewCipher</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span><span class="w">  </span><span class="c1">// 16 字节密钥</span>
+
+<span class="c1">// 后续 GCM 使用代码完全不变</span>
+<span class="nx">aead</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">cipher</span><span class="p">.</span><span class="nx">NewGCM</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="46">4.6 性能参考</h3>
+<table>
+<thead>
+<tr>
+<th>实现</th>
+<th>吞吐量</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SM4 纯软件</td>
+<td>~200-400 MB/s</td>
+<td>取决于具体实现优化</td>
+</tr>
+<tr>
+<td>SM4 硬件加速</td>
+<td>~1000+ MB/s</td>
+<td>部分 ARM 和国产 CPU 支持</td>
+</tr>
+<tr>
+<td>AES-NI</td>
+<td>~4000+ MB/s</td>
+<td>对比参考</td>
+</tr>
+</tbody>
+</table>
+<p>SM4 性能略低于带 AES-NI 的 AES，但对于大多数应用场景来说完全够用。</p>
+<h2 id="5-go">5. Go 语言实现</h2>
+<h3 id="51-sm4-gcm">5.1 SM4-GCM（推荐）</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;crypto/cipher&quot;</span>
+<span class="w">    </span><span class="s">&quot;crypto/rand&quot;</span>
+<span class="w">    </span><span class="s">&quot;encoding/hex&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;io&quot;</span>
+
+<span class="w">    </span><span class="s">&quot;github.com/emmansun/gmsm/sm4&quot;</span>
+<span class="p">)</span>
+
+<span class="c1">// SM4-GCM 加密</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">SM4GCMEncrypt</span><span class="p">(</span><span class="nx">plaintext</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">block</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sm4</span><span class="p">.</span><span class="nx">NewCipher</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">aead</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">cipher</span><span class="p">.</span><span class="nx">NewGCM</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">nonce</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="nx">aead</span><span class="p">.</span><span class="nx">NonceSize</span><span class="p">())</span><span class="w"> </span><span class="c1">// 12 字节</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadFull</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nx">Reader</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// nonce 放在密文前面，便于解密时提取</span>
+<span class="w">    </span><span class="nx">ciphertext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">aead</span><span class="p">.</span><span class="nx">Seal</span><span class="p">(</span><span class="nx">nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">plaintext</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="c1">// SM4-GCM 解密</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">SM4GCMDecrypt</span><span class="p">(</span><span class="nx">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">block</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sm4</span><span class="p">.</span><span class="nx">NewCipher</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">aead</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">cipher</span><span class="p">.</span><span class="nx">NewGCM</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">nonceSize</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">aead</span><span class="p">.</span><span class="nx">NonceSize</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">ciphertext</span><span class="p">)</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">nonceSize</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;ciphertext too short&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">ciphertext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">[:</span><span class="nx">nonceSize</span><span class="p">],</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">[</span><span class="nx">nonceSize</span><span class="p">:]</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">aead</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// SM4 密钥固定为 16 字节</span>
+<span class="w">    </span><span class="nx">key</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">rand</span><span class="p">.</span><span class="nx">Read</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">plaintext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hello, SM4-GCM Encryption!&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;明文: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">plaintext</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;密钥(hex): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span>
+
+<span class="w">    </span><span class="c1">// 加密</span>
+<span class="w">    </span><span class="nx">encrypted</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM4GCMEncrypt</span><span class="p">(</span><span class="nx">plaintext</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;密文(hex): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">encrypted</span><span class="p">))</span>
+
+<span class="w">    </span><span class="c1">// 解密</span>
+<span class="w">    </span><span class="nx">decrypted</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM4GCMDecrypt</span><span class="p">(</span><span class="nx">encrypted</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;解密: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">decrypted</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="52-sm4-cbc">5.2 SM4-CBC（兼容场景）</h3>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
@@ -2566,48 +2354,15 @@ L&#39;(B) = B ⊕ (B &lt;&lt;&lt; 13) ⊕ (B &lt;&lt;&lt; 23)
 <span class="p">}</span>
 
 <span class="c1">// PKCS7 去除填充</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">PKCS7Unpadding</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="p">{</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">PKCS7Unpadding</span><span class="p">(</span><span class="nx">data</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;empty data&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="nx">padding</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">data</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="o">-</span><span class="nx">padding</span><span class="p">]</span>
-<span class="p">}</span>
-
-<span class="c1">// SM4-GCM 加密（推荐）</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">SM4GCMEncrypt</span><span class="p">(</span><span class="nx">plaintext</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">block</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sm4</span><span class="p">.</span><span class="nx">NewCipher</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">padding</span><span class="w"> </span><span class="p">&gt;</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">padding</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;invalid padding&quot;</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">aesGCM</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">cipher</span><span class="p">.</span><span class="nx">NewGCM</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">nonce</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="nx">aesGCM</span><span class="p">.</span><span class="nx">NonceSize</span><span class="p">())</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">ReadFull</span><span class="p">(</span><span class="nx">rand</span><span class="p">.</span><span class="nx">Reader</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">ciphertext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">aesGCM</span><span class="p">.</span><span class="nx">Seal</span><span class="p">(</span><span class="nx">nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">plaintext</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="c1">// SM4-GCM 解密</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">SM4GCMDecrypt</span><span class="p">(</span><span class="nx">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">block</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sm4</span><span class="p">.</span><span class="nx">NewCipher</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">aesGCM</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">cipher</span><span class="p">.</span><span class="nx">NewGCM</span><span class="p">(</span><span class="nx">block</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="nx">nonceSize</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">aesGCM</span><span class="p">.</span><span class="nx">NonceSize</span><span class="p">()</span>
-<span class="w">    </span><span class="nx">nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">ciphertext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">[:</span><span class="nx">nonceSize</span><span class="p">],</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">[</span><span class="nx">nonceSize</span><span class="p">:]</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">aesGCM</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">nonce</span><span class="p">,</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">data</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="o">-</span><span class="nx">padding</span><span class="p">],</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 
 <span class="c1">// SM4-CBC 加密</span>
@@ -2637,388 +2392,40 @@ L&#39;(B) = B ⊕ (B &lt;&lt;&lt; 13) ⊕ (B &lt;&lt;&lt; 23)
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
 <span class="w">    </span><span class="p">}</span>
 
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">ciphertext</span><span class="p">)</span><span class="w"> </span><span class="p">&lt;</span><span class="w"> </span><span class="nx">sm4</span><span class="p">.</span><span class="nx">BlockSize</span><span class="o">*</span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">nil</span><span class="p">,</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Errorf</span><span class="p">(</span><span class="s">&quot;ciphertext too short&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+
 <span class="w">    </span><span class="nx">iv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">[:</span><span class="nx">sm4</span><span class="p">.</span><span class="nx">BlockSize</span><span class="p">]</span>
 <span class="w">    </span><span class="nx">ciphertext</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">[</span><span class="nx">sm4</span><span class="p">.</span><span class="nx">BlockSize</span><span class="p">:]</span>
 
 <span class="w">    </span><span class="nx">mode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">cipher</span><span class="p">.</span><span class="nx">NewCBCDecrypter</span><span class="p">(</span><span class="nx">block</span><span class="p">,</span><span class="w"> </span><span class="nx">iv</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">mode</span><span class="p">.</span><span class="nx">CryptBlocks</span><span class="p">(</span><span class="nx">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">plaintext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="nx">ciphertext</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">mode</span><span class="p">.</span><span class="nx">CryptBlocks</span><span class="p">(</span><span class="nx">plaintext</span><span class="p">,</span><span class="w"> </span><span class="nx">ciphertext</span><span class="p">)</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">PKCS7Unpadding</span><span class="p">(</span><span class="nx">ciphertext</span><span class="p">),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">PKCS7Unpadding</span><span class="p">(</span><span class="nx">plaintext</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// SM4 密钥为 16 字节</span>
-<span class="w">    </span><span class="nx">key</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;1234567890abcdef&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">plaintext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hello, SM4 Encryption!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">key</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;1234567890abcdef&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// 16 字节</span>
+<span class="w">    </span><span class="nx">plaintext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hello, SM4-CBC Encryption!&quot;</span><span class="p">)</span>
 
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;明文: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">plaintext</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;密钥(hex): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">key</span><span class="p">))</span>
 
-<span class="w">    </span><span class="c1">// GCM 模式</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n=== SM4-GCM 模式 ===&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">encrypted</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM4GCMEncrypt</span><span class="p">(</span><span class="nx">plaintext</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">encrypted</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM4CBCEncrypt</span><span class="p">(</span><span class="nx">plaintext</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;密文(hex): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">encrypted</span><span class="p">))</span>
 
-<span class="w">    </span><span class="nx">decrypted</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM4GCMDecrypt</span><span class="p">(</span><span class="nx">encrypted</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">decrypted</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM4CBCDecrypt</span><span class="p">(</span><span class="nx">encrypted</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;解密: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">decrypted</span><span class="p">)</span>
-
-<span class="w">    </span><span class="c1">// CBC 模式</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n=== SM4-CBC 模式 ===&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">encryptedCBC</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM4CBCEncrypt</span><span class="p">(</span><span class="nx">plaintext</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;密文(hex): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">encryptedCBC</span><span class="p">))</span>
-
-<span class="w">    </span><span class="nx">decryptedCBC</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SM4CBCDecrypt</span><span class="p">(</span><span class="nx">encryptedCBC</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;解密: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">decryptedCBC</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="42-python">4.2 Python 实现</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">gmssl.sm4</span><span class="w"> </span><span class="kn">import</span> <span class="n">CryptSM4</span><span class="p">,</span> <span class="n">SM4_ENCRYPT</span><span class="p">,</span> <span class="n">SM4_DECRYPT</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">Crypto.Util.Padding</span><span class="w"> </span><span class="kn">import</span> <span class="n">pad</span><span class="p">,</span> <span class="n">unpad</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">SM4</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;SM4 加密封装&quot;&quot;&quot;</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">16</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;SM4 密钥必须为 16 字节&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">ecb_encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;SM4-ECB 加密&quot;&quot;&quot;</span>
-        <span class="n">crypt</span> <span class="o">=</span> <span class="n">CryptSM4</span><span class="p">()</span>
-        <span class="n">crypt</span><span class="o">.</span><span class="n">set_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">SM4_ENCRYPT</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">crypt</span><span class="o">.</span><span class="n">crypt_ecb</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">plaintext</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">ecb_decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;SM4-ECB 解密&quot;&quot;&quot;</span>
-        <span class="n">crypt</span> <span class="o">=</span> <span class="n">CryptSM4</span><span class="p">()</span>
-        <span class="n">crypt</span><span class="o">.</span><span class="n">set_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">SM4_DECRYPT</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">unpad</span><span class="p">(</span><span class="n">crypt</span><span class="o">.</span><span class="n">crypt_ecb</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">cbc_encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;SM4-CBC 加密，返回 (iv, ciphertext)&quot;&quot;&quot;</span>
-        <span class="n">iv</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
-        <span class="n">crypt</span> <span class="o">=</span> <span class="n">CryptSM4</span><span class="p">()</span>
-        <span class="n">crypt</span><span class="o">.</span><span class="n">set_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">SM4_ENCRYPT</span><span class="p">)</span>
-        <span class="n">ciphertext</span> <span class="o">=</span> <span class="n">crypt</span><span class="o">.</span><span class="n">crypt_cbc</span><span class="p">(</span><span class="n">iv</span><span class="p">,</span> <span class="n">pad</span><span class="p">(</span><span class="n">plaintext</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">iv</span><span class="p">,</span> <span class="n">ciphertext</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">cbc_decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iv</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;SM4-CBC 解密&quot;&quot;&quot;</span>
-        <span class="n">crypt</span> <span class="o">=</span> <span class="n">CryptSM4</span><span class="p">()</span>
-        <span class="n">crypt</span><span class="o">.</span><span class="n">set_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">SM4_DECRYPT</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">unpad</span><span class="p">(</span><span class="n">crypt</span><span class="o">.</span><span class="n">crypt_cbc</span><span class="p">(</span><span class="n">iv</span><span class="p">,</span> <span class="n">ciphertext</span><span class="p">),</span> <span class="mi">16</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="c1"># SM4 密钥必须为 16 字节</span>
-    <span class="n">key</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;1234567890abcdef&quot;</span>
-    <span class="n">plaintext</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Hello, SM4 Encryption!&quot;</span>
-
-    <span class="n">sm4</span> <span class="o">=</span> <span class="n">SM4</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;明文: </span><span class="si">{</span><span class="n">plaintext</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;密钥(hex): </span><span class="si">{</span><span class="n">key</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="c1"># ECB 模式</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== SM4-ECB 模式 ===&quot;</span><span class="p">)</span>
-    <span class="n">encrypted</span> <span class="o">=</span> <span class="n">sm4</span><span class="o">.</span><span class="n">ecb_encrypt</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;密文(hex): </span><span class="si">{</span><span class="n">encrypted</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">decrypted</span> <span class="o">=</span> <span class="n">sm4</span><span class="o">.</span><span class="n">ecb_decrypt</span><span class="p">(</span><span class="n">encrypted</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;解密: </span><span class="si">{</span><span class="n">decrypted</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="c1"># CBC 模式</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== SM4-CBC 模式 ===&quot;</span><span class="p">)</span>
-    <span class="n">iv</span><span class="p">,</span> <span class="n">encrypted_cbc</span> <span class="o">=</span> <span class="n">sm4</span><span class="o">.</span><span class="n">cbc_encrypt</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;IV(hex): </span><span class="si">{</span><span class="n">iv</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;密文(hex): </span><span class="si">{</span><span class="n">encrypted_cbc</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">decrypted_cbc</span> <span class="o">=</span> <span class="n">sm4</span><span class="o">.</span><span class="n">cbc_decrypt</span><span class="p">(</span><span class="n">iv</span><span class="p">,</span> <span class="n">encrypted_cbc</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;解密: </span><span class="si">{</span><span class="n">decrypted_cbc</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="c1"># 标准测试向量</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== 标准测试向量 ===&quot;</span><span class="p">)</span>
-    <span class="n">test_key</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s2">&quot;0123456789abcdeffedcba9876543210&quot;</span><span class="p">)</span>
-    <span class="n">test_plain</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s2">&quot;0123456789abcdeffedcba9876543210&quot;</span><span class="p">)</span>
-    <span class="n">crypt</span> <span class="o">=</span> <span class="n">CryptSM4</span><span class="p">()</span>
-    <span class="n">crypt</span><span class="o">.</span><span class="n">set_key</span><span class="p">(</span><span class="n">test_key</span><span class="p">,</span> <span class="n">SM4_ENCRYPT</span><span class="p">)</span>
-    <span class="n">test_cipher</span> <span class="o">=</span> <span class="n">crypt</span><span class="o">.</span><span class="n">crypt_ecb</span><span class="p">(</span><span class="n">test_plain</span><span class="p">)</span>
-    <span class="n">expected</span> <span class="o">=</span> <span class="s2">&quot;681edf34d206965e86b3e94f536e4246&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;加密结果: </span><span class="si">{</span><span class="n">test_cipher</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;期望结果: </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;验证: </span><span class="si">{</span><span class="s1">&#39;通过 ✓&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">test_cipher</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">expected</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;失败 ✗&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="43-java">4.3 Java 实现</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">org.bouncycastle.jce.provider.BouncyCastleProvider</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.crypto.Cipher</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.crypto.spec.GCMParameterSpec</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.crypto.spec.IvParameterSpec</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">javax.crypto.spec.SecretKeySpec</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.SecureRandom</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.Security</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HexFormat</span><span class="p">;</span>
-
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SM4Example</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">Security</span><span class="p">.</span><span class="na">addProvider</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BouncyCastleProvider</span><span class="p">());</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// SM4-GCM 加密</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">gcmEncrypt</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">plaintext</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">12</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">().</span><span class="na">nextBytes</span><span class="p">(</span><span class="n">nonce</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">Cipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cipher</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;SM4/GCM/NoPadding&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;BC&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">SecretKeySpec</span><span class="w"> </span><span class="n">keySpec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecretKeySpec</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SM4&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">GCMParameterSpec</span><span class="w"> </span><span class="n">gcmSpec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GCMParameterSpec</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span><span class="w"> </span><span class="n">nonce</span><span class="p">);</span>
-<span class="w">        </span><span class="n">cipher</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">Cipher</span><span class="p">.</span><span class="na">ENCRYPT_MODE</span><span class="p">,</span><span class="w"> </span><span class="n">keySpec</span><span class="p">,</span><span class="w"> </span><span class="n">gcmSpec</span><span class="p">);</span>
-
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">ciphertext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="na">doFinal</span><span class="p">(</span><span class="n">plaintext</span><span class="p">);</span>
-
-<span class="w">        </span><span class="c1">// nonce + ciphertext</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">nonce</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">arraycopy</span><span class="p">(</span><span class="n">nonce</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">nonce</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">arraycopy</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">nonce</span><span class="p">.</span><span class="na">length</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// SM4-GCM 解密</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">gcmDecrypt</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">nonce</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">12</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">arraycopy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">nonce</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">);</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">ciphertext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">data</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">12</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">arraycopy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">Cipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cipher</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;SM4/GCM/NoPadding&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;BC&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">SecretKeySpec</span><span class="w"> </span><span class="n">keySpec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecretKeySpec</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SM4&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">GCMParameterSpec</span><span class="w"> </span><span class="n">gcmSpec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">GCMParameterSpec</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span><span class="w"> </span><span class="n">nonce</span><span class="p">);</span>
-<span class="w">        </span><span class="n">cipher</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">Cipher</span><span class="p">.</span><span class="na">DECRYPT_MODE</span><span class="p">,</span><span class="w"> </span><span class="n">keySpec</span><span class="p">,</span><span class="w"> </span><span class="n">gcmSpec</span><span class="p">);</span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="na">doFinal</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// SM4-CBC 加密</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">cbcEncrypt</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">plaintext</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">iv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">16</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">SecureRandom</span><span class="p">().</span><span class="na">nextBytes</span><span class="p">(</span><span class="n">iv</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">Cipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cipher</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;SM4/CBC/PKCS5Padding&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;BC&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">SecretKeySpec</span><span class="w"> </span><span class="n">keySpec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecretKeySpec</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SM4&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">IvParameterSpec</span><span class="w"> </span><span class="n">ivSpec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IvParameterSpec</span><span class="p">(</span><span class="n">iv</span><span class="p">);</span>
-<span class="w">        </span><span class="n">cipher</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">Cipher</span><span class="p">.</span><span class="na">ENCRYPT_MODE</span><span class="p">,</span><span class="w"> </span><span class="n">keySpec</span><span class="p">,</span><span class="w"> </span><span class="n">ivSpec</span><span class="p">);</span>
-
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">ciphertext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="na">doFinal</span><span class="p">(</span><span class="n">plaintext</span><span class="p">);</span>
-
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">iv</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">arraycopy</span><span class="p">(</span><span class="n">iv</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">iv</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">arraycopy</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">iv</span><span class="p">.</span><span class="na">length</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="c1">// SM4-CBC 解密</span>
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="nf">cbcDecrypt</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">iv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="mi">16</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">arraycopy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">iv</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">ciphertext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">byte</span><span class="o">[</span><span class="n">data</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="o">]</span><span class="p">;</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">arraycopy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ciphertext</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">Cipher</span><span class="w"> </span><span class="n">cipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cipher</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;SM4/CBC/PKCS5Padding&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;BC&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">SecretKeySpec</span><span class="w"> </span><span class="n">keySpec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecretKeySpec</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SM4&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">IvParameterSpec</span><span class="w"> </span><span class="n">ivSpec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">IvParameterSpec</span><span class="p">(</span><span class="n">iv</span><span class="p">);</span>
-<span class="w">        </span><span class="n">cipher</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">Cipher</span><span class="p">.</span><span class="na">DECRYPT_MODE</span><span class="p">,</span><span class="w"> </span><span class="n">keySpec</span><span class="p">,</span><span class="w"> </span><span class="n">ivSpec</span><span class="p">);</span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">cipher</span><span class="p">.</span><span class="na">doFinal</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1234567890abcdef&quot;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">();</span><span class="w">  </span><span class="c1">// 16字节密钥</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">plaintext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello, SM4 Encryption!&quot;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">();</span>
-
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;明文: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">plaintext</span><span class="p">));</span>
-
-<span class="w">        </span><span class="c1">// GCM 模式</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;\n=== SM4-GCM ===&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">encGCM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gcmEncrypt</span><span class="p">(</span><span class="n">plaintext</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;密文(hex): &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">encGCM</span><span class="p">));</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">decGCM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gcmDecrypt</span><span class="p">(</span><span class="n">encGCM</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;解密: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">decGCM</span><span class="p">));</span>
-
-<span class="w">        </span><span class="c1">// CBC 模式</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;\n=== SM4-CBC ===&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">encCBC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cbcEncrypt</span><span class="p">(</span><span class="n">plaintext</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;密文(hex): &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">encCBC</span><span class="p">));</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">decCBC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cbcDecrypt</span><span class="p">(</span><span class="n">encCBC</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;解密: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">String</span><span class="p">(</span><span class="n">decCBC</span><span class="p">));</span>
-
-<span class="w">        </span><span class="c1">// 标准测试向量</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;\n=== 标准测试向量 ===&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">testKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">parseHex</span><span class="p">(</span><span class="s">&quot;0123456789abcdeffedcba9876543210&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">testPlain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">parseHex</span><span class="p">(</span><span class="s">&quot;0123456789abcdeffedcba9876543210&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">Cipher</span><span class="w"> </span><span class="n">testCipher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cipher</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;SM4/ECB/NoPadding&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;BC&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">testCipher</span><span class="p">.</span><span class="na">init</span><span class="p">(</span><span class="n">Cipher</span><span class="p">.</span><span class="na">ENCRYPT_MODE</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecretKeySpec</span><span class="p">(</span><span class="n">testKey</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;SM4&quot;</span><span class="p">));</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">testResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">testCipher</span><span class="p">.</span><span class="na">doFinal</span><span class="p">(</span><span class="n">testPlain</span><span class="p">);</span>
-<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">expected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;681edf34d206965e86b3e94f536e4246&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;加密结果: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">testResult</span><span class="p">));</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;期望结果: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">expected</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;验证: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
-<span class="w">            </span><span class="p">(</span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">testResult</span><span class="p">).</span><span class="na">equals</span><span class="p">(</span><span class="n">expected</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;通过 ✓&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s">&quot;失败 ✗&quot;</span><span class="p">));</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<h2 id="5">5. 标准测试向量</h2>
-<h3 id="51">5.1 单次加密</h3>
-<div class="highlight"><pre><span></span><code>密钥:  0123456789ABCDEFFEDCBA9876543210
-明文:  0123456789ABCDEFFEDCBA9876543210
-密文:  681EDF34D206965E86B3E94F536E4246
-</code></pre></div>
-<h3 id="52-1000000">5.2 加密 1000000 次（相同密钥）</h3>
-<div class="highlight"><pre><span></span><code>密钥:  0123456789ABCDEFFEDCBA9876543210
-明文:  0123456789ABCDEFFEDCBA9876543210
-加密 1000000 次后的密文: 595298C7C6FD271F0402F804C33D3F66
-</code></pre></div>
-<h2 id="6">6. 性能分析</h2>
-<h3 id="61">6.1 性能对比</h3>
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th>软件实现（参考值）</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AES-128 (AES-NI)</td>
-<td>~4000+ MB/s</td>
-<td>有专用 CPU 指令</td>
-</tr>
-<tr>
-<td>AES-128 (软件)</td>
-<td>~500 MB/s</td>
-<td>无硬件加速</td>
-</tr>
-<tr>
-<td>SM4 (软件)</td>
-<td>~200-400 MB/s</td>
-<td>取决于优化程度</td>
-</tr>
-<tr>
-<td>SM4 (硬件加速)</td>
-<td>~1000+ MB/s</td>
-<td>部分 ARM 芯片支持</td>
-</tr>
-</tbody>
-</table>
-<h3 id="62">6.2 性能优化</h3>
-<ul>
-<li><strong>查表优化</strong>：预计算 T 变换表，减少运行时计算</li>
-<li><strong>SIMD 优化</strong>：利用向量指令并行处理</li>
-<li><strong>硬件加速</strong>：部分国产芯片（如鲲鹏）提供 SM4 指令</li>
-<li><strong>批量处理</strong>：CTR/GCM 模式支持并行加密</li>
-</ul>
-<h2 id="7">7. 应用场景</h2>
-<h3 id="71">7.1 合规场景</h3>
-<table>
-<thead>
-<tr>
-<th>领域</th>
-<th>应用</th>
-<th>模式</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>等级保护</td>
-<td>系统数据加密</td>
-<td>CBC/GCM</td>
-</tr>
-<tr>
-<td>金融行业</td>
-<td>交易数据加密</td>
-<td>GCM</td>
-</tr>
-<tr>
-<td>政务系统</td>
-<td>文件加密</td>
-<td>CBC</td>
-</tr>
-<tr>
-<td>VPN</td>
-<td>数据通道加密</td>
-<td>GCM</td>
-</tr>
-<tr>
-<td>WAPI</td>
-<td>无线网络加密</td>
-<td>CCM</td>
-</tr>
-<tr>
-<td>物联网</td>
-<td>设备通信加密</td>
-<td>CTR/GCM</td>
-</tr>
-</tbody>
-</table>
-<h3 id="72">7.2 与国际算法的双算法支持</h3>
-<p>许多系统需要同时支持国密和国际标准：</p>
-<pre class="mermaid"><code>flowchart TD
-    A[应用层] --&gt; B[密码服务抽象层]
-    B --&gt; C["国密引擎&lt;br&gt;SM4-GCM / SM3 / SM2"]
-    B --&gt; D["国际密码引擎&lt;br&gt;AES-256-GCM / SHA-256 / ECDSA/RSA"]</code></pre>
-<h2 id="8">8. 推荐库</h2>
-<table>
-<thead>
-<tr>
-<th>语言</th>
-<th>库</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Go</td>
-<td>github.com/emmansun/gmsm</td>
-<td>高性能，SIMD 优化</td>
-</tr>
-<tr>
-<td>Python</td>
-<td>gmssl</td>
-<td>纯 Python</td>
-</tr>
-<tr>
-<td>Java</td>
-<td>BouncyCastle</td>
-<td>成熟稳定</td>
-</tr>
-<tr>
-<td>C</td>
-<td>GmSSL</td>
-<td>完整国密实现</td>
-</tr>
-<tr>
-<td>C</td>
-<td>OpenSSL 1.1.1+</td>
-<td>内置 SM4</td>
-</tr>
-<tr>
-<td>Rust</td>
-<td>libsm</td>
-<td>Rust 国密实现</td>
-</tr>
-</tbody>
-</table>
-<h2 id="9-sm4-vs-aes">9. SM4 vs AES 选型指南</h2>
+<h2 id="6-sm4-vs-aes">6. SM4 vs AES 选型指南</h2>
 <table>
 <thead>
 <tr>
@@ -3036,26 +2443,26 @@ L&#39;(B) = B ⊕ (B &lt;&lt;&lt; 13) ⊕ (B &lt;&lt;&lt; 23)
 <tr>
 <td>国际化项目</td>
 <td>AES</td>
-<td>全球通用</td>
+<td>全球通用，硬件加速更好</td>
 </tr>
 <tr>
 <td>双合规需求</td>
-<td>SM4 + AES</td>
-<td>同时满足</td>
+<td>SM4 + AES 双算法</td>
+<td>同时满足国内外标准</td>
 </tr>
 <tr>
 <td>性能极致优化</td>
-<td>AES (有 AES-NI)</td>
+<td>AES（有 AES-NI）</td>
 <td>硬件加速更成熟</td>
 </tr>
 <tr>
 <td>国密改造</td>
 <td>SM4 替换 AES/DES</td>
-<td>直接替换</td>
+<td>工作模式兼容，迁移简单</td>
 </tr>
 </tbody>
 </table>
-<h2 id="10">10. 总结</h2>
+<h2 id="7">7. 总结</h2>
 <table>
 <thead>
 <tr>
@@ -3066,31 +2473,27 @@ L&#39;(B) = B ⊕ (B &lt;&lt;&lt; 13) ⊕ (B &lt;&lt;&lt; 23)
 <tbody>
 <tr>
 <td>安全性</td>
-<td>⭐⭐⭐⭐⭐ 与 AES-128 同级，无已知攻击</td>
+<td>⭐⭐⭐⭐⭐ 与 AES-128 同级，无已知实际攻击</td>
 </tr>
 <tr>
 <td>性能</td>
-<td>⭐⭐⭐⭐ 软件实现较好，部分平台有硬件加速</td>
-</tr>
-<tr>
-<td>公开性</td>
-<td>⭐⭐⭐⭐⭐ 完全公开，可自由实现</td>
+<td>⭐⭐⭐⭐ 软件实现良好，部分平台有硬件加速</td>
 </tr>
 <tr>
 <td>合规性</td>
-<td>⭐⭐⭐⭐⭐ 中国国标 + ISO 国际标准</td>
+<td>⭐⭐⭐⭐⭐ 国标 + ISO 国际标准</td>
 </tr>
 <tr>
 <td>生态</td>
 <td>⭐⭐⭐⭐ 主流语言均有成熟实现</td>
 </tr>
 <tr>
-<td>推荐度</td>
-<td>⭐⭐⭐⭐⭐ 国密对称加密首选</td>
+<td>迁移成本</td>
+<td>⭐⭐⭐⭐⭐ 与 AES 工作模式兼容，替换简单</td>
 </tr>
 </tbody>
 </table>
-<p>SM4 是中国国密体系中最重要的对称加密算法——完全公开、安全可靠、生态完善。对于需要满足国密合规的系统，SM4 是对称加密的首选算法；对于国际化系统的国密改造，SM4 可以直接替换 AES，工作模式完全兼容。</p>
+<p><strong>一句话总结</strong>：需要国密合规就用 SM4-GCM，使用方式和 AES-GCM 几乎完全一样，迁移成本极低。</p>
 
 
 

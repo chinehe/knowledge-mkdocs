@@ -907,7 +907,18 @@
   <a href="#9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9. 总结
+        9. 开发者快速决策表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 总结
       
     </span>
   </a>
@@ -994,34 +1005,6 @@
     
   
     AES
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../%E5%9B%BD%E5%AF%86SM1/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    国密SM1
   
 
     
@@ -1875,7 +1858,18 @@
   <a href="#9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9. 总结
+        9. 开发者快速决策表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 总结
       
     </span>
   </a>
@@ -2197,7 +2191,7 @@
 <td>✅ 当前标准</td>
 </tr>
 <tr>
-<td><a href="../%E5%9B%BD%E5%AF%86SM1/">SM1</a></td>
+<td><a href="国密SM1.md">SM1</a></td>
 <td>128 位</td>
 <td>128 位</td>
 <td>未公开</td>
@@ -2541,41 +2535,104 @@
 <tr>
 <td>Nonce/IV 重复</td>
 <td>密钥流重复，明文泄露</td>
-<td>每次加密使用随机唯一值</td>
+<td>每次加密使用 <code>crypto/rand</code> 生成唯一值</td>
 </tr>
 <tr>
 <td>仅加密不认证</td>
 <td>无法检测篡改（Padding Oracle 等）</td>
-<td>使用 AEAD 模式</td>
+<td>使用 AEAD 模式（GCM）</td>
 </tr>
 <tr>
 <td>硬编码密钥在代码中</td>
 <td>密钥随代码泄露</td>
-<td>使用 KMS 或环境变量</td>
+<td>使用 KMS、Vault 或环境变量</td>
+</tr>
+<tr>
+<td>使用 <code>math/rand</code> 生成密钥</td>
+<td>可预测的"随机"数</td>
+<td>使用 <code>crypto/rand</code>（密码学安全）</td>
 </tr>
 <tr>
 <td>使用 DES/3DES</td>
 <td>密钥过短或性能差</td>
-<td>迁移到 AES-256</td>
+<td>迁移到 AES-256-GCM</td>
 </tr>
 <tr>
 <td>自己实现加密算法</td>
 <td>几乎必然存在漏洞</td>
-<td>使用经审计的成熟密码库</td>
+<td>使用经审计的标准库或成熟密码库</td>
 </tr>
 <tr>
 <td>用 RSA 直接加密大数据</td>
 <td>性能极差、有长度限制</td>
-<td>混合加密方案</td>
+<td>混合加密方案（RSA 加密对称密钥）</td>
 </tr>
 <tr>
 <td>不验证公钥来源</td>
 <td>中间人攻击</td>
 <td>使用 PKI 证书体系</td>
 </tr>
+<tr>
+<td>PKCS#1 v1.5 填充</td>
+<td>Bleichenbacher 攻击</td>
+<td>RSA 加密用 OAEP，签名用 PSS</td>
+</tr>
+<tr>
+<td>密钥不轮换</td>
+<td>长期使用增加泄露风险</td>
+<td>制定密钥轮换策略</td>
+</tr>
 </tbody>
 </table>
-<h2 id="9">9. 总结</h2>
+<h2 id="9">9. 开发者快速决策表</h2>
+<p>不想看细节？直接对照这张表选算法：</p>
+<table>
+<thead>
+<tr>
+<th>我要做什么</th>
+<th>推荐方案</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加密数据</td>
+<td>AES-256-GCM</td>
+<td>默认选择</td>
+</tr>
+<tr>
+<td>加密数据（国密合规）</td>
+<td>SM4-GCM</td>
+<td>用法与 AES-GCM 相同</td>
+</tr>
+<tr>
+<td>数字签名</td>
+<td>Ed25519</td>
+<td>新项目首选</td>
+</tr>
+<tr>
+<td>数字签名（兼容性）</td>
+<td>RSA-PSS (2048+)</td>
+<td>TLS 证书等场景</td>
+</tr>
+<tr>
+<td>密钥协商</td>
+<td>X25519 + HKDF</td>
+<td>TLS 1.3 默认方案</td>
+</tr>
+<tr>
+<td>保护密码</td>
+<td>不用加密，用 bcrypt/argon2</td>
+<td>这是摘要/KDF 的领域</td>
+</tr>
+<tr>
+<td>传输层安全</td>
+<td>TLS 1.3</td>
+<td>不要自己实现协议</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10">10. 总结</h2>
 <table>
 <thead>
 <tr>
