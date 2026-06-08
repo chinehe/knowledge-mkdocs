@@ -1,0 +1,3252 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Computer%26Network/%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95/SHA%E5%AE%B6%E6%97%8F/">
+      
+      
+        <link rel="prev" href="../MD5/">
+      
+      
+        <link rel="next" href="../%E5%9B%BD%E5%AF%86SM3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>SHA家族 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sha" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SHA家族
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    计算机与网络
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    加解密算法
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    摘要算法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    摘要算法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    摘要算法概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MD5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MD5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SHA家族
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SHA家族
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-sha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. SHA 家族概述
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. SHA 家族概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 家族全景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 演进动因
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-sha-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. SHA-1（已弃用）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. SHA-1（已弃用）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 基本信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 算法原理（简述）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 安全性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 开发者指南
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-sha-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. SHA-2（当前标准）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. SHA-2（当前标准）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 基本信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 算法原理（简述）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 安全性分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 开发者实践指南
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 开发者实践指南">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见错误
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性能参考
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-sha-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. SHA-3（新一代标准）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. SHA-3（新一代标准）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 基本信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-sha-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 为什么需要 SHA-3？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 算法原理（简述）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-sha-3-vs-sha-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 SHA-3 vs SHA-2 对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-shake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 SHAKE 的独特价值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 开发者指南
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Go 语言实现
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Go 语言实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-sha-256" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 SHA-256（推荐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-sha-512" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 SHA-512
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-sha-3-shake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 SHA-3 / SHAKE
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 选型决策
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 选型决策">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-sha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 SHA 家族内部选型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 快速决策表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 变体选择理由
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 量子计算影响
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%9B%BD%E5%AF%86SM3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    国密SM3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../Web/%E4%BA%92%E8%81%94%E7%BD%91Web%E6%9C%8D%E5%8A%A1%E8%AE%A4%E8%AF%81%E6%8A%80%E6%9C%AF%E5%8F%91%E5%B1%95%E5%8F%B2%EF%BC%9A%E4%BB%8EHTTP%20Basic%E5%88%B0OpenID%20Connect/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../NetworkNotes/Ping%E8%83%BD%E6%B5%8B%E7%AB%AF%E5%8F%A3%E5%90%97%3F/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    网络杂谈
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../ai/AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-sha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. SHA 家族概述
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. SHA 家族概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 家族全景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 演进动因
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-sha-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. SHA-1（已弃用）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. SHA-1（已弃用）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 基本信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 算法原理（简述）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 安全性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 开发者指南
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-sha-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. SHA-2（当前标准）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. SHA-2（当前标准）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 基本信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 算法原理（简述）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 安全性分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 开发者实践指南
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 开发者实践指南">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见错误
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性能参考
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-sha-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. SHA-3（新一代标准）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. SHA-3（新一代标准）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 基本信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-sha-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 为什么需要 SHA-3？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 算法原理（简述）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-sha-3-vs-sha-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 SHA-3 vs SHA-2 对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-shake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 SHAKE 的独特价值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 开发者指南
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-go" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Go 语言实现
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Go 语言实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-sha-256" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 SHA-256（推荐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-sha-512" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 SHA-512
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-sha-3-shake" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 SHA-3 / SHAKE
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 选型决策
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 选型决策">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-sha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 SHA 家族内部选型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 快速决策表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 变体选择理由
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 量子计算影响
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    计算机与网络
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    摘要算法
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sha">SHA家族摘要算法</h1>
+<h2 id="1-sha">1. SHA 家族概述</h2>
+<p><strong>SHA</strong>（Secure Hash Algorithm，安全散列算法）是由美国国家安全局（NSA）设计、NIST 发布的一系列密码散列函数标准。从 1993 年至今，SHA 家族经历了多代演进，是互联网安全基础设施中最核心的哈希算法。</p>
+<pre class="mermaid"><code>flowchart TD
+    SHA["SHA 家族"] --&gt; SHA0["SHA-0 (1993)&lt;br&gt;❌ 已撤销"]
+    SHA --&gt; SHA1["SHA-1 (1995)&lt;br&gt;❌ 碰撞已实现"]
+    SHA --&gt; SHA2["SHA-2 (2001)&lt;br&gt;✅ 当前标准"]
+    SHA --&gt; SHA3["SHA-3 (2015)&lt;br&gt;✅ 新一代标准"]
+
+    SHA2 --&gt; S224["SHA-224"]
+    SHA2 --&gt; S256["SHA-256 ⭐"]
+    SHA2 --&gt; S384["SHA-384"]
+    SHA2 --&gt; S512["SHA-512"]
+
+    SHA3 --&gt; S3256["SHA3-256"]
+    SHA3 --&gt; S3512["SHA3-512"]
+    SHA3 --&gt; SHAKE["SHAKE128/256&lt;br&gt;（可变长度输出）"]</code></pre>
+<h3 id="11">1.1 家族全景</h3>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>输出长度</th>
+<th>发布年份</th>
+<th>安全状态</th>
+<th>开发者建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SHA-0</td>
+<td>160 位</td>
+<td>1993</td>
+<td>❌ 已撤销</td>
+<td>不要使用</td>
+</tr>
+<tr>
+<td>SHA-1</td>
+<td>160 位</td>
+<td>1995</td>
+<td>❌ 碰撞已实现</td>
+<td>迁移到 SHA-256</td>
+</tr>
+<tr>
+<td>SHA-224</td>
+<td>224 位</td>
+<td>2004</td>
+<td>✅ 安全</td>
+<td>较少使用</td>
+</tr>
+<tr>
+<td><strong>SHA-256</strong></td>
+<td><strong>256 位</strong></td>
+<td><strong>2001</strong></td>
+<td><strong>✅ 安全</strong></td>
+<td><strong>通用首选</strong></td>
+</tr>
+<tr>
+<td>SHA-384</td>
+<td>384 位</td>
+<td>2001</td>
+<td>✅ 安全</td>
+<td>高安全需求</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>512 位</td>
+<td>2001</td>
+<td>✅ 安全</td>
+<td>64 位平台性能好</td>
+</tr>
+<tr>
+<td>SHA-512/224</td>
+<td>224 位</td>
+<td>2012</td>
+<td>✅ 安全</td>
+<td>较少使用</td>
+</tr>
+<tr>
+<td>SHA-512/256</td>
+<td>256 位</td>
+<td>2012</td>
+<td>✅ 安全</td>
+<td>64 位平台替代 SHA-256</td>
+</tr>
+<tr>
+<td>SHA3-224</td>
+<td>224 位</td>
+<td>2015</td>
+<td>✅ 安全</td>
+<td>较少使用</td>
+</tr>
+<tr>
+<td>SHA3-256</td>
+<td>256 位</td>
+<td>2015</td>
+<td>✅ 安全</td>
+<td>需要防长度扩展时</td>
+</tr>
+<tr>
+<td>SHA3-384</td>
+<td>384 位</td>
+<td>2015</td>
+<td>✅ 安全</td>
+<td>高安全需求</td>
+</tr>
+<tr>
+<td>SHA3-512</td>
+<td>512 位</td>
+<td>2015</td>
+<td>✅ 安全</td>
+<td>极高安全需求</td>
+</tr>
+<tr>
+<td>SHAKE128</td>
+<td>可变</td>
+<td>2015</td>
+<td>✅ 安全</td>
+<td>XOF / 密钥派生</td>
+</tr>
+<tr>
+<td>SHAKE256</td>
+<td>可变</td>
+<td>2015</td>
+<td>✅ 安全</td>
+<td>后量子密码标准组件</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12">1.2 演进动因</h3>
+<table>
+<thead>
+<tr>
+<th>代际</th>
+<th>推动力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SHA-0 → SHA-1</td>
+<td>修复 SHA-0 设计缺陷（消息扩展缺少循环移位）</td>
+</tr>
+<tr>
+<td>SHA-1 → SHA-2</td>
+<td>SHA-1 密钥空间不足（160位），设计更强的算法</td>
+</tr>
+<tr>
+<td>SHA-2 → SHA-3</td>
+<td>结构多样性（SHA-2 和 SHA-1 都基于 Merkle-Damgård，需要独立备选）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-sha-1">2. SHA-1（已弃用）</h2>
+<h3 id="21">2.1 基本信息</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输出长度</td>
+<td>160 位（40 个十六进制字符）</td>
+</tr>
+<tr>
+<td>分组大小</td>
+<td>512 位</td>
+</tr>
+<tr>
+<td>计算轮数</td>
+<td>80 步</td>
+</tr>
+<tr>
+<td>结构</td>
+<td>Merkle-Damgård</td>
+</tr>
+<tr>
+<td>安全状态</td>
+<td>❌ <strong>碰撞已实现，已弃用</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="22">2.2 算法原理（简述）</h3>
+<p>SHA-1 将消息填充后分为 512 位块，每块经过 80 步压缩函数处理，输出 5 个 32 位寄存器拼接的 160 位哈希值。消息扩展将 16 个字扩展为 80 个字（含循环左移 1 位操作，这是区别于 SHA-0 的关键改进）。</p>
+<h3 id="23">2.3 安全性</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>事件</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2005</td>
+<td>王小云等发布理论攻击（2⁶⁹）</td>
+<td>首次证明弱于设计强度</td>
+</tr>
+<tr>
+<td>2017</td>
+<td><strong>Google SHAttered：首个实际碰撞</strong></td>
+<td>两个不同 PDF 具有相同 SHA-1</td>
+</tr>
+<tr>
+<td>2020</td>
+<td>选择前缀碰撞（~$45,000）</td>
+<td>可伪造 PGP 密钥</td>
+</tr>
+</tbody>
+</table>
+<p><strong>退役时间线</strong>：</p>
+<ul>
+<li>2016：CA/Browser Forum 禁止签发 SHA-1 证书</li>
+<li>2017：Chrome/Firefox 拒绝 SHA-1 TLS 证书</li>
+<li>2020：Git 开始迁移到 SHA-256</li>
+</ul>
+<h3 id="24">2.4 开发者指南</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>能否使用 SHA-1</th>
+<th>应该用什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TLS 证书</td>
+<td>❌ 已被浏览器拒绝</td>
+<td>SHA-256</td>
+</tr>
+<tr>
+<td>数字签名</td>
+<td>❌ 禁止</td>
+<td>SHA-256</td>
+</tr>
+<tr>
+<td>HMAC-SHA-1</td>
+<td>⚠️ 仍安全（不依赖碰撞抗性）</td>
+<td>新系统用 HMAC-SHA-256</td>
+</tr>
+<tr>
+<td>TOTP（两步验证）</td>
+<td>⚠️ 仍安全（RFC 规定）</td>
+<td>可继续使用</td>
+</tr>
+<tr>
+<td>Git 对象 ID</td>
+<td>⚠️ 正在迁移</td>
+<td><code>git init --object-format=sha256</code></td>
+</tr>
+<tr>
+<td>非安全校验和</td>
+<td>✅ 可以</td>
+<td>不涉及安全</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-sha-2">3. SHA-2（当前标准）</h2>
+<h3 id="31">3.1 基本信息</h3>
+<table>
+<thead>
+<tr>
+<th>变体</th>
+<th>输出长度</th>
+<th>字长</th>
+<th>分组大小</th>
+<th>轮数</th>
+<th>安全强度（碰撞）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SHA-224</td>
+<td>224 位</td>
+<td>32</td>
+<td>512</td>
+<td>64</td>
+<td>112 位</td>
+</tr>
+<tr>
+<td><strong>SHA-256</strong></td>
+<td><strong>256 位</strong></td>
+<td><strong>32</strong></td>
+<td><strong>512</strong></td>
+<td><strong>64</strong></td>
+<td><strong>128 位</strong></td>
+</tr>
+<tr>
+<td>SHA-384</td>
+<td>384 位</td>
+<td>64</td>
+<td>1024</td>
+<td>80</td>
+<td>192 位</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>512 位</td>
+<td>64</td>
+<td>1024</td>
+<td>80</td>
+<td>256 位</td>
+</tr>
+<tr>
+<td>SHA-512/256</td>
+<td>256 位</td>
+<td>64</td>
+<td>1024</td>
+<td>80</td>
+<td>128 位</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>SHA-512 在 64 位处理器上反而比 SHA-256 快</strong>（使用 64 位字运算）。如果你在 64 位服务器上且需要更高安全强度，可以考虑 SHA-512 或 SHA-512/256。</p>
+</blockquote>
+<h3 id="32">3.2 算法原理（简述）</h3>
+<p>SHA-2 家族基于 <strong>Merkle-Damgård</strong> 结构：</p>
+<pre class="mermaid"><code>flowchart TD
+    A[消息] --&gt; B["填充 + 附加长度"]
+    B --&gt; C["分块（SHA-256: 512位/块）"]
+    C --&gt; D["消息扩展&lt;br&gt;16字 → 64字（SHA-256）&lt;br&gt;16字 → 80字（SHA-512）"]
+    D --&gt; E["压缩函数&lt;br&gt;Ch, Maj, Σ 运算&lt;br&gt;+ 轮常量"]
+    E --&gt; F["哈希值"]</code></pre>
+<p><strong>核心设计</strong>：
+- 初始化寄存器：取自素数的平方根（SHA-256 用 8 个，SHA-512 也用 8 个）
+- 轮常量：取自素数的立方根（"没有后门"的透明设计）
+- 压缩函数：使用 Ch（选择）、Maj（多数）、Σ（旋转组合）三类运算</p>
+<p><strong>SHA-224 和 SHA-384 的区别</strong>：分别是 SHA-256 和 SHA-512 的截断版本，使用不同的初始值。</p>
+<h3 id="33">3.3 安全性分析</h3>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>SHA-256 安全强度</th>
+<th>当前状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>碰撞抗性</td>
+<td>128 位</td>
+<td>✅ 无实际威胁</td>
+</tr>
+<tr>
+<td>原像抗性</td>
+<td>256 位</td>
+<td>✅ 无实际威胁</td>
+</tr>
+<tr>
+<td>最优公开攻击</td>
+<td>31 轮碰撞 / 45 轮原像</td>
+<td>完整 64 轮安全</td>
+</tr>
+</tbody>
+</table>
+<p><strong>已知弱点——长度扩展攻击</strong>：</p>
+<div class="highlight"><pre><span></span><code>已知 SHA256(M) 和 |M|，无需知道 M，即可计算 SHA256(M || padding || M&#39;)
+</code></pre></div>
+<p>防护：
+- ❌ 不要用 <code>SHA256(key || message)</code> 做 MAC
+- ✅ 使用 <code>HMAC-SHA256(key, message)</code></p>
+<p><strong>量子计算影响</strong>：Grover 算法将碰撞搜索降至 ~2⁸⁵，原像搜索降至 ~2¹²⁸，<strong>仍然安全</strong>。</p>
+<h3 id="34">3.4 开发者实践指南</h3>
+<h4 id="_1">使用场景</h4>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>做法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据完整性校验</td>
+<td><code>SHA256(data)</code></td>
+<td>文件校验、下载验证</td>
+</tr>
+<tr>
+<td>消息认证</td>
+<td><code>HMAC-SHA256(key, msg)</code></td>
+<td>不要直接用 SHA256</td>
+</tr>
+<tr>
+<td>数字签名前哈希</td>
+<td><code>Sign(SHA256(msg))</code></td>
+<td>先哈希再签名</td>
+</tr>
+<tr>
+<td>密码存储</td>
+<td>❌ <strong>不要用 SHA-256</strong></td>
+<td>用 Argon2id / bcrypt</td>
+</tr>
+<tr>
+<td>密钥派生</td>
+<td><code>HKDF-SHA256(secret)</code></td>
+<td>从共享秘密派生密钥</td>
+</tr>
+<tr>
+<td>JWT 签名</td>
+<td><code>HS256 = HMAC-SHA256</code></td>
+<td>Token 签名验证</td>
+</tr>
+<tr>
+<td>内容寻址</td>
+<td><code>SHA256(content)</code></td>
+<td>Git、Docker、IPFS</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_2">常见错误</h4>
+<table>
+<thead>
+<tr>
+<th>错误做法</th>
+<th>正确做法</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SHA256(password)</code></td>
+<td><code>Argon2id(password, salt)</code></td>
+<td>SHA-256 太快，易暴力破解</td>
+</tr>
+<tr>
+<td><code>SHA256(key + msg)</code></td>
+<td><code>HMAC-SHA256(key, msg)</code></td>
+<td>防长度扩展攻击</td>
+</tr>
+<tr>
+<td><code>if mac1 == mac2</code></td>
+<td><code>hmac.Equal(mac1, mac2)</code></td>
+<td>防时序侧信道</td>
+</tr>
+<tr>
+<td>无盐值哈希密码</td>
+<td>每用户唯一随机盐</td>
+<td>防彩虹表</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_3">性能参考</h4>
+<table>
+<thead>
+<tr>
+<th>实现方式</th>
+<th>SHA-256 吞吐量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>纯软件（x86-64）</td>
+<td>~500 MB/s</td>
+</tr>
+<tr>
+<td>SHA Extensions（Intel/AMD）</td>
+<td>~2000+ MB/s</td>
+</tr>
+<tr>
+<td>ARM SHA2 指令</td>
+<td>~1500+ MB/s</td>
+</tr>
+</tbody>
+</table>
+<p>Go/Java/Python 标准库会自动利用硬件加速。</p>
+<hr />
+<h2 id="4-sha-3">4. SHA-3（新一代标准）</h2>
+<h3 id="41">4.1 基本信息</h3>
+<table>
+<thead>
+<tr>
+<th>变体</th>
+<th>输出长度</th>
+<th>安全强度（碰撞）</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SHA3-256</td>
+<td>256 位</td>
+<td>128 位</td>
+<td>固定输出</td>
+</tr>
+<tr>
+<td>SHA3-512</td>
+<td>512 位</td>
+<td>256 位</td>
+<td>固定输出</td>
+</tr>
+<tr>
+<td><strong>SHAKE128</strong></td>
+<td><strong>可变</strong></td>
+<td><strong>128 位</strong></td>
+<td><strong>XOF</strong></td>
+</tr>
+<tr>
+<td><strong>SHAKE256</strong></td>
+<td><strong>可变</strong></td>
+<td><strong>256 位</strong></td>
+<td><strong>XOF</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-sha-3">4.2 为什么需要 SHA-3？</h3>
+<p>SHA-3 <strong>不是为了替代 SHA-2</strong>（SHA-2 仍然安全），而是为了：</p>
+<table>
+<thead>
+<tr>
+<th>目的</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结构多样性</td>
+<td>SHA-2 和 SHA-1 都基于 Merkle-Damgård，单一结构有系统风险</td>
+</tr>
+<tr>
+<td>备选方案</td>
+<td>万一 SHA-2 被攻破时有完全独立的替代</td>
+</tr>
+<tr>
+<td>新功能</td>
+<td>海绵结构支持可变长度输出（XOF）、天然防长度扩展</td>
+</tr>
+<tr>
+<td>后量子支撑</td>
+<td>NIST 后量子标准（ML-KEM/ML-DSA）大量使用 SHAKE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43">4.3 算法原理（简述）</h3>
+<p>SHA-3 基于<strong>海绵结构（Sponge Construction）</strong>，与 SHA-2 完全不同：</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph "吸收阶段"
+        M1["消息块₁"] --&gt;|"XOR"| F1["Keccak-f"]
+        M2["消息块₂"] --&gt;|"XOR"| F2["Keccak-f"]
+    end
+    subgraph "挤出阶段"
+        F3["Keccak-f"] --&gt; Z1["输出"]
+    end
+    F1 --&gt; F2 --&gt; F3</code></pre>
+<p><strong>核心概念</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>状态大小</td>
+<td>1600 位（固定）</td>
+</tr>
+<tr>
+<td>速率 r</td>
+<td>与外部交互的部分</td>
+</tr>
+<tr>
+<td>容量 c</td>
+<td>内部保护部分（c = 2 × 安全强度）</td>
+</tr>
+<tr>
+<td>置换函数</td>
+<td>Keccak-f[1600]，24 轮，5 种操作</td>
+</tr>
+</tbody>
+</table>
+<p><strong>与 SHA-2 的核心区别</strong>：容量部分（c）永远不直接暴露给外部，因此<strong>天然免疫长度扩展攻击</strong>。</p>
+<h3 id="44-sha-3-vs-sha-2">4.4 SHA-3 vs SHA-2 对比</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>SHA-2 (SHA-256)</th>
+<th>SHA-3 (SHA3-256)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内部结构</td>
+<td>Merkle-Damgård</td>
+<td>海绵结构</td>
+</tr>
+<tr>
+<td>长度扩展攻击</td>
+<td>❌ 存在（需 HMAC）</td>
+<td>✅ 天然免疫</td>
+</tr>
+<tr>
+<td>可变输出长度</td>
+<td>❌ 不支持</td>
+<td>✅ SHAKE 支持</td>
+</tr>
+<tr>
+<td>硬件加速</td>
+<td>✅ 广泛</td>
+<td>⚠️ 部分平台</td>
+</tr>
+<tr>
+<td>软件性能</td>
+<td>~500 MB/s</td>
+<td>~300 MB/s</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>✅ 安全</td>
+<td>✅ 安全</td>
+</tr>
+<tr>
+<td>生态成熟度</td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+</tbody>
+</table>
+<h3 id="45-shake">4.5 SHAKE 的独特价值</h3>
+<p>SHAKE128/SHAKE256 是<strong>可扩展输出函数（XOF）</strong>，可产生任意长度输出：</p>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>密钥派生</td>
+<td>从共享秘密生成任意长度密钥材料</td>
+</tr>
+<tr>
+<td>后量子密码</td>
+<td>ML-KEM/ML-DSA 核心组件</td>
+</tr>
+<tr>
+<td>确定性随机</td>
+<td>从种子生成确定性伪随机输出</td>
+</tr>
+<tr>
+<td>掩码生成</td>
+<td>替代 MGF1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="46">4.6 开发者指南</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>选 SHA-2 还是 SHA-3</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通用哈希</td>
+<td>SHA-256</td>
+<td>生态更成熟，硬件加速更好</td>
+</tr>
+<tr>
+<td>需要可变长度输出</td>
+<td><strong>SHAKE256</strong></td>
+<td>SHA-2 不支持 XOF</td>
+</tr>
+<tr>
+<td>需要防长度扩展</td>
+<td><strong>SHA-3</strong></td>
+<td>天然免疫，不需要 HMAC 包装</td>
+</tr>
+<tr>
+<td>后量子密码组件</td>
+<td><strong>SHAKE</strong></td>
+<td>NIST 标准要求</td>
+</tr>
+<tr>
+<td>以太坊开发</td>
+<td><strong>Keccak-256</strong></td>
+<td>注意：不是标准 SHA3-256</td>
+</tr>
+<tr>
+<td>多样性/纵深防御</td>
+<td><strong>SHA-3</strong></td>
+<td>结构独立于 SHA-2</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>📝 以太坊注意</strong>：以太坊使用的 Keccak-256 与标准 SHA3-256 填充规则不同（Keccak 用 <code>0x01</code>，SHA-3 用 <code>0x06</code>），输出结果不同。做以太坊开发要用专门的 Keccak-256 实现。</p>
+</blockquote>
+<hr />
+<h2 id="5-go">5. Go 语言实现</h2>
+<h3 id="51-sha-256">5.1 SHA-256（推荐）</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;crypto/hmac&quot;</span>
+<span class="w">    </span><span class="s">&quot;crypto/sha256&quot;</span>
+<span class="w">    </span><span class="s">&quot;encoding/hex&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="w">    </span><span class="s">&quot;io&quot;</span>
+<span class="w">    </span><span class="s">&quot;os&quot;</span>
+<span class="p">)</span>
+
+<span class="c1">// SHA-256 哈希</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">SHA256String</span><span class="p">(</span><span class="nx">s</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">hash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sha256</span><span class="p">.</span><span class="nx">Sum256</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">s</span><span class="p">))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hash</span><span class="p">[:])</span>
+<span class="p">}</span>
+
+<span class="c1">// 文件 SHA-256（流式处理，适合大文件）</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">SHA256File</span><span class="p">(</span><span class="nx">filepath</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="nx">filepath</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">defer</span><span class="w"> </span><span class="nx">file</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
+
+<span class="w">    </span><span class="nx">hasher</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sha256</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Copy</span><span class="p">(</span><span class="nx">hasher</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hasher</span><span class="p">.</span><span class="nx">Sum</span><span class="p">(</span><span class="kc">nil</span><span class="p">)),</span><span class="w"> </span><span class="kc">nil</span>
+<span class="p">}</span>
+
+<span class="c1">// HMAC-SHA-256</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">HMACSHA256</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">mac</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">hmac</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="nx">sha256</span><span class="p">.</span><span class="nx">New</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">mac</span><span class="p">.</span><span class="nx">Write</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">mac</span><span class="p">.</span><span class="nx">Sum</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// HMAC 验证（常数时间比较，防时序攻击）</span>
+<span class="kd">func</span><span class="w"> </span><span class="nx">VerifyHMAC</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">expectedMAC</span><span class="w"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">actualMAC</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">HMACSHA256</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hmac</span><span class="p">.</span><span class="nx">Equal</span><span class="p">(</span><span class="nx">actualMAC</span><span class="p">,</span><span class="w"> </span><span class="nx">expectedMAC</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// 基本哈希</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;=== SHA-256 ===&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SHA256(\&quot;hello\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">SHA256String</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SHA256(\&quot;Hello\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">SHA256String</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">))</span>
+
+<span class="w">    </span><span class="c1">// 测试向量</span>
+<span class="w">    </span><span class="nx">expected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad&quot;</span>
+<span class="w">    </span><span class="nx">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">SHA256String</span><span class="p">(</span><span class="s">&quot;abc&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;\n测试向量 SHA256(\&quot;abc\&quot;) 验证: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">actual</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">expected</span><span class="p">)</span>
+
+<span class="w">    </span><span class="c1">// HMAC-SHA-256</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n=== HMAC-SHA-256 ===&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">key</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;my-secret-key&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hello, HMAC!&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">mac</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">HMACSHA256</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;HMAC = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">mac</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;验证: %v\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">VerifyHMAC</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span><span class="w"> </span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">mac</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="52-sha-512">5.2 SHA-512</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;crypto/sha512&quot;</span>
+<span class="w">    </span><span class="s">&quot;encoding/hex&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// SHA-512</span>
+<span class="w">    </span><span class="nx">hash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sha512</span><span class="p">.</span><span class="nx">Sum512</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SHA512(\&quot;hello\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hash</span><span class="p">[:]))</span>
+
+<span class="w">    </span><span class="c1">// SHA-384</span>
+<span class="w">    </span><span class="nx">hash384</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sha512</span><span class="p">.</span><span class="nx">Sum384</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SHA384(\&quot;hello\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hash384</span><span class="p">[:]))</span>
+
+<span class="w">    </span><span class="c1">// SHA-512/256（64位平台上比 SHA-256 快）</span>
+<span class="w">    </span><span class="nx">hash512_256</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sha512</span><span class="p">.</span><span class="nx">Sum512_256</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SHA512/256(\&quot;hello\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hash512_256</span><span class="p">[:]))</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="53-sha-3-shake">5.3 SHA-3 / SHAKE</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="s">&quot;encoding/hex&quot;</span>
+<span class="w">    </span><span class="s">&quot;fmt&quot;</span>
+
+<span class="w">    </span><span class="s">&quot;golang.org/x/crypto/sha3&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// SHA3-256</span>
+<span class="w">    </span><span class="nx">hash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sha3</span><span class="p">.</span><span class="nx">Sum256</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SHA3-256(\&quot;hello\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hash</span><span class="p">[:]))</span>
+
+<span class="w">    </span><span class="c1">// SHA3-512</span>
+<span class="w">    </span><span class="nx">hash512</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sha3</span><span class="p">.</span><span class="nx">Sum512</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SHA3-512(\&quot;hello\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hash512</span><span class="p">[:]))</span>
+
+<span class="w">    </span><span class="c1">// SHAKE256 可变长度输出</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n=== SHAKE256 可变长度 ===&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;Hello, SHAKE256!&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nx">out16</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">sha3</span><span class="p">.</span><span class="nx">ShakeSum256</span><span class="p">(</span><span class="nx">out16</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SHAKE256(16字节): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">out16</span><span class="p">))</span>
+
+<span class="w">    </span><span class="nx">out32</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">sha3</span><span class="p">.</span><span class="nx">ShakeSum256</span><span class="p">(</span><span class="nx">out32</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SHAKE256(32字节): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">out32</span><span class="p">))</span>
+
+<span class="w">    </span><span class="nx">out64</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">sha3</span><span class="p">.</span><span class="nx">ShakeSum256</span><span class="p">(</span><span class="nx">out64</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;SHAKE256(64字节): %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">out64</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>依赖</strong>：SHA-3 需要 <code>go get golang.org/x/crypto/sha3</code>，SHA-256/SHA-512 在标准库中。</p>
+</blockquote>
+<hr />
+<h2 id="6">6. 选型决策</h2>
+<h3 id="61-sha">6.1 SHA 家族内部选型</h3>
+<pre class="mermaid"><code>flowchart TD
+    START["需要 SHA 哈希"] --&gt; Q1{"需要可变长度输出?"}
+    Q1 --&gt;|是| SHAKE["SHAKE256"]
+    Q1 --&gt;|否| Q2{"需要防长度扩展?&lt;br&gt;（且不想用 HMAC）"}
+    Q2 --&gt;|是| SHA3["SHA3-256"]
+    Q2 --&gt;|否| Q3{"平台?"}
+    Q3 --&gt;|"通用"| SHA256["SHA-256 ⭐"]
+    Q3 --&gt;|"64位服务器&lt;br&gt;需更高安全"| SHA512["SHA-512"]</code></pre>
+<h3 id="62">6.2 快速决策表</h3>
+<table>
+<thead>
+<tr>
+<th>我的需求</th>
+<th>推荐</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通用哈希</td>
+<td><strong>SHA-256</strong></td>
+<td>默认选择</td>
+</tr>
+<tr>
+<td>消息认证</td>
+<td>HMAC-SHA-256</td>
+<td>不要直接拼接</td>
+</tr>
+<tr>
+<td>JWT 签名</td>
+<td>HS256 (HMAC-SHA-256)</td>
+<td>标准方案</td>
+</tr>
+<tr>
+<td>数字签名</td>
+<td>SHA-256 + Ed25519/RSA-PSS</td>
+<td>先哈希再签名</td>
+</tr>
+<tr>
+<td>文件校验</td>
+<td>SHA-256</td>
+<td>替代 MD5/SHA-1</td>
+</tr>
+<tr>
+<td>密码存储</td>
+<td>❌ 不用 SHA</td>
+<td>用 Argon2id</td>
+</tr>
+<tr>
+<td>密钥派生</td>
+<td>HKDF-SHA-256 或 SHAKE256</td>
+<td>取决于生态</td>
+</tr>
+<tr>
+<td>以太坊</td>
+<td>Keccak-256</td>
+<td>不是 SHA3-256</td>
+</tr>
+<tr>
+<td>后量子准备</td>
+<td>SHAKE256</td>
+<td>ML-KEM/ML-DSA 使用</td>
+</tr>
+<tr>
+<td>极高性能</td>
+<td>考虑 BLAKE3</td>
+<td>非 SHA 家族</td>
+</tr>
+<tr>
+<td>国密合规</td>
+<td>SM3</td>
+<td>非 SHA 家族</td>
+</tr>
+</tbody>
+</table>
+<h3 id="63">6.3 变体选择理由</h3>
+<table>
+<thead>
+<tr>
+<th>选择</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SHA-256 而非 SHA-224</td>
+<td>安全余量更大，性能差异可忽略</td>
+</tr>
+<tr>
+<td>SHA-256 而非 SHA-512</td>
+<td>32 位平台更快，输出更短，绝大多数场景够用</td>
+</tr>
+<tr>
+<td>SHA-512 而非 SHA-256</td>
+<td>64 位平台更快，256 位安全强度</td>
+</tr>
+<tr>
+<td>SHA3-256 而非 SHA-256</td>
+<td>需要防长度扩展或结构多样性</td>
+</tr>
+<tr>
+<td>SHAKE256 而非 SHA3-256</td>
+<td>需要可变长度输出</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7">7. 量子计算影响</h2>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>碰撞（经典）</th>
+<th>碰撞（量子 Grover）</th>
+<th>评估</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SHA-1</td>
+<td>2⁸⁰ → 已破解</td>
+<td>—</td>
+<td>❌ 已不安全</td>
+</tr>
+<tr>
+<td>SHA-256</td>
+<td>2¹²⁸</td>
+<td>~2⁸⁵</td>
+<td>✅ 仍然安全</td>
+</tr>
+<tr>
+<td>SHA-512</td>
+<td>2²⁵⁶</td>
+<td>~2¹⁷⁰</td>
+<td>✅ 绰绰有余</td>
+</tr>
+<tr>
+<td>SHA3-256</td>
+<td>2¹²⁸</td>
+<td>~2⁸⁵</td>
+<td>✅ 仍然安全</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>与非对称加密（RSA/ECC）不同，<strong>SHA 家族算法在量子计算面前仍然安全</strong>。Grover 算法只能将搜索加速到平方根，安全余量充足。</p>
+</blockquote>
+<hr />
+<h2 id="8">8. 总结</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>SHA-1</th>
+<th>SHA-2 (SHA-256)</th>
+<th>SHA-3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>安全性</td>
+<td>❌ 已破解</td>
+<td>✅ 安全</td>
+<td>✅ 安全</td>
+</tr>
+<tr>
+<td>性能</td>
+<td>快</td>
+<td>快（有硬件加速）</td>
+<td>稍慢</td>
+</tr>
+<tr>
+<td>生态</td>
+<td>遗留</td>
+<td>⭐⭐⭐⭐⭐ 最广泛</td>
+<td>⭐⭐⭐⭐</td>
+</tr>
+<tr>
+<td>长度扩展防护</td>
+<td>❌</td>
+<td>❌（需 HMAC）</td>
+<td>✅ 天然免疫</td>
+</tr>
+<tr>
+<td>XOF 支持</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅ SHAKE</td>
+</tr>
+<tr>
+<td>后量子密码</td>
+<td>—</td>
+<td>安全</td>
+<td>核心组件</td>
+</tr>
+<tr>
+<td>开发者建议</td>
+<td>迁移</td>
+<td><strong>默认选择</strong></td>
+<td>特定场景使用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话总结</strong>：SHA-256 是绝大多数场景的正确选择。只在需要可变长度输出（SHAKE）、天然防长度扩展（SHA-3）、或后量子密码（SHAKE）时才需要考虑 SHA-3。SHA-1 已经退出历史舞台，遇到就迁移。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -11,10 +11,10 @@
         <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Computer%26Network/%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95/MD5/">
       
       
-        <link rel="prev" href="../../%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/ECC/">
+        <link rel="prev" href="../%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/">
       
       
-        <link rel="next" href="../SHA-1/">
+        <link rel="next" href="../SHA%E5%AE%B6%E6%97%8F/">
       
       
         
@@ -644,6 +644,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    摘要算法概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -733,7 +761,7 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2 散列函数的基本性质
+        1.2 散列函数应满足的性质
       
     </span>
   </a>
@@ -749,110 +777,10 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 算法原理
+        2. 算法原理（简述）
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="2. 算法原理">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1 整体流程
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2 消息填充
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3 初始化向量
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4 压缩函数
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2.4 压缩函数">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        四个非线性函数
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        每步操作
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#t" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        常量表 T
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#25" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.5 输出
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -869,10 +797,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31" class="md-nav__link">
+  <a href="#31-md5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1 碰撞攻击历史
+        3.1 为什么 MD5 不安全？
       
     </span>
   </a>
@@ -883,29 +811,7 @@
   <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 王小云的突破
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 碰撞示例
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4 当前安全状态
+        3.2 实际危害
       
     </span>
   </a>
@@ -921,19 +827,19 @@
   <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 代码实现
+        4. 开发者实践指南
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. 代码实现">
+    <nav class="md-nav" aria-label="4. 开发者实践指南">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-go" class="md-nav__link">
+  <a href="#41-md5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 Go 语言实现
+        4.1 MD5 的使用决策
       
     </span>
   </a>
@@ -941,10 +847,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-python" class="md-nav__link">
+  <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 Python 实现
+        4.2 遗留系统迁移
       
     </span>
   </a>
@@ -952,10 +858,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-java" class="md-nav__link">
+  <a href="#43-md5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3 Java 实现
+        4.3 为什么有些地方还在用 MD5？
       
     </span>
   </a>
@@ -968,10 +874,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#5-go" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 当前合理用途
+        5. Go 语言实现
       
     </span>
   </a>
@@ -1016,70 +922,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../SHA-1/" class="md-nav__link">
+      <a href="../SHA%E5%AE%B6%E6%97%8F/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    SHA-1
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SHA-3/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SHA-3
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../SHA-256/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SHA-256
+    SHA家族
   
 
     
@@ -1599,7 +1449,7 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2 散列函数的基本性质
+        1.2 散列函数应满足的性质
       
     </span>
   </a>
@@ -1615,110 +1465,10 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 算法原理
+        2. 算法原理（简述）
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="2. 算法原理">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1 整体流程
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2 消息填充
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3 初始化向量
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4 压缩函数
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2.4 压缩函数">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        四个非线性函数
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        每步操作
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#t" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        常量表 T
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#25" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.5 输出
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1735,10 +1485,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31" class="md-nav__link">
+  <a href="#31-md5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1 碰撞攻击历史
+        3.1 为什么 MD5 不安全？
       
     </span>
   </a>
@@ -1749,29 +1499,7 @@
   <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 王小云的突破
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 碰撞示例
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4 当前安全状态
+        3.2 实际危害
       
     </span>
   </a>
@@ -1787,19 +1515,19 @@
   <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 代码实现
+        4. 开发者实践指南
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. 代码实现">
+    <nav class="md-nav" aria-label="4. 开发者实践指南">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-go" class="md-nav__link">
+  <a href="#41-md5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 Go 语言实现
+        4.1 MD5 的使用决策
       
     </span>
   </a>
@@ -1807,10 +1535,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-python" class="md-nav__link">
+  <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 Python 实现
+        4.2 遗留系统迁移
       
     </span>
   </a>
@@ -1818,10 +1546,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-java" class="md-nav__link">
+  <a href="#43-md5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3 Java 实现
+        4.3 为什么有些地方还在用 MD5？
       
     </span>
   </a>
@@ -1834,10 +1562,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#5-go" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. 当前合理用途
+        5. Go 语言实现
       
     </span>
   </a>
@@ -1935,7 +1663,7 @@
     
     
       <li class="md-path__item">
-        <a href="./" class="md-path__link">
+        <a href="../%E6%91%98%E8%A6%81%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-path__link">
           
   <span class="md-ellipsis">
     摘要算法
@@ -1959,8 +1687,10 @@
 
 <h1 id="md5">MD5摘要算法</h1>
 <h2 id="1">1. 算法概述</h2>
-<p><strong>MD5</strong>（Message-Digest Algorithm 5）是由 Ronald Rivest（RSA 中的 R）于 1991 年设计的密码散列函数，输出 128 位（16 字节）的哈希值。它是 MD4 的改进版本，曾广泛用于验证数据完整性。</p>
-<p>MD5 定义在 RFC 1321 中，曾是互联网上使用最广泛的哈希算法之一，但由于已发现严重的碰撞漏洞，现已<strong>不推荐用于任何安全用途</strong>。</p>
+<p><strong>MD5</strong>（Message-Digest Algorithm 5）是由 Ronald Rivest（RSA 中的 R）于 1991 年设计的密码散列函数，输出 128 位（16 字节）的哈希值。它曾是互联网上使用最广泛的哈希算法之一。</p>
+<blockquote>
+<p><strong>⚠️ 安全警告：MD5 的碰撞攻击已完全实用化（秒级破解），不应用于任何安全用途。</strong> 如果你的项目中 MD5 用于数字签名、证书验证、密码存储等安全场景，必须立即迁移。</p>
+</blockquote>
 <h3 id="11">1.1 基本参数</h3>
 <table>
 <thead>
@@ -1980,15 +1710,11 @@
 </tr>
 <tr>
 <td>输入长度</td>
-<td>任意（理论上无限制）</td>
+<td>任意</td>
 </tr>
 <tr>
 <td>分组大小</td>
 <td>512 位（64 字节）</td>
-</tr>
-<tr>
-<td>计算轮数</td>
-<td>4 轮 × 16 步 = 64 步</td>
 </tr>
 <tr>
 <td>结构</td>
@@ -1998,10 +1724,13 @@
 <td>标准</td>
 <td>RFC 1321</td>
 </tr>
+<tr>
+<td>安全状态</td>
+<td>❌ <strong>碰撞已破解，禁止用于安全场景</strong></td>
+</tr>
 </tbody>
 </table>
-<h3 id="12">1.2 散列函数的基本性质</h3>
-<p>一个安全的密码散列函数应满足：</p>
+<h3 id="12">1.2 散列函数应满足的性质</h3>
 <table>
 <thead>
 <tr>
@@ -2012,9 +1741,14 @@
 </thead>
 <tbody>
 <tr>
+<td>抗碰撞攻击</td>
+<td>难以找到任意 x≠x' 使 H(x)=H(x')</td>
+<td>❌ <strong>已彻底破解（秒级）</strong></td>
+</tr>
+<tr>
 <td>抗原像攻击</td>
 <td>给定 H(x)，难以找到 x</td>
-<td>⚠️ 弱化但尚未完全破解</td>
+<td>⚠️ 弱化但未完全破解</td>
 </tr>
 <tr>
 <td>抗第二原像攻击</td>
@@ -2022,157 +1756,159 @@
 <td>⚠️ 理论弱化</td>
 </tr>
 <tr>
-<td>抗碰撞攻击</td>
-<td>难以找到任意 x≠x' 使 H(x)=H(x')</td>
-<td>❌ <strong>已彻底破解</strong></td>
+<td>确定性</td>
+<td>相同输入总产生相同输出</td>
+<td>✅ 满足</td>
 </tr>
 <tr>
 <td>雪崩效应</td>
 <td>输入微小变化导致输出巨大变化</td>
 <td>✅ 满足</td>
 </tr>
-<tr>
-<td>确定性</td>
-<td>相同输入总产生相同输出</td>
-<td>✅ 满足</td>
-</tr>
 </tbody>
 </table>
-<h2 id="2">2. 算法原理</h2>
-<h3 id="21">2.1 整体流程</h3>
+<h2 id="2">2. 算法原理（简述）</h2>
+<p>MD5 基于 <strong>Merkle-Damgård</strong> 结构：</p>
 <pre class="mermaid"><code>flowchart TD
-    A[原始消息] --&gt; B["消息填充&lt;br&gt;使消息长度 ≡ 448 mod 512"]
-    B --&gt; C["附加长度&lt;br&gt;追加原始消息长度（64位小端序）"]
-    C --&gt; D["分块处理（每块 512 位）&lt;br&gt;4 轮 × 16 步压缩"]
+    A[原始消息] --&gt; B["消息填充（使长度 ≡ 448 mod 512）"]
+    B --&gt; C["附加原始长度（64位小端序）"]
+    C --&gt; D["分块处理（每块 512 位）&lt;br&gt;4 轮 × 16 步 = 64 步压缩"]
     D --&gt; E[128 位哈希值]</code></pre>
-<h3 id="22">2.2 消息填充</h3>
+<p><strong>核心流程</strong>：</p>
 <ol>
-<li>在消息末尾追加一个 <code>1</code> 位</li>
-<li>追加若干 <code>0</code> 位，使消息长度 ≡ 448 (mod 512)</li>
-<li>追加原始消息长度的 64 位小端序表示</li>
+<li><strong>消息填充</strong>：追加 <code>1</code> 位和若干 <code>0</code> 位，再追加原始长度，使总长度为 512 的倍数</li>
+<li><strong>初始化 4 个 32 位寄存器</strong>（A、B、C、D）</li>
+<li><strong>对每个 512 位分块</strong>：通过 4 轮（每轮 16 步）非线性函数运算，混合消息和常量</li>
+<li><strong>输出</strong>：将 4 个寄存器按小端序拼接为 128 位哈希值</li>
 </ol>
-<p>填充后消息总长度为 512 的倍数。</p>
-<h3 id="23">2.3 初始化向量</h3>
-<p>4 个 32 位寄存器的初始值（小端序）：</p>
-<div class="highlight"><pre><span></span><code>A = 0x67452301
-B = 0xEFCDAB89
-C = 0x98BADCFE
-D = 0x10325476
-</code></pre></div>
-<h3 id="24">2.4 压缩函数</h3>
-<p>对每个 512 位消息块，执行 4 轮操作，每轮 16 步：</p>
-<h4 id="_1">四个非线性函数</h4>
-<div class="highlight"><pre><span></span><code>F(B, C, D) = (B ∧ C) ∨ (¬B ∧ D)     // 轮1: 选择函数
-G(B, C, D) = (B ∧ D) ∨ (C ∧ ¬D)     // 轮2: 条件函数
-H(B, C, D) = B ⊕ C ⊕ D              // 轮3: 奇偶函数
-I(B, C, D) = C ⊕ (B ∨ ¬D)           // 轮4: 逻辑函数
-</code></pre></div>
-<h4 id="_2">每步操作</h4>
-<div class="highlight"><pre><span></span><code>设当前步使用的非线性函数为 func，则：
-temp = A + func(B, C, D) + M[k] + T[i]
-A = D
-D = C
-C = B
-B = B + leftrotate(temp, s)
-
-其中：
-- M[k] 为当前消息块的第 k 个 32 位字
-- T[i] 为常量表（基于 sin 函数生成）
-- s 为每步的循环左移位数
-</code></pre></div>
-<h4 id="t">常量表 T</h4>
-<div class="highlight"><pre><span></span><code>T[i] = floor(2³² × |sin(i)|)，i = 1, 2, ..., 64
-</code></pre></div>
-<h3 id="25">2.5 输出</h3>
-<p>处理完所有消息块后，将 A、B、C、D 四个寄存器按小端序拼接，得到 128 位哈希值。</p>
+<blockquote>
+<p>开发者无需了解内部细节。重要的是知道：MD5 输出固定 128 位，计算速度快，但碰撞抗性已被彻底破解。</p>
+</blockquote>
 <h2 id="3">3. 安全性分析</h2>
-<h3 id="31">3.1 碰撞攻击历史</h3>
+<h3 id="31-md5">3.1 为什么 MD5 不安全？</h3>
 <table>
 <thead>
 <tr>
 <th>时间</th>
 <th>事件</th>
-<th>研究者</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1996</td>
-<td>发现 MD5 压缩函数碰撞</td>
-<td>Dobbertin</td>
-</tr>
-<tr>
-<td>2004</td>
-<td>首次构造完整碰撞</td>
-<td>王小云等</td>
-</tr>
-<tr>
-<td>2005</td>
-<td>碰撞攻击实用化</td>
-<td>多个研究组</td>
-</tr>
-<tr>
-<td>2008</td>
-<td>利用 MD5 碰撞伪造 CA 证书</td>
-<td>Sotirov 等</td>
-</tr>
-<tr>
-<td>2012</td>
-<td>Flame 恶意软件利用 MD5 碰撞</td>
-<td>国家级攻击</td>
-</tr>
-</tbody>
-</table>
-<h3 id="32">3.2 王小云的突破</h3>
-<p>2004 年，中国密码学家<strong>王小云</strong>等人发表了对 MD5 的实用碰撞攻击：</p>
-<ul>
-<li>找到碰撞的计算复杂度从理论的 2⁶⁴ 降低到约 2³⁹</li>
-<li>在普通计算机上可在<strong>数秒内</strong>找到碰撞</li>
-<li>这一成果震动了整个密码学界</li>
-</ul>
-<h3 id="33">3.3 碰撞示例</h3>
-<p>以下两个不同的输入产生相同的 MD5 值（前缀碰撞攻击）：</p>
-<div class="highlight"><pre><span></span><code>一个实际例子：两个不同的可执行文件可以被构造为具有相同的 MD5 哈希
-这意味着 MD5 不能用于验证文件完整性或真实性
-</code></pre></div>
-<h3 id="34">3.4 当前安全状态</h3>
-<table>
-<thead>
-<tr>
-<th>安全性质</th>
-<th>状态</th>
 <th>影响</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>碰撞攻击</td>
-<td>❌ 秒级破解</td>
-<td>不能用于数字签名、证书</td>
+<td>2004</td>
+<td>王小云等首次构造完整碰撞</td>
+<td>碰撞复杂度从 2⁶⁴ 降至 2³⁹</td>
 </tr>
 <tr>
-<td>前缀碰撞</td>
-<td>❌ 实用化</td>
-<td>不能用于任何认证场景</td>
+<td>2005</td>
+<td>碰撞攻击实用化</td>
+<td>普通计算机数秒内找到碰撞</td>
 </tr>
 <tr>
-<td>原像攻击</td>
-<td>⚠️ 理论弱化</td>
-<td>不建议依赖</td>
+<td>2008</td>
+<td>利用 MD5 碰撞伪造 CA 证书</td>
+<td>证明可伪造 HTTPS 证书</td>
 </tr>
 <tr>
-<td>长度扩展攻击</td>
-<td>❌ 存在</td>
-<td>不能用于 MAC（直接构造）</td>
+<td>2012</td>
+<td>Flame 恶意软件利用 MD5 碰撞</td>
+<td>国家级攻击实例</td>
 </tr>
 </tbody>
 </table>
+<h3 id="32">3.2 实际危害</h3>
+<ul>
+<li><strong>可以构造两个不同文件，具有相同的 MD5 值</strong></li>
+<li><strong>可以伪造数字证书</strong>（已有真实案例）</li>
+<li><strong>密码存储用 MD5 极易被彩虹表破解</strong></li>
+<li><strong>长度扩展攻击</strong>：已知 H(M) 和 |M|，无需知道 M 即可计算 H(M || padding || M')</li>
+</ul>
+<h2 id="4">4. 开发者实践指南</h2>
+<h3 id="41-md5">4.1 MD5 的使用决策</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>能否使用 MD5</th>
+<th>应该用什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>密码存储</td>
+<td>❌ 绝对禁止</td>
+<td>Argon2id / bcrypt</td>
+</tr>
+<tr>
+<td>数字签名</td>
+<td>❌ 绝对禁止</td>
+<td>SHA-256 + RSA/ECDSA</td>
+</tr>
+<tr>
+<td>消息认证（MAC）</td>
+<td>❌ 绝对禁止</td>
+<td>HMAC-SHA-256</td>
+</tr>
+<tr>
+<td>证书指纹</td>
+<td>❌ 绝对禁止</td>
+<td>SHA-256</td>
+</tr>
+<tr>
+<td>文件完整性（防篡改）</td>
+<td>❌ 不安全</td>
+<td>SHA-256 / BLAKE3</td>
+</tr>
+<tr>
+<td>文件校验和（防传输错误）</td>
+<td>✅ 可以</td>
+<td>但 SHA-256 也不慢</td>
+</tr>
+<tr>
+<td>数据去重</td>
+<td>✅ 可以</td>
+<td>不涉及安全</td>
+</tr>
+<tr>
+<td>缓存键/分片键</td>
+<td>✅ 可以</td>
+<td>不涉及安全</td>
+</tr>
+<tr>
+<td>ETag / 内容标识</td>
+<td>✅ 可以</td>
+<td>非安全用途</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一条原则</strong>：如果存在"恶意对手可能构造碰撞来欺骗系统"的可能，就不能用 MD5。</p>
+<h3 id="42">4.2 遗留系统迁移</h3>
+<p>如果你的系统中仍在安全场景使用 MD5：</p>
+<div class="highlight"><pre><span></span><code>迁移路径：
+
+密码存储：MD5(password) → Argon2id(password, salt)
+  - 不能直接替换，需要用户下次登录时重新哈希
+  - 过渡期可用：Argon2id(MD5(password), salt)
+
+文件校验：MD5 → SHA-256
+  - 重新计算所有文件的 SHA-256
+  - 新旧哈希并存一段时间
+
+消息认证：H(key||msg) → HMAC-SHA-256(key, msg)
+  - 注意 HMAC 的正确用法
+</code></pre></div>
+<h3 id="43-md5">4.3 为什么有些地方还在用 MD5？</h3>
+<ul>
+<li><strong>历史惯性</strong>：老系统迁移成本高</li>
+<li><strong>非安全场景</strong>：不需要碰撞抗性时，MD5 速度快、输出短</li>
+<li><strong>协议要求</strong>：某些旧协议（如部分 HTTP 认证）指定 MD5</li>
+<li><strong>开发者不了解风险</strong>：这正是本文存在的意义</li>
+</ul>
+<h2 id="5-go">5. Go 语言实现</h2>
 <blockquote>
-<p><strong>🚨 安全警告</strong></p>
-<p><strong>MD5 已被密码学界彻底抛弃用于安全用途。</strong> 任何依赖 MD5 碰撞抗性的应用都是不安全的。</p>
+<p>⚠️ 以下代码仅用于非安全场景（校验和、去重等）。安全场景请使用 <code>crypto/sha256</code>。</p>
 </blockquote>
-<h2 id="4">4. 代码实现</h2>
-<h3 id="41-go">4.1 Go 语言实现</h3>
 <div class="highlight"><pre><span></span><code><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="p">(</span>
@@ -2181,7 +1917,6 @@ B = B + leftrotate(temp, s)
 <span class="w">    </span><span class="s">&quot;fmt&quot;</span>
 <span class="w">    </span><span class="s">&quot;io&quot;</span>
 <span class="w">    </span><span class="s">&quot;os&quot;</span>
-<span class="w">    </span><span class="s">&quot;strings&quot;</span>
 <span class="p">)</span>
 
 <span class="c1">// 计算字符串的 MD5</span>
@@ -2190,7 +1925,7 @@ B = B + leftrotate(temp, s)
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hash</span><span class="p">[:])</span>
 <span class="p">}</span>
 
-<span class="c1">// 计算文件的 MD5</span>
+<span class="c1">// 计算文件的 MD5（流式处理，适合大文件）</span>
 <span class="kd">func</span><span class="w"> </span><span class="nx">MD5File</span><span class="p">(</span><span class="nx">filepath</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">os</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="nx">filepath</span><span class="p">)</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
@@ -2202,237 +1937,67 @@ B = B + leftrotate(temp, s)
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Copy</span><span class="p">(</span><span class="nx">hasher</span><span class="p">,</span><span class="w"> </span><span class="nx">file</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
 <span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hasher</span><span class="p">.</span><span class="nx">Sum</span><span class="p">(</span><span class="kc">nil</span><span class="p">)),</span><span class="w"> </span><span class="kc">nil</span>
-<span class="p">}</span>
-
-<span class="c1">// 流式计算 MD5（适合大数据）</span>
-<span class="kd">func</span><span class="w"> </span><span class="nx">MD5Stream</span><span class="p">(</span><span class="nx">reader</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Reader</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">hasher</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">md5</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">io</span><span class="p">.</span><span class="nx">Copy</span><span class="p">(</span><span class="nx">hasher</span><span class="p">,</span><span class="w"> </span><span class="nx">reader</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span>
-<span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">hex</span><span class="p">.</span><span class="nx">EncodeToString</span><span class="p">(</span><span class="nx">hasher</span><span class="p">.</span><span class="nx">Sum</span><span class="p">(</span><span class="kc">nil</span><span class="p">)),</span><span class="w"> </span><span class="kc">nil</span>
 <span class="p">}</span>
 
 <span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// 基本用法</span>
 <span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;=== MD5 哈希示例 ===&quot;</span><span class="p">)</span>
-
 <span class="w">    </span><span class="nx">testCases</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
-<span class="w">        </span><span class="s">&quot;&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s">&quot;hello&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s">&quot;Hello, MD5!&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="s">&quot;The quick brown fox jumps over the lazy dog&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">_</span><span class="p">,</span><span class="w"> </span><span class="nx">tc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">testCases</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">hash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">MD5String</span><span class="p">(</span><span class="nx">tc</span><span class="p">)</span>
-<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;MD5(\&quot;%s\&quot;)\n  = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">tc</span><span class="p">,</span><span class="w"> </span><span class="nx">hash</span><span class="p">)</span>
+<span class="w">        </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;MD5(\&quot;%s\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">tc</span><span class="p">,</span><span class="w"> </span><span class="nx">MD5String</span><span class="p">(</span><span class="nx">tc</span><span class="p">))</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="c1">// 验证雪崩效应</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n=== 雪崩效应演示 ===&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">s1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span>
-<span class="w">    </span><span class="nx">s2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="w"> </span><span class="c1">// 仅一个字母大小写不同</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;MD5(\&quot;%s\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">s1</span><span class="p">,</span><span class="w"> </span><span class="nx">MD5String</span><span class="p">(</span><span class="nx">s1</span><span class="p">))</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;MD5(\&quot;%s\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">s2</span><span class="p">,</span><span class="w"> </span><span class="nx">MD5String</span><span class="p">(</span><span class="nx">s2</span><span class="p">))</span>
-
-<span class="w">    </span><span class="c1">// 流式计算</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n=== 流式计算 ===&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">reader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">strings</span><span class="p">.</span><span class="nx">NewReader</span><span class="p">(</span><span class="s">&quot;Hello, streaming MD5!&quot;</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">hash</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">MD5Stream</span><span class="p">(</span><span class="nx">reader</span><span class="p">)</span>
-<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;流式 MD5 = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">hash</span><span class="p">)</span>
+<span class="w">    </span><span class="c1">// 雪崩效应演示</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;\n=== 雪崩效应 ===&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;MD5(\&quot;Hello\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">MD5String</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;MD5(\&quot;hello\&quot;) = %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">MD5String</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">))</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="42-python">4.2 Python 实现</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">md5_string</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;计算字符串的 MD5&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">md5_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;计算文件的 MD5&quot;&quot;&quot;</span>
-    <span class="n">hasher</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4096</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
-            <span class="n">hasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">hasher</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">md5_bytes</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;计算字节数据的 MD5&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== MD5 哈希示例 ===&quot;</span><span class="p">)</span>
-
-    <span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;hello&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Hello, MD5!&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;The quick brown fox jumps over the lazy dog&quot;</span><span class="p">,</span>
-    <span class="p">]</span>
-
-    <span class="k">for</span> <span class="n">tc</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
-        <span class="n">hash_value</span> <span class="o">=</span> <span class="n">md5_string</span><span class="p">(</span><span class="n">tc</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MD5(&quot;</span><span class="si">{</span><span class="n">tc</span><span class="si">}</span><span class="s1">&quot;)&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  = </span><span class="si">{</span><span class="n">hash_value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-    <span class="c1"># 验证雪崩效应</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== 雪崩效应演示 ===&quot;</span><span class="p">)</span>
-    <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="s2">&quot;hello&quot;</span>
-    <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">md5_string</span><span class="p">(</span><span class="n">s1</span><span class="p">),</span> <span class="n">md5_string</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MD5(&quot;</span><span class="si">{</span><span class="n">s1</span><span class="si">}</span><span class="s1">&quot;) = </span><span class="si">{</span><span class="n">h1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;MD5(&quot;</span><span class="si">{</span><span class="n">s2</span><span class="si">}</span><span class="s1">&quot;) = </span><span class="si">{</span><span class="n">h2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-    <span class="c1"># 计算不同位数</span>
-    <span class="n">bits_diff</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">h1</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">^</span> <span class="nb">int</span><span class="p">(</span><span class="n">h2</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;不同的位数: </span><span class="si">{</span><span class="n">bits_diff</span><span class="si">}</span><span class="s2">/128 (</span><span class="si">{</span><span class="n">bits_diff</span><span class="o">/</span><span class="mi">128</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
-
-    <span class="c1"># 增量计算</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== 增量计算 ===&quot;</span><span class="p">)</span>
-    <span class="n">hasher</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
-    <span class="n">hasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Hello, &quot;</span><span class="p">)</span>
-    <span class="n">hasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;MD5!&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;增量计算结果: </span><span class="si">{</span><span class="n">hasher</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;一次性计算:   </span><span class="si">{</span><span class="n">md5_string</span><span class="p">(</span><span class="s1">&#39;Hello, MD5!&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="43-java">4.3 Java 实现</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">java.security.MessageDigest</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Files</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.nio.file.Path</span><span class="p">;</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HexFormat</span><span class="p">;</span>
-
-<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MD5Example</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">md5String</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">MessageDigest</span><span class="w"> </span><span class="n">md</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MessageDigest</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;MD5&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">md</span><span class="p">.</span><span class="na">digest</span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="s">&quot;UTF-8&quot;</span><span class="p">));</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">hash</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">md5File</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">filepath</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">MessageDigest</span><span class="w"> </span><span class="n">md</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MessageDigest</span><span class="p">.</span><span class="na">getInstance</span><span class="p">(</span><span class="s">&quot;MD5&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">fileBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Files</span><span class="p">.</span><span class="na">readAllBytes</span><span class="p">(</span><span class="n">Path</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">filepath</span><span class="p">));</span>
-<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">md</span><span class="p">.</span><span class="na">digest</span><span class="p">(</span><span class="n">fileBytes</span><span class="p">);</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">HexFormat</span><span class="p">.</span><span class="na">of</span><span class="p">().</span><span class="na">formatHex</span><span class="p">(</span><span class="n">hash</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;=== MD5 哈希示例 ===&quot;</span><span class="p">);</span>
-
-<span class="w">        </span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">testCases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s">&quot;&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;hello&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;Hello, MD5!&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s">&quot;The quick brown fox jumps over the lazy dog&quot;</span>
-<span class="w">        </span><span class="p">};</span>
-
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">tc</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">testCases</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">md5String</span><span class="p">(</span><span class="n">tc</span><span class="p">);</span>
-<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;MD5(\&quot;%s\&quot;)%n  = %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tc</span><span class="p">,</span><span class="w"> </span><span class="n">hash</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-
-<span class="w">        </span><span class="c1">// 雪崩效应</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;\n=== 雪崩效应演示 ===&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;MD5(\&quot;Hello\&quot;) = %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">md5String</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">));</span>
-<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">printf</span><span class="p">(</span><span class="s">&quot;MD5(\&quot;hello\&quot;) = %s%n&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">md5String</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">));</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
-<h2 id="5">5. 当前合理用途</h2>
-<p>虽然 MD5 不能用于安全场景，但在以下<strong>非安全</strong>场景仍可使用：</p>
-<table>
-<thead>
-<tr>
-<th>用途</th>
-<th>说明</th>
-<th>是否合适</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>文件校验和</td>
-<td>检测传输错误（非恶意篡改）</td>
-<td>✅ 可接受</td>
-</tr>
-<tr>
-<td>数据去重</td>
-<td>快速判断文件是否相同</td>
-<td>✅ 可接受</td>
-</tr>
-<tr>
-<td>缓存键生成</td>
-<td>生成缓存标识符</td>
-<td>✅ 可接受</td>
-</tr>
-<tr>
-<td>数据库分片</td>
-<td>均匀分布哈希</td>
-<td>✅ 可接受</td>
-</tr>
-<tr>
-<td>密码存储</td>
-<td>-</td>
-<td>❌ 绝对禁止</td>
-</tr>
-<tr>
-<td>数字签名</td>
-<td>-</td>
-<td>❌ 绝对禁止</td>
-</tr>
-<tr>
-<td>消息认证</td>
-<td>-</td>
-<td>❌ 绝对禁止</td>
-</tr>
-<tr>
-<td>证书指纹</td>
-<td>-</td>
-<td>❌ 绝对禁止</td>
-</tr>
-</tbody>
-</table>
 <h2 id="6">6. 替代方案</h2>
 <table>
 <thead>
 <tr>
 <th>场景</th>
 <th>推荐算法</th>
-<th>输出长度</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>通用哈希</td>
 <td>SHA-256</td>
-<td>256 位</td>
+<td>当前标准，全平台支持</td>
 </tr>
 <tr>
 <td>高性能哈希</td>
 <td>BLAKE3</td>
-<td>256 位</td>
+<td>比 SHA-256 快 10 倍+</td>
 </tr>
 <tr>
 <td>密码存储</td>
 <td>Argon2id / bcrypt</td>
-<td>可配置</td>
+<td>专为密码设计，慢哈希</td>
 </tr>
 <tr>
-<td>HMAC</td>
+<td>消息认证</td>
 <td>HMAC-SHA-256</td>
-<td>256 位</td>
+<td>标准 MAC 方案</td>
 </tr>
 <tr>
-<td>文件校验</td>
-<td>SHA-256 或 BLAKE3</td>
-<td>256 位</td>
+<td>国密合规</td>
+<td>SM3</td>
+<td>国密哈希标准</td>
 </tr>
 <tr>
 <td>需要 128 位输出</td>
-<td>BLAKE3(128) 或截断 SHA-256</td>
-<td>128 位</td>
+<td>截断 SHA-256 或 BLAKE3</td>
+<td>比 MD5 安全</td>
 </tr>
 </tbody>
 </table>
@@ -2446,10 +2011,6 @@ B = B + leftrotate(temp, s)
 </thead>
 <tbody>
 <tr>
-<td>历史意义</td>
-<td>⭐⭐⭐⭐⭐ 曾是互联网最广泛使用的哈希算法</td>
-</tr>
-<tr>
 <td>安全性</td>
 <td>❌ 碰撞攻击已完全实用化</td>
 </tr>
@@ -2459,15 +2020,19 @@ B = B + leftrotate(temp, s)
 </tr>
 <tr>
 <td>现代安全适用性</td>
-<td>❌ 不应用于任何安全相关场景</td>
+<td>❌ 不应用于任何安全场景</td>
 </tr>
 <tr>
 <td>非安全用途</td>
-<td>⭐⭐⭐ 仍可用于校验和、去重等非安全场景</td>
+<td>✅ 校验和、去重、缓存键等仍可用</td>
+</tr>
+<tr>
+<td>开发者建议</td>
+<td>安全场景用 SHA-256，新项目不要选 MD5</td>
 </tr>
 </tbody>
 </table>
-<p>MD5 的故事是密码学发展的一个重要教训：没有永远安全的算法，密码标准需要与时俱进。当发现算法弱点时，应及时迁移到更安全的替代方案。</p>
+<p><strong>一句话总结</strong>：MD5 在安全用途上已经"死"了，但作为快速校验和工具在非安全场景仍有一席之地。如果你在代码审查中看到 MD5 用于安全场景，应该立刻标记为安全隐患。</p>
 
 
 
