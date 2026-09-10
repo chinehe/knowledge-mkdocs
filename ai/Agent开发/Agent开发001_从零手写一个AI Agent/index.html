@@ -1,0 +1,2048 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/">
+      
+      
+        <link rel="prev" href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87010_Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/">
+      
+      
+        <link rel="next" href="../../AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>从零手写一个AI Agent - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              从零手写一个AI Agent
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent开发
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Agent开发
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从零手写一个AI Agent
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从零手写一个AI Agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 背景
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-react" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 核心心智模型：ReAct 循环
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-0-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 阶段 0：第一次 LLM 调用
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 阶段 1：多轮对话
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-2function-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 阶段 2：工具调用（Function Calling）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-3-agent-loopreact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 阶段 3：完整的 Agent Loop（ReAct）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 阶段 4：多工具与健壮性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 阶段 5：进阶架构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 阶段 5：进阶架构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 短期记忆：窗口 vs 摘要
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-embedding-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 长期记忆：Embedding + 检索（RAG）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 规划（Planning）：先出图纸，再施工
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 多 Agent 协作
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 那些真实的"翻车"瞬间
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%86%E5%9F%9F%E7%83%AD%E9%97%A8%26%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%A2%B3%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI大模型领域热门&核心概念梳理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E3%80%90%E5%B0%9A%E7%A1%85%E8%B0%B7MCP%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97%E3%80%912%E5%B0%8F%E6%97%B6%E5%AD%A6%E9%80%8FMCP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    尚硅谷MCP实战指南学习笔记
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../AI%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%9B%B6%E5%9F%BA%E7%A1%80%E5%85%A8%E5%A5%97%E6%95%99%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%BC%94%E5%8F%98%E5%8F%8A%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI大模型零基础全套教程
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../MCP/MCP001_%E5%88%9D%E5%A7%8BMCP%EF%BC%88Model%20Context%20Protocol%EF%BC%89/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 背景
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-react" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 核心心智模型：ReAct 循环
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-0-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 阶段 0：第一次 LLM 调用
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 阶段 1：多轮对话
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-2function-calling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 阶段 2：工具调用（Function Calling）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-3-agent-loopreact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 阶段 3：完整的 Agent Loop（ReAct）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 阶段 4：多工具与健壮性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 阶段 5：进阶架构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 阶段 5：进阶架构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 短期记忆：窗口 vs 摘要
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-embedding-rag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 长期记忆：Embedding + 检索（RAG）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 规划（Planning）：先出图纸，再施工
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 多 Agent 协作
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 那些真实的"翻车"瞬间
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    AI
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Agent开发
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>从零手写一个AI Agent</h1>
+
+<h2 id="1">1. 背景</h2>
+<p>我们现在用的各种 AI 助手（ChatGPT、Claude、Cursor、Kiro……）都有一个共同的名字：<strong>Agent（智能体）</strong>。市面上的框架也很多——LangChain、AutoGPT、CrewAI……但如果只是把框架的 API 抄一遍，很容易"会用不会懂"：一旦出问题，或者想定制，就无从下手。</p>
+<p>所以这篇笔记走另一条路：<strong>先裸手写、吃透原理，再上框架</strong>。全程只用一个 <code>openai</code> SDK（配合通义千问的兼容接口），从"发出第一条消息"开始，一步步搭到"多个 Agent 协作"，中间不依赖任何 Agent 框架。</p>
+<p>一句话记住整篇文章的主线：</p>
+<blockquote>
+<p><strong>Agent = LLM + 循环（Loop） + 工具（Tools）</strong></p>
+</blockquote>
+<p>LLM 本身只会"输出文字"，不能上网、不能读文件、不能算数。Agent 做的事，就是给 LLM 装上"手和脚"（工具），并让它在一个循环里反复 <strong>思考 → 行动 → 观察 → 再思考</strong>，直到任务完成。后面所有的进阶花样（记忆、检索、规划、多 Agent）都是在这个骨架上做加法。</p>
+<hr />
+<h2 id="2-react">2. 核心心智模型：ReAct 循环</h2>
+<p>最经典的 Agent 运行模式叫 <strong>ReAct</strong>（Reason + Act，推理与行动交替）。它的流程是这样的：</p>
+<pre class="mermaid"><code>graph TD
+    A[用户提问] --&gt; B[把问题 + 可用工具发给 LLM]
+    B --&gt; C{LLM 怎么回复?}
+    C --&gt;|我要调用工具 X| D[程序执行工具 X]
+    D --&gt; E[把工具结果塞回对话]
+    E --&gt; B
+    C --&gt;|我知道答案了| F[返回最终答案]</code></pre>
+<p>理解了这张图，就理解了 90% 的 Agent 框架。下面我们从最小的一步开始，逐步把这张图"写"出来。</p>
+<blockquote>
+<p>环境说明：本文代码用 Python + 通义千问（DashScope）的兼容 OpenAI 接口。<code>base_url</code> 指向 <code>https://dashscope.aliyuncs.com/compatible-mode/v1</code>，密钥放在环境变量 <code>DASHSCOPE_API_KEY</code> 里，绝不写死在代码里。</p>
+</blockquote>
+<hr />
+<h2 id="3-0-llm">3. 阶段 0：第一次 LLM 调用</h2>
+<p><strong>要解决的问题</strong>：先跑通最基础的一次对话——发一条消息，拿到回复。</p>
+<p><strong>核心认知</strong>：一次 LLM 调用涉及三个概念：</p>
+<ul>
+<li><code>role</code>（角色）：每条消息的身份。<code>system</code>（人设/规则）、<code>user</code>（你说的话）、<code>assistant</code>（模型说的话）。</li>
+<li><code>message</code>（消息）：一条 <code>{"role": ..., "content": ...}</code> 结构。<strong>注意发给模型的永远是一个消息列表</strong>，这一点后面会反复用到。</li>
+<li><code>response</code>（响应）：模型返回的结构化数据，真正的回复文字藏在 <code>response.choices[0].message.content</code> 里。</li>
+</ul>
+<p><strong>关键代码</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">,</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;https://dashscope.aliyuncs.com/compatible-mode/v1&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;你是一个乐于助人的中文 AI 助手，回答简洁清晰。&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;你好，请用一句话介绍一下你自己。&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;qwen3.8-27b&quot;</span><span class="p">,</span> <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">)</span>
+<span class="n">reply</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>运行效果</strong>：</p>
+<div class="highlight"><pre><span></span><code>你好，我是通义千问，一个乐于助人的中文 AI 助手，可以帮你写作、解答问题、分析信息和学习新事物。
+</code></pre></div>
+<p>为什么回复要 <code>.choices[0].message.content</code> 层层剥？因为 <code>choices</code> 是个列表（模型理论上可给多个候选，取第一个），<code>.message</code> 是那条候选消息，<code>.content</code> 才是文字。</p>
+<hr />
+<h2 id="4-1">4. 阶段 1：多轮对话</h2>
+<p><strong>要解决的问题</strong>：阶段 0 有"失忆症"——你先说"我叫小明"，再问"我叫什么"，它答不上来。</p>
+<p><strong>核心认知</strong>：</p>
+<blockquote>
+<p><strong>LLM 本身没有记忆。</strong> 每次调用它只能看到你这一次发过去的 <code>messages</code> 列表。所谓"记住上下文"，是<strong>我们程序这边</strong>把每一轮对话都追加进 <code>messages</code>，每次请求都把完整历史发一遍。</p>
+</blockquote>
+<p>也就是说，<strong>"记忆"在最基础层面就是一个不断增长的数组</strong>。</p>
+<p><strong>关键代码</strong>（把阶段 0 包进一个循环，并不断追加消息）：</p>
+<div class="highlight"><pre><span></span><code><span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;你是一个乐于助人的中文 AI 助手。&quot;</span><span class="p">}]</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;你: &quot;</span><span class="p">)</span>
+    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_input</span><span class="p">})</span>     <span class="c1"># 追加你的话</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;qwen3.8-flash&quot;</span><span class="p">,</span> <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">)</span>
+    <span class="n">reply</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+
+    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">reply</span><span class="p">})</span>     <span class="c1"># 关键：也要存模型的回复！</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;助手: </span><span class="si">{</span><span class="n">reply</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>最容易踩的坑</strong>：很多人只追加了 <code>user</code> 消息，忘了把模型的 <code>assistant</code> 回复也存回列表，结果模型下一轮还是"失忆"——因为它看不到自己上一轮说过什么。</p>
+<p><strong>验证记忆</strong>：先说"我叫小明，25 岁"，再问"我叫什么？多大？"，模型准确答出"小明，25 岁"。这时 <code>messages</code> 里正好 5 条（system + 两轮问答），这就是"记忆"的全部真相——<strong>一个从 1 条长到 5 条的列表，没有任何魔法</strong>。</p>
+<blockquote>
+<p>伏笔：历史会无限增长，聊久了 token 越来越多，又慢又贵，还会超出模型上下文上限。这个问题留到阶段 5.1 解决。</p>
+</blockquote>
+<hr />
+<h2 id="5-2function-calling">5. 阶段 2：工具调用（Function Calling）</h2>
+<p><strong>要解决的问题</strong>：LLM 不会精确算数、不能读文件、查不了实时信息。给它配"工具"，让它自己决定何时调用。</p>
+<p><strong>核心认知</strong>：</p>
+<blockquote>
+<p><strong>工具调用的本质 = 模型输出一段结构化 JSON（"我要调用 add，参数 a=3、b=5"），再由我们的程序真正去执行这个函数，把结果告诉模型。模型永远不会自己执行代码。</strong></p>
+</blockquote>
+<p>一次完整的工具调用分 5 步：</p>
+<ol>
+<li>把"问题 + 工具说明书（<code>tools</code>）"一起发给模型；</li>
+<li>模型不直接回答，而是返回一个 <code>tool_calls</code> 请求；</li>
+<li>我们解析请求，执行本地真正的函数；</li>
+<li>把结果作为一条 <code>role="tool"</code> 的消息追加回历史；</li>
+<li>再请求一次，模型基于工具结果给出自然语言答复。</li>
+</ol>
+<p><strong>关键代码</strong>（工具说明书 + 解析执行）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="n">tools</span> <span class="o">=</span> <span class="p">[{</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;计算两个数字相加的结果&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;第一个加数&quot;</span><span class="p">},</span>
+                <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;第二个加数&quot;</span><span class="p">},</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}]</span>
+
+<span class="c1"># 第 1 步：带上 tools 发请求</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;qwen3.8-flash&quot;</span><span class="p">,</span> <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">)</span>
+<span class="n">assistant_message</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span>
+
+<span class="c1"># 第 2、3 步：解析请求并执行本地函数</span>
+<span class="k">for</span> <span class="n">tool_call</span> <span class="ow">in</span> <span class="n">assistant_message</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+    <span class="n">func_args</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">tool_call</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">arguments</span><span class="p">)</span>   <span class="c1"># 模型给的参数是 JSON 字符串</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="o">**</span><span class="n">func_args</span><span class="p">)</span>
+
+    <span class="c1"># 第 4 步：结果以 role=&quot;tool&quot; 回传，必须带 tool_call_id</span>
+    <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;tool&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tool_call_id&quot;</span><span class="p">:</span> <span class="n">tool_call</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">),</span>
+    <span class="p">})</span>
+
+<span class="c1"># 第 5 步：带着工具结果再问一次，拿最终答复</span>
+<span class="n">final</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;qwen3.8-flash&quot;</span><span class="p">,</span> <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>运行效果</strong>：问"12345 加 6789 等于多少"，模型没有自己心算，而是请求 <code>add({'a': 12345, 'b': 6789})</code>，程序算出 <code>19134</code> 回传，模型答复"12345 + 6789 = 19134"。而问"你好呀"这种闲聊时，<code>tool_calls</code> 为空，模型直接回复——<strong>调不调工具是模型自己判断的，不是我们写死的 if-else</strong>。这种自主判断，正是 Agent 的核心特征。</p>
+<hr />
+<h2 id="6-3-agent-loopreact">6. 阶段 3：完整的 Agent Loop（ReAct）</h2>
+<p><strong>要解决的问题</strong>：阶段 2 的流程写死了"发一次 → 执行工具 → 再发一次 → 结束"，只能处理<strong>一步算完</strong>的任务。遇到"先算 12+8，再乘以 10"这种多步、且后一步依赖前一步的任务就做不到。</p>
+<p><strong>核心认知</strong>：把阶段 2 那段"发请求 → 执行工具 → 回传"用一个 <code>while</code> 循环包起来，让它反复转圈，直到模型不再请求工具（<code>finish_reason == "stop"</code>）。这就是 ReAct 循环。</p>
+<ul>
+<li>阶段 2：<code>if 有工具调用: 执行一次</code>（一锤子）</li>
+<li>阶段 3：<code>while 有工具调用: 执行, 再问</code>（转圈直到收工）</li>
+</ul>
+<p><strong>关键代码</strong>（循环 + 两个安全措施）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">run_agent</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">max_iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>   <span class="c1"># 安全措施 1：轮数上限，防死循环</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;遇到数学计算必须调用工具，可分多步调用。&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">},</span>
+    <span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iterations</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">MODEL</span><span class="p">,</span> <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span> <span class="n">tools</span><span class="o">=</span><span class="n">tools</span><span class="p">)</span>
+        <span class="n">assistant_message</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span>
+
+        <span class="c1"># 模型不再请求工具 → 给出最终答案，跳出循环</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">assistant_message</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">assistant_message</span><span class="o">.</span><span class="n">content</span>
+
+        <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_dict</span><span class="p">(</span><span class="n">assistant_message</span><span class="p">))</span>
+
+        <span class="c1"># 安全措施 2：一圈里可能有多个 tool_calls，要全部执行</span>
+        <span class="k">for</span> <span class="n">tool_call</span> <span class="ow">in</span> <span class="n">assistant_message</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+            <span class="n">func_name</span> <span class="o">=</span> <span class="n">tool_call</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">func_args</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">tool_call</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">arguments</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">AVAILABLE_FUNCTIONS</span><span class="p">[</span><span class="n">func_name</span><span class="p">](</span><span class="o">**</span><span class="n">func_args</span><span class="p">)</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;tool&quot;</span><span class="p">,</span> <span class="s2">&quot;tool_call_id&quot;</span><span class="p">:</span> <span class="n">tool_call</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="p">)})</span>
+        <span class="c1"># 本圈结束，带着工具结果进入下一圈</span>
+</code></pre></div>
+<p><strong>运行效果</strong>：问"先算 12 加 8，再把结果乘以 10，最后再加上 5"，Agent 自动转了 4 圈：</p>
+<div class="highlight"><pre><span></span><code>第 1 圈  add(12, 8)      = 20     （finish_reason=tool_calls）
+第 2 圈  multiply(20, 10) = 200    （20 是它从上一圈结果里读到的）
+第 3 圈  add(200, 5)      = 205
+第 4 圈  finish_reason=stop → 输出最终答案 205
+</code></pre></div>
+<p><strong>质变发生在这里</strong>：我们从头到尾没告诉模型"要分三步、每步调什么"。是模型<strong>自己规划、自己一步步执行、自己判断何时完成</strong>的。我们的程序只负责"执行它点名的工具、把结果递回去"。这就是 Agent 的灵魂——<strong>自主决策 + 多步执行</strong>。</p>
+<p>其中：<code>finish_reason</code> 是循环的"红绿灯"（<code>tool_calls</code>=继续转，<code>stop</code>=收工）；<code>max_iterations</code> 是防止模型犯傻反复调工具、烧光额度的保险。</p>
+<hr />
+<h2 id="7-4">7. 阶段 4：多工具与健壮性</h2>
+<p>阶段 3 的 Agent 内核已经通了，但它还是个"温室里的花朵"：工具是玩具，而且工具一报错整个程序就崩。阶段 4 做三件事让它从"能演示"变"能干活、摔不坏"。</p>
+<p><strong>① 真正有用的工具</strong>：加 <code>read_file</code>、<code>list_files</code>，让 Agent 能感知外部世界。</p>
+<p><strong>② 健壮的工具路由</strong>：用一个统一的"分发台" <code>dispatch_tool</code> 处理所有工具调用，模型点了不存在的工具也不会 <code>KeyError</code> 崩溃。</p>
+<p><strong>③ 错误处理（本阶段灵魂）</strong>：</p>
+<blockquote>
+<p><strong>对 Agent 来说，错误不是"程序崩溃的理由"，而是"喂给模型的一条观察信息"。</strong> 模型完全有能力根据错误自己想办法。</p>
+</blockquote>
+<p>看代码里这个分发台——无论发生什么，它都返回一个<strong>字符串</strong>，绝不向上抛异常：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">dispatch_tool</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="n">func_args</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">func_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">AVAILABLE_FUNCTIONS</span><span class="p">:</span>      <span class="c1"># 路由错误：工具不存在</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;错误：不存在名为 &#39;</span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2">&#39; 的工具。&quot;</span>
+
+    <span class="n">func</span> <span class="o">=</span> <span class="n">AVAILABLE_FUNCTIONS</span><span class="p">[</span><span class="n">func_name</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="o">**</span><span class="n">func_args</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="c1"># 关键：把&quot;文件不存在&quot;变成一条给模型的提示，而不是崩溃</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;错误：文件 &#39;</span><span class="si">{</span><span class="n">func_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39; 不存在。你可以先调用 list_files 看看有哪些文件。&quot;</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;错误：执行 </span><span class="si">{</span><span class="n">func_name</span><span class="si">}</span><span class="s2"> 时发生异常：</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p><strong>运行效果</strong>（故意让它读一个不存在的 <code>diary.txt</code>）：</p>
+<div class="highlight"><pre><span></span><code>第 1 圈  list_files() → notes.txt
+        read_file(&#39;diary.txt&#39;) → 错误：文件不存在，建议先 list_files
+第 2 圈  read_file(&#39;notes.txt&#39;) → 读到内容，发现幸运数字 42
+第 3 圈  收工，答出 42（并诚实说明其实没有 diary.txt）
+</code></pre></div>
+<p>如果按"糟糕的做法"，第 1 圈读 <code>diary.txt</code> 抛异常时程序就崩了。但因为我们把错误<strong>转成一条 <code>role="tool"</code> 的观察信息</strong>喂回循环，模型拿到了"重新思考的燃料"，自己绕过了障碍。<strong>这就是玩具 Agent 和可用 Agent 的分水岭。</strong></p>
+<blockquote>
+<p>另外注意：所有文件操作都锁死在一个 <code>data/</code> 目录里，不让 Agent 乱读整个磁盘。<strong>工具越强，越要设安全边界。</strong></p>
+</blockquote>
+<hr />
+<h2 id="8-5">8. 阶段 5：进阶架构</h2>
+<p>内核通了，这一阶段是往上叠"高级能力"。</p>
+<h3 id="81-vs">8.1 短期记忆：窗口 vs 摘要</h3>
+<p>阶段 1 埋的伏笔（历史无限增长）到这里解决。因为模型有<strong>上下文窗口</strong>上限，<code>messages</code> 越长越慢越贵、超限还会报错。两种最常用的短期记忆策略：</p>
+<ul>
+<li><strong>滑动窗口</strong>：只保留 <code>system</code> + 最近 N 轮，旧的直接丢。简单快，但会<strong>彻底遗忘</strong>早期信息。</li>
+<li><strong>摘要压缩</strong>：把较旧的对话让模型概括成一段摘要，用摘要替代原文。保留要点、省 token，但多花一次调用、细节有损。</li>
+</ul>
+<p>做一个"密码考试"对比：对话第 1 轮藏了"保险箱密码 8888"，后面聊一堆无关话题把它推远，再追问"密码是多少"：</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>消息数</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不管理</td>
+<td>11 条</td>
+<td>——</td>
+</tr>
+<tr>
+<td>滑动窗口（留最近 2 轮）</td>
+<td>5 条</td>
+<td>❌ 答不出（含密码的第 1 轮被丢了）</td>
+</tr>
+<tr>
+<td>摘要压缩</td>
+<td>6 条</td>
+<td>✅ 答出 8888（压缩时保留了关键事实）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>记忆管理没有银弹，全是权衡</strong>：窗口快但遗忘，摘要保要点但有成本。真实系统常常两者结合——近期用原文，更早的滚动压成摘要。注意任何策略都<strong>必须保留 <code>system</code> 消息</strong>，否则 Agent 会"变傻"。</p>
+</blockquote>
+<h3 id="82-embedding-rag">8.2 长期记忆：Embedding + 检索（RAG）</h3>
+<p>短期记忆只能管当前窗口，装不下海量、跨会话的知识（你所有的笔记、一整本手册）。思路变了：<strong>把知识存到外部，提问时只检索出最相关的几条塞进上下文</strong>。这就是 <strong>RAG（检索增强生成）</strong>。</p>
+<p>关键概念是 <strong>Embedding（嵌入向量）</strong>：</p>
+<blockquote>
+<p><strong>把一段文字转换成一串数字（向量），语义越相近的文字，向量在空间里"距离"越近。</strong> 于是"找最相关的内容"就变成一道数学题：算向量间的相似度（最常用<strong>余弦相似度</strong>，越接近 1 越相似）。</p>
+</blockquote>
+<p>余弦相似度其实就是几行算术（点积除以两个向量的模长）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">cosine_similarity</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">dot</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>       <span class="c1"># 点积 A·B</span>
+    <span class="n">norm_a</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="p">))</span>     <span class="c1"># |A|</span>
+    <span class="n">norm_b</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">b</span><span class="p">))</span>     <span class="c1"># |B|</span>
+    <span class="k">return</span> <span class="n">dot</span> <span class="o">/</span> <span class="p">(</span><span class="n">norm_a</span> <span class="o">*</span> <span class="n">norm_b</span><span class="p">)</span>               <span class="c1"># 越接近 1 越相似</span>
+</code></pre></div>
+<p>RAG 完整流程：知识逐条转成向量存好 → 问题也转成向量 → 和每条知识算相似度 → 取 Top-K → 塞进 prompt 让模型作答。</p>
+<p><strong>运行效果</strong>（考点：知识库写的是"保险箱<strong>口令</strong>是 8888"，用户问的是"<strong>密码</strong>是多少"，两个词一个字都不重合）：</p>
+<div class="highlight"><pre><span></span><code>所有知识与问题的相似度（从高到低）：
+    0.6938  |  小明的保险箱口令是 8888。      ← 遥遥领先
+    0.3641  |  报销流程：先在系统提交申请…
+    0.3289  |  Python 里用 def 关键字定义函数…
+</code></pre></div>
+<p>尽管"口令"和"密码"字面不同，语义检索照样精准地把它排到了第一。<strong>这就是 embedding 相比关键词搜索的根本优势：它理解的是意思，不是字面。</strong> 真实项目用向量数据库（FAISS 等）只是为了在海量数据下加速，原理和这几行手写的一模一样。</p>
+<h3 id="83-planning">8.3 规划（Planning）：先出图纸，再施工</h3>
+<p>ReAct 是"走一步看一步"，任务一复杂容易迷路、漏步骤。<strong>规划</strong>则把任务分成两阶段：</p>
+<ul>
+<li><strong>规划阶段</strong>：让模型先<strong>不动手</strong>，只输出一份步骤清单；</li>
+<li><strong>执行阶段</strong>：拿着清单一步步执行，每步的产出喂给下一步。</li>
+</ul>
+<p>一句话：<strong>规划 = 先让模型"想清楚整体步骤"，再"照着步骤逐一执行"。</strong>（这正是很多 AI 编程助手先列 todo、再逐项完成的做法。）</p>
+<p><strong>运行效果</strong>（任务："写一首秋天的四行诗 → 翻译成英文 → 统计原诗字数"）：模型先规划出 4 步（还自己多加了"汇总输出"一步），然后逐步执行。<strong>关键在于依赖正确传递</strong>：第 2 步翻译的正是第 1 步写的那首诗，第 3 步数的也是同一首——因为执行时把已完成步骤的产出带进了下一步的上下文。这和阶段 1 的"记忆"一脉相承：上下文靠程序主动传递。</p>
+<p><strong>Planning vs ReAct 怎么选：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ReAct（阶段 3）</th>
+<th>Planning（8.3）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>思路</td>
+<td>走一步看一步</td>
+<td>先出完整计划再执行</td>
+</tr>
+<tr>
+<td>适合</td>
+<td>步骤少、路径不确定、需随机应变</td>
+<td>步骤多、目标明确、需有条理</td>
+</tr>
+<tr>
+<td>短板</td>
+<td>任务长了容易迷路</td>
+<td>计划定死后不灵活</td>
+</tr>
+</tbody>
+</table>
+<p>实战中两者常结合：用 Planning 拆出大步骤，每个大步骤内部再用 ReAct + 工具去完成。</p>
+<h3 id="84-agent">8.4 多 Agent 协作</h3>
+<p>前面都是<strong>一个</strong> Agent 单打独斗。一个 Agent 又写又审，容易顾此失彼、缺乏制衡。多 Agent 的思路是<strong>分工 + 制衡</strong>：</p>
+<blockquote>
+<p><strong>让多个各有专长、各有独立"人设"的 Agent 分工协作，通过互相传递消息，像一个团队一样完成任务。</strong></p>
+</blockquote>
+<p>经典组合是<strong>执行者（Worker）+ 审查者（Reviewer）</strong>：</p>
+<pre class="mermaid"><code>graph LR
+    T[任务] --&gt; W[执行者 Worker]
+    W --&gt;|产出草稿| R[审查者 Reviewer]
+    R --&gt;|不通过: 打回 + 意见| W
+    R --&gt;|通过| D[交付]</code></pre>
+<p><strong>本质揭秘</strong>：每个 Agent 就是<strong>一次带专属 <code>system</code> 人设的 LLM 调用</strong>。执行者人设是"你负责写"，审查者人设是"你负责严格挑错"。同一个模型扮演不同角色——这就是多 Agent 的朴素本质，不需要什么神秘技术。外面套一个"改→审→改→审"的循环，直到审查通过或到达轮数上限。</p>
+<hr />
+<h2 id="9">9. 那些真实的"翻车"瞬间</h2>
+<p>跑这些实验时遇到几个有意思的现象，比干讲原理更有价值：</p>
+<ul>
+<li><strong>语义检索的惊艳</strong>：8.2 里"口令"和"密码"一个字都不重合，embedding 照样把它以 0.69 的相似度排第一。这是关键词搜索做不到的。</li>
+<li><strong>错误让 Agent 更聪明</strong>：8.4 阶段 4 里，读不到 <code>diary.txt</code> 反而触发了模型"先列目录看看"的自救行为——错误信息成了它的思考燃料。</li>
+<li><strong>审查者自己也会犯错</strong>：8.4 用更苛刻的约束（"正好 5 个单词"）测试时，审查者一度<strong>把词数数错</strong>、意见还自相矛盾，把明明合格的句子打了回去。但神奇的是，<strong>整个系统仍然收敛到了正确答案</strong>——执行者在几轮"改→审"后交出了满足全部约束的结果。</li>
+</ul>
+<p>这最后一点给了一个重要提醒：</p>
+<blockquote>
+<p><strong>多 Agent 不是"多一个就一定更对"。</strong> 每个 Agent 都是会犯错的 LLM。多 Agent 的价值不在于某个成员绝对可靠，而在于"分工 + 制衡 + 迭代"能让系统整体<strong>逼近</strong>好结果。这才是它真实的样子——不是魔法。</p>
+</blockquote>
+<hr />
+<h2 id="10">10. 总结</h2>
+<p>从"发出第一条消息"到"多个 Agent 协作"，我们没有用任何框架，把 Agent 的核心机制完整地写了一遍：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>掌握的能力</th>
+<th>核心认知</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>一次 LLM 调用</td>
+<td>role / message / response</td>
+</tr>
+<tr>
+<td>1</td>
+<td>多轮对话</td>
+<td>记忆 = 不断增长的消息列表</td>
+</tr>
+<tr>
+<td>2</td>
+<td>工具调用</td>
+<td>模型出 JSON，程序去执行</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ReAct 循环</td>
+<td>Agent = LLM + 循环 + 工具，自主多步</td>
+</tr>
+<tr>
+<td>4</td>
+<td>多工具 + 健壮性</td>
+<td>错误是给模型的观察，不是崩溃理由</td>
+</tr>
+<tr>
+<td>5.1</td>
+<td>短期记忆</td>
+<td>窗口 vs 摘要的取舍</td>
+</tr>
+<tr>
+<td>5.2</td>
+<td>长期记忆</td>
+<td>Embedding + 相似度检索（RAG）</td>
+</tr>
+<tr>
+<td>5.3</td>
+<td>规划</td>
+<td>先出蓝图，再照图施工</td>
+</tr>
+<tr>
+<td>5.4</td>
+<td>多 Agent</td>
+<td>分工 + 制衡 + 迭代</td>
+</tr>
+</tbody>
+</table>
+<p>最重要的一句话，也是开篇那张心智模型图的兑现：</p>
+<blockquote>
+<p><strong>Agent = LLM + 循环 + 工具。</strong> 记忆、RAG、规划、多 Agent，全都是在这个骨架上做加法。</p>
+</blockquote>
+<p>理解了这条主线，再回头看 LangChain、AutoGen、CrewAI 这些框架，会发现它们的内核，就是我们亲手写过的这些东西。</p>
+<p><strong>下一步可以怎么走</strong>：把散落在各阶段的能力（工具 + ReAct 循环 + 长期记忆 + 规划）拼成<strong>一个</strong>真正好用的 Agent，比如"能读你笔记、会规划、能调多工具"的个人助理；或者挑一个框架（如 LangGraph）重写阶段 3，对照着看每个概念对应你手写的哪部分。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
