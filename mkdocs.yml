@@ -74,6 +74,8 @@ nav:
       - Python标准库简介: Python/python/基础篇009_Python标准库简介.md
       - Python虚拟环境和包: Python/python/基础篇010_Python虚拟环境和包.md
   - AI:
+    - Agent开发:
+      - 从零手写一个AI Agent: ai/Agent开发/Agent开发001_从零手写一个AI Agent.md
     - AI大模型领域热门&核心概念梳理: ai/AI大模型领域热门&核心概念梳理.md
     - 尚硅谷MCP实战指南学习笔记: ai/【尚硅谷MCP实战指南】2小时学透MCP学习笔记.md
     - AI大模型零基础全套教程:
