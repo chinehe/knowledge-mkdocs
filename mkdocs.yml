@@ -104,6 +104,7 @@ nav:
       - JSON类型详解（草稿）: 数据库与缓存/redis/Redis数据类型篇008_JSON类型详解（草稿）.md
     - StarRocks入门篇:
       - 初识StarRocks: 数据库与缓存/starrocks/StarRocks入门篇001_初识StarRocks.md
+      - 快速开始: 数据库与缓存/starrocks/StarRocks入门篇002_快速开始.md
   - DevOps:
     - Docker:
       - Docker入门指南: DevOps/Docker/Docker入门指南.md
