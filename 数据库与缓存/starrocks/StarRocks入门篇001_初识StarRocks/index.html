@@ -1,0 +1,2262 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/starrocks/StarRocks%E5%85%A5%E9%97%A8%E7%AF%87001_%E5%88%9D%E8%AF%86StarRocks/">
+      
+      
+        <link rel="prev" href="../../redis/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87008_JSON%E7%B1%BB%E5%9E%8B%E8%AF%A6%E8%A7%A3%EF%BC%88%E8%8D%89%E7%A8%BF%EF%BC%89/">
+      
+      
+        <link rel="next" href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87002_%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>初识StarRocks - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-starrocks" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              初识StarRocks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库与缓存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis入门篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../redis/Redis%E5%9F%BA%E7%A1%80%E7%AF%87001_%E9%94%AE%28Keys%29%E7%9A%84%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C%E4%B8%8E%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis基础篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../redis/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%AF%87001_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A2%B3%E7%90%86%E4%B8%8E%E9%80%89%E6%8B%A9%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis数据类型篇
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    StarRocks入门篇
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    StarRocks入门篇
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初识StarRocks
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    初识StarRocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-starrocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. StarRocks 是什么
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. StarRocks 是什么">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 一句话定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 用一个熟悉的参照物理解：和 MySQL 的分工
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-starrocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. StarRocks 为什么快
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. StarRocks 为什么快">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-columnar-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 列式存储（Columnar Storage）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-fully-vectorized-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 全向量化执行引擎（Fully Vectorized Engine）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-mpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. MPP 框架（大规模并行处理）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-cbocost-based-optimizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 代价优化器 CBO（Cost-Based Optimizer）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-intelligent-materialized-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. 智能物化视图（Intelligent Materialized View）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-starrocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. StarRocks 的架构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. StarRocks 的架构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 两种架构选择：存算一体 vs 存算分离
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-fefrontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. FE（Frontend，前端节点）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-bebackend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. BE（Backend，后端节点）—— 存算一体架构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-cncompute-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. CN（Compute Node，计算节点）—— 存算分离架构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. 存算分离架构里的存储与缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-starrocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. StarRocks 能用来做什么（应用场景）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. StarRocks 能用来做什么（应用场景）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-olap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. OLAP 多维分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 实时分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 高并发分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 统一分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. 数据湖分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 开源与社区
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 结语
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87002_%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    快速开始
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-starrocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. StarRocks 是什么
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. StarRocks 是什么">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 一句话定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 用一个熟悉的参照物理解：和 MySQL 的分工
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-starrocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. StarRocks 为什么快
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. StarRocks 为什么快">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-columnar-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 列式存储（Columnar Storage）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-fully-vectorized-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 全向量化执行引擎（Fully Vectorized Engine）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-mpp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. MPP 框架（大规模并行处理）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-cbocost-based-optimizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 代价优化器 CBO（Cost-Based Optimizer）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-intelligent-materialized-view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. 智能物化视图（Intelligent Materialized View）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-starrocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. StarRocks 的架构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. StarRocks 的架构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 两种架构选择：存算一体 vs 存算分离
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-fefrontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. FE（Frontend，前端节点）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-bebackend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. BE（Backend，后端节点）—— 存算一体架构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-cncompute-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. CN（Compute Node，计算节点）—— 存算分离架构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. 存算分离架构里的存储与缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-starrocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. StarRocks 能用来做什么（应用场景）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. StarRocks 能用来做什么（应用场景）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-olap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. OLAP 多维分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 实时分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 高并发分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 统一分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. 数据湖分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 开源与社区
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 结语
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据库与缓存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    StarRocks入门篇
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>初识StarRocks</h1>
+
+<p>当数据量来到千万、上亿行，你有没有遇到过这样的场景：一条看似简单的「按天、按品类统计销售额」的 SQL，在 MySQL 上要跑几十秒甚至几分钟？这并不是 MySQL 不够好，而是它从设计之初就不是为这类分析查询准备的。StarRocks 正是为了解决这个问题而生——一个新一代、极速的 MPP（大规模并行处理）分析型数据库，能在海量数据规模下支撑亚秒级查询。这篇文章带你从「它是什么、为什么快、长什么样、能干什么」四个角度，建立对 StarRocks 的第一印象。</p>
+<blockquote>
+<p>本文内容以 StarRocks 官方文档为基础整理，并结合实际理解做了类比与图解。官方原文见：</p>
+<ul>
+<li><a href="https://docs.starrocks.io/docs/introduction/">What is StarRocks?</a></li>
+<li><a href="https://docs.starrocks.io/docs/introduction/Architecture/">Architecture</a></li>
+<li><a href="https://docs.starrocks.io/docs/introduction/Features/">Database Features</a></li>
+</ul>
+<p>版本敏感的内容（具体语法、参数、各特性起始版本）请以你实际部署版本的官方文档为准。</p>
+</blockquote>
+<h2 id="1-starrocks">1. StarRocks 是什么</h2>
+<h3 id="11">1.1. 一句话定义</h3>
+<p>官方对 StarRocks 的定义是：一个新一代、极速的 <strong>MPP（Massively Parallel Processing，大规模并行处理）数据库</strong>，目标是让企业轻松实现<strong>实时分析</strong>，并在大规模数据下提供<strong>亚秒级查询</strong>。</p>
+<p>拆开这句话里的关键词，就是理解 StarRocks 的钥匙：</p>
+<table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>含义</th>
+<th>一句话解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MPP</td>
+<td>大规模并行处理</td>
+<td>数据被切片打散到多台机器，一个查询由多台机器、多个 CPU 核心并行计算</td>
+</tr>
+<tr>
+<td>极速 / 亚秒级</td>
+<td>sub-second query</td>
+<td>大数据量下聚合查询也能在秒级甚至亚秒级返回</td>
+</tr>
+<tr>
+<td>实时分析</td>
+<td>real-time analytics</td>
+<td>数据可高速写入，并支持实时更新与删除</td>
+</tr>
+</tbody>
+</table>
+<p>它还有几个重要特性，官方反复强调：</p>
+<ul>
+<li><strong>兼容 MySQL 协议和标准 SQL</strong>：可以直接用 MySQL 客户端连接，开箱即用地支持 Tableau、Power BI 等主流 BI 工具。</li>
+<li><strong>不依赖任何外部组件</strong>：是一个自包含的一体化分析平台，部署和运维都更简单，支持高扩展、高可用。</li>
+<li><strong>实时更新靠主键表（Primary Key table）实现</strong>：事务型（TP）数据库里的数据变更，可以在秒级同步进 StarRocks，构建实时数仓。</li>
+</ul>
+<h3 id="12-mysql">1.2. 用一个熟悉的参照物理解：和 MySQL 的分工</h3>
+<p>如果你写过 MySQL，可以用它当锚点。平时对 MySQL 做的事大致分两类：</p>
+<ul>
+<li><strong>交易操作（OLTP，联机事务处理）</strong>：下单插一行、改资料更新一行、按主键查我的订单。特点是<strong>每次只碰少数几行</strong>，要求快、要事务、要强一致。MySQL 为此而生。</li>
+<li><strong>分析操作（OLAP，联机分析处理）</strong>：统计「过去 30 天每个品类每天的 GMV」，要<strong>扫描上千万行</strong>，只为算出几百个聚合数字。</li>
+</ul>
+<p>当数据量变大，MySQL 跑第二类查询会越来越慢。而 StarRocks 正是为第二类场景而生。在真实的企业架构里，两者往往是这样协作的：</p>
+<pre class="mermaid"><code>flowchart LR
+    App[业务应用] --&gt;|下单/改资料&lt;br/&gt;高频单行事务| MySQL[(MySQL&lt;br/&gt;OLTP 交易库)]
+    MySQL --&gt;|秒级同步&lt;br/&gt;CDC / 数据管道| SR[(StarRocks&lt;br/&gt;OLAP 分析库)]
+    SR --&gt;|多维聚合查询| BI[BI 报表 / 看板]
+    SR --&gt;|Ad-hoc 查询| Analyst[分析师]</code></pre>
+<blockquote>
+<p>关键认知：StarRocks 和 MySQL 不是替代关系，而是<strong>分工</strong>。TP 库扛在线交易，数据再同步到 StarRocks 做分析。协议兼容 ≠ 可以把它当 OLTP 数据库用。</p>
+</blockquote>
+<h2 id="2-starrocks">2. StarRocks 为什么快</h2>
+<p>StarRocks 的「快」不是一句空话，而是来自几个具体的工程设计：列式存储、向量化执行、MPP 并行、CBO 优化器、物化视图。下面逐一拆解。</p>
+<h3 id="21-columnar-storage">2.1. 列式存储（Columnar Storage）</h3>
+<p>传统 OLTP 数据库（如 MySQL）按<strong>行</strong>存储，一行所有字段挨在一起。而 StarRocks 按<strong>列</strong>存储，同一个字段的所有值连续存放。</p>
+<div class="highlight"><pre><span></span><code>行存（MySQL）：按行连续存放，读一行要读它的所有字段
+┌───────────────────────────────────────────────┐
+│ id=1 │ user=1001 │ amount=59.9 │ category=3 │…│
+├───────────────────────────────────────────────┤
+│ id=2 │ user=1002 │ amount=20.0 │ category=5 │…│
+└───────────────────────────────────────────────┘
+
+列存（StarRocks）：按列连续存放，算 SUM(amount) 只读 amount 这一列
+ id       : [1,      2,      3,    …]
+ user     : [1001,   1002,   1003, …]
+ amount   : [59.9,   20.0,   88.5, …]   ← 只扫这一列
+ category : [3,      5,      3,    …]
+</code></pre></div>
+<p>列式存储带来三个直接好处：</p>
+<ul>
+<li><strong>只读需要的列</strong>：OLAP 查询通常只用到少数几列，列存让你只扫描这些列，大幅减少磁盘 I/O。</li>
+<li><strong>压缩率更高</strong>：同一列数据类型相同、取值相近，编码和压缩效率远高于行存，降低存储成本。</li>
+<li><strong>ACID 导入</strong>：存储引擎保证每一次数据导入事务的原子性、一致性、隔离性和持久性——整个导入事务要么全成功要么全失败，并发事务互不影响。</li>
+</ul>
+<h3 id="22-fully-vectorized-engine">2.2. 全向量化执行引擎（Fully Vectorized Engine）</h3>
+<p>传统数据库一次处理一行（火山模型），而 StarRocks 一次处理<strong>一批数据</strong>（成千上万行打包成一个「向量」）。</p>
+<ul>
+<li>数据的<strong>存储、内存组织、SQL 算子计算</strong>全部以列式方式进行，充分利用 CPU 缓存。</li>
+<li>充分利用 CPU 的 <strong>SIMD 指令</strong>：用更少的指令完成更多的数据操作。</li>
+<li>官方给出的数据：在标准数据集上，向量化让算子整体性能提升 <strong>3～10 倍</strong>。</li>
+<li>还有「在编码数据上直接计算（Operation on Encoded Data）」等优化，无需解码即可执行算子，查询速度再提升 2 倍以上。</li>
+</ul>
+<blockquote>
+<p>一个形象的类比：传统逐行处理像「一粒一粒搬米」，向量化则是「一铲子一铲子铲」——同样的 CPU，干更多的活。</p>
+</blockquote>
+<h3 id="23-mpp">2.3. MPP 框架（大规模并行处理）</h3>
+<p>这是 StarRocks 分布式计算的核心。一个查询请求会被拆成多个可以在多台机器上并行执行的物理计算单元，每台机器用自己独立的 CPU 和内存资源计算自己那一片数据，最后合并结果。</p>
+<p>官方描述的拆分链路，可以用下图表示：</p>
+<pre class="mermaid"><code>flowchart TD
+    SQL["一条 SQL 查询"] --&gt; Plan["FE 按语义拆分"]
+    Plan --&gt; F1["Fragment 1&lt;br/&gt;逻辑执行单元"]
+    Plan --&gt; F2["Fragment 2&lt;br/&gt;逻辑执行单元"]
+    Plan --&gt; F3["Fragment N&lt;br/&gt;逻辑执行单元"]
+
+    F1 --&gt; I1["实例&lt;br/&gt;Scan→Project→Agg"]
+    F2 --&gt; I2["实例&lt;br/&gt;Scan→Project→Agg"]
+    F3 --&gt; I3["实例&lt;br/&gt;Scan→Project→Agg"]
+
+    I1 --&gt; M["Shuffle + 合并结果"]
+    I2 --&gt; M
+    I3 --&gt; M
+    M --&gt; R["最终结果"]</code></pre>
+<ul>
+<li><strong>物理执行单元（fragment instance）是 StarRocks 最小的调度单位</strong>，被调度到各个 BE 上执行。</li>
+<li>一个逻辑执行单元里可以包含多个算子，比如 Scan（扫描）、Project（投影）、Agg（聚合）。</li>
+<li>和很多系统用的 <strong>Scatter-Gather 框架</strong>不同：Scatter-Gather 只有 Gather 节点能做最终合并，而 MPP 把数据 shuffle 到多个节点并行合并。对于高基数字段的 Group By、大表 Join 这类复杂查询，MPP 有明显性能优势。</li>
+<li>随着集群横向扩展，单个查询的性能可以持续提升。</li>
+</ul>
+<blockquote>
+<p>类比：一个人数 100 万张票，和 100 个人每人数 1 万张再汇总的区别——后者就是 MPP 的思路。这也是 StarRocks「加机器就能变快」的根源。</p>
+</blockquote>
+<h3 id="24-cbocost-based-optimizer">2.4. 代价优化器 CBO（Cost-Based Optimizer）</h3>
+<p>多表 Join 查询的性能极难优化：关联的表越多，可能的执行计划越多，选出最优计划是一个 NP-hard 问题。只有足够优秀的优化器才能选出相对最优的执行计划。</p>
+<ul>
+<li>StarRocks 从零设计了一个全新的 CBO，采用类似 <strong>Cascades</strong> 的框架，并深度适配向量化引擎。</li>
+<li>包含大量优化：CTE 复用、子查询改写、Lateral Join、<strong>Join Reorder（连接重排序）</strong>、分布式 Join 执行策略选择、低基数优化等。</li>
+<li>CBO 完整支持 99 条 TPC-DS SQL 语句。</li>
+<li>效果：让 StarRocks 在复杂多表 Join 查询上明显快于同类竞品。</li>
+</ul>
+<blockquote>
+<p>直观理解：CBO 管「同一条 SQL 怎么执行最快」。你写的 SQL 不变，优化器在背后根据数据的统计信息（每列有多少不同值、数据如何分布）自动挑选最省代价的执行方案。</p>
+</blockquote>
+<h3 id="25-intelligent-materialized-view">2.5. 智能物化视图（Intelligent Materialized View）</h3>
+<p>物化视图就是把常用的、昂贵的聚合结果<strong>预先算好存起来</strong>，查询时直接读结果，避免每次重新扫描明细。StarRocks 的物化视图「智能」在两点：</p>
+<ul>
+<li><strong>自动刷新</strong>：和其他产品需要手动同步基表数据不同，StarRocks 的物化视图会根据基表的数据变化<strong>自动更新</strong>，无需额外维护。</li>
+<li><strong>自动改写（透明加速）</strong>：如果优化器识别出某个物化视图能加速当前查询，它会<strong>自动改写查询</strong>去利用这个物化视图——你的 SQL 完全不用改。</li>
+</ul>
+<p>物化视图还能替代传统的 ETL 建模流程。下图展示了如何用物化视图在 StarRocks 内部完成数据分层：</p>
+<pre class="mermaid"><code>flowchart LR
+    Lake[(数据湖原始数据)] --&gt;|外部 MV| Norm[规范化表]
+    Norm --&gt;|异步物化视图| Denorm[反规范化宽表]
+    Norm --&gt;|物化视图| HighConc[面向高并发的汇总表]
+    Denorm --&gt; Q1[复杂分析查询]
+    HighConc --&gt; Q2[高并发查询]</code></pre>
+<blockquote>
+<p>一句话区分 StarRocks 的两大性能利器：<strong>CBO 管「怎么查最快」，物化视图管「提前算好、少查一点」。</strong></p>
+</blockquote>
+<h2 id="3-starrocks">3. StarRocks 的架构</h2>
+<p>官方强调：StarRocks 架构<strong>非常简单</strong>，整个系统只有两类组件——<strong>前端（Frontend，FE）</strong>和<strong>后端（Backend）</strong>。后端又分两种：<strong>BE</strong> 和 <strong>CN（Compute Node）</strong>。它不依赖任何外部组件，节点可以在不停服的情况下横向扩展，并且元数据和业务数据都有副本机制，提升可靠性、避免单点故障（SPOF）。</p>
+<p>整体架构可以用下图概括：</p>
+<pre class="mermaid"><code>flowchart TB
+    Client["MySQL 客户端 / BI 工具"] --&gt;|MySQL 协议| FE
+
+    subgraph FE["FE 前端层（元数据 + 查询规划 + 调度）"]
+        direction LR
+        Leader["Leader"]
+        Follower["Follower"]
+        Observer["Observer"]
+    end
+
+    FE --&gt;|分发执行计划| BE
+
+    subgraph BE["后端层（存储 + 计算）"]
+        direction LR
+        BE1["BE / CN 1"]
+        BE2["BE / CN 2"]
+        BE3["BE / CN 3"]
+    end</code></pre>
+<h3 id="31-vs">3.1. 两种架构选择：存算一体 vs 存算分离</h3>
+<p>StarRocks 支持两种架构，你可以根据需求决定数据存在哪里：</p>
+<table>
+<thead>
+<tr>
+<th>架构</th>
+<th>英文</th>
+<th>数据存储位置</th>
+<th>后端节点</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存算一体</td>
+<td>shared-nothing</td>
+<td>每个 BE 的本地存储各存一部分数据</td>
+<td>FE + BE</td>
+<td>本地存储，查询延迟低，适合追求极致查询性能</td>
+</tr>
+<tr>
+<td>存算分离</td>
+<td>shared-data</td>
+<td>全部数据在对象存储或 HDFS，CN 本地只有缓存</td>
+<td>FE + CN</td>
+<td>存储便宜、弹性强，计算秒级增删，资源隔离好</td>
+</tr>
+</tbody>
+</table>
+<p>两种架构的直观对比：</p>
+<pre class="mermaid"><code>flowchart TB
+    subgraph SN["存算一体 shared-nothing"]
+        direction TB
+        feA["FE"] --&gt; beA1["BE&lt;br/&gt;计算 + 本地数据"]
+        feA --&gt; beA2["BE&lt;br/&gt;计算 + 本地数据"]
+    end
+
+    subgraph SD["存算分离 shared-data"]
+        direction TB
+        feB["FE"] --&gt; cnB1["CN&lt;br/&gt;计算 + 缓存"]
+        feB --&gt; cnB2["CN&lt;br/&gt;计算 + 缓存"]
+        cnB1 --&gt; OSS[("对象存储 / HDFS&lt;br/&gt;统一数据层")]
+        cnB2 --&gt; OSS
+    end</code></pre>
+<blockquote>
+<p>存算分离架构从 StarRocks 3.0 开始引入。它把计算和存储解耦，各自独立扩展，特别适合流量有明显波峰波谷、需要弹性伸缩的场景。</p>
+</blockquote>
+<h3 id="32-fefrontend">3.2. FE（Frontend，前端节点）</h3>
+<p>FE 负责<strong>元数据管理、客户端连接管理、查询计划（Query Planning）和查询调度（Query Scheduling）</strong>。</p>
+<ul>
+<li>每个 FE 都用 <strong>BDB JE（Berkeley DB Java Edition）</strong> 在内存中维护一份完整的元数据副本，保证所有 FE 对外服务一致。</li>
+<li>FE 有三种角色，通过 <strong>Raft 协议</strong>保证一致性和高可用：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>FE 角色</th>
+<th>元数据能力</th>
+<th>是否参与选主</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Leader</td>
+<td>唯一能<strong>读写</strong>元数据的节点；写请求都路由到它，它更新后用 Raft 同步给其他 FE</td>
+<td>本质上也是 Follower，由 Follower 选举产生</td>
+</tr>
+<tr>
+<td>Follower</td>
+<td>只能<strong>读</strong>元数据；重放 Leader 的日志来更新元数据</td>
+<td>参与选主，选主需要半数以上 Follower 存活</td>
+</tr>
+<tr>
+<td>Observer</td>
+<td>只能<strong>读</strong>元数据；重放 Leader 日志</td>
+<td><strong>不参与</strong>选主，主要用来提升查询并发，不给选主增加压力</td>
+</tr>
+</tbody>
+</table>
+<p>三种角色的读写与选主关系如下：</p>
+<pre class="mermaid"><code>flowchart TB
+    Write["元数据写请求"] --&gt; Leader
+    Follower1["Follower"] --&gt;|路由写请求| Leader
+    Follower2["Follower"] --&gt;|路由写请求| Leader
+    Leader --&gt;|Raft 同步日志| Follower1
+    Leader --&gt;|Raft 同步日志| Follower2
+    Leader --&gt;|Raft 同步日志| Observer1["Observer&lt;br/&gt;只读 · 提升查询并发"]
+
+    Follower1 -.-&gt;|参与选主| Election{"Leader 选举&lt;br/&gt;需半数以上 Follower 存活"}
+    Follower2 -.-&gt;|参与选主| Election</code></pre>
+<blockquote>
+<p>一个重要细节：数据写入只有在元数据变更同步到<strong>半数以上 Follower</strong> 之后，才算成功。Leader 挂掉时，Follower 会基于 Raft 重新选主。Observer 不参与选主，所以可以放心地增加 Observer 来扛更多并发查询。</p>
+</blockquote>
+<h3 id="33-bebackend">3.3. BE（Backend，后端节点）—— 存算一体架构</h3>
+<p>BE 负责<strong>数据存储</strong>和 <strong>SQL 执行</strong>。</p>
+<ul>
+<li><strong>数据存储</strong>：各个 BE 存储能力对等，FE 按预定规则把数据分发到 BE；BE 对导入的数据做转换、写成所需格式、生成索引。</li>
+<li><strong>SQL 执行</strong>：FE 把 SQL 解析成逻辑执行计划，再转成能在 BE 上执行的物理执行计划，由<strong>存有目标数据的那个 BE</strong>直接执行。数据就在本地，无需传输和拷贝，因此查询性能很高。</li>
+</ul>
+<h3 id="34-cncompute-node">3.4. CN（Compute Node，计算节点）—— 存算分离架构</h3>
+<p>在存算分离架构里，BE 被 <strong>CN</strong> 取代，存储功能卸载到对象存储或 HDFS。</p>
+<ul>
+<li>CN 是<strong>无状态</strong>的计算节点，执行 BE 的全部功能，<strong>唯独不负责数据存储</strong>。</li>
+<li>CN 可以在<strong>秒级</strong>按需增减，且因为存储和计算分离，增减 CN 不需要重新平衡数据。</li>
+</ul>
+<h3 id="35">3.5. 存算分离架构里的存储与缓存</h3>
+<ul>
+<li><strong>存储</strong>：支持对象存储（AWS S3、Google GCS、Azure Blob Storage、MinIO 等 S3 兼容存储）和 HDFS。数据文件格式和存算一体一致，组织成 segment 文件，专用于存算分离的表叫<strong>云原生表（cloud-native table）</strong>。</li>
+<li><strong>缓存</strong>：存算分离会影响查询性能，StarRocks 用<strong>内存 → 本地磁盘 → 远端存储</strong>的多级数据访问体系来缓解：</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    Query["查询请求"] --&gt; Mem["内存缓存"]
+    Mem --&gt;|未命中| Disk["本地磁盘缓存"]
+    Disk --&gt;|未命中| Remote[("远端对象存储 / HDFS")]
+    Remote -.-&gt;|回填缓存| Disk</code></pre>
+<ul>
+<li>热数据直接扫缓存、再扫本地磁盘；冷数据从对象存储加载到本地缓存以加速后续查询。</li>
+<li>建表时可以开启缓存。开启后数据会同时写本地磁盘和后端对象存储；查询时 CN 先读本地磁盘，没命中再从对象存储取并顺便缓存到本地。</li>
+</ul>
+<blockquote>
+<p>对初学者而言，用本地单机（存算一体）起步就足够了。存算分离、CN、对象存储是进阶内容，等理解了基本模型再接触。各特性在两种架构下的起始支持版本不同，使用时务必查阅与你部署版本一致的官方文档。</p>
+</blockquote>
+<h2 id="4-starrocks">4. StarRocks 能用来做什么（应用场景）</h2>
+<p>官方把 StarRocks 的能力归纳成四大类场景。理解这四类，就能判断「我手头这个需求该不该用 StarRocks」。</p>
+<h3 id="41-olap">4.1. OLAP 多维分析</h3>
+<ul>
+<li><strong>靠什么</strong>：MPP 框架 + 向量化引擎，支持平面表（flat）、星型（star）、雪花（snowflake）等多种 schema。</li>
+<li><strong>典型用途</strong>：用户行为分析、用户画像与标签分析、高维指标报表、自助看板、业务异常探查、跨主题分析、财务数据分析、系统监控分析。</li>
+<li>一句话：经典的「多个维度切来切去看数」的分析报表场景。</li>
+</ul>
+<h3 id="42">4.2. 实时分析</h3>
+<ul>
+<li><strong>靠什么</strong>：主键表（Primary Key table）+ 秒级数据同步。</li>
+<li><strong>典型用途</strong>：大促实时分析、物流追踪、金融行业指标计算、直播质量分析、广告投放分析、驾驶舱管理、应用性能管理（APM）。</li>
+<li>一句话：数据刚产生就要能查到的场景。</li>
+</ul>
+<h3 id="43">4.3. 高并发分析</h3>
+<ul>
+<li><strong>靠什么</strong>：高性能数据分布 + 灵活索引 + 智能物化视图。</li>
+<li><strong>典型用途</strong>：广告主报表分析、零售渠道分析、SaaS 面向用户的分析、多标签页看板。</li>
+<li>一句话：<strong>很多用户同时查</strong>（面向 C 端或大量 B 端用户），而不是少数几个分析师内部用。</li>
+</ul>
+<h3 id="44">4.4. 统一分析</h3>
+<ul>
+<li><strong>靠什么</strong>：一套系统覆盖多种场景 + 湖仓一体。</li>
+<li>两层含义：</li>
+<li><strong>降低总拥有成本（TCO）</strong>：一个系统干多种分析活，减少系统复杂度和维护成本。</li>
+<li><strong>湖仓统一</strong>：延迟敏感、高并发的查询跑在 StarRocks 内表；数据湖里的数据通过<strong>外部 Catalog / 外部表</strong>直接访问，无需迁移数据。</li>
+</ul>
+<h3 id="45">4.5. 数据湖分析</h3>
+<p>作为上面「统一分析」的延伸，StarRocks 还能作为计算引擎，直接分析数据湖中的数据，而无需把数据搬进来：</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph SR["StarRocks（计算引擎）"]
+        Cat["External Catalog&lt;br/&gt;外部数据目录"]
+        Engine["向量化引擎 + CBO"]
+    end
+
+    Meta[("外部元数据服务&lt;br/&gt;Hive Metastore 等")] --- Cat
+    Lake[("数据湖存储&lt;br/&gt;HDFS / S3&lt;br/&gt;Parquet / ORC / CSV")] --- Engine
+    Cat --&gt; Engine
+    Engine --&gt; Result["BI / AI / Ad-hoc / 报表"]</code></pre>
+<ul>
+<li>支持 Apache Hive、Apache Iceberg、Apache Hudi、Delta Lake 等。</li>
+<li>核心能力是<strong>外部 Catalog（External Catalog）</strong>：它充当到外部元数据服务（metastore）的连接，让你无需迁移数据就能查询外部数据源。</li>
+<li>分工：StarRocks 负责计算和分析，数据湖负责数据的存储、组织和维护；StarRocks 用向量化引擎和 CBO 显著提升数据湖分析性能。</li>
+</ul>
+<blockquote>
+<p>判断口诀：<strong>要多维切片 → 场景 1；要数据新鲜 → 场景 2；要扛高并发 → 场景 3；要一套系统管湖和仓 → 场景 4 / 5。</strong></p>
+</blockquote>
+<h2 id="5">5. 开源与社区</h2>
+<ul>
+<li><strong>开源协议</strong>：Apache 2.0，代码托管在 <a href="https://github.com/StarRocks/starrocks">StarRocks GitHub 仓库</a>。</li>
+<li><strong>社区</strong>：官方提供 Slack 频道（提问与交流）、StarRocks.io 博客（社区动态）、LinkedIn（新特性与活动更新）。</li>
+</ul>
+<h2 id="6">6. 结语</h2>
+<p>StarRocks 的设计哲学可以用一句话概括：<strong>用简单的架构，解决复杂的实时分析问题</strong>。它只有 FE 和后端两类组件，却通过列式存储、向量化执行、MPP 并行、CBO 优化器和智能物化视图这一套组合拳，把大规模数据下的分析查询做到了亚秒级；它兼容 MySQL 协议、不依赖外部组件，让上手和运维都足够平滑；它既能管好自己的内表，又能通过外部 Catalog 把数据湖纳入统一分析。</p>
+<p>理解了这些第一印象，再回到最初那个问题——「一条 <code>SELECT ... GROUP BY ...</code> 从客户端发出到返回结果，中间经过了哪些组件、做了哪些优化？」——你已经能说出答案的轮廓：FE 负责解析与规划，把查询拆成并行的 fragment，调度到各个 BE/CN 上，用列存只读必要的列、用向量化批量计算、用 CBO 选出最优路径，最后 shuffle 合并出结果。至于每一步的细节，就是后续文章要展开的旅程了。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
