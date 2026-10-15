@@ -84,27 +84,31 @@ nav:
       - 初识MCP: ai/MCP/MCP001_初始MCP（Model Context Protocol）.md
       - 概述MCP架构、核心概念与工作流程: ai/MCP/MCP002_概述MCP架构、核心概念与工作流程.md
   - 数据库与缓存:
-    - Redis入门篇:
-      - Redis简介与特性: 数据库与缓存/redis/Redis入门篇001_Redis简介与特性.md
-      - Redis安装、配置、客户端连接: 数据库与缓存/redis/Redis入门篇002_Redis安装、配置、客户端连接.md
-    - Redis基础篇:
-      - 键(Keys)的通用操作与过期策略: 数据库与缓存/redis/Redis基础篇001_键(Keys)的通用操作与过期策略.md
-      - Redis事务详解与ACID特性分析: 数据库与缓存/redis/Redis基础篇002_Redis事务详解与ACID特性分析.md
-      - 发布订阅(Pub&Sub)模式详解: 数据库与缓存/redis/Redis基础篇003_发布订阅(Pub&Sub)模式详解.md
-      - Redis Pipeline流水线详解: 数据库与缓存/redis/Redis基础篇004_Redis Pipeline流水线详解.md
-      - 使用Lua脚本与函数拓展Redis详解: 数据库与缓存/redis/Redis基础篇005_使用Lua脚本与函数拓展Redis详解.md
-    - Redis数据类型篇:
-      - 数据类型梳理与选择指南: 数据库与缓存/redis/Redis数据类型篇001_数据类型梳理与选择指南.md
-      - 详解Strings核心命令与存储结构: 数据库与缓存/redis/Redis数据类型篇002_详解Strings核心命令与存储结构.md
-      - 详解Lists列表类型及其命令: 数据库与缓存/redis/Redis数据类型篇003_详解Lists列表类型及其命令.md
-      - 详解Hashes哈希类型及其命令: 数据库与缓存/redis/Redis数据类型篇004_详解Hashes哈希类型及其命令.md
-      - 详解Sets集合类型及其命令: 数据库与缓存/redis/Redis数据类型篇005_详解Sets集合类型及其命令.md
-      - 详解SortedSets有序集合类型及其命令: 数据库与缓存/redis/Redis数据类型篇006_详解SortedSets有序集合类型及其命令.md
-      - 详解Stream流类型及其命令: 数据库与缓存/redis/Redis数据类型篇007_详解Stream流类型及其命令.md
-      - JSON类型详解（草稿）: 数据库与缓存/redis/Redis数据类型篇008_JSON类型详解（草稿）.md
-    - StarRocks入门篇:
-      - 初识StarRocks: 数据库与缓存/starrocks/StarRocks入门篇001_初识StarRocks.md
-      - 快速开始: 数据库与缓存/starrocks/StarRocks入门篇002_快速开始.md
+    - Redis:
+      - 🌱简介与特性: 数据库与缓存/redis/Redis入门篇001_Redis简介与特性.md
+      - 🌱安装、配置、连接: 数据库与缓存/redis/Redis入门篇002_Redis安装、配置、客户端连接.md
+      - 🌿键的通用操作与过期: 数据库与缓存/redis/Redis基础篇001_键(Keys)的通用操作与过期策略.md
+      - 🌿事务与ACID特性分析: 数据库与缓存/redis/Redis基础篇002_Redis事务详解与ACID特性分析.md
+      - 🌿Pub&Sub模式详解: 数据库与缓存/redis/Redis基础篇003_发布订阅(Pub&Sub)模式详解.md
+      - 🌿Pipeline流水线详解: 数据库与缓存/redis/Redis基础篇004_Redis Pipeline流水线详解.md
+      - 🌿Lua脚本与函数: 数据库与缓存/redis/Redis基础篇005_使用Lua脚本与函数拓展Redis详解.md
+      - 🌳数据类型梳理与选择: 数据库与缓存/redis/Redis数据类型篇001_数据类型梳理与选择指南.md
+      - 🌳数据类型 Strings: 数据库与缓存/redis/Redis数据类型篇002_详解Strings核心命令与存储结构.md
+      - 🌳数据类型 Lists: 数据库与缓存/redis/Redis数据类型篇003_详解Lists列表类型及其命令.md
+      - 🌳数据类型 Hashes: 数据库与缓存/redis/Redis数据类型篇004_详解Hashes哈希类型及其命令.md
+      - 🌳数据类型 Sets: 数据库与缓存/redis/Redis数据类型篇005_详解Sets集合类型及其命令.md
+      - 🌳数据类型 SortedSets: 数据库与缓存/redis/Redis数据类型篇006_详解SortedSets有序集合类型及其命令.md
+      - 🌳数据类型 Stream流: 数据库与缓存/redis/Redis数据类型篇007_详解Stream流类型及其命令.md
+      - 🌳数据类型 JSON: 数据库与缓存/redis/Redis数据类型篇008_JSON类型详解（草稿）.md
+    - StarRocks:
+      - 🌱初识StarRocks: 数据库与缓存/starrocks/StarRocks入门篇001_初识StarRocks.md
+      - 🌱快速开始: 数据库与缓存/starrocks/StarRocks入门篇002_快速开始.md
+      - 🌿表设计 概览: 数据库与缓存/starrocks/StarRocks基础篇001_表设计概览.md
+      - 🌿表设计 表类型: 数据库与缓存/starrocks/StarRocks基础篇002_表类型.md
+      - 🌿表设计 数据分布: 数据库与缓存/starrocks/StarRocks基础篇003_数据分布.md
+      - 🌿表设计 数据压缩: 数据库与缓存/starrocks/StarRocks基础篇004_数据压缩.md
+      - 🌿表设计 索引: 数据库与缓存/starrocks/StarRocks基础篇005_索引.md
+      - 🌿表设计 行列混存: 数据库与缓存/starrocks/StarRocks基础篇006_行列混存.md
   - DevOps:
     - Docker:
       - Docker入门指南: DevOps/Docker/Docker入门指南.md
