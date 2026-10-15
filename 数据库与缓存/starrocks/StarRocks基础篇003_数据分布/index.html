@@ -1,0 +1,1100 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/starrocks/StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>StarRocks基础篇003 数据分布 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              StarRocks基础篇003 数据分布
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<!-- 状态：初稿，内容迁移自原「表设计」第 4 章，待按官网「数据分布」章节补齐：
+     表达式分区（简单时间函数/列表达式/复杂时间函数/混合表达式、合并分区、限制）、
+     Range 分区与动态分区、批量创建分区、List 分区、分区管理（增删恢复查看）、临时分区、
+     基于范围的分桶（v4.1）、设置分桶数量（建表时/建表后）、建表后优化数据分布、最佳实践、
+     功能支持矩阵、用虚拟列查看数据在 Tablet 上的分布 -->
+
+<p><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/">基础篇002</a> 定下了数据的语义，这一篇决定数据在集群里怎么摆放——这直接影响查询要扫多少数据、能并行到什么程度。</p>
+<blockquote>
+<p>本文内容整理自 StarRocks 官方文档：<a href="https://docs.starrocks.io/zh/docs/table_design/data_distribution/">数据分布</a>。版本敏感的内容（语法、参数、特性起始版本）请以你实际部署版本的官方文档为准。本文验证环境为 StarRocks 4.1.x。</p>
+</blockquote>
+<h1 id="1">1. 数据分布概述</h1>
+<p>StarRocks 采用<strong>分区 + 分桶</strong>的两级策略，把数据均匀打散到各个 BE 节点：查询时能够有效裁剪数据扫描量，最大限度利用集群的并发性能，从而提升查询性能。</p>
+<pre class="mermaid"><code>flowchart TB
+    T["一张表"] --&gt; P1["分区 Partition 1&lt;br/&gt;(如 2024-01-01)"]
+    T --&gt; P2["分区 Partition 2&lt;br/&gt;(如 2024-01-02)"]
+    T --&gt; Pn["分区 Partition n"]
+    P1 --&gt; B1["分桶/Tablet 1"]
+    P1 --&gt; B2["分桶/Tablet 2"]
+    P1 --&gt; B3["分桶/Tablet 3"]
+    B1 -.多副本.-&gt; BE1["BE 节点"]
+    B2 -.多副本.-&gt; BE2["BE 节点"]
+    B3 -.多副本.-&gt; BE3["BE 节点"]</code></pre>
+<ul>
+<li><strong>第一层·分区</strong>：按分区列（通常是时间/日期）把表拆成更小的管理单元。查询命中分区条件时，可以<strong>分区裁剪</strong>，直接跳过无关分区，大幅减少扫描量。分区还能针对性地设置存储策略（分桶数、冷热、副本数等）。</li>
+<li><strong>第二层·分桶</strong>：同一分区内的数据再切成多个<strong>桶（bucket）</strong>，每个桶的数据称为一个 <strong>Tablet</strong>。Tablet 以多副本（默认 3）均匀分布在 BE 上，既保证高可用，又是并行扫描的最小单元。</li>
+</ul>
+<h1 id="2">2. 分区</h1>
+<h2 id="21">2.1. 分区方式</h2>
+<p>StarRocks 支持三种分区方式（也可以不分区，即全表一个分区）：</p>
+<table>
+<thead>
+<tr>
+<th>分区方式</th>
+<th>适用场景</th>
+<th>推荐度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>表达式分区</strong></td>
+<td>原称"自动创建分区"，灵活易用，适合大多数场景。按连续日期范围或枚举值查询管理数据时，<strong>导入时自动创建分区</strong>，无需预建</td>
+<td>⭐ 推荐，未来将逐步取代其他方式</td>
+</tr>
+<tr>
+<td><strong>Range 分区</strong></td>
+<td>数据简单有序，按连续日期/数值范围查询管理。需动态、批量或手动创建</td>
+<td>特定场景</td>
+</tr>
+<tr>
+<td><strong>List 分区</strong></td>
+<td>按枚举值查询管理，且一个分区需包含分区列的多个取值（如一个分区装一个国家下的多个城市）</td>
+<td>特定场景</td>
+</tr>
+</tbody>
+</table>
+<p><strong>选择分区列的原则</strong>：选能有效裁剪扫描量的列。业务上一般选<strong>时间列</strong>做分区——既优化"删过期数据"的性能，又方便冷热分级存储。</p>
+<p><strong>分区粒度权衡</strong>（综合数据量、查询特点、管理粒度）：</p>
+<ul>
+<li>单月数据量小 → 按月分区，减少元数据数量，降低管理和调度开销。</li>
+<li>单月数据量大、查询常精确到天 → 按天分区，分区裁剪更精细，扫描更少。</li>
+<li>数据要求按天过期 → 按天分区，方便直接删分区。</li>
+</ul>
+<p>表达式分区示例（按天自动建分区）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">site_access</span><span class="p">(</span>
+<span class="w">    </span><span class="n">event_day</span><span class="w"> </span><span class="n">DATETIME</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">site_id</span><span class="w">   </span><span class="nb">INT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;10&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">city_code</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+<span class="w">    </span><span class="n">pv</span><span class="w">        </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;0&#39;</span>
+<span class="p">)</span>
+<span class="n">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">event_day</span><span class="p">,</span><span class="w"> </span><span class="n">site_id</span><span class="p">,</span><span class="w"> </span><span class="n">city_code</span><span class="p">)</span>
+<span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">date_trunc</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">event_day</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">event_day</span><span class="p">,</span><span class="w"> </span><span class="n">site_id</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>此外，<strong>动态分区</strong>可以让 StarRocks 定期提前创建新分区、删除过期分区，实现分区的生命周期管理（TTL）。它和表达式分区的区别是：动态分区按配置<strong>提前预建</strong>分区，数据不属于预建分区会报错；表达式分区则根据导入数据<strong>按需创建</strong>。</p>
+</blockquote>
+<h1 id="3">3. 分桶</h1>
+<h2 id="31">3.1. 分桶方式</h2>
+<p>分区之后必须分桶。StarRocks 主要有两种分桶方式：</p>
+<table>
+<thead>
+<tr>
+<th>分桶方式</th>
+<th>要不要指定分桶键</th>
+<th>特点</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>随机分桶</strong></td>
+<td>不需要（自 v3.1 默认）</td>
+<td>数据随机分布到各桶，简单易用</td>
+<td>数据量不大、查询性能要求不高；仅支持明细表</td>
+</tr>
+<tr>
+<td><strong>哈希分桶</strong></td>
+<td>需要（必须指定分桶键）</td>
+<td>相同分桶键值的行落到同一个桶</td>
+<td>海量数据、查询常用某些列做过滤条件</td>
+</tr>
+</tbody>
+</table>
+<p><strong>哈希分桶的两大优点</strong>：</p>
+<ol>
+<li><strong>提高查询性能</strong>：相同分桶键值的行在同一个桶，查询命中分桶键时能裁掉大量无关桶、减少扫描。</li>
+<li><strong>均匀分布数据</strong>：选<strong>高基数</strong>（唯一值多）的列做分桶键，数据能更均匀地散到各桶。</li>
+</ol>
+<p><strong>怎么选分桶键</strong>：</p>
+<ul>
+<li>如果某列<strong>同时满足</strong>"高基数 + 经常作查询条件"，首选它。</li>
+<li>没有这种列时看查询：复杂查询选高基数列（保证均衡、充分利用资源）；简单查询选常用条件列（提高效率）。</li>
+<li>数据倾斜严重时，用<strong>多列组合</strong>做分桶键（建议不超过 3 列），把数据打散。</li>
+</ul>
+<p>举个例子——<code>site_access</code> 表用 <code>site_id</code> 做分桶键，因为它基数高、且查询几乎都带站点过滤。假设每个分区 10 个桶，<code>WHERE site_id = 54321</code> 的查询能裁掉 9 个桶，只扫 1/10 数据：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">site_access</span><span class="p">(</span>
+<span class="w">    </span><span class="n">event_day</span><span class="w"> </span><span class="nb">DATE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">site_id</span><span class="w">   </span><span class="nb">INT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;10&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">city_code</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+<span class="w">    </span><span class="n">pv</span><span class="w">        </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">SUM</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;0&#39;</span>
+<span class="p">)</span>
+<span class="k">AGGREGATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">event_day</span><span class="p">,</span><span class="w"> </span><span class="n">site_id</span><span class="p">,</span><span class="w"> </span><span class="n">city_code</span><span class="p">)</span>
+<span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">date_trunc</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">event_day</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">site_id</span><span class="p">);</span>
+</code></pre></div>
+<p>但如果 <code>site_id</code> 分布极不均匀（少数热门站点占了绝大多数访问，二八分布），单列分桶会造成严重倾斜、形成局部性能瓶颈。此时可以改用 <code>site_id, city_code</code> 组合分桶，把数据划得更均匀。</p>
+<blockquote>
+<p><strong>短查询 vs 长查询</strong>：<code>site_id</code> 单列分桶利于<strong>短查询</strong>（扫描量小、单机即可完成，减少节点间数据交换）；<code>site_id, city_code</code> 组合分桶利于<strong>长查询</strong>（扫描量大，靠多机并行提速）。</p>
+</blockquote>
+<h2 id="32">3.2. 分桶数量</h2>
+<ul>
+<li><strong>自动设置（推荐）</strong>：自 v2.5.7 起，StarRocks 会根据机器资源和数据量自动决定分桶数，不设 <code>BUCKETS</code> 即可。</li>
+<li><strong>手动设置</strong>：如果单分区原始数据预计超过 100 GB，建议手动设置。经验法则是<strong>每 10 GB 原始数据一个 Tablet</strong>，Tablet 大小一般控制在 1～10 GB。</li>
+</ul>
+<blockquote>
+<p>分桶数设置原则：桶太少，并行度不够；桶太多，Tablet 过多会增加 FE/BE 的元数据管理和调度开销。自 v3.2 起，建表后还可以通过 <code>ALTER TABLE</code> 调整分桶方式、分桶数量和排序键，以适应变化的业务。</p>
+</blockquote>
+<h1 id="4">4. 小结</h1>
+<ul>
+<li>数据分布分两级：分区负责裁剪扫描量和生命周期管理，分桶负责并行度和数据均衡。</li>
+<li>分区优先用表达式分区，通常按时间列划分。</li>
+<li>分桶键优先选"高基数 + 常用过滤条件"的列，倾斜严重时用多列组合。</li>
+</ul>
+<p>数据摆放好之后，还要让查询能在每个 Tablet 里快速找到需要的行。这就是下一篇 <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87004_%E6%8E%92%E5%BA%8F%E9%94%AE%E3%80%81%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/">基础篇004 · 排序键、索引与行列混存</a> 的内容。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

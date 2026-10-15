@@ -1,0 +1,2022 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/starrocks/StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/">
+      
+      
+        <link rel="prev" href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A7%88/">
+      
+      
+        <link rel="next" href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>🌿表类型 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🌿表类型
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库与缓存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    StarRocks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    StarRocks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87001_%E5%88%9D%E8%AF%86StarRocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌱初识StarRocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87002_%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌱快速开始
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计概览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表类型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据库与缓存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87001_%E5%88%9D%E8%AF%86StarRocks/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    StarRocks
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A7%88/">基础篇001</a> 提到，一条建表语句里的第一个设计决策是表类型。它决定了<strong>一张表如何对待"Key 相同的多行数据"</strong>：是全部保留、聚合成一行，还是用新的覆盖旧的。选错表类型会直接改变数据语义，甚至让明细数据永久丢失，而且<strong>建表后不能修改</strong>。这一篇把四种表类型逐个讲透，再横向对比，最后给出选型方法和一个可复现的实验。</p>
+<blockquote>
+<p>本文内容整理自 StarRocks 官方文档：<a href="https://docs.starrocks.io/zh/docs/table_design/table_types/">表类型概览</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/table_types/duplicate_key_table/">明细表</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/table_types/aggregate_table/">聚合表</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/table_types/unique_key_table/">更新表</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/table_types/primary_key_table/">主键表</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/table_types/table_capabilities/">各类表的能力对比</a>。版本敏感的内容（语法、参数、特性起始版本）请以你实际部署版本的官方文档为准。本文验证环境为 StarRocks 4.1.x。</p>
+</blockquote>
+<h1 id="1">1. 表类型概述</h1>
+<p>建表时，你需要指定表类型（Table Type），这样数据导入到表时，StarRocks会按照排序键对数据进行排序、处理、存储。</p>
+<blockquote>
+<p><strong>排序键：</strong></p>
+<p>数据导入到使用某个类型的表，会按照建表时指定的一列或多列排序后存储，这部分用于排序的列就称为排序键。排序键通常为查询时过滤条件频繁使用的一个或多个列，用以加速查询。</p>
+<p>自 3.0 版本起，主键表支持使用 <code>ORDER BY</code> 定义排序键，自 3.3 版本起，明细表、聚合表和更新表支持使用 <code>ORDER BY</code> 定义排序键。</p>
+<p>排序键如何加速查询（前缀索引原理）、怎么设计，详见 <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87004_%E6%8E%92%E5%BA%8F%E9%94%AE%E3%80%81%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/">基础篇004 · 排序键、索引与行列混存</a>。本文只讲各表类型的 Key 和排序键是什么关系。</p>
+</blockquote>
+<p>StarRocks 支持四种表类型，分别是明细表 (Duplicate Key Table)、聚合表 (Aggregate Table)、更新表 (Unique Key Table) 和主键表 (Primary Key Table)。它们能支持日志分析、数据汇总分析、实时分析等多种场景，一句话概括各自定位：</p>
+<ul>
+<li><strong>明细表</strong>：简单易用，数据无约束、可重复，适合存储不需要约束和预聚合的原始数据（如日志）。</li>
+<li><strong>聚合表</strong>：存储预聚合后的数据，降低聚合查询扫描和计算的数据量，提高聚合效率。</li>
+<li><strong>更新表</strong>：适用于实时更新场景，目前已逐渐被主键表取代。</li>
+<li><strong>主键表</strong>：能力最强，具有唯一非空约束，在支撑实时更新、部分列更新的同时保证查询性能，适用于实时查询。</li>
+</ul>
+<blockquote>
+<p><strong>先破一个误区：Key ≠ MySQL 的约束</strong></p>
+<p>从 MySQL 过来的人看到 <code>PRIMARY KEY</code>、<code>UNIQUE KEY</code>，第一反应是"主键约束、唯一约束"。但在 StarRocks 里，这几个 Key 的含义不一样：</p>
+<p><strong>MySQL 的 Key 回答"能不能写进来"</strong>（写入重复主键直接报错拒绝）；<strong>StarRocks 的 Key 回答"写进来的相同 Key 行怎么合并"</strong>（不报错，按表类型决定去重/聚合/覆盖）。</p>
+</blockquote>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>建表后，<strong>表类型不支持修改</strong>。如果需要修改表类型，要重新建表。</li>
+<li>建表时，排序键在建表语句中出现的次序，为数据存储时多重排序的次序。</li>
+<li>不支持排序键的数据类型： BITMAP、HLL。</li>
+<li>前缀索引的长度限制为 36 字节。如果排序键中全部列的值的长度加起来超过 36 字节，则前缀索引仅会保存限制范围内排序键的若干前缀列。</li>
+</ul>
+<h1 id="2-duplicate-key-table">2. 明细表（Duplicate Key Table）</h1>
+<p>明细表是<strong>默认表类型</strong>，建表时不指定任何 Key 就是明细表。表中数据没有任何约束，相同的行可以重复存在。</p>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>分析原始数据，例如原始日志、原始操作记录等；</li>
+<li>查询方式灵活，不需要局限于预聚合的分析方式；</li>
+<li>导入日志数据或时序数据，主要特点是旧数据不会更新，只会追加新数据。</li>
+</ul>
+<p><strong>原理——只追加，不合并</strong>：明细表是四种表类型里最"朴素"的——它不对相同 Key 做任何去重、聚合或覆盖，导入什么就存什么。导入两行完全相同的数据，表里就是实实在在的两行，而不是一行。因此它能完整召回所有历史明细数据，但也<strong>不支持修改历史数据</strong>，只能追加新数据。</p>
+<p><strong>建表示例</strong>（分析某时间范围某类事件，把常用过滤列 <code>event_time</code>、<code>event_type</code> 作为排序键）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">detail</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">event_time</span><span class="w">  </span><span class="n">DATETIME</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;datetime of event&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">event_type</span><span class="w">  </span><span class="nb">INT</span><span class="w">      </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;type of event&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w">     </span><span class="nb">INT</span><span class="w">      </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;id of user&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">device_code</span><span class="w"> </span><span class="nb">INT</span><span class="w">      </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;device code&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">channel</span><span class="w">     </span><span class="nb">INT</span><span class="w">      </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;&quot;</span>
+<span class="p">)</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">event_time</span><span class="p">,</span><span class="w"> </span><span class="n">event_type</span><span class="p">);</span>
+</code></pre></div>
+<p>这里把事件时间 <code>event_time</code> 和事件类型 <code>event_type</code> 定义为排序键——因为分析时经常按"某时间范围、某类事件"过滤，查询条件命中排序键前缀时能快速过滤、减少扫描。</p>
+<p><strong>使用说明</strong>：</p>
+<ul>
+<li><strong>排序键（v3.3.0 起支持 ORDER BY）</strong>：可用 <code>ORDER BY</code> 指定任意列组合作为排序键。注意三条规则：<ul>
+<li>如果同时写了 <code>ORDER BY</code> 和 <code>DUPLICATE KEY</code>，则 <code>DUPLICATE KEY</code> <strong>无效</strong>，以 <code>ORDER BY</code> 为准；</li>
+<li>如果两者都不写，默认取<strong>表的前三列</strong>作为排序键；</li>
+<li>v3.3.0 之前只能用 <code>DUPLICATE KEY</code> 来指定排序键。</li>
+</ul>
+</li>
+<li><strong>分桶</strong>：v3.1.0 起明细表支持<strong>随机分桶</strong>，并且是默认分桶方式，建表时可以不写 <code>DISTRIBUTED BY HASH</code>；v3.1.0 之前必须指定哈希分桶键，否则建表失败。随机分桶目前<strong>只有明细表支持</strong>。</li>
+<li><strong>分桶数量</strong>：v2.5.7 起，建表和新增分区时可以不设置分桶数量（<code>BUCKETS</code>），由 StarRocks 自动设置。</li>
+<li><strong>索引</strong>：建表时支持为所有列创建 Bitmap 索引、Bloom Filter 索引。</li>
+</ul>
+<h1 id="3-aggregate-table">3. 聚合表（Aggregate Table）</h1>
+<p>聚合表为<strong>预聚合</strong>而生：建表时定义聚合键，并给每个<strong>值列</strong>指定聚合函数（SUM/MAX/MIN/REPLACE 等）。相同聚合键的多行，值列按函数自动合并成一行。它能在查询前就把数据按维度汇总，大幅降低聚合查询需要扫描和计算的数据量。</p>
+<p><strong>适用场景</strong>：数据统计和分析类场景，例如：</p>
+<ul>
+<li>分析网站或 App 的流量、用户停留时间和总访问次数；</li>
+<li>分析广告的总点击量、总浏览量和消费统计；</li>
+<li>分析电商年度交易数据，找出各季度、各月份的地域畅销商品。</li>
+</ul>
+<p>这类场景的共同特点是：大多数查询是 SUM、MAX、MIN 这类聚合查询；不需要检索原始明细数据；历史数据不常更新，只追加新数据。</p>
+<p><strong>原理——数据会被聚合三次</strong>：</p>
+<pre class="mermaid"><code>flowchart LR
+    IN["原始数据&lt;br/&gt;多行相同聚合键"] --&gt; V["① 导入时&lt;br/&gt;每批数据内按聚合键合并"]
+    V --&gt; C["② 后台 Compaction&lt;br/&gt;多版本文件合并时再聚合"]
+    C --&gt; Q["③ 查询时&lt;br/&gt;返回前聚合所有版本"]
+    Q --&gt; R["最终聚合结果"]</code></pre>
+<ul>
+<li><strong>导入阶段</strong>：数据按批次导入，每批形成一个版本，同一版本内相同聚合键的数据先聚合；</li>
+<li><strong>后台 Compaction 阶段</strong>：多个版本的文件定期合并成一个大文件，合并时再聚合相同聚合键的数据；</li>
+<li><strong>查询阶段</strong>：返回结果前，把所有版本中相同聚合键的数据聚合。</li>
+</ul>
+<p>比如导入 <code>(2020-05-01, CHN, 1)</code>、<code>(2020-05-01, CHN, 2)</code>、<code>(2020-05-01, USA, 3)</code>、<code>(2020-05-01, USA, 4)</code> 四条，<code>pv</code> 列声明为 SUM，导入时就聚合成 <code>CHN→3</code>、<code>USA→7</code> 两条。</p>
+<p><strong>建表示例</strong>（统计各城市访问各网页的次数，<code>pv</code> 列用 SUM 聚合）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">aggregate_tbl</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">site_id</span><span class="w">   </span><span class="n">LARGEINT</span><span class="w">    </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;id of site&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nb">date</span><span class="w">      </span><span class="nb">DATE</span><span class="w">        </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;time of event&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">city_code</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w">          </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;city_code of user&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">pv</span><span class="w">        </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">SUM</span><span class="w">  </span><span class="k">DEFAULT</span><span class="w"> </span><span class="ss">&quot;0&quot;</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;total page views&quot;</span>
+<span class="p">)</span>
+<span class="k">AGGREGATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">site_id</span><span class="p">,</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w"> </span><span class="n">city_code</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">site_id</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>使用说明</strong>：</p>
+<ul>
+<li>
+<p><strong>聚合函数在建表时就焊死，且和"数据怎么写进来"强绑定</strong>——这是聚合表最容易踩的坑：</p>
+<table>
+<thead>
+<tr>
+<th>写入方式</th>
+<th>该用的函数</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每次事件写一行 <code>pv=1</code></td>
+<td><code>SUM</code></td>
+<td>自动累加成总次数</td>
+</tr>
+<tr>
+<td>外部已算好"累计 N"，每次写最新值</td>
+<td><code>REPLACE</code></td>
+<td>用最新值覆盖</td>
+</tr>
+</tbody>
+</table>
+<p>本想"每次 +1"却用了 <code>REPLACE</code>，结果永远是 1；本想"写最新值"却用了 <code>SUM</code>，数字会被重复累加到爆。
+* <strong>聚合键规则</strong>：聚合键必须定义在其他列之前。如果显式用 <code>AGGREGATE KEY</code> 定义，它<strong>必须包含除值列之外的所有列</strong>，否则建表失败；若不显式定义，则默认把除值列外的所有列都当作聚合键。聚合键具有唯一性约束。
+* <strong>值列与聚合函数</strong>：在列名后指定聚合函数即把该列定义为值列。常用的聚合函数有 SUM、MAX、MIN、REPLACE、REPLACE_IF_NOT_NULL、HLL_UNION、PERCENTILE_UNION、BITMAP_UNION，完整列表以当前版本 <code>CREATE TABLE</code> 文档为准。
+* <strong>排序键在聚合前过滤，值列在聚合后过滤</strong>：v3.3.0 起聚合表的排序键与聚合键解耦，可用 <code>ORDER BY</code> 单独指定（两者的列需相同、顺序可不同）。这个解耦很有价值：查询时<strong>排序键列在多版本聚合之前就能过滤数据，而值列要等聚合之后才能过滤</strong>。所以应把经常用作过滤条件的列设为排序键，让数据在聚合前就被裁掉。
+* <strong>分桶</strong>：建表时必须用 <code>DISTRIBUTED BY HASH</code> 指定分桶键；v2.5.7 起可以不设置分桶数量，由 StarRocks 自动设置。
+* <strong>索引</strong>：建表时只能为 Key 列创建 Bitmap 索引、Bloom Filter 索引。
+* <strong>导入时须给出全部列</strong>：例如更新上面的 <code>aggregate_tbl</code> 时，必须同时给出 <code>site_id</code>、<code>date</code>、<code>city_code</code>、<code>pv</code> 四列。例外是：有默认值的列可以不导入；把值列的聚合函数设为 <code>REPLACE_IF_NOT_NULL</code> 可以实现部分列更新（导入值为 NULL 的列保持原值）。</p>
+</li>
+</ul>
+<h2 id="31-v340-beta">3.1. 深入：通用聚合函数状态（v3.4.0 起，Beta）</h2>
+<p>早期聚合表的值列只能用 SUM、MAX、MIN、REPLACE、HLL_UNION、PERCENTILE_UNION、BITMAP_UNION 等有限的内置聚合函数。为了让理论上所有内置聚合函数都能用于聚合表，v3.4.0 引入了<strong>通用聚合状态</strong>：通过"函数名 + 入参类型"唯一标识一个聚合函数，把它的<strong>中间状态</strong>存进值列，列类型自动推断为该函数的中间状态类型。</p>
+<p><strong>定义方式</strong>：<code>col_name agg_func_name(parameter1_type, [parameter2_type], ...)</code></p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">test_create_agg_table</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">dt</span><span class="w">             </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="w">    </span><span class="n">hll_sketch_agg</span><span class="w"> </span><span class="n">ds_hll_count_distinct</span><span class="p">(</span><span class="nb">varchar</span><span class="p">),</span><span class="w">  </span><span class="c1">-- 存储该函数的中间状态</span>
+<span class="w">    </span><span class="n">avg_agg</span><span class="w">        </span><span class="k">avg</span><span class="p">(</span><span class="nb">bigint</span><span class="p">),</span>
+<span class="w">    </span><span class="n">array_agg_agg</span><span class="w">  </span><span class="n">array_agg</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+<span class="w">    </span><span class="n">min_by_agg</span><span class="w">     </span><span class="n">min_by</span><span class="p">(</span><span class="nb">varchar</span><span class="p">,</span><span class="w"> </span><span class="nb">bigint</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">AGGREGATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span><span class="w"> </span><span class="n">BUCKETS</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>三个组合函数</strong>负责操作这些中间状态：</p>
+<table>
+<thead>
+<tr>
+<th>组合函数</th>
+<th>函数类别</th>
+<th>作用</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{函数名}_state</code></td>
+<td>标量函数</td>
+<td>把输入参数转换成中间状态，用于写入</td>
+<td>中间状态类型</td>
+</tr>
+<tr>
+<td><code>{函数名}_union</code></td>
+<td>聚合函数</td>
+<td>把多个中间状态合并成一个状态</td>
+<td>中间状态类型</td>
+</tr>
+<tr>
+<td><code>{函数名}_merge</code></td>
+<td>聚合函数</td>
+<td>合并多个中间状态，并计算出最终结果</td>
+<td>最终结果类型</td>
+</tr>
+</tbody>
+</table>
+<p>典型用法是写入时用 <code>_state</code> 把明细转成中间状态，查询时用 <code>_merge</code> 拿到最终结果：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- 写入：把明细表 t1 的数据转成中间状态，灌入聚合表</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">test_create_agg_table</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span>
+<span class="w">       </span><span class="n">ds_hll_count_distinct_state</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">       </span><span class="n">avg_state</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">       </span><span class="n">array_agg_state</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">       </span><span class="n">min_by_state</span><span class="p">(</span><span class="n">province</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">t1</span><span class="p">;</span>
+
+<span class="c1">-- 查询：合并中间状态，得到最终聚合结果</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span>
+<span class="w">       </span><span class="n">ds_hll_count_distinct_merge</span><span class="p">(</span><span class="n">hll_sketch_agg</span><span class="p">),</span>
+<span class="w">       </span><span class="n">avg_merge</span><span class="p">(</span><span class="n">avg_agg</span><span class="p">),</span>
+<span class="w">       </span><span class="n">array_agg_merge</span><span class="p">(</span><span class="n">array_agg_agg</span><span class="p">),</span>
+<span class="w">       </span><span class="n">min_by_merge</span><span class="p">(</span><span class="n">min_by_agg</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">test_create_agg_table</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">dt</span><span class="p">;</span>
+</code></pre></div>
+<p>通用聚合状态也可以用在同步和异步物化视图里：物化视图中存 <code>xxx_union(xxx_state(col))</code>，之后直接写 <code>avg(id)</code> 这类普通聚合查询，就能被物化视图透明加速。</p>
+<p><strong>使用限制</strong>：</p>
+<ul>
+<li>仅支持至少有一个参数的 StarRocks 内置函数，不支持 Java 和 Python UDAF；</li>
+<li>聚合状态列的类型固定为 Nullable（计数函数除外），且不可修改；</li>
+<li>定义多参数函数时只需写参数类型，不需要参数值；</li>
+<li>不支持 ORDER BY、DISTINCT 这类复杂参数；</li>
+<li>GROUP_CONCAT、WINDOW_FUNNEL、APPROX_TOP_K 等函数的支持仍在开发中。</li>
+</ul>
+<h1 id="4-unique-key-table">4. 更新表（Unique Key Table）</h1>
+<p>更新表为实时、频繁更新而设计。建表时定义唯一键，多条数据唯一键相同时，value 列会进行 REPLACE，查询时返回唯一键相同的一组数据中的最新数据。<strong>该类型目前已逐渐被主键表取代，新表设计建议优先主键表。</strong></p>
+<p><strong>适用场景</strong>：实时且频繁更新的业务，例如电商订单分析——订单状态经常变化，每天更新量可达上亿。</p>
+<p><strong>原理——多版本 + 读时合并（Merge-On-Read）</strong>：更新表可以视为聚合表的特例，即 value 列的聚合函数固定为 REPLACE。数据分批导入，每批分配一个版本号；同一唯一键可能存在多个版本，查询时返回版本号最大的那条。</p>
+<p>例如下表中 <code>ID</code> 是唯一键，<code>_version</code> 是 StarRocks 内部的版本号：ID=1 的数据导入了两批（版本 1、2），ID=2 的数据导入了三批（版本 3、4、5）。</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>value</th>
+<th>_version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>100</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>101</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>100</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>101</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>102</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>查 ID=1 返回 <code>101</code>（版本 2），查 ID=2 返回 <code>102</code>（版本 5）。</p>
+<p><strong>建表示例</strong>（电商订单经常按日期统计订单状态，所以把常用过滤列 <code>create_time</code>、<code>order_id</code> 作唯一键，订单状态和总价作 value 列）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">create_time</span><span class="w"> </span><span class="nb">DATE</span><span class="w">   </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;create time of an order&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">order_id</span><span class="w">    </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;id of an order&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">order_state</span><span class="w"> </span><span class="nb">INT</span><span class="w">    </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;state of an order&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">total_price</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="ss">&quot;price of an order&quot;</span>
+<span class="p">)</span>
+<span class="k">UNIQUE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">create_time</span><span class="p">,</span><span class="w"> </span><span class="n">order_id</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">order_id</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>使用说明</strong>：</p>
+<ul>
+<li><strong>唯一键规则</strong>：唯一键必须用 <code>UNIQUE KEY</code> 显式定义，且必须定义在其他列之前，满足唯一性约束。</li>
+<li><strong>排序键解耦（v3.3.0 起）</strong>：可用 <code>ORDER BY</code> 单独指定排序键（排序键与唯一键的列需相同、顺序可不同）。和聚合表同理，排序键能在多版本聚合<strong>之前</strong>过滤数据，value 列要等聚合之后才能过滤，所以应把频繁用作过滤条件的列设为排序键。</li>
+<li><strong>分桶</strong>：建表时必须用 <code>DISTRIBUTED BY HASH</code> 指定分桶键；v2.5.7 起可以不设置分桶数量。</li>
+<li><strong>索引</strong>：建表时只能为 Key 列创建 Bitmap 索引、Bloom Filter 索引。</li>
+<li><strong>导入时须给出全部列</strong>：例如上例的 <code>create_time</code>、<code>order_id</code>、<code>order_state</code>、<code>total_price</code> 四列都要指明；有默认值的列可以不导入。</li>
+<li><strong>导入频率不宜太高</strong>：查询需要在线合并多版本，版本过多会拖慢查询。业务要求分钟级就每分钟导一次，不必追求秒级。</li>
+</ul>
+<h1 id="5-primary-key-table">5. 主键表（Primary Key Table）</h1>
+<p>主键表使用 StarRocks 全新设计的存储引擎，<strong>既支撑实时数据更新，又保证高效的复杂查询性能</strong>，让实时分析不再受限于 T+1 延迟。主键具有唯一且非空约束，新数据主键与老数据冲突时直接替换老数据。</p>
+<p>主键表的能力随版本持续增强，几个关键节点：</p>
+<ul>
+<li>v3.0 起解耦排序键与主键，支持单独指定排序键；</li>
+<li>v3.1 起存算分离模式支持创建主键表；</li>
+<li>v3.1.4 起支持持久化主键索引到本地磁盘；</li>
+<li>v3.3.2 起支持持久化主键索引到对象存储。</li>
+</ul>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li><strong>实时对接事务型数据</strong>：TP 库除了插入，还有大量更新和删除。通过 Flink-CDC 等工具直接对接 Binlog，把增删改实时同步到主键表，能简化同步流程，查询性能相比 Merge-On-Read 的更新表提升 3～10 倍。</li>
+<li><strong>部分列更新实现多流 JOIN</strong>：用户画像等场景常用大宽表，上游数据来自多个业务（购物、快递、银行等）或系统（计算标签的机器学习系统）。各业务只更新自己负责的列即可，同时继续享有实时增删改和高效查询。</li>
+</ul>
+<p><strong>原理——Delete+Insert + 主键索引</strong>：</p>
+<p>更新表和聚合表整体采用 Merge-On-Read 策略：写入简单高效，但读取时要在线合并多个版本的数据文件，而且 Merge 算子的存在让谓词和索引无法下推到底层数据，严重影响查询性能。主键表为了兼顾实时更新和查询性能，元数据组织、读写方式完全不同：</p>
+<pre class="mermaid"><code>flowchart TB
+    subgraph UNIQ["更新表：Merge-On-Read"]
+        U1["多版本都留着"] --&gt; U2["查询时在线 Merge 多版本"]
+        U2 --&gt; U3["Merge 算子挡住谓词/索引下推&lt;br/&gt;→ 查询慢"]
+    end
+    subgraph PK["主键表：Delete+Insert"]
+        P1["主键索引定位旧行"] --&gt; P2["旧行在 DelVector 标记删除&lt;br/&gt;新行写入新文件"]
+        P2 --&gt; P3["查询只读最新数据&lt;br/&gt;谓词/索引可下推 → 查询快"]
+    end</code></pre>
+<p>主键表借助<strong>主键索引</strong> + <strong>DelVector</strong>（删除标记）实现：</p>
+<ul>
+<li><strong>写入</strong>：由内部 Loadjob 完成，含一批 Insert/Update/Delete 变更。导入时把对应 Tablet 的主键索引加载进内存。<strong>Delete</strong> 通过主键索引找到旧行所在的数据文件和行号，在 DelVector 中标记删除；<strong>Update</strong> 则是把旧行在 DelVector 标记删除、同时把最新数据写入新文件（相当于 Update = Delete + Insert），并更新主键索引里该行的新位置。</li>
+<li><strong>读取</strong>：由于历史重复数据写入时已被标记删除，同一主键只需读最新一条，无需在线 Merge；扫描时谓词和各类索引可下推到 Scan 层，减少扫描开销。</li>
+</ul>
+<h2 id="51-loadjob-tablet">5.1. 深入：Loadjob 的两阶段与 Tablet 结构</h2>
+<p>StarRocks 底层是列式存储。一个 Tablet 往往包含多个 Rowset，每个 Rowset 的数据分段存储在 Segment 文件中；Segment 用列存格式组织数据（类似 Parquet），并且<strong>不可修改</strong>。</p>
+<p>数据写入时，BE 执行 Loadjob。一个 Loadjob 包含一批数据变更，可视为一个具有 ACID 属性的事务，分 write 和 commit 两阶段：</p>
+<ul>
+<li><strong>write 阶段</strong>：按分区分桶信息把数据分发到对应 Tablet，每个 Tablet 收到数据后按列存格式存储，形成一个新的 Rowset。</li>
+<li><strong>commit 阶段</strong>：所有数据都写入成功后，FE 向所有参与的 Tablet 发起 commit，每个 commit 携带一个 version 版本号，代表 Tablet 数据的最新版本。commit 主要包括：查找并更新主键索引，记录所有变更的数据并标记为删除；根据标记为删除的数据生成 DelVector；生成新版本的元数据。</li>
+</ul>
+<p>读取时，根据最新的 Tablet 版本在元数据中找到要读的 Rowset，读取 Segment 时查找最新版本的 DelVector，从而跳过同主键的旧数据，只读最新数据；过滤算子下推到 Scan 层，可直接利用各类索引过滤。</p>
+<p>一个 Tablet 是实际物理存储单元（以副本分布在各 BE），主要含以下组件：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>元数据</strong></td>
+<td>保存 Tablet 的版本历史及每个版本的信息（含哪些 Rowset）。每次 Loadjob 或 Compaction 的 commit 阶段都生成一个新版本</td>
+</tr>
+<tr>
+<td><strong>主键索引</strong></td>
+<td>HashMap 结构，Key 是编码后的主键值，Value 记录数据行位置（rowset_id、segment_id、rowid）。通常只在写入时用到</td>
+</tr>
+<tr>
+<td><strong>DelVector</strong></td>
+<td>每个 Rowset 中每个 Segment 文件对应的删除标记</td>
+</tr>
+<tr>
+<td><strong>Rowset</strong></td>
+<td>逻辑概念，存储 Tablet 中一次数据变更的数据集合</td>
+</tr>
+<tr>
+<td><strong>Segment</strong></td>
+<td>Rowset 的数据实际分段存储在一个或多个 Segment（列存文件）中，按列包含列值和列相关的索引信息</td>
+</tr>
+</tbody>
+</table>
+<h2 id="52">5.2. 建表与使用说明</h2>
+<p>只需在 <code>CREATE TABLE</code> 中用 <code>PRIMARY KEY</code> 定义主键，即可创建主键表。主键表只支持哈希分桶，所以还要用 <code>DISTRIBUTED BY HASH</code> 定义分桶键：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders1</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">order_id</span><span class="w"> </span><span class="nb">bigint</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dt</span><span class="w">       </span><span class="nb">date</span><span class="w">   </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w">  </span><span class="nb">INT</span><span class="w">    </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">good_id</span><span class="w">  </span><span class="nb">INT</span><span class="w">    </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">cnt</span><span class="w">      </span><span class="nb">int</span><span class="w">    </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">revenue</span><span class="w">  </span><span class="nb">int</span><span class="w">    </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">)</span>
+<span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">order_id</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="w"> </span><span class="p">(</span><span class="n">order_id</span><span class="p">);</span>
+</code></pre></div>
+<p>实际业务中通常还会用到分区和排序键。假设 <code>order_id</code> 能唯一标识一行，并且经常按"订单日期 + 商户"查询销售情况，采用 <code>dt</code> 分区、<code>merchant_id</code> 分桶：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders2</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">order_id</span><span class="w">    </span><span class="nb">bigint</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dt</span><span class="w">          </span><span class="nb">date</span><span class="w">    </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">merchant_id</span><span class="w"> </span><span class="nb">int</span><span class="w">     </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w">     </span><span class="nb">int</span><span class="w">     </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">good_id</span><span class="w">     </span><span class="nb">int</span><span class="w">     </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">good_name</span><span class="w">   </span><span class="n">string</span><span class="w">  </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">price</span><span class="w">       </span><span class="nb">int</span><span class="w">     </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">cnt</span><span class="w">         </span><span class="nb">int</span><span class="w">     </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">revenue</span><span class="w">     </span><span class="nb">int</span><span class="w">     </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">state</span><span class="w">       </span><span class="n">tinyint</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">)</span>
+<span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">merchant_id</span><span class="p">)</span><span class="w">   </span><span class="c1">-- 主键须包含分区列 dt 和分桶列 merchant_id</span>
+<span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">date_trunc</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="w"> </span><span class="p">(</span><span class="n">merchant_id</span><span class="p">)</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">merchant_id</span><span class="p">)</span><span class="w">                </span><span class="c1">-- 排序键与主键解耦，按常用过滤列排序</span>
+<span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;enable_persistent_index&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;true&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>主键</strong>的规则：</p>
+<ul>
+<li>主键列必须定义在其他列之前；</li>
+<li>主键必须包含分区列和分桶列；</li>
+<li>主键列支持数值（整型、布尔）、日期、字符串类型，<strong>不支持 DECIMAL</strong>；</li>
+<li>默认单条主键值编码后最大长度 128 字节；</li>
+<li>建表后不支持修改主键定义；</li>
+<li>主键列的值不能更新，以免破坏数据一致性。</li>
+</ul>
+<p><strong>主键索引</strong>保存主键值和数据行位置的映射，通常只在导入数据时把相关 Tablet 的主键索引加载进内存。可以综合查询和更新性能、内存和磁盘情况，选择是否持久化：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>配置</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>持久化（默认）</td>
+<td><code>enable_persistent_index = true</code></td>
+<td>导入时少部分索引在内存、大部分在磁盘，避免占用过大内存；通常性能接近全内存索引。SSD 建议开启；HDD 且导入频率不高也可开启</td>
+</tr>
+<tr>
+<td>全内存</td>
+<td><code>enable_persistent_index = false</code></td>
+<td>主键索引全部放内存，内存开销大</td>
+</tr>
+</tbody>
+</table>
+<p>存算分离集群自 v3.1.4 起支持本地磁盘持久化索引，v3.3.2 起可通过表属性 <code>persistent_index_type = CLOUD_NATIVE</code> 持久化到对象存储。</p>
+<p><strong>排序键</strong>（v3.0 起与主键解耦）：由 <code>ORDER BY</code> 定义，可以是任意满足类型要求的列组合，用于按序存储并构建前缀索引。</p>
+<ul>
+<li>指定了排序键，就按排序键构建前缀索引；没指定，就按主键构建；</li>
+<li>建表后可以用 <code>ALTER TABLE ... ORDER BY ...</code> 修改排序键，但不支持删除排序键，也不支持修改排序列的数据类型。</li>
+</ul>
+<p><strong>数据变更</strong>：主键表是唯一支持在导入时删除数据、以及用 <code>UPDATE</code> 语句更新数据的表类型，还支持部分列更新，具体能力见第 6.3 节。另外，自增列可以用来生成主键。</p>
+<h1 id="6">6. 四种表类型对比</h1>
+<p>前面逐个讲了四种表类型，这一章从四个角度横向对比，方便选型时速查。</p>
+<h2 id="61-key">6.1. Key 列与排序键</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>明细表</th>
+<th>聚合表</th>
+<th>更新表</th>
+<th>主键表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Key 列</strong></td>
+<td><code>DUPLICATE KEY</code></td>
+<td><code>AGGREGATE KEY</code></td>
+<td><code>UNIQUE KEY</code></td>
+<td><code>PRIMARY KEY</code></td>
+</tr>
+<tr>
+<td><strong>约束</strong></td>
+<td>无</td>
+<td>唯一</td>
+<td>唯一</td>
+<td>唯一、非空</td>
+</tr>
+<tr>
+<td><strong>相同 Key 的数据</strong></td>
+<td>新旧数据都保留</td>
+<td>按值列聚合函数聚合新旧数据</td>
+<td>新数据替代旧数据</td>
+<td>新数据替代旧数据</td>
+</tr>
+<tr>
+<td><strong>底层机制</strong></td>
+<td>直接追加</td>
+<td>多阶段聚合（Merge-On-Read）</td>
+<td>多版本（Merge-On-Read）</td>
+<td>Delete+Insert</td>
+</tr>
+<tr>
+<td><strong>查询性能</strong></td>
+<td>高</td>
+<td>高（已预聚合）</td>
+<td>较低（在线合并）</td>
+<td>高（谓词和索引可下推）</td>
+</tr>
+<tr>
+<td><strong>Key 与排序键</strong></td>
+<td>v3.3.0 起支持 <code>ORDER BY</code>；与 <code>DUPLICATE KEY</code> 同时使用时后者无效</td>
+<td>v3.3.0 起解耦，两者列相同、顺序可不同</td>
+<td>v3.3.0 起解耦，两者列相同、顺序可不同</td>
+<td>v3.0.0 起解耦，排序键可为任意列组合</td>
+</tr>
+<tr>
+<td><strong>分区/分桶列</strong></td>
+<td>无要求</td>
+<td>必须在聚合键中</td>
+<td>必须在唯一键中</td>
+<td>必须在主键中</td>
+</tr>
+<tr>
+<td><strong>典型场景</strong></td>
+<td>日志、明细</td>
+<td>固定口径汇总</td>
+<td>实时更新（历史方案）</td>
+<td>实时更新、CDC、部分列更新</td>
+</tr>
+</tbody>
+</table>
+<p><strong>UNIQUE 和 PRIMARY 的关键区别</strong>：两者对相同 Key 的处理<strong>结果一样</strong>（后写覆盖），光看查询输出分不出区别，差别在底层机制和性能——更新表靠 Merge-On-Read（查询慢、谓词索引无法下推），主键表靠 Delete+Insert（查询快、可下推、支持部分列更新）。所以选型不是看"要不要覆盖"，而是看"查询性能要求高不高、是不是实时 CDC"。</p>
+<h2 id="62">6.2. 列的数据类型</h2>
+<p><strong>Key 列</strong>（以及排序键）支持数值（整型、布尔、DECIMAL）、字符串、日期时间。例外是<strong>主键表的 Key 列不支持 DECIMAL</strong>。</p>
+<p><strong>Value 列</strong>都支持数值、字符串、日期时间等基础类型，但对特殊类型的支持各不相同：</p>
+<table>
+<thead>
+<tr>
+<th>Value 列类型</th>
+<th>明细表</th>
+<th>聚合表</th>
+<th>更新表</th>
+<th>主键表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BITMAP</strong></td>
+<td>不支持</td>
+<td>支持，聚合函数须为 <code>bitmap_union</code>、<code>replace</code> 或 <code>replace_if_not_null</code></td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>HLL</strong></td>
+<td>不支持</td>
+<td>支持，聚合函数须为 <code>hll_union</code>、<code>replace</code> 或 <code>replace_if_not_null</code></td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>PERCENTILE</strong></td>
+<td>不支持</td>
+<td>支持，聚合函数须为 <code>percentile_union</code>、<code>replace</code> 或 <code>replace_if_not_null</code></td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>JSON / ARRAY / MAP / STRUCT</strong></td>
+<td>支持</td>
+<td>支持，聚合函数须为 <code>replace</code> 或 <code>replace_if_not_null</code></td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+</tbody>
+</table>
+<h2 id="63">6.3. 数据变更</h2>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>明细表</th>
+<th>聚合表</th>
+<th>更新表</th>
+<th>主键表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>导入时 INSERT</strong></td>
+<td>支持</td>
+<td>支持（同聚合键的行会聚合）</td>
+<td>支持（同唯一键的行会更新）</td>
+<td>支持，导入任务中配置 <code>__op=0</code>。内部把 INSERT 和 UPDATE 都当作 UPSERT</td>
+</tr>
+<tr>
+<td><strong>导入时 UPDATE</strong></td>
+<td>不支持</td>
+<td>支持（用 REPLACE 聚合函数实现）</td>
+<td>支持（本身就是 REPLACE）</td>
+<td>支持（同上，UPSERT）</td>
+</tr>
+<tr>
+<td><strong>导入时 DELETE</strong></td>
+<td>不支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>支持，导入任务中配置 <code>__op=1</code></td>
+</tr>
+<tr>
+<td><strong>导入的列是否完整</strong></td>
+<td>默认须导入全部列，有默认值的列可不导</td>
+<td>默认须导入全部列；有默认值的列可不导；值列用 <code>REPLACE_IF_NOT_NULL</code> 可实现部分列更新</td>
+<td>默认须导入全部列，有默认值的列可不导</td>
+<td>默认须导入全部列；开启部分列更新 <code>partial_update</code> 或列有默认值时可不导</td>
+</tr>
+<tr>
+<td><strong>DML INSERT</strong></td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>DML UPDATE</strong></td>
+<td>不支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>支持，Key 列和 Value 列都可作过滤条件</td>
+</tr>
+<tr>
+<td><strong>DML DELETE</strong></td>
+<td>支持，Key 列和 Value 列都可作过滤条件，但只支持简单条件（<code>=</code>、<code>&lt;</code>、<code>&gt;</code> 等）</td>
+<td>只支持 Key 列作过滤条件，且只支持简单条件</td>
+<td>只支持 Key 列作过滤条件，且只支持简单条件</td>
+<td>支持，Key 列和 Value 列都可作过滤条件</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>上表的"简单条件"指基于列本身的 <code>=</code>、<code>&lt;</code>、<code>&gt;</code> 等比较，不支持函数、子查询这类复杂条件。</p>
+</blockquote>
+<h2 id="64">6.4. 与其他功能的兼容性</h2>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>明细表</th>
+<th>聚合表</th>
+<th>更新表</th>
+<th>主键表</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>基于 Key 列建 Bitmap / Bloom Filter 索引</strong></td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>基于 Value 列建 Bitmap / Bloom Filter 索引</strong></td>
+<td>支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>表达式分区 / List 分区</strong></td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>随机分桶</strong></td>
+<td>v3.1 起支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td><strong>异步物化视图</strong></td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>同步物化视图</strong></td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td><strong>CTAS</strong></td>
+<td>支持</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td><strong>备份与恢复</strong></td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>v2.5 起支持</td>
+</tr>
+</tbody>
+</table>
+<h1 id="7">7. 选型决策与动手验证</h1>
+<p>把四种类型收敛成一条判断链：</p>
+<pre class="mermaid"><code>flowchart TD
+    Start["要建一张内部表"] --&gt; Q1{"数据会被更新吗?"}
+    Q1 --&gt;|不会，只追加| Q2{"需要预聚合吗?"}
+    Q2 --&gt;|不需要，保留明细| DUP["明细表&lt;br/&gt;DUPLICATE KEY"]
+    Q2 --&gt;|需要固定口径汇总| AGG["聚合表&lt;br/&gt;AGGREGATE KEY&lt;br/&gt;（按写入方式选 SUM/REPLACE）"]
+    Q1 --&gt;|会| Q3{"要删除数据/部分列更新/CDC/高查询性能?"}
+    Q3 --&gt;|是（推荐）| PK["主键表&lt;br/&gt;PRIMARY KEY"]
+    Q3 --&gt;|一般更新即可| UNIQ["更新表&lt;br/&gt;UNIQUE KEY&lt;br/&gt;（历史方案）"]</code></pre>
+<p><strong>动手验证</strong>：用同一份数据灌进不同类型的表，亲眼看合并语义的差异（单机 Docker 即可，单 BE 记得加 <code>replication_num=1</code>）。</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="n">model_lab</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">model_lab</span><span class="p">;</span>
+
+<span class="c1">-- 明细：全保留</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t_dup</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="nb">INT</span><span class="p">)</span>
+<span class="n">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="n">PROPERTIES</span><span class="p">(</span><span class="ss">&quot;replication_num&quot;</span><span class="o">=</span><span class="ss">&quot;1&quot;</span><span class="p">);</span>
+
+<span class="c1">-- 聚合 SUM：累加</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t_agg_sum</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">SUM</span><span class="p">)</span>
+<span class="k">AGGREGATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="n">PROPERTIES</span><span class="p">(</span><span class="ss">&quot;replication_num&quot;</span><span class="o">=</span><span class="ss">&quot;1&quot;</span><span class="p">);</span>
+
+<span class="c1">-- 聚合 REPLACE：覆盖</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t_agg_rep</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">REPLACE</span><span class="p">)</span>
+<span class="k">AGGREGATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="n">PROPERTIES</span><span class="p">(</span><span class="ss">&quot;replication_num&quot;</span><span class="o">=</span><span class="ss">&quot;1&quot;</span><span class="p">);</span>
+
+<span class="c1">-- 主键：覆盖</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t_pk</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="nb">INT</span><span class="p">)</span>
+<span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="n">PROPERTIES</span><span class="p">(</span><span class="ss">&quot;replication_num&quot;</span><span class="o">=</span><span class="ss">&quot;1&quot;</span><span class="p">);</span>
+
+<span class="c1">-- 同一个 id=1 分两批先后写入 50、80（模拟两个导入批次）</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t_dup</span><span class="w">     </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t_dup</span><span class="w">     </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t_agg_sum</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t_agg_sum</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t_agg_rep</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t_agg_rep</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t_pk</span><span class="w">      </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t_pk</span><span class="w">      </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;dup&#39;</span><span class="w">     </span><span class="k">AS</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t_dup</span>
+<span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;agg_sum&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t_agg_sum</span>
+<span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;agg_rep&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t_agg_rep</span>
+<span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;pk&#39;</span><span class="p">,</span><span class="w">      </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t_pk</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>这里故意用多条 <code>INSERT</code> 模拟"同一个 Key 分批到达"。生产环境不要逐行 <code>INSERT</code>，批量导入请用 Stream Load 等方式。</p>
+</blockquote>
+<p>预期结果：</p>
+<table>
+<thead>
+<tr>
+<th>表</th>
+<th>id=1 的结果</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>明细 t_dup</td>
+<td><strong>两行</strong> 50、80</td>
+<td>全保留</td>
+</tr>
+<tr>
+<td>聚合 t_agg_sum</td>
+<td>一行 <strong>130</strong></td>
+<td>50+80 累加</td>
+</tr>
+<tr>
+<td>聚合 t_agg_rep</td>
+<td>一行 <strong>80</strong></td>
+<td>后写覆盖</td>
+</tr>
+<tr>
+<td>主键 t_pk</td>
+<td>一行 <strong>80</strong></td>
+<td>后写覆盖</td>
+</tr>
+</tbody>
+</table>
+<p>两个最该记住的对比：<code>agg_sum=130 vs agg_rep=80</code>（同是聚合表，函数不同结果天差地别）；<code>agg_rep=80 vs pk=80</code>（结果相同，但聚合表靠 REPLACE 合并、主键表靠 Delete+Insert，机制与适用场景完全不同）。实验做完 <code>DROP DATABASE model_lab;</code> 清理即可。</p>
+<h1 id="8">8. 小结</h1>
+<ul>
+<li>四种表类型的本质区别是<strong>如何处理 Key 相同的多行数据</strong>：明细表全保留，聚合表按函数聚合，更新表和主键表后写覆盖。</li>
+<li>聚合表的聚合函数在建表时就定死，选函数前先想清楚数据以什么形态写进来。</li>
+<li>更新表和主键表结果相同、机制不同：更新表是 Merge-On-Read，主键表是 Delete+Insert。新表优先选主键表。</li>
+<li>主键表是唯一支持导入时删除数据和 <code>UPDATE</code> 语句的表类型，部分列更新能力也最完整；代价是要维护主键索引，并且主键必须包含分区列和分桶列。</li>
+<li>表类型建表后不能修改，选错只能重建。</li>
+</ul>
+<p>表类型定下了数据的语义。接下来要决定数据在集群里怎么摆放：几千万行数据该怎么切开、放到哪些节点，才能让查询既能跳过无关数据、又能充分并行？这就是下一篇 <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/">基础篇003 · 数据分布</a> 的内容。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

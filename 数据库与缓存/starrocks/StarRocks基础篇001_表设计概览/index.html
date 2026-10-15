@@ -1,0 +1,1608 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/starrocks/StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A7%88/">
+      
+      
+        <link rel="prev" href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87002_%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/">
+      
+      
+        <link rel="next" href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>🌿表设计概览 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-starrocks" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🌿表设计概览
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库与缓存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    StarRocks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    StarRocks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87001_%E5%88%9D%E8%AF%86StarRocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌱初识StarRocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87002_%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌱快速开始
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计概览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表类型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据库与缓存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87001_%E5%88%9D%E8%AF%86StarRocks/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    StarRocks
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>入门篇里我们已经能把 StarRocks 跑起来、建一张最简单的表、导数据并查询。但那张表没有指定表类型、分区、分桶，全用的默认值。从这一篇开始进入「表设计」：先建立整体认识，搞清楚 StarRocks 里的数据是怎么组织的、一张表由哪些设计决策组成；表类型、数据分布、排序键与索引这三块核心内容，分别在后面三篇深入展开。</p>
+<blockquote>
+<p>本文内容整理自 StarRocks 官方文档：<a href="https://docs.starrocks.io/zh/docs/table_design/">Catalogs、databases 和 tables</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/StarRocks_table_design/">表概览</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/data_compression/">数据压缩</a>。版本敏感的内容（语法、参数、特性起始版本）请以你实际部署版本的官方文档为准。本文验证环境为 StarRocks 4.1.x。</p>
+</blockquote>
+<h1 id="1-starrocks">1. StarRocks数据存储</h1>
+<p>StarRocks 采用 <strong>Catalog → Database → Table</strong> 三层对象层级来组织数据。</p>
+<ul>
+<li>
+<p><strong>Catalog</strong> 目录：Catalog 分为 Internal Catalog 和 External Catalog。</p>
+</li>
+<li>
+<p><strong>Internal Catalog</strong> 内部数据目录：用于管理导入到StarRocks中的数据以及内部的物化视图等。每个集群都有且只有一个名为<code>default_catalog</code>的Internal Catalog，包含一个或多个数据库。StarRocks作为数据仓库存储数据，能够显著提高查询性能，尤其应对大规模数据的复杂查询分析。</p>
+</li>
+<li>
+<p><strong>External Catalog</strong> 外部数据目录：用于连接数据湖中的数据。将StarRocks作为查询引擎，直接查询数据湖上的数据，无需导入数据到StarRocks。</p>
+</li>
+<li>
+<p><strong>database</strong> 数据库：数据库是包含表、视图、物化视图等对象的集合，用于存储、管理和操作数据。</p>
+</li>
+<li>
+<p>表层级：包括表、物化视图、视图等对象。</p>
+</li>
+<li>
+<p><strong>table</strong> 表：分为内部表和外部表。</p>
+<ul>
+<li><strong>内部表</strong>：归属于Internal catalog的数据库，数据保存在StarRocks中。内部表由行和列构成，每行数据是一条记录。</li>
+</ul>
+<blockquote>
+<p>此处内部表的行和列为逻辑概念，在 StarRocks 中数据实际是按列存储的。物理上，一列数据会经过分块编码、压缩等操作，然后持久化存储。</p>
+</blockquote>
+<p>在 StarRocks 中，根据约束的类型将内部表分四种，分别是主键表、明细表、聚合表和更新表，适用于存储和查询多种业务场景中的数据，比如原始日志、实时数据、以及汇总数据。</p>
+<p>内部表采用分区+分桶的两级数据分布策略，实现数据均匀分布。并且分桶以多副本形式均匀分布至 BE 节点，保证数据高可用。</p>
+<ul>
+<li><strong>外部表</strong>：外部表是 External catalog 中的表，实际数据存在外部数据源中，StarRocks 只保存表对应的元数据，您可以通过外部表查询外部数据。</li>
+</ul>
+</li>
+<li>
+<p><strong>materialized view</strong> 物化视图：物化视图是特殊的物理表，能够存储基于基表的预计算结果。当您对基表执行复杂查询时，StarRocks 可以自动复用物化视图中的预计算结果，实现查询透明加速、湖仓加速和数据建模等业务需求。物化视图分为同步物化视图和异步物化视图。其中异步物化视图能力更加强大，能够存储基于多个基表（内部表和外部表）的预计算结果，并且支持丰富的聚合算子。</p>
+</li>
+<li>
+<p><strong>view</strong> 视图：视图（也叫逻辑视图）是虚拟表，不实际存储数据，其中所展示的数据来自于基表生成的查询结果。每次在查询中引用某个视图时，都会运行定义该视图的查询。</p>
+</li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+    SR[("StarRocks")]
+
+    SR --&gt; IC["Internal catalog&lt;br/&gt;(default_catalog)"]
+    SR --&gt; EC1["External_catalog_1"]
+    SR --&gt; ECn["External_catalog_n"]
+
+    subgraph INTERNAL["Data stored in StarRocks（集群内部数据）"]
+        IC --&gt; DB1["Database_1"]
+        IC --&gt; DBn["Database_n"]
+        DB1 --&gt; T1["table_1"]
+        DB1 --&gt; MV1["materialized view_1"]
+        DB1 --&gt; V1["view_1"]
+        DBn --&gt; T2["table_1"]
+        DBn --&gt; MV2["materialized view_1"]
+        DBn --&gt; V2["view_1"]
+    end
+
+    subgraph EXTERNAL["Data stored in external data sources（外部数据源）"]
+        EC1 --&gt; EDB1["Database"]
+        ECn --&gt; EDBn["Database"]
+        EDB1 --&gt; ET1["table_1 … table_n"]
+        EDBn --&gt; ETn["table_1 … table_n"]
+    end</code></pre>
+<h1 id="2">2. 表结构</h1>
+<p><strong>表</strong> 是StarRocks中的数据存储单元。</p>
+<blockquote>
+<p>理解表结构以及如何设计合理的表结构，有利于优化数据组织，提高查询效率。相比于传统的数据库，StarRocks会以列的方式存储JSON、ARRAY等复杂的半结构化数据，保证高效查询。</p>
+</blockquote>
+<p>和其他关系型数据库一样，StarRocks 的表在逻辑上由<strong>行（Row）</strong>和<strong>列（Column）</strong>构成：</p>
+<ul>
+<li><strong>行</strong>：每一行代表一条记录，包含一组相关联的数据。</li>
+<li><strong>列</strong>：每一列代表一个特定属性，所有行的列数相同，同一列的数据类型相同。例如一张员工表可能包含姓名、工号、部门、薪水等列。</li>
+</ul>
+<p>建表非常简单，只需在 <code>CREATE TABLE</code> 中定义列和列的数据类型即可：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">example_db</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">example_db</span><span class="p">;</span>
+
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_access</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">uid</span><span class="w">         </span><span class="nb">int</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w">        </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span>
+<span class="w">    </span><span class="n">age</span><span class="w">         </span><span class="nb">int</span><span class="p">,</span>
+<span class="w">    </span><span class="n">phone</span><span class="w">       </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
+<span class="w">    </span><span class="n">last_access</span><span class="w"> </span><span class="n">datetime</span><span class="p">,</span>
+<span class="w">    </span><span class="n">credits</span><span class="w">     </span><span class="n">double</span>
+<span class="p">)</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+</code></pre></div>
+<p>上面创建了一张<strong>明细表</strong>（未声明表类型时的默认类型），表中数据没有任何约束，相同的数据行可以重复存在；同时通过 <code>ORDER BY</code> 指定前两列 <code>uid</code>、<code>name</code> 为<strong>排序列</strong>，构成<strong>排序键</strong>。数据按排序键排序后存储，有助于查询时快速定位。</p>
+<blockquote>
+<p><strong>副本数提示</strong>：如果你的测试集群只有一个 BE，建表时需要在 <code>PROPERTIES</code> 中把副本数设为 1，即 <code>PROPERTIES("replication_num" = "1")</code>。默认副本数为 3，也是生产集群推荐值。</p>
+</blockquote>
+<p>建完表后，有两条命令帮你确认表结构和你以为的一致：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- 查看列定义（字段、类型、是否可空、是否为 Key 列、默认值等）</span>
+<span class="k">DESCRIBE</span><span class="w"> </span><span class="n">user_access</span><span class="p">;</span>
+
+<span class="c1">-- 查看完整建表语句（含表类型、分布方式、排序键、PROPERTIES 等所有属性）</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_access</span><span class="err">\</span><span class="k">G</span>
+</code></pre></div>
+<p><code>SHOW CREATE TABLE</code> 会把你没显式写、但 StarRocks 自动补齐的默认属性都展示出来（比如压缩算法 <code>LZ4</code>、副本数、分布方式等），是核对表设计的利器。</p>
+<h1 id="3">3. 表设计全景：一条建表语句里的设计决策</h1>
+<p>上面的 <code>user_access</code> 只写了列和排序键，其余全靠默认值。一张认真设计过的表，<code>CREATE TABLE</code> 里的每个子句都对应一个设计决策：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">order_id</span><span class="w">  </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dt</span><span class="w">        </span><span class="nb">DATE</span><span class="w">   </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w">   </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">amount</span><span class="w">    </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="w">            </span><span class="c1">-- ① 表类型：相同 Key 的数据怎么处理</span>
+<span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">date_trunc</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="w">    </span><span class="c1">-- ② 分区：数据先按天切开</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="w"> </span><span class="p">(</span><span class="n">order_id</span><span class="p">)</span><span class="w">        </span><span class="c1">-- ② 分桶：每个分区再切成多个 Tablet</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">)</span><span class="w">                </span><span class="c1">-- ③ 排序键：数据按什么顺序存储</span>
+<span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="ss">&quot;replication_num&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;1&quot;</span><span class="p">,</span><span class="w">          </span><span class="c1">-- 副本数</span>
+<span class="w">    </span><span class="ss">&quot;compression&quot;</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ZSTD&quot;</span><span class="w">        </span><span class="c1">-- ④ 压缩算法</span>
+<span class="p">);</span>
+</code></pre></div>
+<p>这几个决策分别回答一个问题，也正好是表设计系列的分篇方式：</p>
+<table>
+<thead>
+<tr>
+<th>子句</th>
+<th>回答的问题</th>
+<th>影响</th>
+<th>详见</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① <code>DUPLICATE</code> / <code>AGGREGATE</code> / <code>UNIQUE</code> / <code>PRIMARY KEY</code></td>
+<td>相同 Key 的多行数据是保留、聚合还是覆盖</td>
+<td>数据语义、能否更新</td>
+<td><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/">基础篇002 · 表类型</a></td>
+</tr>
+<tr>
+<td>② <code>PARTITION BY</code> / <code>DISTRIBUTED BY</code></td>
+<td>数据怎么切分、摆放到哪些节点</td>
+<td>查询扫描量、并行度、数据倾斜、生命周期管理</td>
+<td><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/">基础篇003 · 数据分布</a></td>
+</tr>
+<tr>
+<td>③ <code>ORDER BY</code>、索引、<code>store_type</code></td>
+<td>查询怎么快速定位到数据</td>
+<td>过滤效率、点查性能</td>
+<td><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87004_%E6%8E%92%E5%BA%8F%E9%94%AE%E3%80%81%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/">基础篇004 · 排序键、索引与行列混存</a></td>
+</tr>
+<tr>
+<td>④ <code>"compression"</code></td>
+<td>数据以什么算法压缩</td>
+<td>存储空间、I/O 与 CPU 开销</td>
+<td>本文第 6 章</td>
+</tr>
+</tbody>
+</table>
+<p>决策的先后顺序也有讲究：先选表类型（定数据语义），再定分区分桶（定物理布局），最后设计排序键和索引（定查询加速）。后一步依赖前一步，比如主键表要求主键必须包含分区列和分桶列，排序键的设计要结合表类型的 Key 来考虑。</p>
+<h1 id="4">4. 数据类型</h1>
+<p>除了基本的数据类型，如数值、日期和字符串，StarRocks 还支持复杂的半结构化数据类型，包括 <strong>ARRAY、JSON、MAP、STRUCT</strong>。和传统数据库不同，这些半结构化数据同样按列存储，查询效率有保障。</p>
+<p>建表选类型时要注意，<strong>不同的列能用的类型不一样</strong>：</p>
+<ul>
+<li><strong>Key 列</strong>（以及排序键）只支持数值、字符串、日期时间这类基础类型；BITMAP、HLL 等类型不能做排序键。</li>
+<li><strong>Value 列</strong>支持的类型更多，但 BITMAP、HLL、半结构化类型在不同表类型中的支持程度不同。</li>
+</ul>
+<p>具体的对照表放在 <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/">基础篇002 · 表类型</a> 的对比章节。全部数据类型的定义和取值范围，请查阅官方<a href="https://docs.starrocks.io/zh/docs/sql-reference/data-types/">数据类型</a>文档。</p>
+<h1 id="5">5. 约束</h1>
+<p>约束用于确保数据的完整性、一致性和准确性。StarRocks 的约束跟表类型绑定：</p>
+<table>
+<thead>
+<tr>
+<th>表类型</th>
+<th>Key 列</th>
+<th>约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主键表</td>
+<td><code>PRIMARY KEY</code></td>
+<td>唯一、非空</td>
+</tr>
+<tr>
+<td>聚合表</td>
+<td><code>AGGREGATE KEY</code></td>
+<td>唯一</td>
+</tr>
+<tr>
+<td>更新表</td>
+<td><code>UNIQUE KEY</code></td>
+<td>唯一</td>
+</tr>
+<tr>
+<td>明细表</td>
+<td><code>DUPLICATE KEY</code></td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>这里的"唯一"和 MySQL 不同</strong>：MySQL 写入重复主键会直接报错；StarRocks 不会拒绝重复 Key 的数据，而是按表类型把相同 Key 的多行<strong>合并成一行</strong>（聚合或覆盖），从而保证表里的 Key 唯一。合并规则详见 <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/">基础篇002 · 表类型</a>。</p>
+</blockquote>
+<h1 id="6">6. 数据压缩</h1>
+<p>StarRocks 支持对表和索引数据进行压缩。压缩既能节省存储空间，也能提升 I/O 密集型任务的性能；代价是压缩和解压缩需要额外的 CPU 资源。</p>
+<h2 id="61">6.1. 选择压缩算法</h2>
+<p>StarRocks 支持四种压缩算法，它们在压缩率和压缩/解压缩性能上各有取舍：</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>压缩率排名</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zlib</td>
+<td>1（最高）</td>
+<td>压缩比高，但数据高度压缩后，导入和查询性能会受一定影响</td>
+</tr>
+<tr>
+<td>Zstandard（zstd）</td>
+<td>2</td>
+<td>压缩比与解压缩性能较均衡</td>
+</tr>
+<tr>
+<td>LZ4</td>
+<td>3</td>
+<td>压缩比与解压缩性能较均衡，<strong>默认算法</strong></td>
+</tr>
+<tr>
+<td>Snappy</td>
+<td>4（最低）</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>如果对存储空间没有特殊要求，官方建议使用 <strong>LZ4 或 Zstandard</strong>。另外，数据类型也会影响压缩率，同一算法在不同类型的列上效果不同。</p>
+<h2 id="62">6.2. 设置压缩算法</h2>
+<p>压缩算法<strong>只能在建表时设置，建表后无法修改</strong>。建表时通过 <code>PROPERTIES</code> 的 <code>compression</code> 属性指定，不指定则默认使用 LZ4：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">data_compression</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">   </span><span class="nb">INT</span><span class="w">       </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">CHAR</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">)</span>
+<span class="k">UNIQUE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;compression&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ZSTD&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>建表后可以用 <code>SHOW CREATE TABLE</code> 查看表实际使用的压缩算法。</p>
+<h1 id="7">7. 临时表</h1>
+<h2 id="71">7.1. 为什么需要临时表</h2>
+<p>处理数据时，经常需要把中间计算结果保存下来以便后续复用（比如 ETL 的中间结果）。以前只有两种办法，都不理想：</p>
+<ul>
+<li><strong>CTE（<code>WITH</code> 子句）</strong>：只是逻辑概念，不会物理存储结果，也无法在不同查询间共享。</li>
+<li><strong>自己建一张普通表</strong>：能存能共享，但要自己维护表的生命周期，用完还得记得删。</li>
+</ul>
+<p>StarRocks 在 <strong>v3.3.1</strong> 引入了临时表来解决这个问题：</p>
+<ul>
+<li>临时表的生命周期与 <strong>Session 绑定</strong>，由 StarRocks 管理，Session 结束时自动清除；</li>
+<li>临时表<strong>仅在当前 Session 内可见</strong>，不同 Session 可以创建同名临时表。</li>
+</ul>
+<h2 id="72">7.2. 使用临时表</h2>
+<p>在以下语句中加上 <code>TEMPORARY</code> 关键字，即可创建或删除临时表：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- CREATE TABLE</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TEMPORARY</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tmp_orders</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">order_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">amount</span><span class="w">   </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">order_id</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">order_id</span><span class="p">);</span>
+
+<span class="c1">-- CREATE TABLE AS SELECT</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TEMPORARY</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tmp_big_orders</span><span class="w"> </span><span class="k">AS</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+
+<span class="c1">-- CREATE TABLE LIKE</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TEMPORARY</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tmp_orders_copy</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="n">orders</span><span class="p">;</span>
+
+<span class="c1">-- DROP TABLE</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">TEMPORARY</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tmp_orders</span><span class="p">;</span>
+</code></pre></div>
+<p>临时表的命名规则和普通表不同：</p>
+<ul>
+<li>和其他内部表一样，临时表必须建在 Default Catalog 下的某个 Database 中；</li>
+<li>因为临时表基于 Session，<strong>命名不受唯一性约束</strong>：不同 Session 可以建同名临时表，也可以建和普通表同名的临时表；</li>
+<li>同一 Database 里同时有同名的临时表和普通表时，<strong>临时表优先</strong>：在该 Session 内，对这个表名的所有查询和操作都只作用于临时表。</li>
+</ul>
+<h2 id="73">7.3. 使用限制</h2>
+<p>临时表的用法和普通内部表基本相同，但有以下限制：</p>
+<ul>
+<li>必须创建在 Default Catalog 中；</li>
+<li>不支持设置 Colocate Group，显式指定的 <code>colocate_with</code> 属性会被忽略；</li>
+<li>建表时 <code>ENGINE</code> 必须为 <code>olap</code>；</li>
+<li>不支持 <code>ALTER TABLE</code>；</li>
+<li>不支持基于临时表创建视图和物化视图；</li>
+<li>不支持用 <code>EXPORT</code> 导出；</li>
+<li>不支持通过异步任务（<code>SUBMIT TASK</code>）创建临时表，或向其导入、导出数据。</li>
+</ul>
+<h1 id="8">8. 更多特性</h1>
+<p>除了上面这些常用特性，StarRocks 还提供一些让表结构更健壮的能力，按需了解即可：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BITMAP / HLL 列</td>
+<td>加速去重计数（精确去重 / 近似去重）</td>
+</tr>
+<tr>
+<td>生成列、自增列</td>
+<td>加速部分查询；自增列还可以用来生成主键</td>
+</tr>
+<tr>
+<td>数据自动降冷</td>
+<td>配置冷热数据策略，降低运维成本</td>
+</tr>
+<tr>
+<td>Colocate Join</td>
+<td>让参与 JOIN 的表数据分布对齐，加速多表 JOIN</td>
+</tr>
+</tbody>
+</table>
+<h1 id="9">9. 小结</h1>
+<ul>
+<li>StarRocks 用 <strong>Catalog → Database → Table</strong> 组织数据：Internal Catalog 管理内部数据，External Catalog 连接数据湖。</li>
+<li>一条 <code>CREATE TABLE</code> 里藏着四个设计决策：<strong>表类型、数据分布、排序键与索引、压缩</strong>。先定数据语义，再定物理布局，最后定查询加速。</li>
+<li>数据类型上，Key 列只支持基础类型，Value 列的类型支持随表类型而不同。</li>
+<li>约束跟表类型绑定，StarRocks 的"唯一"靠合并实现，不是写入时报错。</li>
+<li>压缩算法默认 LZ4，只能建表时设置；临时表（v3.3.1+）跟 Session 同生共死，适合存放中间结果。</li>
+</ul>
+<p>下一篇进入第一个、也是最核心的设计决策：<a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/">基础篇002 · 表类型</a>——四种表类型分别怎么处理相同 Key 的数据，以及该怎么选。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
