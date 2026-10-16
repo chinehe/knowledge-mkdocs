@@ -2,9 +2,9 @@
 
 > 本文内容整理自 StarRocks 官方文档：[数据分布](https://docs.starrocks.io/zh/docs/table_design/data_distribution/)、[表达式分区](https://docs.starrocks.io/zh/docs/table_design/data_distribution/expression_partitioning/)、[Range 分区](https://docs.starrocks.io/zh/docs/table_design/data_distribution/dynamic_partitioning/)、[List 分区](https://docs.starrocks.io/zh/docs/table_design/data_distribution/list_partitioning/)、[临时分区](https://docs.starrocks.io/zh/docs/table_design/data_distribution/Temporary_partition/)、[能力边界](https://docs.starrocks.io/zh/docs/table_design/data_distribution/feature-support-data-distribution/)。
 
-# 1. 数据分布概述
+## 1. 数据分布概述
 
-## 1.1. 常见的数据分布方式
+### 1.1. 常见的数据分布方式
 
 数据均匀分布，是指把数据按一定规则划分成子集，并均衡地放到不同节点上。现代分布式数据库常见的数据分布方式有四种：
 
@@ -17,7 +17,7 @@
 
 实际业务中也常把它们组合使用，例如 Hash+Hash、Range+Hash、Hash+List。
 
-## 1.2. StarRocks 的两级分布：分区 + 分桶
+### 1.2. StarRocks 的两级分布：分区 + 分桶
 
 StarRocks 通过**分区 + 分桶**两级来实现数据分布：
 
@@ -106,9 +106,9 @@ DISTRIBUTED BY HASH(city, id);
 > * v3.1 起，建表和新增分区时可以不设置分桶键（`DISTRIBUTED BY`），默认使用随机分桶；
 > * v3.2 起，建表后可以修改部分数据分布属性，以适应查询模式和数据特点的变化（见第 4 章）。
 
-# 2. 分区
+## 2. 分区
 
-## 2.1. 分区的作用与选择
+### 2.1. 分区的作用与选择
 
 分区把一张表按分区键拆成不同的管理单元。它有两个作用：
 
@@ -136,7 +136,7 @@ StarRocks 提供三种分区方式：
 * 单月数据量很大，且大部分查询精确到天 → 按天分区，分区裁剪更有效，扫描的数据更少。
 * 数据要求按天过期 → 按天分区。
 
-## 2.2. 表达式分区（推荐）
+### 2.2. 表达式分区（推荐）
 
 表达式分区自 v3.0 起支持（原称自动分区）。建表时只需写一个分区表达式，导入数据时 StarRocks 会按数据和表达式规则**自动创建分区**，不需要预先建一大堆分区，也不需要配置动态分区属性。
 
@@ -149,7 +149,7 @@ StarRocks 提供三种分区方式：
 | 复杂时间函数表达式 | v3.4 | 任何返回 `DATE` / `DATETIME` 的表达式 | `PARTITION BY from_unixtime(ts, '%Y%m%d')` |
 | 混合表达式 | v3.4 | 多个分区列，其中一个可以是时间函数表达式 | `PARTITION BY from_unixtime(ts, '%Y%m%d'), city` |
 
-### 2.2.1. 简单时间函数表达式
+#### 2.2.1. 简单时间函数表达式
 
 经常按连续时间范围查询和管理数据时，指定一个日期类型（`DATE` 或 `DATETIME`）列作分区列，并在时间函数里写明分区粒度（年、月、周、日、小时）。StarRocks 会按导入的数据自动创建分区，并设置分区的起止时间。
 
@@ -236,7 +236,7 @@ PARTITION BY time_slice(event_day, INTERVAL 1 week)
 DISTRIBUTED BY HASH(event_day, site_id);
 ```
 
-### 2.2.2. 列表达式（v3.1 起）
+#### 2.2.2. 列表达式（v3.1 起）
 
 经常按某种类型查询和管理数据时，直接把表示类型的列写成分区列。StarRocks 会按导入数据的分区列取值自动创建分区。
 
@@ -271,7 +271,7 @@ INSERT INTO t_recharge_detail1 VALUES (1, 1, 1, 'Houston', '2022-04-01');
 
 插入后，StarRocks 自动创建分区 `p20220401_Houston`，之后 `dt='2022-04-01'`、`city='Houston'` 的数据都存到这个分区。
 
-### 2.2.3. 复杂时间函数表达式（v3.4 起）
+#### 2.2.3. 复杂时间函数表达式（v3.4 起）
 
 v3.4.0 起，表达式分区支持**任何返回 `DATE` 或 `DATETIME` 的表达式**。比如表里存的是 Unix 时间戳，不必再额外定义一个生成的日期列，直接在分区表达式里用 `from_unixtime()` 即可。
 
@@ -305,7 +305,7 @@ PARTITION BY date_trunc('month', str_to_date(CAST(ts AS STRING), '%Y%m%d'));
 
 几点注意：多个时间函数可以组合使用，比如 `PARTITION BY from_unixtime(cast(str as INT) + 3600, '%Y-%m-%d')`；所有时间函数都使用系统默认时区；`date_format`、`str2date`、`str_to_date`、`from_unixtime` 的格式串必须以最粗的粒度 `%Y` 开头，不能用 `%m-%d` 这样以更细粒度开头的格式。
 
-### 2.2.4. 混合表达式（v3.4 起）
+#### 2.2.4. 混合表达式（v3.4 起）
 
 v3.4.0 起，表达式分区支持多个分区列，其中一个可以是时间函数表达式。比如每行数据带 Unix 时间戳，经常按天和城市查询：
 
@@ -320,7 +320,7 @@ PARTITION BY from_unixtime(ts, '%Y%m%d'), city;
 
 每个城市每天的数据存在一个分区里。2.2.3 节的分区裁剪规则同样适用于混合表达式。
 
-### 2.2.5. 管理表达式分区
+#### 2.2.5. 管理表达式分区
 
 **导入数据**：导入时 StarRocks 按表达式规则自动创建分区，有几点要注意：
 
@@ -356,7 +356,7 @@ BETWEEN '2024-01-01' AND '2024-03-31';
 
 执行后，1 月、2 月、3 月的日级分区分别合并成 `2024-01`、`2024-02`、`2024-03` 三个月级分区。合并分区只支持基于时间函数的表达式分区，不支持多个分区列的分区，也不能和 Schema Change、DML 操作并行执行。
 
-### 2.2.6. 表达式分区的限制
+#### 2.2.6. 表达式分区的限制
 
 * 存算分离模式自 v3.1.0 起支持时间函数表达式，自 v3.1.1 起支持列表达式；
 * 不支持用 CTAS 创建表达式分区的表；
@@ -364,7 +364,7 @@ BETWEEN '2024-01-01' AND '2024-03-31';
 * 用 `ALTER TABLE <table_name> DROP PARTITION <partition_name>` 删除**列表达式**创建的分区时，数据会被直接删除，无法恢复；
 * 自 v3.4.0、v3.3.8、v3.2.13、v3.1.16 起，支持备份和恢复表达式分区的表。
 
-## 2.3. Range 分区（不推荐）
+### 2.3. Range 分区（不推荐）
 
 Range 分区适合简单的连续数据，比如时间序列或连续的数值。它需要**显式定义**分区列和"分区 ↔ 分区列取值范围"的映射关系，导入时 StarRocks 按分区列值所属的范围把数据分到对应分区。
 
@@ -377,7 +377,7 @@ Range 分区适合简单的连续数据，比如时间序列或连续的数值�
 
 Range 分区只支持一个函数表达式，且不支持字符串类型的分区键，必须先用 `str2date` 转换。
 
-### 2.3.1. 语法
+#### 2.3.1. 语法
 
 ```sql
 PARTITION BY RANGE ( partition_columns | function_expression )
@@ -398,7 +398,7 @@ multi_range_partitions ::=
 time_unit ::= HOUR | DAY | WEEK | MONTH | YEAR
 ```
 
-### 2.3.2. 手动创建与批量创建分区
+#### 2.3.2. 手动创建与批量创建分区
 
 **手动创建**：逐个写出每个分区的范围。
 
@@ -480,7 +480,7 @@ PARTITION BY RANGE(from_unixtime(event_time)) (
 )
 ```
 
-### 2.3.3. 动态分区
+#### 2.3.3. 动态分区
 
 在 Range 分区的基础上，可以开启**动态分区**：StarRocks 自动**提前创建**新分区、**删除**过期分区，实现分区的生命周期管理（TTL），降低维护成本。
 
@@ -551,7 +551,7 @@ ALTER TABLE site_access SET ("dynamic_partition.enable" = "false");
 
 > **动态分区 vs 表达式分区**：动态分区只是按配置**定期提前创建**一批分区，如果导入的数据不属于这些提前建好的分区，导入会报错；表达式分区则会**按导入的数据按需创建**对应分区。
 
-## 2.4. List 分区（不推荐）
+### 2.4. List 分区（不推荐）
 
 List 分区自 v3.1 起支持。你需要**显式列出每个分区包含的枚举值**，这些值不需要连续。导入时，StarRocks 按分区列值和分区的映射关系，把数据分到对应分区。
 
@@ -636,7 +636,7 @@ DISTRIBUTED BY HASH(`id`);
 * 自 v3.4.0、v3.3.8、v3.2.13、v3.1.16 起支持备份与恢复 List 分区表；
 * 自 v3.3.5 起，异步物化视图支持基于 List 分区的基表创建。
 
-## 2.5. 三种分区方式对比
+### 2.5. 三种分区方式对比
 
 | 对比项 | 表达式分区（时间函数） | 表达式分区（列表达式） | Range 分区 | List 分区 |
 |---|---|---|---|---|
@@ -648,7 +648,7 @@ DISTRIBUTED BY HASH(`id`);
 
 > 从 v3.1 起，表达式分区、Range 分区、List 分区都支持全部四种表类型。
 
-## 2.6. 管理分区
+### 2.6. 管理分区
 
 **增加分区**：Range 分区和 List 分区可以手动增加新分区来存放新数据；表达式分区在导入时自动建分区，不需要手动增加。新增分区的分桶数默认与原分区相同，也可以按新分区的数据量调整：
 
@@ -676,7 +676,7 @@ RECOVER PARTITION p1 FROM site_access;
 SHOW PARTITIONS FROM site_access;
 ```
 
-## 2.7. 临时分区
+### 2.7. 临时分区
 
 临时分区可以建在一张已经定义好分区规则的分区表上，并为它单独设定数据分布策略：分区范围、分桶数，以及副本数、存储介质等属性。它是"原子替换正式分区"时的临时数据载体。
 
@@ -692,7 +692,7 @@ flowchart LR
     B --> C["3. REPLACE PARTITION<br/>原子替换正式分区"]
 ```
 
-### 2.7.1. 创建临时分区
+#### 2.7.1. 创建临时分区
 
 ```sql
 -- 创建一个临时分区（两种写法）
@@ -741,7 +741,7 @@ ADD TEMPORARY PARTITIONS START ("2020-04-01") END ("2021-01-01") EVERY (INTERVAL
 * 临时分区的名称不能和正式分区、其他临时分区重复；
 * 同一张表的临时分区之间范围不能重叠，但临时分区的范围可以和正式分区重叠。
 
-### 2.7.2. 查看、导入与查询
+#### 2.7.2. 查看、导入与查询
 
 ```sql
 -- 查看临时分区
@@ -763,7 +763,7 @@ SELECT * FROM site_access TEMPORARY PARTITION (tp1, tp2);
 | Broker Load | `DATA INFILE(...) INTO TABLE site_access TEMPORARY PARTITION (tp1, tp2, ...)` |
 | Routine Load | `CREATE ROUTINE LOAD ... ON site_access ... TEMPORARY PARTITION (tp1, tp2, ...)` |
 
-### 2.7.3. 用临时分区替换正式分区
+#### 2.7.3. 用临时分区替换正式分区
 
 替换成功后，**原正式分区和临时分区都会被删除，且不可恢复**。
 
@@ -806,7 +806,7 @@ PROPERTIES (
 
 表上存在临时分区时，不能用 `ALTER` 对表做 Schema Change；反过来，表在做 Schema Change 时也不能添加临时分区。
 
-### 2.7.4. 删除临时分区
+#### 2.7.4. 删除临时分区
 
 ```sql
 ALTER TABLE site_access DROP TEMPORARY PARTITION tp1;
@@ -824,11 +824,11 @@ ALTER TABLE site_access DROP TEMPORARY PARTITION tp1;
 
 正式分区和临时分区互不关联，操作正式分区不会影响临时分区。
 
-# 3. 分桶
+## 3. 分桶
 
 一个分区按分桶方式被切成多个桶，每个桶的数据就是一个 Tablet。分桶是实际物理文件组织的单元。
 
-## 3.1. 分桶方式
+### 3.1. 分桶方式
 
 | 分桶方式 | 起始版本 | 是否要指定分桶键 | 数据怎么分 |
 |---|---|---|---|
@@ -836,7 +836,7 @@ ALTER TABLE site_access DROP TEMPORARY PARTITION tp1;
 | **哈希分桶** | — | 需要 | 同一分区内，按分桶键哈希分桶，分桶键值相同的行一定落到同一个分桶 |
 | **基于范围的分桶** | v4.1（默认关闭） | 不需要 | 同一分区内，按键列的取值范围有序划分，每个 Tablet 存一段连续范围的数据 |
 
-## 3.2. 随机分桶（v3.1 起）
+### 3.2. 随机分桶（v3.1 起）
 
 不设置分桶方式时，StarRocks 默认使用随机分桶，并自动设置分桶数量。它把每个分区的数据随机地分到所有分桶中，适合**数据量不大、对查询性能要求不高**的场景。
 
@@ -868,7 +868,7 @@ DISTRIBUTED BY RANDOM BUCKETS 8;
 
 v3.2 起，随机分桶表支持根据集群信息和数据量，在导入过程中按需动态增加分桶数量。此时分区内部实际的层次是"分区 > 子分区 > 分桶"：StarRocks 通过新增子分区来增加分桶，所以 `SHOW PARTITIONS` 会返回多条同名分区的记录，分别代表同一分区下的各个子分区。
 
-## 3.3. 哈希分桶
+### 3.3. 哈希分桶
 
 对每个分区的数据，StarRocks 按分桶键和分桶数量做哈希分桶：用分桶键的值算出哈希值，再按哈希值把数据分到对应的桶。
 
@@ -931,7 +931,7 @@ DISTRIBUTED BY HASH(site_id, city_code);
 | `site_id` | 短查询（扫描数据量不大、单机就能完成扫描） | 减少节点之间的数据交换，提高集群整体性能 |
 | `site_id, city_code` | 长查询（扫描数据量大、多机并行能显著提速） | 数据更分散，能利用分布式集群的整体并发性能 |
 
-## 3.4. 基于范围的分桶（v4.1 起）
+### 3.4. 基于范围的分桶（v4.1 起）
 
 v4.1 起，StarRocks 引入了基于范围的分布语义，**默认关闭**，需要把 FE 配置项 `enable_range_distribution` 设为 `true` 才能启用。启用后，数据按键列的取值范围有序划分，每个 Tablet 存储一段连续范围内的数据。
 
@@ -1000,9 +1000,9 @@ REFRESH ASYNC
 AS SELECT ... FROM range_table;
 ```
 
-## 3.5. 设置分桶数量
+### 3.5. 设置分桶数量
 
-### 3.5.1. 建表时设置
+#### 3.5.1. 建表时设置
 
 **自动设置（推荐）**：v2.5.7 起，StarRocks 会根据机器资源和数据量自动设置分区中的分桶数量，不写 `BUCKETS` 即可。
 
@@ -1034,7 +1034,7 @@ DISTRIBUTED BY HASH(site_id, city_code) BUCKETS 30;
 SET GLOBAL enable_tablet_internal_parallel = true;
 ```
 
-### 3.5.2. 建表后设置
+#### 3.5.2. 建表后设置
 
 建表后同样可以自动或手动设置分桶数量，范围可以是全部分区、指定分区或新增分区：
 
@@ -1056,13 +1056,13 @@ DISTRIBUTED BY HASH(site_id, city_code) BUCKETS 30;
 
 随机分桶表的写法相同，把 `DISTRIBUTED BY HASH(...)` 换成 `DISTRIBUTED BY RANDOM` 即可。
 
-### 3.5.3. 查看分桶数量
+#### 3.5.3. 查看分桶数量
 
 用 `SHOW PARTITIONS` 查看各分区的分桶数量。如果是开启了按需动态增加分桶的随机分桶表，返回的是分区**当前**的分桶数，导入过程中会动态增加。
 
 > v4.1 起，单个 Tablet 的最大容量调整为 100 GB。
 
-# 4. 建表后优化数据分布（v3.2 起）
+## 4. 建表后优化数据分布（v3.2 起）
 
 随着业务的查询模式和数据量变化，建表时设置的分桶方式、分桶数量和排序键可能不再合适，导致查询性能下降。这时可以用 `ALTER TABLE` 调整它们来优化数据分布（存算分离模式暂不支持）。典型场景：
 
@@ -1082,7 +1082,7 @@ DISTRIBUTED BY HASH(site_id, city_code) BUCKETS 30;
     ALTER TABLE t ORDER BY k2, k1;
     ```
 
-# 5. 最佳实践
+## 5. 最佳实践
 
 分区和分桶的选择对 StarRocks 非常关键，建表时要结合业务情况选好分区键和分桶键：
 
@@ -1093,7 +1093,7 @@ DISTRIBUTED BY HASH(site_id, city_code) BUCKETS 30;
 | **高吞吐** | 尽量把数据打散，让集群以更高的并发扫描数据、完成计算 |
 | **元数据管理** | Tablet 过多会增加 FE/BE 的元数据管理和调度开销，分区不宜过细、分桶数不宜过多 |
 
-# 6. 小结
+## 6. 小结
 
 * 数据分布分两级：**分区**负责裁剪扫描数据和管理数据生命周期，**分桶**负责数据均衡和并行度。每个分桶就是一个 Tablet。
 * 分区优先用**表达式分区**：时间函数表达式按时间自动建分区，列表达式按枚举值自动建分区；v3.4 起还支持复杂时间函数和混合表达式，v3.5 起支持合并分区和通用分区 TTL。
@@ -1102,4 +1102,4 @@ DISTRIBUTED BY HASH(site_id, city_code) BUCKETS 30;
 * 分桶优先选"高基数 + 常用过滤条件"的列做哈希分桶键，倾斜严重时用多列组合；明细表可以直接用随机分桶；v4.1 起还可以选择基于范围的分桶。
 * 分桶数量优先交给 StarRocks 自动设置，手动设置时按每 10 GB 原始数据一个 Tablet 估算；建表后可以用 `ALTER TABLE` 调整分桶和排序键。
 
-数据摆放好之后，还要让查询能在每个 Tablet 里快速找到需要的行。这就是下一篇 [基础篇004 · 排序键、索引与行列混存](StarRocks基础篇004_排序键、索引与行列混存.md) 的内容。
+数据摆放好之后，每一列落盘时还要编码、压缩。下一篇 [基础篇004 · 数据压缩](StarRocks基础篇004_数据压缩.md) 讲压缩算法怎么选。

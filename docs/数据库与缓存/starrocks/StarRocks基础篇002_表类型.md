@@ -2,7 +2,7 @@
 
 > 本文内容整理自 StarRocks 官方文档：[表类型概览](https://docs.starrocks.io/zh/docs/table_design/table_types/)、[明细表](https://docs.starrocks.io/zh/docs/table_design/table_types/duplicate_key_table/)、[聚合表](https://docs.starrocks.io/zh/docs/table_design/table_types/aggregate_table/)、[更新表](https://docs.starrocks.io/zh/docs/table_design/table_types/unique_key_table/)、[主键表](https://docs.starrocks.io/zh/docs/table_design/table_types/primary_key_table/)、[各类表的能力对比](https://docs.starrocks.io/zh/docs/table_design/table_types/table_capabilities/)。版本敏感的内容（语法、参数、特性起始版本）请以你实际部署版本的官方文档为准。本文验证环境为 StarRocks 4.1.x。
 
-# 1. 表类型概述
+## 1. 表类型概述
 
 建表时，你需要指定表类型（Table Type），这样数据导入到表时，StarRocks会按照排序键对数据进行排序、处理、存储。
 
@@ -12,7 +12,7 @@
 >
 > 自 3.0 版本起，主键表支持使用 `ORDER BY` 定义排序键，自 3.3 版本起，明细表、聚合表和更新表支持使用 `ORDER BY` 定义排序键。
 >
-> 排序键如何加速查询（前缀索引原理）、怎么设计，详见 [基础篇004 · 排序键、索引与行列混存](StarRocks基础篇004_排序键、索引与行列混存.md)。本文只讲各表类型的 Key 和排序键是什么关系。
+> 排序键如何加速查询（前缀索引原理）、怎么设计，详见 [基础篇005 · 索引](StarRocks基础篇005_索引.md)。本文只讲各表类型的 Key 和排序键是什么关系。
 
 StarRocks 支持四种表类型，分别是明细表 (Duplicate Key Table)、聚合表 (Aggregate Table)、更新表 (Unique Key Table) 和主键表 (Primary Key Table)。它们能支持日志分析、数据汇总分析、实时分析等多种场景，一句话概括各自定位：
 
@@ -30,9 +30,9 @@ StarRocks 支持四种表类型，分别是明细表 (Duplicate Key Table)、聚
 **注意事项：**
 
 * 建表后，**表类型不支持修改**。如果需要修改表类型，要重新建表。
-* 排序键本身的规则（排序次序、支持的数据类型、前缀索引 36 字节限制等）见 [基础篇004](StarRocks基础篇004_排序键、索引与行列混存.md) 第 2 章。
+* 排序键本身的规则（排序次序、支持的数据类型、前缀索引 36 字节限制等）见 [基础篇005 · 索引](StarRocks基础篇005_索引.md) 第 2 章。
 
-# 2. 明细表（Duplicate Key Table）
+## 2. 明细表（Duplicate Key Table）
 
 明细表是**默认表类型**，建表时不指定任何 Key 就是明细表。表中数据没有任何约束，相同的行可以重复存在。
 
@@ -69,7 +69,7 @@ ORDER BY (event_time, event_type);
 * **分桶数量**：v2.5.7 起，建表和新增分区时可以不设置分桶数量（`BUCKETS`），由 StarRocks 自动设置。
 * **索引**：建表时支持为所有列创建 Bitmap 索引、Bloom Filter 索引。
 
-# 3. 聚合表（Aggregate Table）
+## 3. 聚合表（Aggregate Table）
 
 聚合表为**预聚合**而生：建表时定义聚合键，并给每个**值列**指定聚合函数（SUM/MAX/MIN/REPLACE 等）。相同聚合键的多行，值列按函数自动合并成一行。它能在查询前就把数据按维度汇总，大幅降低聚合查询需要扫描和计算的数据量。
 
@@ -127,7 +127,7 @@ DISTRIBUTED BY HASH(site_id);
 * **索引**：建表时只能为 Key 列创建 Bitmap 索引、Bloom Filter 索引。
 * **导入时须给出全部列**：例如更新上面的 `aggregate_tbl` 时，必须同时给出 `site_id`、`date`、`city_code`、`pv` 四列。例外是：有默认值的列可以不导入；把值列的聚合函数设为 `REPLACE_IF_NOT_NULL` 可以实现部分列更新（导入值为 NULL 的列保持原值）。
 
-## 3.1. 深入：通用聚合函数状态（v3.4.0 起，Beta）
+### 3.1. 深入：通用聚合函数状态（v3.4.0 起，Beta）
 
 早期聚合表的值列只能用 SUM、MAX、MIN、REPLACE、HLL_UNION、PERCENTILE_UNION、BITMAP_UNION 等有限的内置聚合函数。为了让理论上所有内置聚合函数都能用于聚合表，v3.4.0 引入了**通用聚合状态**：通过"函数名 + 入参类型"唯一标识一个聚合函数，把它的**中间状态**存进值列，列类型自动推断为该函数的中间状态类型。
 
@@ -186,7 +186,7 @@ GROUP BY dt;
 * 不支持 ORDER BY、DISTINCT 这类复杂参数；
 * GROUP_CONCAT、WINDOW_FUNNEL、APPROX_TOP_K 等函数的支持仍在开发中。
 
-# 4. 更新表（Unique Key Table）
+## 4. 更新表（Unique Key Table）
 
 更新表为实时、频繁更新而设计。建表时定义唯一键，多条数据唯一键相同时，value 列会进行 REPLACE，查询时返回唯一键相同的一组数据中的最新数据。**该类型目前已逐渐被主键表取代，新表设计建议优先主键表。**
 
@@ -228,7 +228,7 @@ DISTRIBUTED BY HASH(order_id);
 * **导入时须给出全部列**：例如上例的 `create_time`、`order_id`、`order_state`、`total_price` 四列都要指明；有默认值的列可以不导入。
 * **导入频率不宜太高**：查询需要在线合并多版本，版本过多会拖慢查询。业务要求分钟级就每分钟导一次，不必追求秒级。
 
-# 5. 主键表（Primary Key Table）
+## 5. 主键表（Primary Key Table）
 
 主键表使用 StarRocks 全新设计的存储引擎，**既支撑实时数据更新，又保证高效的复杂查询性能**，让实时分析不再受限于 T+1 延迟。主键具有唯一且非空约束，新数据主键与老数据冲突时直接替换老数据。
 
@@ -265,7 +265,7 @@ flowchart TB
 * **写入**：由内部 Loadjob 完成，含一批 Insert/Update/Delete 变更。导入时把对应 Tablet 的主键索引加载进内存。**Delete** 通过主键索引找到旧行所在的数据文件和行号，在 DelVector 中标记删除；**Update** 则是把旧行在 DelVector 标记删除、同时把最新数据写入新文件（相当于 Update = Delete + Insert），并更新主键索引里该行的新位置。
 * **读取**：由于历史重复数据写入时已被标记删除，同一主键只需读最新一条，无需在线 Merge；扫描时谓词和各类索引可下推到 Scan 层，减少扫描开销。
 
-## 5.1. 深入：Loadjob 的两阶段与 Tablet 结构
+### 5.1. 深入：Loadjob 的两阶段与 Tablet 结构
 
 StarRocks 底层是列式存储。一个 Tablet 往往包含多个 Rowset，每个 Rowset 的数据分段存储在 Segment 文件中；Segment 用列存格式组织数据（类似 Parquet），并且**不可修改**。
 
@@ -286,7 +286,7 @@ StarRocks 底层是列式存储。一个 Tablet 往往包含多个 Rowset，每�
 | **Rowset** | 逻辑概念，存储 Tablet 中一次数据变更的数据集合 |
 | **Segment** | Rowset 的数据实际分段存储在一个或多个 Segment（列存文件）中，按列包含列值和列相关的索引信息 |
 
-## 5.2. 建表与使用说明
+### 5.2. 建表与使用说明
 
 只需在 `CREATE TABLE` 中用 `PRIMARY KEY` 定义主键，即可创建主键表。主键表只支持哈希分桶，所以还要用 `DISTRIBUTED BY HASH` 定义分桶键：
 
@@ -350,11 +350,11 @@ PROPERTIES ("enable_persistent_index" = "true");
 
 **数据变更**：主键表是唯一支持在导入时删除数据、以及用 `UPDATE` 语句更新数据的表类型，还支持部分列更新，具体能力见第 6.3 节。另外，自增列可以用来生成主键。
 
-# 6. 四种表类型对比
+## 6. 四种表类型对比
 
 前面逐个讲了四种表类型，这一章从四个角度横向对比，方便选型时速查。
 
-## 6.1. Key 列与排序键
+### 6.1. Key 列与排序键
 
 | 维度 | 明细表 | 聚合表 | 更新表 | 主键表 |
 |---|---|---|---|---|
@@ -369,7 +369,7 @@ PROPERTIES ("enable_persistent_index" = "true");
 
 **UNIQUE 和 PRIMARY 的关键区别**：两者对相同 Key 的处理**结果一样**（后写覆盖），光看查询输出分不出区别，差别在底层机制和性能——更新表靠 Merge-On-Read（查询慢、谓词索引无法下推），主键表靠 Delete+Insert（查询快、可下推、支持部分列更新）。所以选型不是看"要不要覆盖"，而是看"查询性能要求高不高、是不是实时 CDC"。
 
-## 6.2. 列的数据类型
+### 6.2. 列的数据类型
 
 **Key 列**（以及排序键）支持数值（整型、布尔、DECIMAL）、字符串、日期时间。例外是**主键表的 Key 列不支持 DECIMAL**。
 
@@ -382,7 +382,7 @@ PROPERTIES ("enable_persistent_index" = "true");
 | **PERCENTILE** | 不支持 | 支持，聚合函数须为 `percentile_union`、`replace` 或 `replace_if_not_null` | 支持 | 支持 |
 | **JSON / ARRAY / MAP / STRUCT** | 支持 | 支持，聚合函数须为 `replace` 或 `replace_if_not_null` | 支持 | 支持 |
 
-## 6.3. 数据变更
+### 6.3. 数据变更
 
 | 操作 | 明细表 | 聚合表 | 更新表 | 主键表 |
 |---|---|---|---|---|
@@ -396,7 +396,7 @@ PROPERTIES ("enable_persistent_index" = "true");
 
 > 上表的"简单条件"指基于列本身的 `=`、`<`、`>` 等比较，不支持函数、子查询这类复杂条件。
 
-## 6.4. 与其他功能的兼容性
+### 6.4. 与其他功能的兼容性
 
 | 功能 | 明细表 | 聚合表 | 更新表 | 主键表 |
 |---|---|---|---|---|
@@ -409,7 +409,7 @@ PROPERTIES ("enable_persistent_index" = "true");
 | **CTAS** | 支持 | 不支持 | 不支持 | 支持 |
 | **备份与恢复** | 支持 | 支持 | 支持 | v2.5 起支持 |
 
-# 7. 选型决策与动手验证
+## 7. 选型决策与动手验证
 
 把四种类型收敛成一条判断链：
 
@@ -480,7 +480,7 @@ ORDER BY t, amount;
 
 两个最该记住的对比：`agg_sum=130 vs agg_rep=80`（同是聚合表，函数不同结果天差地别）；`agg_rep=80 vs pk=80`（结果相同，但聚合表靠 REPLACE 合并、主键表靠 Delete+Insert，机制与适用场景完全不同）。实验做完 `DROP DATABASE model_lab;` 清理即可。
 
-# 8. 小结
+## 8. 小结
 
 * 四种表类型的本质区别是**如何处理 Key 相同的多行数据**：明细表全保留，聚合表按函数聚合，更新表和主键表后写覆盖。
 * 聚合表的聚合函数在建表时就定死，选函数前先想清楚数据以什么形态写进来。

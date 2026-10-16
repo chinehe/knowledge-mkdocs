@@ -1,4 +1,4 @@
-入门篇里我们已经能把 StarRocks 跑起来、建一张最简单的表、导数据并查询。但那张表没有指定表类型、分区、分桶，全用的默认值。从这一篇开始进入「表设计」：先建立整体认识，搞清楚 StarRocks 里的数据是怎么组织的、一张表由哪些设计决策组成；表类型、数据分布、排序键与索引这三块核心内容，分别在后面三篇深入展开。
+入门篇里我们已经能把 StarRocks 跑起来、建一张最简单的表、导数据并查询。但那张表没有指定表类型、分区、分桶，全用的默认值。从这一篇开始进入「表设计」：先建立整体认识，搞清楚 StarRocks 里的数据是怎么组织的、一张表由哪些设计决策组成；表类型、数据分布、数据压缩、索引、行列混存，分别在后面五篇深入展开。
 
 > 本文内容整理自 StarRocks 官方文档：[Catalogs、databases 和 tables](https://docs.starrocks.io/zh/docs/table_design/)、[表概览](https://docs.starrocks.io/zh/docs/table_design/StarRocks_table_design/)、[数据压缩](https://docs.starrocks.io/zh/docs/table_design/data_compression/)。版本敏感的内容（语法、参数、特性起始版本）请以你实际部署版本的官方文档为准。本文验证环境为 StarRocks 4.1.x。
 
@@ -116,10 +116,11 @@ CREATE TABLE orders (
 PRIMARY KEY (order_id, dt)            -- ① 表类型：相同 Key 的数据怎么处理
 PARTITION BY date_trunc('day', dt)    -- ② 分区：数据先按天切开
 DISTRIBUTED BY HASH (order_id)        -- ② 分桶：每个分区再切成多个 Tablet
-ORDER BY (dt, user_id)                -- ③ 排序键：数据按什么顺序存储
+ORDER BY (dt, user_id)                -- ④ 排序键：数据按什么顺序存储
 PROPERTIES (
     "replication_num" = "1",          -- 副本数
-    "compression"     = "ZSTD"        -- ④ 压缩算法
+    "compression"     = "ZSTD",       -- ③ 压缩算法
+    "store_type"      = "column_with_row"  -- ⑤ 行列混存（可选）
 );
 ```
 
@@ -129,10 +130,11 @@ PROPERTIES (
 |---|---|---|---|
 | ① `DUPLICATE` / `AGGREGATE` / `UNIQUE` / `PRIMARY KEY` | 相同 Key 的多行数据是保留、聚合还是覆盖 | 数据语义、能否更新 | [基础篇002 · 表类型](StarRocks基础篇002_表类型.md) |
 | ② `PARTITION BY` / `DISTRIBUTED BY` | 数据怎么切分、摆放到哪些节点 | 查询扫描量、并行度、数据倾斜、生命周期管理 | [基础篇003 · 数据分布](StarRocks基础篇003_数据分布.md) |
-| ③ `ORDER BY`、索引、`store_type` | 查询怎么快速定位到数据 | 过滤效率、点查性能 | [基础篇004 · 排序键、索引与行列混存](StarRocks基础篇004_排序键、索引与行列混存.md) |
-| ④ `"compression"` | 数据以什么算法压缩 | 存储空间、I/O 与 CPU 开销 | 本文第 6 章 |
+| ③ `"compression"` | 数据以什么算法压缩 | 存储空间、I/O 与 CPU 开销 | [基础篇004 · 数据压缩](StarRocks基础篇004_数据压缩.md) |
+| ④ `ORDER BY`、索引 | 查询怎么快速定位到数据 | 过滤效率 | [基础篇005 · 索引](StarRocks基础篇005_索引.md) |
+| ⑤ `"store_type"` | 是否同时按行存储 | 主键点查性能 | [基础篇006 · 行列混存](StarRocks基础篇006_行列混存.md) |
 
-决策的先后顺序也有讲究：先选表类型（定数据语义），再定分区分桶（定物理布局），最后设计排序键和索引（定查询加速）。后一步依赖前一步，比如主键表要求主键必须包含分区列和分桶列，排序键的设计要结合表类型的 Key 来考虑。
+决策的先后顺序也有讲究：先选表类型（定数据语义），再定分区分桶（定物理布局）和压缩（定存储方式），最后设计排序键、索引和行列混存（定查询加速）。后一步依赖前一步，比如主键表要求主键必须包含分区列和分桶列，排序键的设计要结合表类型的 Key 来考虑。
 
 ## 4. 数据类型
 
@@ -160,36 +162,7 @@ PROPERTIES (
 
 ## 6. 数据压缩
 
-StarRocks 支持对表和索引数据进行压缩。压缩既能节省存储空间，也能提升 I/O 密集型任务的性能；代价是压缩和解压缩需要额外的 CPU 资源。
-
-### 6.1. 选择压缩算法
-
-StarRocks 支持四种压缩算法，它们在压缩率和压缩/解压缩性能上各有取舍：
-
-| 算法 | 压缩率排名 | 特点 |
-|---|---|---|
-| zlib | 1（最高） | 压缩比高，但数据高度压缩后，导入和查询性能会受一定影响 |
-| Zstandard（zstd） | 2 | 压缩比与解压缩性能较均衡 |
-| LZ4 | 3 | 压缩比与解压缩性能较均衡，**默认算法** |
-| Snappy | 4（最低） | — |
-
-如果对存储空间没有特殊要求，官方建议使用 **LZ4 或 Zstandard**。另外，数据类型也会影响压缩率，同一算法在不同类型的列上效果不同。
-
-### 6.2. 设置压缩算法
-
-压缩算法**只能在建表时设置，建表后无法修改**。建表时通过 `PROPERTIES` 的 `compression` 属性指定，不指定则默认使用 LZ4：
-
-```sql
-CREATE TABLE data_compression (
-    id   INT       NOT NULL,
-    name CHAR(200) NULL
-)
-UNIQUE KEY(id)
-DISTRIBUTED BY HASH(id)
-PROPERTIES ("compression" = "ZSTD");
-```
-
-建表后可以用 `SHOW CREATE TABLE` 查看表实际使用的压缩算法。
+StarRocks 会对表和索引数据进行压缩，以节省存储空间、减少 I/O，代价是额外的 CPU 开销。支持 LZ4（默认）、Zstandard、zlib、Snappy 四种算法，只能在建表时通过 `"compression"` 属性设置。算法怎么选、怎么设置，详见 [基础篇004 · 数据压缩](StarRocks基础篇004_数据压缩.md)。
 
 ## 7. 临时表
 
@@ -261,7 +234,7 @@ DROP TEMPORARY TABLE tmp_orders;
 ## 9. 小结
 
 * StarRocks 用 **Catalog → Database → Table** 组织数据：Internal Catalog 管理内部数据，External Catalog 连接数据湖。
-* 一条 `CREATE TABLE` 里藏着四个设计决策：**表类型、数据分布、排序键与索引、压缩**。先定数据语义，再定物理布局，最后定查询加速。
+* 一条 `CREATE TABLE` 里藏着几个设计决策：**表类型、数据分布、压缩、排序键与索引、行列混存**。先定数据语义，再定物理布局和存储方式，最后定查询加速。
 * 数据类型上，Key 列只支持基础类型，Value 列的类型支持随表类型而不同。
 * 约束跟表类型绑定，StarRocks 的"唯一"靠合并实现，不是写入时报错。
 * 压缩算法默认 LZ4，只能建表时设置；临时表（v3.3.1+）跟 Session 同生共死，适合存放中间结果。

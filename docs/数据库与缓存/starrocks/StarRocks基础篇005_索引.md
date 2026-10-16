@@ -1,8 +1,8 @@
-[基础篇003](StarRocks基础篇003_数据分布.md) 把数据切开、摆放到了各个 Tablet 上。这一篇关注查询怎么在 Tablet 里**快速找到需要的那些行**：先讲排序键和前缀索引，它们决定了最常用的过滤条件能不能少扫数据；再讲排序键管不到的过滤条件该用哪种索引；最后讲为高并发点查准备的行列混存。
+[基础篇003](StarRocks基础篇003_数据分布.md) 把数据切开、摆放到了各个 Tablet 上。这一篇关注查询怎么在 Tablet 里**快速找到需要的那些行**：先讲排序键和前缀索引，它们决定了最常用的过滤条件能不能少扫数据；再讲排序键管不到的过滤条件该用哪种索引。
 
-> 本文内容整理自 StarRocks 官方文档：[索引](https://docs.starrocks.io/zh/docs/table_design/indexes/)、[前缀索引和排序键](https://docs.starrocks.io/zh/docs/table_design/indexes/Prefix_index_sort_key/)、[Bitmap 索引](https://docs.starrocks.io/zh/docs/table_design/indexes/Bitmap_index/)、[Bloom filter 索引](https://docs.starrocks.io/zh/docs/table_design/indexes/Bloomfilter_index/)、[N-gram bloom filter 索引](https://docs.starrocks.io/zh/docs/table_design/indexes/Ngram_Bloom_Filter_Index/)、[全文倒排索引](https://docs.starrocks.io/zh/docs/table_design/indexes/inverted_index/)、[向量索引](https://docs.starrocks.io/zh/docs/table_design/indexes/vector_index/)、[行列混存](https://docs.starrocks.io/zh/docs/table_design/hybrid_table/)。
+> 本文内容整理自 StarRocks 官方文档：[索引](https://docs.starrocks.io/zh/docs/table_design/indexes/)、[前缀索引和排序键](https://docs.starrocks.io/zh/docs/table_design/indexes/Prefix_index_sort_key/)、[Bitmap 索引](https://docs.starrocks.io/zh/docs/table_design/indexes/Bitmap_index/)、[Bloom filter 索引](https://docs.starrocks.io/zh/docs/table_design/indexes/Bloomfilter_index/)、[N-gram bloom filter 索引](https://docs.starrocks.io/zh/docs/table_design/indexes/Ngram_Bloom_Filter_Index/)、[全文倒排索引](https://docs.starrocks.io/zh/docs/table_design/indexes/inverted_index/)、[向量索引](https://docs.starrocks.io/zh/docs/table_design/indexes/vector_index/)。
 
-# 1. 索引概述
+## 1. 索引概述
 
 索引能帮查询快速定位满足条件的数据：如果表在某些列上建了索引，查询又用得上这些索引，就不用扫描全表，只读一部分数据就能找到目标行。
 
@@ -36,9 +36,9 @@ flowchart TB
 | 全文倒排索引 | 手动（Beta） | 按关键词全文检索 |
 | 向量索引 | 手动（Beta） | 近似最近邻搜索（ANNS） |
 
-# 2. 排序键与前缀索引
+## 2. 排序键与前缀索引
 
-## 2.1. 原理
+### 2.1. 原理
 
 建表时可以指定一个或多个列构成**排序键（Sort Key）**，表中的数据行按排序键排序后再落盘存储。
 
@@ -65,7 +65,7 @@ flowchart LR
 
 > 排序键不是传统数据库的二级索引。它决定的是数据在文件里的**物理顺序**，前缀索引只是建立在这个顺序之上的稀疏目录。所以一张表只有一个前缀索引。
 
-## 2.2. 各表类型如何使用排序键
+### 2.2. 各表类型如何使用排序键
 
 v3.0 起主键表支持用 `ORDER BY` 定义排序键，v3.3 起明细表、聚合表和更新表也支持。四种表类型处理数据和排序的顺序不同：
 
@@ -78,7 +78,7 @@ v3.0 起主键表支持用 `ORDER BY` 定义排序键，v3.3 起明细表、聚�
 
 前缀索引的来源：表通过 `ORDER BY` 指定了排序键，就按排序键构建前缀索引；没有指定，就按 Key 列构建。建表后可以用 `SHOW CREATE TABLE` 返回结果中的 `ORDER BY` 子句查看排序列和它们的顺序。
 
-## 2.3. 前缀字段的规则
+### 2.3. 前缀字段的规则
 
 前缀索引项不一定包含排序键的全部列，它受两条限制：
 
@@ -103,7 +103,7 @@ ORDER BY (uid, name);
 
 **例 2**：另一张表 `user_access2` 的前三列 `name varchar(20)`、`uid int`、`last_access datetime` 为排序列。前缀索引以 VARCHAR 类型的 `name` 开头，取完 `name`（20 字节）就直接截断，即使还没到 36 字节也不再往后取。所以前缀字段只有 `name`。
 
-## 2.4. 如何设计排序键
+### 2.4. 如何设计排序键
 
 **排序列不宜过多**：一般 3 个，建议不超过 4 个。排序列过多并不能提升查询性能，反而会增加导入时的排序开销。
 
@@ -130,7 +130,7 @@ ORDER BY (uid, name);
 * 聚合表和更新表中，排序列必须定义在其他列之前。
 * 排序键在建表语句中出现的次序，就是数据存储时多重排序的次序。
 
-## 2.5. 修改排序键
+### 2.5. 修改排序键
 
 业务的查询特点变了，查询条件经常用前缀字段之外的列，现有前缀索引就过滤不了数据，查询性能可能下降。这时有两种办法：
 
@@ -142,33 +142,33 @@ ORDER BY (uid, name);
 
 * **建同步物化视图**：基于该表建一个同步物化视图，用其他常用的过滤列构建前缀索引。代价是增加存储空间。
 
-## 2.6. 判断前缀索引是否生效
+### 2.6. 判断前缀索引是否生效
 
 执行查询后，在 Query Profile 的 scan 节点中查看 `ShortKeyFilterRows` 等指标，就能知道前缀索引是否生效以及过滤了多少行。
 
-# 3. 其他内置索引
+## 3. 其他内置索引
 
-## 3.1. Ordinal 索引
+### 3.1. Ordinal 索引
 
 StarRocks 底层是列式存储，每一列的数据以 **Data Page** 为单位分块存储，每个 Data Page 一般是 64 × 1024 字节（`data_page_size = 64 * 1024`）。每个 Data Page 都对应一条 Ordinal 索引项，记录该页的起始行号等信息。
 
 这样就可以**通过行号找到列 Data Page 的物理地址**。其他索引查找数据时，最终都要通过 Ordinal 索引找到列 Data Page 的位置。
 
-## 3.2. ZoneMap 索引
+### 3.2. ZoneMap 索引
 
 ZoneMap 索引存储每块数据的统计信息：Min（最小值）、Max（最大值）、HasNull（是否有空值）、HasNotNull（是否不全为空）。查询时，StarRocks 根据这些统计信息快速判断哪些数据块可以整块跳过，减少扫描的数据量。
 
 "每块"数据有两种粒度，对应两种 ZoneMap 索引：一种存每个 **Segment** 的统计信息，另一种存每个列的每个 **Data Page** 的统计信息。
 
-# 4. Bitmap 索引
+## 4. Bitmap 索引
 
-## 4.1. 原理
+### 4.1. 原理
 
 Bitmap 索引用位图（bitmap）建索引。位图是一个 bit 数组，每个 bit 对应表中的一行，取值 0 或 1，表示这一行是否等于某个列值。
 
 一张表只有一个前缀索引，如果查询的过滤条件不包含前缀索引的前缀，就可以给过滤列建 Bitmap 索引来提高查询效率。
 
-## 4.2. 什么时候适合用
+### 4.2. 什么时候适合用
 
 选择 Bitmap 索引，首先考虑**列的基数**和**对查询的过滤效果**。和普遍印象相反，Bitmap 索引适合：
 
@@ -187,7 +187,7 @@ Bitmap 索引用位图（bitmap）建索引。位图是一个 bit 数组，每�
 
 所以官方建议结合实际数据和查询做性能测试，权衡过滤效果和这些额外开销。好在 StarRocks 会自适应地决定是否使用 Bitmap 索引（见下一节），建了不合适的索引，查询也不会因此明显变慢。
 
-## 4.3. 自适应选择是否使用
+### 4.3. 自适应选择是否使用
 
 StarRocks 会根据列基数和查询自适应选择是否使用 Bitmap 索引：如果用了起不到过滤较多 Page 的效果，或者加载索引的开销较大，默认就不使用。
 
@@ -206,7 +206,7 @@ StarRocks 会根据列基数和查询自适应选择是否使用 Bitmap 索引�
 | `WHERE gender = 'male'` | 1/2，大于 1/1000 | 不使用 |
 | `WHERE gender = 'male' AND city IN ('北京', '上海')` | 两列相乘：(1×2)/(2×10000)，小于 1/1000 | 使用 |
 
-## 4.4. 优势与适用范围
+### 4.4. 优势与适用范围
 
 **优势**：
 
@@ -222,7 +222,7 @@ StarRocks 会根据列基数和查询自适应选择是否使用 Bitmap 索引�
 * 字符串：CHAR、STRING、VARCHAR；
 * 其他：HLL。
 
-## 4.5. 基本操作
+### 4.5. 基本操作
 
 **创建**：建表时创建，或建表后用 `CREATE INDEX` 创建。同一张表的 Bitmap 索引不能重名；可以给多个列分别建，多个索引定义之间用逗号隔开。
 
@@ -263,7 +263,7 @@ DROP INDEX index_name ON [db_name.]table_name;
 
 **查看查询是否命中**：看查询 Profile 中的 `BitmapIndexFilterRows` 字段。
 
-## 4.6. 性能测试结论
+### 4.6. 性能测试结论
 
 官方用 SSB 20G 的 `lineorder` 表（约 1.4 亿行）做了测试：一张表不建索引作对照，另一张表在 `lo_shipmode`（基数 7）、`lo_quantity`（50）、`lo_discount`（11）、`lo_orderdate`（2406）、`lo_tax`（9）、`lo_partkey`（60 万）上建 Bitmap 索引。这些索引占用的磁盘空间从 130M 到 601M 不等，`lo_partkey` 最大。
 
@@ -281,9 +281,9 @@ DROP INDEX index_name ON [db_name.]table_name;
 * **多个低基数列组合**：读取的 Page 减少了约 2/3（35168 → 11325），加载数据的时间大幅下降。
 * **单个高基数列**：只读了 225 个 Page，耗时从 0.43 秒降到 0.015 秒。
 
-# 5. Bloom filter 索引
+## 5. Bloom filter 索引
 
-## 5.1. 原理
+### 5.1. 原理
 
 Bloom filter（布隆过滤器）索引能快速判断数据文件中**是否可能**包含要查询的数据，不包含就跳过，减少扫描量。它空间效率高，适合**基数较高**的列，比如 ID 列。
 
@@ -296,7 +296,7 @@ Bloom filter（布隆过滤器）索引能快速判断数据文件中**是否可
 
 注意"可能存在"的判断有一定误判率，即**假阳性概率**（False Positive Probability）：判断某处包含目标数据，实际却不包含。但它不会漏判：判断为不存在的，一定不存在。
 
-## 5.2. 使用说明
+### 5.2. 使用说明
 
 * 主键表和明细表的所有列都能建 Bloom filter 索引；聚合表和更新表只有 Key 列可以建。
 * 支持的数据类型：
@@ -306,7 +306,7 @@ Bloom filter（布隆过滤器）索引能快速判断数据文件中**是否可
 * **只能加速包含 `IN` 和 `=` 过滤条件的查询**，例如 `WHERE xxx IN (...)`、`WHERE column = xxx`。
 * 查看查询是否命中：看 Profile 中的 `BloomFilterFilterRows` 字段。
 
-## 5.3. 创建、查看与修改
+### 5.3. 创建、查看与修改
 
 **创建**：建表时在 `PROPERTIES` 中用 `bloom_filter_columns` 指定，多个列用逗号隔开。
 
@@ -337,9 +337,9 @@ ALTER TABLE table1 SET ("bloom_filter_columns" = "");
 
 修改索引是异步操作，可以用 `SHOW ALTER TABLE` 查看进度。每张表同时只能进行一个修改索引的任务。
 
-# 6. N-gram bloom filter 索引（Beta）
+## 6. N-gram bloom filter 索引（Beta）
 
-## 6.1. 原理
+### 6.1. 原理
 
 N-gram bloom filter 索引是一种特殊的 Bloom filter 索引，通常用来加速 `LIKE` 查询，以及 `ngram_search` 和 `ngram_search_case_insensitive` 函数的计算。它只适用于字符串类型（STRING、CHAR、VARCHAR）的列。
 
@@ -348,14 +348,14 @@ N-gram bloom filter 索引是一种特殊的 Bloom filter 索引，通常用来�
 * 普通 Bloom filter 索引：把整个字符串 `Technical` 写入索引；
 * `gram_num` 为 4 的 N-gram bloom filter 索引：先切成 `"Tech"`、`"echn"`、`"chni"`、`"hnic"`、`"nica"`、`"ical"` 六个子串，再分别写入索引。
 
-## 6.2. 使用说明
+### 6.2. 使用说明
 
 * 明细表和主键表的所有字符串列都能建；聚合表和更新表只能在字符串类型的 Key 列上建；
 * 只能为 CHAR、STRING、VARCHAR 类型的列创建；
 * **一个列只能建一种**：Bloom filter 索引和 N-gram bloom filter 索引二选一；
 * 查看查询是否命中：看 Profile 中的 `BloomFilterFilterRows` 字段。
 
-## 6.3. 创建、查看与修改
+### 6.3. 创建、查看与修改
 
 ```sql
 CREATE TABLE test.table1 (
@@ -393,7 +393,7 @@ ALTER TABLE table1 DROP INDEX new_index_name;
 
 修改索引是异步操作，可以用 `SHOW ALTER TABLE` 查看进度，每次只能运行一个修改索引的任务。
 
-## 6.4. 能加速的查询
+### 6.4. 能加速的查询
 
 * **`LIKE` 查询**：只有 `gram_num` 小于被查询字符串的长度时才能加速。比如 `gram_num` 为 4，`LIKE "%abc"` 中的 `abc` 只有 3 个字符，无法加速；`LIKE "%abcd"`、`LIKE "%abcde%"` 可以加速。
 * **`ngram_search`**：函数作用的列建有 N-gram bloom filter 索引，且函数中指定的 `gram_num` 与索引的 `gram_num` 一致时，索引会自动过滤掉字符串相似度为 0 的数据，显著加快函数执行。
@@ -405,9 +405,9 @@ ALTER TABLE table1 DROP INDEX new_index_name;
                                          "case_sensitive" = "false") COMMENT ''
     ```
 
-# 7. 全文倒排索引（Beta）
+## 7. 全文倒排索引（Beta）
 
-## 7.1. 原理
+### 7.1. 原理
 
 全文倒排索引自 v3.3.0 起支持，主键表自 v4.0 起支持。它把文本拆成一个个词，为每个词建一个索引条目，记录这个词出现在数据文件的哪些行。
 
@@ -415,7 +415,7 @@ ALTER TABLE table1 DROP INDEX new_index_name;
 
 每个数据文件都包含基于索引列的全文倒排索引。v4.1 起，除了默认的 CLucene 实现，还提供 builtin（内置）实现，见 7.6 节。
 
-## 7.2. 创建
+### 7.2. 创建
 
 先开启 FE 配置项 `enable_experimental_gin`：
 
@@ -450,7 +450,7 @@ CREATE INDEX idx ON t (v) USING GIN('parser' = 'english');
 | `chinese` | 中文分词 | 使用 CLucene 的 CJK Analyzer |
 | `standard` | 多语言分词 | 基于 Unicode 文本分段算法，适合大多数语言和中英文混合，大写字母转成小写 |
 
-## 7.3. 查看与删除
+### 7.3. 查看与删除
 
 ```sql
 -- 查看
@@ -461,7 +461,7 @@ DROP INDEX idx ON t;
 ALTER TABLE t DROP INDEX idx;
 ```
 
-## 7.4. 用全文倒排索引加速查询
+### 7.4. 用全文倒排索引加速查询
 
 建好索引后，要确保系统变量 `enable_gin_filter` 已开启。能加速哪些查询，取决于索引列有没有分词。
 
@@ -503,11 +503,11 @@ SELECT * FROM t WHERE t.value MATCH_ALL "database data";  -- 同时包含 databa
 * 表达式谓词：`(NOT) LIKE`、`(NOT) MATCH`、`(NOT) MATCH_ANY`、`(NOT) MATCH_ALL`。此时 `MATCH` 在语义上等同于 `LIKE`，并且两者只支持 `(NOT) <col_name> MATCH|LIKE '%keyword%'` 这种格式。`LIKE` 不符合这个格式时查询照常执行，但不会用全文倒排索引过滤。
 * 常规谓词：`==`、`!=`、`<=`、`>=`、`NOT IN`、`IN`、`IS NOT NULL`、`NOT NULL`。
 
-## 7.5. 验证是否加速
+### 7.5. 验证是否加速
 
 执行查询后，在 Query Profile 的 scan 节点中查看 `GinFilterRows`（用全文倒排索引过滤掉的行数）和 `GinFilter`（过滤耗时）。
 
-## 7.6. Builtin 倒排索引（v4.1 起）
+### 7.6. Builtin 倒排索引（v4.1 起）
 
 v4.1 起，StarRocks 提供 **builtin** 倒排索引实现，作为默认 CLucene 实现的补充。它是 StarRocks 原生的倒排索引，基于 bitmap 索引构建。
 
@@ -566,9 +566,9 @@ PROPERTIES ("replicated_storage" = "false");
 SELECT * FROM t_gram WHERE text_val MATCH "%rock%";
 ```
 
-# 8. 向量索引（Beta）
+## 8. 向量索引（Beta）
 
-## 8.1. 原理
+### 8.1. 原理
 
 向量索引用来做**近似最近邻搜索**（ANNS），比如在一堆 embedding 向量里找和查询向量最相似的几个。目前 StarRocks 在 Segment 文件级别建向量索引：索引把每个搜索项映射到 Segment 文件中的行 ID，直接定位到数据行，不需要对每一行做暴力的向量距离计算。
 
@@ -587,13 +587,13 @@ StarRocks 提供两种向量索引：
 | 召回率调整 | 支持；召回率相近时计算成本更高 | 支持 |
 | 缓存策略 | 可以调整索引块的缓存比例，平衡内存和延迟 | 目前只支持整个文件缓存 |
 
-## 8.2. 前提条件
+### 8.2. 前提条件
 
 * 每张表只支持一个向量索引；
 * 被索引的列必须是 `ARRAY<FLOAT> NOT NULL`；
 * 只有明细表和主键表支持向量索引。
 
-## 8.3. 创建
+### 8.3. 创建
 
 ```sql
 -- HNSW 向量索引
@@ -677,7 +677,7 @@ USING VECTOR (
 
 存算分离集群用 `async` 模式时，可以查 `information_schema.partitions_meta` 的 `VISIBLE_VERSION`、`MIN_VI_BUILT_VERSION`、`MAX_VI_BUILT_VERSION` 看建索引进度：`MIN_VI_BUILT_VERSION` 等于 `VISIBLE_VERSION` 说明分区内所有 Tablet 的索引都已建好。另外，存算分离集群里用 `ALTER TABLE ADD INDEX` 加索引会重写现有数据，即使设了 `async`，也要等索引建完 Schema Change 才算完成。
 
-## 8.4. 查看与删除
+### 8.4. 查看与删除
 
 ```sql
 SHOW CREATE TABLE hnsw\G
@@ -686,7 +686,7 @@ DROP INDEX ivfpq_vector ON ivfpq;
 ALTER TABLE ivfpq DROP INDEX ivfpq_vector;
 ```
 
-## 8.5. 用向量索引做近似搜索
+### 8.5. 用向量索引做近似搜索
 
 **查询要满足的条件**：
 
@@ -742,7 +742,7 @@ ORDER BY l2_distance([1,1,1,1,1], vector)
 LIMIT 1;
 ```
 
-## 8.6. 调优与验证
+### 8.6. 调优与验证
 
 **搜索参数**：通过会话变量 `ann_params` 或 SQL Hint 传入。建议先在小数据集上调到满意的召回率和延迟，再用到大数据集上。
 
@@ -789,109 +789,7 @@ SET pq_refine_factor = 2;
 
 **验证是否命中**：对查询执行 `EXPLAIN`，`OlapScanNode` 中出现 `VECTORINDEX: ON`，说明近似搜索用上了向量索引。
 
-# 9. 行列混存
-
-## 9.1. 列存与行列混存
-
-StarRocks 作为 OLAP 数据库，原本用**列式存储**，能提升聚合查询这类复杂查询的性能。v3.2.3 起，StarRocks 还支持**行列混存**（Beta）：数据同时按行和按列存储。它适合基于主键的高并发、低延迟点查和部分列更新，同时保留了接近列存的分析能力。行列混存还支持 prepared statement，能提高查询性能和安全性。
-
-| 对比项 | 列式存储 | 行列混存 |
-|---|---|---|
-| **存储方式** | 只按列存 | 按行和按列都存。表里多一个隐藏的二进制列 `__row`：写入时，把每行所有 value 列的值编码后写入 `__row`。因此有额外的存储开销 |
-| **适合的场景** | 复杂数据分析，例如海量数据上的聚合分析、多表 JOIN；字段很多的宽表，但查询只涉及少数几列 | 同时支持行存和列存的场景。行存场景包括：基于主键的高并发点查；字段少的表上查询大部分字段；部分列更新（更新多个列、少量行） |
-
-## 9.2. 基本用法
-
-**建表**：先开启 FE 配置项 `enable_experimental_rowstore`，再在建表时把 `PROPERTIES` 中的 `store_type` 设为 `column_with_row`。
-
-```sql
-ADMIN SET FRONTEND CONFIG ("enable_experimental_rowstore" = "true");
-
-CREATE TABLE users (
-    id      bigint NOT NULL,
-    country string,
-    city    string,
-    revenue bigint
-)
-PRIMARY KEY (id)
-DISTRIBUTED BY HASH (id)
-PROPERTIES ("store_type" = "column_with_row");
-```
-
-建表要求：
-
-* 表必须是主键表；
-* `__row` 列的长度不能超过 1 MB；
-* v3.2.4 起，支持 BITMAP、HLL、JSON、ARRAY、MAP、STRUCT 类型的列。
-
-**增删改**：和列存表一样，可以用导入和 DML 语句插入、删除、更新数据。
-
-```sql
-INSERT INTO users (id, country, city, revenue) VALUES
-    (1, 'USA', 'New York', 5000),
-    (2, 'UK', 'London', 4500),
-    (3, 'France', 'Paris', 6000),
-    (4, 'Germany', 'Berlin', 4000),
-    (5, 'Japan', 'Tokyo', 7000),
-    (6, 'Australia', 'Sydney', 7500);
-
-DELETE FROM users WHERE id = 6;
-UPDATE users SET revenue = 6500 WHERE id = 4;
-```
-
-**点查走短路径**：点查会走"短路径"（short circuit），直接查行存数据，提高查询性能。
-
-1. 确认开启了查询短路：
-
-    ```sql
-    SHOW VARIABLES LIKE '%enable_short_circuit%';
-    -- 未开启时：
-    SET enable_short_circuit = true;
-    ```
-
-2. 查询满足条件时才走短路径：`WHERE` 子句的条件列**包含全部主键列**，并且运算符是 `=` 或 `IN`。条件列除了全部主键列之外，还可以包含其他列。
-
-    ```sql
-    SELECT * FROM users WHERE id = 1;
-    ```
-
-3. 用 `EXPLAIN` 验证，查询计划中出现 `Short Circuit Scan: true` 说明走了短路径：
-
-    ```sql
-    EXPLAIN SELECT * FROM users WHERE id = 1;
-    -- ...
-    --   0:OlapScanNode
-    --      TABLE: users
-    --      PREDICATES: 1: id = 1
-    --      partitions=1/1
-    --      tabletRatio=1/6
-    --      Short Circuit Scan: true
-    ```
-
-**Prepared statement**：
-
-```sql
-PREPARE select_all_stmt   FROM 'SELECT * FROM users';
-PREPARE select_by_id_stmt FROM 'SELECT * FROM users WHERE id = ?';
-
-SET @id1 = 1, @id2 = 2;
-
-EXECUTE select_by_id_stmt USING @id1;
-EXECUTE select_by_id_stmt USING @id2;
-```
-
-## 9.3. 限制
-
-* 存算分离集群暂不支持行列混存；
-* v3.2.4 起，行列混存的表支持用 `ALTER TABLE` 修改；
-* 查询短路目前只适合"定时批量导入、导入完成后再查询"的场景。数据写入的 apply 阶段可能和查询短路产生索引互斥，导致写入阻塞短路查询，影响写入期间点查的响应时间；
-* 行列混存会明显增加存储占用：数据存了行、列两份，而且行存的压缩率可能不如列存；
-* 导入的耗时和资源消耗会增加；
-* 可以作为在线服务的一种方案，但性能可能比不上成熟的 OLTP 数据库；
-* 不支持依赖列存的功能，比如列模式的部分列更新；
-* 必须是主键表。
-
-# 10. 如何选择
+## 9. 如何选择
 
 按过滤条件的特点选择加速手段：
 
@@ -905,9 +803,9 @@ flowchart TD
     B -->|"字符串 LIKE / ngram_search"| NG["N-gram bloom filter 索引"]
     B -->|"按关键词全文检索"| GIN["全文倒排索引"]
     B -->|"找最相似的向量"| VEC["向量索引"]
-    Q --> C{"按完整主键高并发点查整行?"}
-    C -->|是| ROW["主键表 + 行列混存"]
 ```
+
+> 如果是按完整主键高并发地点查整行，索引帮助有限，这类场景用 [基础篇006 · 行列混存](StarRocks基础篇006_行列混存.md)。
 
 几个索引在支持范围上的差异，放在一起对比：
 
@@ -919,11 +817,10 @@ flowchart TD
 | 全文倒排 | 明细表支持；主键表 v4.0 起支持 | — | CHAR、VARCHAR、STRING | `MATCH` 系列；不分词时还支持 `LIKE` 和常规谓词 |
 | 向量 | 支持，每表一个 | 不支持 | `ARRAY<FLOAT> NOT NULL` | 按距离函数 `ORDER BY ... LIMIT` |
 
-# 11. 小结
+## 10. 小结
 
 * **排序键决定数据的物理顺序**，前缀索引是建在这个顺序上的稀疏索引：每 1024 行一个索引项，前缀最多 3 个字段、36 字节，字符串列只能在末尾。最常用的过滤列放前面，排序列一般 3 个。
 * Ordinal 索引负责按行号找到数据页，ZoneMap 索引按数据块的统计信息整块跳过数据，两者都自动生效。
 * 排序键管不到的过滤条件，按需手动建索引：高基数列等值查询用 **Bloom filter**；较高基数列或多个低基数列组合用 **Bitmap**（StarRocks 会自适应决定是否使用）；字符串模糊查询用 **N-gram bloom filter**；全文检索用**全文倒排索引**；向量相似度搜索用**向量索引**。
-* **行列混存**让主键表在保留分析能力的同时支持高并发点查，代价是额外的存储和导入开销。
 
-到这里，表设计的几个决策（表类型、数据分布、排序键与索引、压缩）就都讲完了。表建好之后，下一步是把数据可靠地导进来，这是导入篇的内容。
+索引解决的是"怎么少扫数据"。还有一类查询是按主键高并发地点查整行，列存天生不擅长，下一篇 [基础篇006 · 行列混存](StarRocks基础篇006_行列混存.md) 讲 StarRocks 为它准备的存储方式。
