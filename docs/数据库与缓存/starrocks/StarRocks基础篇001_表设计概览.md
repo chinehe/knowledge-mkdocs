@@ -1,6 +1,6 @@
 入门篇里我们已经能把 StarRocks 跑起来、建一张最简单的表、导数据并查询。但那张表没有指定表类型、分区、分桶，全用的默认值。从这一篇开始进入「表设计」：先建立整体认识，搞清楚 StarRocks 里的数据是怎么组织的、一张表由哪些设计决策组成；表类型、数据分布、数据压缩、索引、行列混存，分别在后面五篇深入展开。
 
-> 本文内容整理自 StarRocks 官方文档：[Catalogs、databases 和 tables](https://docs.starrocks.io/zh/docs/table_design/)、[表概览](https://docs.starrocks.io/zh/docs/table_design/StarRocks_table_design/)、[数据压缩](https://docs.starrocks.io/zh/docs/table_design/data_compression/)。版本敏感的内容（语法、参数、特性起始版本）请以你实际部署版本的官方文档为准。本文验证环境为 StarRocks 4.1.x。
+> 本文内容整理自 StarRocks 官方文档：[Catalogs、databases 和 tables](https://docs.starrocks.io/zh/docs/table_design/)、[表概览](https://docs.starrocks.io/zh/docs/table_design/StarRocks_table_design/)、[数据压缩](https://docs.starrocks.io/zh/docs/table_design/data_compression/)。
 
 ## 1. StarRocks数据存储
 
@@ -208,7 +208,7 @@ DROP TEMPORARY TABLE tmp_orders;
 * 因为临时表基于 Session，**命名不受唯一性约束**：不同 Session 可以建同名临时表，也可以建和普通表同名的临时表；
 * 同一 Database 里同时有同名的临时表和普通表时，**临时表优先**：在该 Session 内，对这个表名的所有查询和操作都只作用于临时表。
 
-## 7.3. 使用限制
+### 7.3. 使用限制
 
 临时表的用法和普通内部表基本相同，但有以下限制：
 

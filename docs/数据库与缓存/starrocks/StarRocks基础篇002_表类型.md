@@ -1,6 +1,6 @@
 [基础篇001](StarRocks基础篇001_表设计概览.md) 提到，一条建表语句里的第一个设计决策是表类型。它决定了**一张表如何对待"Key 相同的多行数据"**：是全部保留、聚合成一行，还是用新的覆盖旧的。选错表类型会直接改变数据语义，甚至让明细数据永久丢失，而且**建表后不能修改**。这一篇把四种表类型逐个讲透，再横向对比，最后给出选型方法和一个可复现的实验。
 
-> 本文内容整理自 StarRocks 官方文档：[表类型概览](https://docs.starrocks.io/zh/docs/table_design/table_types/)、[明细表](https://docs.starrocks.io/zh/docs/table_design/table_types/duplicate_key_table/)、[聚合表](https://docs.starrocks.io/zh/docs/table_design/table_types/aggregate_table/)、[更新表](https://docs.starrocks.io/zh/docs/table_design/table_types/unique_key_table/)、[主键表](https://docs.starrocks.io/zh/docs/table_design/table_types/primary_key_table/)、[各类表的能力对比](https://docs.starrocks.io/zh/docs/table_design/table_types/table_capabilities/)。版本敏感的内容（语法、参数、特性起始版本）请以你实际部署版本的官方文档为准。本文验证环境为 StarRocks 4.1.x。
+> 本文内容整理自 StarRocks 官方文档：[表类型概览](https://docs.starrocks.io/zh/docs/table_design/table_types/)、[明细表](https://docs.starrocks.io/zh/docs/table_design/table_types/duplicate_key_table/)、[聚合表](https://docs.starrocks.io/zh/docs/table_design/table_types/aggregate_table/)、[更新表](https://docs.starrocks.io/zh/docs/table_design/table_types/unique_key_table/)、[主键表](https://docs.starrocks.io/zh/docs/table_design/table_types/primary_key_table/)、[各类表的能力对比](https://docs.starrocks.io/zh/docs/table_design/table_types/table_capabilities/)。
 
 ## 1. 表类型概述
 
