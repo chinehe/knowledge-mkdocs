@@ -709,4 +709,3 @@ w = new(bytes.Buffer)
 w = nil
 ```
 
-![image-20250925164925471](../../.public/image-20250925164925471.png)

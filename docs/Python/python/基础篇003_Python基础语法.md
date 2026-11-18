@@ -2581,7 +2581,7 @@ if __name__ == "__main__":
 ```
 
 **文档目录 (`docs/`)**
-```markdown
+````markdown
 ## docs/index.md
 ## My Package 文档
 
@@ -2600,7 +2600,7 @@ result = main_function("input")
 - [教程](tutorial.md)
 - [常见问题](faq.md)
 
-```
+````
 
 **示例目录 (`examples/`)**
 ```python

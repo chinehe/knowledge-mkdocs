@@ -62,7 +62,7 @@ nav:
       - 更优雅地使用gin服务: Golang/gin framework/Gin框架进阶篇001_更优雅地使用gin服务.md
       - 数据库集成: Golang/gin framework/Gin框架进阶篇004_数据库集成.md
   - Python:
-    - Python语言基础篇:
+    - 语言基础:
       - 深入了解Python语言概念、历史、特性: Python/python/基础篇001_深入了解Python语言概念、历史、特性.md
       - Python安装教程: Python/python/基础篇002_Python安装教程.md
       - Python基础语法: Python/python/基础篇003_Python基础语法.md
@@ -73,6 +73,21 @@ nav:
       - Python类: Python/python/基础篇008_Python类.md
       - Python标准库简介: Python/python/基础篇009_Python标准库简介.md
       - Python虚拟环境和包: Python/python/基础篇010_Python虚拟环境和包.md
+    - 工程化:
+      - 企业级Web后端初始化路线图: Python/engineering/Python工程化篇001_从零初始化企业级Web后端路线图.md
+      - 代码质量工具ruff与mypy: Python/engineering/Python工程化篇002_代码质量工具ruff与mypy.md
+      - pre-commit提交前自动检查: Python/engineering/Python工程化篇003_pre-commit提交前自动检查.md
+      - pytest异步测试实践: Python/engineering/Python工程化篇004_pytest异步测试实践.md
+      - 配置管理pydantic-settings: Python/engineering/Python工程化篇005_配置管理pydantic-settings.md
+      - 结构化日志structlog: Python/engineering/Python工程化篇006_结构化日志structlog.md
+    - FastAPI框架:
+      - 应用入口、路由与项目分层: Python/fastapi/FastAPI基础篇001_应用入口、路由与项目分层.md
+      - 依赖注入与Bearer认证: Python/fastapi/FastAPI基础篇002_依赖注入与Bearer认证.md
+      - 统一异常处理与请求追踪中间件: Python/fastapi/FastAPI基础篇003_统一异常处理与请求追踪中间件.md
+      - 健康检查: Python/fastapi/FastAPI基础篇004_健康检查.md
+    - SQLAlchemy:
+      - 异步引擎、会话与模型定义: Python/sqlalchemy/SQLAlchemy基础篇001_异步引擎、会话与模型定义.md
+      - Alembic数据库迁移: Python/sqlalchemy/SQLAlchemy基础篇002_Alembic数据库迁移.md
   - AI:
     - Agent开发:
       - 从零手写一个AI Agent: ai/Agent开发/Agent开发001_从零手写一个AI Agent.md
@@ -112,6 +127,7 @@ nav:
   - DevOps:
     - Docker:
       - Docker入门指南: DevOps/Docker/Docker入门指南.md
+      - Python服务容器化与部署: DevOps/Docker/Docker实战_Python服务容器化与部署.md
   - About: about.md
 
 theme:
@@ -142,6 +158,11 @@ theme:
         name: Switch to light mode
 
 markdown_extensions:
+  # 标题锚点保留中文（默认会去掉非 ASCII 字符），如 "## 2. SHA-1（已弃用）" → #2-sha-1已弃用
+  - toc:
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
   # 支持代码块围栏增强 + Mermaid 流程图渲染
   - pymdownx.superfences:
       custom_fences:

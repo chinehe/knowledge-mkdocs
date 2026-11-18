@@ -109,13 +109,9 @@ Docker客户端和守护进程可以运行在同一套系统上，也可以使�
 
 
 
-**Docker架构图：**
-
-![image-20260113171600013](../../.public//image-20260113171600013.png)
 
 
-
-**图中元素讲解：**
+**架构中各组件说明：**
 
 * **Client 客户端**：用户与 Docker 交互的入口，通过命令行或 API 发送指令给 Docker Daemon。`docker` 命令使用 Docker API，Docker 客户端可以与多个守护进程通信。
 
@@ -636,6 +632,105 @@ COPY --from=build-stage /path/in/build/stage /path/to/place/in/final/stage
 
 
 
+### 4.2.5. .dockerignore
+
+执行`docker build .`时，`.`指定的目录就是**构建上下文**。构建开始时，Docker会先把整个构建上下文发送给构建器（4.2.1输出中的`load build context`、`transferring context`就是这一步），Dockerfile中`COPY . /app`复制的也是构建上下文中的文件。
+
+如果不加限制，项目目录下的所有文件，包括Git历史、本地虚拟环境、各种缓存和密钥文件，都会被发送给构建器，并可能通过`COPY`进入镜像。
+
+
+
+在构建上下文的根目录放一个`.dockerignore`文件，可以把不需要的文件排除在构建上下文之外：
+
+* 构建更快：需要传输的上下文更小，无关文件的变化也不会让`COPY`层的缓存失效。
+* 镜像更小：本地虚拟环境、缓存等不会被复制进镜像。
+* 更安全：避免`.env`等敏感文件进入镜像。
+
+`.dockerignore`的语法与`.gitignore`类似：每行一个匹配模式，`#`开头为注释；`**`匹配任意层级的目录，如`**/__pycache__`；`!`开头表示取反，把前面排除的文件重新包含进来，如`!.env.example`。
+
+> **必须排除`.env`：**
+>
+> `.env`中通常存放数据库密码、密钥等敏感配置。如果没有排除，`COPY . /app`会把它打进镜像层，任何能拉取这个镜像的人都能读到其中的密钥（即使后面的指令删除了这个文件，它仍然保留在之前的层里）。配置应该在运行容器时通过环境变量注入（见4.3.3.2），而不是写进镜像。
+
+
+
+以一个Python Web服务的`.dockerignore`为例：
+
+```shell
+# 不进入镜像构建上下文的文件：既让构建更快，也防止敏感文件被打进镜像
+.git
+.venv
+.env
+.env.*
+!.env.example
+**/__pycache__
+.mypy_cache
+.ruff_cache
+.pytest_cache
+.coverage
+htmlcov
+.idea
+.vscode
+.DS_Store
+tests
+```
+
+每类文件排除的原因：
+
+* `.git`：Git历史，体积可能很大，运行时用不到。
+* `.venv`：本地虚拟环境，与宿主机平台（如macOS）绑定，放进Linux镜像也无法使用。镜像中的依赖由Dockerfile中的`uv sync`重新安装。
+* `.env`、`.env.*`、`!.env.example`：排除所有环境配置文件，防止密钥进入镜像；`.env.example`是不含真实密钥的配置模板，用`!`重新包含进来。
+* `**/__pycache__`、`.mypy_cache`、`.ruff_cache`、`.pytest_cache`、`.coverage`、`htmlcov`：Python字节码、类型检查、代码检查、测试和覆盖率产生的缓存与报告。它们是本地开发的产物，镜像中不需要，而且经常变化，会让`COPY`层的缓存频繁失效。
+* `.idea`、`.vscode`、`.DS_Store`：编辑器配置和macOS系统文件。
+* `tests`：测试代码只在开发环境和CI中运行，生产镜像不需要。
+
+### 4.2.6. 构建时挂载（RUN --mount）
+
+4.3.5中介绍的`docker run --mount`是运行时挂载，作用于运行中的容器。Dockerfile中的`RUN`指令也支持`--mount`参数，这是BuildKit提供的构建时挂载：只在执行这一条`RUN`指令期间挂载，指令执行完就卸载，挂载的内容不会留在镜像层里。
+
+使用构建时挂载，需要在Dockerfile首行声明语法版本：
+
+```dockerfile
+# syntax=docker/dockerfile:1
+```
+
+
+
+常用的挂载类型有两种：
+
+* `type=cache`：挂载一个由构建器管理的缓存目录，它在多次构建之间保留。适合存放包管理器的下载缓存，如`--mount=type=cache,target=/root/.cache/uv`。即使依赖层失效需要重新安装，没有变化的包也可以直接从缓存中取，不用重新下载。
+* `type=bind`：把构建上下文中的文件或目录临时挂载进来，而不用`COPY`，如`--mount=type=bind,source=uv.lock,target=uv.lock`。这一层只用到挂载的文件，它的缓存也只受这些文件变化的影响。
+
+
+
+以一个使用uv管理依赖的Python项目为例，Dockerfile中安装依赖的部分如下：
+
+```dockerfile
+# syntax=docker/dockerfile:1
+
+FROM ghcr.io/astral-sh/uv:0.11-python3.12-trixie-slim AS builder
+WORKDIR /app
+
+# 先只装第三方依赖：只要 pyproject.toml 和 uv.lock 不变，这一层就走缓存，改业务代码不会重装依赖
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --locked --no-install-project --no-dev
+
+# 再装项目本身
+COPY . /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked --no-dev --no-editable
+```
+
+1. 第一条`RUN`通过`type=bind`挂载`pyproject.toml`和`uv.lock`，只用这两个文件安装第三方依赖（`--no-install-project`表示不安装项目本身）。这一层的缓存只受这两个依赖文件影响，修改业务代码不会触发依赖重装。
+2. 两条`RUN`都通过`type=cache`挂载了uv的缓存目录`/root/.cache/uv`。依赖文件变化导致依赖层失效时，uv可以复用之前下载过的包，只下载新增或变化的部分。
+3. 业务代码在依赖安装之后才`COPY`进来，代码变化只会让后面的层失效。
+
+> 完整的Python项目容器化实战见[Docker实战：Python服务容器化与部署](./Docker实战_Python服务容器化与部署.md)。
+
+
+
 ## 4.3. 运行容器
 
 ### 4.3.1. 启动容器
@@ -1062,9 +1157,7 @@ Docker Compose 在一个叫 `compose.yml` 的 YAML 文件中定义了整个多�
    * -p 参数（--publish 的缩写）：表示发布端口。该命令会发布容器的3000端口到主机上的3000端口。
    * getting-started：镜像的名称（标签）。
 
-2. 启动完成后，打开浏览器 [http://localhost:3000](http://localhost:3000/)，就可以看到运行的应用：
-
-   ![Empty todo list](../../.public/todo-list-empty.png)
+2. 启动完成后，打开浏览器 [http://localhost:3000](http://localhost:3000/)，就可以看到运行的应用。
 
 3. 试试添加几个条目，看看效果是否如你所愿。
 
@@ -1093,9 +1186,6 @@ e0790b5b51a8 getting-started "docker-entrypoint.s…" 6 minutes ago Up 6 minutes
 
 
 
- **Docker Desktop 图形界面:**
-
-![image-20260116112701919](../../.public//image-20260116112701919.png)
 
 ## 5.2. 更新应用
 
@@ -1188,8 +1278,6 @@ e0790b5b51a8 getting-started "docker-entrypoint.s…" 6 minutes ago Up 6 minutes
 
 5. 等待推送完成，就能在Docker Hub中看到镜像了。
 
-   ![image-20260116135220885](../../.public//image-20260116135220885.png)
-
 ## 5.4 持久化数据库
 
 如果多次尝试从镜像启动容器（删除旧容器），你会发现每次新启动的应用的待办列表都是空的。这是因为容器每次都是从镜像开始的，虽然容器可以创建、更新和删除文件，但当容器被移除时，这些数据文件变更也会丢失。
@@ -1247,8 +1335,6 @@ Docker 完全管理卷，包括磁盘上的存储位置。你只需要记住卷�
 
 1. 打开网址 [http://localhost:3000](http://localhost:3000/)并设置一些事项。
 
-   ![image-20260116143020802](../../.public//image-20260116143020802.png)
-
 2. 停止并移除旧容器
 
    ```shell
@@ -1267,8 +1353,6 @@ Docker 完全管理卷，包括磁盘上的存储位置。你只需要记住卷�
    ```
 
 4. 打开网址 [http://localhost:3000](http://localhost:3000/)并检查事项是否存在。
-
-   ![image-20260116143146267](../../.public//image-20260116143146267.png)
 
 ### 5.4.4. 查看卷
 
@@ -1458,8 +1542,6 @@ docker volume inspect todo-db
    ```
 
 6. 刷新浏览器，可以看到页面更新了。
-
-   ![image-20260116152739702](../../.public//image-20260116152739702.png)
 
 7. 如果你想做的其他改动，可以随时修改。每次你做更改并保存文件时，由于绑定挂载，这些更改都会反映在容器里。当 Nodemon 检测到变化时，它会自动在容器内重启应用。
 
@@ -1955,8 +2037,6 @@ volumes:
 ### 5.7.5. 查看应用栈
 
 在Docker Desktop的仪表盘中，会有一个叫`getting-started-app`的组。这是Docker Compose的项目名称，用来将容器分组在一起。默认情况下，项目名称也就是`compose.yaml`文件所在的目录名称。
-
-![image-20260116180129682](../../.public//image-20260116180129682.png)
 
 如果你展开这个组，就能看到在`compose.yaml`文件中定义的两个容器。
 
