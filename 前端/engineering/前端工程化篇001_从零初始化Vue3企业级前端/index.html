@@ -1,0 +1,1834 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/%E5%89%8D%E7%AB%AF/engineering/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96Vue3%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%89%8D%E7%AB%AF/">
+      
+      
+        <link rel="prev" href="../../../ai/MCP/MCP002_%E6%A6%82%E8%BF%B0MCP%E6%9E%B6%E6%9E%84%E3%80%81%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B/">
+      
+      
+        <link rel="next" href="../../vue/Vue3%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8EPinia%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>从零初始化Vue3企业级前端 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-路线总览" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              从零初始化Vue3企业级前端
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  前端
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前端
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    前端
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工程化
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    工程化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从零初始化Vue3企业级前端
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从零初始化Vue3企业级前端
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-路线总览" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 路线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-阶段一用-create-vue-初始化项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 阶段一：用 create-vue 初始化项目
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-阶段二企业级目录分层约定" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 阶段二：企业级目录分层约定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-阶段三packagejson-脚本编排" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 阶段三：package.json 脚本编排
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-阶段四代码质量三件套各司其职" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 阶段四：代码质量三件套各司其职
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-阶段五本地联调与-vite-代理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 阶段五：本地联调与 Vite 代理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-小结与后续" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 小结与后续
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../vue/Vue3%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8EPinia%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vue
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-路线总览" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 路线总览
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-阶段一用-create-vue-初始化项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 阶段一：用 create-vue 初始化项目
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-阶段二企业级目录分层约定" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 阶段二：企业级目录分层约定
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-阶段三packagejson-脚本编排" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 阶段三：package.json 脚本编排
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-阶段四代码质量三件套各司其职" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 阶段四：代码质量三件套各司其职
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-阶段五本地联调与-vite-代理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 阶段五：本地联调与 Vite 代理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-小结与后续" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 小结与后续
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    前端
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    工程化
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>从零初始化Vue3企业级前端</h1>
+
+<h2 id="1-路线总览">1. 路线总览</h2>
+<p>本文给出一个企业级 Vue 3 前端从空目录到可本地联调的推荐初始化顺序。示例项目名为 <code>my-app</code>，技术选型如下：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>选型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>框架 / 语言</td>
+<td>Vue 3（组合式 API）、TypeScript</td>
+</tr>
+<tr>
+<td>构建工具</td>
+<td>Vite</td>
+</tr>
+<tr>
+<td>路由</td>
+<td>Vue Router</td>
+</tr>
+<tr>
+<td>状态管理</td>
+<td>Pinia</td>
+</tr>
+<tr>
+<td>HTTP 客户端</td>
+<td>axios</td>
+</tr>
+<tr>
+<td>脚本编排</td>
+<td>npm-run-all2（<code>run-p</code> 并行、<code>run-s</code> 串行）</td>
+</tr>
+<tr>
+<td>类型检查</td>
+<td>vue-tsc</td>
+</tr>
+<tr>
+<td>代码质量</td>
+<td>oxlint（快速 lint）+ ESLint（规则校验）+ Prettier（格式化）</td>
+</tr>
+<tr>
+<td>包管理</td>
+<td>pnpm（npm / yarn 亦可）</td>
+</tr>
+</tbody>
+</table>
+<p>这套工具链是官方脚手架 create-vue 的默认组合，也是社区主流选择：Vite 提供秒级启动的开发服务器和基于 Rollup 的生产构建；Vue Router 与 Pinia 是 Vue 官方维护的路由和状态库；TypeScript 在组件、接口、状态层提供类型保障；ESLint、Prettier 统一规范。全部采用官方或官方推荐方案，升级和查文档的成本最低。</p>
+<p>本文是路线图，按下面五个阶段把初始化串起来，每个阶段只讲目的、产出和验证方式，具体细节放在同系列的详细篇里。</p>
+<pre class="mermaid"><code>flowchart LR
+    A[脚手架&lt;br/&gt;create-vue 初始化] --&gt; B[目录分层&lt;br/&gt;api/stores/views/...]
+    B --&gt; C[类型检查与构建&lt;br/&gt;vue-tsc + vite build]
+    C --&gt; D[代码质量&lt;br/&gt;oxlint + eslint + prettier]
+    D --&gt; E[本地联调&lt;br/&gt;Vite 代理转发 /api]</code></pre>
+<p>排列顺序遵循一个原则：<strong>先有骨架，再有约定，最后是质量与联调</strong>。脚手架定出技术选型；目录分层确定代码该放哪里；类型检查和构建保证产物可用；代码质量工具统一规范；本地联调打通前后端。</p>
+<h2 id="2-阶段一用-create-vue-初始化项目">2. 阶段一：用 create-vue 初始化项目</h2>
+<p><strong>目的</strong>：用官方脚手架一次性生成 Vue 3 + TypeScript 项目骨架，并把路由、状态、lint、格式化都接好，避免手工拼装。</p>
+<p>create-vue 本身只是脚手架：它根据你选择的特性生成一份预配置好的项目，其余交给 Vite。交互式创建用：</p>
+<div class="highlight"><pre><span></span><code>pnpm<span class="w"> </span>create<span class="w"> </span>vue@latest
+</code></pre></div>
+<p>在当前目录内非交互创建（CI 或脚本里常用），用特性标志一次性指定：</p>
+<div class="highlight"><pre><span></span><code>pnpm<span class="w"> </span>create<span class="w"> </span>vue@latest<span class="w"> </span>.<span class="w"> </span>--ts<span class="w"> </span>--router<span class="w"> </span>--pinia<span class="w"> </span>--eslint<span class="w"> </span>--prettier
+</code></pre></div>
+<p>各选项的含义：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--ts</code></td>
+<td>启用 TypeScript，生成 <code>tsconfig*.json</code>，组件用 <code>&lt;script setup lang="ts"&gt;</code></td>
+</tr>
+<tr>
+<td><code>--router</code></td>
+<td>集成 Vue Router，生成 <code>src/router/</code> 和示例路由</td>
+</tr>
+<tr>
+<td><code>--pinia</code></td>
+<td>集成 Pinia 状态管理，在入口注册 <code>createPinia()</code></td>
+</tr>
+<tr>
+<td><code>--eslint</code></td>
+<td>接入 ESLint，生成扁平配置 <code>eslint.config.ts</code> 及 <code>lint</code> 脚本</td>
+</tr>
+<tr>
+<td><code>--prettier</code></td>
+<td>接入 Prettier 做格式化，并让 ESLint 不与它冲突</td>
+</tr>
+</tbody>
+</table>
+<p>命令末尾的 <code>.</code> 表示在当前目录创建而不是新建子目录。新版脚手架在启用 ESLint 时会一并加入 oxlint（基于 Rust 的高速 linter），和 ESLint 配合使用（见第 5 章）。</p>
+<p><strong>为什么选这套</strong>：这些都是 Vue 官方维护或官方推荐的方案，开箱即用、互相适配。TypeScript 让接口响应、组件 props、store 状态都有类型；Vue Router 和 Pinia 覆盖路由与状态两大基础能力；ESLint + Prettier 把"查错"和"排版"分开，前者管潜在 bug，后者管风格。</p>
+<p><strong>产出</strong>：<code>package.json</code>、<code>vite.config.ts</code>、<code>tsconfig.json</code> 系列、<code>eslint.config.ts</code>、<code>src/</code> 骨架、<code>index.html</code>、<code>.gitignore</code> 等。</p>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>pnpm<span class="w"> </span>install
+pnpm<span class="w"> </span>dev<span class="w">     </span><span class="c1"># 预期：打印本地地址（默认 http://localhost:5173），浏览器打开能看到首页</span>
+</code></pre></div>
+<h2 id="3-阶段二企业级目录分层约定">3. 阶段二：企业级目录分层约定</h2>
+<p><strong>目的</strong>：约定每类代码的落点，让接口、状态、页面、组件、通用逻辑各归其位，新人一看目录就知道去哪里加代码。</p>
+<p>脚手架生成的是最小骨架，企业级项目通常在 <code>src/</code> 下按职责补全这几层：</p>
+<div class="highlight"><pre><span></span><code>src/
+├── api/           # 接口封装：HTTP 客户端、各业务模块的请求函数、响应类型
+├── stores/        # Pinia 状态：跨组件共享的状态与动作
+├── views/         # 页面级组件：与路由一一对应
+├── components/    # 可复用组件：不绑定具体页面的通用 UI
+├── composables/   # 组合式逻辑：以 use* 命名的可复用逻辑函数
+├── router/        # 路由：路由表、守卫
+└── assets/        # 样式与静态资源：全局 CSS、图片、字体
+</code></pre></div>
+<p>各层的职责与边界：</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>职责</th>
+<th>边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api/</code></td>
+<td>封装与后端的通信：一个统一的 axios 实例、按业务拆分的请求函数、请求/响应的 TypeScript 类型。拦截器（带令牌、自动刷新、统一错误）集中在这里</td>
+<td>只负责"发请求、收数据"，不持有应用状态，不操作 DOM</td>
+</tr>
+<tr>
+<td><code>stores/</code></td>
+<td>用 Pinia 管理跨组件、跨页面共享的状态（如登录态、用户信息）及其动作</td>
+<td>调用 <code>api/</code> 取数据并存状态；不直接写 <code>fetch</code>/<code>axios</code> 细节</td>
+</tr>
+<tr>
+<td><code>views/</code></td>
+<td>页面级组件，与路由表里的 <code>component</code> 一一对应，负责组织一屏的布局和数据流</td>
+<td>通过 store 或 composable 拿数据，尽量把可复用 UI 下沉到 <code>components/</code></td>
+</tr>
+<tr>
+<td><code>components/</code></td>
+<td>不绑定具体页面的可复用 UI 组件（按钮、图标、开关等）</td>
+<td>通过 props/emits 与外界交互，不直接依赖某个页面或路由</td>
+</tr>
+<tr>
+<td><code>composables/</code></td>
+<td>以 <code>use*</code> 命名的组合式函数，封装可跨组件复用的有状态逻辑（如主题、分页、表单）</td>
+<td>返回响应式状态和方法，不渲染 UI</td>
+</tr>
+<tr>
+<td><code>router/</code></td>
+<td>路由表与导航守卫，页面懒加载也在这里声明</td>
+<td>只管"URL ↔ 组件"的映射和访问控制</td>
+</tr>
+<tr>
+<td><code>assets/</code></td>
+<td>全局样式、CSS 变量、图片字体等静态资源</td>
+<td>纯资源，不含逻辑</td>
+</tr>
+</tbody>
+</table>
+<p>两个常见写法，值得固定成约定：</p>
+<p><strong>路由懒加载</strong>。首页等首屏必需的页面直接静态导入，其余页面用动态导入，访问到才下载这块代码：</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">,</span><span class="w"> </span><span class="nx">createWebHistory</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vue-router&#39;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">HomeView</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@/views/HomeView.vue&#39;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">router</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">createRouter</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">history</span><span class="o">:</span><span class="w"> </span><span class="kt">createWebHistory</span><span class="p">(</span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">BASE_URL</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">routes</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;home&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">component</span><span class="o">:</span><span class="w"> </span><span class="kt">HomeView</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// 懒加载：访问 /login 时才下载这块代码</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/login&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;login&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">component</span><span class="o">:</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">import</span><span class="p">(</span><span class="s1">&#39;@/views/LoginView.vue&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">router</span>
+</code></pre></div>
+<p><strong>composable 的模块级单例</strong>。把状态定义在 <code>use*</code> 函数之外（模块作用域），整个应用就共享同一份；定义在函数内部则每次调用都是独立实例。例如一个全应用共享的主题逻辑：</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ref</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;vue&#39;</span>
+
+<span class="c1">// 模块级单例：整个应用共享同一份主题状态</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ref</span><span class="o">&lt;</span><span class="s1">&#39;system&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;light&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;dark&#39;</span><span class="o">&gt;</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">useTheme</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">function</span><span class="w"> </span><span class="nx">setMode</span><span class="p">(</span><span class="nx">m</span><span class="o">:</span><span class="w"> </span><span class="kt">typeof</span><span class="w"> </span><span class="nx">mode</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">mode</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">m</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">mode</span><span class="p">,</span><span class="w"> </span><span class="nx">setMode</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><code>@</code> 是脚手架在 <code>vite.config.ts</code> 里配置的路径别名，指向 <code>src/</code>，让深层目录之间的导入不必写一长串 <code>../../</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="nx">resolve</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">alias</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s1">&#39;@&#39;</span><span class="o">:</span><span class="w"> </span><span class="nx">fileURLToPath</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nx">URL</span><span class="p">(</span><span class="s1">&#39;./src&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">url</span><span class="p">)),</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">},</span>
+</code></pre></div>
+<h2 id="4-阶段三packagejson-脚本编排">4. 阶段三：package.json 脚本编排</h2>
+<p><strong>目的</strong>：把构建、类型检查、lint、格式化拆成职责单一、可单独运行、也能被组合的脚本。关键在于用 npm-run-all2 提供的 <code>run-p</code>（并行）和 <code>run-s</code>（串行）来编排，而不是用 <code>&amp;&amp;</code>/<code>&amp;</code> 手写。</p>
+<p>脚手架生成的脚本大致如下：</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;dev&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vite&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;run-p type-check \&quot;build-only {@}\&quot; --&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preview&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vite preview&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;build-only&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vite build&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;type-check&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vue-tsc --build&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;run-s \&quot;lint:*\&quot;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lint:oxlint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;oxlint . --fix&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lint:eslint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eslint . --fix --cache&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;prettier --write src/&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>逐条说明为什么这样拆：</p>
+<table>
+<thead>
+<tr>
+<th>脚本</th>
+<th>做什么</th>
+<th>为什么单独拆出来</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dev</code></td>
+<td>启动 Vite 开发服务器（含 HMR 热更新）</td>
+<td>日常开发入口</td>
+</tr>
+<tr>
+<td><code>build</code></td>
+<td><strong>并行</strong>跑 <code>type-check</code> 和 <code>build-only</code></td>
+<td>类型检查和打包互不依赖，并行能省一半等待时间</td>
+</tr>
+<tr>
+<td><code>build-only</code></td>
+<td>只用 Vite 打包生产产物，不做类型检查</td>
+<td>拆出来让 <code>build</code> 能单独调度它；也可在已确信类型没问题时单独跑</td>
+</tr>
+<tr>
+<td><code>type-check</code></td>
+<td>用 <code>vue-tsc --build</code> 对 <code>.vue</code> 和 <code>.ts</code> 做类型检查</td>
+<td>Vite 打包默认不做类型检查（靠 esbuild 转译，只剥离类型），类型校验必须单独一步</td>
+</tr>
+<tr>
+<td><code>lint</code></td>
+<td><strong>串行</strong>跑所有 <code>lint:*</code> 脚本</td>
+<td>先快后慢、先粗后细，顺序执行，输出不会交错</td>
+</tr>
+<tr>
+<td><code>lint:oxlint</code></td>
+<td>用 oxlint 快速扫一遍并自动修</td>
+<td>oxlint 用 Rust 实现，极快，先挡掉大批明显问题</td>
+</tr>
+<tr>
+<td><code>lint:eslint</code></td>
+<td>用 ESLint 做更全面的规则校验，带 <code>--cache</code></td>
+<td>ESLint 规则更全但更慢，<code>--cache</code> 只检查改动过的文件</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td>用 Prettier 格式化 <code>src/</code></td>
+<td>格式化与 lint 分离：Prettier 专管排版，ESLint 专管代码质量</td>
+</tr>
+</tbody>
+</table>
+<p>几个要点：</p>
+<ul>
+<li>
+<p><strong><code>vue-tsc</code> 而不是 <code>tsc</code></strong>：普通 <code>tsc</code> 不认识 <code>.vue</code> 单文件组件里的 <code>&lt;template&gt;</code> 和 <code>&lt;script setup&gt;</code>。<code>vue-tsc</code> 是 TypeScript 的包装，能对单文件组件做类型检查。<code>--build</code> 模式按 <code>tsconfig</code> 的项目引用增量编译，速度更快。</p>
+</li>
+<li>
+<p><strong><code>run-p</code> vs <code>run-s</code></strong>：<code>run-p</code>（run-parallel）同时启动多个脚本，适合互不依赖的任务（类型检查 + 打包）；<code>run-s</code>（run-serial）按顺序执行，适合有先后或需要清晰输出的任务（多个 lint）。二者由 npm-run-all2 提供，比 shell 的 <code>&amp;</code>/<code>&amp;&amp;</code> 跨平台（Windows 上也一致），还支持 <code>lint:*</code> 这样的通配匹配。</p>
+</li>
+<li>
+<p><strong><code>build</code> 里的 <code>"build-only {@}" --</code></strong>：<code>{@}</code> 是 npm-run-all2 的占位符，把传给 <code>build</code> 的额外参数透传给 <code>build-only</code>，末尾的 <code>--</code> 用来界定参数边界。这样 <code>pnpm build --mode staging</code> 能把 <code>--mode staging</code> 传到底层的 <code>vite build</code>。</p>
+</li>
+</ul>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>pnpm<span class="w"> </span>type-check<span class="w">   </span><span class="c1"># 预期：无类型错误</span>
+pnpm<span class="w"> </span>lint<span class="w">         </span><span class="c1"># 预期：oxlint、eslint 依次通过</span>
+pnpm<span class="w"> </span>format<span class="w">       </span><span class="c1"># 预期：格式化后无改动或仅规范化排版</span>
+pnpm<span class="w"> </span>build<span class="w">        </span><span class="c1"># 预期：类型检查与打包并行完成，产出 dist/</span>
+</code></pre></div>
+<h2 id="5-阶段四代码质量三件套各司其职">5. 阶段四：代码质量三件套各司其职</h2>
+<p><strong>目的</strong>：用三个工具分工协作，而不是让一个工具什么都干。</p>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>定位</th>
+<th>典型职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>oxlint</td>
+<td>高速 linter</td>
+<td>秒级扫描全项目，挡掉未使用变量、明显错误等常见问题</td>
+</tr>
+<tr>
+<td>ESLint</td>
+<td>规则校验</td>
+<td>配合 <code>eslint-plugin-vue</code>、TypeScript 规则做更深入的静态检查</td>
+</tr>
+<tr>
+<td>Prettier</td>
+<td>格式化</td>
+<td>统一缩进、引号、换行等纯排版问题</td>
+</tr>
+</tbody>
+</table>
+<p>分工的意义：<strong>Prettier 管"长什么样"，lint 管"写得对不对"</strong>。把格式化从 lint 里剥离，二者就不会互相打架——脚手架通过 <code>eslint-config-prettier</code> 关掉 ESLint 里所有与格式相关的规则，交给 Prettier 专管。oxlint 放在 ESLint 前面，是因为它极快，能先过滤掉大批低级问题，ESLint 再处理需要更强规则引擎的部分。</p>
+<p><strong>验证</strong>：改一处明显问题（比如留一个未使用的变量），运行 <code>pnpm lint</code>，预期 oxlint 或 ESLint 报出该问题并在可自动修复时修掉。</p>
+<p>详细的规则配置、扁平配置写法、与编辑器集成等放在同系列详细篇（见第 7 章）。</p>
+<h2 id="6-阶段五本地联调与-vite-代理">6. 阶段五：本地联调与 Vite 代理</h2>
+<p><strong>目的</strong>：开发时前端跑在 Vite 的端口、后端跑在另一个端口，直接请求会跨域。用 Vite 开发服务器的代理把前端的 <code>/api/*</code> 转发到后端，既避免跨域，又让前端代码里只写相对路径 <code>/api/...</code>，无需区分环境。</p>
+<p>在 <code>vite.config.ts</code> 里配置 <code>server.proxy</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">defineConfig</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">server</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">proxy</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// 前端 /api/* 转发到本地后端</span>
+<span class="w">      </span><span class="s1">&#39;/api&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">target</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;http://127.0.0.1:8000&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">changeOrigin</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>配合一个统一的 axios 实例，<code>baseURL</code> 设成 <code>/api/v1</code>，所有业务请求都走这个相对路径：</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;axios&#39;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">http</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">baseURL</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;/api/v1&#39;</span><span class="p">,</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>这样做的好处：</p>
+<ul>
+<li><strong>只在一处配置后端地址</strong>。代理只在开发服务器生效；生产环境由 Nginx 等反向代理把 <code>/api</code> 指向真实后端，前端代码不用改。</li>
+<li><strong><code>changeOrigin: true</code></strong> 把转发请求的 <code>Host</code> 头改成目标地址，后端按正常同源请求处理。</li>
+<li><strong>避免 CORS</strong>。浏览器看到的始终是同源的 <code>/api</code>，跨域发生在开发服务器到后端这一跳，不受浏览器同源策略限制。</li>
+</ul>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>pnpm<span class="w"> </span>dev
+<span class="c1"># 前端页面发起的 /api/... 请求能正常拿到后端响应，浏览器 Network 面板里状态码为 2xx</span>
+</code></pre></div>
+<h2 id="7-小结与后续">7. 小结与后续</h2>
+<p>初始化顺序是<strong>脚手架 → 目录分层 → 类型检查/构建 → 代码质量 → 本地联调</strong>，每个阶段都为后一个阶段打底：</p>
+<ul>
+<li>用 <code>pnpm create vue@latest . --ts --router --pinia --eslint --prettier</code> 一次性生成 Vue 3 + TypeScript 骨架，技术选型全用官方或官方推荐方案。</li>
+<li><code>src/</code> 按职责分层：<code>api</code> 发请求、<code>stores</code> 管共享状态、<code>views</code> 对应路由页面、<code>components</code> 放通用 UI、<code>composables</code> 封装可复用逻辑、<code>router</code> 管路由、<code>assets</code> 放样式资源。</li>
+<li><code>package.json</code> 用 npm-run-all2 的 <code>run-p</code>/<code>run-s</code> 编排：<code>build</code> 并行跑 <code>type-check</code>（<code>vue-tsc --build</code>）和打包，<code>lint</code> 串行跑 oxlint + ESLint，<code>format</code> 交给 Prettier。</li>
+<li>代码质量三件套分工：Prettier 管排版，oxlint 快速过滤，ESLint 深入校验。</li>
+<li>本地联调用 Vite 的 <code>server.proxy</code> 把 <code>/api</code> 转发到后端，前端只写相对路径。</li>
+</ul>
+<p>同系列后续详细篇会展开以下主题：</p>
+<ul>
+<li>TypeScript 分层配置（<code>tsconfig.json</code>/<code>tsconfig.app.json</code>/<code>tsconfig.node.json</code>）与 Vite 的配合</li>
+<li>ESLint / Prettier / oxlint 工具链的规则配置与编辑器集成</li>
+<li>Vue 应用入口、路由与 Pinia 状态管理的组织方式</li>
+<li>axios 实例封装：请求/响应拦截器、令牌携带与自动刷新</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
