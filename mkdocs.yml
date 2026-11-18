@@ -98,6 +98,12 @@ nav:
     - MCP:
       - 初识MCP: ai/MCP/MCP001_初始MCP（Model Context Protocol）.md
       - 概述MCP架构、核心概念与工作流程: ai/MCP/MCP002_概述MCP架构、核心概念与工作流程.md
+  - 前端:
+    - 工程化:
+      - 从零初始化Vue3企业级前端: 前端/engineering/前端工程化篇001_从零初始化Vue3企业级前端.md
+    - Vue:
+      - 应用入口、路由与Pinia状态管理: 前端/vue/Vue3基础篇001_应用入口、路由与Pinia状态管理.md
+      - axios封装与前端令牌认证: 前端/vue/Vue3基础篇002_axios封装与前端令牌认证.md
   - 数据库与缓存:
     - Redis:
       - 🌱简介与特性: 数据库与缓存/redis/Redis入门篇001_Redis简介与特性.md
