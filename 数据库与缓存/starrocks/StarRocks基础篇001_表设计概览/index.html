@@ -25,7 +25,7 @@
     
     
       
-        <title>🌿表设计概览 - ChineHe Knowledge</title>
+        <title>🌿表设计 概览 - ChineHe Knowledge</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-starrocks" class="md-skip">
+        <a href="#1-starrocks数据存储" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              🌿表设计概览
+              🌿表设计 概览
             
           </span>
         </div>
@@ -947,8 +947,24 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 概览
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -957,7 +973,7 @@
   <span class="md-ellipsis">
     
   
-    🌿表设计概览
+    🌿表设计 概览
   
 
     
@@ -966,6 +982,161 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-starrocks数据存储" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. StarRocks数据存储
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-表结构" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 表结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-表设计全景一条建表语句里的设计决策" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 表设计全景：一条建表语句里的设计决策
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-数据类型" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 数据类型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-约束" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 约束
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-数据压缩" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 数据压缩
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-临时表" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 临时表
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 临时表">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-为什么需要临时表" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 为什么需要临时表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-使用临时表" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 使用临时表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-使用限制" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. 使用限制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-更多特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 更多特性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -986,7 +1157,119 @@
   <span class="md-ellipsis">
     
   
-    🌿表类型
+    🌿表设计 表类型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 数据分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87004_%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 数据压缩
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87005_%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87006_%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 行列混存
   
 
     
@@ -1116,8 +1399,152 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-starrocks数据存储" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. StarRocks数据存储
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-表结构" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 表结构
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-表设计全景一条建表语句里的设计决策" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 表设计全景：一条建表语句里的设计决策
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-数据类型" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 数据类型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-约束" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 约束
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-数据压缩" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 数据压缩
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-临时表" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 临时表
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 临时表">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-为什么需要临时表" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 为什么需要临时表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-使用临时表" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 使用临时表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-使用限制" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. 使用限制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-更多特性" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 更多特性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1208,11 +1635,13 @@
 
 
 
-<p>入门篇里我们已经能把 StarRocks 跑起来、建一张最简单的表、导数据并查询。但那张表没有指定表类型、分区、分桶，全用的默认值。从这一篇开始进入「表设计」：先建立整体认识，搞清楚 StarRocks 里的数据是怎么组织的、一张表由哪些设计决策组成；表类型、数据分布、排序键与索引这三块核心内容，分别在后面三篇深入展开。</p>
+  <h1>🌿表设计 概览</h1>
+
+<p>入门篇里我们已经能把 StarRocks 跑起来、建一张最简单的表、导数据并查询。但那张表没有指定表类型、分区、分桶，全用的默认值。从这一篇开始进入「表设计」：先建立整体认识，搞清楚 StarRocks 里的数据是怎么组织的、一张表由哪些设计决策组成；表类型、数据分布、数据压缩、索引、行列混存，分别在后面五篇深入展开。</p>
 <blockquote>
-<p>本文内容整理自 StarRocks 官方文档：<a href="https://docs.starrocks.io/zh/docs/table_design/">Catalogs、databases 和 tables</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/StarRocks_table_design/">表概览</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/data_compression/">数据压缩</a>。版本敏感的内容（语法、参数、特性起始版本）请以你实际部署版本的官方文档为准。本文验证环境为 StarRocks 4.1.x。</p>
+<p>本文内容整理自 StarRocks 官方文档：<a href="https://docs.starrocks.io/zh/docs/table_design/">Catalogs、databases 和 tables</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/StarRocks_table_design/">表概览</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/data_compression/">数据压缩</a>。</p>
 </blockquote>
-<h1 id="1-starrocks">1. StarRocks数据存储</h1>
+<h2 id="1-starrocks数据存储">1. StarRocks数据存储</h2>
 <p>StarRocks 采用 <strong>Catalog → Database → Table</strong> 三层对象层级来组织数据。</p>
 <ul>
 <li>
@@ -1275,7 +1704,7 @@
         EDB1 --&gt; ET1["table_1 … table_n"]
         EDBn --&gt; ETn["table_1 … table_n"]
     end</code></pre>
-<h1 id="2">2. 表结构</h1>
+<h2 id="2-表结构">2. 表结构</h2>
 <p><strong>表</strong> 是StarRocks中的数据存储单元。</p>
 <blockquote>
 <p>理解表结构以及如何设计合理的表结构，有利于优化数据组织，提高查询效率。相比于传统的数据库，StarRocks会以列的方式存储JSON、ARRAY等复杂的半结构化数据，保证高效查询。</p>
@@ -1311,7 +1740,7 @@
 <span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_access</span><span class="err">\</span><span class="k">G</span>
 </code></pre></div>
 <p><code>SHOW CREATE TABLE</code> 会把你没显式写、但 StarRocks 自动补齐的默认属性都展示出来（比如压缩算法 <code>LZ4</code>、副本数、分布方式等），是核对表设计的利器。</p>
-<h1 id="3">3. 表设计全景：一条建表语句里的设计决策</h1>
+<h2 id="3-表设计全景一条建表语句里的设计决策">3. 表设计全景：一条建表语句里的设计决策</h2>
 <p>上面的 <code>user_access</code> 只写了列和排序键，其余全靠默认值。一张认真设计过的表，<code>CREATE TABLE</code> 里的每个子句都对应一个设计决策：</p>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">order_id</span><span class="w">  </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
@@ -1322,10 +1751,11 @@
 <span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="w">            </span><span class="c1">-- ① 表类型：相同 Key 的数据怎么处理</span>
 <span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">date_trunc</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span><span class="w">    </span><span class="c1">-- ② 分区：数据先按天切开</span>
 <span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="w"> </span><span class="p">(</span><span class="n">order_id</span><span class="p">)</span><span class="w">        </span><span class="c1">-- ② 分桶：每个分区再切成多个 Tablet</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">)</span><span class="w">                </span><span class="c1">-- ③ 排序键：数据按什么顺序存储</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">)</span><span class="w">                </span><span class="c1">-- ④ 排序键：数据按什么顺序存储</span>
 <span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="ss">&quot;replication_num&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;1&quot;</span><span class="p">,</span><span class="w">          </span><span class="c1">-- 副本数</span>
-<span class="w">    </span><span class="ss">&quot;compression&quot;</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ZSTD&quot;</span><span class="w">        </span><span class="c1">-- ④ 压缩算法</span>
+<span class="w">    </span><span class="ss">&quot;compression&quot;</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ZSTD&quot;</span><span class="p">,</span><span class="w">       </span><span class="c1">-- ③ 压缩算法</span>
+<span class="w">    </span><span class="ss">&quot;store_type&quot;</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;column_with_row&quot;</span><span class="w">  </span><span class="c1">-- ⑤ 行列混存（可选）</span>
 <span class="p">);</span>
 </code></pre></div>
 <p>这几个决策分别回答一个问题，也正好是表设计系列的分篇方式：</p>
@@ -1352,21 +1782,27 @@
 <td><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/">基础篇003 · 数据分布</a></td>
 </tr>
 <tr>
-<td>③ <code>ORDER BY</code>、索引、<code>store_type</code></td>
-<td>查询怎么快速定位到数据</td>
-<td>过滤效率、点查性能</td>
-<td><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87004_%E6%8E%92%E5%BA%8F%E9%94%AE%E3%80%81%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/">基础篇004 · 排序键、索引与行列混存</a></td>
-</tr>
-<tr>
-<td>④ <code>"compression"</code></td>
+<td>③ <code>"compression"</code></td>
 <td>数据以什么算法压缩</td>
 <td>存储空间、I/O 与 CPU 开销</td>
-<td>本文第 6 章</td>
+<td><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87004_%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9/">基础篇004 · 数据压缩</a></td>
+</tr>
+<tr>
+<td>④ <code>ORDER BY</code>、索引</td>
+<td>查询怎么快速定位到数据</td>
+<td>过滤效率</td>
+<td><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87005_%E7%B4%A2%E5%BC%95/">基础篇005 · 索引</a></td>
+</tr>
+<tr>
+<td>⑤ <code>"store_type"</code></td>
+<td>是否同时按行存储</td>
+<td>主键点查性能</td>
+<td><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87006_%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/">基础篇006 · 行列混存</a></td>
 </tr>
 </tbody>
 </table>
-<p>决策的先后顺序也有讲究：先选表类型（定数据语义），再定分区分桶（定物理布局），最后设计排序键和索引（定查询加速）。后一步依赖前一步，比如主键表要求主键必须包含分区列和分桶列，排序键的设计要结合表类型的 Key 来考虑。</p>
-<h1 id="4">4. 数据类型</h1>
+<p>决策的先后顺序也有讲究：先选表类型（定数据语义），再定分区分桶（定物理布局）和压缩（定存储方式），最后设计排序键、索引和行列混存（定查询加速）。后一步依赖前一步，比如主键表要求主键必须包含分区列和分桶列，排序键的设计要结合表类型的 Key 来考虑。</p>
+<h2 id="4-数据类型">4. 数据类型</h2>
 <p>除了基本的数据类型，如数值、日期和字符串，StarRocks 还支持复杂的半结构化数据类型，包括 <strong>ARRAY、JSON、MAP、STRUCT</strong>。和传统数据库不同，这些半结构化数据同样按列存储，查询效率有保障。</p>
 <p>建表选类型时要注意，<strong>不同的列能用的类型不一样</strong>：</p>
 <ul>
@@ -1374,7 +1810,7 @@
 <li><strong>Value 列</strong>支持的类型更多，但 BITMAP、HLL、半结构化类型在不同表类型中的支持程度不同。</li>
 </ul>
 <p>具体的对照表放在 <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/">基础篇002 · 表类型</a> 的对比章节。全部数据类型的定义和取值范围，请查阅官方<a href="https://docs.starrocks.io/zh/docs/sql-reference/data-types/">数据类型</a>文档。</p>
-<h1 id="5">5. 约束</h1>
+<h2 id="5-约束">5. 约束</h2>
 <p>约束用于确保数据的完整性、一致性和准确性。StarRocks 的约束跟表类型绑定：</p>
 <table>
 <thead>
@@ -1410,55 +1846,10 @@
 <blockquote>
 <p><strong>这里的"唯一"和 MySQL 不同</strong>：MySQL 写入重复主键会直接报错；StarRocks 不会拒绝重复 Key 的数据，而是按表类型把相同 Key 的多行<strong>合并成一行</strong>（聚合或覆盖），从而保证表里的 Key 唯一。合并规则详见 <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/">基础篇002 · 表类型</a>。</p>
 </blockquote>
-<h1 id="6">6. 数据压缩</h1>
-<p>StarRocks 支持对表和索引数据进行压缩。压缩既能节省存储空间，也能提升 I/O 密集型任务的性能；代价是压缩和解压缩需要额外的 CPU 资源。</p>
-<h2 id="61">6.1. 选择压缩算法</h2>
-<p>StarRocks 支持四种压缩算法，它们在压缩率和压缩/解压缩性能上各有取舍：</p>
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th>压缩率排名</th>
-<th>特点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>zlib</td>
-<td>1（最高）</td>
-<td>压缩比高，但数据高度压缩后，导入和查询性能会受一定影响</td>
-</tr>
-<tr>
-<td>Zstandard（zstd）</td>
-<td>2</td>
-<td>压缩比与解压缩性能较均衡</td>
-</tr>
-<tr>
-<td>LZ4</td>
-<td>3</td>
-<td>压缩比与解压缩性能较均衡，<strong>默认算法</strong></td>
-</tr>
-<tr>
-<td>Snappy</td>
-<td>4（最低）</td>
-<td>—</td>
-</tr>
-</tbody>
-</table>
-<p>如果对存储空间没有特殊要求，官方建议使用 <strong>LZ4 或 Zstandard</strong>。另外，数据类型也会影响压缩率，同一算法在不同类型的列上效果不同。</p>
-<h2 id="62">6.2. 设置压缩算法</h2>
-<p>压缩算法<strong>只能在建表时设置，建表后无法修改</strong>。建表时通过 <code>PROPERTIES</code> 的 <code>compression</code> 属性指定，不指定则默认使用 LZ4：</p>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">data_compression</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">id</span><span class="w">   </span><span class="nb">INT</span><span class="w">       </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">CHAR</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span>
-<span class="p">)</span>
-<span class="k">UNIQUE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
-<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
-<span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;compression&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ZSTD&quot;</span><span class="p">);</span>
-</code></pre></div>
-<p>建表后可以用 <code>SHOW CREATE TABLE</code> 查看表实际使用的压缩算法。</p>
-<h1 id="7">7. 临时表</h1>
-<h2 id="71">7.1. 为什么需要临时表</h2>
+<h2 id="6-数据压缩">6. 数据压缩</h2>
+<p>StarRocks 会对表和索引数据进行压缩，以节省存储空间、减少 I/O，代价是额外的 CPU 开销。支持 LZ4（默认）、Zstandard、zlib、Snappy 四种算法，只能在建表时通过 <code>"compression"</code> 属性设置。算法怎么选、怎么设置，详见 <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87004_%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9/">基础篇004 · 数据压缩</a>。</p>
+<h2 id="7-临时表">7. 临时表</h2>
+<h3 id="71-为什么需要临时表">7.1. 为什么需要临时表</h3>
 <p>处理数据时，经常需要把中间计算结果保存下来以便后续复用（比如 ETL 的中间结果）。以前只有两种办法，都不理想：</p>
 <ul>
 <li><strong>CTE（<code>WITH</code> 子句）</strong>：只是逻辑概念，不会物理存储结果，也无法在不同查询间共享。</li>
@@ -1469,7 +1860,7 @@
 <li>临时表的生命周期与 <strong>Session 绑定</strong>，由 StarRocks 管理，Session 结束时自动清除；</li>
 <li>临时表<strong>仅在当前 Session 内可见</strong>，不同 Session 可以创建同名临时表。</li>
 </ul>
-<h2 id="72">7.2. 使用临时表</h2>
+<h3 id="72-使用临时表">7.2. 使用临时表</h3>
 <p>在以下语句中加上 <code>TEMPORARY</code> 关键字，即可创建或删除临时表：</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- CREATE TABLE</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TEMPORARY</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tmp_orders</span><span class="w"> </span><span class="p">(</span>
@@ -1495,7 +1886,7 @@
 <li>因为临时表基于 Session，<strong>命名不受唯一性约束</strong>：不同 Session 可以建同名临时表，也可以建和普通表同名的临时表；</li>
 <li>同一 Database 里同时有同名的临时表和普通表时，<strong>临时表优先</strong>：在该 Session 内，对这个表名的所有查询和操作都只作用于临时表。</li>
 </ul>
-<h2 id="73">7.3. 使用限制</h2>
+<h3 id="73-使用限制">7.3. 使用限制</h3>
 <p>临时表的用法和普通内部表基本相同，但有以下限制：</p>
 <ul>
 <li>必须创建在 Default Catalog 中；</li>
@@ -1506,7 +1897,7 @@
 <li>不支持用 <code>EXPORT</code> 导出；</li>
 <li>不支持通过异步任务（<code>SUBMIT TASK</code>）创建临时表，或向其导入、导出数据。</li>
 </ul>
-<h1 id="8">8. 更多特性</h1>
+<h2 id="8-更多特性">8. 更多特性</h2>
 <p>除了上面这些常用特性，StarRocks 还提供一些让表结构更健壮的能力，按需了解即可：</p>
 <table>
 <thead>
@@ -1534,10 +1925,10 @@
 </tr>
 </tbody>
 </table>
-<h1 id="9">9. 小结</h1>
+<h2 id="9-小结">9. 小结</h2>
 <ul>
 <li>StarRocks 用 <strong>Catalog → Database → Table</strong> 组织数据：Internal Catalog 管理内部数据，External Catalog 连接数据湖。</li>
-<li>一条 <code>CREATE TABLE</code> 里藏着四个设计决策：<strong>表类型、数据分布、排序键与索引、压缩</strong>。先定数据语义，再定物理布局，最后定查询加速。</li>
+<li>一条 <code>CREATE TABLE</code> 里藏着几个设计决策：<strong>表类型、数据分布、压缩、排序键与索引、行列混存</strong>。先定数据语义，再定物理布局和存储方式，最后定查询加速。</li>
 <li>数据类型上，Key 列只支持基础类型，Value 列的类型支持随表类型而不同。</li>
 <li>约束跟表类型绑定，StarRocks 的"唯一"靠合并实现，不是写入时报错。</li>
 <li>压缩算法默认 LZ4，只能建表时设置；临时表（v3.3.1+）跟 Session 同生共死，适合存放中间结果。</li>

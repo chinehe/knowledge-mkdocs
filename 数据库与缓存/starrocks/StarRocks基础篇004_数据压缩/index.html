@@ -8,9 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/starrocks/StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87004_%E6%8E%92%E5%BA%8F%E9%94%AE%E3%80%81%E7%B4%A2%E5%BC%95%E4%B8%8E%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/">
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/starrocks/StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87004_%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9/">
       
       
+        <link rel="prev" href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/">
+      
+      
+        <link rel="next" href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87005_%E7%B4%A2%E5%BC%95/">
       
       
         
@@ -21,7 +25,7 @@
     
     
       
-        <title>StarRocks基础篇004 排序键、索引与行列混存 - ChineHe Knowledge</title>
+        <title>🌿表设计 数据压缩 - ChineHe Knowledge</title>
       
     
     
@@ -72,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1" class="md-skip">
+        <a href="#1-压缩的作用与代价" class="md-skip">
           Skip to content
         </a>
       
@@ -108,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              StarRocks基础篇004 排序键、索引与行列混存
+              🌿表设计 数据压缩
             
           </span>
         </div>
@@ -338,6 +342,8 @@
   
   
   
+    
+  
   
     
     
@@ -345,10 +351,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
           
   
@@ -711,6 +719,63 @@
       
   
   
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库与缓存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
   
   
     
@@ -732,10 +797,6 @@
   
   
   
-    
-  
-  
-  
     <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
       
   
@@ -743,7 +804,7 @@
   <span class="md-ellipsis">
     
   
-    数据库与缓存
+    Redis
   
 
     
@@ -757,8 +818,387 @@
     </a>
   
 
+      
+    </li>
   
 
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    StarRocks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    StarRocks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87001_%E5%88%9D%E8%AF%86StarRocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌱初识StarRocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87002_%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌱快速开始
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 概览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 表类型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 数据分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 数据压缩
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 数据压缩
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-压缩的作用与代价" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 压缩的作用与代价
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-选择压缩算法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 选择压缩算法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-设置压缩算法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 设置压缩算法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87005_%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87006_%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 行列混存
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -865,8 +1305,58 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-压缩的作用与代价" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 压缩的作用与代价
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-选择压缩算法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 选择压缩算法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-设置压缩算法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 设置压缩算法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -884,6 +1374,72 @@
   
 
 
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据库与缓存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87001_%E5%88%9D%E8%AF%86StarRocks/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    StarRocks
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
               
               <article class="md-content__inner md-typeset">
                 
@@ -891,136 +1447,75 @@
 
 
 
-<!-- 状态：初稿，内容迁移自原「表设计」第 6、7 章，待按官网「索引」「行列混存」章节补齐：
-     排序键与前缀索引（原理、36 字节限制、排序键设计、如何判断前缀索引生效）、
-     Ordinal / ZoneMap 索引、Bitmap 索引（原理、自适应、创建/查看/删除、命中验证）、
-     Bloom Filter 索引、N-Gram Bloom Filter 索引、全文倒排索引、向量索引、
-     行列混存（增删改、prepared statements、完整限制） -->
+  <h1>🌿表设计 数据压缩</h1>
 
-<p><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/">基础篇003</a> 把数据切开摆放到了各个 Tablet 上。这一篇关注查询怎么在 Tablet 里快速找到需要的数据：排序键与前缀索引、其他索引，以及为高并发点查准备的行列混存。</p>
+<p><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/">基础篇003</a> 决定了数据切成哪些 Tablet、放到哪些节点。数据真正落盘时，每一列都会先编码、再压缩。压缩算法选得合不合适，影响的是存储空间，以及导入和查询时的 I/O 与 CPU 开销。这一篇讲 StarRocks 支持哪些压缩算法、怎么选、怎么设置。</p>
 <blockquote>
-<p>本文内容整理自 StarRocks 官方文档：<a href="https://docs.starrocks.io/zh/docs/table_design/indexes/">索引</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/hybrid_table/">行列混存</a>。版本敏感的内容（语法、参数、特性起始版本）请以你实际部署版本的官方文档为准。本文验证环境为 StarRocks 4.1.x。</p>
+<p>本文内容整理自 StarRocks 官方文档：<a href="https://docs.starrocks.io/zh/docs/table_design/data_compression/">数据压缩</a>。</p>
 </blockquote>
-<h1 id="1">1. 索引概述</h1>
-<p>索引是一种特殊的数据结构，相当于数据的目录，能帮查询快速定位到满足条件的数据。StarRocks 的索引分两大类：<strong>系统自动创建的内置索引</strong>和<strong>用户手动创建的索引</strong>。</p>
-<pre class="mermaid"><code>flowchart TB
-    IDX["StarRocks 索引"] --&gt; BUILTIN["内置索引&lt;br/&gt;（自动创建）"]
-    IDX --&gt; MANUAL["手动索引&lt;br/&gt;（按需创建）"]
-    BUILTIN --&gt; PRE["前缀索引 Prefix"]
-    BUILTIN --&gt; ORD["Ordinal 索引"]
-    BUILTIN --&gt; ZONE["ZoneMap 索引"]
-    MANUAL --&gt; BM["Bitmap 索引"]
-    MANUAL --&gt; BF["Bloom Filter 索引"]</code></pre>
-<h1 id="2">2. 内置索引（自动创建）</h1>
-<table>
-<thead>
-<tr>
-<th>索引</th>
-<th>原理</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>前缀索引</strong></td>
-<td>数据写入时按排序键排序，每 1024 行为一个逻辑数据块，取块内首行排序键值作为索引项</td>
-<td>查询条件命中排序键<strong>前缀</strong>时，快速定位、减少扫描</td>
-</tr>
-<tr>
-<td><strong>Ordinal 索引</strong></td>
-<td>列数据按 Data Page 存储（每页约 64 KB），每生成一个页就记一条索引项（含起始行号）</td>
-<td>通过行号定位某列数据页的物理位置</td>
-</tr>
-<tr>
-<td><strong>ZoneMap 索引</strong></td>
-<td>记录每个数据块的统计信息：Min、Max、是否有 Null 等</td>
-<td>查询时据统计快速判断能否整块跳过，减少扫描</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>前缀索引</strong>是日常建模最该关注的——它直接解释了"为什么排序键列顺序很重要"：只有查询条件命中排序键前缀，前缀索引才生效。这也是排序键设计（高选择性、常用等值过滤列靠前）的依据。前缀索引的长度限制为 36 字节，排序键各列值的长度加起来超过 36 字节时，前缀索引只保存限制范围内的若干前缀列。</p>
-</blockquote>
-<h1 id="3">3. 手动索引（按需创建）</h1>
-<p>当查询条件列<strong>不是排序键前缀</strong>时，可以根据数据和查询特点手动建索引：</p>
-<table>
-<thead>
-<tr>
-<th>索引</th>
-<th>适用列</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Bitmap 索引</strong></td>
-<td>高基数列，或多个低基数列的组合</td>
-<td>过滤性能理想（可过滤掉千分之九百九十九以上的行）</td>
-</tr>
-<tr>
-<td><strong>Bloom Filter 索引</strong></td>
-<td>基数较高的列（如 ID 列）</td>
-<td>空间高效，但存在一定误判率</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>StarRocks 还提供 N-Gram Bloom Filter（加速 LIKE / ngram 函数）、全文倒排索引（加速全文检索）、向量索引（近似最近邻搜索 ANNS）等更专门的索引。</p>
-</blockquote>
-<h1 id="4">4. 行列混存</h1>
-<p>StarRocks 作为 OLAP 数据库，默认采用<strong>列式存储</strong>，利于聚合、多表 JOIN 等复杂分析。但自 <strong>v3.2.3</strong> 起（Beta 特性），它也支持<strong>行列混存</strong>：数据同时按行和按列两种方式存储，兼顾列存的分析能力和行存的点查能力。</p>
-<table>
-<thead>
-<tr>
-<th>对比项</th>
-<th>列式存储（默认）</th>
-<th>行列混存</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>存储方式</td>
-<td>只按列存</td>
-<td>行、列都存（额外一个隐藏的 <code>__row</code> 列把整行编码存起来）</td>
-</tr>
-<tr>
-<td>擅长</td>
-<td>复杂分析、聚合、宽表只查少数列</td>
-<td>主键高并发点查、低延迟、部分列更新</td>
-</tr>
-<tr>
-<td>代价</td>
-<td>—</td>
-<td>额外存储开销、导入耗时增加</td>
-</tr>
-</tbody>
-</table>
-<p><strong>什么时候用</strong>：当你的主键表既要跑分析、又有大量"按主键点查整行"的在线请求（高并发、低延迟）时，行列混存能让点查走行存的"短路径"（Short Circuit），显著提速。</p>
-<p><strong>基本用法</strong>（必须是主键表）：</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- 先开启 FE 配置项</span>
-<span class="k">ADMIN</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">FRONTEND</span><span class="w"> </span><span class="n">CONFIG</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;enable_experimental_rowstore&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;true&quot;</span><span class="p">);</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">id</span><span class="w">      </span><span class="nb">bigint</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">    </span><span class="n">country</span><span class="w"> </span><span class="n">string</span><span class="p">,</span>
-<span class="w">    </span><span class="n">city</span><span class="w">    </span><span class="n">string</span><span class="p">,</span>
-<span class="w">    </span><span class="n">revenue</span><span class="w"> </span><span class="nb">bigint</span>
-<span class="p">)</span>
-<span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
-<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
-<span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;store_type&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;column_with_row&quot;</span><span class="p">);</span>
-</code></pre></div>
-<p>点查时，若 <code>WHERE</code> 条件包含全部主键列、且用 <code>=</code> 或 <code>IN</code>，查询会走行存短路径。可以用 <code>EXPLAIN</code> 验证——计划里出现 <code>Short Circuit Scan: true</code> 说明走了短路径。</p>
-<blockquote>
-<p><strong>几个要点</strong>：① 这是 Beta 特性，仅主键表支持，存算分离集群暂不支持；② 行列混存会明显增加存储占用（行存压缩率通常不如列存）；③ 它可用于在线服务，但点查性能未必能与成熟的 OLTP 数据库相比。</p>
-</blockquote>
-<h1 id="5">5. 小结</h1>
+<h2 id="1-压缩的作用与代价">1. 压缩的作用与代价</h2>
+<p>StarRocks 支持对<strong>表和索引数据</strong>进行压缩：</p>
 <ul>
-<li>内置的前缀 / Ordinal / ZoneMap 索引自动生效，其中前缀索引决定了排序键为什么重要。</li>
-<li>查询条件不在排序键前缀上时，按需手动建 Bitmap / Bloom Filter 等索引。</li>
-<li>行列混存让主键表兼顾分析与高并发点查，代价是额外存储。</li>
+<li><strong>好处</strong>：节省存储空间；同时读写的数据量变小，能提升 I/O 密集型任务的性能；</li>
+<li><strong>代价</strong>：压缩和解压缩需要额外的 CPU 资源。</li>
 </ul>
-<p>到这里，表设计的四个决策（表类型、数据分布、排序键与索引、压缩）就讲完了。</p>
+<h2 id="2-选择压缩算法">2. 选择压缩算法</h2>
+<p>StarRocks 支持四种压缩算法，它们在压缩率和压缩/解压缩性能上各有取舍：</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>压缩率排名</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zlib</td>
+<td>1（最高）</td>
+<td>压缩比高，但数据高度压缩后，导入和查询性能会受一定影响</td>
+</tr>
+<tr>
+<td>Zstandard（zstd）</td>
+<td>2</td>
+<td>压缩比与解压缩性能较均衡</td>
+</tr>
+<tr>
+<td>LZ4</td>
+<td>3</td>
+<td>压缩比与解压缩性能较均衡，<strong>默认算法</strong></td>
+</tr>
+<tr>
+<td>Snappy</td>
+<td>4（最低）</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>选择建议：</p>
+<ul>
+<li>如果对存储空间没有特殊要求，官方建议使用 <strong>LZ4 或 Zstandard</strong>；</li>
+<li>存储空间特别紧张、能接受导入和查询性能有所下降时，再考虑 zlib；</li>
+<li>数据类型也会影响压缩率，同一算法在不同类型的列上效果不同。</li>
+</ul>
+<h2 id="3-设置压缩算法">3. 设置压缩算法</h2>
+<p>压缩算法<strong>只能在建表时设置，建表后无法修改</strong>。建表时通过 <code>PROPERTIES</code> 的 <code>compression</code> 属性指定，不指定则默认使用 LZ4：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">data_compression</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">   </span><span class="nb">INT</span><span class="w">       </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">CHAR</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span>
+<span class="p">)</span>
+<span class="k">UNIQUE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;compression&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ZSTD&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>建表后可以用 <code>SHOW CREATE TABLE</code> 查看表实际使用的压缩算法。</p>
+<h2 id="4-小结">4. 小结</h2>
+<ul>
+<li>压缩节省存储、减少 I/O，代价是 CPU。</li>
+<li>压缩率 zlib &gt; Zstandard &gt; LZ4 &gt; Snappy；默认 LZ4，无特殊需求时选 LZ4 或 Zstandard。</li>
+<li>压缩算法只能在建表时通过 <code>"compression"</code> 设置，建表后不能修改。</li>
+</ul>
+<p>数据怎么存下来已经确定了，接下来看查询怎么在这些数据里快速定位到需要的行：<a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87005_%E7%B4%A2%E5%BC%95/">基础篇005 · 索引</a>。</p>
 
 
 

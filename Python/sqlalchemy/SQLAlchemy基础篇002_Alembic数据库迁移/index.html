@@ -1,0 +1,2764 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Python/sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87002_Alembic%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/">
+      
+      
+        <link rel="prev" href="../SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/">
+      
+      
+        <link rel="next" href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Alembic数据库迁移 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-为什么需要迁移工具" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Alembic数据库迁移
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语言基础
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工程化
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI框架
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQLAlchemy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SQLAlchemy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    异步引擎、会话与模型定义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alembic数据库迁移
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alembic数据库迁移
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-为什么需要迁移工具" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 为什么需要迁移工具
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 为什么需要迁移工具">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-alembic-的做法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Alembic 的做法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-版本链" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 版本链
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-初始化" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 初始化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-alembic-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. alembic init
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-改造-envpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 改造 env.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 改造 env.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-数据库地址取自应用配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 数据库地址取自应用配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-target_metadata告诉-alembic-模型长什么样" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. target_metadata：告诉 Alembic 模型长什么样
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-在线模式异步引擎--nullpool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 在线模式：异步引擎 + NullPool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-compare_server_defaulttrue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. compare_server_default=True
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-离线模式只输出-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. 离线模式：只输出 SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-ini-的--插值陷阱" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6. ini 的 % 插值陷阱
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-配置-alembicini" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 配置 alembic.ini
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 配置 alembic.ini">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-file_template文件名以时间开头" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. file_template：文件名以时间开头
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-post_write_hooks生成后自动格式化" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. post_write_hooks：生成后自动格式化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-生成迁移autogenerate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 生成迁移：autogenerate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 生成迁移：autogenerate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-工作方式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 工作方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-空的基线迁移" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 空的基线迁移
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-局限生成后必须人工检查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 局限：生成后必须人工检查
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-常用命令" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 常用命令
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-迁移文件的维护规则" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 迁移文件的维护规则
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 迁移文件的维护规则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-已执行过的迁移不再修改" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 已执行过的迁移不再修改
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-让格式工具不碰旧迁移" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 让格式工具不碰旧迁移
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-在代码里调用迁移" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 在代码里调用迁移
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-部署" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 部署
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 部署">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-迁移作为一次性任务执行" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. 迁移作为一次性任务执行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-docker-composemigrate-服务" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. docker compose：migrate 服务
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. Kubernetes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-迁移可以重复执行" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. 迁移可以重复执行
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-为什么需要迁移工具" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 为什么需要迁移工具
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 为什么需要迁移工具">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-alembic-的做法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Alembic 的做法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-版本链" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 版本链
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-初始化" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 初始化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 初始化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-alembic-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. alembic init
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-改造-envpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 改造 env.py
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 改造 env.py">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-数据库地址取自应用配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 数据库地址取自应用配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-target_metadata告诉-alembic-模型长什么样" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. target_metadata：告诉 Alembic 模型长什么样
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-在线模式异步引擎--nullpool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 在线模式：异步引擎 + NullPool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-compare_server_defaulttrue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. compare_server_default=True
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-离线模式只输出-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. 离线模式：只输出 SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-ini-的--插值陷阱" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6. ini 的 % 插值陷阱
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-配置-alembicini" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 配置 alembic.ini
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 配置 alembic.ini">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-file_template文件名以时间开头" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. file_template：文件名以时间开头
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-post_write_hooks生成后自动格式化" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. post_write_hooks：生成后自动格式化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-生成迁移autogenerate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 生成迁移：autogenerate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 生成迁移：autogenerate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-工作方式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 工作方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-空的基线迁移" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 空的基线迁移
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-局限生成后必须人工检查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 局限：生成后必须人工检查
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-常用命令" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 常用命令
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-迁移文件的维护规则" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 迁移文件的维护规则
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 迁移文件的维护规则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-已执行过的迁移不再修改" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 已执行过的迁移不再修改
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-让格式工具不碰旧迁移" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 让格式工具不碰旧迁移
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-在代码里调用迁移" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 在代码里调用迁移
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-部署" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 部署
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 部署">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-迁移作为一次性任务执行" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. 迁移作为一次性任务执行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-docker-composemigrate-服务" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. docker compose：migrate 服务
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-kubernetes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. Kubernetes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-迁移可以重复执行" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. 迁移可以重复执行
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Python
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    SQLAlchemy
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Alembic数据库迁移</h1>
+
+<h2 id="1-为什么需要迁移工具">1. 为什么需要迁移工具</h2>
+<p>项目上线后，表结构会一直变：加表、加列、加索引、改默认值。如果靠手工在每个环境执行 SQL，很快会遇到下面的问题：</p>
+<ul>
+<li>开发库、测试库、生产库各执行了哪些 SQL，没人说得清，某个环境漏执行一条就会出错。</li>
+<li>新同事拿到代码，不知道该按什么顺序执行哪些 SQL 才能建出一个和线上一致的库。</li>
+<li>改错了想回退，没有现成的反向 SQL。</li>
+</ul>
+<p><strong>数据库迁移工具</strong>把每次表结构变更写成一个脚本，按顺序管理起来。SQLAlchemy 生态里的迁移工具是 <a href="https://alembic.sqlalchemy.org/">Alembic</a>，它和 SQLAlchemy 出自同一作者。</p>
+<h3 id="11-alembic-的做法">1.1. Alembic 的做法</h3>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>迁移脚本</td>
+<td>每次变更是 <code>versions/</code> 目录下的一个 Python 文件，包含 <code>upgrade()</code>（升级）和 <code>downgrade()</code>（回退），和代码一起提交到 git</td>
+</tr>
+<tr>
+<td>版本号（revision）</td>
+<td>每个脚本有一个唯一的版本号，如 <code>42c6de21e591</code></td>
+</tr>
+<tr>
+<td><code>down_revision</code></td>
+<td>指向上一个版本号，所有脚本由此串成一条链</td>
+</tr>
+<tr>
+<td><code>alembic_version</code> 表</td>
+<td>Alembic 在数据库里建的一张表，只有一行，记录这个库当前处于哪个版本</td>
+</tr>
+</tbody>
+</table>
+<p>执行 <code>alembic upgrade head</code> 时，Alembic 先读 <code>alembic_version</code> 得到当前版本，再沿着链依次执行之后的每个 <code>upgrade()</code>，最后把 <code>alembic_version</code> 更新为最新版本。已经执行过的脚本不会再执行。</p>
+<h3 id="12-版本链">1.2. 版本链</h3>
+<p>以一个有两个迁移的项目为例，迁移脚本头部是这样写的：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 20261118_1118_33a373c63bbf_init.py</span>
+<span class="n">revision</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;33a373c63bbf&quot;</span>
+<span class="n">down_revision</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>   <span class="c1"># 第一个迁移，没有上一个版本</span>
+
+<span class="c1"># 20261118_1351_42c6de21e591_add_users_and_refresh_tokens.py</span>
+<span class="n">revision</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;42c6de21e591&quot;</span>
+<span class="n">down_revision</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;33a373c63bbf&quot;</span>   <span class="c1"># 指向 init</span>
+</code></pre></div>
+<p>串起来就是：</p>
+<pre class="mermaid"><code>graph LR
+    B["base&lt;br/&gt;空库"] --&gt;|upgrade| R1["33a373c63bbf&lt;br/&gt;init"]
+    R1 --&gt;|upgrade| R2["42c6de21e591&lt;br/&gt;add users and refresh_tokens&lt;br/&gt;(head)"]
+    R2 -.-&gt;|downgrade| R1
+    R1 -.-&gt;|downgrade| B</code></pre>
+<p><code>alembic history</code> 输出的也是这条链：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span><span class="nb">history</span>
+33a373c63bbf<span class="w"> </span>-&gt;<span class="w"> </span>42c6de21e591<span class="w"> </span><span class="o">(</span>head<span class="o">)</span>,<span class="w"> </span>add<span class="w"> </span>users<span class="w"> </span>and<span class="w"> </span>refresh_tokens
+&lt;base&gt;<span class="w"> </span>-&gt;<span class="w"> </span>33a373c63bbf,<span class="w"> </span>init
+</code></pre></div>
+<ul>
+<li><code>&lt;base&gt;</code> 表示空库（还没有任何迁移）。</li>
+<li><code>head</code> 表示链的最新一端。</li>
+</ul>
+<h2 id="2-初始化">2. 初始化</h2>
+<h3 id="21-alembic-init">2.1. alembic init</h3>
+<p>Alembic 已经作为运行依赖安装（<code>uv add alembic</code>）。项目使用异步驱动 asyncpg，所以初始化时选择<strong>异步模板</strong>：</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>init<span class="w"> </span>-t<span class="w"> </span>async<span class="w"> </span>migrations
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-t async</code></td>
+<td>使用异步模板，生成的 <code>env.py</code> 用异步引擎连接数据库</td>
+</tr>
+<tr>
+<td><code>migrations</code></td>
+<td>迁移目录名，默认叫 <code>alembic</code>，这里改成更直白的 <code>migrations</code></td>
+</tr>
+</tbody>
+</table>
+<p>生成的文件：</p>
+<div class="highlight"><pre><span></span><code>my-service/
+├── alembic.ini              # Alembic 配置：脚本目录、文件名模板、钩子、日志
+└── migrations/
+    ├── env.py               # 迁移环境：怎么连数据库、拿哪份元数据做对比
+    ├── README
+    ├── script.py.mako       # 新迁移脚本的模板
+    └── versions/            # 迁移脚本存放目录
+</code></pre></div>
+<p>生成的 <code>env.py</code> 只是一个通用模板，需要改造成从应用读取配置和模型，见下一节。</p>
+<h2 id="3-改造-envpy">3. 改造 env.py</h2>
+<p><code>env.py</code> 是每条 Alembic 命令都会执行的脚本，它决定了连哪个数据库、拿什么做对比。下面逐段讲解项目改造后的 <code>migrations/env.py</code>。</p>
+<h3 id="31-数据库地址取自应用配置">3.1. 数据库地址取自应用配置</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">alembic</span><span class="w"> </span><span class="kn">import</span> <span class="n">context</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">pool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">Connection</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.ext.asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_async_engine</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.core.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_settings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">config</span>
+
+<span class="c1"># 与应用使用同一份配置，不在 alembic.ini 里重复写数据库地址和密码</span>
+<span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="n">get_settings</span><span class="p">()</span><span class="o">.</span><span class="n">database_url</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">()</span>
+</code></pre></div>
+<p>默认模板从 <code>alembic.ini</code> 的 <code>sqlalchemy.url</code> 读数据库地址。这样有两个问题：</p>
+<ul>
+<li>数据库地址要在应用配置（<code>.env</code> / 环境变量）和 <code>alembic.ini</code> 里各写一份，改了一处忘了另一处。</li>
+<li><code>alembic.ini</code> 要提交到 git，密码写在里面就泄露了。</li>
+</ul>
+<p>改成调用应用的 <code>get_settings()</code> 后，迁移和应用读的是同一个 <code>DATABASE_URL</code>：本地读 <code>.env</code>，容器里读环境变量。<code>database_url</code> 是 pydantic 的 <code>SecretStr</code> 类型，用 <code>get_secret_value()</code> 取出原文。</p>
+<p>同时把 <code>alembic.ini</code> 里 <code>sqlalchemy.url</code> 的占位符注释掉（或删掉），避免有人误以为地址是在这里配置的：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># sqlalchemy.url = driver://user:pass@localhost/dbname</span>
+</code></pre></div>
+<blockquote>
+<p><code>alembic.ini</code> 里的 <code>prepend_sys_path = .</code> 会把项目根目录加入 <code>sys.path</code>。项目是 src 布局，<code>my_service</code> 已经通过 <code>uv sync</code> 安装进虚拟环境，所以 <code>env.py</code> 里可以直接 <code>import my_service</code>。</p>
+</blockquote>
+<h3 id="32-target_metadata告诉-alembic-模型长什么样">3.2. target_metadata：告诉 Alembic 模型长什么样</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># autogenerate 会对比这份元数据和数据库的实际结构，生成差异。</span>
+<span class="c1"># 所有模型都要在 my_service.models 包里导入，否则会被当成&quot;不存在的表&quot;。</span>
+<span class="n">target_metadata</span> <span class="o">=</span> <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span>
+</code></pre></div>
+<p><code>Base.metadata</code> 收集了所有继承 <code>Base</code> 的模型的表结构。默认模板里这一行是 <code>target_metadata = None</code>，不改的话 autogenerate 什么都检测不到。</p>
+<h3 id="33-在线模式异步引擎--nullpool">3.3. 在线模式：异步引擎 + NullPool</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">do_run_migrations</span><span class="p">(</span><span class="n">connection</span><span class="p">:</span> <span class="n">Connection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+        <span class="n">connection</span><span class="o">=</span><span class="n">connection</span><span class="p">,</span>
+        <span class="n">target_metadata</span><span class="o">=</span><span class="n">target_metadata</span><span class="p">,</span>
+        <span class="n">compare_server_default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># 列的数据库默认值变化也生成迁移</span>
+    <span class="p">)</span>
+    <span class="k">with</span> <span class="n">context</span><span class="o">.</span><span class="n">begin_transaction</span><span class="p">():</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">run_migrations</span><span class="p">()</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">run_async_migrations</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># 迁移是一次性任务，用 NullPool：不保留连接，跑完即断开</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_async_engine</span><span class="p">(</span><span class="n">DATABASE_URL</span><span class="p">,</span> <span class="n">poolclass</span><span class="o">=</span><span class="n">pool</span><span class="o">.</span><span class="n">NullPool</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">connection</span><span class="o">.</span><span class="n">run_sync</span><span class="p">(</span><span class="n">do_run_migrations</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_migrations_online</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">run_async_migrations</span><span class="p">())</span>
+</code></pre></div>
+<p>执行过程：</p>
+<pre class="mermaid"><code>graph TD
+    A["alembic upgrade head"] --&gt; B["run_migrations_online()"]
+    B --&gt; C["asyncio.run(run_async_migrations())"]
+    C --&gt; D["create_async_engine(..., NullPool)"]
+    D --&gt; E["connection.run_sync(do_run_migrations)"]
+    E --&gt; F["context.configure + run_migrations&lt;br/&gt;（同步代码，在一个事务里执行）"]
+    F --&gt; G["engine.dispose() 断开连接"]</code></pre>
+<p>要点：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>create_async_engine(DATABASE_URL, ...)</code></td>
+<td>直接用连接串创建引擎。默认模板是 <code>async_engine_from_config(config.get_section(...))</code>，从 ini 里读 <code>sqlalchemy.url</code>，这里不再需要（原因见 3.6）</td>
+</tr>
+<tr>
+<td><code>poolclass=pool.NullPool</code></td>
+<td>连接池是为长期运行、反复取连接的应用准备的。迁移跑一次就结束，NullPool 每次用完直接关闭连接，不保留空闲连接</td>
+</tr>
+<tr>
+<td><code>connection.run_sync(...)</code></td>
+<td>Alembic 的迁移执行逻辑是同步代码，<code>run_sync</code> 把异步连接包装成同步连接交给它</td>
+</tr>
+<tr>
+<td><code>asyncio.run(...)</code></td>
+<td>命令行入口是同步的，在这里启动事件循环。这也决定了在代码里调用迁移的限制（见第 8 节）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-compare_server_defaulttrue">3.4. compare_server_default=True</h3>
+<p><code>context.configure</code> 默认<strong>不检测</strong>列的 <code>server_default</code>（数据库层面的默认值）变化。比如把模型里的 <code>server_default=sa.text("true")</code> 改成 <code>sa.text("false")</code>，不开这个选项时 autogenerate 不会生成任何迁移，模型和数据库就悄悄不一致了。</p>
+<p>项目的 <code>is_active</code>、<code>created_at</code> 等列都用了 <code>server_default</code>，所以打开这个选项。</p>
+<h3 id="35-离线模式只输出-sql">3.5. 离线模式：只输出 SQL</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">run_migrations_offline</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;离线模式：不连接数据库，只输出 SQL（alembic upgrade head --sql）。&quot;&quot;&quot;</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">DATABASE_URL</span><span class="p">,</span>
+        <span class="n">target_metadata</span><span class="o">=</span><span class="n">target_metadata</span><span class="p">,</span>
+        <span class="n">literal_binds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">dialect_opts</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;paramstyle&quot;</span><span class="p">:</span> <span class="s2">&quot;named&quot;</span><span class="p">},</span>
+    <span class="p">)</span>
+    <span class="k">with</span> <span class="n">context</span><span class="o">.</span><span class="n">begin_transaction</span><span class="p">():</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">run_migrations</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">is_offline_mode</span><span class="p">():</span>
+    <span class="n">run_migrations_offline</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">run_migrations_online</span><span class="p">()</span>
+</code></pre></div>
+<p>命令带 <code>--sql</code> 时进入离线模式：Alembic 不连接数据库，而是把要执行的 SQL 打印出来。<code>url</code> 在这里只用来确定数据库方言（PostgreSQL），生成对应语法的 SQL。<code>literal_binds=True</code> 把参数直接写进 SQL 文本，输出的脚本可以直接执行。</p>
+<p>数据库没启动时也能运行，输出节选：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>upgrade<span class="w"> </span>head<span class="w"> </span>--sql
+BEGIN<span class="p">;</span>
+CREATE<span class="w"> </span>TABLE<span class="w"> </span>alembic_version<span class="w"> </span><span class="o">(</span>
+<span class="w">    </span>version_num<span class="w"> </span>VARCHAR<span class="o">(</span><span class="m">32</span><span class="o">)</span><span class="w"> </span>NOT<span class="w"> </span>NULL,<span class="w"> </span>
+<span class="w">    </span>CONSTRAINT<span class="w"> </span>alembic_version_pkc<span class="w"> </span>PRIMARY<span class="w"> </span>KEY<span class="w"> </span><span class="o">(</span>version_num<span class="o">)</span>
+<span class="o">)</span><span class="p">;</span>
+--<span class="w"> </span>Running<span class="w"> </span>upgrade<span class="w">  </span>-&gt;<span class="w"> </span>33a373c63bbf
+INSERT<span class="w"> </span>INTO<span class="w"> </span>alembic_version<span class="w"> </span><span class="o">(</span>version_num<span class="o">)</span><span class="w"> </span>VALUES<span class="w"> </span><span class="o">(</span><span class="s1">&#39;33a373c63bbf&#39;</span><span class="o">)</span><span class="w"> </span>RETURNING<span class="w"> </span>alembic_version.version_num<span class="p">;</span>
+--<span class="w"> </span>Running<span class="w"> </span>upgrade<span class="w"> </span>33a373c63bbf<span class="w"> </span>-&gt;<span class="w"> </span>42c6de21e591
+CREATE<span class="w"> </span>TABLE<span class="w"> </span>users<span class="w"> </span><span class="o">(</span>
+<span class="w">    </span>id<span class="w"> </span>UUID<span class="w"> </span>NOT<span class="w"> </span>NULL,<span class="w"> </span>
+<span class="w">    </span>username<span class="w"> </span>VARCHAR<span class="o">(</span><span class="m">50</span><span class="o">)</span><span class="w"> </span>NOT<span class="w"> </span>NULL,<span class="w"> </span>
+<span class="w">    </span>...
+<span class="w">    </span>CONSTRAINT<span class="w"> </span>pk_users<span class="w"> </span>PRIMARY<span class="w"> </span>KEY<span class="w"> </span><span class="o">(</span>id<span class="o">)</span>,<span class="w"> </span>
+<span class="w">    </span>CONSTRAINT<span class="w"> </span>uq_users_username<span class="w"> </span>UNIQUE<span class="w"> </span><span class="o">(</span>username<span class="o">)</span>
+<span class="o">)</span><span class="p">;</span>
+...
+CREATE<span class="w"> </span>INDEX<span class="w"> </span>ix_refresh_tokens_user_id<span class="w"> </span>ON<span class="w"> </span>refresh_tokens<span class="w"> </span><span class="o">(</span>user_id<span class="o">)</span><span class="p">;</span>
+UPDATE<span class="w"> </span>alembic_version<span class="w"> </span>SET<span class="w"> </span><span class="nv">version_num</span><span class="o">=</span><span class="s1">&#39;42c6de21e591&#39;</span><span class="w"> </span>WHERE<span class="w"> </span>alembic_version.version_num<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;33a373c63bbf&#39;</span><span class="p">;</span>
+COMMIT<span class="p">;</span>
+</code></pre></div>
+<p>生产库不允许程序直接改表结构时，可以把这份 SQL 交给 DBA 审核后执行。</p>
+<h3 id="36-ini-的--插值陷阱">3.6. ini 的 % 插值陷阱</h3>
+<p>有一种常见写法是在 <code>env.py</code> 里把应用配置的地址塞回 Alembic 配置，其余代码保持模板原样：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 不推荐</span>
+<span class="n">config</span><span class="o">.</span><span class="n">set_main_option</span><span class="p">(</span><span class="s2">&quot;sqlalchemy.url&quot;</span><span class="p">,</span> <span class="n">DATABASE_URL</span><span class="p">)</span>
+</code></pre></div>
+<p>问题在于 <code>alembic.ini</code> 是用 Python 的 <code>configparser</code> 解析的，<code>%</code> 在里面有<strong>插值</strong>含义（例如 <code>%(here)s</code> 会被替换成 ini 文件所在目录）。<code>set_main_option</code> 写入的值同样会被当作插值模板处理。</p>
+<p>数据库密码里含有特殊字符时，连接串里要做 URL 编码，例如 <code>@</code> 编码成 <code>%40</code>，这时就会报错：</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">config</span><span class="o">.</span><span class="n">set_main_option</span><span class="p">(</span><span class="s2">&quot;sqlalchemy.url&quot;</span><span class="p">,</span> <span class="s2">&quot;postgresql+asyncpg://u:p</span><span class="si">%40s</span><span class="s2">s@h/db&quot;</span><span class="p">)</span>
+<span class="ne">ValueError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">interpolation</span> <span class="n">syntax</span> <span class="ow">in</span> <span class="s1">&#39;postgresql+asyncpg://u:p</span><span class="si">%40s</span><span class="s1">s@h/db&#39;</span> <span class="n">at</span> <span class="n">position</span> <span class="mi">24</span>
+</code></pre></div>
+<p>解决办法：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接用连接串创建引擎（3.3 节的做法）</td>
+<td><code>create_async_engine(DATABASE_URL, ...)</code>，地址不经过 configparser，没有插值问题</td>
+</tr>
+<tr>
+<td>写入前转义 <code>%</code></td>
+<td><code>config.set_main_option("sqlalchemy.url", url.replace("%", "%%"))</code>，能用但容易忘</td>
+</tr>
+</tbody>
+</table>
+<p>同理，<code>alembic.ini</code> 里凡是要表示字面量 <code>%</code> 的地方都要写成 <code>%%</code>，下一节的 <code>file_template</code> 就是这样。</p>
+<h2 id="4-配置-alembicini">4. 配置 alembic.ini</h2>
+<h3 id="41-file_template文件名以时间开头">4.1. file_template：文件名以时间开头</h3>
+<p>默认的迁移文件名是 <code>%%(rev)s_%%(slug)s</code>，即"版本号_描述"，例如 <code>42c6de21e591_add_users_and_refresh_tokens.py</code>。版本号是随机的哈希值，在文件管理器或 IDE 里按名字排序时顺序是乱的，看不出哪个先哪个后。</p>
+<p>项目改成以时间开头：</p>
+<div class="highlight"><pre><span></span><code><span class="na">file_template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">%%(year)d%%(month).2d%%(day).2d_%%(hour).2d%%(minute).2d_%%(rev)s_%%(slug)s</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>占位符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%%(year)d%%(month).2d%%(day).2d</code></td>
+<td>日期，如 <code>20261118</code>（<code>.2d</code> 表示补齐两位）</td>
+</tr>
+<tr>
+<td><code>%%(hour).2d%%(minute).2d</code></td>
+<td>时分，如 <code>1351</code></td>
+</tr>
+<tr>
+<td><code>%%(rev)s</code></td>
+<td>版本号</td>
+</tr>
+<tr>
+<td><code>%%(slug)s</code></td>
+<td><code>-m</code> 描述转换成的文件名片段</td>
+</tr>
+</tbody>
+</table>
+<p><code>%%</code> 是 configparser 里字面量 <code>%</code> 的写法（见 3.6）。对比效果：</p>
+<div class="highlight"><pre><span></span><code># 默认：按名字排序，顺序和创建顺序无关
+33a373c63bbf_init.py
+42c6de21e591_add_users_and_refresh_tokens.py
+
+# 项目：按名字排序就是时间顺序
+20261118_1118_33a373c63bbf_init.py
+20261118_1351_42c6de21e591_add_users_and_refresh_tokens.py
+</code></pre></div>
+<blockquote>
+<p>文件名只影响阅读。Alembic 判断执行顺序始终看脚本里的 <code>revision</code> / <code>down_revision</code>，不看文件名。</p>
+</blockquote>
+<h3 id="42-post_write_hooks生成后自动格式化">4.2. post_write_hooks：生成后自动格式化</h3>
+<p>autogenerate 生成的代码风格不一定符合项目规范（引号、行宽等）。<code>[post_write_hooks]</code> 可以在每次生成迁移脚本后自动执行一个命令：</p>
+<div class="highlight"><pre><span></span><code><span class="k">[post_write_hooks]</span>
+<span class="na">hooks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ruff_format</span>
+<span class="na">ruff_format.type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">module</span>
+<span class="na">ruff_format.module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ruff</span>
+<span class="na">ruff_format.options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">format REVISION_SCRIPT_FILENAME</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hooks = ruff_format</code></td>
+<td>要执行的钩子名称，可以写多个</td>
+</tr>
+<tr>
+<td><code>ruff_format.type = module</code></td>
+<td>以 <code>python -m &lt;模块&gt;</code> 的方式运行，用的是当前虚拟环境里的 ruff</td>
+</tr>
+<tr>
+<td><code>ruff_format.module = ruff</code></td>
+<td>模块名</td>
+</tr>
+<tr>
+<td><code>ruff_format.options = format REVISION_SCRIPT_FILENAME</code></td>
+<td>参数，<code>REVISION_SCRIPT_FILENAME</code> 会被替换成新生成的文件路径，整体相当于 <code>python -m ruff format &lt;新文件&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>生成迁移时会看到：</p>
+<div class="highlight"><pre><span></span><code>Running post write hook &#39;ruff_format&#39; ...
+1 file reformatted
+</code></pre></div>
+<blockquote>
+<p>注意和第 7 节 ruff 排除配置的冲突：</p>
+<ul>
+<li><strong>现象</strong>：<code>pyproject.toml</code> 的 <code>[tool.ruff]</code> 设置了 <code>extend-exclude = ["migrations/versions"]</code> 和 <code>force-exclude = true</code> 后，生成迁移时钩子照常运行，但新文件没有被格式化，ruff 输出 <code>warning: No Python files found under the given path(s)</code>。</li>
+<li><strong>原因</strong>：<code>force-exclude</code> 会让 ruff 即使在命令行显式传入文件路径，也跳过被排除的文件。钩子传入的新迁移文件位于 <code>migrations/versions/</code> 下，因此被直接跳过，钩子等于不生效。</li>
+<li><strong>解决办法</strong>：在钩子参数里加 <code>--no-force-exclude</code>，ruff 就会正常格式化传入的文件：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="na">ruff_format.options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">format --no-force-exclude REVISION_SCRIPT_FILENAME</span>
+</code></pre></div>
+</blockquote>
+<h2 id="5-生成迁移autogenerate">5. 生成迁移：autogenerate</h2>
+<h3 id="51-工作方式">5.1. 工作方式</h3>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;add users and refresh_tokens&quot;</span>
+</code></pre></div>
+<p>Alembic 连接数据库，读取实际的表结构，和 <code>target_metadata</code>（模型）做对比，把差异写成 <code>upgrade()</code> / <code>downgrade()</code> 里的 <code>op.xxx</code> 调用：</p>
+<pre class="mermaid"><code>graph LR
+    M["target_metadata&lt;br/&gt;（ORM 模型）"] --&gt; C{"对比"}
+    D["数据库实际结构&lt;br/&gt;（连接后读取）"] --&gt; C
+    C --&gt; F["新迁移脚本&lt;br/&gt;upgrade() / downgrade()"]</code></pre>
+<p>输出节选（省略了日志前缀）：</p>
+<div class="highlight"><pre><span></span><code>Detected added table &#39;users&#39;
+Detected added table &#39;refresh_tokens&#39;
+Detected added index &#39;ix_refresh_tokens_family_id&#39; on &#39;(&#39;family_id&#39;,)&#39;
+Detected added index &#39;ix_refresh_tokens_user_id&#39; on &#39;(&#39;user_id&#39;,)&#39;
+Generating .../migrations/versions/20261118_1351_42c6de21e591_add_users_and_refresh_tokens.py ...  done
+Running post write hook &#39;ruff_format&#39; ...
+1 file reformatted
+</code></pre></div>
+<p>生成的脚本（节选）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">upgrade</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Upgrade schema.&quot;&quot;&quot;</span>
+    <span class="c1"># ### commands auto generated by Alembic - please adjust! ###</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span>
+        <span class="s2">&quot;users&quot;</span><span class="p">,</span>
+        <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">Uuid</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">50</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="s2">&quot;is_active&quot;</span><span class="p">,</span> <span class="n">sa</span><span class="o">.</span><span class="n">Boolean</span><span class="p">(),</span> <span class="n">server_default</span><span class="o">=</span><span class="n">sa</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">&quot;true&quot;</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="o">...</span>
+        <span class="n">sa</span><span class="o">.</span><span class="n">PrimaryKeyConstraint</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="s2">&quot;pk_users&quot;</span><span class="p">)),</span>
+        <span class="n">sa</span><span class="o">.</span><span class="n">UniqueConstraint</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="s2">&quot;uq_users_username&quot;</span><span class="p">)),</span>
+    <span class="p">)</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">create_table</span><span class="p">(</span>
+        <span class="s2">&quot;refresh_tokens&quot;</span><span class="p">,</span>
+        <span class="o">...</span>
+        <span class="n">sa</span><span class="o">.</span><span class="n">ForeignKeyConstraint</span><span class="p">(</span>
+            <span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;users.id&quot;</span><span class="p">],</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="s2">&quot;fk_refresh_tokens_user_id_users&quot;</span><span class="p">),</span>
+            <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;CASCADE&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="o">...</span>
+    <span class="p">)</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="s2">&quot;ix_refresh_tokens_user_id&quot;</span><span class="p">),</span> <span class="s2">&quot;refresh_tokens&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">],</span> <span class="n">unique</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># ### end Alembic commands ###</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">downgrade</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Downgrade schema.&quot;&quot;&quot;</span>
+    <span class="c1"># ### commands auto generated by Alembic - please adjust! ###</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">drop_index</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="s2">&quot;ix_refresh_tokens_user_id&quot;</span><span class="p">),</span> <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;refresh_tokens&quot;</span><span class="p">)</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">drop_index</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="s2">&quot;ix_refresh_tokens_family_id&quot;</span><span class="p">),</span> <span class="n">table_name</span><span class="o">=</span><span class="s2">&quot;refresh_tokens&quot;</span><span class="p">)</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">drop_table</span><span class="p">(</span><span class="s2">&quot;refresh_tokens&quot;</span><span class="p">)</span>
+    <span class="n">op</span><span class="o">.</span><span class="n">drop_table</span><span class="p">(</span><span class="s2">&quot;users&quot;</span><span class="p">)</span>
+    <span class="c1"># ### end Alembic commands ###</span>
+</code></pre></div>
+<p>注释 <code>please adjust!</code> 的意思是：这是自动生成的草稿，提交前要人工检查。</p>
+<h3 id="52-空的基线迁移">5.2. 空的基线迁移</h3>
+<p>项目的第一个迁移是在还没有任何模型时生成的，<code>upgrade()</code> 和 <code>downgrade()</code> 都是 <code>pass</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;init</span>
+
+<span class="sd">Revision ID: 33a373c63bbf</span>
+<span class="sd">Revises:</span>
+<span class="sd">Create Date: 2026-11-18 11:18:42.738457</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">revision</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;33a373c63bbf&quot;</span>
+<span class="n">down_revision</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">upgrade</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Upgrade schema.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">downgrade</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Downgrade schema.&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div>
+<p>它不改任何表，只作为版本链的起点：配好 <code>env.py</code> 后先生成它并执行一次，可以验证 Alembic 能连上数据库、<code>alembic_version</code> 表能正常创建。之后每次加模型，都在它后面接新的迁移。</p>
+<h3 id="53-局限生成后必须人工检查">5.3. 局限：生成后必须人工检查</h3>
+<p>autogenerate 只是对比"现在长什么样"，不知道"你想做什么"。常见的坑：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>autogenerate 的结果</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>列或表改名</td>
+<td>识别成"删掉旧列 + 新增新列"，执行后<strong>旧列的数据会丢失</strong></td>
+<td>手工改成 <code>op.alter_column("users", "name", new_column_name="username")</code></td>
+</tr>
+<tr>
+<td>新模型没在 <code>models/__init__.py</code> 导入</td>
+<td>模型所在模块没被加载，表不在 <code>Base.metadata</code> 里，检测不到；如果数据库里已有这张表，甚至会生成删表语句</td>
+<td>新增模型后在 <code>models/__init__.py</code> 里导入</td>
+</tr>
+<tr>
+<td>约束没有固定名字</td>
+<td>数据库自动起名，之后修改或删除约束时迁移里写不出名字</td>
+<td>在 <code>Base</code> 上配置 <code>naming_convention</code>（项目已配置，所以生成了 <code>pk_users</code>、<code>fk_refresh_tokens_user_id_users</code> 这类名字）</td>
+</tr>
+<tr>
+<td>外键的 <code>ondelete</code></td>
+<td>只会照抄模型，模型里漏写就没有</td>
+<td>对照业务确认，例如 <code>refresh_tokens.user_id</code> 需要 <code>ondelete="CASCADE"</code></td>
+</tr>
+<tr>
+<td><code>downgrade()</code> 的删除顺序</td>
+<td>通常正确，但手工改过 <code>upgrade()</code> 后要同步调整</td>
+<td>有外键依赖时先删子表再删父表：先 <code>refresh_tokens</code>，后 <code>users</code></td>
+</tr>
+</tbody>
+</table>
+<p>项目的 <code>models/__init__.py</code> 统一导入所有模型，<code>env.py</code> 只需要 <code>from my_service.models import Base</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;ORM 模型。新增模型后在这里导入，Alembic 才能发现它。&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.models.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.models.refresh_token</span><span class="w"> </span><span class="kn">import</span> <span class="n">RefreshToken</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.models.user</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Base&quot;</span><span class="p">,</span> <span class="s2">&quot;RefreshToken&quot;</span><span class="p">,</span> <span class="s2">&quot;User&quot;</span><span class="p">]</span>
+</code></pre></div>
+<h2 id="6-常用命令">6. 常用命令</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uv run alembic revision --autogenerate -m "描述"</code></td>
+<td>对比模型和数据库，生成新迁移脚本</td>
+</tr>
+<tr>
+<td><code>uv run alembic upgrade head</code></td>
+<td>升级到最新版本</td>
+</tr>
+<tr>
+<td><code>uv run alembic downgrade -1</code></td>
+<td>回退一个版本（执行当前版本的 <code>downgrade()</code>）</td>
+</tr>
+<tr>
+<td><code>uv run alembic current</code></td>
+<td>查看数据库当前所处的版本</td>
+</tr>
+<tr>
+<td><code>uv run alembic history</code></td>
+<td>查看版本链</td>
+</tr>
+<tr>
+<td><code>uv run alembic check</code></td>
+<td>检查模型和数据库是否一致，有未生成的变更时返回非零退出码</td>
+</tr>
+<tr>
+<td><code>uv run alembic upgrade head --sql</code></td>
+<td>不连数据库，只输出要执行的 SQL</td>
+</tr>
+</tbody>
+</table>
+<p><code>alembic check</code> 在模型和数据库一致时输出：</p>
+<div class="highlight"><pre><span></span><code>No new upgrade operations detected.
+</code></pre></div>
+<p>适合放进 CI：数据库先 <code>upgrade head</code>，再 <code>check</code>。如果有人改了模型却忘了生成迁移，CI 就会失败。</p>
+<blockquote>
+<p>除 <code>history</code> 和 <code>upgrade head --sql</code> 外，这些命令都要连接数据库。数据库没启动时会报 <code>Connect call failed ('127.0.0.1', 5432)</code>。</p>
+</blockquote>
+<h2 id="7-迁移文件的维护规则">7. 迁移文件的维护规则</h2>
+<h3 id="71-已执行过的迁移不再修改">7.1. 已执行过的迁移不再修改</h3>
+<p>迁移脚本一旦提交并在别的环境（同事的库、测试库、生产库）执行过，就<strong>不要再改</strong>它的内容：</p>
+<ul>
+<li>那些环境的 <code>alembic_version</code> 已经记录了这个版本，Alembic 不会重新执行它，改动永远不会生效。</li>
+<li>结果是新环境（按改后的脚本建库）和老环境（按改前的脚本建库）结构不一致。</li>
+</ul>
+<p>需要调整时，新建一个迁移来修正。只有在本地生成、还没提交也没在别处执行过的迁移，才可以直接改或删掉重新生成。</p>
+<h3 id="72-让格式工具不碰旧迁移">7.2. 让格式工具不碰旧迁移</h3>
+<p>格式化工具升级或规则调整后，可能会批量改写所有 <code>.py</code> 文件，旧迁移也会被"顺手"改掉，产生没有意义的 diff。项目在 <code>pyproject.toml</code> 里把迁移目录排除：</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.ruff]</span>
+<span class="n">extend-exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;migrations/versions&quot;</span><span class="p">]</span><span class="w">   </span><span class="c1"># 自动生成的迁移文件不检查</span>
+<span class="n">force-exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c1"># 即使显式传入文件路径（如 pre-commit），也遵守上面的排除规则</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>extend-exclude</code></td>
+<td>在 ruff 默认排除列表基础上追加目录，<code>ruff check .</code> / <code>ruff format .</code> 扫描时跳过</td>
+</tr>
+<tr>
+<td><code>force-exclude</code></td>
+<td>pre-commit 会把改动的文件路径逐个传给 ruff，默认情况下显式传入的文件不受 exclude 约束；开启后同样跳过</td>
+</tr>
+</tbody>
+</table>
+<p>这个配置对 4.2 的 post write hook 也生效，需要的话按 4.2 的说明加 <code>--no-force-exclude</code>。</p>
+<h2 id="8-在代码里调用迁移">8. 在代码里调用迁移</h2>
+<p>除了命令行，Alembic 也可以在 Python 代码里调用。项目的测试用它来建表：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/conftest.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">alembic</span><span class="w"> </span><span class="kn">import</span> <span class="n">command</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">alembic.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Config</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="n">autouse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_test_database</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;整个测试会话只执行一次：重建测试库，用 Alembic 迁移建表。</span>
+
+<span class="sd">    用迁移而不是 Base.metadata.create_all 建表，顺便验证了迁移脚本本身。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">_recreate_test_database</span><span class="p">())</span>
+    <span class="n">command</span><span class="o">.</span><span class="n">upgrade</span><span class="p">(</span><span class="n">Config</span><span class="p">(</span><span class="s2">&quot;alembic.ini&quot;</span><span class="p">),</span> <span class="s2">&quot;head&quot;</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>Config("alembic.ini")</code> 用的是相对路径，相对于当前工作目录。在项目根目录执行 <code>uv run pytest</code> 时能找到。</li>
+<li><code>command.upgrade(config, "head")</code> 等价于命令行的 <code>alembic upgrade head</code>。<code>command</code> 模块里还有 <code>downgrade</code>、<code>current</code>、<code>check</code> 等，与命令行一一对应。</li>
+<li>测试库地址在 conftest 开头通过环境变量 <code>DATABASE_URL</code> 覆盖，<code>env.py</code> 里的 <code>get_settings()</code> 读到的就是测试库（conftest 里调用了 <code>get_settings.cache_clear()</code> 清掉缓存）。</li>
+</ul>
+<p><strong>必须在同步上下文中调用。</strong> 这个 fixture 是普通的 <code>def</code>，不是 <code>async def</code>，原因是 <code>env.py</code> 内部会执行 <code>asyncio.run(...)</code>（见 3.3），而 <code>asyncio.run</code> 不能在已经运行的事件循环里调用。如果把它写进 <code>async def</code> 的 fixture 或测试里，会报错：</p>
+<div class="highlight"><pre><span></span><code>RuntimeError: asyncio.run() cannot be called from a running event loop
+</code></pre></div>
+<h2 id="9-部署">9. 部署</h2>
+<h3 id="91-迁移作为一次性任务执行">9.1. 迁移作为一次性任务执行</h3>
+<p>不要在应用启动时（例如 FastAPI 的 lifespan 里）执行迁移：</p>
+<ul>
+<li>多副本部署时，几个实例同时启动，会同时去执行同一批迁移，可能互相冲突。</li>
+<li>迁移失败时应用也起不来，而且迁移日志和应用日志混在一起，不好排查。</li>
+</ul>
+<p>正确的做法是把迁移拆成一个独立的、执行完就退出的任务，成功后再启动应用。</p>
+<h3 id="92-docker-composemigrate-服务">9.2. docker compose：migrate 服务</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">migrate</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">profiles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;app&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-service:local</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;alembic&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;upgrade&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;head&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;app-env</span>
+<span class="w">      </span><span class="nt">APP_ENV</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+<span class="w">      </span><span class="c1"># 容器之间用服务名 postgres 访问，不是 localhost</span>
+<span class="w">      </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql+asyncpg://postgres:postgres@postgres:5432/my_service</span>
+<span class="w">      </span><span class="nt">JWT_SECRET_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JWT_SECRET_KEY:?请在 .env 中设置 JWT_SECRET_KEY}</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">postgres</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
+
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">profiles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;app&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-service:local</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="nv">*app-env</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">migrate</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_completed_successfully</span><span class="w">   </span><span class="c1"># 迁移成功后才启动应用</span>
+</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    P["postgres&lt;br/&gt;service_healthy"] --&gt; M["migrate&lt;br/&gt;alembic upgrade head&lt;br/&gt;执行完退出"]
+    M --&gt;|service_completed_successfully| A["app&lt;br/&gt;启动应用"]</code></pre>
+<ul>
+<li><code>migrate</code> 和 <code>app</code> 用同一个镜像、同一份环境变量（YAML 锚点 <code>&amp;app-env</code> / <code>*app-env</code>），迁移连的就是应用要用的库。</li>
+<li>镜像里要包含迁移所需的文件。项目的 Dockerfile 在运行阶段单独复制了它们：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">COPY</span><span class="w"> </span>--chown<span class="o">=</span>app:app<span class="w"> </span>alembic.ini<span class="w"> </span>./
+<span class="k">COPY</span><span class="w"> </span>--chown<span class="o">=</span>app:app<span class="w"> </span>migrations<span class="w"> </span>./migrations
+</code></pre></div>
+<ul>
+<li><code>migrate</code> 失败（非零退出码）时，<code>app</code> 不会启动。</li>
+</ul>
+<h3 id="93-kubernetes">9.3. Kubernetes</h3>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Job</td>
+<td>部署前单独运行一个 Job 执行 <code>alembic upgrade head</code>，整个集群只执行一次，多副本时推荐</td>
+</tr>
+<tr>
+<td>initContainer</td>
+<td>在应用 Pod 里加一个先于应用运行的容器执行迁移。注意它是<strong>每个 Pod 都会执行一次</strong>，多副本同时启动时仍会并发迁移</td>
+</tr>
+</tbody>
+</table>
+<h3 id="94-迁移可以重复执行">9.4. 迁移可以重复执行</h3>
+<p><code>alembic upgrade head</code> 是幂等的：Alembic 先读 <code>alembic_version</code>，只执行比当前版本新的迁移；数据库已经是最新版本时什么也不做，直接成功退出。所以每次部署都无条件执行一遍 <code>migrate</code> 是安全的。</p>
+<h2 id="10-小结">10. 小结</h2>
+<ul>
+<li>Alembic 把每次表结构变更写成带版本号的 Python 脚本，通过 <code>revision</code> / <code>down_revision</code> 串成链，数据库里的 <code>alembic_version</code> 表记录当前版本。</li>
+<li>用 <code>alembic init -t async migrations</code> 初始化，然后改造 <code>env.py</code>：地址从 <code>get_settings()</code> 读取，<code>target_metadata = Base.metadata</code>，<code>create_async_engine</code> + <code>NullPool</code>，打开 <code>compare_server_default</code>。</li>
+<li><code>alembic.ini</code> 由 configparser 解析，<code>%</code> 有插值含义，所以项目不用 <code>set_main_option</code> 传连接串，而是直接用连接串建引擎；ini 里的字面量 <code>%</code> 写成 <code>%%</code>。</li>
+<li><code>file_template</code> 让文件名以时间开头；<code>post_write_hooks</code> 在生成后自动执行 <code>ruff format</code>，和 <code>force-exclude</code> 同时使用时要加 <code>--no-force-exclude</code>。</li>
+<li>autogenerate 只是对比模型和数据库，识别不了改名，检测不到没导入的模型，生成后必须人工检查约束名、<code>ondelete</code> 和 <code>downgrade()</code> 顺序。</li>
+<li>已在别处执行过的迁移不再修改，用新迁移修正；ruff 用 <code>extend-exclude</code> + <code>force-exclude</code> 不碰旧迁移。</li>
+<li>代码里用 <code>command.upgrade(Config("alembic.ini"), "head")</code> 调用，必须在同步上下文中执行。</li>
+<li>部署时迁移作为一次性任务（compose 的 migrate 服务、K8s Job）先于应用执行；<code>upgrade head</code> 可以重复执行。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

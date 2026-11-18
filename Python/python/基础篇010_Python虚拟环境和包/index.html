@@ -14,7 +14,7 @@
         <link rel="prev" href="../%E5%9F%BA%E7%A1%80%E7%AF%87009_Python%E6%A0%87%E5%87%86%E5%BA%93%E7%AE%80%E4%BB%8B/">
       
       
-        <link rel="next" href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/">
+        <link rel="next" href="../../engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/">
       
       
         
@@ -74,6 +74,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#1-为什么需要虚拟环境" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -685,7 +690,7 @@
   <span class="md-ellipsis">
     
   
-    Python语言基础篇
+    语言基础
   
 
     
@@ -701,7 +706,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Python语言基础篇
+    语言基础
   
 
           </label>
@@ -973,6 +978,24 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python虚拟环境和包
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -990,6 +1013,223 @@
 
       </a>
       
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-为什么需要虚拟环境" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 为什么需要虚拟环境
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 为什么需要虚拟环境">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-传统做法venv--pip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 传统做法：venv + pip
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-uv-简介" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. uv 简介
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-用-uv-初始化项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 用 uv 初始化项目
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 用 uv 初始化项目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-uv-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. uv init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-python-版本自动管理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Python 版本自动管理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-管理依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 管理依赖
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 管理依赖">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-uv-add添加依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. uv add：添加依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-uvlock-与-uv-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. uv.lock 与 uv sync
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-uv-run在项目环境中执行命令" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. uv run：在项目环境中执行命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-项目本身的安装方式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 项目本身的安装方式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 项目本身的安装方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-可编辑安装" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 可编辑安装
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-projectscripts定义命令行入口" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. [project.scripts]：定义命令行入口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-版本号只维护一份" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 版本号只维护一份
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-常用命令速查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 常用命令速查
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -997,6 +1237,162 @@
             
           </ul>
         </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工程化
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI框架
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQLAlchemy
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
       
     </li>
   
@@ -1226,6 +1622,214 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-为什么需要虚拟环境" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 为什么需要虚拟环境
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 为什么需要虚拟环境">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-传统做法venv--pip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 传统做法：venv + pip
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-uv-简介" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. uv 简介
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-用-uv-初始化项目" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 用 uv 初始化项目
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 用 uv 初始化项目">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-uv-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. uv init
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-python-版本自动管理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Python 版本自动管理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-管理依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 管理依赖
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 管理依赖">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-uv-add添加依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. uv add：添加依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-uvlock-与-uv-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. uv.lock 与 uv sync
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-uv-run在项目环境中执行命令" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. uv run：在项目环境中执行命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-项目本身的安装方式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 项目本身的安装方式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 项目本身的安装方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-可编辑安装" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 可编辑安装
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-projectscripts定义命令行入口" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. [project.scripts]：定义命令行入口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-版本号只维护一份" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 版本号只维护一份
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-常用命令速查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 常用命令速查
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1296,7 +1900,7 @@
         <a href="../%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
           
   <span class="md-ellipsis">
-    Python语言基础篇
+    语言基础
   </span>
 
         </a>
@@ -1317,7 +1921,347 @@
 
   <h1>Python虚拟环境和包</h1>
 
+<h2 id="1-为什么需要虚拟环境">1. 为什么需要虚拟环境</h2>
+<p>Python 的第三方包默认安装在解释器的全局目录里。只要一台机器上有两个项目，就会遇到下面的问题：</p>
+<ul>
+<li>项目 A 需要 <code>sqlalchemy 1.4</code>，项目 B 需要 <code>sqlalchemy 2.0</code>，全局只能装一个版本。</li>
+<li>升级一个包，可能悄悄把另一个项目弄坏。</li>
+<li>新同事拿到代码，不知道要装哪些包、装什么版本。</li>
+</ul>
+<p><strong>虚拟环境（Virtual Environment）</strong> 就是为每个项目单独准备一份 Python 解释器和包目录，项目之间互不影响。</p>
+<h3 id="11-传统做法venv--pip">1.1. 传统做法：venv + pip</h3>
+<p>Python 3.3 起自带 <code>venv</code> 模块，配合 <code>pip</code> 就能完成最基础的隔离：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 在项目目录下创建虚拟环境（生成 .venv 目录）</span>
+python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 
+<span class="c1"># 激活虚拟环境（macOS / Linux）</span>
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+
+<span class="c1"># 安装依赖</span>
+pip<span class="w"> </span>install<span class="w"> </span>fastapi<span class="w"> </span>sqlalchemy
+
+<span class="c1"># 把当前环境的依赖导出到文件，供别人安装</span>
+pip<span class="w"> </span>freeze<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+
+<span class="c1"># 退出虚拟环境</span>
+deactivate
+</code></pre></div>
+<p>这套做法能用，但在团队协作中有几个明显的短板：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python 版本不受管理</td>
+<td><code>venv</code> 只能使用机器上已有的 Python，团队成员的版本可能不一致，需要另外装 pyenv</td>
+</tr>
+<tr>
+<td>没有锁文件</td>
+<td><code>requirements.txt</code> 通常只写直接依赖，间接依赖的版本每次安装都可能不同</td>
+</tr>
+<tr>
+<td>依赖分组不方便</td>
+<td>运行依赖和开发依赖（pytest、mypy 等）要拆成多个 requirements 文件</td>
+</tr>
+<tr>
+<td>需要手动激活</td>
+<td>忘记 <code>activate</code> 就会装到全局环境里</td>
+</tr>
+<tr>
+<td>速度慢</td>
+<td>pip 解析和安装大型依赖树比较慢</td>
+</tr>
+</tbody>
+</table>
+<p>因此社区陆续出现了 pipenv、poetry、pdm 等工具。目前最受关注的是 <strong>uv</strong>。</p>
+<h2 id="2-uv-简介">2. uv 简介</h2>
+<p><a href="https://docs.astral.sh/uv/">uv</a> 是 Astral 公司（ruff 的作者）用 Rust 编写的 Python 包与项目管理工具，一个工具就替代了下面这些：</p>
+<table>
+<thead>
+<tr>
+<th>原来的工具</th>
+<th>uv 中的对应功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pyenv</td>
+<td><code>uv python install</code>，按 <code>.python-version</code> 自动下载 Python</td>
+</tr>
+<tr>
+<td>venv / virtualenv</td>
+<td>自动创建并管理项目的 <code>.venv</code></td>
+</tr>
+<tr>
+<td>pip / pip-tools</td>
+<td><code>uv add</code>、<code>uv sync</code>、<code>uv pip</code></td>
+</tr>
+<tr>
+<td>poetry / pdm</td>
+<td><code>pyproject.toml</code> + <code>uv.lock</code> 的项目管理</td>
+</tr>
+<tr>
+<td>pipx</td>
+<td><code>uv tool install</code></td>
+</tr>
+</tbody>
+</table>
+<p>它的特点：</p>
+<ul>
+<li><strong>快</strong>：安装速度通常是 pip 的 10 到 100 倍。</li>
+<li><strong>有锁文件</strong>：<code>uv.lock</code> 记录完整依赖树的精确版本，所有人、所有环境装出来的东西一模一样。</li>
+<li><strong>不需要激活</strong>：用 <code>uv run &lt;命令&gt;</code> 就能在项目环境中执行，不存在"忘记激活"的问题。</li>
+<li><strong>遵循标准</strong>：项目信息写在标准的 <code>pyproject.toml</code> 里，不是私有格式。</li>
+</ul>
+<p>安装 uv：</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-LsSf<span class="w"> </span>https://astral.sh/uv/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+uv<span class="w"> </span>--version
+</code></pre></div>
+<h2 id="3-用-uv-初始化项目">3. 用 uv 初始化项目</h2>
+<h3 id="31-uv-init">3.1. uv init</h3>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>my-service<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-service
+uv<span class="w"> </span>init<span class="w"> </span>--app<span class="w"> </span>--package<span class="w"> </span>--python<span class="w"> </span><span class="m">3</span>.12<span class="w"> </span>.
+</code></pre></div>
+<p>参数说明：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--app</code></td>
+<td>这是一个应用（Web 服务、命令行工具），而不是要发布到 PyPI 的库</td>
+</tr>
+<tr>
+<td><code>--package</code></td>
+<td>生成可安装的包结构，代码放在 <code>src/&lt;包名&gt;/</code> 下（src 布局）</td>
+</tr>
+<tr>
+<td><code>--python 3.12</code></td>
+<td>指定 Python 版本，写入 <code>.python-version</code></td>
+</tr>
+</tbody>
+</table>
+<p>生成的文件：</p>
+<div class="highlight"><pre><span></span><code>my-service/
+├── .python-version         # 3.12，uv 会按这个版本自动下载 Python
+├── pyproject.toml          # 项目信息与依赖
+├── README.md
+└── src/
+    └── my_service/
+        └── __init__.py
+</code></pre></div>
+<blockquote>
+<p>项目名里的 <code>-</code> 在包名里会变成 <code>_</code>：项目叫 <code>my-service</code>，导入时写 <code>import my_service</code>。</p>
+</blockquote>
+<p>生成的 <code>pyproject.toml</code> 大致如下：</p>
+<div class="highlight"><pre><span></span><code><span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my-service&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;=3.12&quot;</span>
+<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+
+<span class="k">[project.scripts]</span>
+<span class="n">my-service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_service:main&quot;</span>
+
+<span class="k">[build-system]</span>
+<span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;uv_build&gt;=0.11.1,&lt;0.12.0&quot;</span><span class="p">]</span>
+<span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;uv_build&quot;</span>
+</code></pre></div>
+<p><code>[build-system]</code> 声明用 <code>uv_build</code> 把项目构建成可安装的包，<code>--package</code> 模式下 uv 会把项目本身也安装进虚拟环境。</p>
+<h3 id="32-python-版本自动管理">3.2. Python 版本自动管理</h3>
+<p><code>.python-version</code> 里写的是 <code>3.12</code>。执行任何 uv 命令时，如果本机没有这个版本，uv 会自动下载一份独立的 Python，不需要事先安装，也不会影响系统自带的 Python。</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>python<span class="w"> </span>list<span class="w">        </span><span class="c1"># 查看可用和已安装的 Python 版本</span>
+uv<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.13
+</code></pre></div>
+<h2 id="4-管理依赖">4. 管理依赖</h2>
+<h3 id="41-uv-add添加依赖">4.1. uv add：添加依赖</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 运行依赖：写入 [project] dependencies</span>
+uv<span class="w"> </span>add<span class="w"> </span><span class="s2">&quot;fastapi[standard]&quot;</span><span class="w"> </span>pydantic-settings<span class="w"> </span><span class="s2">&quot;sqlalchemy[asyncio]&quot;</span><span class="w"> </span>asyncpg<span class="w"> </span>alembic
+
+<span class="c1"># 开发依赖：写入 [dependency-groups] dev，不会打进生产镜像</span>
+uv<span class="w"> </span>add<span class="w"> </span>--dev<span class="w"> </span>ruff<span class="w"> </span>mypy<span class="w"> </span>pytest<span class="w"> </span>pytest-asyncio<span class="w"> </span>pytest-cov<span class="w"> </span>pre-commit
+
+<span class="c1"># 删除依赖</span>
+uv<span class="w"> </span>remove<span class="w"> </span>asyncpg
+</code></pre></div>
+<p>执行后 <code>pyproject.toml</code> 会变成：</p>
+<div class="highlight"><pre><span></span><code><span class="k">[project]</span>
+<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;alembic&gt;=1.20.1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;asyncpg&gt;=0.32.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;fastapi[standard]&gt;=0.163.1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;pydantic-settings&gt;=2.16.3&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;sqlalchemy[asyncio]&gt;=2.1.8&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="k">[dependency-groups]</span>
+<span class="n">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;mypy&gt;=2.4.1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;pre-commit&gt;=4.7.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;pytest&gt;=9.2.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;pytest-asyncio&gt;=1.5.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;pytest-cov&gt;=7.1.0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;ruff&gt;=0.17.5&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+<ul>
+<li><code>pyproject.toml</code> 里写的是<strong>版本范围</strong>（<code>&gt;=</code>），表达"至少需要哪个版本"。</li>
+<li>真正安装的<strong>精确版本</strong>记录在 <code>uv.lock</code> 里。</li>
+<li><code>[dependency-groups]</code> 是 PEP 735 定义的标准写法，<code>dev</code> 组默认会被安装，部署时用 <code>--no-dev</code> 排除。</li>
+</ul>
+<h3 id="42-uvlock-与-uv-sync">4.2. uv.lock 与 uv sync</h3>
+<p><code>uv.lock</code> 记录了整棵依赖树（包括间接依赖）每个包的精确版本和哈希值，<strong>必须提交到仓库</strong>。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 按 uv.lock 创建或更新 .venv，让环境和锁文件完全一致</span>
+uv<span class="w"> </span>sync
+
+<span class="c1"># 只装运行依赖（部署时用）</span>
+uv<span class="w"> </span>sync<span class="w"> </span>--no-dev
+
+<span class="c1"># 要求锁文件必须是最新的：pyproject.toml 和 uv.lock 不一致时直接报错，不会偷偷更新锁文件</span>
+uv<span class="w"> </span>sync<span class="w"> </span>--locked
+</code></pre></div>
+<p><code>--locked</code> 常用在 CI 和 Dockerfile 里：如果有人改了 <code>pyproject.toml</code> 却忘了提交更新后的 <code>uv.lock</code>，构建会立即失败，避免"线上装的版本和本地测试的不一样"。</p>
+<p>新同事克隆项目后只需要一条命令：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>&lt;仓库地址&gt;<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-service
+uv<span class="w"> </span>sync
+</code></pre></div>
+<h3 id="43-uv-run在项目环境中执行命令">4.3. uv run：在项目环境中执行命令</h3>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import fastapi; print(fastapi.__version__)&quot;</span>
+uv<span class="w"> </span>run<span class="w"> </span>pytest
+uv<span class="w"> </span>run<span class="w"> </span>ruff<span class="w"> </span>check
+uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+</code></pre></div>
+<p><code>uv run</code> 会先确认环境和锁文件同步（必要时自动 sync），再用 <code>.venv</code> 里的解释器执行命令。因此<strong>不需要 <code>source .venv/bin/activate</code></strong>，团队文档里所有命令都统一写成 <code>uv run xxx</code> 即可。</p>
+<h2 id="5-项目本身的安装方式">5. 项目本身的安装方式</h2>
+<h3 id="51-可编辑安装">5.1. 可编辑安装</h3>
+<p><code>--package</code> 模式下，<code>uv sync</code> 会把项目本身以<strong>可编辑模式（editable）</strong>安装进 <code>.venv</code>：虚拟环境里放的不是代码的拷贝，而是一个指向 <code>src/</code> 目录的链接。</p>
+<table>
+<thead>
+<tr>
+<th>改动</th>
+<th>是否需要重新 <code>uv sync</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>修改 <code>src/</code> 下已有的 <code>.py</code> 文件</td>
+<td>不需要，立即生效</td>
+</tr>
+<tr>
+<td>在 <code>src/my_service/</code> 下新增模块</td>
+<td>不需要，立即生效</td>
+</tr>
+<tr>
+<td>修改 <code>pyproject.toml</code>（依赖、<code>[project.scripts]</code> 等）</td>
+<td><strong>需要</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>部署时则相反：Docker 镜像里用 <code>uv sync --no-editable</code>，把代码直接装进虚拟环境，运行阶段就不再需要 <code>src/</code> 目录。</p>
+</blockquote>
+<h3 id="52-projectscripts定义命令行入口">5.2. [project.scripts]：定义命令行入口</h3>
+<div class="highlight"><pre><span></span><code><span class="k">[project.scripts]</span>
+<span class="n">my-service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_service.cli:main&quot;</span>
+</code></pre></div>
+<p>含义是：安装后生成一个叫 <code>my-service</code> 的命令，执行它就相当于调用 <code>my_service.cli</code> 模块里的 <code>main()</code> 函数。</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>sync<span class="w">                                  </span><span class="c1"># 修改 scripts 后需要重新 sync</span>
+uv<span class="w"> </span>run<span class="w"> </span>my-service<span class="w"> </span>create-user<span class="w"> </span>Alice
+</code></pre></div>
+<p>常见错误：</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ImportError: cannot import name 'main'</code></td>
+<td>入口指向的函数被删除或改名了（例如删掉了 <code>uv init</code> 生成的 Hello 函数，但没改 scripts）</td>
+</tr>
+<tr>
+<td><code>ModuleNotFoundError: No module named 'my_service.cli'</code></td>
+<td><code>cli.py</code> 没放在包目录 <code>src/my_service/</code> 下，而是放到了项目根目录</td>
+</tr>
+<tr>
+<td>命令不存在</td>
+<td>修改 <code>[project.scripts]</code> 后没有重新 <code>uv sync</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="53-版本号只维护一份">5.3. 版本号只维护一份</h3>
+<p>版本号写在 <code>pyproject.toml</code> 的 <code>version</code> 里。代码中需要版本号时（例如接口文档、启动日志），不要再写一遍，而是从已安装包的元数据里读取：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/__init__.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">importlib.metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">version</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="s2">&quot;my-service&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><code>importlib.metadata</code> 读取的是"已安装的包"的信息，所以前提是项目已经通过 <code>uv sync</code> 安装。这样发布新版本只需要改 <code>pyproject.toml</code> 一处。</p>
+<h2 id="6-常用命令速查">6. 常用命令速查</h2>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uv init --app --package</code></td>
+<td>初始化 src 布局的应用项目</td>
+</tr>
+<tr>
+<td><code>uv add &lt;包&gt;</code> / <code>uv add --dev &lt;包&gt;</code></td>
+<td>添加运行依赖 / 开发依赖</td>
+</tr>
+<tr>
+<td><code>uv remove &lt;包&gt;</code></td>
+<td>删除依赖</td>
+</tr>
+<tr>
+<td><code>uv sync</code></td>
+<td>按锁文件同步环境</td>
+</tr>
+<tr>
+<td><code>uv sync --locked --no-dev</code></td>
+<td>CI / 部署：校验锁文件，只装运行依赖</td>
+</tr>
+<tr>
+<td><code>uv lock --upgrade-package &lt;包&gt;</code></td>
+<td>升级某个包在锁文件中的版本</td>
+</tr>
+<tr>
+<td><code>uv run &lt;命令&gt;</code></td>
+<td>在项目环境中执行命令</td>
+</tr>
+<tr>
+<td><code>uv tree</code></td>
+<td>查看依赖树</td>
+</tr>
+<tr>
+<td><code>uv python install &lt;版本&gt;</code></td>
+<td>安装指定版本的 Python</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-小结">7. 小结</h2>
+<ul>
+<li>虚拟环境解决了"多个项目依赖冲突"的问题；<code>venv + pip</code> 是最基础的方案。</li>
+<li>uv 用一个工具统一了 Python 版本、虚拟环境、依赖和锁文件的管理，速度快且遵循 <code>pyproject.toml</code> 标准。</li>
+<li><code>pyproject.toml</code> 写版本范围，<code>uv.lock</code> 记录精确版本，两者都要提交；CI 和镜像构建用 <code>--locked</code> 保证一致。</li>
+<li>命令统一用 <code>uv run</code> 执行，不需要手动激活环境。</li>
+<li>项目本身以可编辑方式安装：改代码立即生效，改 <code>pyproject.toml</code> 需要重新 <code>uv sync</code>。</li>
+</ul>
 
 
 

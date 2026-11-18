@@ -1,0 +1,2911 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Python/fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87002_%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8EBearer%E8%AE%A4%E8%AF%81/">
+      
+      
+        <link rel="prev" href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/">
+      
+      
+        <link rel="next" href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87003_%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E4%B8%8E%E8%AF%B7%E6%B1%82%E8%BF%BD%E8%B8%AA%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>依赖注入与Bearer认证 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-依赖注入概述" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              依赖注入与Bearer认证
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语言基础
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工程化
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FastAPI框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    应用入口、路由与项目分层
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    依赖注入与Bearer认证
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    依赖注入与Bearer认证
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-依赖注入概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 依赖注入概述
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 依赖注入概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-什么是-depends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 什么是 Depends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-依赖的解析与请求内缓存" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 依赖的解析与请求内缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-用-annotated-定义依赖别名" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 用 Annotated 定义依赖别名
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 用 Annotated 定义依赖别名">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-两种写法对比" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 两种写法对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-项目中的三个别名" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 项目中的三个别名
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-依赖链" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 依赖链
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 依赖链">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-项目的依赖树" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 项目的依赖树
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-什么都可以当依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 什么都可以当依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-通过-depends-注入配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 通过 Depends 注入配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-yield-依赖管理数据库会话" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. yield 依赖：管理数据库会话
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. yield 依赖：管理数据库会话">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-写法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 写法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-生命周期" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 生命周期
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-约定依赖不自动-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 约定：依赖不自动 commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-httpbearer从请求头取令牌" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HTTPBearer：从请求头取令牌
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. HTTPBearer：从请求头取令牌">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-基本用法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 基本用法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-auto_error-参数" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. auto_error 参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-401-响应带-www-authenticate-头" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 401 响应带 WWW-Authenticate 头
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-swagger-中的-authorize-按钮" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4. Swagger 中的 Authorize 按钮
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-在接口中要求登录" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 在接口中要求登录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-接口文档与响应细节" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 接口文档与响应细节
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 接口文档与响应细节">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-返回-204-no-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 返回 204 No Content
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-responses-声明错误响应模型" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. responses= 声明错误响应模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-完整示例apiv1auth-的四个接口" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 完整示例：/api/v1/auth 的四个接口
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 完整示例：/api/v1/auth 的四个接口">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-路由代码" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 路由代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-接口一览" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 接口一览
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-调用示例" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. 调用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87003_%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E4%B8%8E%E8%AF%B7%E6%B1%82%E8%BF%BD%E8%B8%AA%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    统一异常处理与请求追踪中间件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87004_%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    健康检查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQLAlchemy
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-依赖注入概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 依赖注入概述
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 依赖注入概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-什么是-depends" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 什么是 Depends
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-依赖的解析与请求内缓存" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 依赖的解析与请求内缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-用-annotated-定义依赖别名" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 用 Annotated 定义依赖别名
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 用 Annotated 定义依赖别名">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-两种写法对比" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 两种写法对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-项目中的三个别名" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 项目中的三个别名
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-依赖链" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 依赖链
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 依赖链">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-项目的依赖树" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 项目的依赖树
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-什么都可以当依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 什么都可以当依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-通过-depends-注入配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 通过 Depends 注入配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-yield-依赖管理数据库会话" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. yield 依赖：管理数据库会话
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. yield 依赖：管理数据库会话">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-写法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 写法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-生命周期" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 生命周期
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-约定依赖不自动-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 约定：依赖不自动 commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-httpbearer从请求头取令牌" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. HTTPBearer：从请求头取令牌
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. HTTPBearer：从请求头取令牌">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-基本用法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 基本用法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-auto_error-参数" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. auto_error 参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-401-响应带-www-authenticate-头" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 401 响应带 WWW-Authenticate 头
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-swagger-中的-authorize-按钮" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4. Swagger 中的 Authorize 按钮
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-在接口中要求登录" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 在接口中要求登录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-接口文档与响应细节" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 接口文档与响应细节
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 接口文档与响应细节">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-返回-204-no-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 返回 204 No Content
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-responses-声明错误响应模型" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. responses= 声明错误响应模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-完整示例apiv1auth-的四个接口" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 完整示例：/api/v1/auth 的四个接口
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 完整示例：/api/v1/auth 的四个接口">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-路由代码" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 路由代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-接口一览" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 接口一览
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-调用示例" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. 调用示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Python
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    FastAPI框架
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>依赖注入与Bearer认证</h1>
+
+<p>本文以一个 FastAPI 后端服务（包名 <code>my_service</code>）的认证模块为例，讲解 FastAPI 的依赖注入（<code>Depends</code>）以及如何用 <code>HTTPBearer</code> 实现"需要登录才能访问"的接口。</p>
+<p>涉及的项目文件：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api/deps.py</code></td>
+<td>路由层公共依赖：数据库会话、认证服务、当前用户</td>
+</tr>
+<tr>
+<td><code>api/v1/auth.py</code></td>
+<td>认证接口：login / refresh / logout / me</td>
+</tr>
+<tr>
+<td><code>services/auth_service.py</code></td>
+<td>认证业务逻辑，其中 <code>authenticate</code> 负责校验 access token</td>
+</tr>
+<tr>
+<td><code>core/exceptions.py</code></td>
+<td>统一异常，其中 <code>UnauthorizedError</code> 对应 401</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>认证机制本身（JWT access token + 可轮换的 refresh token）不在本文展开，这里只关注 FastAPI 层面的写法。</p>
+<p>文中的运行结果基于 FastAPI 0.163.1。</p>
+</blockquote>
+<h2 id="1-依赖注入概述">1. 依赖注入概述</h2>
+<h3 id="11-什么是-depends">1.1. 什么是 Depends</h3>
+<p>依赖注入的意思是：处理函数不自己创建要用的东西（数据库会话、配置、当前用户），而是在参数上声明"这个参数由某个函数提供"，由框架负责调用这个函数，把返回值传进来。</p>
+<p>在 FastAPI 中，这个声明就是 <code>Depends</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Depends</span><span class="p">,</span> <span class="n">FastAPI</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot;real&quot;</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/demo&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">demo</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_config</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="c1"># 每次请求，FastAPI 先调用 get_config()，再把返回值传给 cfg</span>
+    <span class="k">return</span> <span class="n">cfg</span>
+</code></pre></div>
+<p>被 <code>Depends</code> 引用的函数叫<strong>依赖（dependency）</strong>。依赖本身也可以声明参数：可以是普通的请求参数（Query、Header、Body、<code>Request</code> 对象），也可以是另一个 <code>Depends</code>。FastAPI 会递归解析，最终形成一棵依赖树。</p>
+<p>依赖与 Gin 中间件的对比：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>FastAPI 依赖</th>
+<th>Gin 中间件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>声明位置</td>
+<td>处理函数的参数上</td>
+<td><code>engine.Use</code> / <code>group.Use</code> / 路由注册时</td>
+</tr>
+<tr>
+<td>数据传递</td>
+<td>依赖的返回值直接作为参数传入，有类型</td>
+<td><code>c.Set</code> / <code>c.Get</code>，取出来是 <code>any</code></td>
+</tr>
+<tr>
+<td>作用范围</td>
+<td>哪个接口声明了就对哪个接口生效</td>
+<td>按注册范围生效</td>
+</tr>
+<tr>
+<td>中断请求</td>
+<td>在依赖里抛异常</td>
+<td><code>c.Abort()</code></td>
+</tr>
+<tr>
+<td>文档</td>
+<td>依赖里的参数、安全方案会自动出现在 OpenAPI 文档中</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-依赖的解析与请求内缓存">1.2. 依赖的解析与请求内缓存</h3>
+<p>FastAPI 在<strong>每个请求</strong>中都会重新解析依赖，不会跨请求复用返回值。但在<strong>同一个请求</strong>内，同一个依赖被多处引用时，默认只调用一次，之后直接复用结果。</p>
+<p>示例代码：<code>dep_a</code>、<code>dep_b</code> 和处理函数本身都依赖 <code>get_config</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Depends</span><span class="p">,</span> <span class="n">FastAPI</span>
+
+<span class="n">calls</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">calls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;get_config&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;real&quot;</span>
+
+
+<span class="n">ConfigDep</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_config</span><span class="p">)]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dep_a</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">ConfigDep</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;a:</span><span class="si">{</span><span class="n">cfg</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dep_b</span><span class="p">(</span><span class="n">cfg</span><span class="p">:</span> <span class="n">ConfigDep</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;b:</span><span class="si">{</span><span class="n">cfg</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/cache&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cache</span><span class="p">(</span>
+    <span class="n">a</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">dep_a</span><span class="p">)],</span>
+    <span class="n">b</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">dep_b</span><span class="p">)],</span>
+    <span class="n">c</span><span class="p">:</span> <span class="n">ConfigDep</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">b</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code># 请求一次 /cache 的结果
+cache: {&#39;a&#39;: &#39;a:real&#39;, &#39;b&#39;: &#39;b:real&#39;, &#39;c&#39;: &#39;real&#39;}   get_config calls: 1
+</code></pre></div>
+<p><code>get_config</code> 被三处引用，但一次请求里只调用了 1 次。</p>
+<p>这个缓存在项目里很重要：如果一个接口同时依赖 <code>DbSession</code> 和 <code>AuthServiceDep</code>（后者内部也依赖 <code>DbSession</code>），两者拿到的是<strong>同一个数据库会话</strong>，在同一个事务里工作。</p>
+<p>如果确实需要每处都重新调用，可以写 <code>Depends(get_config, use_cache=False)</code>。</p>
+<h2 id="2-用-annotated-定义依赖别名">2. 用 Annotated 定义依赖别名</h2>
+<h3 id="21-两种写法对比">2.1. 两种写法对比</h3>
+<p><code>Depends</code> 有两种写法：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 写法一：默认值写法（旧写法）</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">User</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">UserResponse</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="c1"># 写法二：Annotated 写法（官方推荐）</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">User</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">)])</span> <span class="o">-&gt;</span> <span class="n">UserResponse</span><span class="p">:</span> <span class="o">...</span>
+</code></pre></div>
+<p><code>Annotated[类型, 元数据]</code> 是 Python 标准库 <code>typing</code> 提供的：第一个参数是真正的类型，后面的元数据类型检查器会忽略，FastAPI 会读取。所以 mypy 看到的 <code>user</code> 类型就是 <code>User</code>。</p>
+<p><code>Annotated</code> 写法的最大好处是可以<strong>提取成类型别名</strong>，到处复用：</p>
+<div class="highlight"><pre><span></span><code><span class="n">CurrentUser</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">User</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">)]</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">CurrentUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserResponse</span><span class="p">:</span> <span class="o">...</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>默认值写法</th>
+<th>Annotated 别名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路由函数里的写法</td>
+<td><code>user: User = Depends(get_current_user)</code></td>
+<td><code>user: CurrentUser</code></td>
+</tr>
+<tr>
+<td>类型信息</td>
+<td>类型和依赖分开写在 <code>:</code> 和 <code>=</code> 两侧</td>
+<td>类型和依赖写在同一个标注里，别名本身就带着类型 <code>User</code></td>
+</tr>
+<tr>
+<td>参数顺序</td>
+<td>有默认值的参数必须排在无默认值的参数后面</td>
+<td>没有默认值，不受顺序限制</td>
+</tr>
+<tr>
+<td>复用</td>
+<td>每处都要重复写一遍</td>
+<td>定义一次，到处引用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-项目中的三个别名">2.2. 项目中的三个别名</h3>
+<p><code>api/deps.py</code> 中定义了三个依赖别名：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 数据库会话</span>
+<span class="n">DbSession</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db_session</span><span class="p">)]</span>
+
+<span class="c1"># 认证服务</span>
+<span class="n">AuthServiceDep</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">AuthService</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_auth_service</span><span class="p">)]</span>
+
+<span class="c1"># 当前登录用户</span>
+<span class="n">CurrentUser</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">User</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">)]</span>
+</code></pre></div>
+<p>路由里只需要写 <code>auth: AuthServiceDep</code> 或 <code>user: CurrentUser</code>，代码更短，也不需要在每个路由文件里导入 <code>Depends</code> 和具体的依赖函数。</p>
+<h2 id="3-依赖链">3. 依赖链</h2>
+<h3 id="31-项目的依赖树">3.1. 项目的依赖树</h3>
+<p>依赖可以依赖其他依赖。项目中 <code>/me</code> 接口的完整依赖关系如下：</p>
+<pre class="mermaid"><code>graph TD
+    me["me(user: CurrentUser)"] --&gt; get_current_user
+    get_current_user --&gt; bearer["_bearer_scheme&lt;br/&gt;HTTPBearer(auto_error=False)"]
+    get_current_user --&gt; get_auth_service
+    bearer --&gt; header["请求头 Authorization"]
+    get_auth_service --&gt; get_db_session
+    get_auth_service --&gt; get_settings
+    get_db_session --&gt; request["Request&lt;br/&gt;request.app.state.session_factory"]</code></pre>
+<p>对应的代码（<code>api/deps.py</code>，省略了导入）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_db_session</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;每个请求一个会话；请求结束时自动关闭，未提交的事务自动回滚。&quot;&quot;&quot;</span>
+    <span class="n">session_factory</span><span class="p">:</span> <span class="n">async_sessionmaker</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">session_factory</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">session_factory</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">session</span>
+
+
+<span class="n">DbSession</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db_session</span><span class="p">)]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_auth_service</span><span class="p">(</span>
+    <span class="n">session</span><span class="p">:</span> <span class="n">DbSession</span><span class="p">,</span> <span class="n">settings</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Settings</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_settings</span><span class="p">)]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthService</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">AuthService</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
+
+
+<span class="n">AuthServiceDep</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">AuthService</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_auth_service</span><span class="p">)]</span>
+
+<span class="n">_bearer_scheme</span> <span class="o">=</span> <span class="n">HTTPBearer</span><span class="p">(</span><span class="n">auto_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;登录接口返回的 access_token&quot;</span><span class="p">)</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_current_user</span><span class="p">(</span>
+    <span class="n">credentials</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">HTTPAuthorizationCredentials</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">_bearer_scheme</span><span class="p">)],</span>
+    <span class="n">auth</span><span class="p">:</span> <span class="n">AuthServiceDep</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;从请求头 Authorization: Bearer &lt;access_token&gt; 中解析出当前用户。&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">credentials</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">UnauthorizedError</span><span class="p">(</span><span class="s2">&quot;未登录&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">auth</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="o">.</span><span class="n">credentials</span><span class="p">)</span>
+
+
+<span class="n">CurrentUser</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">User</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_current_user</span><span class="p">)]</span>
+</code></pre></div>
+<p>逐层说明：</p>
+<table>
+<thead>
+<tr>
+<th>依赖</th>
+<th>输入</th>
+<th>输出</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>get_db_session</code></td>
+<td><code>Request</code></td>
+<td><code>AsyncSession</code></td>
+<td>从 <code>request.app.state.session_factory</code> 取会话工厂（在 lifespan 启动时创建），每个请求开一个会话</td>
+</tr>
+<tr>
+<td><code>get_settings</code></td>
+<td>无</td>
+<td><code>Settings</code></td>
+<td>带 <code>@lru_cache</code>，整个进程只读取一次配置</td>
+</tr>
+<tr>
+<td><code>get_auth_service</code></td>
+<td><code>DbSession</code> + <code>Settings</code></td>
+<td><code>AuthService</code></td>
+<td>把会话和配置组装成服务对象</td>
+</tr>
+<tr>
+<td><code>_bearer_scheme</code></td>
+<td>请求头 <code>Authorization</code></td>
+<td><code>HTTPAuthorizationCredentials \| None</code></td>
+<td>取出 Bearer 令牌，见第 5 节</td>
+</tr>
+<tr>
+<td><code>get_current_user</code></td>
+<td>凭证 + <code>AuthServiceDep</code></td>
+<td><code>User</code></td>
+<td>没有令牌抛 401；有令牌交给 <code>auth.authenticate</code> 校验</td>
+</tr>
+</tbody>
+</table>
+<p><code>authenticate</code> 的逻辑（<code>services/auth_service.py</code>）：解码 access token 得到用户 ID，再查一次数据库确认用户存在且未停用，任何一步失败都抛 <code>UnauthorizedError("登录已失效，请重新登录")</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">decode_access_token</span><span class="p">(</span><span class="n">access_token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">jwt_secret_key</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">user_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">UnauthorizedError</span><span class="p">(</span><span class="s2">&quot;登录已失效，请重新登录&quot;</span><span class="p">)</span>
+    <span class="c1"># 查一次用户：账号被停用或删除后，即使 access token 未过期也立即拒绝</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">user</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">UnauthorizedError</span><span class="p">(</span><span class="s2">&quot;登录已失效，请重新登录&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">user</span>
+</code></pre></div>
+<h3 id="32-什么都可以当依赖">3.2. 什么都可以当依赖</h3>
+<p>从上面的代码可以看出，<code>Depends</code> 接收的是任意<strong>可调用对象</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>依赖形式</th>
+<th>项目中的例子</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async def</code> 函数</td>
+<td><code>get_current_user</code></td>
+<td>在事件循环中直接 <code>await</code></td>
+</tr>
+<tr>
+<td>普通 <code>def</code> 函数</td>
+<td><code>get_auth_service</code>、<code>get_settings</code></td>
+<td>FastAPI 会放到线程池中执行，不阻塞事件循环</td>
+</tr>
+<tr>
+<td><code>async def</code> + <code>yield</code></td>
+<td><code>get_db_session</code></td>
+<td>有"清理"阶段的依赖，见第 4 节</td>
+</tr>
+<tr>
+<td>实现了 <code>__call__</code> 的类实例</td>
+<td><code>_bearer_scheme</code>（<code>HTTPBearer</code> 实例）</td>
+<td>FastAPI 调用 <code>instance(request)</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-通过-depends-注入配置">3.3. 通过 Depends 注入配置</h3>
+<p><code>get_auth_service</code> 里的配置没有直接调用 <code>get_settings()</code>，而是通过 <code>Depends(get_settings)</code> 注入。这样做的好处是测试时可以用 <code>app.dependency_overrides</code> 替换掉它：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 测试中：把 get_settings 替换成返回测试配置的函数</span>
+<span class="n">app</span><span class="o">.</span><span class="n">dependency_overrides</span><span class="p">[</span><span class="n">get_settings</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">Settings</span><span class="p">(</span><span class="n">jwt_secret_key</span><span class="o">=</span><span class="s2">&quot;x&quot;</span> <span class="o">*</span> <span class="mi">32</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+
+<span class="c1"># ...执行测试请求...</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">dependency_overrides</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>  <span class="c1"># 测试结束后恢复</span>
+</code></pre></div>
+<p><code>dependency_overrides</code> 是一个字典，键是原依赖函数，值是替代函数。替换后，<strong>所有</strong>通过 <code>Depends(get_settings)</code> 引用它的地方都会改用替代函数，依赖链上游不需要任何改动。以 1.2 节的示例为例，运行后会输出：</p>
+<div class="highlight"><pre><span></span><code># 覆盖前
+{&#39;a&#39;: &#39;a:real&#39;, &#39;b&#39;: &#39;b:real&#39;, &#39;c&#39;: &#39;real&#39;}
+# app.dependency_overrides[get_config] = lambda: &quot;fake&quot; 之后
+{&#39;a&#39;: &#39;a:fake&#39;, &#39;b&#39;: &#39;b:fake&#39;, &#39;c&#39;: &#39;fake&#39;}
+</code></pre></div>
+<p>注意事项：</p>
+<ul>
+<li>只有通过 <code>Depends</code> 引用的地方会被覆盖。项目里 <code>create_app()</code> 和 <code>lifespan</code> 是直接调用 <code>get_settings()</code> 的，不受影响。</li>
+<li>另一种做法是不用 <code>dependency_overrides</code>，而是在测试配置（如 <code>tests/conftest.py</code>）里、创建 app 之前设置环境变量，再调用 <code>get_settings.cache_clear()</code> 清掉 <code>lru_cache</code>，让整个进程都读到测试配置。</li>
+</ul>
+<h2 id="4-yield-依赖管理数据库会话">4. yield 依赖：管理数据库会话</h2>
+<h3 id="41-写法">4.1. 写法</h3>
+<p>依赖函数里用 <code>yield</code> 代替 <code>return</code>，就变成了带清理阶段的依赖：</p>
+<ul>
+<li><code>yield</code> 之前：准备资源。</li>
+<li><code>yield</code> 的值：注入给处理函数。</li>
+<li><code>yield</code> 之后（或 <code>async with</code> 退出时）：清理资源。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_db_session</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]:</span>
+    <span class="n">session_factory</span><span class="p">:</span> <span class="n">async_sessionmaker</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">session_factory</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">session_factory</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">session</span>
+</code></pre></div>
+<p>这里用 <code>async with</code> 把会话的生命周期交给 SQLAlchemy 管理：退出 <code>async with</code> 时会话自动关闭，关闭时还没提交的事务会被回滚。</p>
+<h3 id="42-生命周期">4.2. 生命周期</h3>
+<pre class="mermaid"><code>sequenceDiagram
+    participant C as 客户端
+    participant F as FastAPI
+    participant D as get_db_session
+    participant H as 处理函数 / Service
+
+    C-&gt;&gt;F: HTTP 请求
+    F-&gt;&gt;D: 调用依赖
+    D-&gt;&gt;D: session_factory() 创建会话
+    D--&gt;&gt;F: yield session
+    F-&gt;&gt;H: 注入 session，执行业务
+    H-&gt;&gt;H: 需要持久化时 session.commit()
+    H--&gt;&gt;F: 返回结果或抛出异常
+    F-&gt;&gt;D: 请求结束，继续执行 yield 之后的代码
+    D-&gt;&gt;D: 退出 async with：关闭会话，未提交的事务回滚
+    F--&gt;&gt;C: HTTP 响应</code></pre>
+<p>几个要点：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正常请求</td>
+<td>每个请求一个独立会话，请求结束后关闭</td>
+</tr>
+<tr>
+<td>业务抛异常（如 <code>UnauthorizedError</code>）</td>
+<td>异常同样会让 <code>async with</code> 退出，会话关闭，未提交的修改回滚</td>
+</tr>
+<tr>
+<td>同一请求多处依赖 <code>DbSession</code></td>
+<td>依赖缓存保证拿到同一个会话</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-约定依赖不自动-commit">4.3. 约定：依赖不自动 commit</h3>
+<p><code>get_db_session</code> 只负责创建和关闭会话，<strong>不在 <code>yield</code> 之后自动 commit</strong>。什么时候提交由 service 显式决定，例如 <code>AuthService</code> 中：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">refresh_token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">stored</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_tokens</span><span class="o">.</span><span class="n">get_by_hash_for_update</span><span class="p">(</span><span class="n">hash_refresh_token</span><span class="p">(</span><span class="n">refresh_token</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">stored</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_tokens</span><span class="o">.</span><span class="n">revoke_family</span><span class="p">(</span><span class="n">stored</span><span class="o">.</span><span class="n">family_id</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">UTC</span><span class="p">))</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>  <span class="c1"># service 自己决定提交</span>
+</code></pre></div>
+<p>这样约定的原因：</p>
+<ul>
+<li>提交点在业务代码里一眼可见，不依赖"请求成功结束"这个隐含条件。</li>
+<li>业务上有时需要"先提交一部分再抛异常"。例如 <code>refresh</code> 检测到 refresh token 被重复使用时，先 <code>commit</code> 作废整个令牌家族，再抛 <code>UnauthorizedError</code>。如果由依赖在请求结束时统一提交，抛异常就意味着回滚，作废操作就丢了。</li>
+<li>没有调用 <code>commit</code> 的修改，在会话关闭时自动回滚，不会意外写入。</li>
+</ul>
+<h2 id="5-httpbearer从请求头取令牌">5. HTTPBearer：从请求头取令牌</h2>
+<h3 id="51-基本用法">5.1. 基本用法</h3>
+<p><code>fastapi.security.HTTPBearer</code> 负责从请求头 <code>Authorization: Bearer &lt;token&gt;</code> 中取出令牌：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.security</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPAuthorizationCredentials</span><span class="p">,</span> <span class="n">HTTPBearer</span>
+
+<span class="n">_bearer_scheme</span> <span class="o">=</span> <span class="n">HTTPBearer</span><span class="p">(</span><span class="n">auto_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;登录接口返回的 access_token&quot;</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auto_error</code></td>
+<td>取不到令牌时的行为，见 5.2</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>显示在接口文档的安全方案说明里</td>
+</tr>
+</tbody>
+</table>
+<p>取到令牌时返回 <code>HTTPAuthorizationCredentials</code> 对象：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scheme</code></td>
+<td><code>"Bearer"</code></td>
+</tr>
+<tr>
+<td><code>credentials</code></td>
+<td>令牌本身，即 <code>Bearer</code> 后面的部分</td>
+</tr>
+</tbody>
+</table>
+<p><code>HTTPBearer</code> 只负责"取"，不校验令牌是否有效。校验交给 <code>get_current_user</code> 里的 <code>auth.authenticate(credentials.credentials)</code>。</p>
+<h3 id="52-auto_error-参数">5.2. auto_error 参数</h3>
+<table>
+<thead>
+<tr>
+<th><code>auto_error</code></th>
+<th>请求头缺失、或不是 <code>Bearer xxx</code> 格式时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>True</code>（默认）</td>
+<td>框架直接抛出 <code>HTTPException(401, "Not authenticated")</code>，处理函数和后续依赖都不执行</td>
+</tr>
+<tr>
+<td><code>False</code></td>
+<td>返回 <code>None</code>，由我们自己决定怎么处理</td>
+</tr>
+</tbody>
+</table>
+<p>分别用不同的请求头访问需要登录的接口，运行后会输出如下结果（项目注册了全局异常处理器，所以两种情况都是统一的错误格式，区别在 <code>message</code>）：</p>
+<div class="highlight"><pre><span></span><code># auto_error=True（默认）
+无 Authorization 头       -&gt; 401 {&quot;code&quot;:&quot;unauthorized&quot;,&quot;message&quot;:&quot;Not authenticated&quot;,...}
+Authorization: Basic abc  -&gt; 401 {&quot;code&quot;:&quot;unauthorized&quot;,&quot;message&quot;:&quot;Not authenticated&quot;,...}
+Authorization: Bearer     -&gt; 401 {&quot;code&quot;:&quot;unauthorized&quot;,&quot;message&quot;:&quot;Not authenticated&quot;,...}
+
+# auto_error=False + 自己抛 UnauthorizedError(&quot;未登录&quot;)
+无 Authorization 头       -&gt; 401 {&quot;code&quot;:&quot;unauthorized&quot;,&quot;message&quot;:&quot;未登录&quot;,...}
+Authorization: Basic abc  -&gt; 401 {&quot;code&quot;:&quot;unauthorized&quot;,&quot;message&quot;:&quot;未登录&quot;,...}
+Authorization: Bearer tok -&gt; 200，credentials.credentials == &quot;tok&quot;
+</code></pre></div>
+<p>项目选择 <code>auto_error=False</code>，原因是：缺少令牌时返回中文提示"未登录"，和其他业务错误一样由 <code>UnauthorizedError</code> 抛出，而不是框架默认的英文报错。</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_current_user</span><span class="p">(</span>
+    <span class="n">credentials</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">HTTPAuthorizationCredentials</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">_bearer_scheme</span><span class="p">)],</span>
+    <span class="n">auth</span><span class="p">:</span> <span class="n">AuthServiceDep</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">credentials</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># auto_error=False 时，没有令牌得到 None</span>
+        <span class="k">raise</span> <span class="n">UnauthorizedError</span><span class="p">(</span><span class="s2">&quot;未登录&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">auth</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">credentials</span><span class="o">.</span><span class="n">credentials</span><span class="p">)</span>
+</code></pre></div>
+<p>注意参数类型要写成 <code>HTTPAuthorizationCredentials | None</code>，否则类型检查器不会提醒你处理 <code>None</code>。</p>
+<h3 id="53-401-响应带-www-authenticate-头">5.3. 401 响应带 WWW-Authenticate 头</h3>
+<p>HTTP 规范要求 401 响应带上 <code>WWW-Authenticate</code> 头，告诉客户端应该用哪种方式认证。项目通过异常类的 <code>headers</code> <strong>类属性</strong>实现，所有 <code>UnauthorizedError</code> 自动带上这个头：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AppError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;业务异常基类。在 service 层抛出，由全局处理器转成统一的错误响应。&quot;&quot;&quot;</span>
+
+    <span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span>
+    <span class="n">code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;bad_request&quot;</span>
+    <span class="n">headers</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 需要额外返回的响应头</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">details</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">details</span> <span class="o">=</span> <span class="n">details</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UnauthorizedError</span><span class="p">(</span><span class="n">AppError</span><span class="p">):</span>
+    <span class="n">status_code</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_401_UNAUTHORIZED</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;unauthorized&quot;</span>
+    <span class="c1"># HTTP 规范要求 401 响应带上该头，告诉客户端用哪种方式认证</span>
+    <span class="n">headers</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;WWW-Authenticate&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>全局异常处理器把 <code>exc.headers</code> 原样放进响应：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">exception_handler</span><span class="p">(</span><span class="n">AppError</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle_app_error</span><span class="p">(</span><span class="n">_</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="n">AppError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONResponse</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">build_error_response</span><span class="p">(</span>
+        <span class="n">exc</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">exc</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">exc</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">details</span><span class="o">=</span><span class="n">exc</span><span class="o">.</span><span class="n">details</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">exc</span><span class="o">.</span><span class="n">headers</span>
+    <span class="p">)</span>
+</code></pre></div>
+<p>运行后可以看到：上面 5.2 中所有 401 响应的 <code>WWW-Authenticate</code> 头都是 <code>Bearer</code>，200 响应没有这个头。</p>
+<p><code>ClassVar</code> 标注说明 <code>headers</code> 是类级别的配置，不是实例属性，子类直接覆盖即可，抛异常时不需要每次传参。</p>
+<h3 id="54-swagger-中的-authorize-按钮">5.4. Swagger 中的 Authorize 按钮</h3>
+<p>依赖链上有 <code>HTTPBearer</code> 的接口，FastAPI 会在 OpenAPI 文档里自动生成安全方案：</p>
+<div class="highlight"><pre><span></span><code>components.securitySchemes:
+  {&quot;HTTPBearer&quot;: {&quot;type&quot;: &quot;http&quot;, &quot;description&quot;: &quot;登录接口返回的 access_token&quot;, &quot;scheme&quot;: &quot;bearer&quot;}}
+
+/me 接口:
+  security: [{&quot;HTTPBearer&quot;: []}]
+</code></pre></div>
+<p>于是 Swagger UI（<code>/docs</code>）右上角会出现 <strong>Authorize</strong> 按钮，需要登录的接口旁边会显示一个锁图标。调试步骤：</p>
+<ol>
+<li>在 <code>/docs</code> 中调用 <code>POST /api/v1/auth/login</code>，复制响应里的 <code>access_token</code>。</li>
+<li>点击 Authorize，把 <code>access_token</code> 填进去（只填令牌本身，不用写 <code>Bearer</code> 前缀）。</li>
+<li>之后调用 <code>GET /api/v1/auth/me</code> 等需要登录的接口，Swagger 会自动带上 <code>Authorization: Bearer &lt;token&gt;</code> 头。</li>
+</ol>
+<blockquote>
+<p>项目在生产环境（<code>APP_ENV=prod</code>）关闭了 <code>/docs</code>、<code>/redoc</code> 和 <code>/openapi.json</code>。</p>
+</blockquote>
+<h2 id="6-在接口中要求登录">6. 在接口中要求登录</h2>
+<p>有了 <code>CurrentUser</code> 别名，要求登录只需要加一个参数：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/me&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;当前登录用户&quot;</span><span class="p">,</span> <span class="n">responses</span><span class="o">=</span><span class="n">_UNAUTHORIZED</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">CurrentUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserResponse</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">UserResponse</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>请求情况</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>没带令牌</td>
+<td><code>get_current_user</code> 抛 <code>UnauthorizedError("未登录")</code>，返回 401，处理函数不执行</td>
+</tr>
+<tr>
+<td>令牌无效、过期，或用户已停用</td>
+<td><code>authenticate</code> 抛 <code>UnauthorizedError("登录已失效，请重新登录")</code>，返回 401</td>
+</tr>
+<tr>
+<td>令牌有效</td>
+<td><code>user</code> 就是数据库里查出来的 <code>User</code> 对象</td>
+</tr>
+</tbody>
+</table>
+<p>处理函数里不需要写任何判断，未登录的请求根本到不了函数体。以后新增需要登录的接口，照样加上 <code>user: CurrentUser</code> 即可；不需要当前用户对象但需要登录的接口，也可以这样声明，参数不用就行。</p>
+<h2 id="7-接口文档与响应细节">7. 接口文档与响应细节</h2>
+<h3 id="71-返回-204-no-content">7.1. 返回 204 No Content</h3>
+<p>注销接口成功后没有需要返回的内容，用 204 状态码：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/logout&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;注销&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">logout</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="n">RefreshTokenRequest</span><span class="p">,</span> <span class="n">auth</span><span class="p">:</span> <span class="n">AuthServiceDep</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">auth</span><span class="o">.</span><span class="n">logout</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">refresh_token</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>status_code=status.HTTP_204_NO_CONTENT</code>：设置成功时的状态码，接口文档里的成功响应也会显示为 204。</li>
+<li>返回类型 <code>-&gt; None</code>：函数不返回内容，FastAPI 不会为它生成响应体模型。</li>
+</ul>
+<p>调用后的结果：响应状态码 204，响应体为空（<code>b''</code>），文档中该接口的响应只有 <code>204</code>。</p>
+<h3 id="72-responses-声明错误响应模型">7.2. responses= 声明错误响应模型</h3>
+<p>FastAPI 默认只在文档里展示成功响应，以及接口有请求参数时的 422（参数校验失败）。业务代码里抛出的 401 文档不会自动知道，需要用 <code>responses=</code> 参数声明：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.core.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ErrorResponse</span>
+
+<span class="c1"># 让接口文档里展示 401 的响应格式</span>
+<span class="n">_UNAUTHORIZED</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">status</span><span class="o">.</span><span class="n">HTTP_401_UNAUTHORIZED</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">ErrorResponse</span><span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/me&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;当前登录用户&quot;</span><span class="p">,</span> <span class="n">responses</span><span class="o">=</span><span class="n">_UNAUTHORIZED</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">CurrentUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserResponse</span><span class="p">:</span> <span class="o">...</span>
+</code></pre></div>
+<ul>
+<li>键是状态码，值里的 <code>"model"</code> 指定响应体的 Pydantic 模型，文档会据此展示字段结构。</li>
+<li>把字典提取成模块级常量，多个接口共用。</li>
+<li>声明后 <code>/me</code> 的文档响应列表为 <code>200</code>、<code>401</code>。</li>
+</ul>
+<p><strong>为什么必须写类型标注</strong>：<code>responses</code> 参数的类型是 <code>dict[int | str, dict[str, Any]]</code>。不写标注时，mypy 会把常量推断为 <code>dict[int, dict[str, type[ErrorResponse]]]</code>。<code>dict</code> 的类型参数是不变的（invariant），<code>dict[int, ...]</code> 不能当作 <code>dict[int | str, ...]</code> 使用，于是 mypy 报类型不兼容。显式标注成参数要求的类型即可。</p>
+<p>错误响应模型 <code>ErrorResponse</code> 就是项目统一的错误格式：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ErrorResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">code</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># 机器可读的错误码，调用方据此做分支判断</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># 人可读的错误描述</span>
+    <span class="n">request_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 排查问题时，用它在日志里搜索这次请求</span>
+    <span class="n">details</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 补充信息，如参数校验失败的字段列表</span>
+</code></pre></div>
+<h2 id="8-完整示例apiv1auth-的四个接口">8. 完整示例：/api/v1/auth 的四个接口</h2>
+<h3 id="81-路由代码">8.1. 路由代码</h3>
+<p><code>api/v1/auth.py</code> 完整代码：</p>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;认证接口：登录、刷新令牌、注销、查询当前用户。&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIRouter</span><span class="p">,</span> <span class="n">status</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.api.deps</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthServiceDep</span><span class="p">,</span> <span class="n">CurrentUser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.core.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ErrorResponse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.schemas.auth</span><span class="w"> </span><span class="kn">import</span> <span class="n">LoginRequest</span><span class="p">,</span> <span class="n">RefreshTokenRequest</span><span class="p">,</span> <span class="n">TokenResponse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.schemas.user</span><span class="w"> </span><span class="kn">import</span> <span class="n">UserResponse</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">()</span>
+
+<span class="c1"># 让接口文档里展示 401 的响应格式</span>
+<span class="n">_UNAUTHORIZED</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">status</span><span class="o">.</span><span class="n">HTTP_401_UNAUTHORIZED</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">ErrorResponse</span><span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;登录&quot;</span><span class="p">,</span> <span class="n">responses</span><span class="o">=</span><span class="n">_UNAUTHORIZED</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="n">LoginRequest</span><span class="p">,</span> <span class="n">auth</span><span class="p">:</span> <span class="n">AuthServiceDep</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokenResponse</span><span class="p">:</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">body</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/refresh&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;刷新令牌&quot;</span><span class="p">,</span> <span class="n">responses</span><span class="o">=</span><span class="n">_UNAUTHORIZED</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">refresh</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="n">RefreshTokenRequest</span><span class="p">,</span> <span class="n">auth</span><span class="p">:</span> <span class="n">AuthServiceDep</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokenResponse</span><span class="p">:</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">auth</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">refresh_token</span><span class="p">)</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/logout&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;注销&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">logout</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="n">RefreshTokenRequest</span><span class="p">,</span> <span class="n">auth</span><span class="p">:</span> <span class="n">AuthServiceDep</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">auth</span><span class="o">.</span><span class="n">logout</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">refresh_token</span><span class="p">)</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/me&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;当前登录用户&quot;</span><span class="p">,</span> <span class="n">responses</span><span class="o">=</span><span class="n">_UNAUTHORIZED</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">CurrentUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserResponse</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">UserResponse</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</code></pre></div>
+<p>路由在 <code>api/v1/router.py</code> 中以 <code>prefix="/auth"</code> 注册，再在 <code>main.py</code> 中以 <code>prefix="/api/v1"</code> 挂到 app 上，最终路径是 <code>/api/v1/auth/...</code>。</p>
+<h3 id="82-接口一览">8.2. 接口一览</h3>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>请求体</th>
+<th>依赖</th>
+<th>是否需要登录</th>
+<th>成功响应</th>
+<th>文档声明的错误</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /login</code></td>
+<td><code>LoginRequest</code>（username、password）</td>
+<td><code>AuthServiceDep</code></td>
+<td>否</td>
+<td>200 <code>TokenResponse</code></td>
+<td>401</td>
+</tr>
+<tr>
+<td><code>POST /refresh</code></td>
+<td><code>RefreshTokenRequest</code>（refresh_token）</td>
+<td><code>AuthServiceDep</code></td>
+<td>否</td>
+<td>200 <code>TokenResponse</code></td>
+<td>401</td>
+</tr>
+<tr>
+<td><code>POST /logout</code></td>
+<td><code>RefreshTokenRequest</code>（refresh_token）</td>
+<td><code>AuthServiceDep</code></td>
+<td>否</td>
+<td>204 无响应体</td>
+<td>无</td>
+</tr>
+<tr>
+<td><code>GET /me</code></td>
+<td>无</td>
+<td><code>CurrentUser</code></td>
+<td>是</td>
+<td>200 <code>UserResponse</code></td>
+<td>401</td>
+</tr>
+</tbody>
+</table>
+<p>从表中可以看出几种用法的组合：</p>
+<ul>
+<li><strong>处理函数只拿 service</strong>（login / refresh / logout）：参数写 <code>auth: AuthServiceDep</code>，会话、配置由依赖链自动组装，处理函数只做一行转发。</li>
+<li><strong>处理函数要求登录</strong>（me）：参数写 <code>user: CurrentUser</code>，令牌提取、校验、查用户都在依赖里完成。</li>
+<li><strong>logout 不要求登录</strong>：它凭请求体里的 refresh token 作废对应的登录；令牌无效也视为成功（幂等），所以不声明 401。</li>
+</ul>
+<h3 id="83-调用示例">8.3. 调用示例</h3>
+<p>用 curl 调用这四个接口（<code>B=localhost:8000/api/v1/auth</code>），运行后会输出如下内容（令牌已省略）：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 登录</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="nv">$B</span>/login<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;username&quot;:&quot;alice&quot;,&quot;password&quot;:&quot;******&quot;}&#39;</span>
+<span class="c1"># {&quot;access_token&quot;:&quot;eyJ...&quot;,&quot;token_type&quot;:&quot;bearer&quot;,&quot;access_token_expires_at&quot;:&quot;...&quot;,</span>
+<span class="c1">#  &quot;refresh_token&quot;:&quot;dEt...&quot;,&quot;refresh_token_expires_at&quot;:&quot;...&quot;}</span>
+
+<span class="c1"># 带 access token 访问 /me</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot; %{http_code}\n&quot;</span><span class="w"> </span><span class="nv">$B</span>/me<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$A1</span><span class="s2">&quot;</span>
+<span class="c1"># {&quot;id&quot;:&quot;3fa85f64-...&quot;,&quot;username&quot;:&quot;alice&quot;,&quot;is_active&quot;:true,&quot;created_at&quot;:&quot;...&quot;} 200</span>
+
+<span class="c1"># 不带令牌访问 /me</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span><span class="nv">$B</span>/me
+<span class="c1"># 401</span>
+
+<span class="c1"># 注销</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="nv">$B</span>/logout<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;refresh_token\&quot;:\&quot;</span><span class="nv">$F3</span><span class="s2">\&quot;}&quot;</span>
+<span class="c1"># 204</span>
+
+<span class="c1"># 注销后再用 access token 访问 /me</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span><span class="nv">$B</span>/me<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$A3</span><span class="s2">&quot;</span>
+<span class="c1"># 200</span>
+</code></pre></div>
+<p>最后一条返回 200 是预期行为：注销只作废 refresh token，已签发的 access token 无法撤回，会在有效期（默认 15 分钟）结束后自然失效。</p>
+<h2 id="9-小结">9. 小结</h2>
+<table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>写法</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>声明依赖</td>
+<td><code>Depends(func)</code></td>
+<td>每个请求解析一次；同一请求内重复的依赖只调用一次</td>
+</tr>
+<tr>
+<td>依赖别名</td>
+<td><code>X = Annotated[T, Depends(func)]</code></td>
+<td>路由里只写 <code>x: X</code>，类型检查器识别为 <code>T</code></td>
+</tr>
+<tr>
+<td>依赖链</td>
+<td>依赖的参数里再写依赖</td>
+<td><code>get_db_session</code> → <code>get_auth_service</code> → <code>get_current_user</code></td>
+</tr>
+<tr>
+<td>配置注入</td>
+<td><code>Annotated[Settings, Depends(get_settings)]</code></td>
+<td>测试时可用 <code>app.dependency_overrides</code> 替换</td>
+</tr>
+<tr>
+<td>yield 依赖</td>
+<td><code>async with factory() as s: yield s</code></td>
+<td>每请求一个会话，结束自动关闭、未提交的事务回滚；依赖不 commit，service 显式 commit</td>
+</tr>
+<tr>
+<td>Bearer 令牌</td>
+<td><code>HTTPBearer(auto_error=False, description=...)</code></td>
+<td>缺令牌返回 <code>None</code>，自己抛中文 401；自动生成 Swagger Authorize 按钮</td>
+</tr>
+<tr>
+<td>401 响应头</td>
+<td>异常类属性 <code>headers = {"WWW-Authenticate": "Bearer"}</code></td>
+<td>全局处理器把它放进响应</td>
+</tr>
+<tr>
+<td>要求登录</td>
+<td><code>async def handler(user: CurrentUser)</code></td>
+<td>未登录的请求到不了函数体</td>
+</tr>
+<tr>
+<td>返回 204</td>
+<td><code>status_code=status.HTTP_204_NO_CONTENT</code> + <code>-&gt; None</code></td>
+<td>响应体为空</td>
+</tr>
+<tr>
+<td>文档声明错误</td>
+<td><code>responses={401: {"model": ErrorResponse}}</code></td>
+<td>常量需显式标注 <code>dict[int \| str, dict[str, Any]]</code>，否则 mypy 报错</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

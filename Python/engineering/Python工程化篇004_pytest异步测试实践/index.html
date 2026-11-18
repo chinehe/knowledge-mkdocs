@@ -1,0 +1,3326 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Python/engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87004_pytest%E5%BC%82%E6%AD%A5%E6%B5%8B%E8%AF%95%E5%AE%9E%E8%B7%B5/">
+      
+      
+        <link rel="prev" href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87003_pre-commit%E6%8F%90%E4%BA%A4%E5%89%8D%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5/">
+      
+      
+        <link rel="next" href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87005_%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86pydantic-settings/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>pytest异步测试实践 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-测试相关依赖与配置" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              pytest异步测试实践
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语言基础
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工程化
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    工程化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    企业级Web后端初始化路线图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87002_%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%B7%A5%E5%85%B7ruff%E4%B8%8Emypy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    代码质量工具ruff与mypy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87003_pre-commit%E6%8F%90%E4%BA%A4%E5%89%8D%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pre-commit提交前自动检查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pytest异步测试实践
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pytest异步测试实践
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-测试相关依赖与配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 测试相关依赖与配置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 测试相关依赖与配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-pytest-配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. pytest 配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pytest-asyncio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. pytest-asyncio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. pytest-asyncio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-asyncio_mode--auto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. asyncio_mode = "auto"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-asyncio_default_fixture_loop_scope--function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. asyncio_default_fixture_loop_scope = "function"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-conftestpy-与-fixture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. conftest.py 与 fixture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. conftest.py 与 fixture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-fixture-通过同名参数注入" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. fixture 通过同名参数注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-fixture-之间相互依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. fixture 之间相互依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-conftestpy-是固定文件名" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. conftest.py 是固定文件名
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-testsinitpy-与导入路径" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. tests/init.py 与导入路径
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-测试数据库用真实-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 测试数据库：用真实 PostgreSQL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 测试数据库：用真实 PostgreSQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-为什么不用-sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 为什么不用 SQLite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-隔离方案" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 隔离方案
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-session-级同步-fixture重建测试库并迁移" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. session 级同步 fixture：重建测试库并迁移
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-派生测试库地址" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4. 派生测试库地址
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-每个测试结束后清空所有表" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5. 每个测试结束后清空所有表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-环境变量要在导入-app-之前设置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 环境变量要在导入 app 之前设置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-httpxasyncclient--asgitransport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. httpx.AsyncClient + ASGITransport
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. httpx.AsyncClient + ASGITransport">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-不启动服务直接调用应用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 不启动服务直接调用应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-手动触发-lifespan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 手动触发 lifespan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-测试写法示例" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 测试写法示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 测试写法示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-单元测试不需要数据库" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 单元测试：不需要数据库
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-接口测试认证流程" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 接口测试：认证流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-运行结果" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. 运行结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-覆盖率" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 覆盖率
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 覆盖率">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-运行与配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. 运行与配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-读懂报告" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 读懂报告
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-坑sqlalchemy-异步模式与-greenlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 坑：SQLAlchemy 异步模式与 greenlet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-验证测试有效变异检查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 验证测试有效：变异检查
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-常见问题速查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 常见问题速查
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87005_%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86pydantic-settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置管理pydantic-settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87006_%E7%BB%93%E6%9E%84%E5%8C%96%E6%97%A5%E5%BF%97structlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    结构化日志structlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI框架
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQLAlchemy
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-测试相关依赖与配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 测试相关依赖与配置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 测试相关依赖与配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-pytest-配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. pytest 配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pytest-asyncio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. pytest-asyncio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. pytest-asyncio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-asyncio_mode--auto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. asyncio_mode = "auto"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-asyncio_default_fixture_loop_scope--function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. asyncio_default_fixture_loop_scope = "function"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-conftestpy-与-fixture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. conftest.py 与 fixture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. conftest.py 与 fixture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-fixture-通过同名参数注入" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. fixture 通过同名参数注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-fixture-之间相互依赖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. fixture 之间相互依赖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-conftestpy-是固定文件名" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. conftest.py 是固定文件名
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-testsinitpy-与导入路径" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. tests/init.py 与导入路径
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-测试数据库用真实-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 测试数据库：用真实 PostgreSQL
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 测试数据库：用真实 PostgreSQL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-为什么不用-sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 为什么不用 SQLite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-隔离方案" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 隔离方案
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-session-级同步-fixture重建测试库并迁移" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. session 级同步 fixture：重建测试库并迁移
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-派生测试库地址" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4. 派生测试库地址
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-每个测试结束后清空所有表" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5. 每个测试结束后清空所有表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-环境变量要在导入-app-之前设置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 环境变量要在导入 app 之前设置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-httpxasyncclient--asgitransport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. httpx.AsyncClient + ASGITransport
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. httpx.AsyncClient + ASGITransport">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-不启动服务直接调用应用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 不启动服务直接调用应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-手动触发-lifespan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 手动触发 lifespan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-测试写法示例" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 测试写法示例
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 测试写法示例">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-单元测试不需要数据库" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 单元测试：不需要数据库
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-接口测试认证流程" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 接口测试：认证流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-运行结果" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. 运行结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-覆盖率" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 覆盖率
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 覆盖率">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-运行与配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. 运行与配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-读懂报告" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 读懂报告
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-坑sqlalchemy-异步模式与-greenlet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 坑：SQLAlchemy 异步模式与 greenlet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-验证测试有效变异检查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 验证测试有效：变异检查
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-常见问题速查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 常见问题速查
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Python
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    工程化
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>pytest异步测试实践</h1>
+
+<h2 id="1-测试相关依赖与配置">1. 测试相关依赖与配置</h2>
+<p>本文以一个 FastAPI + SQLAlchemy 异步 + PostgreSQL 的 Web 服务为例，说明异步 Web 服务的测试怎么组织：事件循环怎么配、测试数据库怎么隔离、怎么不启动服务就调用接口、怎么看覆盖率，以及怎么确认测试真的有效。</p>
+<h3 id="11-依赖">1.1. 依赖</h3>
+<p>测试用到的包都放在开发依赖组里，不会进入生产镜像：</p>
+<div class="highlight"><pre><span></span><code><span class="k">[dependency-groups]</span>
+<span class="n">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;httpx&gt;=0.28.1&quot;</span><span class="p">,</span><span class="w">          </span><span class="c1"># 测试客户端：AsyncClient + ASGITransport</span>
+<span class="w">    </span><span class="s2">&quot;pytest&gt;=9.2.0&quot;</span><span class="p">,</span><span class="w">          </span><span class="c1"># 测试框架</span>
+<span class="w">    </span><span class="s2">&quot;pytest-asyncio&gt;=1.5.0&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1"># 让 pytest 能运行 async def 测试和 fixture</span>
+<span class="w">    </span><span class="s2">&quot;pytest-cov&gt;=7.1.0&quot;</span><span class="p">,</span><span class="w">      </span><span class="c1"># 覆盖率（基于 coverage.py）</span>
+<span class="w">    </span><span class="c1"># ...</span>
+<span class="p">]</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>包</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pytest</code></td>
+<td>发现、收集、运行测试，提供 fixture 机制</td>
+</tr>
+<tr>
+<td><code>pytest-asyncio</code></td>
+<td>pytest 本身不支持 <code>async def</code> 测试，这个插件负责创建事件循环并运行协程</td>
+</tr>
+<tr>
+<td><code>httpx</code></td>
+<td>异步 HTTP 客户端，配合 <code>ASGITransport</code> 直接调用 ASGI 应用</td>
+</tr>
+<tr>
+<td><code>pytest-cov</code></td>
+<td>在 pytest 运行时统计代码覆盖率</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-pytest-配置">1.2. pytest 配置</h3>
+<p>pytest 会读取 <code>pyproject.toml</code> 里的 <code>[tool.pytest.ini_options]</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.pytest.ini_options]</span>
+<span class="n">testpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">]</span>
+<span class="n">asyncio_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;auto&quot;</span><span class="w">                          </span><span class="c1"># async def 测试函数无需逐个加装饰器</span>
+<span class="n">asyncio_default_fixture_loop_scope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;function&quot;</span>
+<span class="n">addopts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;-ra --strict-markers&quot;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>testpaths</code></td>
+<td>只在 <code>tests/</code> 下找测试，直接执行 <code>uv run pytest</code> 即可</td>
+</tr>
+<tr>
+<td><code>asyncio_mode</code></td>
+<td>pytest-asyncio 的工作模式，见 2.1</td>
+</tr>
+<tr>
+<td><code>asyncio_default_fixture_loop_scope</code></td>
+<td>异步 fixture 默认使用哪个范围的事件循环，见 2.2</td>
+</tr>
+<tr>
+<td><code>addopts</code></td>
+<td>每次运行都自动带上的命令行参数</td>
+</tr>
+<tr>
+<td><code>-ra</code></td>
+<td>结尾的 short test summary 里列出所有非通过的结果（失败、错误、跳过等）</td>
+</tr>
+<tr>
+<td><code>--strict-markers</code></td>
+<td>使用未注册的标记（如把 <code>@pytest.mark.asyncio</code> 拼错）直接报错，而不是悄悄忽略</td>
+</tr>
+</tbody>
+</table>
+<p>运行时，pytest 的输出头部会显示这些配置是否生效：</p>
+<div class="highlight"><pre><span></span><code>platform darwin -- Python 3.12.13, pytest-9.2.0, pluggy-1.7.0
+rootdir: ~/projects/my-service
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.14.5, cov-7.1.0, anyio-4.16.0, asyncio-1.5.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+</code></pre></div>
+<h2 id="2-pytest-asyncio">2. pytest-asyncio</h2>
+<h3 id="21-asyncio_mode--auto">2.1. asyncio_mode = "auto"</h3>
+<p>pytest-asyncio 有两种模式：</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>strict</code>（默认）</td>
+<td>只有加了 <code>@pytest.mark.asyncio</code> 的测试、用 <code>@pytest_asyncio.fixture</code> 定义的 fixture 才由插件处理</td>
+</tr>
+<tr>
+<td><code>auto</code></td>
+<td>所有 <code>async def</code> 测试和 <code>async def</code> fixture 都自动交给插件处理，不需要任何装饰器</td>
+</tr>
+</tbody>
+</table>
+<p>strict 模式下忘记加标记的 <code>async def</code> 测试不会运行，会直接失败：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_plain</span><span class="p">():</span>          <span class="c1"># 没有加 @pytest.mark.asyncio</span>
+    <span class="k">assert</span> <span class="kc">False</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>async def functions are not natively supported.
+You need to install a suitable plugin for your async framework, for example:
+  - anyio
+  - pytest-asyncio
+  ...
+</code></pre></div>
+<p>项目里几乎所有测试和 fixture 都是异步的，用 <code>auto</code> 模式可以省掉大量重复的装饰器：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># auto 模式：直接写 async def 即可</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_healthz</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/healthz&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+
+
+<span class="c1"># strict 模式下要写成这样</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">asyncio</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_healthz</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">...</span>
+</code></pre></div>
+<blockquote>
+<p><code>auto</code> 模式适合项目只用 asyncio 的情况。如果同一个项目里还要测试 trio 等其他异步框架，应使用 <code>strict</code> 模式，避免插件之间抢着处理同一个测试。</p>
+</blockquote>
+<h3 id="22-asyncio_default_fixture_loop_scope--function">2.2. asyncio_default_fixture_loop_scope = "function"</h3>
+<p>pytest-asyncio 需要为异步 fixture 和异步测试提供一个事件循环。这个配置决定<strong>异步 fixture 默认运行在哪个范围的事件循环里</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>取值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>function</code></td>
+<td>每个测试函数一个新的事件循环，测试结束后关闭</td>
+</tr>
+<tr>
+<td><code>class</code> / <code>module</code> / <code>package</code> / <code>session</code></td>
+<td>同一个类 / 模块 / 包 / 整个测试会话共用一个事件循环</td>
+</tr>
+</tbody>
+</table>
+<p>设为 <code>function</code> 的效果：</p>
+<ul>
+<li>每个测试都在全新的事件循环里运行，上一个测试遗留的任务、连接不会影响下一个测试。</li>
+<li>异步 fixture 和测试在同一个循环里，fixture 里创建的数据库连接池可以在测试里直接使用。</li>
+</ul>
+<p>不设置这个选项时，pytest-asyncio 1.5 会给出弃用警告：</p>
+<div class="highlight"><pre><span></span><code>PytestDeprecationWarning: The configuration option &quot;asyncio_default_fixture_loop_scope&quot; is unset.
+The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions
+of pytest-asyncio will default the loop scope for asynchronous fixtures to &quot;function&quot; scope. ...
+</code></pre></div>
+<p>所以显式写上 <code>function</code>，既消除警告，又和插件未来的默认值保持一致。输出头部的 <code>asyncio_default_test_loop_scope=function</code> 是测试函数本身的循环范围，默认就是 <code>function</code>。</p>
+<blockquote>
+<p>默认循环范围是 <code>function</code> 时，<code>scope="session"</code> 的<strong>异步</strong> fixture 需要一个跨测试存活的事件循环，得单独为它指定循环范围（<code>@pytest_asyncio.fixture(scope="session", loop_scope="session")</code>），测试也要用同一个循环才能共享它创建的连接。项目回避了这个问题：会话级的建库 fixture 写成同步函数，见 5.3。</p>
+</blockquote>
+<h2 id="3-conftestpy-与-fixture">3. conftest.py 与 fixture</h2>
+<h3 id="31-fixture-通过同名参数注入">3.1. fixture 通过同名参数注入</h3>
+<p>fixture 是 pytest 提供"测试前准备、测试后清理"的机制。用 <code>@pytest.fixture</code> 定义一个函数，测试函数只要<strong>声明一个同名参数</strong>，pytest 就会先执行这个 fixture，把它的返回值（或 <code>yield</code> 出来的值）传进来：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">client</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncClient</span><span class="p">]:</span>
+    <span class="n">transport</span> <span class="o">=</span> <span class="n">ASGITransport</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncClient</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="n">transport</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;http://test&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">c</span>
+
+
+<span class="c1"># 参数名 client 和 fixture 名一致，pytest 自动注入</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_healthz</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/healthz&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p><code>yield</code> 把一个 fixture 分成两段：</p>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>执行时机</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>yield</code> 之前</td>
+<td>测试开始前：创建资源</td>
+</tr>
+<tr>
+<td><code>yield</code> 的值</td>
+<td>注入给测试函数</td>
+</tr>
+<tr>
+<td><code>yield</code> 之后</td>
+<td>测试结束后（无论成功失败）：释放资源</td>
+</tr>
+</tbody>
+</table>
+<p>常用参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scope="function"</code>（默认）</td>
+<td>每个测试执行一次</td>
+</tr>
+<tr>
+<td><code>scope="session"</code></td>
+<td>整个测试会话只执行一次</td>
+</tr>
+<tr>
+<td><code>autouse=True</code></td>
+<td>不需要测试声明参数，自动对范围内的所有测试生效</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-fixture-之间相互依赖">3.2. fixture 之间相互依赖</h3>
+<p>fixture 自己也可以声明参数来依赖其他 fixture。项目 <code>tests/conftest.py</code> 里的依赖关系如下：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">app</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">FastAPI</span><span class="p">]:</span> <span class="o">...</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">client</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncClient</span><span class="p">]:</span> <span class="o">...</span>      <span class="c1"># 依赖 app</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">db_session</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]:</span>    <span class="c1"># 依赖 app</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">session_factory</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">session</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">user</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>                      <span class="c1"># 依赖 db_session</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;一个可以登录的测试用户。&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">UserService</span><span class="p">(</span><span class="n">db_session</span><span class="p">)</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span>
+        <span class="n">UserCreate</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">TEST_USERNAME</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">TEST_PASSWORD</span><span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div>
+<pre class="mermaid"><code>graph TD
+    S["_test_database&lt;br/&gt;session 级 · autouse&lt;br/&gt;重建测试库 + 迁移"] -.整个会话一次.-&gt; A
+    A["app&lt;br/&gt;创建应用 + 触发 lifespan&lt;br/&gt;结束后 TRUNCATE"] --&gt; C["client&lt;br/&gt;AsyncClient + ASGITransport"]
+    A --&gt; D["db_session&lt;br/&gt;直接操作数据库"]
+    D --&gt; U["user&lt;br/&gt;创建测试用户 Alice"]</code></pre>
+<p>几个要点：</p>
+<ul>
+<li>测试只声明自己直接需要的 fixture，pytest 会沿着依赖链把上游的都准备好。例如测试只写了 <code>user</code>，pytest 会依次执行 <code>app → db_session → user</code>。</li>
+<li><strong>同一个测试里，同一个 fixture 只执行一次</strong>。<code>test_inactive_user_cannot_login(client, user, db_session)</code> 里的 <code>client</code>、<code>db_session</code> 拿到的是同一个 <code>app</code>，所以通过 <code>db_session</code> 修改的数据，<code>client</code> 发出的请求能读到。</li>
+<li>清理顺序与创建顺序相反：先关闭 <code>client</code>、<code>db_session</code>，最后才执行 <code>app</code> 中 <code>yield</code> 之后的清表和关闭连接池。</li>
+</ul>
+<p>例如下面这个测试用 <code>db_session</code> 停用用户，再用 <code>client</code> 验证登录被拒绝：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_inactive_user_cannot_login</span><span class="p">(</span>
+    <span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">User</span><span class="p">,</span> <span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">await</span> <span class="n">db_session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">AUTH</span><span class="si">}</span><span class="s2">/login&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">TEST_USERNAME</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">TEST_PASSWORD</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">401</span>
+</code></pre></div>
+<p>再如 <code>test_unhandled_exception_returns_500_without_details</code> 同时声明了 <code>app</code> 和 <code>client</code>，先在 <code>app</code> 上临时注册一个会抛异常的路由，再用 <code>client</code> 请求它：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_unhandled_exception_returns_500_without_details</span><span class="p">(</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/boom&quot;</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">boom</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;secret internal detail&quot;</span><span class="p">)</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/boom&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">500</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;internal_error&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;secret internal detail&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span>
+</code></pre></div>
+<h3 id="33-conftestpy-是固定文件名">3.3. conftest.py 是固定文件名</h3>
+<p><code>conftest.py</code> 是 pytest 约定的文件名。pytest 收集测试时会自动加载测试目录（及其上级目录）里的 <code>conftest.py</code>，其中定义的 fixture 对该目录下所有测试文件可见，<strong>测试文件不需要 import 就能使用</strong>。</p>
+<p>文件名写错时，pytest 不会把它当作 conftest 加载。例如把它误写成 <code>configtest.py</code>，运行后会输出：</p>
+<div class="highlight"><pre><span></span><code>collected 13 items / 1 error
+
+ImportError while importing test module &#39;.../tests/test_auth.py&#39;.
+tests/test_auth.py:7: in &lt;module&gt;
+    from tests.conftest import TEST_PASSWORD, TEST_USERNAME
+E   ModuleNotFoundError: No module named &#39;tests.conftest&#39;
+!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ModuleNotFoundError: No module named 'tests.conftest'</code></td>
+<td><code>test_auth.py</code> 里写了 <code>from tests.conftest import ...</code>，而 <code>tests/conftest.py</code> 不存在</td>
+</tr>
+<tr>
+<td>只收集到 13 个用例，而不是 28 个</td>
+<td><code>test_auth.py</code> 整个导入失败，它的 15 个用例都没有被收集；剩下的是 <code>test_health.py</code>（6 个）和 <code>test_security.py</code>（7 个）</td>
+</tr>
+<tr>
+<td><code>fixture 'client' not found</code></td>
+<td>如果测试文件里没有这句 import，就不会在导入阶段失败，而是在运行时找不到 conftest 里定义的 fixture</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>conftest.py 里的 fixture 不需要 import；但普通常量（如 <code>TEST_USERNAME</code>）不是 fixture，要用的话仍然需要显式 import，这就依赖下一节的导入路径。</p>
+</blockquote>
+<h2 id="4-testsinitpy-与导入路径">4. tests/<strong>init</strong>.py 与导入路径</h2>
+<p><code>test_auth.py</code> 里有这样一句：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">tests.conftest</span><span class="w"> </span><span class="kn">import</span> <span class="n">TEST_PASSWORD</span><span class="p">,</span> <span class="n">TEST_USERNAME</span>
+</code></pre></div>
+<p>要让 <code>tests.conftest</code> 能被导入，项目根目录必须在 <code>sys.path</code> 里。这由 <code>tests/__init__.py</code> 决定。</p>
+<p>pytest 默认使用 <code>prepend</code> 导入模式：导入一个测试文件时，从它所在目录往上找，找到<strong>第一个不含 <code>__init__.py</code> 的目录</strong>，把这个目录插入 <code>sys.path</code> 最前面，再按包路径导入。</p>
+<div class="highlight"><pre><span></span><code>my-service/                  ← 不含 __init__.py，被插入 sys.path
+├── pyproject.toml
+├── src/my_service/...
+└── tests/
+    ├── __init__.py         ← 有这个文件，tests 被当作一个包
+    ├── conftest.py
+    ├── test_auth.py        ← 以 tests.test_auth 的名字导入
+    ├── test_health.py
+    └── test_security.py
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>tests/ 下有没有 <code>__init__.py</code></th>
+<th>插入 sys.path 的目录</th>
+<th>测试模块名</th>
+<th><code>from tests.conftest import ...</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有</td>
+<td>项目根目录 <code>my-service/</code></td>
+<td><code>tests.test_auth</code></td>
+<td>可以</td>
+</tr>
+<tr>
+<td>没有</td>
+<td><code>tests/</code> 自己</td>
+<td><code>test_auth</code></td>
+<td>找不到 <code>tests</code> 包</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>业务代码 <code>my_service</code> 能被导入，靠的是 <code>uv sync</code> 把项目以可编辑模式装进了 <code>.venv</code>，与这里的 <code>sys.path</code> 无关。</p>
+</blockquote>
+<h2 id="5-测试数据库用真实-postgresql">5. 测试数据库：用真实 PostgreSQL</h2>
+<h3 id="51-为什么不用-sqlite">5.1. 为什么不用 SQLite</h3>
+<p>很多教程用 SQLite 内存库做测试，启动快、不需要外部服务。但测试用的数据库应该和生产一致，否则测试通过不代表线上能跑。项目依赖了这些 PostgreSQL 特性：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>项目中的用法</th>
+<th>SQLite 的情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SELECT ... FOR UPDATE</code> 行锁</td>
+<td>刷新令牌时加锁，防止同一个令牌并发刷新换出两组新令牌</td>
+<td>不支持行锁，SQLAlchemy 生成 SQL 时会直接忽略 <code>with_for_update()</code></td>
+</tr>
+<tr>
+<td><code>timestamptz</code></td>
+<td>所有时间字段 <code>DateTime(timezone=True)</code>，比较过期时间</td>
+<td>没有带时区的时间类型</td>
+</tr>
+<tr>
+<td><code>UUID</code></td>
+<td>主键、<code>user_id</code>、<code>family_id</code></td>
+<td>没有原生 UUID 类型</td>
+</tr>
+</tbody>
+</table>
+<p>例如刷新令牌的查询：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_by_hash_for_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RefreshToken</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;查询并加行锁（SELECT ... FOR UPDATE）。&quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+        <span class="n">select</span><span class="p">(</span><span class="n">RefreshToken</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">RefreshToken</span><span class="o">.</span><span class="n">token_hash</span> <span class="o">==</span> <span class="n">token_hash</span><span class="p">)</span><span class="o">.</span><span class="n">with_for_update</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">scalar_one_or_none</span><span class="p">()</span>
+</code></pre></div>
+<p>在 SQLite 上这段代码也能"通过"，但行锁根本没有生效，测试就失去了意义。</p>
+<h3 id="52-隔离方案">5.2. 隔离方案</h3>
+<p>用真实数据库时，要解决两个问题：不能弄脏开发库，测试之间不能互相影响。项目的做法：</p>
+<table>
+<thead>
+<tr>
+<th>层面</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>与开发库隔离</td>
+<td>使用独立的测试库，名字是开发库名加 <code>_test</code>（如 <code>my_service_test</code>）</td>
+</tr>
+<tr>
+<td>每次测试会话</td>
+<td>开始时删除并重建测试库，用 Alembic 迁移建表（顺便测试了迁移脚本）</td>
+</tr>
+<tr>
+<td>每个测试之间</td>
+<td>测试结束后 <code>TRUNCATE</code> 所有表，下一个测试从空库开始</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>sequenceDiagram
+    participant P as pytest
+    participant PG as PostgreSQL
+    P-&gt;&gt;PG: 连接 postgres 库
+    P-&gt;&gt;PG: DROP DATABASE IF EXISTS my_service_test WITH (FORCE)
+    P-&gt;&gt;PG: CREATE DATABASE my_service_test
+    P-&gt;&gt;PG: alembic upgrade head（建表）
+    loop 每个测试
+        P-&gt;&gt;PG: 创建连接池（lifespan 启动）
+        P-&gt;&gt;PG: 执行测试
+        P-&gt;&gt;PG: TRUNCATE 所有表 CASCADE
+        P-&gt;&gt;PG: 释放连接池（lifespan 关闭）
+    end</code></pre>
+<h3 id="53-session-级同步-fixture重建测试库并迁移">5.3. session 级同步 fixture：重建测试库并迁移</h3>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_recreate_test_database</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># CREATE DATABASE 不能在目标库里执行，所以先连到同一实例的 postgres 库</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="n">TEST_DATABASE_URL</span><span class="o">.</span><span class="n">host</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="n">TEST_DATABASE_URL</span><span class="o">.</span><span class="n">port</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="n">TEST_DATABASE_URL</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
+        <span class="n">password</span><span class="o">=</span><span class="n">TEST_DATABASE_URL</span><span class="o">.</span><span class="n">password</span><span class="p">,</span>
+        <span class="n">database</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;DROP DATABASE IF EXISTS &quot;</span><span class="si">{</span><span class="n">TEST_DATABASE_URL</span><span class="o">.</span><span class="n">database</span><span class="si">}</span><span class="s1">&quot; WITH (FORCE)&#39;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;CREATE DATABASE &quot;</span><span class="si">{</span><span class="n">TEST_DATABASE_URL</span><span class="o">.</span><span class="n">database</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="n">autouse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_test_database</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;整个测试会话只执行一次：重建测试库，用 Alembic 迁移建表。</span>
+
+<span class="sd">    用迁移而不是 Base.metadata.create_all 建表，顺便验证了迁移脚本本身。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">_recreate_test_database</span><span class="p">())</span>
+    <span class="n">command</span><span class="o">.</span><span class="n">upgrade</span><span class="p">(</span><span class="n">Config</span><span class="p">(</span><span class="s2">&quot;alembic.ini&quot;</span><span class="p">),</span> <span class="s2">&quot;head&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>逐条说明：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scope="session", autouse=True</code></td>
+<td>整个测试会话只执行一次，且所有测试自动依赖它，不需要声明参数</td>
+</tr>
+<tr>
+<td>fixture 写成普通 <code>def</code>，而不是 <code>async def</code></td>
+<td>同步 fixture 运行时<strong>没有正在运行的事件循环</strong>，可以直接用 <code>asyncio.run(...)</code> 执行异步建库代码；同时也不需要像 2.2 中那样为 session 级异步 fixture 单独配置循环范围</td>
+</tr>
+<tr>
+<td>先连 <code>postgres</code> 库</td>
+<td><code>CREATE DATABASE</code> / <code>DROP DATABASE</code> 不能在目标库自己的连接里执行，要连到同一实例的另一个库</td>
+</tr>
+<tr>
+<td><code>DROP DATABASE ... WITH (FORCE)</code></td>
+<td>PostgreSQL 13+ 支持，会先断开还连着测试库的会话（例如上次测试中断残留的连接），否则 DROP 会失败</td>
+</tr>
+<tr>
+<td><code>IF EXISTS</code></td>
+<td>第一次运行时测试库还不存在</td>
+</tr>
+<tr>
+<td><code>command.upgrade(Config("alembic.ini"), "head")</code></td>
+<td>用 Python API 执行等同于 <code>alembic upgrade head</code> 的迁移</td>
+</tr>
+<tr>
+<td>迁移必须在同步上下文调用</td>
+<td>项目的 <code>migrations/env.py</code> 里用 <code>asyncio.run(run_async_migrations())</code> 执行迁移；如果在 <code>async def</code> 里调用，就会在已有事件循环中再次 <code>asyncio.run</code>，抛出 <code>RuntimeError</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>migrations/env.py</code> 的相关部分：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 与应用使用同一份配置，不在 alembic.ini 里重复写数据库地址和密码</span>
+<span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="n">get_settings</span><span class="p">()</span><span class="o">.</span><span class="n">database_url</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_migrations_online</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">run_async_migrations</span><span class="p">())</span>
+</code></pre></div>
+<p><code>env.py</code> 从应用配置读取数据库地址，而 conftest 顶部已经把 <code>DATABASE_URL</code> 环境变量改成了测试库（见第 6 节），所以迁移会执行到测试库上。</p>
+<blockquote>
+<p>因为这个 fixture 是 <code>autouse</code> 的，即使只运行不需要数据库的 <code>test_security.py</code>，也会先连接数据库。PostgreSQL 没启动时，所有用例都会报错：
+<code>OSError: Multiple exceptions: [Errno 61] Connect call failed ('::1', 5432, 0, 0), [Errno 61] Connect call failed ('127.0.0.1', 5432)</code></p>
+</blockquote>
+<h3 id="54-派生测试库地址">5.4. 派生测试库地址</h3>
+<p>测试库地址不单独配置，而是从开发库地址自动派生：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_url</span>
+
+<span class="n">_dev_url</span> <span class="o">=</span> <span class="n">make_url</span><span class="p">(</span><span class="n">Settings</span><span class="p">()</span><span class="o">.</span><span class="n">database_url</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">())</span>
+<span class="n">TEST_DATABASE_URL</span> <span class="o">=</span> <span class="n">_dev_url</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_dev_url</span><span class="o">.</span><span class="n">database</span><span class="si">}</span><span class="s2">_test&quot;</span><span class="p">)</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DATABASE_URL&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TEST_DATABASE_URL</span><span class="o">.</span><span class="n">render_as_string</span><span class="p">(</span><span class="n">hide_password</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>make_url(str)</code></td>
+<td>把连接串解析成 <code>URL</code> 对象，可以读取 <code>.host</code>、<code>.port</code>、<code>.username</code>、<code>.password</code>、<code>.database</code></td>
+</tr>
+<tr>
+<td><code>url.set(database=...)</code></td>
+<td><code>URL</code> 是不可变对象，<code>set</code> 返回一个修改了指定部分的新对象，其他部分（驱动、账号、主机）保持不变</td>
+</tr>
+<tr>
+<td><code>render_as_string(hide_password=False)</code></td>
+<td>转回字符串。默认会把密码显示为 <code>***</code>，写入环境变量供应用连接时必须输出完整密码</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="n">url</span> <span class="o">=</span> <span class="n">make_url</span><span class="p">(</span><span class="s2">&quot;postgresql+asyncpg://app:secret@localhost:5432/my_service&quot;</span><span class="p">)</span>
+<span class="n">test_url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;my_service_test&quot;</span><span class="p">)</span>
+
+<span class="nb">str</span><span class="p">(</span><span class="n">test_url</span><span class="p">)</span>
+<span class="c1"># postgresql+asyncpg://app:***@localhost:5432/my_service_test</span>
+
+<span class="n">test_url</span><span class="o">.</span><span class="n">render_as_string</span><span class="p">(</span><span class="n">hide_password</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># postgresql+asyncpg://app:secret@localhost:5432/my_service_test</span>
+</code></pre></div>
+<p>这样不需要在 <code>.env</code> 里额外维护一个测试库地址，开发库在哪，测试库就建在同一个实例上。</p>
+<h3 id="55-每个测试结束后清空所有表">5.5. 每个测试结束后清空所有表</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">text</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span>
+
+<span class="n">tables</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">sorted_tables</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">application</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">db_engine</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TRUNCATE </span><span class="si">{</span><span class="n">tables</span><span class="si">}</span><span class="s2"> CASCADE&quot;</span><span class="p">))</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Base.metadata.sorted_tables</code></td>
+<td>所有 ORM 模型对应的表，按外键依赖排序；新增模型后自动包含，不需要手动维护表名列表</td>
+</tr>
+<tr>
+<td>一条 <code>TRUNCATE</code> 列出所有表</td>
+<td>一次清空，比逐表 <code>DELETE</code> 快；<code>refresh_tokens.user_id</code> 外键引用了 <code>users</code>，两张表放在同一条语句里才允许清空 <code>users</code></td>
+</tr>
+<tr>
+<td><code>CASCADE</code></td>
+<td>兜底：如果还有不在列表里的表通过外键引用了这些表，一并清空，而不是报错</td>
+</tr>
+<tr>
+<td><code>engine.begin()</code></td>
+<td>开启事务，代码块结束时自动提交</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Alembic 的版本表 <code>alembic_version</code> 不属于 ORM 模型，不在 <code>sorted_tables</code> 里，所以不会被清空，测试库始终保持"已迁移到 head"的状态。</p>
+<p>另一种常见方案是"每个测试包在一个事务里，结束时回滚"。但项目的业务代码自己会 <code>commit</code>（例如刷新令牌时检测到复用要立即提交作废操作），回滚方案需要额外处理嵌套事务；TRUNCATE 方案更直观，代价是每个测试多一条 SQL。</p>
+</blockquote>
+<h2 id="6-环境变量要在导入-app-之前设置">6. 环境变量要在导入 app 之前设置</h2>
+<p><code>main.py</code> 在模块级创建了应用实例：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/main.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_app</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">FastAPI</span><span class="p">:</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">get_settings</span><span class="p">()</span>
+    <span class="n">setup_logging</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="o">...</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>   <span class="c1"># 模块被导入时就会执行</span>
+</code></pre></div>
+<p>而 <code>get_settings()</code> 用 <code>@lru_cache</code> 缓存了配置：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@lru_cache</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_settings</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Settings</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Settings</span><span class="p">()</span>
+</code></pre></div>
+<p>这意味着：<strong>只要 <code>my_service.main</code> 被导入，就会读取一次配置并缓存下来</strong>。如果此时环境变量还指向开发库，测试就会连到开发库上。</p>
+<p>所以 conftest 有两处安排：</p>
+<p><strong>1. 文件顶部先改环境变量，再清缓存</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ---------- 测试环境配置：必须在创建 app 之前完成 ----------</span>
+<span class="c1"># 环境变量优先级高于 .env，这里覆盖的值会生效</span>
+<span class="n">_dev_url</span> <span class="o">=</span> <span class="n">make_url</span><span class="p">(</span><span class="n">Settings</span><span class="p">()</span><span class="o">.</span><span class="n">database_url</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">())</span>
+<span class="n">TEST_DATABASE_URL</span> <span class="o">=</span> <span class="n">_dev_url</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_dev_url</span><span class="o">.</span><span class="n">database</span><span class="si">}</span><span class="s2">_test&quot;</span><span class="p">)</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;APP_ENV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DATABASE_URL&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TEST_DATABASE_URL</span><span class="o">.</span><span class="n">render_as_string</span><span class="p">(</span><span class="n">hide_password</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;JWT_SECRET_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;test-secret-key-only-for-tests-0123456789&quot;</span>
+<span class="n">get_settings</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
+</code></pre></div>
+<ul>
+<li>pydantic-settings 中<strong>环境变量的优先级高于 <code>.env</code> 文件</strong>，所以在 <code>os.environ</code> 里覆盖就能生效。</li>
+<li>注意这里用 <code>Settings()</code> 直接创建一个新实例读取开发库地址，而不是 <code>get_settings()</code>，避免把开发配置写进缓存。</li>
+<li><code>get_settings.cache_clear()</code> 清掉可能已经缓存的旧配置，下次调用时按新的环境变量重新读取。</li>
+</ul>
+<p><strong>2. <code>create_app</code> 的 import 放在 fixture 函数内</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">app</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">FastAPI</span><span class="p">]:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">my_service.main</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>   <span class="c1"># 不放在文件顶部</span>
+
+    <span class="n">application</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
+    <span class="o">...</span>
+</code></pre></div>
+<p>如果把 <code>from my_service.main import create_app</code> 写在 conftest 顶部，导入发生在修改环境变量之前，模块级的 <code>app = create_app()</code> 就会用开发配置执行一遍。放进 fixture 里，可以保证导入时环境变量已经改好。</p>
+<pre class="mermaid"><code>graph LR
+    A["conftest 顶部&lt;br/&gt;修改 os.environ"] --&gt; B["get_settings.cache_clear()"]
+    B --&gt; C["fixture 内&lt;br/&gt;import my_service.main"]
+    C --&gt; D["create_app()&lt;br/&gt;读取测试配置"]</code></pre>
+<h2 id="7-httpxasyncclient--asgitransport">7. httpx.AsyncClient + ASGITransport</h2>
+<h3 id="71-不启动服务直接调用应用">7.1. 不启动服务直接调用应用</h3>
+<p>FastAPI 应用本质上是一个 ASGI 可调用对象。<code>httpx.ASGITransport</code> 把 HTTP 请求直接转换成对这个对象的函数调用，不需要启动 uvicorn、不占用端口、不走网络：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">httpx</span><span class="w"> </span><span class="kn">import</span> <span class="n">ASGITransport</span><span class="p">,</span> <span class="n">AsyncClient</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">client</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncClient</span><span class="p">]:</span>
+    <span class="n">transport</span> <span class="o">=</span> <span class="n">ASGITransport</span><span class="p">(</span><span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">AsyncClient</span><span class="p">(</span><span class="n">transport</span><span class="o">=</span><span class="n">transport</span><span class="p">,</span> <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;http://test&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">c</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>transport=ASGITransport(app=app)</code></td>
+<td>请求交给 ASGI 应用处理，而不是发到网络</td>
+</tr>
+<tr>
+<td><code>base_url="http://test"</code></td>
+<td>请求必须是完整 URL，这里随便给一个主机名，测试里就可以只写路径 <code>client.get("/healthz")</code></td>
+</tr>
+</tbody>
+</table>
+<p>和真实请求一样，中间件、异常处理器、依赖注入都会完整执行，所以 <code>test_health.py</code> 能测到中间件生成的 <code>X-Request-ID</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_response_has_request_id</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/healthz&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;x-request-id&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">32</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_upstream_request_id_is_kept</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/healthz&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;X-Request-ID&quot;</span><span class="p">:</span> <span class="s2">&quot;from-gateway-1&quot;</span><span class="p">})</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;x-request-id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;from-gateway-1&quot;</span>
+</code></pre></div>
+<h3 id="72-手动触发-lifespan">7.2. 手动触发 lifespan</h3>
+<p>项目在 <code>lifespan</code> 里创建数据库连接池：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@asynccontextmanager</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">lifespan</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">get_settings</span><span class="p">()</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">db_engine</span> <span class="o">=</span> <span class="n">engine</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">session_factory</span> <span class="o">=</span> <span class="n">create_session_factory</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+    <span class="k">yield</span>
+    <span class="k">await</span> <span class="n">engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+</code></pre></div>
+<p><code>ASGITransport</code> 只处理 HTTP 请求，<strong>不会执行 lifespan</strong>。如果直接用，<code>app.state.db_engine</code> 根本不存在，第一个访问数据库的请求就会报错。</p>
+<p>所以 <code>app</code> fixture 用 <code>app.router.lifespan_context</code> 手动进入 lifespan：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">app</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">FastAPI</span><span class="p">]:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">my_service.main</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
+
+    <span class="n">application</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
+    <span class="c1"># 手动触发 lifespan：创建数据库连接池，测试结束后释放</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">application</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">lifespan_context</span><span class="p">(</span><span class="n">application</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">application</span>
+        <span class="c1"># 清空所有表，保证下一个测试从空库开始</span>
+        <span class="n">tables</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">sorted_tables</span><span class="p">)</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">application</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">db_engine</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TRUNCATE </span><span class="si">{</span><span class="n">tables</span><span class="si">}</span><span class="s2"> CASCADE&quot;</span><span class="p">))</span>
+</code></pre></div>
+<ul>
+<li>进入 <code>async with</code> 时执行 lifespan 中 <code>yield</code> 之前的代码（创建连接池）。</li>
+<li>测试结束后，先在连接池还在的时候清表，再退出 <code>async with</code>，执行 <code>engine.dispose()</code> 释放连接。</li>
+<li>每个测试都 <code>create_app()</code> 一个新实例，测试里临时注册的路由（如 3.2 中的 <code>/boom</code>）不会泄漏到其他测试。</li>
+</ul>
+<h2 id="8-测试写法示例">8. 测试写法示例</h2>
+<h3 id="81-单元测试不需要数据库">8.1. 单元测试：不需要数据库</h3>
+<p><code>test_security.py</code> 测试密码哈希与 JWT 工具函数，都是纯函数，不需要任何 fixture，写成普通的同步测试：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">jwt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.core.security</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">create_access_token</span><span class="p">,</span>
+    <span class="n">decode_access_token</span><span class="p">,</span>
+    <span class="n">hash_password</span><span class="p">,</span>
+    <span class="n">verify_password</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">SECRET</span> <span class="o">=</span> <span class="s2">&quot;x&quot;</span> <span class="o">*</span> <span class="mi">40</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_password_hash_and_verify</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">hashed</span> <span class="o">=</span> <span class="n">hash_password</span><span class="p">(</span><span class="s2">&quot;Passw0rd!&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">hashed</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;$argon2id$&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">hashed</span> <span class="o">!=</span> <span class="s2">&quot;Passw0rd!&quot;</span>
+    <span class="k">assert</span> <span class="n">verify_password</span><span class="p">(</span><span class="n">hashed</span><span class="p">,</span> <span class="s2">&quot;Passw0rd!&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">verify_password</span><span class="p">(</span><span class="n">hashed</span><span class="p">,</span> <span class="s2">&quot;wrong&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_expired_access_token_is_rejected</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># 有效期设为负数，签发出来就是过期的</span>
+    <span class="n">token</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">create_access_token</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">(),</span> <span class="n">SECRET</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">decode_access_token</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">SECRET</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_unsigned_token_is_rejected</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># alg=none 攻击：不带签名的令牌必须被拒绝</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span><span class="s2">&quot;sub&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()),</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;access&quot;</span><span class="p">},</span> <span class="kc">None</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">decode_access_token</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">SECRET</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+</code></pre></div>
+<p>单元测试的重点是边界和攻击场景：过期、密钥不对、不带签名（<code>alg=none</code>）、用 refresh 类型的令牌冒充 access 令牌。</p>
+<h3 id="82-接口测试认证流程">8.2. 接口测试：认证流程</h3>
+<p><code>test_auth.py</code> 通过 <code>client</code> 走完整的 HTTP 接口，先抽出两个辅助函数：</p>
+<div class="highlight"><pre><span></span><code><span class="n">AUTH</span> <span class="o">=</span> <span class="s2">&quot;/api/v1/auth&quot;</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_login</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">TEST_USERNAME</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">AUTH</span><span class="si">}</span><span class="s2">/login&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">TEST_PASSWORD</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">tokens</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_bearer</span><span class="p">(</span><span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="n">access_token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><code>assert resp.status_code == 200, resp.text</code>：断言失败时把响应体打印出来，排查时能直接看到接口返回的错误信息。</p>
+</blockquote>
+<p><strong>登录</strong>：声明 <code>user</code> fixture 就有了一个可以登录的用户。</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_login_success</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="k">await</span> <span class="n">_login</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">tokens</span><span class="p">[</span><span class="s2">&quot;token_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;bearer&quot;</span>
+    <span class="k">assert</span> <span class="n">tokens</span><span class="p">[</span><span class="s2">&quot;access_token&quot;</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="n">tokens</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]</span>
+
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_login_unknown_user_has_same_message</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># 不声明 user：库里没有任何用户</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">AUTH</span><span class="si">}</span><span class="s2">/login&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;nobody&quot;</span><span class="p">,</span> <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="n">TEST_PASSWORD</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">401</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;用户名或密码错误&quot;</span>
+</code></pre></div>
+<p><strong>刷新轮换</strong>：刷新后拿到的是新的 refresh token，新的 access token 可以正常使用。</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_refresh_rotates_tokens</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">old</span> <span class="o">=</span> <span class="k">await</span> <span class="n">_login</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">AUTH</span><span class="si">}</span><span class="s2">/refresh&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="n">old</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]})</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">new</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">old</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]</span>
+
+    <span class="n">me</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">AUTH</span><span class="si">}</span><span class="s2">/me&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">_bearer</span><span class="p">(</span><span class="n">new</span><span class="p">[</span><span class="s2">&quot;access_token&quot;</span><span class="p">]))</span>
+    <span class="k">assert</span> <span class="n">me</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+</code></pre></div>
+<p><strong>复用检测</strong>：已经用过的旧令牌再次被使用，视为被盗用，同一家族的令牌全部作废。</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_reused_refresh_token_revokes_whole_family</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="k">await</span> <span class="n">_login</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+    <span class="n">second</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">AUTH</span><span class="si">}</span><span class="s2">/refresh&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="n">first</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]})</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+    <span class="c1"># 旧令牌被再次使用（模拟被盗用）</span>
+    <span class="n">reuse</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">AUTH</span><span class="si">}</span><span class="s2">/refresh&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="n">first</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]})</span>
+    <span class="k">assert</span> <span class="n">reuse</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">401</span>
+
+    <span class="c1"># 同一家族里最新的令牌也一并失效</span>
+    <span class="n">latest</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">AUTH</span><span class="si">}</span><span class="s2">/refresh&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="n">second</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]})</span>
+    <span class="k">assert</span> <span class="n">latest</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">401</span>
+</code></pre></div>
+<p><strong>注销只影响当前会话</strong>：同一用户登录两次，注销其中一个，另一个仍然可以刷新。</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_logout_only_affects_current_session</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">session_a</span> <span class="o">=</span> <span class="k">await</span> <span class="n">_login</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+    <span class="n">session_b</span> <span class="o">=</span> <span class="k">await</span> <span class="n">_login</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">AUTH</span><span class="si">}</span><span class="s2">/logout&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="n">session_a</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]})</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">AUTH</span><span class="si">}</span><span class="s2">/refresh&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">:</span> <span class="n">session_b</span><span class="p">[</span><span class="s2">&quot;refresh_token&quot;</span><span class="p">]})</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
+</code></pre></div>
+<p>这些用例覆盖的就是手工用 curl 调接口时要走的流程，区别是每次提交都能自动重复执行。</p>
+<h3 id="83-运行结果">8.3. 运行结果</h3>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>pytest
+</code></pre></div>
+<p>正常情况下 28 个用例全部通过（<code>test_auth.py</code> 15 个、<code>test_health.py</code> 6 个、<code>test_security.py</code> 7 个），耗时约 2 秒：</p>
+<div class="highlight"><pre><span></span><code>28 passed in ...s
+</code></pre></div>
+<p>其他常用参数：</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/test_auth.py<span class="w">                          </span><span class="c1"># 只跑一个文件</span>
+uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/test_auth.py::test_refresh_rotates_tokens<span class="w">   </span><span class="c1"># 只跑一个用例</span>
+uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>-k<span class="w"> </span><span class="nb">logout</span><span class="w">                                   </span><span class="c1"># 只跑名字包含 logout 的用例</span>
+uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>-x<span class="w">                                          </span><span class="c1"># 遇到第一个失败就停止</span>
+</code></pre></div>
+<h2 id="9-覆盖率">9. 覆盖率</h2>
+<h3 id="91-运行与配置">9.1. 运行与配置</h3>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>--cov<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--cov</code></td>
+<td>开启覆盖率统计，统计范围取 <code>[tool.coverage.run] source</code></td>
+</tr>
+<tr>
+<td><code>--cov-report=term-missing</code></td>
+<td>在终端输出报告，并列出未覆盖的行号</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.coverage.run]</span>
+<span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;src/my_service&quot;</span><span class="p">]</span>
+<span class="n">branch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">concurrency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;greenlet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;thread&quot;</span><span class="p">]</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td>只统计业务代码，不统计测试代码和第三方库</td>
+</tr>
+<tr>
+<td><code>branch = true</code></td>
+<td>开启<strong>分支覆盖</strong>：不仅看每行是否执行过，还看每个 <code>if</code> 的"真"和"假"两条路径是否都走过</td>
+</tr>
+<tr>
+<td><code>concurrency</code></td>
+<td>告诉 coverage 代码里用了哪些并发方式，见 9.3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="92-读懂报告">9.2. 读懂报告</h3>
+<p>报告的表头：</p>
+<div class="highlight"><pre><span></span><code>Name                                  Stmts   Miss Branch BrPart  Cover   Missing
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>列</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Stmts</code></td>
+<td>可执行语句数</td>
+</tr>
+<tr>
+<td><code>Miss</code></td>
+<td>没有执行到的语句数</td>
+</tr>
+<tr>
+<td><code>Branch</code></td>
+<td>分支数（开启 <code>branch = true</code> 后才有）</td>
+</tr>
+<tr>
+<td><code>BrPart</code></td>
+<td>部分覆盖的分支数：某个判断只走过其中一条路径</td>
+</tr>
+<tr>
+<td><code>Cover</code></td>
+<td>覆盖率</td>
+</tr>
+<tr>
+<td><code>Missing</code></td>
+<td>未覆盖的位置。<code>18</code> 表示第 18 行没执行，<code>41-49</code> 表示一段连续的行，<code>23-&gt;25</code> 表示从第 23 行跳到第 25 行的那条分支没走过</td>
+</tr>
+</tbody>
+</table>
+<p>几点经验：</p>
+<ul>
+<li><code>cli.py</code> 显示 0% 是正常的：它是命令行入口（<code>my-service create-user</code>），项目没有为它写测试。</li>
+<li>覆盖率是"哪里一定没测到"的提示，而不是"测得好不好"的证明。代码被执行了不代表断言检查了它的结果，这一点要靠第 10 节的变异检查来确认。</li>
+<li>重点看 <code>Missing</code> 列里业务分支（如 <code>if stored.revoked_at is not None</code>）有没有被走到，而不是追求 100%。</li>
+</ul>
+<h3 id="93-坑sqlalchemy-异步模式与-greenlet">9.3. 坑：SQLAlchemy 异步模式与 greenlet</h3>
+<p>现象：不做额外配置直接统计覆盖率时，<code>services/auth_service.py</code> 只显示约 30%，但登录、刷新、注销明明都有测试覆盖。</p>
+<p>原因：SQLAlchemy 的异步模式内部用 <strong>greenlet</strong> 在同步的 ORM 代码和异步驱动之间切换。coverage 默认只按线程跟踪执行，识别不了 greenlet 的切换，于是 <strong><code>await</code> 数据库调用之后执行的代码都被算作未覆盖</strong>。</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">refresh_token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokenResponse</span><span class="p">:</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">UTC</span><span class="p">)</span>
+    <span class="n">stored</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_tokens</span><span class="o">.</span><span class="n">get_by_hash_for_update</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="c1"># 数据库调用</span>
+    <span class="k">if</span> <span class="n">stored</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">stored</span><span class="o">.</span><span class="n">expires_at</span> <span class="o">&lt;=</span> <span class="n">now</span><span class="p">:</span>                   <span class="c1"># ← 之后的行都被误判为未执行</span>
+        <span class="k">raise</span> <span class="n">UnauthorizedError</span><span class="p">(</span><span class="s2">&quot;登录已失效，请重新登录&quot;</span><span class="p">)</span>
+    <span class="o">...</span>
+</code></pre></div>
+<p>修复方法是在 <code>[tool.coverage.run]</code> 中声明 greenlet：</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.coverage.run]</span>
+<span class="n">concurrency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;greenlet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;thread&quot;</span><span class="p">]</span>
+</code></pre></div>
+<blockquote>
+<p><code>concurrency</code> 的默认值是 <code>["thread"]</code>。一旦手动设置就会覆盖默认值，所以要把 <code>thread</code> 一起写上。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有测试覆盖的 service 层覆盖率很低，Missing 集中在数据库调用之后</td>
+<td>coverage 识别不了 SQLAlchemy 异步模式内部的 greenlet 切换</td>
+<td><code>concurrency = ["greenlet", "thread"]</code></td>
+</tr>
+<tr>
+<td><code>cli.py</code> 0%</td>
+<td>没有为命令行入口写测试</td>
+<td>正常，可以接受</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-验证测试有效变异检查">10. 验证测试有效：变异检查</h2>
+<p>覆盖率只能说明代码被执行过。要确认测试<strong>真的能发现错误</strong>，可以故意把业务代码改坏，看测试会不会失败。这种做法叫变异检查（mutation testing），手工做几处关键逻辑就很有价值。</p>
+<p>以刷新令牌的轮换逻辑为例，<code>services/auth_service.py</code> 的 <code>refresh</code> 方法里有一行：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 轮换：作废旧令牌，在同一家族内签发新令牌</span>
+<span class="n">stored</span><span class="o">.</span><span class="n">revoked_at</span> <span class="o">=</span> <span class="n">now</span>
+<span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_issue_tokens</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">family_id</span><span class="o">=</span><span class="n">stored</span><span class="o">.</span><span class="n">family_id</span><span class="p">)</span>
+</code></pre></div>
+<p>这一行把旧令牌标记为已作废。如果漏掉它，旧令牌就能被无限次使用，复用检测也就不会触发。</p>
+<p>操作步骤：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. 把 stored.revoked_at = now 这一行注释掉</span>
+
+<span class="c1"># 2. 运行测试</span>
+uv<span class="w"> </span>run<span class="w"> </span>pytest
+</code></pre></div>
+<p>结果：</p>
+<div class="highlight"><pre><span></span><code>FAILED tests/test_auth.py::test_reused_refresh_token_revokes_whole_family
+1 failed, 27 passed
+</code></pre></div>
+<p>旧令牌没有被作废，第二次使用它时接口返回了 200 而不是 401，<code>test_reused_refresh_token_revokes_whole_family</code> 的断言失败，说明这个测试确实守住了"轮换后旧令牌失效"这条规则。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 3. 恢复代码</span>
+git<span class="w"> </span>checkout<span class="w"> </span>src/my_service/services/auth_service.py
+</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    A[故意改坏一处关键逻辑] --&gt; B[运行测试]
+    B --&gt;|有测试失败| C[测试有效]
+    B --&gt;|全部通过| D[测试有漏洞，补用例]
+    C --&gt; E[git checkout 恢复代码]
+    D --&gt; E</code></pre>
+<blockquote>
+<p>如果改坏代码后测试依然全部通过，说明这段逻辑虽然被"执行"了（覆盖率里显示已覆盖），但没有任何断言检查它的结果。</p>
+</blockquote>
+<h2 id="11-常见问题速查">11. 常见问题速查</h2>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>async def functions are not natively supported.</code></td>
+<td>没装 pytest-asyncio，或 strict 模式下忘了加 <code>@pytest.mark.asyncio</code></td>
+<td>安装插件并设置 <code>asyncio_mode = "auto"</code></td>
+</tr>
+<tr>
+<td><code>PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.</code></td>
+<td>没有配置异步 fixture 的循环范围</td>
+<td>设置 <code>asyncio_default_fixture_loop_scope = "function"</code></td>
+</tr>
+<tr>
+<td><code>ModuleNotFoundError: No module named 'tests.conftest'</code>，收集数变少</td>
+<td>conftest 文件名写错（如 <code>configtest.py</code>）</td>
+<td>改为 <code>conftest.py</code></td>
+</tr>
+<tr>
+<td><code>fixture 'client' not found</code></td>
+<td>conftest 没被加载，或 fixture 名拼错</td>
+<td>检查文件名和 fixture 名</td>
+</tr>
+<tr>
+<td><code>from tests.xxx import</code> 找不到 <code>tests</code></td>
+<td><code>tests/</code> 下缺少 <code>__init__.py</code></td>
+<td>添加空的 <code>tests/__init__.py</code></td>
+</tr>
+<tr>
+<td>测试数据写进了开发库</td>
+<td>在修改环境变量之前就导入了 <code>my_service.main</code></td>
+<td>conftest 顶部先改 <code>os.environ</code> 并 <code>cache_clear()</code>，<code>create_app</code> 在 fixture 内 import</td>
+</tr>
+<tr>
+<td>请求时报 <code>app.state</code> 没有 <code>db_engine</code></td>
+<td><code>ASGITransport</code> 不执行 lifespan</td>
+<td><code>async with app.router.lifespan_context(app)</code></td>
+</tr>
+<tr>
+<td>所有用例（包括不需要数据库的）都报 <code>Connect call failed ('127.0.0.1', 5432)</code></td>
+<td>PostgreSQL 没启动，autouse 的建库 fixture 失败</td>
+<td>先启动数据库容器</td>
+</tr>
+<tr>
+<td>service 层覆盖率异常低</td>
+<td>coverage 识别不了 greenlet</td>
+<td><code>concurrency = ["greenlet", "thread"]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-小结">12. 小结</h2>
+<ul>
+<li><code>asyncio_mode = "auto"</code> 让 <code>async def</code> 测试和 fixture 无需装饰器；<code>asyncio_default_fixture_loop_scope = "function"</code> 让每个测试使用独立的事件循环，并消除弃用警告。</li>
+<li>fixture 通过同名参数注入，可以相互依赖（<code>app → client</code>、<code>app → db_session → user</code>），同一测试内同一 fixture 只创建一次；<code>conftest.py</code> 是固定文件名，写错就不会被加载。</li>
+<li><code>tests/__init__.py</code> 让 pytest 把项目根目录加入 <code>sys.path</code>，才能 <code>from tests.conftest import ...</code>。</li>
+<li>测试用真实 PostgreSQL：独立的 <code>_test</code> 库，会话开始时重建并用 Alembic 迁移建表，每个测试结束 <code>TRUNCATE ... CASCADE</code>。建库和迁移放在 session 级<strong>同步</strong> fixture 里，用 <code>asyncio.run</code> 执行。</li>
+<li><code>main.py</code> 导入即创建应用、读取配置，所以环境变量要在导入前设置，<code>create_app</code> 在 fixture 内 import。</li>
+<li><code>httpx.AsyncClient + ASGITransport</code> 不启动服务直接调用应用，但不会执行 lifespan，要用 <code>app.router.lifespan_context(app)</code> 手动触发。</li>
+<li>覆盖率用 <code>--cov --cov-report=term-missing</code> 查看，开启分支覆盖；SQLAlchemy 异步模式需要 <code>concurrency = ["greenlet", "thread"]</code>，否则统计不准。</li>
+<li>覆盖率只说明代码被执行过，用变异检查（故意改坏代码看测试是否失败）确认测试真的有效。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

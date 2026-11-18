@@ -1,0 +1,2704 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Python/fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/">
+      
+      
+        <link rel="prev" href="../../engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87006_%E7%BB%93%E6%9E%84%E5%8C%96%E6%97%A5%E5%BF%97structlog/">
+      
+      
+        <link rel="next" href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87002_%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8EBearer%E8%AE%A4%E8%AF%81/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>应用入口、路由与项目分层 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-启动服务fastapi-dev-与-fastapi-run" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              应用入口、路由与项目分层
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语言基础
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工程化
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FastAPI框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    应用入口、路由与项目分层
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    应用入口、路由与项目分层
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-启动服务fastapi-dev-与-fastapi-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 启动服务：fastapi dev 与 fastapi run
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 启动服务：fastapi dev 与 fastapi run">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-两个命令的区别" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 两个命令的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-指定入口entrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 指定入口（entrypoint）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-坑docker-镜像里找不到入口" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 坑：Docker 镜像里找不到入口
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-应用工厂-create_app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 应用工厂 create_app()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 应用工厂 create_app()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-把组装逻辑集中到一个函数" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 把组装逻辑集中到一个函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-模块末尾的-app--create_app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 模块末尾的 app = create_app()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-lifespan启动与关闭逻辑" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. lifespan：启动与关闭逻辑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. lifespan：启动与关闭逻辑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-基本写法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 基本写法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-替代已废弃的-on_event" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 替代已废弃的 on_event
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-返回类型写-asyncgeneratornone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 返回类型写 AsyncGenerator[None]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-appstate-存放进程级共享资源" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. app.state 存放进程级共享资源
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-apirouter拆分路由" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. APIRouter：拆分路由
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. APIRouter：拆分路由">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-每个模块一个-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 每个模块一个 router
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-汇总路由与版本前缀" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 汇总路由与版本前缀
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-健康检查挂在根路径" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 健康检查挂在根路径
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-坑路径漏写开头的-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 坑：路径漏写开头的 /
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-返回类型注解即响应模型" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 返回类型注解即响应模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 返回类型注解即响应模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-用返回类型声明响应" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 用返回类型声明响应
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-从-orm-对象构造响应模型" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 从 ORM 对象构造响应模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-生产环境关闭接口文档" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 生产环境关闭接口文档
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-项目分层" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 项目分层
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 项目分层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-目录结构" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 目录结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-分层约定" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 分层约定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-schemas-与-models-分开" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. schemas 与 models 分开
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87002_%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8EBearer%E8%AE%A4%E8%AF%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    依赖注入与Bearer认证
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87003_%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E4%B8%8E%E8%AF%B7%E6%B1%82%E8%BF%BD%E8%B8%AA%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    统一异常处理与请求追踪中间件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87004_%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    健康检查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQLAlchemy
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-启动服务fastapi-dev-与-fastapi-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 启动服务：fastapi dev 与 fastapi run
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 启动服务：fastapi dev 与 fastapi run">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-两个命令的区别" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 两个命令的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-指定入口entrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 指定入口（entrypoint）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-坑docker-镜像里找不到入口" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 坑：Docker 镜像里找不到入口
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-应用工厂-create_app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 应用工厂 create_app()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 应用工厂 create_app()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-把组装逻辑集中到一个函数" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 把组装逻辑集中到一个函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-模块末尾的-app--create_app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 模块末尾的 app = create_app()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-lifespan启动与关闭逻辑" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. lifespan：启动与关闭逻辑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. lifespan：启动与关闭逻辑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-基本写法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 基本写法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-替代已废弃的-on_event" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 替代已废弃的 on_event
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-返回类型写-asyncgeneratornone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 返回类型写 AsyncGenerator[None]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-appstate-存放进程级共享资源" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. app.state 存放进程级共享资源
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-apirouter拆分路由" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. APIRouter：拆分路由
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. APIRouter：拆分路由">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-每个模块一个-router" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 每个模块一个 router
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-汇总路由与版本前缀" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 汇总路由与版本前缀
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-健康检查挂在根路径" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 健康检查挂在根路径
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-坑路径漏写开头的-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 坑：路径漏写开头的 /
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-返回类型注解即响应模型" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 返回类型注解即响应模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 返回类型注解即响应模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-用返回类型声明响应" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 用返回类型声明响应
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-从-orm-对象构造响应模型" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 从 ORM 对象构造响应模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-生产环境关闭接口文档" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 生产环境关闭接口文档
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-项目分层" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 项目分层
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 项目分层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-目录结构" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 目录结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-分层约定" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 分层约定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-schemas-与-models-分开" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. schemas 与 models 分开
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Python
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    FastAPI框架
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>应用入口、路由与项目分层</h1>
+
+<h2 id="1-启动服务fastapi-dev-与-fastapi-run">1. 启动服务：fastapi dev 与 fastapi run</h2>
+<p>安装 <code>fastapi[standard]</code> 后会附带 <code>fastapi</code> 命令行工具（底层是 Uvicorn），开发和生产分别使用两个子命令。</p>
+<h3 id="11-两个命令的区别">1.1. 两个命令的区别</h3>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><code>fastapi dev</code></th>
+<th><code>fastapi run</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用途</td>
+<td>本地开发</td>
+<td>生产部署</td>
+</tr>
+<tr>
+<td>自动重载</td>
+<td>开启，代码变化后自动重启</td>
+<td>关闭</td>
+</tr>
+<tr>
+<td>默认监听地址</td>
+<td><code>127.0.0.1</code>，只有本机能访问</td>
+<td><code>0.0.0.0</code>，容器外或其他机器能访问</td>
+</tr>
+<tr>
+<td>默认端口</td>
+<td>8000</td>
+<td>8000</td>
+</tr>
+<tr>
+<td>多进程</td>
+<td>没有 <code>--workers</code> 参数</td>
+<td>支持 <code>--workers</code>（与 <code>--reload</code> 互斥）</td>
+</tr>
+</tbody>
+</table>
+<p><code>fastapi dev --help</code> 里的说明是"等价于 <code>fastapi run</code>，但开启重载并监听 127.0.0.1"；<code>fastapi run --help</code> 则相反。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 开发</span>
+uv<span class="w"> </span>run<span class="w"> </span>fastapi<span class="w"> </span>dev
+
+<span class="c1"># 换端口</span>
+uv<span class="w"> </span>run<span class="w"> </span>fastapi<span class="w"> </span>dev<span class="w"> </span>--port<span class="w"> </span><span class="m">8001</span>
+
+<span class="c1"># 生产（容器内）</span>
+fastapi<span class="w"> </span>run<span class="w"> </span>--entrypoint<span class="w"> </span>my_service.main:app<span class="w"> </span>--host<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>--port<span class="w"> </span><span class="m">8000</span>
+</code></pre></div>
+<h3 id="12-指定入口entrypoint">1.2. 指定入口（entrypoint）</h3>
+<p><code>fastapi</code> 命令需要知道 FastAPI 实例在哪里，格式是 <code>模块路径:变量名</code>。有两种配置方式：</p>
+<p><strong>方式一：写在 <code>pyproject.toml</code> 里</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.fastapi]</span>
+<span class="n">entrypoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_service.main:app&quot;</span>
+</code></pre></div>
+<p>配置后在项目根目录直接运行 <code>uv run fastapi dev</code>，不需要再写路径。</p>
+<p><strong>方式二：命令行参数</strong></p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>fastapi<span class="w"> </span>dev<span class="w"> </span>--entrypoint<span class="w"> </span>my_service.main:app
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[tool.fastapi] entrypoint</code></td>
+<td>本地开发，命令最短</td>
+</tr>
+<tr>
+<td><code>--entrypoint</code> 参数</td>
+<td>读不到 <code>pyproject.toml</code> 的环境，例如 Docker 运行镜像</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13-坑docker-镜像里找不到入口">1.3. 坑：Docker 镜像里找不到入口</h3>
+<p>常见的多阶段构建 Dockerfile 在运行阶段只复制虚拟环境、<code>alembic.ini</code> 和 <code>migrations/</code>，<strong>没有 <code>pyproject.toml</code></strong>。如果 CMD 写成：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fastapi&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>容器启动时会报错：</p>
+<div class="highlight"><pre><span></span><code>Could not find a default file to run, please provide an explicit path
+</code></pre></div>
+<p>原因是 <code>fastapi run</code> 读不到 <code>[tool.fastapi]</code>，工作目录 <code>/app</code> 下也没有可以自动发现的入口文件（代码以 <code>--no-editable</code> 方式装进了虚拟环境）。CMD 里必须显式指定入口：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># 运行阶段没有 pyproject.toml，读不到 [tool.fastapi] entrypoint，所以这里显式指定</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fastapi&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--entrypoint&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;my_service.main:app&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--host&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="p">]</span>
+</code></pre></div>
+<h2 id="2-应用工厂-create_app">2. 应用工厂 create_app()</h2>
+<h3 id="21-把组装逻辑集中到一个函数">2.1. 把组装逻辑集中到一个函数</h3>
+<p>不要在模块顶层零散地创建和配置 <code>FastAPI</code>，而是把所有组装步骤放进 <code>create_app()</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/main.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_app</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">FastAPI</span><span class="p">:</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">get_settings</span><span class="p">()</span>
+    <span class="n">setup_logging</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">app_name</span><span class="p">,</span>
+        <span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">,</span>
+        <span class="n">debug</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">app_debug</span><span class="p">,</span>
+        <span class="n">lifespan</span><span class="o">=</span><span class="n">lifespan</span><span class="p">,</span>
+        <span class="c1"># 生产环境不暴露接口文档</span>
+        <span class="n">docs_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/docs&quot;</span><span class="p">,</span>
+        <span class="n">redoc_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/redoc&quot;</span><span class="p">,</span>
+        <span class="n">openapi_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/openapi.json&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">register_exception_handlers</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>          <span class="c1"># 统一错误响应</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">RequestContextMiddleware</span><span class="p">)</span>  <span class="c1"># request_id、访问日志</span>
+
+    <span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">health</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>             <span class="c1"># /healthz、/readyz</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">api_router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/api/v1&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">app</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
+</code></pre></div>
+<p>工厂函数的好处：</p>
+<table>
+<thead>
+<tr>
+<th>好处</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>组装顺序一目了然</td>
+<td>配置、日志、异常处理、中间件、路由都在一个函数里，新人读这一个函数就知道应用由什么组成</td>
+</tr>
+<tr>
+<td>可以按不同配置创建实例</td>
+<td>测试中先改环境变量，再调用 <code>create_app()</code> 得到一个使用测试配置的新实例</td>
+</tr>
+<tr>
+<td>实例之间互不影响</td>
+<td>每个测试拿到独立的 app，<code>app.state</code> 里的连接池不会串用</td>
+</tr>
+</tbody>
+</table>
+<p>测试里的用法（<code>tests/conftest.py</code>，简化）：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">app</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">FastAPI</span><span class="p">]:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">my_service.main</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
+
+    <span class="n">application</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
+    <span class="c1"># 手动触发 lifespan：创建数据库连接池，测试结束后释放</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">application</span><span class="o">.</span><span class="n">router</span><span class="o">.</span><span class="n">lifespan_context</span><span class="p">(</span><span class="n">application</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">application</span>
+</code></pre></div>
+<h3 id="22-模块末尾的-app--create_app">2.2. 模块末尾的 app = create_app()</h3>
+<p><code>main.py</code> 最后一行 <code>app = create_app()</code> 是给 <code>fastapi dev/run</code> 用的，它们按 <code>my_service.main:app</code> 导入这个变量。</p>
+<p>这一行在<strong>导入模块时就会执行</strong>，也就是说只要 <code>import my_service.main</code>，就会读取配置、初始化日志、创建一个 app。对测试的影响：</p>
+<ul>
+<li>配置必须在导入 <code>my_service.main</code> <strong>之前</strong>准备好。<code>conftest.py</code> 在文件顶部设置 <code>APP_ENV</code>、<code>DATABASE_URL</code>、<code>JWT_SECRET_KEY</code> 并调用 <code>get_settings.cache_clear()</code>，而 <code>create_app</code> 放在 fixture 内部导入。</li>
+<li>必填配置缺失时（如没有 <code>JWT_SECRET_KEY</code>），连导入都会失败。</li>
+<li>导入时只创建 app，不会执行 lifespan，所以不会连接数据库。</li>
+</ul>
+<h2 id="3-lifespan启动与关闭逻辑">3. lifespan：启动与关闭逻辑</h2>
+<h3 id="31-基本写法">3.1. 基本写法</h3>
+<p>lifespan 是一个异步上下文管理器，传给 <code>FastAPI(lifespan=...)</code>。<code>yield</code> 之前的代码在应用启动时执行，<code>yield</code> 之后的代码在应用关闭时执行。</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncGenerator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">asynccontextmanager</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span>
+
+
+<span class="nd">@asynccontextmanager</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">lifespan</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">get_settings</span><span class="p">()</span>
+
+    <span class="c1"># 启动：创建数据库引擎（连接池）。这里不会立即建立连接，第一次使用时才连接</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">db_engine</span> <span class="o">=</span> <span class="n">engine</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">session_factory</span> <span class="o">=</span> <span class="n">create_session_factory</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;app_startup&quot;</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">app_env</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">)</span>
+
+    <span class="k">yield</span>
+
+    <span class="c1"># 关闭：释放连接池中的所有连接</span>
+    <span class="k">await</span> <span class="n">engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;app_shutdown&quot;</span><span class="p">)</span>
+</code></pre></div>
+<pre class="mermaid"><code>sequenceDiagram
+    participant S as Uvicorn
+    participant L as lifespan
+    participant A as 路由处理函数
+    S-&gt;&gt;L: 启动
+    L-&gt;&gt;L: create_engine / create_session_factory&lt;br/&gt;存入 app.state
+    L--&gt;&gt;S: yield（启动完成）
+    S-&gt;&gt;A: 处理请求（从 app.state 取会话工厂）
+    S-&gt;&gt;L: 收到停止信号
+    L-&gt;&gt;L: await engine.dispose()</code></pre>
+<p>启动和关闭写在同一个函数里，创建的对象（<code>engine</code>）是局部变量，关闭时直接使用，不需要全局变量来传递。</p>
+<h3 id="32-替代已废弃的-on_event">3.2. 替代已废弃的 on_event</h3>
+<p>旧写法用两个装饰器分别注册启动和关闭函数：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ 已废弃</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">on_event</span><span class="p">(</span><span class="s2">&quot;startup&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">startup</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">on_event</span><span class="p">(</span><span class="s2">&quot;shutdown&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">shutdown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+</code></pre></div>
+<p>当前版本调用 <code>@app.on_event</code> 会产生 <code>DeprecationWarning: on_event is deprecated, use lifespan event handlers instead.</code>。新代码统一使用 lifespan。</p>
+<h3 id="33-返回类型写-asyncgeneratornone">3.3. 返回类型写 AsyncGenerator[None]</h3>
+<p>lifespan 函数的返回类型写 <code>AsyncGenerator[None]</code>，不要写 <code>AsyncIterator[None]</code>。原因见 <a href="../../engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87002_%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%B7%A5%E5%85%B7ruff%E4%B8%8Emypy/">Python工程化篇002_代码质量工具ruff与mypy</a>。</p>
+<p>所有带 <code>yield</code> 的异步函数（lifespan、<code>get_db_session</code> 依赖、测试 fixture）都建议统一用这个写法。</p>
+<h3 id="34-appstate-存放进程级共享资源">3.4. app.state 存放进程级共享资源</h3>
+<p><code>app.state</code> 是挂在应用实例上的一个对象，可以随意设置属性，适合存放<strong>整个进程共用一份</strong>的资源：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app.state.db_engine</code></td>
+<td><code>AsyncEngine</code></td>
+<td>内部持有连接池，整个进程只创建一个</td>
+</tr>
+<tr>
+<td><code>app.state.session_factory</code></td>
+<td><code>async_sessionmaker[AsyncSession]</code></td>
+<td>每个请求用它创建一个会话</td>
+</tr>
+</tbody>
+</table>
+<p>在请求中通过 <code>request.app.state</code> 读取：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/api/deps.py</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_db_session</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;每个请求一个会话；请求结束时自动关闭，未提交的事务自动回滚。&quot;&quot;&quot;</span>
+    <span class="n">session_factory</span><span class="p">:</span> <span class="n">async_sessionmaker</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">session_factory</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">session_factory</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">session</span>
+</code></pre></div>
+<p>和模块级全局变量相比，资源跟随 app 实例：测试中每个 app 有自己的连接池，lifespan 结束时一起释放。</p>
+<h2 id="4-apirouter拆分路由">4. APIRouter：拆分路由</h2>
+<h3 id="41-每个模块一个-router">4.1. 每个模块一个 router</h3>
+<p><code>APIRouter</code> 的用法和 <code>FastAPI</code> 实例一样（<code>@router.get</code>、<code>@router.post</code>……），作用类似 Gin 的路由组。每个业务模块新建一个文件，各自声明一个 <code>router</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/api/v1/auth.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIRouter</span><span class="p">,</span> <span class="n">status</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">()</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;登录&quot;</span><span class="p">,</span> <span class="n">responses</span><span class="o">=</span><span class="n">_UNAUTHORIZED</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="n">LoginRequest</span><span class="p">,</span> <span class="n">auth</span><span class="p">:</span> <span class="n">AuthServiceDep</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokenResponse</span><span class="p">:</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">auth</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">body</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/logout&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;注销&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">logout</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="n">RefreshTokenRequest</span><span class="p">,</span> <span class="n">auth</span><span class="p">:</span> <span class="n">AuthServiceDep</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">auth</span><span class="o">.</span><span class="n">logout</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">refresh_token</span><span class="p">)</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/me&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;当前登录用户&quot;</span><span class="p">,</span> <span class="n">responses</span><span class="o">=</span><span class="n">_UNAUTHORIZED</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">CurrentUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserResponse</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">UserResponse</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</code></pre></div>
+<p>模块内的路径只写相对部分（<code>/login</code>、<code>/me</code>），前缀在注册时统一加。</p>
+<h3 id="42-汇总路由与版本前缀">4.2. 汇总路由与版本前缀</h3>
+<p>前缀分两级添加：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/api/v1/router.py —— v1 的所有模块在这里注册</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIRouter</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.api.v1</span><span class="w"> </span><span class="kn">import</span> <span class="n">auth</span>
+
+<span class="n">api_router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">()</span>
+<span class="n">api_router</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">auth</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/auth&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;auth&quot;</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/main.py —— 加上版本前缀</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">health</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">api_router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/api/v1&quot;</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>位置</th>
+<th>加的前缀</th>
+<th>其他参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模块</td>
+<td><code>auth.py</code></td>
+<td>无</td>
+<td><code>summary</code>、<code>responses</code> 等单接口参数</td>
+</tr>
+<tr>
+<td>版本汇总</td>
+<td><code>api/v1/router.py</code></td>
+<td><code>/auth</code></td>
+<td><code>tags=["auth"]</code>，接口文档按 tag 分组</td>
+</tr>
+<tr>
+<td>应用</td>
+<td><code>main.py</code></td>
+<td><code>/api/v1</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>最终路径：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>路径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/auth/login</code></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/auth/refresh</code></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/v1/auth/logout</code></td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/v1/auth/me</code></td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>flowchart LR
+    A["app"] --&gt;|"prefix=/api/v1"| B["api_router&lt;br/&gt;api/v1/router.py"]
+    A --&gt;|"无前缀"| H["health.router&lt;br/&gt;/healthz /readyz"]
+    B --&gt;|"prefix=/auth&lt;br/&gt;tags=auth"| C["auth.router&lt;br/&gt;/login /refresh /logout /me"]
+    B -.-&gt;|"新模块在这里注册"| D["conversations.router"]</code></pre>
+<p>新增模块时只改 <code>api/v1/router.py</code> 一处：</p>
+<div class="highlight"><pre><span></span><code><span class="n">api_router</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">conversations</span><span class="o">.</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/conversations&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;conversations&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>将来出现不兼容的 v2 接口，新建 <code>api/v2/router.py</code>，在 <code>main.py</code> 里用 <code>prefix="/api/v2"</code> 注册即可，v1 保持不变。</p>
+<h3 id="43-健康检查挂在根路径">4.3. 健康检查挂在根路径</h3>
+<p><code>health.router</code> 直接注册到 app，不经过 <code>/api/v1</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/api/health.py</span>
+<span class="n">router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;health&quot;</span><span class="p">])</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/healthz&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;存活检查&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">healthz</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">HealthResponse</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">HealthResponse</span><span class="p">()</span>
+</code></pre></div>
+<p><code>/healthz</code>、<code>/readyz</code> 给 K8s 探针和负载均衡器使用，属于运维接口，和业务接口的版本无关，地址应保持固定。详见 <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87004_%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">FastAPI基础篇004_健康检查</a>。</p>
+<h3 id="44-坑路径漏写开头的-">4.4. 坑：路径漏写开头的 /</h3>
+<div class="highlight"><pre><span></span><code><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;readyz&quot;</span><span class="p">)</span>   <span class="c1"># ❌ 少了开头的 /</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">readyz</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">HealthResponse</span><span class="p">:</span> <span class="o">...</span>
+</code></pre></div>
+<p>这样写<strong>启动时不报错</strong>，但：</p>
+<ul>
+<li><code>/openapi.json</code> 的 <code>paths</code> 里出现的是 <code>'readyz'</code>，不是 <code>'/readyz'</code>；</li>
+<li><code>GET /readyz</code> 一直返回 404。</li>
+</ul>
+<p>请求路径总是以 <code>/</code> 开头，而注册的路径是字面量 <code>readyz</code>，两者永远匹配不上。排查 404 时，先打开 <code>/openapi.json</code> 或 <code>/docs</code> 看实际注册的路径。路由路径一律以 <code>/</code> 开头。</p>
+<h2 id="5-返回类型注解即响应模型">5. 返回类型注解即响应模型</h2>
+<h3 id="51-用返回类型声明响应">5.1. 用返回类型声明响应</h3>
+<div class="highlight"><pre><span></span><code><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/me&quot;</span><span class="p">,</span> <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;当前登录用户&quot;</span><span class="p">,</span> <span class="n">responses</span><span class="o">=</span><span class="n">_UNAUTHORIZED</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">me</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">CurrentUser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserResponse</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">UserResponse</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</code></pre></div>
+<p>写了 <code>-&gt; UserResponse</code> 之后，FastAPI 会用它做两件事：</p>
+<table>
+<thead>
+<tr>
+<th>作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>序列化与过滤</td>
+<td>返回值按 <code>UserResponse</code> 校验并转成 JSON，<strong>模型里没有的字段不会输出</strong></td>
+</tr>
+<tr>
+<td>生成文档</td>
+<td><code>/docs</code> 中该接口的 200 响应结构就是 <code>UserResponse</code></td>
+</tr>
+</tbody>
+</table>
+<p>过滤效果：处理函数返回 <code>{"username": "alice", "password_hash": "xxx"}</code>，响应体只有 <code>{"username": "alice"}</code>。</p>
+<p>效果等同于旧写法 <code>@router.get("/me", response_model=UserResponse)</code>，但类型注解同时能被 mypy 检查，不需要写两遍。</p>
+<p>接口没有响应体时（如注销返回 204），返回类型写 <code>-&gt; None</code>，并在装饰器里设置 <code>status_code=status.HTTP_204_NO_CONTENT</code>。</p>
+<h3 id="52-从-orm-对象构造响应模型">5.2. 从 ORM 对象构造响应模型</h3>
+<p><code>CurrentUser</code> 依赖返回的是 SQLAlchemy 的 <code>User</code> 对象，而 Pydantic 默认只接受 dict。响应模型加上 <code>from_attributes=True</code> 后，就能按属性名从 ORM 对象读取字段：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/schemas/user.py</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UserResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="c1"># 允许直接从 ORM 对象构造：UserResponse.model_validate(user)</span>
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">from_attributes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">is_active</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">created_at</span><span class="p">:</span> <span class="n">datetime</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">UserResponse</span><span class="o">.</span><span class="n">model_validate</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>   <span class="c1"># user 是 ORM 对象</span>
+</code></pre></div>
+<h2 id="6-生产环境关闭接口文档">6. 生产环境关闭接口文档</h2>
+<p>FastAPI 默认提供三个文档相关的地址：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认地址</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docs_url</code></td>
+<td><code>/docs</code></td>
+<td>Swagger UI 页面</td>
+</tr>
+<tr>
+<td><code>redoc_url</code></td>
+<td><code>/redoc</code></td>
+<td>ReDoc 页面</td>
+</tr>
+<tr>
+<td><code>openapi_url</code></td>
+<td><code>/openapi.json</code></td>
+<td>完整接口定义（两个页面的数据来源）</td>
+</tr>
+</tbody>
+</table>
+<p>生产环境不应暴露接口结构，三个参数<strong>都要设为 <code>None</code></strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
+    <span class="o">...</span><span class="p">,</span>
+    <span class="n">docs_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/docs&quot;</span><span class="p">,</span>
+    <span class="n">redoc_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/redoc&quot;</span><span class="p">,</span>
+    <span class="n">openapi_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/openapi.json&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>只关一个是不够的，用 <code>TestClient</code> 请求三个地址，结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th><code>/docs</code></th>
+<th><code>/redoc</code></th>
+<th><code>/openapi.json</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只设 <code>docs_url=None</code></td>
+<td>404</td>
+<td>200</td>
+<td>200</td>
+</tr>
+<tr>
+<td>三个都设为 <code>None</code></td>
+<td>404</td>
+<td>404</td>
+<td>404</td>
+</tr>
+</tbody>
+</table>
+<p><code>/openapi.json</code> 里有全部路径、参数和响应结构，只关页面而留着它，等于把接口文档换了个地址继续公开。</p>
+<p>按上面的写法，<code>APP_ENV=prod</code> 时（如用 docker compose 启动的生产容器），<code>/docs</code> 返回 404。</p>
+<h2 id="7-项目分层">7. 项目分层</h2>
+<h3 id="71-目录结构">7.1. 目录结构</h3>
+<div class="highlight"><pre><span></span><code>my-service/
+├── src/my_service/
+│   ├── main.py                 # 应用入口：create_app()、lifespan（连接池的创建与释放）
+│   ├── cli.py                  # 管理命令：my-service create-user
+│   ├── api/                    # 接口层：参数解析、调用 service、返回响应
+│   │   ├── deps.py             #   公共依赖：DbSession、AuthServiceDep、CurrentUser
+│   │   ├── health.py           #   /healthz、/readyz
+│   │   └── v1/
+│   │       ├── router.py       #   v1 路由汇总，新模块在这里注册
+│   │       └── auth.py         #   /api/v1/auth/*
+│   ├── services/               # 业务逻辑层：业务规则、事务提交
+│   ├── repositories/           # 数据访问层：只执行 SQL
+│   ├── models/                 # ORM 模型（对应数据库表）
+│   ├── schemas/                # Pydantic 模型（接口的输入输出）
+│   ├── db/session.py           # 数据库引擎与会话工厂
+│   └── core/                   # 基础设施
+│       ├── config.py           #   配置（Settings）
+│       ├── logging.py          #   日志
+│       ├── exceptions.py       #   业务异常与统一错误响应
+│       ├── middleware.py       #   request_id、访问日志、未处理异常兜底
+│       └── security.py         #   密码哈希、JWT、refresh token
+├── migrations/                 # Alembic 迁移脚本
+├── tests/                      # 测试
+├── Dockerfile
+├── docker-compose.yml
+├── alembic.ini
+└── pyproject.toml
+</code></pre></div>
+<h3 id="72-分层约定">7.2. 分层约定</h3>
+<p>一个请求依次经过下面几层，<strong>只允许上层调用下层</strong>：</p>
+<pre class="mermaid"><code>flowchart LR
+    API["api&lt;br/&gt;接口层"] --&gt; SVC["services&lt;br/&gt;业务层"] --&gt; REPO["repositories&lt;br/&gt;数据访问层"] --&gt; MODEL["models&lt;br/&gt;ORM 模型"]
+    API -.使用.-&gt; SCH["schemas&lt;br/&gt;接口数据结构"]</code></pre>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>负责</th>
+<th>不该做的事</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api</td>
+<td>解析参数、声明依赖、把 service 的结果转成响应</td>
+<td>写业务判断、直接写 SQL</td>
+</tr>
+<tr>
+<td>services</td>
+<td>业务规则、权限判断、<strong>决定何时 <code>commit</code></strong>、抛出业务异常</td>
+<td>依赖 <code>Request</code>、返回 HTTP 状态码</td>
+</tr>
+<tr>
+<td>repositories</td>
+<td>增删改查，最多 <code>flush</code>，<strong>不 <code>commit</code></strong></td>
+<td>包含业务规则</td>
+</tr>
+<tr>
+<td>models / schemas</td>
+<td>分别描述数据库表、接口数据结构</td>
+<td>混用：不要把 ORM 对象直接作为响应返回</td>
+</tr>
+</tbody>
+</table>
+<p>以创建用户为例，看事务边界落在哪一层：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># repositories/user_repository.py —— 只 flush</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>  <span class="c1"># 发送 INSERT，拿到数据库生成的默认值；不提交事务</span>
+    <span class="k">return</span> <span class="n">user</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># services/user_service.py —— 业务判断 + commit</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">UserCreate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
+    <span class="k">if</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_by_username</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">username</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ConflictError</span><span class="p">(</span><span class="s2">&quot;用户名已存在&quot;</span><span class="p">)</span>
+
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">password_hash</span><span class="o">=</span><span class="n">hash_password</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">password</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># 两个请求同时创建同一用户名时，上面的检查可能都通过，由数据库唯一约束兜底</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="n">ConflictError</span><span class="p">(</span><span class="s2">&quot;用户名已存在&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+    <span class="k">return</span> <span class="n">user</span>
+</code></pre></div>
+<p>repository 不提交，service 才能把多次数据库操作放进同一个事务，全部成功再一起 <code>commit</code>。service 只抛 <code>ConflictError</code> 这类业务异常，由全局异常处理器转成 409 响应，所以它不依赖任何 HTTP 概念，CLI（<code>my-service create-user</code>）也能直接调用。</p>
+<h3 id="73-schemas-与-models-分开">7.3. schemas 与 models 分开</h3>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>基类</th>
+<th>描述的对象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models/</code></td>
+<td>SQLAlchemy <code>Base</code></td>
+<td>数据库表</td>
+</tr>
+<tr>
+<td><code>schemas/</code></td>
+<td>Pydantic <code>BaseModel</code></td>
+<td>接口的请求和响应</td>
+</tr>
+</tbody>
+</table>
+<p>两者字段看起来很像，但是故意分开定义。<code>User</code> 模型有 <code>password_hash</code> 字段：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># models/user.py</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">TimestampMixin</span><span class="p">,</span> <span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;users&quot;</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">)</span>
+    <span class="n">username</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># 区分大小写</span>
+    <span class="n">password_hash</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">))</span>
+    <span class="n">is_active</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">server_default</span><span class="o">=</span><span class="n">true</span><span class="p">())</span>
+</code></pre></div>
+<p>而 <code>UserResponse</code>（见 5.2 节）只有 <code>id</code>、<code>username</code>、<code>is_active</code>、<code>created_at</code>，<strong>故意不包含 <code>password_hash</code></strong>。以后给表加了新的敏感字段，只要不往响应模型里加，就不会被接口返回。</p>
+<h2 id="8-小结">8. 小结</h2>
+<table>
+<thead>
+<tr>
+<th>主题</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>启动命令</td>
+<td><code>fastapi dev</code> 热重载、监听 <code>127.0.0.1</code>；<code>fastapi run</code> 用于生产、不重载、监听 <code>0.0.0.0</code></td>
+</tr>
+<tr>
+<td>entrypoint</td>
+<td>本地用 <code>[tool.fastapi] entrypoint</code>；Docker 运行镜像没有 <code>pyproject.toml</code>，CMD 必须写 <code>--entrypoint</code></td>
+</tr>
+<tr>
+<td>应用工厂</td>
+<td><code>create_app()</code> 集中组装；<code>app = create_app()</code> 在导入时执行，测试要先设好环境变量再导入</td>
+</tr>
+<tr>
+<td>lifespan</td>
+<td><code>yield</code> 前创建引擎和会话工厂，<code>yield</code> 后 <code>engine.dispose()</code>；替代 <code>@app.on_event</code>；返回类型 <code>AsyncGenerator[None]</code></td>
+</tr>
+<tr>
+<td>app.state</td>
+<td>存放进程级共享资源（<code>db_engine</code>、<code>session_factory</code>）</td>
+</tr>
+<tr>
+<td>路由</td>
+<td>每个模块一个 <code>APIRouter</code>；<code>api/v1/router.py</code> 加模块前缀和 tag，<code>main.py</code> 加 <code>/api/v1</code>；健康检查挂根路径</td>
+</tr>
+<tr>
+<td>路径</td>
+<td>一律以 <code>/</code> 开头，漏写不报错但永远 404</td>
+</tr>
+<tr>
+<td>响应模型</td>
+<td>返回类型注解即响应模型，负责过滤字段和生成文档；从 ORM 对象构造需要 <code>from_attributes=True</code></td>
+</tr>
+<tr>
+<td>接口文档</td>
+<td>生产环境 <code>docs_url</code>、<code>redoc_url</code>、<code>openapi_url</code> 三个都设为 <code>None</code></td>
+</tr>
+<tr>
+<td>分层</td>
+<td>api → services → repositories → models，只允许上层调用下层；service 决定 <code>commit</code>，repository 最多 <code>flush</code>；schemas 与 models 分开</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3453 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Python/engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/">
+      
+      
+        <link rel="prev" href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87010_Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/">
+      
+      
+        <link rel="next" href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87002_%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%B7%A5%E5%85%B7ruff%E4%B8%8Emypy/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>企业级Web后端初始化路线图 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-路线总览" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              企业级Web后端初始化路线图
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语言基础
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工程化
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    工程化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    企业级Web后端初始化路线图
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    企业级Web后端初始化路线图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-路线总览" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 路线总览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 路线总览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-13-步路线" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 13 步路线
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-每步一次提交" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 每步一次提交
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-每一步都要能验证" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 每一步都要能验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-阶段一工程骨架" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 阶段一：工程骨架
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 阶段一：工程骨架">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-步骤-1gitignoreenvexample-与首次提交" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 步骤 1：.gitignore、.env.example 与首次提交
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-步骤-2在-pyprojecttoml-中配置-ruffmypypytest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 步骤 2：在 pyproject.toml 中配置 ruff、mypy、pytest
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-阶段二应用基础设施" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 阶段二：应用基础设施
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 阶段二：应用基础设施">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-步骤-3配置模块-coreconfigpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 步骤 3：配置模块 core/config.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-步骤-4结构化日志-coreloggingpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 步骤 4：结构化日志 core/logging.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-步骤-5mainpy-与健康检查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 步骤 5：main.py 与健康检查
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-阶段三数据库" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 阶段三：数据库
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 阶段三：数据库">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-步骤-6docker-起-postgresql数据库引擎与会话orm-基类" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 步骤 6：Docker 起 PostgreSQL、数据库引擎与会话、ORM 基类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-步骤-7alembic-迁移" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 步骤 7：Alembic 迁移
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-阶段四请求链路与业务" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 阶段四：请求链路与业务
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 阶段四：请求链路与业务">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-步骤-8统一异常与-request-id-中间件" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 步骤 8：统一异常与 request-id 中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-步骤-9用户表与-create-user-命令" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 步骤 9：用户表与 create-user 命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-步骤-10jwt-登录刷新注销" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 步骤 10：JWT 登录、刷新、注销
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-阶段五质量与交付" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 阶段五：质量与交付
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 阶段五：质量与交付">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-步骤-11pytest-测试" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 步骤 11：pytest 测试
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-步骤-12pre-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. 步骤 12：pre-commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-步骤-13dockerfile-与-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 步骤 13：Dockerfile 与 compose
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-pyprojecttoml-集中配置各工具" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. pyproject.toml 集中配置各工具
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. pyproject.toml 集中配置各工具">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-各节的作用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 各节的作用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-完整配置示例" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 完整配置示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-env-与-envexample-的分工" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. .env 与 .env.example 的分工
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. .env 与 .env.example 的分工">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-两个文件各管什么" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 两个文件各管什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-坑修改-env-后不生效" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 坑：修改 .env 后不生效
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-调试常用命令" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 调试常用命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 调试常用命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. curl
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-在-shell-里解析-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 在 shell 里解析 JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-完整示例验证认证流程" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 完整示例：验证认证流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-端口占用与残留进程" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. 端口占用与残留进程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-git-不跟踪空目录" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. git 不跟踪空目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-分步教程的写法经验" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 分步教程的写法经验
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87002_%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%B7%A5%E5%85%B7ruff%E4%B8%8Emypy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    代码质量工具ruff与mypy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87003_pre-commit%E6%8F%90%E4%BA%A4%E5%89%8D%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pre-commit提交前自动检查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87004_pytest%E5%BC%82%E6%AD%A5%E6%B5%8B%E8%AF%95%E5%AE%9E%E8%B7%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pytest异步测试实践
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87005_%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86pydantic-settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置管理pydantic-settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87006_%E7%BB%93%E6%9E%84%E5%8C%96%E6%97%A5%E5%BF%97structlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    结构化日志structlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI框架
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQLAlchemy
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-路线总览" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 路线总览
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 路线总览">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-13-步路线" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 13 步路线
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-每步一次提交" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 每步一次提交
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-每一步都要能验证" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 每一步都要能验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-阶段一工程骨架" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 阶段一：工程骨架
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 阶段一：工程骨架">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-步骤-1gitignoreenvexample-与首次提交" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 步骤 1：.gitignore、.env.example 与首次提交
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-步骤-2在-pyprojecttoml-中配置-ruffmypypytest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 步骤 2：在 pyproject.toml 中配置 ruff、mypy、pytest
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-阶段二应用基础设施" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 阶段二：应用基础设施
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 阶段二：应用基础设施">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-步骤-3配置模块-coreconfigpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 步骤 3：配置模块 core/config.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-步骤-4结构化日志-coreloggingpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 步骤 4：结构化日志 core/logging.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-步骤-5mainpy-与健康检查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 步骤 5：main.py 与健康检查
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-阶段三数据库" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 阶段三：数据库
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 阶段三：数据库">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-步骤-6docker-起-postgresql数据库引擎与会话orm-基类" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 步骤 6：Docker 起 PostgreSQL、数据库引擎与会话、ORM 基类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-步骤-7alembic-迁移" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 步骤 7：Alembic 迁移
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-阶段四请求链路与业务" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 阶段四：请求链路与业务
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 阶段四：请求链路与业务">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-步骤-8统一异常与-request-id-中间件" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 步骤 8：统一异常与 request-id 中间件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-步骤-9用户表与-create-user-命令" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 步骤 9：用户表与 create-user 命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-步骤-10jwt-登录刷新注销" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 步骤 10：JWT 登录、刷新、注销
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-阶段五质量与交付" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 阶段五：质量与交付
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 阶段五：质量与交付">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-步骤-11pytest-测试" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 步骤 11：pytest 测试
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-步骤-12pre-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. 步骤 12：pre-commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-步骤-13dockerfile-与-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 步骤 13：Dockerfile 与 compose
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-pyprojecttoml-集中配置各工具" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. pyproject.toml 集中配置各工具
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. pyproject.toml 集中配置各工具">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-各节的作用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 各节的作用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-完整配置示例" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 完整配置示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-env-与-envexample-的分工" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. .env 与 .env.example 的分工
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. .env 与 .env.example 的分工">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-两个文件各管什么" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 两个文件各管什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-坑修改-env-后不生效" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 坑：修改 .env 后不生效
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-调试常用命令" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 调试常用命令
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 调试常用命令">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-curl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. curl
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-在-shell-里解析-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 在 shell 里解析 JSON
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-完整示例验证认证流程" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 完整示例：验证认证流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-端口占用与残留进程" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. 端口占用与残留进程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-git-不跟踪空目录" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. git 不跟踪空目录
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-分步教程的写法经验" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 分步教程的写法经验
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Python
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    工程化
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>企业级Web后端初始化路线图</h1>
+
+<h2 id="1-路线总览">1. 路线总览</h2>
+<p>本文给出一个企业级 Python Web 后端从空目录到可部署的推荐初始化顺序。示例项目名为 <code>my-service</code>（Python 包名 <code>my_service</code>），技术选型如下：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>选型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语言 / 包管理</td>
+<td>Python 3.12 / uv</td>
+</tr>
+<tr>
+<td>Web 框架</td>
+<td>FastAPI（Uvicorn）</td>
+</tr>
+<tr>
+<td>数据库</td>
+<td>PostgreSQL 17、SQLAlchemy 2.0（异步，asyncpg 驱动）、Alembic 迁移</td>
+</tr>
+<tr>
+<td>配置</td>
+<td>pydantic-settings（环境变量 / <code>.env</code>）</td>
+</tr>
+<tr>
+<td>日志</td>
+<td>structlog（开发环境彩色输出，生产环境 JSON）</td>
+</tr>
+<tr>
+<td>认证</td>
+<td>JWT access token + 存库的 refresh token（Argon2id 密码哈希）</td>
+</tr>
+<tr>
+<td>质量</td>
+<td>ruff（lint + 格式化）、mypy（strict）、pytest、pre-commit</td>
+</tr>
+<tr>
+<td>交付</td>
+<td>Docker 多阶段构建、docker compose</td>
+</tr>
+</tbody>
+</table>
+<p>本文是路线图，每一步只讲目的、产出文件和验证方式，具体技术细节放在同系列的详细篇里，各步骤末尾附有链接。</p>
+<h3 id="11-13-步路线">1.1. 13 步路线</h3>
+<pre class="mermaid"><code>flowchart TD
+    subgraph A[阶段一：工程骨架]
+        S1[1. .gitignore / .env.example / 首次提交] --&gt; S2[2. pyproject 配置 ruff / mypy / pytest]
+    end
+    subgraph B[阶段二：应用基础设施]
+        S3[3. 配置模块 core/config.py] --&gt; S4[4. 结构化日志 core/logging.py] --&gt; S5[5. main.py 与健康检查]
+    end
+    subgraph C[阶段三：数据库]
+        S6[6. Docker 起 PostgreSQL&lt;br/&gt;引擎、会话、ORM 基类] --&gt; S7[7. Alembic 迁移]
+    end
+    subgraph D[阶段四：请求链路与业务]
+        S8[8. 统一异常与 request-id 中间件] --&gt; S9[9. 用户表与 create-user 命令] --&gt; S10[10. JWT 登录 / 刷新 / 注销]
+    end
+    subgraph E[阶段五：质量与交付]
+        S11[11. pytest 测试] --&gt; S12[12. pre-commit] --&gt; S13[13. Dockerfile 与 compose]
+    end
+    S2 --&gt; S3
+    S5 --&gt; S6
+    S7 --&gt; S8
+    S10 --&gt; S11</code></pre>
+<p>排列顺序遵循一个原则：<strong>先有地基，再有业务</strong>。配置和日志是后面所有模块都要用的，所以排在最前；数据库会话是业务的前提；统一异常要在写业务接口之前定好，否则每个接口都会各写一套错误格式。</p>
+<h3 id="12-每步一次提交">1.2. 每步一次提交</h3>
+<p>每完成一步就提交一次，一次提交只包含这一步的产出；步骤 9 和步骤 10 联系紧密，也可以合成一次提交。提交信息建议从第一次提交起就使用约定式前缀：<code>feat:</code>（新功能）、<code>chore:</code>（工程配置）、<code>test:</code>（测试）、<code>build:</code>（构建与交付）。</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>建议的提交信息</th>
+<th>主要产出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>chore: init project skeleton</code></td>
+<td><code>.gitignore</code>、<code>.env.example</code>、<code>pyproject.toml</code>、<code>uv.lock</code>、<code>alembic.ini</code>、<code>migrations/</code>、<code>tests/__init__.py</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>chore: configure ruff, mypy and pytest</code></td>
+<td><code>pyproject.toml</code> 的 <code>[tool.*]</code> 配置</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>feat: add settings module</code></td>
+<td><code>core/config.py</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>feat: add structured logging</code></td>
+<td><code>core/logging.py</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>feat: add app entry and health endpoints</code></td>
+<td><code>main.py</code>、<code>api/health.py</code>、<code>api/v1/router.py</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>feat: add database engine, session and readiness check</code></td>
+<td><code>docker-compose.yml</code>、<code>db/session.py</code>、<code>models/base.py</code>、<code>api/deps.py</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>feat: configure alembic with app settings and models</code></td>
+<td><code>alembic.ini</code>、<code>migrations/env.py</code>、第一个迁移</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>feat: add unified error handling and request context middleware</code></td>
+<td><code>core/exceptions.py</code>、<code>core/middleware.py</code></td>
+</tr>
+<tr>
+<td>9、10</td>
+<td><code>feat: add users, JWT login, refresh token rotation and logout</code></td>
+<td>模型、迁移、repositories、schemas、services、<code>cli.py</code>、<code>core/security.py</code>、<code>api/v1/auth.py</code></td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>test: add tests for security, health and auth</code></td>
+<td><code>tests/conftest.py</code>、<code>tests/test_*.py</code></td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>chore: add pre-commit hooks</code></td>
+<td><code>.pre-commit-config.yaml</code></td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>build: add Dockerfile and compose app/migrate services</code></td>
+<td><code>Dockerfile</code>、<code>.dockerignore</code>、<code>docker-compose.yml</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="13-每一步都要能验证">1.3. 每一步都要能验证</h3>
+<p>每一步结束时都要跑一条命令，确认这一步真的做对了，再提交。这样出问题时只需要排查最近一步的改动。下文每一步都列出了<strong>验证命令</strong>和<strong>预期结果</strong>。</p>
+<h2 id="2-阶段一工程骨架">2. 阶段一：工程骨架</h2>
+<h3 id="21-步骤-1gitignoreenvexample-与首次提交">2.1. 步骤 1：.gitignore、.env.example 与首次提交</h3>
+<p><strong>目的</strong>：建立 uv 项目结构，确定哪些文件进仓库、哪些不进，完成第一次提交。</p>
+<p><strong>主要命令</strong>：</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>init<span class="w"> </span>--app<span class="w"> </span>--package<span class="w"> </span>--python<span class="w"> </span><span class="m">3</span>.12<span class="w"> </span>.
+
+<span class="c1"># 运行依赖与开发依赖</span>
+uv<span class="w"> </span>add<span class="w"> </span><span class="s2">&quot;fastapi[standard]&quot;</span><span class="w"> </span>pydantic-settings<span class="w"> </span><span class="s2">&quot;sqlalchemy[asyncio]&quot;</span><span class="w"> </span>asyncpg<span class="w"> </span>alembic<span class="w"> </span>structlog
+uv<span class="w"> </span>add<span class="w"> </span>--dev<span class="w"> </span>ruff<span class="w"> </span>mypy<span class="w"> </span>pytest<span class="w"> </span>pytest-asyncio<span class="w"> </span>pytest-cov<span class="w"> </span>pre-commit<span class="w"> </span>httpx
+
+<span class="c1"># 用 async 模板生成 alembic.ini 和 migrations/（步骤 7 再接入应用配置）</span>
+uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>init<span class="w"> </span>-t<span class="w"> </span>async<span class="w"> </span>migrations
+</code></pre></div>
+<p><strong>产出文件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.python-version</code></td>
+<td><code>3.12</code>，uv 按它自动下载 Python</td>
+</tr>
+<tr>
+<td><code>pyproject.toml</code> / <code>uv.lock</code></td>
+<td>依赖声明与锁文件，都要提交</td>
+</tr>
+<tr>
+<td><code>.gitignore</code></td>
+<td>排除虚拟环境、缓存、<code>.env</code></td>
+</tr>
+<tr>
+<td><code>.env.example</code></td>
+<td>配置模板，只写变量名和示例值</td>
+</tr>
+<tr>
+<td><code>src/my_service/__init__.py</code></td>
+<td>包目录（src 布局）</td>
+</tr>
+<tr>
+<td><code>tests/__init__.py</code></td>
+<td>空文件，让 git 能跟踪 <code>tests/</code> 目录（见第 10 章）</td>
+</tr>
+<tr>
+<td><code>alembic.ini</code>、<code>migrations/</code></td>
+<td>Alembic 模板生成的文件</td>
+</tr>
+</tbody>
+</table>
+<p><code>.gitignore</code> 的核心部分：</p>
+<div class="highlight"><pre><span></span><code># 虚拟环境
+.venv/
+
+# 环境变量
+.env
+.env.*
+!.env.example
+
+# 工具缓存
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+</code></pre></div>
+<p><code>.env.*</code> 加 <code>!.env.example</code> 的写法：先排除所有 <code>.env.xxx</code> 文件（如 <code>.env.local</code>、<code>.env.prod</code>），再单独放行模板文件。</p>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>check-ignore<span class="w"> </span>-v<span class="w"> </span>.env
+<span class="c1"># .gitignore:12:.env    .env        ← 说明 .env 被第 12 行规则忽略</span>
+
+git<span class="w"> </span>ls-files<span class="w"> </span>tests
+<span class="c1"># tests/__init__.py              ← tests 目录已被跟踪</span>
+</code></pre></div>
+<p>详细篇：<a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87010_Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/">Python 虚拟环境和包</a></p>
+<h3 id="22-步骤-2在-pyprojecttoml-中配置-ruffmypypytest">2.2. 步骤 2：在 pyproject.toml 中配置 ruff、mypy、pytest</h3>
+<p><strong>目的</strong>：在写业务代码之前定好代码规范和类型检查标准，之后每一行代码都按同一标准检查。</p>
+<p><strong>产出文件</strong>：<code>pyproject.toml</code> 新增 <code>[tool.ruff]</code>、<code>[tool.ruff.lint]</code>、<code>[tool.mypy]</code>、<code>[tool.pytest.ini_options]</code>、<code>[tool.coverage.run]</code> 几节，各节作用见第 7 章。</p>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>ruff<span class="w"> </span>check<span class="w"> </span>--fix<span class="w">     </span><span class="c1"># 预期：All checks passed!</span>
+uv<span class="w"> </span>run<span class="w"> </span>ruff<span class="w"> </span>format<span class="w"> </span>--check<span class="w">  </span><span class="c1"># 预期：所有文件 already formatted</span>
+uv<span class="w"> </span>run<span class="w"> </span>mypy<span class="w"> </span>src<span class="w">             </span><span class="c1"># 预期：Success: no issues found in N source files</span>
+uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w">               </span><span class="c1"># 此时还没有测试，预期：no tests ran</span>
+</code></pre></div>
+<p>首次运行 <code>ruff check --fix</code> 时，它可能会调整 Alembic 模板生成的 <code>migrations/env.py</code> 的 import 顺序（把 <code>from alembic import context</code> 移到第三方库分组里）。这说明 lint 配置已经生效。</p>
+<p>详细篇：<a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87002_%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%B7%A5%E5%85%B7ruff%E4%B8%8Emypy/">代码质量工具 ruff 与 mypy</a></p>
+<h2 id="3-阶段二应用基础设施">3. 阶段二：应用基础设施</h2>
+<h3 id="31-步骤-3配置模块-coreconfigpy">3.1. 步骤 3：配置模块 core/config.py</h3>
+<p><strong>目的</strong>：所有配置从环境变量和 <code>.env</code> 读取，启动时统一校验类型和取值范围，缺项或格式错误直接启动失败。</p>
+<p><strong>产出文件</strong>：<code>src/my_service/core/__init__.py</code>、<code>src/my_service/core/config.py</code>，<code>.env.example</code> 补充 <code>LOG_LEVEL</code>、<code>DATABASE_POOL_SIZE</code>。</p>
+<p>下面是完整版本（JWT 相关字段在步骤 10 加入）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Settings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">SettingsConfigDict</span><span class="p">(</span><span class="n">env_file</span><span class="o">=</span><span class="s2">&quot;.env&quot;</span><span class="p">,</span> <span class="n">env_file_encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+    <span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;my-service&quot;</span>
+    <span class="n">app_env</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;dev&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;prod&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;dev&quot;</span>
+    <span class="n">app_debug</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">log_level</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">,</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;INFO&quot;</span>
+
+    <span class="c1"># 用 SecretStr 包装：打印配置或写日志时密码会显示为 **********</span>
+    <span class="n">database_url</span><span class="p">:</span> <span class="n">SecretStr</span>
+    <span class="n">database_pool_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">database_max_overflow</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">jwt_secret_key</span><span class="p">:</span> <span class="n">SecretStr</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+    <span class="n">access_token_expire_minutes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">refresh_token_expire_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;database_url&quot;</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_database_url</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">SecretStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SecretStr</span><span class="p">:</span>
+        <span class="n">PostgresDsn</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">v</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_prod</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app_env</span> <span class="o">==</span> <span class="s2">&quot;prod&quot;</span>
+
+
+<span class="nd">@lru_cache</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_settings</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Settings</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Settings</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from my_service.core.config import get_settings; print(get_settings())&quot;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>预期结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>配置齐全</td>
+<td>打印全部字段，<code>database_url=SecretStr('**********')</code>，密码不会明文显示</td>
+</tr>
+<tr>
+<td>缺少 <code>DATABASE_URL</code></td>
+<td><code>database_url  Field required</code></td>
+</tr>
+<tr>
+<td><code>JWT_SECRET_KEY</code> 太短</td>
+<td><code>Value should have at least 32 items after validation</code></td>
+</tr>
+<tr>
+<td><code>DATABASE_URL</code> 用了 <code>mysql://</code></td>
+<td><code>URL scheme should be 'postgres', 'postgresql', 'postgresql+asyncpg', ...</code></td>
+</tr>
+</tbody>
+</table>
+<p>详细篇：<a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87005_%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86pydantic-settings/">配置管理 pydantic-settings</a></p>
+<h3 id="32-步骤-4结构化日志-coreloggingpy">3.2. 步骤 4：结构化日志 core/logging.py</h3>
+<p><strong>目的</strong>：让 structlog 和标准库 logging（uvicorn、sqlalchemy 等第三方库）走同一条处理链，开发环境输出彩色可读格式，生产环境每行一条 JSON。</p>
+<p><strong>产出文件</strong>：<code>src/my_service/core/logging.py</code>，对外提供 <code>setup_logging(settings)</code> 和 <code>get_logger(name)</code>。</p>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">from my_service.core.config import get_settings</span>
+<span class="s2">from my_service.core.logging import setup_logging, get_logger</span>
+<span class="s2">setup_logging(get_settings())</span>
+<span class="s2">get_logger(&#39;demo&#39;).info(&#39;user_login&#39;, user_id=1)</span>
+<span class="s2">&quot;</span>
+</code></pre></div>
+<p>预期输出（<code>APP_ENV=dev</code>）：</p>
+<div class="highlight"><pre><span></span><code>2026-11-18T07:07:05.842827Z [info     ] user_login                     [demo] user_id=1
+</code></pre></div>
+<p>在命令前加 <code>APP_ENV=prod</code> 再执行一次，预期输出 JSON：</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user_login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;demo&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:07:05.987676Z&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>详细篇：<a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87006_%E7%BB%93%E6%9E%84%E5%8C%96%E6%97%A5%E5%BF%97structlog/">结构化日志 structlog</a></p>
+<h3 id="33-步骤-5mainpy-与健康检查">3.3. 步骤 5：main.py 与健康检查</h3>
+<p><strong>目的</strong>：创建 FastAPI 应用入口，挂载路由，提供 <code>/healthz</code>（存活检查）和 <code>/readyz</code>（就绪检查，这一步先占位，步骤 6 接入数据库检查）。</p>
+<p><strong>产出文件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/my_service/main.py</code></td>
+<td><code>create_app()</code> 工厂函数、<code>lifespan</code>、模块级 <code>app = create_app()</code></td>
+</tr>
+<tr>
+<td><code>src/my_service/api/health.py</code></td>
+<td><code>/healthz</code>、<code>/readyz</code></td>
+</tr>
+<tr>
+<td><code>src/my_service/api/v1/router.py</code></td>
+<td>v1 路由汇总</td>
+</tr>
+<tr>
+<td><code>src/my_service/__init__.py</code></td>
+<td>删掉 <code>uv init</code> 生成的 <code>main()</code>，改为从包元数据读取 <code>__version__</code></td>
+</tr>
+<tr>
+<td><code>pyproject.toml</code></td>
+<td>新增 <code>[tool.fastapi] entrypoint</code>；删掉指向旧 <code>main()</code> 的 <code>[project.scripts]</code>（步骤 9 再加回来）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>fastapi<span class="w"> </span>dev
+
+<span class="c1"># 另开一个终端</span>
+curl<span class="w"> </span>-i<span class="w"> </span>localhost:8000/healthz
+<span class="c1"># HTTP/1.1 200 OK</span>
+<span class="c1"># ...</span>
+<span class="c1"># {&quot;status&quot;:&quot;ok&quot;}</span>
+</code></pre></div>
+<p>浏览器打开 <a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a> 能看到 Swagger 文档。</p>
+<p>详细篇：<a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/">应用入口、路由与项目分层</a>、<a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87004_%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">健康检查</a></p>
+<h2 id="4-阶段三数据库">4. 阶段三：数据库</h2>
+<h3 id="41-步骤-6docker-起-postgresql数据库引擎与会话orm-基类">4.1. 步骤 6：Docker 起 PostgreSQL、数据库引擎与会话、ORM 基类</h3>
+<p><strong>目的</strong>：本地用 Docker 运行 PostgreSQL；应用启动时创建引擎（连接池），每个请求一个会话；定义所有模型共用的基类；<code>/readyz</code> 真正检查数据库。</p>
+<p><strong>产出文件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker-compose.yml</code></td>
+<td><code>postgres:17-alpine</code>，数据卷持久化，<code>pg_isready</code> 健康检查</td>
+</tr>
+<tr>
+<td><code>src/my_service/db/session.py</code></td>
+<td><code>create_engine()</code>、<code>create_session_factory()</code></td>
+</tr>
+<tr>
+<td><code>src/my_service/models/base.py</code></td>
+<td><code>Base</code>（带约束命名规则）、<code>TimestampMixin</code></td>
+</tr>
+<tr>
+<td><code>src/my_service/models/__init__.py</code></td>
+<td>汇总导入所有模型，供 Alembic 发现</td>
+</tr>
+<tr>
+<td><code>src/my_service/api/deps.py</code></td>
+<td><code>DbSession</code> 依赖：每个请求一个会话</td>
+</tr>
+<tr>
+<td><code>main.py</code> / <code>api/health.py</code></td>
+<td><code>lifespan</code> 中创建和释放引擎；<code>/readyz</code> 执行 <code>SELECT 1</code>，超时 2 秒</td>
+</tr>
+</tbody>
+</table>
+<p>compose 里的健康检查要加 <code>-h 127.0.0.1</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># 不加 -h 时检查走 socket，容器首次初始化期间会过早显示 healthy</span>
+<span class="w">  </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD-SHELL&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;pg_isready</span><span class="nv"> </span><span class="s">-h</span><span class="nv"> </span><span class="s">127.0.0.1</span><span class="nv"> </span><span class="s">-U</span><span class="nv"> </span><span class="s">postgres</span><span class="nv"> </span><span class="s">-d</span><span class="nv"> </span><span class="s">my_service&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
+<span class="w">  </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3s</span>
+<span class="w">  </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+</code></pre></div>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+docker<span class="w"> </span>compose<span class="w"> </span>ps<span class="w">                    </span><span class="c1"># 预期：STATUS 显示 (healthy)</span>
+
+uv<span class="w"> </span>run<span class="w"> </span>fastapi<span class="w"> </span>dev
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>localhost:8000/readyz
+<span class="c1"># 200</span>
+</code></pre></div>
+<p>数据库停掉后再请求 <code>/readyz</code>，预期返回 503，服务日志中出现 <code>readiness_check_failed</code>。</p>
+<p>详细篇：<a href="../../sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/">异步引擎、会话与模型定义</a>、<a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87004_%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">健康检查</a></p>
+<h3 id="42-步骤-7alembic-迁移">4.2. 步骤 7：Alembic 迁移</h3>
+<p><strong>目的</strong>：表结构的每次变化都用迁移脚本记录。迁移读取应用同一份配置，不在 <code>alembic.ini</code> 里重复写数据库地址。</p>
+<p><strong>产出文件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>改动</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alembic.ini</code></td>
+<td>设置 <code>file_template</code>（迁移文件名以时间开头）；注释掉 <code>sqlalchemy.url</code>；配置 <code>post_write_hooks</code> 在生成后自动 <code>ruff format</code></td>
+</tr>
+<tr>
+<td><code>migrations/env.py</code></td>
+<td>数据库地址取自 <code>get_settings()</code>，<code>target_metadata = Base.metadata</code>，迁移用 <code>NullPool</code></td>
+</tr>
+<tr>
+<td><code>migrations/versions/&lt;日期&gt;_&lt;时间&gt;_&lt;rev&gt;_init.py</code></td>
+<td>第一个迁移，此时还没有模型，<code>upgrade()</code> 里只有 <code>pass</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>alembic.ini</code> 中的关键配置：</p>
+<div class="highlight"><pre><span></span><code><span class="na">file_template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">%%(year)d%%(month).2d%%(day).2d_%%(hour).2d%%(minute).2d_%%(rev)s_%%(slug)s</span>
+
+<span class="c1"># sqlalchemy.url = driver://user:pass@localhost/dbname</span>
+
+<span class="k">[post_write_hooks]</span>
+<span class="na">hooks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ruff_format</span>
+<span class="na">ruff_format.type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">module</span>
+<span class="na">ruff_format.module</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ruff</span>
+<span class="na">ruff_format.options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">format REVISION_SCRIPT_FILENAME</span>
+</code></pre></div>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;init&quot;</span><span class="w">   </span><span class="c1"># 预期：生成 migrations/versions/&lt;时间&gt;_&lt;rev&gt;_init.py</span>
+uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>current<span class="w">                             </span><span class="c1"># 预期：显示最新 revision，带 (head)</span>
+uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>check<span class="w">                               </span><span class="c1"># 预期：模型与数据库一致，没有待生成的迁移</span>
+</code></pre></div>
+<p>详细篇：<a href="../../sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87002_Alembic%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/">Alembic 数据库迁移</a></p>
+<h2 id="5-阶段四请求链路与业务">5. 阶段四：请求链路与业务</h2>
+<h3 id="51-步骤-8统一异常与-request-id-中间件">5.1. 步骤 8：统一异常与 request-id 中间件</h3>
+<p><strong>目的</strong>：所有错误（业务异常、参数校验失败、路由不存在、未处理异常）返回同一种 JSON 结构；每个请求分配 <code>request_id</code>，写入响应头和该请求的所有日志。</p>
+<p><strong>产出文件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/my_service/core/exceptions.py</code></td>
+<td><code>ErrorResponse</code>、<code>AppError</code> 及其子类、<code>register_exception_handlers()</code></td>
+</tr>
+<tr>
+<td><code>src/my_service/core/middleware.py</code></td>
+<td>纯 ASGI 写法的 <code>RequestContextMiddleware</code>：分配 request_id、访问日志、兜底 500</td>
+</tr>
+<tr>
+<td><code>src/my_service/core/logging.py</code></td>
+<td>关闭 uvicorn 自带的访问日志，改由中间件输出</td>
+</tr>
+<tr>
+<td><code>src/my_service/main.py</code></td>
+<td>注册异常处理器和中间件</td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-i<span class="w"> </span>localhost:8000/nope
+<span class="c1"># HTTP/1.1 404 Not Found</span>
+<span class="c1"># x-request-id: 7b578c08cb064b61ac6bceb4b4577534</span>
+<span class="c1"># ...</span>
+<span class="c1"># {&quot;code&quot;:&quot;not_found&quot;,&quot;message&quot;:&quot;Not Found&quot;,&quot;request_id&quot;:&quot;7b578c08cb064b61ac6bceb4b4577534&quot;,&quot;details&quot;:null}</span>
+
+curl<span class="w"> </span>-i<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;X-Request-ID: abc-123&quot;</span><span class="w"> </span>localhost:8000/healthz
+<span class="c1"># 响应头中 x-request-id: abc-123     ← 沿用上游传来的值</span>
+</code></pre></div>
+<p>服务日志里同时出现一条 <code>http_request</code>，带 <code>method</code>、<code>path</code>、<code>status</code>、<code>duration_ms</code> 和同一个 <code>request_id</code>。<code>/healthz</code>、<code>/readyz</code> 不记访问日志。</p>
+<p>详细篇：<a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87003_%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E4%B8%8E%E8%AF%B7%E6%B1%82%E8%BF%BD%E8%B8%AA%E4%B8%AD%E9%97%B4%E4%BB%B6/">统一异常处理与请求追踪中间件</a></p>
+<h3 id="52-步骤-9用户表与-create-user-命令">5.2. 步骤 9：用户表与 create-user 命令</h3>
+<p><strong>目的</strong>：建用户表；示例服务不开放注册接口，由管理员在命令行创建用户。这一步同时建立分层结构：<code>api → services → repositories → models</code>。</p>
+<p><strong>产出文件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>models/user.py</code>、<code>models/refresh_token.py</code></td>
+<td>ORM 模型，并在 <code>models/__init__.py</code> 中导入</td>
+</tr>
+<tr>
+<td><code>migrations/versions/..._add_users_and_refresh_tokens.py</code></td>
+<td>自动生成后人工检查的迁移</td>
+</tr>
+<tr>
+<td><code>repositories/user_repository.py</code></td>
+<td>只执行 SQL，不 <code>commit</code></td>
+</tr>
+<tr>
+<td><code>schemas/user.py</code></td>
+<td><code>UserCreate</code>（用户名 3 到 50 位，只允许字母、数字和 <code>_ . -</code>；密码至少 8 位）、<code>UserResponse</code></td>
+</tr>
+<tr>
+<td><code>services/user_service.py</code></td>
+<td>用户名重复时抛 <code>ConflictError("用户名已存在")</code></td>
+</tr>
+<tr>
+<td><code>src/my_service/cli.py</code></td>
+<td><code>my-service create-user &lt;用户名&gt;</code>，用 <code>getpass</code> 输入两次密码</td>
+</tr>
+<tr>
+<td><code>pyproject.toml</code></td>
+<td><code>[project.scripts] my-service = "my_service.cli:main"</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>revision<span class="w"> </span>--autogenerate<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;add users and refresh tokens&quot;</span>
+<span class="c1"># 打开新生成的迁移文件人工检查后再执行</span>
+uv<span class="w"> </span>run<span class="w"> </span>alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+
+uv<span class="w"> </span>sync<span class="w">                                </span><span class="c1"># 修改 [project.scripts] 后需要重新 sync</span>
+uv<span class="w"> </span>run<span class="w"> </span>my-service<span class="w"> </span>create-user<span class="w"> </span>Alice
+<span class="c1"># 密码：</span>
+<span class="c1"># 确认密码：</span>
+<span class="c1"># 已创建用户：Alice（id=...）</span>
+
+uv<span class="w"> </span>run<span class="w"> </span>my-service<span class="w"> </span>create-user<span class="w"> </span>Alice<span class="w">    </span><span class="c1"># 再执行一次，预期：用户名已存在</span>
+</code></pre></div>
+<p>详细篇：<a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87010_Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%92%8C%E5%8C%85/">Python 虚拟环境和包</a>（<code>[project.scripts]</code> 一节）、<a href="../../sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87002_Alembic%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/">Alembic 数据库迁移</a></p>
+<h3 id="53-步骤-10jwt-登录刷新注销">5.3. 步骤 10：JWT 登录、刷新、注销</h3>
+<p><strong>目的</strong>：短期 access token（JWT，15 分钟）+ 长期 refresh token（随机串，7 天，库里只存 SHA-256 哈希）。刷新时轮换，旧 refresh token 被复用时作废整次登录。</p>
+<p><strong>产出文件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>core/security.py</code></td>
+<td>Argon2id 密码哈希、JWT 签发与校验、refresh token 生成</td>
+</tr>
+<tr>
+<td><code>services/auth_service.py</code></td>
+<td>登录、刷新（轮换 + 复用检测）、注销、校验 access token</td>
+</tr>
+<tr>
+<td><code>repositories/refresh_token_repository.py</code>、<code>schemas/auth.py</code></td>
+<td>refresh token 的读写、请求与响应模型</td>
+</tr>
+<tr>
+<td><code>api/v1/auth.py</code></td>
+<td><code>/login</code>、<code>/refresh</code>、<code>/logout</code>、<code>/me</code></td>
+</tr>
+<tr>
+<td><code>api/deps.py</code></td>
+<td><code>AuthServiceDep</code>、<code>CurrentUser</code></td>
+</tr>
+<tr>
+<td><code>core/config.py</code>、<code>.env.example</code></td>
+<td><code>JWT_SECRET_KEY</code>、<code>ACCESS_TOKEN_EXPIRE_MINUTES</code>、<code>REFRESH_TOKEN_EXPIRE_DAYS</code></td>
+</tr>
+<tr>
+<td><code>pyproject.toml</code></td>
+<td>新增依赖 <code>pyjwt</code>、<code>argon2-cffi</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证</strong>：用第 9 章的 curl 脚本把登录、刷新、复用检测、注销完整走一遍，预期结果：</p>
+<table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>预期状态码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户名大小写不对</td>
+<td>401</td>
+</tr>
+<tr>
+<td>正确登录</td>
+<td>200，返回 <code>access_token</code>、<code>refresh_token</code> 及过期时间</td>
+</tr>
+<tr>
+<td>带 access token 访问 <code>/me</code></td>
+<td>200</td>
+</tr>
+<tr>
+<td>不带令牌访问 <code>/me</code></td>
+<td>401</td>
+</tr>
+<tr>
+<td>用旧的 refresh token 再次刷新（模拟被盗用）</td>
+<td>401</td>
+</tr>
+<tr>
+<td>刷新得到的新 refresh token 也被连带作废</td>
+<td>401</td>
+</tr>
+<tr>
+<td>注销</td>
+<td>204</td>
+</tr>
+<tr>
+<td>注销后用 refresh token 刷新</td>
+<td>401</td>
+</tr>
+<tr>
+<td>注销后用 access token 访问 <code>/me</code></td>
+<td><strong>200</strong>：access token 无法撤回，过期前仍可用</td>
+</tr>
+</tbody>
+</table>
+<p>详细篇：<a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87002_%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8EBearer%E8%AE%A4%E8%AF%81/">依赖注入与 Bearer 认证</a></p>
+<h2 id="6-阶段五质量与交付">6. 阶段五：质量与交付</h2>
+<h3 id="61-步骤-11pytest-测试">6.1. 步骤 11：pytest 测试</h3>
+<p><strong>目的</strong>：用真实 PostgreSQL 跑测试。测试库独立（开发库名加 <code>_test</code>），会话开始时重建并通过 Alembic 迁移建表，每个测试后清空所有表。</p>
+<p><strong>产出文件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tests/conftest.py</code></td>
+<td>覆盖 <code>APP_ENV</code>、<code>DATABASE_URL</code>、<code>JWT_SECRET_KEY</code>；fixture：<code>app</code>、<code>client</code>、<code>db_session</code>、<code>user</code></td>
+</tr>
+<tr>
+<td><code>tests/test_security.py</code>、<code>tests/test_health.py</code>、<code>tests/test_auth.py</code></td>
+<td>测试用例</td>
+</tr>
+<tr>
+<td><code>pyproject.toml</code></td>
+<td>测试目录忽略 <code>S105</code>、<code>S106</code>（允许写死测试密码）；<code>[tool.coverage.run]</code> 增加 <code>concurrency</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>--collect-only<span class="w"> </span>-q<span class="w">    </span><span class="c1"># 预期：N tests collected，没有收集错误</span>
+uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w">                      </span><span class="c1"># 预期：全部 passed</span>
+uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>--cov<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+</code></pre></div>
+<p>详细篇：<a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87004_pytest%E5%BC%82%E6%AD%A5%E6%B5%8B%E8%AF%95%E5%AE%9E%E8%B7%B5/">pytest 异步测试实践</a></p>
+<h3 id="62-步骤-12pre-commit">6.2. 步骤 12：pre-commit</h3>
+<p><strong>目的</strong>：每次 <code>git commit</code> 前自动检查行尾空格、文件末尾换行、YAML/TOML 语法、私钥，以及 ruff 和 mypy，不通过就不能提交。</p>
+<p><strong>产出文件</strong>：<code>.pre-commit-config.yaml</code>；<code>pyproject.toml</code> 的 <code>[tool.ruff]</code> 增加 <code>force-exclude = true</code>（pre-commit 会把文件路径显式传给 ruff，不加这项时 <code>extend-exclude</code> 对显式传入的文件不生效）。</p>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>install<span class="w">           </span><span class="c1"># 预期：pre-commit installed at .git/hooks/pre-commit</span>
+uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files<span class="w">   </span><span class="c1"># 预期：每个钩子都显示 Passed</span>
+</code></pre></div>
+<p>第一次对全部文件运行时，<code>end-of-file-fixer</code> 常会修复一批末尾缺少换行的文件（如 <code>.env.example</code>、<code>.gitignore</code>、Alembic 模板生成的 <code>migrations/README</code>），这些修复应包含在这一步的提交里。被钩子自动修改的文件需要重新 <code>git add</code> 后再提交。</p>
+<p>详细篇：<a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87003_pre-commit%E6%8F%90%E4%BA%A4%E5%89%8D%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5/">pre-commit 提交前自动检查</a></p>
+<h3 id="63-步骤-13dockerfile-与-compose">6.3. 步骤 13：Dockerfile 与 compose</h3>
+<p><strong>目的</strong>：多阶段构建镜像，以非 root 用户运行；compose 增加 <code>migrate</code>（执行迁移后退出）和 <code>app</code> 两个服务，放在 <code>app</code> profile 下，日常 <code>docker compose up -d</code> 仍只启动数据库。</p>
+<p><strong>产出文件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Dockerfile</code></td>
+<td>构建阶段 <code>uv sync --locked --no-dev</code>，依赖层单独缓存；运行阶段只复制 <code>.venv</code>、<code>alembic.ini</code>、<code>migrations/</code></td>
+</tr>
+<tr>
+<td><code>.dockerignore</code></td>
+<td>排除 <code>.git</code>、<code>.venv</code>、<code>.env</code>、缓存和 <code>tests</code></td>
+</tr>
+<tr>
+<td><code>docker-compose.yml</code></td>
+<td><code>migrate</code> 依赖数据库 healthy；<code>app</code> 依赖 <code>migrate</code> 成功完成，映射到宿主机 8080</td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证</strong>：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>--profile<span class="w"> </span>app<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--build
+docker<span class="w"> </span>compose<span class="w"> </span>--profile<span class="w"> </span>app<span class="w"> </span>ps<span class="w"> </span>-a
+<span class="c1"># migrate 显示 Exited (0)，app 显示 (healthy)</span>
+
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>localhost:8080/healthz<span class="w">   </span><span class="c1"># 200</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>localhost:8080/docs<span class="w">      </span><span class="c1"># 404：APP_ENV=prod 时关闭接口文档</span>
+
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>app<span class="w"> </span>my-service<span class="w"> </span>create-user<span class="w"> </span>&lt;用户名&gt;<span class="w">          </span><span class="c1"># 在容器中创建用户</span>
+</code></pre></div>
+<p>详细篇：<a href="../../../DevOps/Docker/Docker%E5%AE%9E%E6%88%98_Python%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96%E4%B8%8E%E9%83%A8%E7%BD%B2/">Docker 实战：Python 服务容器化与部署</a></p>
+<h2 id="7-pyprojecttoml-集中配置各工具">7. pyproject.toml 集中配置各工具</h2>
+<p>项目的依赖、命令行入口和所有开发工具的配置都写在 <code>pyproject.toml</code> 里，不再单独维护 <code>setup.cfg</code>、<code>.flake8</code>、<code>mypy.ini</code>、<code>pytest.ini</code> 等文件。</p>
+<h3 id="71-各节的作用">7.1. 各节的作用</h3>
+<table>
+<thead>
+<tr>
+<th>配置节</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[project]</code></td>
+<td>项目名、版本、Python 版本要求、运行依赖</td>
+</tr>
+<tr>
+<td><code>[project.scripts]</code></td>
+<td>定义命令行入口：<code>my-service = "my_service.cli:main"</code></td>
+</tr>
+<tr>
+<td><code>[build-system]</code></td>
+<td>用 <code>uv_build</code> 构建，项目本身会被安装进虚拟环境</td>
+</tr>
+<tr>
+<td><code>[tool.fastapi]</code></td>
+<td><code>entrypoint = "my_service.main:app"</code>，<code>fastapi dev</code> / <code>fastapi run</code> 据此找到应用，无需在命令里写路径</td>
+</tr>
+<tr>
+<td><code>[dependency-groups]</code></td>
+<td>开发依赖（<code>dev</code> 组），部署时用 <code>--no-dev</code> 排除</td>
+</tr>
+<tr>
+<td><code>[tool.ruff]</code></td>
+<td>行宽、目标版本、源码目录、排除目录</td>
+</tr>
+<tr>
+<td><code>[tool.ruff.lint]</code></td>
+<td>启用哪些规则、忽略哪些规则</td>
+</tr>
+<tr>
+<td><code>[tool.ruff.lint.per-file-ignores]</code></td>
+<td>针对部分文件放宽规则（如测试）</td>
+</tr>
+<tr>
+<td><code>[tool.mypy]</code></td>
+<td>类型检查的严格程度和插件</td>
+</tr>
+<tr>
+<td><code>[tool.pytest.ini_options]</code></td>
+<td>测试目录、异步模式、默认参数</td>
+</tr>
+<tr>
+<td><code>[tool.coverage.run]</code></td>
+<td>覆盖率统计范围和方式</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-完整配置示例">7.2. 完整配置示例</h3>
+<div class="highlight"><pre><span></span><code><span class="k">[project.scripts]</span>
+<span class="n">my-service</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_service.cli:main&quot;</span>
+
+<span class="k">[tool.fastapi]</span>
+<span class="n">entrypoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_service.main:app&quot;</span>
+
+<span class="c1"># ---------- Ruff：lint + 格式化 ----------</span>
+<span class="k">[tool.ruff]</span>
+<span class="n">line-length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="n">target-version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;py312&quot;</span>
+<span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;src&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;tests&quot;</span><span class="p">]</span>
+<span class="n">extend-exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;migrations/versions&quot;</span><span class="p">]</span><span class="w">   </span><span class="c1"># 自动生成的迁移文件不检查</span>
+<span class="n">force-exclude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c1"># 即使显式传入文件路径（如 pre-commit），也遵守上面的排除规则</span>
+
+<span class="k">[tool.ruff.lint]</span>
+<span class="n">select</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;E&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;W&quot;</span><span class="p">,</span><span class="w">   </span><span class="c1"># pycodestyle 基础风格</span>
+<span class="w">    </span><span class="s2">&quot;F&quot;</span><span class="p">,</span><span class="w">        </span><span class="c1"># pyflakes：未使用的变量、导入等</span>
+<span class="w">    </span><span class="s2">&quot;I&quot;</span><span class="p">,</span><span class="w">        </span><span class="c1"># import 排序</span>
+<span class="w">    </span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="w">        </span><span class="c1"># bugbear：常见 bug 写法</span>
+<span class="w">    </span><span class="s2">&quot;UP&quot;</span><span class="p">,</span><span class="w">       </span><span class="c1"># 使用新版 Python 语法</span>
+<span class="w">    </span><span class="s2">&quot;N&quot;</span><span class="p">,</span><span class="w">        </span><span class="c1"># 命名规范</span>
+<span class="w">    </span><span class="s2">&quot;S&quot;</span><span class="p">,</span><span class="w">        </span><span class="c1"># bandit：安全问题</span>
+<span class="w">    </span><span class="s2">&quot;ASYNC&quot;</span><span class="p">,</span><span class="w">    </span><span class="c1"># 异步代码中的阻塞调用</span>
+<span class="w">    </span><span class="s2">&quot;SIM&quot;</span><span class="p">,</span><span class="w">      </span><span class="c1"># 可简化的写法</span>
+<span class="w">    </span><span class="s2">&quot;RUF&quot;</span><span class="p">,</span><span class="w">      </span><span class="c1"># ruff 自带规则</span>
+<span class="p">]</span>
+<span class="n">ignore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;RUF001&quot;</span><span class="p">,</span><span class="s2">&quot;RUF002&quot;</span><span class="p">,</span><span class="s2">&quot;RUF003&quot;</span><span class="w"> </span><span class="c1"># 允许中文全角标点出现在字符串、文档字符、注释中</span>
+<span class="p">]</span>
+
+<span class="k">[tool.ruff.lint.per-file-ignores]</span>
+<span class="s2">&quot;tests/**/*.py&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;S101&quot;</span><span class="p">,</span><span class="w">            </span><span class="c1"># 测试里允许使用 assert</span>
+<span class="w">    </span><span class="s2">&quot;S105&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S106&quot;</span><span class="p">,</span><span class="w">    </span><span class="c1"># 测试里允许写死测试用的密码和密钥</span>
+<span class="p">]</span>
+
+<span class="c1"># ---------- Mypy：静态类型检查 ----------</span>
+<span class="k">[tool.mypy]</span>
+<span class="n">python_version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;3.12&quot;</span>
+<span class="n">strict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">plugins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pydantic.mypy&quot;</span><span class="p">]</span><span class="w">   </span><span class="c1"># 让 mypy 理解 Pydantic 模型</span>
+<span class="n">mypy_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;src&quot;</span>
+
+<span class="c1"># ---------- Pytest ----------</span>
+<span class="k">[tool.pytest.ini_options]</span>
+<span class="n">testpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">]</span>
+<span class="n">asyncio_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;auto&quot;</span><span class="w">                          </span><span class="c1"># async def 测试函数无需逐个加装饰器</span>
+<span class="n">asyncio_default_fixture_loop_scope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;function&quot;</span>
+<span class="n">addopts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;-ra --strict-markers&quot;</span>
+
+<span class="c1"># ---------- 覆盖率 ----------</span>
+<span class="k">[tool.coverage.run]</span>
+<span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;src/my_service&quot;</span><span class="p">]</span>
+<span class="n">branch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">concurrency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;greenlet&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;thread&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>几个容易忽略的点：</p>
+<ul>
+<li><code>RUF001</code>~<code>RUF003</code> 会把中文全角标点（如 <code>，</code>、<code>：</code>）报成"易混淆字符"。中文注释多的项目建议直接忽略。</li>
+<li><code>[tool.fastapi]</code> 只在有 <code>pyproject.toml</code> 的目录下生效。Docker 运行阶段如果只复制 <code>.venv</code>、<code>alembic.ini</code>、<code>migrations/</code>，就没有这个文件，所以 <code>Dockerfile</code> 的 <code>CMD</code> 里要显式写 <code>--entrypoint my_service.main:app</code>。</li>
+<li><code>addopts = "--strict-markers"</code>：使用未注册的 <code>@pytest.mark.xxx</code> 时直接报错，拼错的标记名不会只留下一条容易被忽略的警告。</li>
+</ul>
+<h2 id="8-env-与-envexample-的分工">8. .env 与 .env.example 的分工</h2>
+<h3 id="81-两个文件各管什么">8.1. 两个文件各管什么</h3>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>是否提交</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.env.example</code></td>
+<td>提交</td>
+<td>所有变量名、本地开发可用的示例值；密钥类变量留空，并注明生成方式</td>
+</tr>
+<tr>
+<td><code>.env</code></td>
+<td><strong>不提交</strong></td>
+<td>真实值，被 <code>.gitignore</code> 和 <code>.dockerignore</code> 同时排除</td>
+</tr>
+</tbody>
+</table>
+<p><code>.env.example</code> 示例：</p>
+<div class="highlight"><pre><span></span><code><span class="nv">APP_ENV</span><span class="o">=</span>dev
+<span class="nv">APP_DEBUG</span><span class="o">=</span><span class="nb">true</span>
+<span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql+asyncpg://postgres:postgres@localhost:5432/my_service
+
+<span class="nv">LOG_LEVEL</span><span class="o">=</span>INFO
+<span class="nv">DATABASE_POOL_SIZE</span><span class="o">=</span><span class="m">10</span>
+
+<span class="c1"># 生成方式：uv run python -c &#39;import secrets; print(secrets.token_urlsafe(48))&#39;</span>
+<span class="nv">JWT_SECRET_KEY</span><span class="o">=</span>
+<span class="nv">ACCESS_TOKEN_EXPIRE_MINUTES</span><span class="o">=</span><span class="m">15</span>
+<span class="nv">REFRESH_TOKEN_EXPIRE_DAYS</span><span class="o">=</span><span class="m">7</span>
+</code></pre></div>
+<p>新成员的使用方式：</p>
+<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;import secrets; print(secrets.token_urlsafe(48))&#39;</span>
+<span class="c1"># 把输出填到 .env 的 JWT_SECRET_KEY= 后面</span>
+</code></pre></div>
+<p><code>JWT_SECRET_KEY</code> 留空有两个好处：模板里不会出现一个"能用"的密钥被所有人复制；忘记填写时，<code>Field(min_length=32)</code> 会让应用直接启动失败，而不是带着弱密钥运行。</p>
+<p><code>.dockerignore</code> 中同样排除了 <code>.env</code>，这样即使 <code>Dockerfile</code> 里有 <code>COPY . /app</code>，密钥也不会被打进镜像：</p>
+<div class="highlight"><pre><span></span><code>.env
+.env.*
+!.env.example
+</code></pre></div>
+<h3 id="82-坑修改-env-后不生效">8.2. 坑：修改 .env 后不生效</h3>
+<p>现象：修改 <code>.env</code> 后重启应用，读到的配置仍是旧值。</p>
+<p>原因：pydantic-settings 的读取优先级是：<strong>系统环境变量 &gt; <code>.env</code> 文件 &gt; 默认值</strong>。部分 IDE 的集成终端会把项目里的 <code>.env</code> 自动注入为环境变量，新打开的 IDE 终端里就已经存在 <code>DATABASE_URL</code>、<code>DATABASE_POOL_SIZE</code> 等变量。这时再修改 <code>.env</code>，应用读到的仍然是终端里那份旧的环境变量。</p>
+<p>排查和解决：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="nv">$DATABASE_URL</span><span class="w">           </span><span class="c1"># 有输出，说明当前终端已存在同名环境变量</span>
+env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>DATABASE<span class="w">          </span><span class="c1"># 查看所有相关变量</span>
+
+<span class="nb">unset</span><span class="w"> </span>DATABASE_URL<span class="w"> </span>DATABASE_POOL_SIZE<span class="w">   </span><span class="c1"># 方式一：清除后应用会改读 .env</span>
+<span class="c1"># 方式二：新开一个终端（如果是 IDE 注入的，需要先关掉 IDE 的这项功能）</span>
+</code></pre></div>
+<p>测试也利用了这条优先级：<code>tests/conftest.py</code> 在创建应用之前写 <code>os.environ["DATABASE_URL"] = ...</code>，覆盖 <code>.env</code> 里的开发库地址，再调用 <code>get_settings.cache_clear()</code> 清掉已缓存的配置。</p>
+<p>详细篇：<a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87005_%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86pydantic-settings/">配置管理 pydantic-settings</a></p>
+<h2 id="9-调试常用命令">9. 调试常用命令</h2>
+<h3 id="91-curl">9.1. curl</h3>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>curl -i URL</code></td>
+<td>同时显示响应头和响应体，用来看 <code>X-Request-ID</code>、状态码</td>
+</tr>
+<tr>
+<td><code>curl -s -o /dev/null -w "%{http_code}\n" URL</code></td>
+<td>只输出状态码，适合批量检查</td>
+</tr>
+<tr>
+<td><code>curl -s -w " %{http_code}\n" URL</code></td>
+<td>输出响应体，末尾追加状态码</td>
+</tr>
+<tr>
+<td><code>curl -s -X POST URL -H 'Content-Type: application/json' -d '{...}'</code></td>
+<td>发送 JSON 请求</td>
+</tr>
+</tbody>
+</table>
+<p><code>-s</code> 关闭进度条，<code>-o /dev/null</code> 丢弃响应体，<code>-w</code> 按格式输出请求信息，<code>%{http_code}</code> 是状态码。</p>
+<h3 id="92-在-shell-里解析-json">9.2. 在 shell 里解析 JSON</h3>
+<p>不想额外安装 <code>jq</code> 时，可以用 Python 自带的 <code>json</code> 模块定义一个小函数：</p>
+<div class="highlight"><pre><span></span><code>jget<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import sys,json;print(json.load(sys.stdin)[&#39;</span><span class="nv">$1</span><span class="s2">&#39;])&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{&quot;access_token&quot;:&quot;abc&quot;,&quot;token_type&quot;:&quot;bearer&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jget<span class="w"> </span>access_token
+<span class="c1"># abc</span>
+</code></pre></div>
+<h3 id="93-完整示例验证认证流程">9.3. 完整示例：验证认证流程</h3>
+<p>下面这段脚本（zsh）可以把步骤 10 的认证流程完整验证一遍：</p>
+<div class="highlight"><pre><span></span><code><span class="nv">U</span><span class="o">=</span><span class="s1">&#39;Alice&#39;</span><span class="p">;</span><span class="w"> </span><span class="nv">PW</span><span class="o">=</span><span class="s1">&#39;&lt;密码&gt;&#39;</span>
+<span class="nv">B</span><span class="o">=</span>localhost:8000/api/v1/auth<span class="p">;</span><span class="w"> </span><span class="nv">J</span><span class="o">=</span><span class="s1">&#39;Content-Type: application/json&#39;</span>
+jget<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import sys,json;print(json.load(sys.stdin)[&#39;</span><span class="nv">$1</span><span class="s2">&#39;])&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+login<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="nv">$B</span>/login<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$J</span><span class="s2">&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;username\&quot;:\&quot;</span><span class="nv">$U</span><span class="s2">\&quot;,\&quot;password\&quot;:\&quot;</span><span class="nv">$PW</span><span class="s2">\&quot;}&quot;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;1. 用户名大小写不对：&quot;</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="nv">$B</span>/login<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$J</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;username\&quot;:\&quot;</span><span class="si">${</span><span class="nv">U</span><span class="p">:</span><span class="nv">l</span><span class="si">}</span><span class="s2">\&quot;,\&quot;password\&quot;:\&quot;</span><span class="nv">$PW</span><span class="s2">\&quot;}&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;2. 登录：&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">R1</span><span class="o">=</span><span class="k">$(</span>login<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$R1</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$R1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span>access_token<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&gt;&gt;&gt; 登录失败，请检查 U 和 PW&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span>exit<span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="nv">A1</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$R1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jget<span class="w"> </span>access_token<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="nv">F1</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$R1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jget<span class="w"> </span>refresh_token<span class="k">)</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;3. 带 access token 访问 /me：&quot;</span><span class="p">;</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot; %{http_code}\n&quot;</span><span class="w"> </span><span class="nv">$B</span>/me<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$A1</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;4. 不带令牌访问 /me：&quot;</span><span class="p">;</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span><span class="nv">$B</span>/me
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;5. 刷新：&quot;</span>
+<span class="nv">R2</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="nv">$B</span>/refresh<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$J</span><span class="s2">&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;refresh_token\&quot;:\&quot;</span><span class="nv">$F1</span><span class="s2">\&quot;}&quot;</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="nv">F2</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$R2</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jget<span class="w"> </span>refresh_token<span class="k">)</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;6. 再次使用旧的 F1（模拟被盗用）：&quot;</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="nv">$B</span>/refresh<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$J</span><span class="s2">&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;refresh_token\&quot;:\&quot;</span><span class="nv">$F1</span><span class="s2">\&quot;}&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;7. 新的 F2 也被连带作废：&quot;</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="nv">$B</span>/refresh<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$J</span><span class="s2">&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;refresh_token\&quot;:\&quot;</span><span class="nv">$F2</span><span class="s2">\&quot;}&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;8. 重新登录后注销：&quot;</span>
+<span class="nv">R3</span><span class="o">=</span><span class="k">$(</span>login<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="nv">A3</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$R3</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jget<span class="w"> </span>access_token<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="nv">F3</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$R3</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jget<span class="w"> </span>refresh_token<span class="k">)</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;   注销：%{http_code}\n&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="nv">$B</span>/logout<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$J</span><span class="s2">&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;refresh_token\&quot;:\&quot;</span><span class="nv">$F3</span><span class="s2">\&quot;}&quot;</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;   注销后刷新：%{http_code}\n&quot;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="nv">$B</span>/refresh<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$J</span><span class="s2">&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;refresh_token\&quot;:\&quot;</span><span class="nv">$F3</span><span class="s2">\&quot;}&quot;</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;   注销后用 access token：%{http_code}\n&quot;</span><span class="w"> </span><span class="nv">$B</span>/me<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$A3</span><span class="s2">&quot;</span>
+</code></pre></div>
+<p>脚本里用到的几个 shell 技巧：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>${U:l}</code></td>
+<td>zsh 的参数修饰符，把变量转成小写（<code>Alice</code> → <code>alice</code>），用来验证用户名区分大小写；<code>${U:u}</code> 转大写</td>
+</tr>
+<tr>
+<td><code>R1=$(login)</code></td>
+<td>把命令输出保存到变量，后面多次使用</td>
+</tr>
+<tr>
+<td><code>grep -q ... \|\| { ...; }</code></td>
+<td>登录失败时提前退出，避免后面的步骤拿空令牌产生误导性的结果</td>
+</tr>
+</tbody>
+</table>
+<h3 id="94-端口占用与残留进程">9.4. 端口占用与残留进程</h3>
+<div class="highlight"><pre><span></span><code>lsof<span class="w"> </span>-nP<span class="w"> </span>-i<span class="w"> </span>:8000
+<span class="c1"># COMMAND   PID  USER   FD   TYPE ... NAME</span>
+<span class="c1"># Python  12345 alice  ...  TCP 127.0.0.1:8000 (LISTEN)</span>
+</code></pre></div>
+<p><code>-n</code> 不把 IP 解析成主机名，<code>-P</code> 不把端口号解析成服务名，输出更快也更直观。</p>
+<p><code>fastapi dev</code> 实际由两个进程组成：</p>
+<pre class="mermaid"><code>flowchart LR
+    R[reloader 进程&lt;br/&gt;监听文件变化] --&gt;|代码改动时重启| W[worker 进程&lt;br/&gt;监听 8000 端口、处理请求]</code></pre>
+<p>用 <code>kill -INT</code> 结束进程后，worker 可能没有跟着退出，继续占着 8000 端口，<strong>用的还是启动时的旧配置</strong>。表现是：改了 <code>.env</code> 或代码，重启服务，请求结果却完全没变；或者新启动的服务报 <code>address already in use</code>。</p>
+<div class="highlight"><pre><span></span><code>lsof<span class="w"> </span>-nP<span class="w"> </span>-i<span class="w"> </span>:8000<span class="w">      </span><span class="c1"># 找到仍在监听的 PID</span>
+<span class="nb">kill</span><span class="w"> </span>&lt;PID&gt;<span class="w">             </span><span class="c1"># 结束残留的 worker</span>
+lsof<span class="w"> </span>-nP<span class="w"> </span>-i<span class="w"> </span>:8000<span class="w">      </span><span class="c1"># 再查一次，没有输出说明端口已释放</span>
+</code></pre></div>
+<h2 id="10-git-不跟踪空目录">10. git 不跟踪空目录</h2>
+<p>git 只跟踪文件，不跟踪目录。一个空的 <code>tests/</code> 目录执行 <code>git add</code> 后不会出现在提交里，别人克隆下来也没有这个目录。</p>
+<p>常见做法是在 <code>tests/</code> 下放一个空的 <code>__init__.py</code>，第一次提交时就带上：</p>
+<div class="highlight"><pre><span></span><code>touch<span class="w"> </span>tests/__init__.py
+git<span class="w"> </span>add<span class="w"> </span>tests/__init__.py
+git<span class="w"> </span>ls-files<span class="w"> </span>tests<span class="w">            </span><span class="c1"># 能看到 tests/__init__.py</span>
+</code></pre></div>
+<p>这个 <code>__init__.py</code> 还有实际用途：它让 <code>tests</code> 成为一个包，测试文件可以写 <code>from tests.conftest import TEST_PASSWORD, TEST_USERNAME</code>。</p>
+<blockquote>
+<p>其他语言或非 Python 目录常用 <code>.gitkeep</code> 占位，这只是社区约定，git 本身对这个文件名没有特殊处理。</p>
+</blockquote>
+<h2 id="11-分步教程的写法经验">11. 分步教程的写法经验</h2>
+<p>按"每步给出说明，再由读者照着写入文件"的方式搭建项目时，下面这些错误很常见：</p>
+<table>
+<thead>
+<tr>
+<th>错误</th>
+<th>后果</th>
+<th>典型表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整步跳过</td>
+<td>后续步骤依赖的模块不存在，报错位置和真正原因隔了好几步</td>
+<td>后面某一步突然报错，要逐步核对产出文件才能找到原因</td>
+</tr>
+<tr>
+<td>说明写的是"新增一个函数"，只把这个函数片段写进了文件</td>
+<td>文件原有内容全部丢失</td>
+<td>import 报错、功能消失</td>
+</tr>
+<tr>
+<td>模块文件放在包目录之外，如 <code>cli.py</code> 放在项目根目录，没有放进 <code>src/my_service/</code></td>
+<td>包里没有这个模块</td>
+<td><code>ModuleNotFoundError: No module named 'my_service.cli'</code></td>
+</tr>
+<tr>
+<td>固定文件名拼错，如 <code>tests/conftest.py</code> 写成 <code>configtest.py</code></td>
+<td>pytest 不会自动加载它，fixture 和测试环境配置都不生效</td>
+<td><code>ModuleNotFoundError: No module named 'tests.conftest'</code></td>
+</tr>
+<tr>
+<td>提交里带行尾空格</td>
+<td>diff 里出现无意义的改动</td>
+<td>引入 pre-commit 后被 <code>trailing-whitespace</code> 自动清理</td>
+</tr>
+</tbody>
+</table>
+<p>把 <code>conftest.py</code> 拼错后，测试文件里的 <code>from tests.conftest import ...</code> 会在收集阶段报错：</p>
+<div class="highlight"><pre><span></span><code>ERROR collecting tests/test_auth.py
+tests/test_auth.py:7: in &lt;module&gt;
+    from tests.conftest import TEST_PASSWORD, TEST_USERNAME
+E   ModuleNotFoundError: No module named &#39;tests.conftest&#39;
+</code></pre></div>
+<p>预防办法：</p>
+<ol>
+<li><strong>给完整文件，而不是"在某处插入几行"。</strong> 完整文件可以直接覆盖，读者不需要判断插入位置，也不会误删原有内容。只改一两行时，至少给出改动前后的上下文。</li>
+<li><strong>每个文件都写明完整路径</strong>，如 <code>src/my_service/cli.py</code>、<code>tests/conftest.py</code>。路径和文件名写错是最常见、也最难从报错里看出来的问题。</li>
+<li><strong>每一步都附带验证命令和预期结果</strong>，照着操作的人能当场发现自己漏了或做错了，不会把问题带到后面。</li>
+<li><strong>尽早引入 pre-commit 兜底</strong>。行尾空格、文件末尾换行、import 顺序、格式、类型错误这类问题交给工具自动修复或拦截，不依赖人工检查。pre-commit 也可以提前到步骤 2，和 ruff、mypy 一起配置。</li>
+</ol>
+<h2 id="12-小结">12. 小结</h2>
+<ul>
+<li>初始化顺序是<strong>工程骨架 → 配置与日志 → 应用入口 → 数据库与迁移 → 统一异常 → 业务 → 测试 → 提交检查 → 容器化</strong>，先做后面所有模块都依赖的部分。</li>
+<li>每一步都有一条验证命令和明确的预期结果，验证通过再提交，出问题时只需排查最近一步。</li>
+<li>依赖和所有工具配置集中在 <code>pyproject.toml</code>：<code>[tool.ruff]</code>、<code>[tool.mypy]</code>、<code>[tool.pytest.ini_options]</code>、<code>[tool.coverage.run]</code>、<code>[tool.fastapi]</code>、<code>[project.scripts]</code> 各管一件事。</li>
+<li><code>.env.example</code> 提交，只写变量名、示例值和密钥的生成方式；<code>.env</code> 存真实值，同时被 <code>.gitignore</code> 和 <code>.dockerignore</code> 排除。系统环境变量优先于 <code>.env</code>，改了 <code>.env</code> 不生效时先 <code>echo $变量名</code>。</li>
+<li>git 不跟踪空目录，<code>tests/</code> 要放 <code>__init__.py</code> 才能提交。</li>
+<li>调试时常用 <code>curl -i</code>、<code>curl -s -o /dev/null -w "%{http_code}\n"</code>、<code>lsof -nP -i :8000</code>；<code>fastapi dev</code> 有 reloader 和 worker 两个进程，结束后要确认端口已释放。</li>
+<li>写分步教程时给完整文件和完整路径，每步附验证命令，再用 pre-commit 自动兜底。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

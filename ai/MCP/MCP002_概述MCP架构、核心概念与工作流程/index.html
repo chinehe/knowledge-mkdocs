@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-mcp-scope" class="md-skip">
+        <a href="#1-mcp-包含的内容scope-" class="md-skip">
           Skip to content
         </a>
       
@@ -1020,7 +1020,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-mcp-scope" class="md-nav__link">
+  <a href="#1-mcp-包含的内容scope-" class="md-nav__link">
     <span class="md-ellipsis">
       
         1. MCP 包含的内容（Scope ）
@@ -1031,7 +1031,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-mcp" class="md-nav__link">
+  <a href="#2-mcp架构的参与者" class="md-nav__link">
     <span class="md-ellipsis">
       
         2. MCP架构的参与者
@@ -1042,7 +1042,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-mcp" class="md-nav__link">
+  <a href="#3-深入理解mcp核心概念" class="md-nav__link">
     <span class="md-ellipsis">
       
         3. 深入理解MCP核心概念
@@ -1053,7 +1053,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-mcp" class="md-nav__link">
+  <a href="#4-mcp工作流程" class="md-nav__link">
     <span class="md-ellipsis">
       
         4. MCP工作流程
@@ -1253,7 +1253,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-mcp-scope" class="md-nav__link">
+  <a href="#1-mcp-包含的内容scope-" class="md-nav__link">
     <span class="md-ellipsis">
       
         1. MCP 包含的内容（Scope ）
@@ -1264,7 +1264,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-mcp" class="md-nav__link">
+  <a href="#2-mcp架构的参与者" class="md-nav__link">
     <span class="md-ellipsis">
       
         2. MCP架构的参与者
@@ -1275,7 +1275,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-mcp" class="md-nav__link">
+  <a href="#3-深入理解mcp核心概念" class="md-nav__link">
     <span class="md-ellipsis">
       
         3. 深入理解MCP核心概念
@@ -1286,7 +1286,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-mcp" class="md-nav__link">
+  <a href="#4-mcp工作流程" class="md-nav__link">
     <span class="md-ellipsis">
       
         4. MCP工作流程
@@ -1389,7 +1389,7 @@
 
   <h1>概述MCP架构、核心概念与工作流程</h1>
 
-<h2 id="1-mcp-scope">1. MCP 包含的内容（Scope ）</h2>
+<h2 id="1-mcp-包含的内容scope-">1. MCP 包含的内容（Scope ）</h2>
 <p>MCP（Model Context Protocol）协议包含以下内容：
 * MCP规范（Specification）：定义客户端和服务端需要实现的需求。
 * MCP SDKs： 用于实现MCP协议的，针对不同变成语言的SDK。
@@ -1398,7 +1398,7 @@
 <blockquote>
 <p>MCP协议专注于上下文交换协议本身，不关心AI应用如何使用LLM大语言模型，也不关心如何使用上下文。</p>
 </blockquote>
-<h2 id="2-mcp">2. MCP架构的参与者</h2>
+<h2 id="2-mcp架构的参与者">2. MCP架构的参与者</h2>
 <p>MCP遵循客户端-服务器（client-server）架构，MCP主机（如Claude Code等AI应用）建立与一个或多个MCP服务的连接。</p>
 <blockquote>
 <p>MCP主机通过为每个MCP服务创建一个MCP客户端来实现这一点。
@@ -1434,7 +1434,7 @@ MCP服务器指的是提供上下文数据的程序，既可以运行在本地�
 当Claude Desktop启动filesystem server时，这个服务器和主机运行在相同的机器上，使用stdio传输，这种称为本地MCP服务器。
 而Sentry MCP Server运行在Sentry平台上，使用HTTP流式传输，这种称为远程MCP服务器。</p>
 </blockquote>
-<h2 id="3-mcp">3. 深入理解MCP核心概念</h2>
+<h2 id="3-深入理解mcp核心概念">3. 深入理解MCP核心概念</h2>
 <p>其中包含以下的核心概念：
 * MCP主机（Host）：运行大语言模型并发起连接的应用程序，是与用户直接交互的界面和环境。
   * 是整个架构的大脑，负责接收用户指令，决定需要调用什么工具或访问什么数据，并通过内置的Client发起请求。
@@ -1480,7 +1480,7 @@ MCP服务器指的是提供上下文数据的程序，既可以运行在本地�
   ServerA --&gt; LocalResourcesA
   ServerB --&gt; LocalResourcesB
   ServerC --&gt; |Web APIs| RemoteResources</code></pre></p>
-<h2 id="4-mcp">4. MCP工作流程</h2>
+<h2 id="4-mcp工作流程">4. MCP工作流程</h2>
 <p>MCP（Model Context Protocol）的工作流程基于客户端-服务器架构，采用JSON-RPC 2.0协议进行通信。整个流程涉及Host、MCP Client、MCP Server以及后端资源之间的协调配合。</p>
 <p>主要工作步骤：
 1. 初始化阶段

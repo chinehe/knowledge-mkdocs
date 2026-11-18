@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1" class="md-skip">
+        <a href="#1-静态文件服务方法" class="md-skip">
           Skip to content
         </a>
       
@@ -1038,7 +1038,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-静态文件服务方法" class="md-nav__link">
     <span class="md-ellipsis">
       
         1. 静态文件服务方法
@@ -1049,7 +1049,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-静态文件服务" class="md-nav__link">
     <span class="md-ellipsis">
       
         2. 静态文件服务
@@ -1060,7 +1060,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-单个静态文件服务" class="md-nav__link">
     <span class="md-ellipsis">
       
         3. 单个静态文件服务
@@ -1071,7 +1071,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#4-自定义文件系统的静态文件服务" class="md-nav__link">
     <span class="md-ellipsis">
       
         4. 自定义文件系统的静态文件服务
@@ -1549,7 +1549,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-静态文件服务方法" class="md-nav__link">
     <span class="md-ellipsis">
       
         1. 静态文件服务方法
@@ -1560,7 +1560,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-静态文件服务" class="md-nav__link">
     <span class="md-ellipsis">
       
         2. 静态文件服务
@@ -1571,7 +1571,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
+  <a href="#3-单个静态文件服务" class="md-nav__link">
     <span class="md-ellipsis">
       
         3. 单个静态文件服务
@@ -1582,7 +1582,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#4-自定义文件系统的静态文件服务" class="md-nav__link">
     <span class="md-ellipsis">
       
         4. 自定义文件系统的静态文件服务
@@ -1686,7 +1686,7 @@
   <h1>静态文件服务</h1>
 
 <p>Web应用通常需要提供静态资源，如CSS、JavaScript、图片等。Gin框架提供了多种方法来处理静态文件。</p>
-<h2 id="1">1. 静态文件服务方法</h2>
+<h2 id="1-静态文件服务方法">1. 静态文件服务方法</h2>
 <p>Gin提供了以下静态文件服务方法：</p>
 <ul>
 <li><code>Static()</code> ：提供静态文件服务</li>
@@ -1694,7 +1694,7 @@
 <li><code>StaticFS()</code>： 提供静态文件服务（自定义文件系统）</li>
 <li><code>StaticFileFS()</code>：提供单个静态文件服务（自定义文件系统）</li>
 </ul>
-<h2 id="2">2. 静态文件服务</h2>
+<h2 id="2-静态文件服务">2. 静态文件服务</h2>
 <p><code>Static()</code>方法用于从指定的文件系统根目录提供静态文件服务。</p>
 <p>源码：</p>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">group</span><span class="w"> </span><span class="o">*</span><span class="nx">RouterGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">Static</span><span class="p">(</span><span class="nx">relativePath</span><span class="p">,</span><span class="w"> </span><span class="nx">root</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">IRoutes</span><span class="w"> </span><span class="p">{</span>
@@ -1774,7 +1774,7 @@
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">().</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="3">3. 单个静态文件服务</h2>
+<h2 id="3-单个静态文件服务">3. 单个静态文件服务</h2>
 <p><code>StaticFile</code>方法用于注册单个路由，为指定的单个本地文件提供服务。</p>
 <p>源码：</p>
 <div class="highlight"><pre><span></span><code><span class="kd">func</span><span class="w"> </span><span class="p">(</span><span class="nx">group</span><span class="w"> </span><span class="o">*</span><span class="nx">RouterGroup</span><span class="p">)</span><span class="w"> </span><span class="nx">StaticFile</span><span class="p">(</span><span class="nx">relativePath</span><span class="p">,</span><span class="w"> </span><span class="nx">filepath</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">IRoutes</span><span class="w"> </span><span class="p">{</span>
@@ -1858,7 +1858,7 @@
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">().</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="4">4. 自定义文件系统的静态文件服务</h2>
+<h2 id="4-自定义文件系统的静态文件服务">4. 自定义文件系统的静态文件服务</h2>
 <p><code>StaticFS</code>、<code>StaticFileFS</code>方法与前面介绍的两个方法类似，但是增加了一个<code>fs http.FileSystem</code>参数，用于指定使用的文件系统。</p>
 <blockquote>
 <p>gin默认使用<code>gin.Dir()</code></p>

@@ -1,0 +1,2956 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Python/sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/">
+      
+      
+        <link rel="prev" href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87004_%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">
+      
+      
+        <link rel="next" href="../SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87002_Alembic%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>异步引擎、会话与模型定义 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-引擎与会话" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              异步引擎、会话与模型定义
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语言基础
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工程化
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI框架
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQLAlchemy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SQLAlchemy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    异步引擎、会话与模型定义
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    异步引擎、会话与模型定义
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-引擎与会话" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 引擎与会话
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 引擎与会话">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-两者的关系" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 两者的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-驱动与连接串" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 驱动与连接串
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-在-lifespan-中创建和释放引擎" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 在 lifespan 中创建和释放引擎
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-创建引擎create_async_engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 创建引擎：create_async_engine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 创建引擎：create_async_engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-连接池参数" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 连接池参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-引擎是懒连接的" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 引擎是懒连接的
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-会话工厂async_sessionmaker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 会话工厂：async_sessionmaker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 会话工厂：async_sessionmaker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-expire_on_commitfalse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. expire_on_commit=False
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-会话依赖每个请求一个会话" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 会话依赖：每个请求一个会话
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-模型声明" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 模型声明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 模型声明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-declarativebase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. DeclarativeBase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-mapped--mapped_column类型化写法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Mapped + mapped_column：类型化写法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-可空与-not-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 可空与 NOT NULL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-约束命名规则" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 约束命名规则
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-用-mixin-复用字段" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 用 Mixin 复用字段
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-default-与-server_default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. default 与 server_default
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-主键与外键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 主键与外键
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 主键与外键">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-uuid-主键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. UUID 主键
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-外键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 外键
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-20-风格查询" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 2.0 风格查询
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. 2.0 风格查询">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-select--where按条件查一个" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1. select + where：按条件查一个
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-sessionget按主键查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2. session.get：按主键查
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-update批量更新" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3. update：批量更新
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-join多表查询" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4. join：多表查询
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-flush-与-commit分层职责" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. flush 与 commit：分层职责
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. flush 与 commit：分层职责">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-flush-与-commit-的区别" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1. flush 与 commit 的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-repository-只-flushservice-决定何时-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2. repository 只 flush，service 决定何时 commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-并发问题的处理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 并发问题的处理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. 并发问题的处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-唯一约束兜底捕获-integrityerror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1. 唯一约束兜底：捕获 IntegrityError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-with_for_update行锁防止重复刷新" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2. with_for_update：行锁防止重复刷新
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-字符串比较区分大小写" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3. 字符串比较区分大小写
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87002_Alembic%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alembic数据库迁移
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-引擎与会话" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 引擎与会话
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 引擎与会话">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-两者的关系" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 两者的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-驱动与连接串" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 驱动与连接串
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-在-lifespan-中创建和释放引擎" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 在 lifespan 中创建和释放引擎
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-创建引擎create_async_engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 创建引擎：create_async_engine
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 创建引擎：create_async_engine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-连接池参数" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 连接池参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-引擎是懒连接的" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 引擎是懒连接的
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-会话工厂async_sessionmaker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 会话工厂：async_sessionmaker
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 会话工厂：async_sessionmaker">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-expire_on_commitfalse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. expire_on_commit=False
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-会话依赖每个请求一个会话" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 会话依赖：每个请求一个会话
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-模型声明" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 模型声明
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 模型声明">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-declarativebase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. DeclarativeBase
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-mapped--mapped_column类型化写法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Mapped + mapped_column：类型化写法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-可空与-not-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 可空与 NOT NULL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-约束命名规则" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 约束命名规则
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-用-mixin-复用字段" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 用 Mixin 复用字段
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-default-与-server_default" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. default 与 server_default
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-主键与外键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 主键与外键
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 主键与外键">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-uuid-主键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. UUID 主键
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-外键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 外键
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-20-风格查询" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 2.0 风格查询
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. 2.0 风格查询">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-select--where按条件查一个" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1. select + where：按条件查一个
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-sessionget按主键查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2. session.get：按主键查
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-update批量更新" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3. update：批量更新
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-join多表查询" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4. join：多表查询
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-flush-与-commit分层职责" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. flush 与 commit：分层职责
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. flush 与 commit：分层职责">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-flush-与-commit-的区别" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1. flush 与 commit 的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-repository-只-flushservice-决定何时-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2. repository 只 flush，service 决定何时 commit
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-并发问题的处理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. 并发问题的处理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. 并发问题的处理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-唯一约束兜底捕获-integrityerror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.1. 唯一约束兜底：捕获 IntegrityError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-with_for_update行锁防止重复刷新" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.2. with_for_update：行锁防止重复刷新
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-字符串比较区分大小写" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12.3. 字符串比较区分大小写
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Python
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    SQLAlchemy
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>异步引擎、会话与模型定义</h1>
+
+<h2 id="1-引擎与会话">1. 引擎与会话</h2>
+<p>SQLAlchemy 2.0 的异步用法里有两个核心对象：<strong>引擎（AsyncEngine）</strong> 和 <strong>会话（AsyncSession）</strong>。分清它们的职责和生命周期，是写好数据库代码的第一步。</p>
+<h3 id="11-两者的关系">1.1. 两者的关系</h3>
+<table>
+<thead>
+<tr>
+<th>对象</th>
+<th>内部持有</th>
+<th>数量</th>
+<th>生命周期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AsyncEngine</code></td>
+<td>连接池（多条数据库连接）</td>
+<td>整个进程<strong>一个</strong></td>
+<td>应用启动时创建，关闭时 <code>dispose()</code></td>
+</tr>
+<tr>
+<td><code>AsyncSession</code></td>
+<td>一次<strong>工作单元</strong>：本次要读写的对象、当前事务</td>
+<td><strong>每个请求一个</strong></td>
+<td>请求开始时创建，请求结束时关闭</td>
+</tr>
+</tbody>
+</table>
+<p>会话本身不是连接。会话第一次需要执行 SQL 时，才从引擎的连接池里借一条连接，事务结束后把连接还回池里。</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph 进程
+        E["AsyncEngine&lt;br/&gt;（全局唯一）"]
+        subgraph P["连接池"]
+            C1["连接 1"]
+            C2["连接 2"]
+            C3["连接 ..."]
+        end
+        E --- P
+        S1["AsyncSession&lt;br/&gt;请求 A"] -- 借用 / 归还 --&gt; P
+        S2["AsyncSession&lt;br/&gt;请求 B"] -- 借用 / 归还 --&gt; P
+    end
+    P &lt;--&gt; DB[("PostgreSQL")]</code></pre>
+<h3 id="12-驱动与连接串">1.2. 驱动与连接串</h3>
+<p>异步模式需要异步驱动，PostgreSQL 用 <code>asyncpg</code>。连接串里用 <code>+驱动名</code> 指定驱动：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 安装（sqlalchemy 的 asyncio 扩展 + asyncpg 驱动）</span>
+uv<span class="w"> </span>add<span class="w"> </span><span class="s2">&quot;sqlalchemy[asyncio]&quot;</span><span class="w"> </span>asyncpg
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># .env</span>
+<span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql+asyncpg://postgres:postgres@localhost:5432/my_service
+</code></pre></div>
+<p>格式为 <code>方言+驱动://用户名:密码@主机:端口/数据库名</code>。只写 <code>postgresql://...</code> 时 SQLAlchemy 会选用该方言的默认驱动（SQLAlchemy 2.1.8 中是 psycopg），而不是 asyncpg，所以异步项目要显式写上 <code>+asyncpg</code>。</p>
+<h3 id="13-在-lifespan-中创建和释放引擎">1.3. 在 lifespan 中创建和释放引擎</h3>
+<p>FastAPI 的 <code>lifespan</code> 在应用启动时执行 <code>yield</code> 之前的代码，关闭时执行之后的代码，正好对应引擎的生命周期：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/main.py</span>
+<span class="nd">@asynccontextmanager</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">lifespan</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">get_settings</span><span class="p">()</span>
+
+    <span class="c1"># 启动：创建数据库引擎（连接池）。这里不会立即建立连接，第一次使用时才连接</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">db_engine</span> <span class="o">=</span> <span class="n">engine</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">session_factory</span> <span class="o">=</span> <span class="n">create_session_factory</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+
+    <span class="k">yield</span>
+
+    <span class="c1"># 关闭：释放连接池中的所有连接</span>
+    <span class="k">await</span> <span class="n">engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+</code></pre></div>
+<p>引擎和会话工厂挂在 <code>app.state</code> 上，后面的会话依赖从这里取。</p>
+<h2 id="2-创建引擎create_async_engine">2. 创建引擎：create_async_engine</h2>
+<h3 id="21-连接池参数">2.1. 连接池参数</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/db/session.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.ext.asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncEngine</span><span class="p">,</span> <span class="n">create_async_engine</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_engine</span><span class="p">(</span><span class="n">settings</span><span class="p">:</span> <span class="n">Settings</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncEngine</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">create_async_engine</span><span class="p">(</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">database_url</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">(),</span>
+        <span class="n">pool_size</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">database_pool_size</span><span class="p">,</span>  <span class="c1"># 常驻连接数</span>
+        <span class="n">max_overflow</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">database_max_overflow</span><span class="p">,</span>  <span class="c1"># 高峰期允许额外创建的连接数</span>
+        <span class="n">pool_pre_ping</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># 取出连接前先探活，避免拿到已被数据库断开的连接</span>
+        <span class="n">pool_recycle</span><span class="o">=</span><span class="mi">1800</span><span class="p">,</span>  <span class="c1"># 连接最长使用 30 分钟后重建，避免被防火墙或代理静默断开</span>
+    <span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>示例取值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pool_size</code></td>
+<td>10（配置项默认值）</td>
+<td>池里常驻的连接数</td>
+</tr>
+<tr>
+<td><code>max_overflow</code></td>
+<td>20（配置项默认值）</td>
+<td>常驻连接都被占用时，最多再临时创建多少条；用完即关。同时最多 <code>pool_size + max_overflow</code> = 30 条连接</td>
+</tr>
+<tr>
+<td><code>pool_pre_ping</code></td>
+<td><code>True</code></td>
+<td>每次从池里取连接前先发一个轻量探测，连接已断就丢弃并换一条新的</td>
+</tr>
+<tr>
+<td><code>pool_recycle</code></td>
+<td><code>1800</code></td>
+<td>连接从创建起超过 1800 秒（30 分钟），下次取出时先关掉重建</td>
+</tr>
+</tbody>
+</table>
+<p><code>pool_recycle</code> 针对的是这种情况：数据库前面有防火墙、NAT 或代理，空闲太久的 TCP 连接会被它们<strong>静默断开</strong>，客户端并不知道。定期重建可以避开这个时间窗口，<code>pool_pre_ping</code> 再兜住剩下的意外断开。</p>
+<blockquote>
+<p>连接总数要算上所有进程：例如 4 个 worker 进程，每个最多 30 条，合计 120 条，不能超过数据库的 <code>max_connections</code>。</p>
+</blockquote>
+<h3 id="22-引擎是懒连接的">2.2. 引擎是懒连接的</h3>
+<p><code>create_async_engine</code> 只是创建引擎对象和一个空的连接池，<strong>不会连接数据库</strong>。即使地址根本连不上，创建也会成功：</p>
+<div class="highlight"><pre><span></span><code><span class="n">eng</span> <span class="o">=</span> <span class="n">create_async_engine</span><span class="p">(</span><span class="s2">&quot;postgresql+asyncpg://u:p@10.255.255.1:5999/nodb&quot;</span><span class="p">,</span> <span class="n">pool_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eng</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">status</span><span class="p">())</span>
+<span class="c1"># Pool size: 1  Connections in pool: 0 Current Overflow: -1 Current Checked out connections: 0</span>
+</code></pre></div>
+<p>第一次执行 SQL 时才真正建立连接。所以数据库地址或密码写错，应用照样能启动，要等到第一个访问数据库的请求才报错。需要启动时就发现问题，可以加一个健康检查接口或在启动时主动执行一次查询。</p>
+<h2 id="3-会话工厂async_sessionmaker">3. 会话工厂：async_sessionmaker</h2>
+<p><code>async_sessionmaker</code> 是创建会话的工厂，把引擎和会话的公共配置绑定在一起，之后每次调用 <code>factory()</code> 得到一个新会话。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/db/session.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.ext.asyncio</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncSession</span><span class="p">,</span> <span class="n">async_sessionmaker</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_session_factory</span><span class="p">(</span><span class="n">engine</span><span class="p">:</span> <span class="n">AsyncEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">async_sessionmaker</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]:</span>
+    <span class="c1"># expire_on_commit=False：commit 后对象属性仍可直接读取。</span>
+    <span class="c1"># 异步模式下若为 True，commit 后访问属性会触发隐式查询并报错。</span>
+    <span class="k">return</span> <span class="n">async_sessionmaker</span><span class="p">(</span><span class="n">engine</span><span class="p">,</span> <span class="n">expire_on_commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="31-expire_on_commitfalse">3.1. expire_on_commit=False</h3>
+<p><code>expire_on_commit</code> 默认为 <code>True</code>：<code>commit()</code> 之后，会话里所有对象的属性都被标记为"过期"，下次访问属性时 SQLAlchemy 自动发一条 SELECT 重新加载。</p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th><code>expire_on_commit=True</code>（默认）时 commit 后访问 <code>user.id</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同步</td>
+<td>自动执行 SELECT 重新加载，能正常拿到值</td>
+</tr>
+<tr>
+<td>异步</td>
+<td>属性访问是普通的同步操作，没有地方 <code>await</code>，这种<strong>隐式 IO</strong> 无法执行，直接报错（常见报错为 <code>MissingGreenlet</code>）</td>
+</tr>
+</tbody>
+</table>
+<p>典型场景是创建用户后返回给接口：</p>
+<div class="highlight"><pre><span></span><code><span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="k">return</span> <span class="n">user</span>  <span class="c1"># FastAPI 序列化时读取 user.id、user.created_at</span>
+</code></pre></div>
+<p>设成 <code>False</code> 后，commit 后对象保持 commit 前的属性值，可以直接读取。代价是对象不会自动刷新为数据库的最新值，需要时显式 <code>await session.refresh(obj)</code>。</p>
+<h2 id="4-会话依赖每个请求一个会话">4. 会话依赖：每个请求一个会话</h2>
+<p>在 FastAPI 中用 <code>yield</code> 依赖提供会话：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/api/deps.py</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_db_session</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;每个请求一个会话；请求结束时自动关闭，未提交的事务自动回滚。&quot;&quot;&quot;</span>
+    <span class="n">session_factory</span><span class="p">:</span> <span class="n">async_sessionmaker</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">]</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">session_factory</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">session_factory</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">session</span>
+
+
+<span class="c1"># 路由函数里这样用：async def handler(session: DbSession): ...</span>
+<span class="n">DbSession</span> <span class="o">=</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">AsyncSession</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db_session</span><span class="p">)]</span>
+</code></pre></div>
+<p><code>async with</code> 退出时会关闭会话：还没提交的事务被回滚，连接还回连接池。不管请求是正常返回还是抛了异常，都会走到这一步。</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant R as 请求
+    participant D as get_db_session
+    participant S as Service
+    participant DB as PostgreSQL
+    R-&gt;&gt;D: 进入依赖
+    D-&gt;&gt;D: session_factory() 创建会话
+    D-&gt;&gt;S: yield session
+    S-&gt;&gt;DB: 执行 SQL（首次执行时借连接并开启事务）
+    S-&gt;&gt;DB: session.commit()（由 service 显式调用）
+    S--&gt;&gt;D: 处理结束 / 抛出异常
+    D-&gt;&gt;DB: 关闭会话：未提交的事务回滚，连接归还连接池</code></pre>
+<p>注意这个依赖<strong>不会自动 commit</strong>。是否提交、什么时候提交是业务决定，由 service 层显式调用 <code>session.commit()</code>（见第 11 节）。这样做的好处是：只读请求不会产生无意义的提交；业务中途失败抛出异常时，已执行的修改自然被回滚。</p>
+<h2 id="5-模型声明">5. 模型声明</h2>
+<h3 id="51-declarativebase">5.1. DeclarativeBase</h3>
+<p>所有模型继承同一个基类，基类持有一个 <code>MetaData</code>，里面登记了所有表的结构，Alembic 生成迁移时就是读它。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/models/base.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">MetaData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeclarativeBase</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">MetaData</span><span class="p">(</span><span class="n">naming_convention</span><span class="o">=</span><span class="n">NAMING_CONVENTION</span><span class="p">)</span>  <span class="c1"># 命名规则见第 6 节</span>
+</code></pre></div>
+<h3 id="52-mapped--mapped_column类型化写法">5.2. Mapped + mapped_column：类型化写法</h3>
+<p>2.0 风格用类型注解 <code>Mapped[...]</code> 声明列的 Python 类型，<code>mapped_column(...)</code> 补充数据库层面的细节：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/models/user.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">String</span><span class="p">,</span> <span class="n">true</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.models.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span><span class="p">,</span> <span class="n">TimestampMixin</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">TimestampMixin</span><span class="p">,</span> <span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;users&quot;</span>
+
+    <span class="nb">id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">)</span>
+    <span class="n">username</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># 区分大小写</span>
+    <span class="n">password_hash</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">255</span><span class="p">))</span>
+    <span class="n">is_active</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">server_default</span><span class="o">=</span><span class="n">true</span><span class="p">())</span>
+</code></pre></div>
+<p>SQLAlchemy 会根据注解推断列类型：</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>推断出的 PostgreSQL 类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Mapped[uuid.UUID]</code></td>
+<td><code>UUID</code></td>
+</tr>
+<tr>
+<td><code>Mapped[bool]</code></td>
+<td><code>BOOLEAN</code></td>
+</tr>
+<tr>
+<td><code>Mapped[str]</code></td>
+<td><code>VARCHAR</code>（不带长度）；需要长度时写 <code>String(50)</code></td>
+</tr>
+<tr>
+<td><code>Mapped[datetime]</code></td>
+<td><code>TIMESTAMP WITHOUT TIME ZONE</code>；需要带时区时写 <code>DateTime(timezone=True)</code></td>
+</tr>
+</tbody>
+</table>
+<p>类型注解的好处是 mypy 和编辑器能知道 <code>user.username</code> 是 <code>str</code>，写错类型会被提前发现。</p>
+<h3 id="53-可空与-not-null">5.3. 可空与 NOT NULL</h3>
+<p>是否可空也由注解决定：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/models/refresh_token.py</span>
+<span class="n">expires_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>           <span class="c1"># NOT NULL</span>
+<span class="n">revoked_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>    <span class="c1"># 可空</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>生成的列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Mapped[datetime]</code></td>
+<td><code>expires_at TIMESTAMP WITH TIME ZONE NOT NULL</code></td>
+</tr>
+<tr>
+<td><code>Mapped[datetime \| None]</code></td>
+<td><code>revoked_at TIMESTAMP WITH TIME ZONE</code>（可空）</td>
+</tr>
+</tbody>
+</table>
+<p>不是 <code>Optional</code>（<code>X | None</code>）的列<strong>默认就是 NOT NULL</strong>，不需要再写 <code>nullable=False</code>。</p>
+<h2 id="6-约束命名规则">6. 约束命名规则</h2>
+<p>主键、唯一约束、外键、索引在数据库里都有名字。不指定名字时由数据库自动生成，不同数据库的规则还不一样。问题出在以后：Alembic 修改或删除约束时要按名字操作，名字不可预测，生成的迁移就找不到它。</p>
+<p>解决办法是在 <code>MetaData</code> 上配置命名规则：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/models/base.py</span>
+<span class="n">NAMING_CONVENTION</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;ix&quot;</span><span class="p">:</span> <span class="s2">&quot;ix_</span><span class="si">%(column_0_label)s</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uq&quot;</span><span class="p">:</span> <span class="s2">&quot;uq_</span><span class="si">%(table_name)s</span><span class="s2">_</span><span class="si">%(column_0_name)s</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ck&quot;</span><span class="p">:</span> <span class="s2">&quot;ck_</span><span class="si">%(table_name)s</span><span class="s2">_</span><span class="si">%(constraint_name)s</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fk&quot;</span><span class="p">:</span> <span class="s2">&quot;fk_</span><span class="si">%(table_name)s</span><span class="s2">_</span><span class="si">%(column_0_name)s</span><span class="s2">_</span><span class="si">%(referred_table_name)s</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pk&quot;</span><span class="p">:</span> <span class="s2">&quot;pk_</span><span class="si">%(table_name)s</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="p">(</span><span class="n">DeclarativeBase</span><span class="p">):</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">MetaData</span><span class="p">(</span><span class="n">naming_convention</span><span class="o">=</span><span class="n">NAMING_CONVENTION</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>约束类型</th>
+<th>示例模型生成的名字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pk</code></td>
+<td>主键</td>
+<td><code>pk_users</code>、<code>pk_refresh_tokens</code></td>
+</tr>
+<tr>
+<td><code>uq</code></td>
+<td>唯一约束</td>
+<td><code>uq_users_username</code>、<code>uq_refresh_tokens_token_hash</code></td>
+</tr>
+<tr>
+<td><code>fk</code></td>
+<td>外键</td>
+<td><code>fk_refresh_tokens_user_id_users</code></td>
+</tr>
+<tr>
+<td><code>ix</code></td>
+<td>索引</td>
+<td><code>ix_refresh_tokens_user_id</code>、<code>ix_refresh_tokens_family_id</code></td>
+</tr>
+<tr>
+<td><code>ck</code></td>
+<td>检查约束</td>
+<td>示例模型未使用</td>
+</tr>
+</tbody>
+</table>
+<p><code>ix</code> 里的 <code>column_0_label</code> 是"表名_列名"，所以得到 <code>ix_refresh_tokens_user_id</code>。Alembic 自动生成的迁移里，这些名字用 <code>op.f()</code> 包裹，表示"名字已经按规则生成好，不要再套一次规则"：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># migrations/versions/&lt;revision&gt;_add_users_and_refresh_tokens.py（节选）</span>
+<span class="n">sa</span><span class="o">.</span><span class="n">PrimaryKeyConstraint</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="s2">&quot;pk_users&quot;</span><span class="p">)),</span>
+<span class="n">sa</span><span class="o">.</span><span class="n">UniqueConstraint</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="s2">&quot;uq_users_username&quot;</span><span class="p">)),</span>
+<span class="o">...</span>
+<span class="n">sa</span><span class="o">.</span><span class="n">ForeignKeyConstraint</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;users.id&quot;</span><span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">op</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="s2">&quot;fk_refresh_tokens_user_id_users&quot;</span><span class="p">),</span>
+    <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;CASCADE&quot;</span><span class="p">,</span>
+<span class="p">),</span>
+<span class="o">...</span>
+<span class="n">op</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><span class="s2">&quot;ix_refresh_tokens_user_id&quot;</span><span class="p">),</span> <span class="s2">&quot;refresh_tokens&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">],</span> <span class="n">unique</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<blockquote>
+<p>命名规则<strong>必须在建第一张表之前定好</strong>。已经用数据库自动命名建好的约束，事后加规则不会改名，只能写迁移逐个重命名。</p>
+</blockquote>
+<h2 id="7-用-mixin-复用字段">7. 用 Mixin 复用字段</h2>
+<p>多张表都有的字段（如创建时间、更新时间）放进一个普通类里，模型通过多重继承复用：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/models/base.py</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TimestampMixin</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;创建时间、更新时间。时间一律带时区存储（timestamptz）。&quot;&quot;&quot;</span>
+
+    <span class="n">created_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">server_default</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+    <span class="n">updated_at</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span>
+        <span class="n">DateTime</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">server_default</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="n">onupdate</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">TimestampMixin</span><span class="p">,</span> <span class="n">Base</span><span class="p">):</span>  <span class="c1"># Mixin 写在 Base 前面</span>
+    <span class="o">...</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DateTime(timezone=True)</code></td>
+<td>PostgreSQL 的 <code>TIMESTAMP WITH TIME ZONE</code>（即 <code>timestamptz</code>），按 UTC 存储，读出时带时区信息</td>
+</tr>
+<tr>
+<td><code>server_default=func.now()</code></td>
+<td>表结构里写入 <code>DEFAULT now()</code>，插入时由数据库填当前时间</td>
+</tr>
+<tr>
+<td><code>onupdate=func.now()</code></td>
+<td>通过 ORM 执行 UPDATE 时，SQLAlchemy 在 SET 子句里加上 <code>updated_at=now()</code></td>
+</tr>
+</tbody>
+</table>
+<p>注意 <code>onupdate</code> 是 SQLAlchemy 层面的行为，不会写进表结构。直接用 SQL 执行 UPDATE 时 <code>updated_at</code> 不会变；需要数据库层面保证就得用触发器。</p>
+<h2 id="8-default-与-server_default">8. default 与 server_default</h2>
+<p>两者都是"插入时没给值就用默认值"，区别在于<strong>由谁来填</strong>：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>default</code></th>
+<th><code>server_default</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>谁填值</td>
+<td>SQLAlchemy 在 Python 里生成值，放进 INSERT 语句</td>
+<td>数据库按表结构里的 <code>DEFAULT</code> 填值</td>
+</tr>
+<tr>
+<td>是否写进表结构</td>
+<td>否</td>
+<td>是（出现在 DDL 和迁移文件里）</td>
+</tr>
+<tr>
+<td>绕过 ORM 直接写 SQL 插入</td>
+<td><strong>不生效</strong></td>
+<td>生效</td>
+</tr>
+<tr>
+<td>典型用法</td>
+<td><code>default=uuid.uuid4</code>（传函数，每行生成一次）</td>
+<td><code>server_default=func.now()</code>、<code>server_default=true()</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>User.is_active</code> 两个都写了：</p>
+<div class="highlight"><pre><span></span><code><span class="n">is_active</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">server_default</span><span class="o">=</span><span class="n">true</span><span class="p">())</span>
+</code></pre></div>
+<p>生成的表结构：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="n">UUID</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">password_hash</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">is_active</span><span class="w"> </span><span class="nb">BOOLEAN</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">true</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">now</span><span class="p">()</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">pk_users</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">uq_users_username</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><code>server_default</code> 的值必须是 SQL 表达式或字符串。布尔值用 <code>sqlalchemy.true()</code>，生成的是 <code>DEFAULT true</code>；直接写 Python 的 <code>True</code> 是不行的。</p>
+<blockquote>
+<p>上面的 DDL 可以不连数据库直接打印出来，用来检查模型写得对不对：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.dialects</span><span class="w"> </span><span class="kn">import</span> <span class="n">postgresql</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.schema</span><span class="w"> </span><span class="kn">import</span> <span class="n">CreateTable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">CreateTable</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">__table__</span><span class="p">)</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">dialect</span><span class="o">=</span><span class="n">postgresql</span><span class="o">.</span><span class="n">dialect</span><span class="p">()))</span>
+</code></pre></div>
+</blockquote>
+<h2 id="9-主键与外键">9. 主键与外键</h2>
+<h3 id="91-uuid-主键">9.1. UUID 主键</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>Mapped[uuid.UUID]</code> 在 PostgreSQL 上对应原生的 <code>UUID</code> 类型（16 字节），不是字符串。</li>
+<li><code>default=uuid.uuid4</code> 传的是函数本身（不带括号），每插入一行调用一次，由 Python 生成 ID。</li>
+</ul>
+<p>为什么不用自增整数 ID：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>暴露数据量</td>
+<td>用户 ID 出现在 URL 里（如 <code>/users/1024</code>），别人从数字就能估出有多少用户</td>
+</tr>
+<tr>
+<td>可被遍历</td>
+<td>把 ID 从 1 依次加 1 去请求，就能逐个探测资源；权限校验稍有疏漏就会大面积泄露</td>
+</tr>
+</tbody>
+</table>
+<p>UUID 随机且不连续，这两个问题都不存在。</p>
+<h3 id="92-外键">9.2. 外键</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/models/refresh_token.py</span>
+<span class="c1"># 用户被删除时，其令牌一并删除</span>
+<span class="n">user_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span>
+    <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;users.id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;CASCADE&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ForeignKey("users.id")</code></td>
+<td>引用 <code>users</code> 表的 <code>id</code> 列，用的是<strong>表名.列名</strong>，不是类名</td>
+</tr>
+<tr>
+<td><code>ondelete="CASCADE"</code></td>
+<td>数据库层面的级联：删除用户时，数据库自动删除他的所有令牌</td>
+</tr>
+<tr>
+<td><code>index=True</code></td>
+<td>给外键列建索引</td>
+</tr>
+</tbody>
+</table>
+<p>生成的 DDL：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">fk_refresh_tokens_user_id_users</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">ix_refresh_tokens_user_id</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+</code></pre></div>
+<p>PostgreSQL <strong>不会</strong>自动给外键列建索引。按用户查令牌、删除用户时级联删除令牌，都要按 <code>user_id</code> 查找，没有索引就是全表扫描，所以外键列通常都加 <code>index=True</code>。</p>
+<h2 id="10-20-风格查询">10. 2.0 风格查询</h2>
+<p>2.0 风格的统一写法是：用 <code>select()</code> / <code>update()</code> 构造语句，交给 <code>session.execute()</code> 执行，再从结果里取数据。</p>
+<h3 id="101-select--where按条件查一个">10.1. select + where：按条件查一个</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/repositories/user_repository.py</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_by_username</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">select</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="n">username</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">scalar_one_or_none</span><span class="p">()</span>
+</code></pre></div>
+<p><code>User.username == username</code> 不是普通的布尔比较，而是生成一个 SQL 条件表达式。生成的 SQL：</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">password_hash</span><span class="p">,</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">is_active</span><span class="p">,</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">created_at</span><span class="p">,</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">updated_at</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">users</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">%</span><span class="p">(</span><span class="n">username_1</span><span class="p">)</span><span class="n">s</span><span class="p">::</span><span class="nb">VARCHAR</span>
+</code></pre></div>
+<p>参数以占位符传给驱动，不会拼接进 SQL 字符串，不存在 SQL 注入问题。</p>
+<p><code>execute()</code> 返回的结果对象有几种取法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>返回</th>
+<th>结果行数不符时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scalar_one_or_none()</code></td>
+<td>一个对象或 <code>None</code></td>
+<td>多于 1 行时报错</td>
+</tr>
+<tr>
+<td><code>scalar_one()</code></td>
+<td>一个对象</td>
+<td>0 行或多于 1 行都报错</td>
+</tr>
+<tr>
+<td><code>scalars().all()</code></td>
+<td>对象列表</td>
+<td>不报错</td>
+</tr>
+<tr>
+<td><code>scalars().first()</code></td>
+<td>第一个对象或 <code>None</code></td>
+<td>不报错</td>
+</tr>
+</tbody>
+</table>
+<p>带 <code>scalar</code> 的方法取每行的第一列。<code>select(User)</code> 每行只有一个 <code>User</code> 对象，所以用 <code>scalar*</code> 直接拿到对象；不带 <code>scalar</code> 时拿到的是 <code>Row</code> 元组。</p>
+<h3 id="102-sessionget按主键查">10.2. session.get：按主键查</h3>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span>
+</code></pre></div>
+<p>按主键查询时用 <code>session.get()</code> 更简洁。它会先在当前会话已加载的对象里找，找到就直接返回，找不到才发 SELECT。</p>
+<h3 id="103-update批量更新">10.3. update：批量更新</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/repositories/refresh_token_repository.py</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">revoke_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">family_id</span><span class="p">:</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">,</span> <span class="n">now</span><span class="p">:</span> <span class="n">datetime</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+        <span class="n">update</span><span class="p">(</span><span class="n">RefreshToken</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">RefreshToken</span><span class="o">.</span><span class="n">family_id</span> <span class="o">==</span> <span class="n">family_id</span><span class="p">,</span> <span class="n">RefreshToken</span><span class="o">.</span><span class="n">revoked_at</span><span class="o">.</span><span class="n">is_</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">revoked_at</span><span class="o">=</span><span class="n">now</span><span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div>
+<p>生成的 SQL：</p>
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">revoked_at</span><span class="o">=%</span><span class="p">(</span><span class="n">revoked_at</span><span class="p">)</span><span class="n">s</span><span class="p">::</span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">TIME</span><span class="w"> </span><span class="k">ZONE</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="p">.</span><span class="n">family_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">%</span><span class="p">(</span><span class="n">family_id_1</span><span class="p">)</span><span class="n">s</span><span class="p">::</span><span class="n">UUID</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="p">.</span><span class="n">revoked_at</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span>
+</code></pre></div>
+<p>要点：</p>
+<ul>
+<li><code>where()</code> 传多个条件时用 <code>AND</code> 连接。</li>
+<li>判断 NULL 要写 <code>.is_(None)</code>，生成 <code>IS NULL</code>。写成 <code>== None</code> 也能工作，但 ruff 等工具会报警告。</li>
+<li>单个对象的修改不需要 <code>update()</code>：直接给属性赋值（如 <code>stored.revoked_at = now</code>），commit 时 SQLAlchemy 自动生成 UPDATE。<code>update()</code> 适合"一条语句改一批行"。</li>
+</ul>
+<h3 id="104-join多表查询">10.4. join：多表查询</h3>
+<p>下面基于前文的 <code>User</code> 和 <code>RefreshToken</code> 模型举例，并附上语句编译后的 SQL。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 查出所有未作废的令牌，以及所属用户的用户名</span>
+<span class="n">stmt</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">select</span><span class="p">(</span><span class="n">RefreshToken</span><span class="p">,</span> <span class="n">User</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">RefreshToken</span><span class="o">.</span><span class="n">user_id</span> <span class="o">==</span> <span class="n">User</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">RefreshToken</span><span class="o">.</span><span class="n">revoked_at</span><span class="o">.</span><span class="n">is_</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">stmt</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>  <span class="c1"># 选了多列，每行是一个元组</span>
+    <span class="o">...</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="p">.</span><span class="n">created_at</span><span class="p">,</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">username</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="p">.</span><span class="n">user_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="p">.</span><span class="n">revoked_at</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span>
+</code></pre></div>
+<p>两表之间只有一个外键时，可以省略 ON 条件，SQLAlchemy 会按外键自动推断：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 只查已启用用户的令牌</span>
+<span class="n">stmt</span> <span class="o">=</span> <span class="n">select</span><span class="p">(</span><span class="n">RefreshToken</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">is_active</span><span class="o">.</span><span class="n">is_</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">stmt</span><span class="p">))</span><span class="o">.</span><span class="n">scalars</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="p">.</span><span class="n">user_id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">users</span><span class="p">.</span><span class="n">is_active</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">true</span>
+</code></pre></div>
+<h2 id="11-flush-与-commit分层职责">11. flush 与 commit：分层职责</h2>
+<h3 id="111-flush-与-commit-的区别">11.1. flush 与 commit 的区别</h3>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>做了什么</th>
+<th>其他连接能否看到</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>session.add(obj)</code></td>
+<td>只把对象登记进会话，不发 SQL</td>
+<td>否</td>
+</tr>
+<tr>
+<td><code>await session.flush()</code></td>
+<td>把待写入的修改以 INSERT / UPDATE 发给数据库，<strong>事务不提交</strong></td>
+<td>否</td>
+</tr>
+<tr>
+<td><code>await session.commit()</code></td>
+<td>先 flush，再提交事务</td>
+<td>是</td>
+</tr>
+<tr>
+<td><code>await session.rollback()</code></td>
+<td>回滚事务，撤销本事务的所有修改（包括已 flush 的）</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>flush 的用处是<strong>提前拿到数据库生成的值、提前暴露约束错误</strong>：INSERT 执行后，<code>server_default</code> 填的 <code>created_at</code> 等值就有了；唯一约束冲突也会在 flush 时立刻抛出，而不是等到 commit。</p>
+<h3 id="112-repository-只-flushservice-决定何时-commit">11.2. repository 只 flush，service 决定何时 commit</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/repositories/user_repository.py</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">User</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>  <span class="c1"># 发送 INSERT，拿到数据库生成的默认值；不提交事务</span>
+    <span class="k">return</span> <span class="n">user</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>职责</th>
+<th>是否 commit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路由（api）</td>
+<td>解析请求、调用 service、返回响应</td>
+<td>否</td>
+</tr>
+<tr>
+<td>service</td>
+<td>业务规则；决定哪些操作属于同一个事务</td>
+<td><strong>是</strong>，业务完成时显式 commit</td>
+</tr>
+<tr>
+<td>repository</td>
+<td>只负责读写数据库，不包含业务规则</td>
+<td>否，最多 flush</td>
+</tr>
+</tbody>
+</table>
+<p>原因是一个业务操作往往要调用多个 repository。例如刷新令牌：把旧令牌标记为作废、插入新令牌，这两步必须同时成功或同时失败。如果每个 repository 方法都自己 commit，第二步失败时第一步已经提交，数据就不一致了。由 service 在最后统一 commit，整个业务就是一个事务。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/services/auth_service.py（节选）</span>
+<span class="n">stored</span><span class="o">.</span><span class="n">revoked_at</span> <span class="o">=</span> <span class="n">now</span>                 <span class="c1"># 修改旧令牌（尚未写库）</span>
+<span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">refresh_tokens</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>      <span class="c1"># flush：发出 UPDATE 和 INSERT</span>
+<span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>             <span class="c1"># 一起提交</span>
+</code></pre></div>
+<h2 id="12-并发问题的处理">12. 并发问题的处理</h2>
+<h3 id="121-唯一约束兜底捕获-integrityerror">12.1. 唯一约束兜底：捕获 IntegrityError</h3>
+<p>创建用户时先查一次用户名是否存在，这能给出友好提示，但挡不住并发：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/services/user_service.py</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">UserCreate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
+    <span class="k">if</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_by_username</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">username</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ConflictError</span><span class="p">(</span><span class="s2">&quot;用户名已存在&quot;</span><span class="p">)</span>
+
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">password_hash</span><span class="o">=</span><span class="n">hash_password</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">password</span><span class="p">))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># 两个请求同时创建同一用户名时，上面的检查可能都通过，由数据库唯一约束兜底</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="n">ConflictError</span><span class="p">(</span><span class="s2">&quot;用户名已存在&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+    <span class="k">return</span> <span class="n">user</span>
+</code></pre></div>
+<pre class="mermaid"><code>sequenceDiagram
+    participant A as 请求 A
+    participant B as 请求 B
+    participant DB as PostgreSQL
+    A-&gt;&gt;DB: SELECT username='alice' → 不存在
+    B-&gt;&gt;DB: SELECT username='alice' → 不存在
+    A-&gt;&gt;DB: INSERT alice → 成功，COMMIT
+    B-&gt;&gt;DB: INSERT alice → 违反 uq_users_username
+    DB--&gt;&gt;B: IntegrityError
+    B-&gt;&gt;B: rollback()，转成 ConflictError（409）</code></pre>
+<p>要点：</p>
+<ul>
+<li>先查询：覆盖绝大多数情况，返回明确的业务错误。</li>
+<li>唯一约束：真正保证不重复，由数据库原子地判断。</li>
+<li>捕获 <code>IntegrityError</code> 后要先 <code>rollback()</code>：出错后的会话处于失败状态，不回滚就不能继续使用。</li>
+<li>再转成业务异常 <code>ConflictError</code>，接口返回 409，而不是把数据库异常变成 500。</li>
+</ul>
+<h3 id="122-with_for_update行锁防止重复刷新">12.2. with_for_update：行锁防止重复刷新</h3>
+<p>refresh token 每次刷新都会作废旧令牌、签发新令牌。如果同一个令牌被并发提交两次，两个请求都读到"未作废"，就会换出两组新令牌。解决办法是查询时加行锁：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/repositories/refresh_token_repository.py</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_by_hash_for_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_hash</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RefreshToken</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;查询并加行锁（SELECT ... FOR UPDATE）。</span>
+
+<span class="sd">    同一个令牌被并发提交刷新时，第二个请求会等第一个提交后再读，</span>
+<span class="sd">    读到的是已作废状态，不会出现一个令牌换出两组新令牌的情况。</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+        <span class="n">select</span><span class="p">(</span><span class="n">RefreshToken</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">RefreshToken</span><span class="o">.</span><span class="n">token_hash</span> <span class="o">==</span> <span class="n">token_hash</span><span class="p">)</span><span class="o">.</span><span class="n">with_for_update</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">scalar_one_or_none</span><span class="p">()</span>
+</code></pre></div>
+<p>生成的 SQL 末尾多了 <code>FOR UPDATE</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">refresh_tokens</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">refresh_tokens</span><span class="p">.</span><span class="n">token_hash</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">%</span><span class="p">(</span><span class="n">token_hash_1</span><span class="p">)</span><span class="n">s</span><span class="p">::</span><span class="nb">VARCHAR</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span>
+</code></pre></div>
+<pre class="mermaid"><code>sequenceDiagram
+    participant A as 请求 A
+    participant B as 请求 B
+    participant DB as PostgreSQL
+    A-&gt;&gt;DB: SELECT ... FOR UPDATE（拿到行锁）
+    B-&gt;&gt;DB: SELECT ... FOR UPDATE（等待 A 释放锁）
+    A-&gt;&gt;DB: 作废旧令牌、插入新令牌、COMMIT（释放锁）
+    DB--&gt;&gt;B: 返回这一行，revoked_at 已有值
+    B-&gt;&gt;B: 判定为已作废令牌被重用 → 401</code></pre>
+<ul>
+<li>行锁从 SELECT 开始持有，直到所在事务 commit 或 rollback 才释放。会话依赖在请求结束时会回滚未提交的事务，所以抛异常的路径也不会一直占着锁。</li>
+<li>用同一个令牌并发发起 3 个刷新请求，结果是 1 个 200、2 个 401。</li>
+<li>按 <code>AuthService.refresh</code> 的逻辑，后到的请求读到已作废状态，会被当作"已作废令牌被重用"，并作废整个令牌家族，先成功的那个请求拿到的新令牌也会一起失效。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>唯一约束 + 捕获 <code>IntegrityError</code></td>
+<td>防止<strong>插入</strong>重复数据</td>
+</tr>
+<tr>
+<td><code>with_for_update()</code> 行锁</td>
+<td>"先读后改"的操作，防止多个请求基于同一个旧状态各自修改</td>
+</tr>
+</tbody>
+</table>
+<h3 id="123-字符串比较区分大小写">12.3. 字符串比较区分大小写</h3>
+<p>PostgreSQL 的字符串比较默认<strong>区分大小写</strong>，<code>WHERE username = 'alice'</code> 匹配不到 <code>Alice</code>。唯一约束也一样，<code>Alice</code> 和 <code>alice</code> 被视为两个不同的值。</p>
+<p>示例中的用户名设计为区分大小写，所以 <code>User.username == username</code> 直接比较即可，不需要额外处理。例如用户 <code>Alice</code> 用小写的 <code>alice</code> 登录会返回 401。</p>
+<blockquote>
+<p>如果需要不区分大小写，就要在比较和唯一约束两处都做处理（例如统一转小写存储，或使用 <code>citext</code> 类型），只改查询不改约束会导致仍能注册大小写不同的重复用户名。</p>
+</blockquote>
+<h2 id="13-小结">13. 小结</h2>
+<ul>
+<li><code>AsyncEngine</code> 持有连接池，整个进程一个，在 lifespan 中创建、关闭时 <code>dispose()</code>；它是懒连接的，创建时不连数据库。<code>AsyncSession</code> 是一次工作单元，每个请求一个。</li>
+<li>连接池参数：<code>pool_size</code> 常驻连接，<code>max_overflow</code> 高峰额外连接，<code>pool_pre_ping</code> 取连接前探活，<code>pool_recycle</code> 定期重建连接。</li>
+<li>异步模式下 <code>async_sessionmaker</code> 要设 <code>expire_on_commit=False</code>，否则 commit 后访问属性会触发隐式 IO 而报错。</li>
+<li>会话依赖用 <code>async with</code> + <code>yield</code>：请求结束自动关闭、未提交事务自动回滚；不自动 commit，由 service 显式提交。</li>
+<li>模型用 <code>DeclarativeBase</code> + <code>Mapped[...]</code> + <code>mapped_column</code>；<code>X | None</code> 为可空列，其余默认 NOT NULL。</li>
+<li>在建第一张表前配置 <code>naming_convention</code>，让约束名可预测，Alembic 才能修改和删除它们。</li>
+<li><code>default</code> 由 Python 填值，<code>server_default</code> 写进表结构由数据库填值；公共字段用 Mixin 复用。</li>
+<li>主键用 UUID，避免暴露数据量和被遍历；外键加 <code>ondelete</code> 和 <code>index=True</code>。</li>
+<li>查询用 2.0 风格：<code>select().where()</code> + <code>scalar_one_or_none()</code>、<code>session.get()</code>、<code>update().where().values()</code>、<code>join()</code>。</li>
+<li>repository 只 flush，service 决定何时 commit。</li>
+<li>并发下用唯一约束 + 捕获 <code>IntegrityError</code> 防重复插入，用 <code>with_for_update()</code> 行锁保护"先读后改"。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

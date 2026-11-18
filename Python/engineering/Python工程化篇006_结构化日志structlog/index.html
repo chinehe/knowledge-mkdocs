@@ -1,0 +1,2876 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Python/engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87006_%E7%BB%93%E6%9E%84%E5%8C%96%E6%97%A5%E5%BF%97structlog/">
+      
+      
+        <link rel="prev" href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87005_%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86pydantic-settings/">
+      
+      
+        <link rel="next" href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>结构化日志structlog - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-为什么需要结构化日志" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              结构化日志structlog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语言基础
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工程化
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    工程化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    企业级Web后端初始化路线图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87002_%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%B7%A5%E5%85%B7ruff%E4%B8%8Emypy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    代码质量工具ruff与mypy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87003_pre-commit%E6%8F%90%E4%BA%A4%E5%89%8D%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pre-commit提交前自动检查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87004_pytest%E5%BC%82%E6%AD%A5%E6%B5%8B%E8%AF%95%E5%AE%9E%E8%B7%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pytest异步测试实践
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87005_%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86pydantic-settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置管理pydantic-settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    结构化日志structlog
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    结构化日志structlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-为什么需要结构化日志" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 为什么需要结构化日志
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 为什么需要结构化日志">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-自由文本日志的问题" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 自由文本日志的问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-结构化日志事件名--键值对" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 结构化日志：事件名 + 键值对
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-按环境选择输出格式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 按环境选择输出格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-写法约定" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. 写法约定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-与标准库-logging-桥接" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 与标准库 logging 桥接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 与标准库 logging 桥接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-为什么要桥接" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 为什么要桥接
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-配置代码" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 配置代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-关键配置项说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 关键配置项说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-两种来源的输出效果" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 两种来源的输出效果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-处理器链" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 处理器链
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 处理器链">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-处理器的工作方式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 处理器的工作方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-共享处理器各自的作用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 共享处理器各自的作用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-自定义-processor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 自定义 processor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-异常日志与敏感信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 异常日志与敏感信息
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 异常日志与敏感信息">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-坑①dict_tracebacks-会输出局部变量" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 坑①：dict_tracebacks 会输出局部变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-解决关闭-show_locals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 解决：关闭 show_locals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-dev-环境保留-locals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. dev 环境保留 locals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-容器中的日志输出位置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 容器中的日志输出位置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-接管-uvicorn-日志" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 接管 uvicorn 日志
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 接管 uvicorn 日志">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-清空-uvicorn-自带的-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 清空 uvicorn 自带的 handler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-坑②uvicorn-附带的-color_message" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. 坑②：uvicorn 附带的 color_message
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-关闭-uvicornaccess改由中间件输出访问日志" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 关闭 uvicorn.access，改由中间件输出访问日志
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-启动最开始的几行不经过我们的格式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. 启动最开始的几行不经过我们的格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-请求上下文自动携带-request_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 请求上下文：自动携带 request_id
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-输出样例dev-与-prod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 输出样例：dev 与 prod
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 输出样例：dev 与 prod">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-dev-环境" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. dev 环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-prod-环境" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. prod 环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI框架
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQLAlchemy
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-为什么需要结构化日志" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 为什么需要结构化日志
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 为什么需要结构化日志">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-自由文本日志的问题" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 自由文本日志的问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-结构化日志事件名--键值对" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 结构化日志：事件名 + 键值对
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-按环境选择输出格式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 按环境选择输出格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-写法约定" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. 写法约定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-与标准库-logging-桥接" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 与标准库 logging 桥接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 与标准库 logging 桥接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-为什么要桥接" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 为什么要桥接
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-配置代码" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 配置代码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-关键配置项说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 关键配置项说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-两种来源的输出效果" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 两种来源的输出效果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-处理器链" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 处理器链
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 处理器链">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-处理器的工作方式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 处理器的工作方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-共享处理器各自的作用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 共享处理器各自的作用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-自定义-processor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. 自定义 processor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-异常日志与敏感信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 异常日志与敏感信息
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 异常日志与敏感信息">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-坑①dict_tracebacks-会输出局部变量" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 坑①：dict_tracebacks 会输出局部变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-解决关闭-show_locals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 解决：关闭 show_locals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-dev-环境保留-locals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. dev 环境保留 locals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-容器中的日志输出位置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 容器中的日志输出位置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-接管-uvicorn-日志" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 接管 uvicorn 日志
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 接管 uvicorn 日志">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-清空-uvicorn-自带的-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 清空 uvicorn 自带的 handler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-坑②uvicorn-附带的-color_message" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. 坑②：uvicorn 附带的 color_message
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-关闭-uvicornaccess改由中间件输出访问日志" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 关闭 uvicorn.access，改由中间件输出访问日志
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-启动最开始的几行不经过我们的格式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. 启动最开始的几行不经过我们的格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-请求上下文自动携带-request_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 请求上下文：自动携带 request_id
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-输出样例dev-与-prod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 输出样例：dev 与 prod
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 输出样例：dev 与 prod">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-dev-环境" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. dev 环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-prod-环境" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. prod 环境
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Python
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    工程化
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>结构化日志structlog</h1>
+
+<h2 id="1-为什么需要结构化日志">1. 为什么需要结构化日志</h2>
+<h3 id="11-自由文本日志的问题">1.1. 自由文本日志的问题</h3>
+<p>很多项目的日志是这样写的：</p>
+<div class="highlight"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;用户 </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2"> 创建订单 </span><span class="si">{</span><span class="n">order_id</span><span class="si">}</span><span class="s2">，金额 </span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>输出是一句给人看的话：</p>
+<div class="highlight"><pre><span></span><code>2026-11-18 15:06:22 INFO 用户 u-1 创建订单 1001，金额 99.5
+</code></pre></div>
+<p>人读起来没问题，但日志一多、要上日志平台检索时就很麻烦：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>难以按字段检索</td>
+<td>想查"金额大于 1000 的订单"，只能写正则去匹配句子，句式一改正则就失效</td>
+</tr>
+<tr>
+<td>同一类事件写法不统一</td>
+<td>A 写"创建订单"，B 写"下单成功"，C 写"order created"，统计不到一起</td>
+</tr>
+<tr>
+<td>上下文靠手工拼</td>
+<td>每条日志都要自己把 <code>request_id</code> 拼进字符串，漏一条就串不起整个请求</td>
+</tr>
+<tr>
+<td>机器解析成本高</td>
+<td>日志平台需要为每种格式单独配置解析规则</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-结构化日志事件名--键值对">1.2. 结构化日志：事件名 + 键值对</h3>
+<p>结构化日志的思路是：<strong>每条日志 = 一个固定的事件名 + 一组键值对</strong>。事件名说明"发生了什么"，键值对记录"相关的数据"。</p>
+<div class="highlight"><pre><span></span><code><span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;order_created&quot;</span><span class="p">,</span> <span class="n">order_id</span><span class="o">=</span><span class="mi">1001</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mf">99.5</span><span class="p">)</span>
+</code></pre></div>
+<p>生产环境下输出为一行 JSON：</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;order_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;order_created&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_service.demo&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157009Z&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>日志平台拿到的是现成的字段，可以直接写 <code>event = "order_created" AND amount &gt; 1000</code> 这样的查询，不需要任何解析规则。</p>
+<p><a href="https://www.structlog.org/">structlog</a> 是 Python 中最常用的结构化日志库。安装：</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>add<span class="w"> </span>structlog
+</code></pre></div>
+<h3 id="13-按环境选择输出格式">1.3. 按环境选择输出格式</h3>
+<p>同一套日志调用，按环境输出不同格式：</p>
+<table>
+<thead>
+<tr>
+<th>环境</th>
+<th>渲染器</th>
+<th>输出形式</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dev / test</td>
+<td><code>structlog.dev.ConsoleRenderer</code></td>
+<td>彩色、对齐的单行文本，异常带完整堆栈</td>
+<td>本地开发时人眼阅读</td>
+</tr>
+<tr>
+<td>prod</td>
+<td><code>structlog.processors.JSONRenderer</code></td>
+<td>每行一条 JSON</td>
+<td>由 ELK、Loki、阿里云 SLS 等日志平台采集和检索</td>
+</tr>
+</tbody>
+</table>
+<p>业务代码不关心最终格式，只管调用 <code>log.info(...)</code>；格式由启动时的日志配置决定。</p>
+<h3 id="14-写法约定">1.4. 写法约定</h3>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ 事件名 + 键值对</td>
+<td><code>log.info("order_created", order_id=oid, amount=amt)</code></td>
+<td>字段可检索</td>
+</tr>
+<tr>
+<td>❌ f-string 拼接</td>
+<td><code>log.info(f"order {oid} created, amount={amt}")</code></td>
+<td>数据被拼进字符串，无法按字段查询</td>
+</tr>
+<tr>
+<td>✅ 事件名用 snake_case</td>
+<td><code>user_login</code>、<code>http_request</code>、<code>unhandled_exception</code></td>
+<td>固定、简短，便于统计同类事件</td>
+</tr>
+<tr>
+<td>❌ 记录敏感信息</td>
+<td><code>log.info("user_login", password=pwd, token=tok)</code></td>
+<td>密码、令牌一旦进日志，所有能看日志的人都能拿到</td>
+</tr>
+</tbody>
+</table>
+<p>业务代码统一用项目封装的 <code>get_logger</code> 获取 logger：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">my_service.core.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;app_startup&quot;</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">app_env</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">__version__</span><span class="p">)</span>
+</code></pre></div>
+<p><code>__name__</code> 是模块路径（如 <code>my_service.main</code>），会出现在每条日志的 <code>logger</code> 字段里，一眼就能看出日志来自哪个模块。</p>
+<h2 id="2-与标准库-logging-桥接">2. 与标准库 logging 桥接</h2>
+<h3 id="21-为什么要桥接">2.1. 为什么要桥接</h3>
+<p>一个 FastAPI 服务里，日志来自两个地方：</p>
+<ul>
+<li><strong>自己的代码</strong>：通过 structlog 输出。</li>
+<li><strong>第三方库</strong>：uvicorn、sqlalchemy、httpx 等用的都是标准库 <code>logging</code>，不会改成 structlog。</li>
+</ul>
+<p>如果两边各自输出，同一个服务的日志就会一半是 JSON、一半是普通文本，日志平台没法统一解析。桥接的目标是：<strong>两条来源最终都交给同一个 formatter 渲染，输出格式完全一致。</strong></p>
+<pre class="mermaid"><code>flowchart LR
+    A["业务代码&lt;br/&gt;log.info('order_created', ...)"] --&gt; B["structlog 处理器链&lt;br/&gt;shared_processors"]
+    B --&gt; C["wrap_for_formatter&lt;br/&gt;打包成 LogRecord"]
+    D["第三方库&lt;br/&gt;uvicorn / sqlalchemy / httpx&lt;br/&gt;logging.getLogger(...).info(...)"] --&gt; E["标准库 LogRecord"]
+    C --&gt; F["root logger"]
+    E --&gt; F
+    F --&gt; G["StreamHandler(sys.stdout)"]
+    G --&gt; H["ProcessorFormatter"]
+    H -- "来自 structlog：直接使用已处理的 event_dict" --&gt; I["renderer&lt;br/&gt;dev: ConsoleRenderer&lt;br/&gt;prod: JSONRenderer"]
+    H -- "来自标准库：先跑 foreign_pre_chain" --&gt; I
+    I --&gt; J["stdout"]</code></pre>
+<h3 id="22-配置代码">2.2. 配置代码</h3>
+<p>下面是日志模块 <code>src/my_service/core/logging.py</code> 的完整实现（服务启动时在 <code>create_app()</code> 中调用一次 <code>setup_logging(settings)</code>）：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">structlog</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">structlog.tracebacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExceptionDictTransformer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">structlog.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">EventDict</span><span class="p">,</span> <span class="n">Processor</span><span class="p">,</span> <span class="n">WrappedLogger</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.core.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Settings</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_drop_color_message</span><span class="p">(</span><span class="n">_</span><span class="p">:</span> <span class="n">WrappedLogger</span><span class="p">,</span> <span class="n">__</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">event_dict</span><span class="p">:</span> <span class="n">EventDict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EventDict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;uvicorn 会在 extra 里附带一份带颜色控制符的 color_message，与 event 重复，去掉。&quot;&quot;&quot;</span>
+    <span class="n">event_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;color_message&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">event_dict</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_logging</span><span class="p">(</span><span class="n">setting</span><span class="p">:</span> <span class="n">Settings</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># structlog 日志与第三方库（uvicorn、sqlalchemy 等）的标准库日志共用的处理链</span>
+    <span class="n">shared_processors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Processor</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">structlog</span><span class="o">.</span><span class="n">contextvars</span><span class="o">.</span><span class="n">merge_contextvars</span><span class="p">,</span>  <span class="c1"># 合并上下文变量，如 request_id</span>
+        <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">add_log_level</span><span class="p">,</span>  <span class="c1"># 增加 level 字段</span>
+        <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">add_logger_name</span><span class="p">,</span>  <span class="c1"># 增加 logger 字段</span>
+        <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">ExtraAdder</span><span class="p">(),</span>  <span class="c1"># 支持标准库的 logger.info(&quot;...&quot;, extra={...})</span>
+        <span class="n">_drop_color_message</span><span class="p">,</span>
+        <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">TimeStamper</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;iso&quot;</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">renderer</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Processor</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">setting</span><span class="o">.</span><span class="n">is_prod</span><span class="p">:</span>
+        <span class="n">renderer</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="c1"># 异常堆栈转成 JSON；不输出局部变量，避免密码、token 写进日志</span>
+            <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">ExceptionRenderer</span><span class="p">(</span><span class="n">ExceptionDictTransformer</span><span class="p">(</span><span class="n">show_locals</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+            <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">JSONRenderer</span><span class="p">(),</span>
+        <span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">renderer</span> <span class="o">=</span> <span class="p">[</span><span class="n">structlog</span><span class="o">.</span><span class="n">dev</span><span class="o">.</span><span class="n">ConsoleRenderer</span><span class="p">()]</span>
+
+    <span class="n">structlog</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+        <span class="n">processors</span><span class="o">=</span><span class="p">[</span><span class="o">*</span><span class="n">shared_processors</span><span class="p">,</span> <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">ProcessorFormatter</span><span class="o">.</span><span class="n">wrap_for_formatter</span><span class="p">],</span>
+        <span class="n">logger_factory</span><span class="o">=</span><span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">LoggerFactory</span><span class="p">(),</span>
+        <span class="n">wrapper_class</span><span class="o">=</span><span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">BoundLogger</span><span class="p">,</span>
+        <span class="n">cache_logger_on_first_use</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">formatter</span> <span class="o">=</span> <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">ProcessorFormatter</span><span class="p">(</span>
+        <span class="n">foreign_pre_chain</span><span class="o">=</span><span class="n">shared_processors</span><span class="p">,</span>
+        <span class="n">processors</span><span class="o">=</span><span class="p">[</span><span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">ProcessorFormatter</span><span class="o">.</span><span class="n">remove_processors_meta</span><span class="p">,</span> <span class="o">*</span><span class="n">renderer</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+    <span class="n">handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+
+    <span class="n">root</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">setting</span><span class="o">.</span><span class="n">log_level</span><span class="p">)</span>
+
+    <span class="c1"># uvicorn 自带 handler，清掉后交给 root 统一输出，避免格式不一致或重复打印</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span> <span class="s2">&quot;uvicorn.error&quot;</span><span class="p">,</span> <span class="s2">&quot;uvicorn.access&quot;</span><span class="p">):</span>
+        <span class="n">uv_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">uv_logger</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="n">uv_logger</span><span class="o">.</span><span class="n">propagate</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># 访问日志改由 RequestContextMiddleware 输出（带 request_id 和耗时），</span>
+    <span class="c1"># 关掉 uvicorn 自带的，避免重复</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;uvicorn.access&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_logger</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">BoundLogger</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">structlog</span><span class="o">.</span><span class="n">stdlib</span><span class="o">.</span><span class="n">get_logger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="23-关键配置项说明">2.3. 关键配置项说明</h3>
+<p><code>structlog.configure(...)</code> 决定 structlog 这一侧怎么处理：</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>processors</code></td>
+<td><code>[*shared_processors, wrap_for_formatter]</code></td>
+<td>先跑共享处理器，最后一步 <code>wrap_for_formatter</code> <strong>不渲染</strong>，而是把 event_dict 打包交给标准库 logging</td>
+</tr>
+<tr>
+<td><code>logger_factory</code></td>
+<td><code>structlog.stdlib.LoggerFactory()</code></td>
+<td>structlog 底层使用标准库的 <code>logging.Logger</code>，日志因此会走 root 的 handler</td>
+</tr>
+<tr>
+<td><code>wrapper_class</code></td>
+<td><code>structlog.stdlib.BoundLogger</code></td>
+<td>提供 <code>info</code>、<code>warning</code>、<code>exception</code> 等与标准库一致的方法</td>
+</tr>
+<tr>
+<td><code>cache_logger_on_first_use</code></td>
+<td><code>True</code></td>
+<td>首次使用后缓存 logger，减少每次调用的开销</td>
+</tr>
+</tbody>
+</table>
+<p><code>ProcessorFormatter(...)</code> 是挂在 handler 上的 formatter，决定最终输出什么：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>foreign_pre_chain</code></td>
+<td><code>shared_processors</code></td>
+<td>只对<strong>来自标准库</strong>的日志（"外来"日志）执行，让第三方库日志也补齐 level、logger、timestamp 等字段</td>
+</tr>
+<tr>
+<td><code>processors</code></td>
+<td><code>[remove_processors_meta, *renderer]</code></td>
+<td>两种来源都会执行；<code>remove_processors_meta</code> 删掉 structlog 内部用的 <code>_record</code>、<code>_from_structlog</code> 字段，再交给渲染器</td>
+</tr>
+</tbody>
+</table>
+<p>handler 只有一个：</p>
+<ul>
+<li>root logger 上<strong>只挂一个</strong> <code>StreamHandler(sys.stdout)</code>，先 <code>root.handlers.clear()</code> 再添加，避免重复调用 <code>setup_logging</code> 时挂上多个 handler 导致每条日志打印多次。</li>
+<li>所有 logger 默认 <code>propagate=True</code>，日志都会冒泡到 root，由这一个 handler 统一输出。</li>
+<li><code>root.setLevel(setting.log_level)</code> 让日志级别由配置项 <code>LOG_LEVEL</code> 控制。</li>
+</ul>
+<h3 id="24-两种来源的输出效果">2.4. 两种来源的输出效果</h3>
+<p>用一个演示脚本分别从 structlog 和标准库 logger 写日志（logger 名称模拟 sqlalchemy）：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.core.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_settings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.core.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span><span class="p">,</span> <span class="n">setup_logging</span>
+
+<span class="n">setup_logging</span><span class="p">(</span><span class="n">get_settings</span><span class="p">())</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="s2">&quot;my_service.demo&quot;</span><span class="p">)</span>
+
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;order_created&quot;</span><span class="p">,</span> <span class="n">order_id</span><span class="o">=</span><span class="mi">1001</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mf">99.5</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;sqlalchemy.engine&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;pool exhausted, size=</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;pool&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">})</span>
+</code></pre></div>
+<p><code>APP_ENV=prod</code> 时两条日志都是 JSON，字段一致：</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;order_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;order_created&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_service.demo&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157009Z&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pool exhausted, size=10&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;warning&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sqlalchemy.engine&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;pool&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157271Z&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>标准库日志的消息（<code>%d</code> 已经被格式化）成为 <code>event</code> 字段，<code>extra</code> 里的 <code>pool</code> 成为普通字段。</p>
+<h2 id="3-处理器链">3. 处理器链</h2>
+<h3 id="31-处理器的工作方式">3.1. 处理器的工作方式</h3>
+<p>structlog 的核心是一条<strong>处理器链（processor chain）</strong>：每次调用 <code>log.info("order_created", order_id=1001)</code>，structlog 把参数组装成一个字典 <code>event_dict</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="s2">&quot;order_created&quot;</span><span class="p">,</span> <span class="s2">&quot;order_id&quot;</span><span class="p">:</span> <span class="mi">1001</span><span class="p">}</span>
+</code></pre></div>
+<p>然后按顺序交给每个处理器，每个处理器接收上一个的结果、加工后返回，最后一个处理器（渲染器）把字典变成字符串。</p>
+<pre class="mermaid"><code>flowchart LR
+    A["event_dict"] --&gt; B[merge_contextvars] --&gt; C[add_log_level] --&gt; D[add_logger_name] --&gt; E[ExtraAdder] --&gt; F[_drop_color_message] --&gt; G[TimeStamper] --&gt; H["渲染器"] --&gt; I["输出字符串"]</code></pre>
+<h3 id="32-共享处理器各自的作用">3.2. 共享处理器各自的作用</h3>
+<table>
+<thead>
+<tr>
+<th>处理器</th>
+<th>新增 / 修改的字段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>structlog.contextvars.merge_contextvars</code></td>
+<td><code>request_id</code> 等</td>
+<td>把通过 <code>bound_contextvars</code> 绑定在当前上下文里的变量合并进来，见第 7 节</td>
+</tr>
+<tr>
+<td><code>structlog.stdlib.add_log_level</code></td>
+<td><code>level</code></td>
+<td>记录日志级别，如 <code>info</code>、<code>warning</code>、<code>error</code></td>
+</tr>
+<tr>
+<td><code>structlog.stdlib.add_logger_name</code></td>
+<td><code>logger</code></td>
+<td>记录 logger 名称，如 <code>my_service.main</code>、<code>uvicorn.error</code></td>
+</tr>
+<tr>
+<td><code>structlog.stdlib.ExtraAdder()</code></td>
+<td><code>extra</code> 中的键</td>
+<td>把标准库 <code>logger.info("...", extra={...})</code> 传入的字段加进 event_dict，第三方库的附加信息不会丢</td>
+</tr>
+<tr>
+<td><code>_drop_color_message</code></td>
+<td>删除 <code>color_message</code></td>
+<td>项目自定义，见 3.3 节</td>
+</tr>
+<tr>
+<td><code>structlog.processors.TimeStamper(fmt="iso", utc=True)</code></td>
+<td><code>timestamp</code></td>
+<td>ISO 8601 格式的 UTC 时间，如 <code>2026-11-18T07:06:23.157009Z</code>；统一 UTC，避免多台机器时区不同</td>
+</tr>
+</tbody>
+</table>
+<p>这组处理器同时用在 <code>structlog.configure(processors=...)</code> 和 <code>ProcessorFormatter(foreign_pre_chain=...)</code> 里，所以两种来源的日志字段一致。</p>
+<h3 id="33-自定义-processor">3.3. 自定义 processor</h3>
+<p>处理器就是一个普通函数，签名固定为：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">structlog.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">EventDict</span><span class="p">,</span> <span class="n">WrappedLogger</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_processor</span><span class="p">(</span><span class="n">logger</span><span class="p">:</span> <span class="n">WrappedLogger</span><span class="p">,</span> <span class="n">method_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">event_dict</span><span class="p">:</span> <span class="n">EventDict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EventDict</span><span class="p">:</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">event_dict</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>logger</code></td>
+<td>底层的 logger 对象，一般用不到</td>
+</tr>
+<tr>
+<td><code>method_name</code></td>
+<td>调用的方法名，如 <code>"info"</code>、<code>"warning"</code></td>
+</tr>
+<tr>
+<td><code>event_dict</code></td>
+<td>当前的日志字典，可以增、删、改字段</td>
+</tr>
+<tr>
+<td>返回值</td>
+<td>加工后的字典，交给下一个处理器</td>
+</tr>
+</tbody>
+</table>
+<p>项目中的 <code>_drop_color_message</code> 用来删除 uvicorn 附带的重复字段（原因见 6.2 节）。用不到的参数用 <code>_</code>、<code>__</code> 命名：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_drop_color_message</span><span class="p">(</span><span class="n">_</span><span class="p">:</span> <span class="n">WrappedLogger</span><span class="p">,</span> <span class="n">__</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">event_dict</span><span class="p">:</span> <span class="n">EventDict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">EventDict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;uvicorn 会在 extra 里附带一份带颜色控制符的 color_message，与 event 重复，去掉。&quot;&quot;&quot;</span>
+    <span class="n">event_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;color_message&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">event_dict</span>
+</code></pre></div>
+<p><strong>顺序很重要</strong>：<code>color_message</code> 是 uvicorn 通过 <code>extra</code> 传入的，只有经过 <code>ExtraAdder</code> 之后它才会出现在 event_dict 里。所以 <code>_drop_color_message</code> 必须排在 <code>ExtraAdder</code> 之后。把两种顺序分别配置在 <code>foreign_pre_chain</code> 中，运行后会输出：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 顺序 1：[_drop_color_message, ExtraAdder()]</span>
+<span class="p">{</span><span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="s2">&quot;Started server process [1]&quot;</span><span class="p">,</span> <span class="s2">&quot;color_message&quot;</span><span class="p">:</span> <span class="s2">&quot;Started server process [</span><span class="se">\u001b</span><span class="s2">[36m</span><span class="si">%d</span><span class="se">\u001b</span><span class="s2">[0m]&quot;</span><span class="p">}</span>
+
+<span class="c1"># 顺序 2：[ExtraAdder(), _drop_color_message]</span>
+<span class="p">{</span><span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="s2">&quot;Started server process [1]&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>排在前面时删除操作什么都没删到，<code>color_message</code> 随后被 <code>ExtraAdder</code> 加了进来。</p>
+<h2 id="4-异常日志与敏感信息">4. 异常日志与敏感信息</h2>
+<h3 id="41-坑①dict_tracebacks-会输出局部变量">4.1. 坑①：dict_tracebacks 会输出局部变量</h3>
+<p>在 <code>except</code> 块里调用 <code>log.exception(...)</code>，structlog 会把异常信息一起记录。生产环境需要把堆栈也转成 JSON，常见写法是使用 structlog 自带的 <code>structlog.processors.dict_tracebacks</code>。</p>
+<p>用下面的脚本验证：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">structlog</span>
+
+<span class="n">structlog</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="n">processors</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">add_log_level</span><span class="p">,</span>
+        <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">dict_tracebacks</span><span class="p">,</span>
+        <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">JSONRenderer</span><span class="p">(),</span>
+    <span class="p">],</span>
+    <span class="n">logger_factory</span><span class="o">=</span><span class="n">structlog</span><span class="o">.</span><span class="n">PrintLoggerFactory</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">structlog</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;s3cret&quot;</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">divide</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;divide_failed&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>输出（为便于阅读做了换行）：</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;divide_failed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;exception&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;exc_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ZeroDivisionError&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;exc_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;division by zero&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;frames&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/structlog_locals_demo.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;lineno&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;module&gt;&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">&quot;locals&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;sys&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;module &#39;sys&#39; (built-in)&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;structlog&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;module &#39;structlog&#39; from &#39;...&#39;&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;log&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;BoundLoggerLazyProxy(...)&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;divide&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;function divide at 0x1010ba660&gt;&quot;</span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/structlog_locals_demo.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;lineno&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;divide&quot;</span><span class="p">,</span>
+<span class="w">     </span><span class="nt">&quot;locals&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;a&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;b&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&#39;s3cret&#39;&quot;</span><span class="p">}}</span>
+<span class="w">  </span><span class="p">],</span><span class="w"> </span><span class="err">...</span><span class="p">}]}</span>
+</code></pre></div>
+<p><code>dict_tracebacks</code> 默认会把<strong>每一帧的局部变量</strong>都写进 <code>frames[].locals</code>：模块对象、函数对象，以及 <code>password</code> 这样的变量值。真实服务里，出错函数的局部变量可能就是用户密码、JWT、数据库连接串，一次异常就会把它们写进日志平台。</p>
+<h3 id="42-解决关闭-show_locals">4.2. 解决：关闭 show_locals</h3>
+<p><code>dict_tracebacks</code> 等价于使用默认参数的 <code>ExceptionRenderer(ExceptionDictTransformer())</code>。项目改为显式构造，并关闭局部变量：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">structlog.tracebacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExceptionDictTransformer</span>
+
+<span class="n">renderer</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">ExceptionRenderer</span><span class="p">(</span><span class="n">ExceptionDictTransformer</span><span class="p">(</span><span class="n">show_locals</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+    <span class="n">structlog</span><span class="o">.</span><span class="n">processors</span><span class="o">.</span><span class="n">JSONRenderer</span><span class="p">(),</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>同样的异常，项目配置下的 prod 输出：</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;divide_failed&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_service.demo&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157375Z&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;exception&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;exc_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ZeroDivisionError&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;exc_value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;division by zero&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;exc_notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="nt">&quot;syntax_error&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;is_cause&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;frames&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/structlog_demo.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;lineno&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;module&gt;&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/structlog_demo.py&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;lineno&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;divide&quot;</span><span class="p">}],</span><span class="w"> </span><span class="nt">&quot;is_group&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;exceptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]}]}</span>
+</code></pre></div>
+<p><code>frames</code> 里只剩 <code>filename</code>、<code>lineno</code>、<code>name</code>，足够定位出错位置，局部变量不再输出。</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>frames 内容</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dict_tracebacks</code></td>
+<td><code>filename</code>、<code>lineno</code>、<code>name</code>、<code>locals</code></td>
+<td>不建议用于生产</td>
+</tr>
+<tr>
+<td><code>ExceptionRenderer(ExceptionDictTransformer(show_locals=False))</code></td>
+<td><code>filename</code>、<code>lineno</code>、<code>name</code></td>
+<td>生产环境</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-dev-环境保留-locals">4.3. dev 环境保留 locals</h3>
+<p>dev 环境使用 <code>ConsoleRenderer</code>，项目没有关闭局部变量。环境里装有 rich 时，堆栈会画成带框的表格，每一帧下面列出 locals，方便本地排查（节选）：</p>
+<div class="highlight"><pre><span></span><code>2026-11-18T07:06:35.246115Z [error    ] divide_failed                  [my_service.demo]
+╭─────────────────────────────── Traceback (most recent call last) ────────────────────────────────╮
+│ /tmp/structlog_demo.py:26 in divide                                                              │
+│                                                                                                  │
+│   24 def divide(a, b):                                                                           │
+│   25 │   password = &quot;s3cret&quot;                                                                     │
+│ ❱ 26 │   return a / b                                                                            │
+│                                                                                                  │
+│ ╭────── locals ───────╮                                                                          │
+│ │        a = 1        │                                                                          │
+│ │        b = 0        │                                                                          │
+│ │ password = &#39;s3cret&#39; │                                                                          │
+│ ╰─────────────────────╯                                                                          │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+ZeroDivisionError: division by zero
+</code></pre></div>
+<p>本地数据是开发者自己的测试数据，看到局部变量的好处大于风险；生产日志会集中存储、多人可见，所以要关掉。</p>
+<h2 id="5-容器中的日志输出位置">5. 容器中的日志输出位置</h2>
+<p>项目的 handler 是 <code>logging.StreamHandler(sys.stdout)</code>，<strong>应用只把日志写到标准输出，不写日志文件</strong>。这是容器部署的惯例：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用写 stdout</td>
+<td>应用只管输出，不关心日志最终存到哪</td>
+</tr>
+<tr>
+<td>平台负责收集</td>
+<td>Docker、Kubernetes 会接管容器的标准输出，日志平台的采集器（Filebeat、Promtail、Logtail 等）从这里读取</td>
+</tr>
+<tr>
+<td>应用不写文件</td>
+<td>容器文件系统是临时的，重建即丢失；写文件还要自己处理切割、清理和磁盘占满的问题</td>
+</tr>
+</tbody>
+</table>
+<p>本地运行时，日志直接显示在终端；<code>docker compose logs</code> 或 <code>kubectl logs</code> 看到的也是同一份输出。</p>
+<h2 id="6-接管-uvicorn-日志">6. 接管 uvicorn 日志</h2>
+<h3 id="61-清空-uvicorn-自带的-handler">6.1. 清空 uvicorn 自带的 handler</h3>
+<p>uvicorn 启动时会给 <code>uvicorn</code>、<code>uvicorn.error</code>、<code>uvicorn.access</code> 这几个 logger 挂上自己的 handler 和格式。如果不处理，这些日志会按 uvicorn 的格式单独打印，和我们的格式不一致。</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span> <span class="s2">&quot;uvicorn.error&quot;</span><span class="p">,</span> <span class="s2">&quot;uvicorn.access&quot;</span><span class="p">):</span>
+    <span class="n">uv_logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">uv_logger</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>   <span class="c1"># 去掉 uvicorn 自己的 handler</span>
+    <span class="n">uv_logger</span><span class="o">.</span><span class="n">propagate</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># 冒泡到 root，交给我们的 handler 输出</span>
+</code></pre></div>
+<p>处理之后，uvicorn 的日志也经过 <code>foreign_pre_chain</code> 和同一个渲染器，<code>logger</code> 字段为 <code>uvicorn.error</code> 等。</p>
+<h3 id="62-坑②uvicorn-附带的-color_message">6.2. 坑②：uvicorn 附带的 color_message</h3>
+<p>uvicorn 在写部分日志时会通过 <code>extra</code> 附带一个 <code>color_message</code> 字段，内容是带终端颜色控制符的同一句话，用于它自己的彩色格式。经过 <code>ExtraAdder</code> 后，这个字段会原样出现在 JSON 中：</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Started server process [12345]&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uvicorn.error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;color_message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Started server process [\u001b[36m%d\u001b[0m]&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p><code>color_message</code> 和 <code>event</code> 内容重复，还带有 <code>\u001b[36m</code> 这样的控制符，对检索没有用处。项目用自定义的 <code>_drop_color_message</code> 处理器删掉它（排在 <code>ExtraAdder</code> 之后，见 3.3 节），删除后：</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Started server process [12345]&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uvicorn.error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157303Z&quot;</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="63-关闭-uvicornaccess改由中间件输出访问日志">6.3. 关闭 uvicorn.access，改由中间件输出访问日志</h3>
+<p>uvicorn 的访问日志（<code>uvicorn.access</code>）只有客户端地址、方法、路径和状态码，没有 <code>request_id</code> 和耗时。项目把它关掉：</p>
+<div class="highlight"><pre><span></span><code><span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;uvicorn.access&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+<p>访问日志改由请求中间件 <code>RequestContextMiddleware</code>（<code>src/my_service/core/middleware.py</code>）在请求结束时输出：</p>
+<div class="highlight"><pre><span></span><code><span class="k">finally</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_SKIP_ACCESS_LOG_PATHS</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;http_request&quot;</span><span class="p">,</span>
+            <span class="n">method</span><span class="o">=</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">],</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">],</span>
+            <span class="n">status</span><span class="o">=</span><span class="n">status_code</span><span class="p">,</span>
+            <span class="n">duration_ms</span><span class="o">=</span><span class="nb">round</span><span class="p">((</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>对比</th>
+<th>uvicorn.access</th>
+<th>中间件 <code>http_request</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>格式</td>
+<td>一句文本</td>
+<td>结构化字段</td>
+</tr>
+<tr>
+<td>request_id</td>
+<td>无</td>
+<td>有（来自 contextvars）</td>
+</tr>
+<tr>
+<td>耗时</td>
+<td>无</td>
+<td><code>duration_ms</code></td>
+</tr>
+<tr>
+<td>健康检查</td>
+<td>每次探针都记录</td>
+<td><code>/healthz</code>、<code>/readyz</code> 不记录，避免刷屏</td>
+</tr>
+</tbody>
+</table>
+<p>如果两者都开着，每个请求会打印两条访问日志，所以只保留中间件这一条。</p>
+<h3 id="64-启动最开始的几行不经过我们的格式">6.4. 启动最开始的几行不经过我们的格式</h3>
+<p>用 <code>fastapi dev</code> 或 <code>uvicorn</code> 启动时，终端最前面会出现几行 uvicorn 自己格式的日志：</p>
+<div class="highlight"><pre><span></span><code>INFO:     ...
+INFO:     ...
+</code></pre></div>
+<p>这是正常现象：这几行是 uvicorn 在<strong>导入我们的应用之前</strong>打印的。那时 <code>create_app()</code> 还没执行，<code>setup_logging</code> 也还没被调用，用的仍是 uvicorn 默认的日志配置。应用导入之后的日志才会使用统一格式。</p>
+<h2 id="7-请求上下文自动携带-request_id">7. 请求上下文：自动携带 request_id</h2>
+<p>请求中间件在处理每个请求时，用 <code>structlog.contextvars.bound_contextvars</code> 绑定 <code>request_id</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 绑定后，这个请求内的所有日志都会自动带上 request_id</span>
+<span class="k">with</span> <span class="n">structlog</span><span class="o">.</span><span class="n">contextvars</span><span class="o">.</span><span class="n">bound_contextvars</span><span class="p">(</span><span class="n">request_id</span><span class="o">=</span><span class="n">request_id</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send_with_request_id</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;unhandled_exception&quot;</span><span class="p">)</span>
+        <span class="o">...</span>
+</code></pre></div>
+<p>原理是两部分配合：</p>
+<ol>
+<li><code>bound_contextvars</code> 把 <code>request_id</code> 存进 Python 的 <code>contextvars</code>，每个请求（每个异步任务）各自独立，并发请求之间不会串；<code>with</code> 块结束时自动解绑。</li>
+<li>处理器链第一步 <code>merge_contextvars</code> 把这些变量合并进每条日志。</li>
+</ol>
+<p>因此在这个请求里，路由、service、repository 中的任意 <code>log.info(...)</code> 都不用手动传 <code>request_id</code>。由于 <code>merge_contextvars</code> 也在 <code>foreign_pre_chain</code> 里，第三方库在请求内写的标准库日志同样会带上它：</p>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">structlog</span><span class="o">.</span><span class="n">contextvars</span><span class="o">.</span><span class="n">bound_contextvars</span><span class="p">(</span><span class="n">request_id</span><span class="o">=</span><span class="s2">&quot;3f2a9c&quot;</span><span class="p">):</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;user_login&quot;</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="s2">&quot;u-1&quot;</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;sqlalchemy.engine&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;BEGIN (implicit)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;u-1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user_login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;request_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3f2a9c&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_service.demo&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157326Z&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BEGIN (implicit)&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;request_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3f2a9c&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sqlalchemy.engine&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157359Z&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p><code>request_id</code> 的生成规则、<code>X-Request-ID</code> 响应头、以及纯 ASGI 中间件的写法，详见 <a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87003_%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E4%B8%8E%E8%AF%B7%E6%B1%82%E8%BF%BD%E8%B8%AA%E4%B8%AD%E9%97%B4%E4%BB%B6/">FastAPI基础篇003_统一异常处理与请求追踪中间件</a>。</p>
+<h2 id="8-输出样例dev-与-prod">8. 输出样例：dev 与 prod</h2>
+<p>先运行 2.4、6.2、7 节中的演示脚本，再用 httpx 的 <code>ASGITransport</code> 在进程内启动应用（包括 lifespan），带 <code>X-Request-ID: demo-req-001</code> 请求一次 <code>GET /api/v1/auth/me</code>（未登录，返回 401），再请求一次 <code>/healthz</code>，运行后会输出下面的日志。</p>
+<h3 id="81-dev-环境">8.1. dev 环境</h3>
+<p><code>APP_ENV=dev</code>（终端里是彩色的，这里用 <code>NO_COLOR=1</code> 去掉颜色）：</p>
+<div class="highlight"><pre><span></span><code>2026-11-18T07:06:35.245771Z [info     ] order_created                  [my_service.demo] amount=99.5 order_id=1001
+2026-11-18T07:06:35.245973Z [warning  ] pool exhausted, size=10        [sqlalchemy.engine] pool=main
+2026-11-18T07:06:35.246016Z [info     ] Started server process [12345] [uvicorn.error]
+2026-11-18T07:06:35.246046Z [info     ] user_login                     [my_service.demo] request_id=3f2a9c user_id=u-1
+2026-11-18T07:06:35.246093Z [info     ] BEGIN (implicit)               [sqlalchemy.engine] request_id=3f2a9c
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>2026-11-18T07:07:10.480164Z [info     ] app_startup                    [my_service.main] env=dev version=0.1.0
+2026-11-18T07:07:10.487404Z [info     ] http_request                   [my_service.core.middleware] duration_ms=6.47 method=GET path=/api/v1/auth/me request_id=demo-req-001 status=401
+2026-11-18T07:07:10.487660Z [info     ] HTTP Request: GET http://test/api/v1/auth/me &quot;HTTP/1.1 401 Unauthorized&quot; [httpx]
+2026-11-18T07:07:10.488106Z [info     ] HTTP Request: GET http://test/healthz &quot;HTTP/1.1 200 OK&quot; [httpx]
+2026-11-18T07:07:10.488254Z [info     ] app_shutdown                   [my_service.main]
+</code></pre></div>
+<p>每行依次是：时间戳、级别、事件名、<code>[logger 名称]</code>、按字母排序的键值对。</p>
+<h3 id="82-prod-环境">8.2. prod 环境</h3>
+<p><code>APP_ENV=prod</code>，每行一条 JSON：</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;order_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">99.5</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;order_created&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_service.demo&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157009Z&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pool exhausted, size=10&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;warning&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sqlalchemy.engine&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;pool&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;main&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157271Z&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Started server process [12345]&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uvicorn.error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157303Z&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;u-1&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user_login&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;request_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3f2a9c&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_service.demo&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157326Z&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BEGIN (implicit)&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;request_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3f2a9c&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sqlalchemy.engine&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:06:23.157359Z&quot;</span><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;prod&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;app_startup&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_service.main&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:07:10.079967Z&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/api/v1/auth/me&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">401</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;duration_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">11.13</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http_request&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;request_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;demo-req-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_service.core.middleware&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:07:10.092017Z&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTTP Request: GET http://test/api/v1/auth/me \&quot;HTTP/1.1 401 Unauthorized\&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;httpx&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:07:10.092641Z&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTTP Request: GET http://test/healthz \&quot;HTTP/1.1 200 OK\&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;httpx&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:07:10.093363Z&quot;</span><span class="p">}</span>
+<span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;app_shutdown&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;my_service.main&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-11-18T07:07:10.093533Z&quot;</span><span class="p">}</span>
+</code></pre></div>
+<p>从样例中可以确认：</p>
+<ul>
+<li>业务日志（<code>my_service.*</code>）和第三方库日志（<code>sqlalchemy.engine</code>、<code>uvicorn.error</code>、<code>httpx</code>）格式完全一致。</li>
+<li><code>uvicorn.error</code> 那条没有 <code>color_message</code>。</li>
+<li>请求内的日志都带 <code>request_id</code>；<code>/healthz</code> 没有 <code>http_request</code> 访问日志（最后的 <code>httpx</code> 那几行是演示用的客户端自己打印的）。</li>
+<li>没有 <code>uvicorn.access</code> 的访问日志，每个请求只有中间件的一条 <code>http_request</code>。</li>
+</ul>
+<h2 id="9-小结">9. 小结</h2>
+<table>
+<thead>
+<tr>
+<th>要点</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>日志写法</td>
+<td><code>log.info("snake_case_event", key=value)</code>，不用 f-string 拼接，不记录密码和令牌</td>
+</tr>
+<tr>
+<td>获取 logger</td>
+<td><code>log = get_logger(__name__)</code></td>
+</tr>
+<tr>
+<td>输出格式</td>
+<td>dev / test 用 <code>ConsoleRenderer</code>，prod 用 <code>JSONRenderer</code>，每行一条 JSON</td>
+</tr>
+<tr>
+<td>与标准库桥接</td>
+<td><code>structlog.configure</code> 末尾用 <code>wrap_for_formatter</code>；<code>ProcessorFormatter(foreign_pre_chain=shared_processors, processors=[remove_processors_meta, *renderer])</code></td>
+</tr>
+<tr>
+<td>handler</td>
+<td>root 只挂一个 <code>StreamHandler(sys.stdout)</code>，所有 logger 冒泡到 root</td>
+</tr>
+<tr>
+<td>处理器链</td>
+<td><code>merge_contextvars</code> → <code>add_log_level</code> → <code>add_logger_name</code> → <code>ExtraAdder</code> → 自定义处理器 → <code>TimeStamper(fmt="iso", utc=True)</code></td>
+</tr>
+<tr>
+<td>自定义 processor</td>
+<td>签名 <code>(logger, method_name, event_dict) -&gt; EventDict</code>；删除 extra 字段的处理器要排在 <code>ExtraAdder</code> 之后</td>
+</tr>
+<tr>
+<td>异常与敏感信息</td>
+<td>prod 用 <code>ExceptionRenderer(ExceptionDictTransformer(show_locals=False))</code>，不要用默认的 <code>dict_tracebacks</code>；dev 保留 locals</td>
+</tr>
+<tr>
+<td>输出位置</td>
+<td>只写 stdout，由容器平台收集，应用不写日志文件</td>
+</tr>
+<tr>
+<td>uvicorn</td>
+<td>清空 <code>uvicorn</code> / <code>uvicorn.error</code> / <code>uvicorn.access</code> 的 handler 并 <code>propagate=True</code>；删掉 <code>color_message</code>；<code>uvicorn.access</code> 设 <code>disabled=True</code>，访问日志由中间件输出</td>
+</tr>
+<tr>
+<td>请求追踪</td>
+<td>中间件用 <code>bound_contextvars(request_id=...)</code> 绑定，本请求内所有日志自动带 <code>request_id</code></td>
+</tr>
+</tbody>
+</table>
+<p>几个容易踩的坑：</p>
+<ul>
+<li>生产环境用 <code>dict_tracebacks</code> 会把每一帧的局部变量写进 JSON，可能泄露密码和令牌。</li>
+<li>uvicorn 的 <code>color_message</code> 会跟着 <code>extra</code> 进入日志，删除它的处理器放在 <code>ExtraAdder</code> 前面不会生效。</li>
+<li>启动最开始几行 <code>INFO:     ...</code> 是 uvicorn 在导入应用之前打印的，不经过统一格式，属于正常现象。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

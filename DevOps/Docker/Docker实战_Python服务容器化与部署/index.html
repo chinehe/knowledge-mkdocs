@@ -1,0 +1,3163 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/DevOps/Docker/Docker%E5%AE%9E%E6%88%98_Python%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96%E4%B8%8E%E9%83%A8%E7%BD%B2/">
+      
+      
+        <link rel="prev" href="../Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">
+      
+      
+        <link rel="next" href="../../../about/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Python服务容器化与部署 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-项目与目标" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Python服务容器化与部署
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    DevOps
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker入门指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python服务容器化与部署
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python服务容器化与部署
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-项目与目标" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 项目与目标
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 项目与目标">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-项目背景" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 项目背景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-dockerignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. .dockerignore
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dockerfile-逐行解析" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Dockerfile 逐行解析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Dockerfile 逐行解析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-完整-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 完整 Dockerfile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-两阶段产物流向" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 两阶段产物流向
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-构建阶段基础镜像与环境变量" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 构建阶段：基础镜像与环境变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-依赖层bind-mount--cache-mount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 依赖层：bind mount + cache mount
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-项目层copy-与---no-editable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. 项目层：COPY 与 --no-editable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-运行阶段只复制运行所需" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6. 运行阶段：只复制运行所需
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-两阶段的-python-路径必须一致" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7. 两阶段的 Python 路径必须一致
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-运行时细节" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 运行时细节
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 运行时细节">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-非-root-运行" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 非 root 运行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-cmd-的-exec-形式与优雅停机" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. CMD 的 exec 形式与优雅停机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-pythonunbuffered1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. PYTHONUNBUFFERED=1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-坑fastapi-run-找不到入口" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. 坑：fastapi run 找不到入口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-slim-镜像没有-curl用-python-做健康检查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. slim 镜像没有 curl：用 Python 做健康检查
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-compose-编排逐段解析" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Compose 编排逐段解析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Compose 编排逐段解析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-完整-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 完整 docker-compose.yml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-healthcheck-参数" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. healthcheck 参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-postgrespg_isready-必须加--h-127001" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. postgres：pg_isready 必须加 -h 127.0.0.1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-depends_on数据库就绪--迁移成功--启动应用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. depends_on：数据库就绪 → 迁移成功 → 启动应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-profiles日常只起数据库" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. profiles：日常只起数据库
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-必填插值与-env" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. 必填插值与 .env
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-yaml-锚点复用环境变量" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7. YAML 锚点复用环境变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#48-网络端口与-app_env" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.8. 网络、端口与 APP_ENV
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-运行与验证" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 运行与验证
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 运行与验证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-启动与查看状态" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 启动与查看状态
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-接口验证" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 接口验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-在容器中执行管理命令" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 在容器中执行管理命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-停止与数据卷" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4. 停止与数据卷
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-数据库迁移作为一次性任务" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 数据库迁移作为一次性任务
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-部署到-kubernetes-的要点" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 部署到 Kubernetes 的要点
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-镜像体积与优化方向" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 镜像体积与优化方向
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-项目与目标" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 项目与目标
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 项目与目标">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-项目背景" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 项目背景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-dockerignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. .dockerignore
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-dockerfile-逐行解析" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Dockerfile 逐行解析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Dockerfile 逐行解析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-完整-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 完整 Dockerfile
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-两阶段产物流向" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 两阶段产物流向
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-构建阶段基础镜像与环境变量" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 构建阶段：基础镜像与环境变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-依赖层bind-mount--cache-mount" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 依赖层：bind mount + cache mount
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-项目层copy-与---no-editable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. 项目层：COPY 与 --no-editable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-运行阶段只复制运行所需" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6. 运行阶段：只复制运行所需
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-两阶段的-python-路径必须一致" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7. 两阶段的 Python 路径必须一致
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-运行时细节" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 运行时细节
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 运行时细节">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-非-root-运行" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 非 root 运行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-cmd-的-exec-形式与优雅停机" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. CMD 的 exec 形式与优雅停机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-pythonunbuffered1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. PYTHONUNBUFFERED=1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-坑fastapi-run-找不到入口" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. 坑：fastapi run 找不到入口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-slim-镜像没有-curl用-python-做健康检查" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5. slim 镜像没有 curl：用 Python 做健康检查
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-compose-编排逐段解析" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Compose 编排逐段解析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Compose 编排逐段解析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-完整-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 完整 docker-compose.yml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-healthcheck-参数" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. healthcheck 参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-postgrespg_isready-必须加--h-127001" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. postgres：pg_isready 必须加 -h 127.0.0.1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-depends_on数据库就绪--迁移成功--启动应用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. depends_on：数据库就绪 → 迁移成功 → 启动应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-profiles日常只起数据库" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. profiles：日常只起数据库
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-必填插值与-env" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. 必填插值与 .env
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-yaml-锚点复用环境变量" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7. YAML 锚点复用环境变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#48-网络端口与-app_env" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.8. 网络、端口与 APP_ENV
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-运行与验证" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 运行与验证
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 运行与验证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-启动与查看状态" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 启动与查看状态
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-接口验证" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 接口验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-在容器中执行管理命令" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 在容器中执行管理命令
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-停止与数据卷" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4. 停止与数据卷
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-数据库迁移作为一次性任务" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 数据库迁移作为一次性任务
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-部署到-kubernetes-的要点" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 部署到 Kubernetes 的要点
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-镜像体积与优化方向" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 镜像体积与优化方向
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    DevOps
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Docker
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Python服务容器化与部署</h1>
+
+<p>《Docker入门指南》讲了镜像、容器、Compose 这些基本概念。本文以一个 FastAPI 示例项目 my-service 为例，讲解如何把一个 Python 后端服务做成可以上生产的镜像，并用 Docker Compose 在本地以生产形态跑起来。</p>
+<p>文章主要内容包括：</p>
+<ol>
+<li>项目与目标：项目涉及哪些文件，<code>.dockerignore</code> 的作用。</li>
+<li>Dockerfile 逐行解析：uv 官方推荐的多阶段构建写法。</li>
+<li>运行时细节：非 root 运行、优雅停机、日志输出、健康检查，以及常见的坑。</li>
+<li>Compose 编排逐段解析：健康检查、启动顺序、profiles、必填变量、YAML 锚点。</li>
+<li>运行与验证：启动、检查、执行管理命令、停止。</li>
+<li>数据库迁移作为一次性任务。</li>
+<li>部署到 Kubernetes 的要点。</li>
+<li>镜像体积与优化方向。</li>
+</ol>
+<p>关于本文：</p>
+<ul>
+<li>文中的 Dockerfile、docker-compose.yml 是一套完整可用的配置，示例项目名为 <code>my-service</code>，Python 包名为 <code>my_service</code>。</li>
+<li>文中给出的命令输出、构建耗时和镜像体积，是按这套配置构建、运行后得到的典型结果，具体数值会随依赖数量、网络和镜像版本变化。</li>
+</ul>
+<h2 id="1-项目与目标">1. 项目与目标</h2>
+<h3 id="11-项目背景">1.1. 项目背景</h3>
+<p>示例项目 my-service 是一个 FastAPI 后端服务，使用 uv 管理依赖，PostgreSQL 存储数据，Alembic 做数据库迁移。</p>
+<p>和容器化相关的文件如下：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Dockerfile</code></td>
+<td>构建应用镜像（多阶段）</td>
+</tr>
+<tr>
+<td><code>.dockerignore</code></td>
+<td>排除不进入构建上下文的文件</td>
+</tr>
+<tr>
+<td><code>docker-compose.yml</code></td>
+<td>编排数据库、迁移任务、应用三个服务</td>
+</tr>
+<tr>
+<td><code>pyproject.toml</code> / <code>uv.lock</code></td>
+<td>依赖声明与锁定版本</td>
+</tr>
+<tr>
+<td><code>alembic.ini</code> / <code>migrations/</code></td>
+<td>数据库迁移配置与脚本</td>
+</tr>
+</tbody>
+</table>
+<p>容器化要达到的目标：</p>
+<ul>
+<li><strong>镜像小而干净：</strong> 运行镜像里只有运行所需的文件，没有构建工具、源码目录、测试代码。</li>
+<li><strong>构建快：</strong> 只改业务代码时，不重新安装依赖。</li>
+<li><strong>安全：</strong> 不以 root 运行，敏感文件不进镜像。</li>
+<li><strong>可运维：</strong> 能被健康检查探测，能优雅停机，日志实时输出。</li>
+<li><strong>启动顺序可靠：</strong> 数据库就绪 → 迁移成功 → 启动应用。</li>
+</ul>
+<h3 id="12-dockerignore">1.2. .dockerignore</h3>
+<p><code>docker build .</code> 时，<code>.</code> 目录下的文件会作为<strong>构建上下文</strong>发送给构建器。<code>.dockerignore</code> 用来排除不需要的文件，作用有两个：</p>
+<ul>
+<li>构建上下文更小，构建更快。</li>
+<li>防止敏感文件（如 <code>.env</code>）被 <code>COPY . .</code> 打进镜像。</li>
+</ul>
+<p>项目的 <code>.dockerignore</code>：</p>
+<div class="highlight"><pre><span></span><code># 不进入镜像构建上下文的文件：既让构建更快，也防止敏感文件被打进镜像
+.git
+.venv
+.env
+.env.*
+!.env.example
+**/__pycache__
+.mypy_cache
+.ruff_cache
+.pytest_cache
+.coverage
+htmlcov
+.idea
+.vscode
+.DS_Store
+tests
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>条目</th>
+<th>排除原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.git</code></td>
+<td>版本历史体积大，镜像里用不到</td>
+</tr>
+<tr>
+<td><code>.venv</code></td>
+<td>本地虚拟环境（macOS 上的二进制）不能在 Linux 容器里用；不排除的话，<code>COPY . /app</code> 还会把它复制到 <code>/app/.venv</code>，和构建阶段生成的虚拟环境混在一起</td>
+</tr>
+<tr>
+<td><code>.env</code>、<code>.env.*</code></td>
+<td>含真实密钥，绝不能进镜像</td>
+</tr>
+<tr>
+<td><code>!.env.example</code></td>
+<td><code>!</code> 表示例外：示例配置不含密钥，可以保留</td>
+</tr>
+<tr>
+<td>各类缓存、<code>htmlcov</code>、IDE 目录</td>
+<td>开发工具的产物，与运行无关</td>
+</tr>
+<tr>
+<td><code>tests</code></td>
+<td>测试代码不进生产镜像</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-dockerfile-逐行解析">2. Dockerfile 逐行解析</h2>
+<h3 id="21-完整-dockerfile">2.1. 完整 Dockerfile</h3>
+<p>项目的 Dockerfile 采用 uv 官方推荐的多阶段写法：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># syntax=docker/dockerfile:1</span>
+
+<span class="c"># ============ 构建阶段：安装依赖，生成虚拟环境 ============</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">ghcr.io/astral-sh/uv:0.11-python3.12-trixie-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+
+<span class="k">ENV</span><span class="w"> </span><span class="nv">UV_COMPILE_BYTECODE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">UV_LINK_MODE</span><span class="o">=</span>copy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">UV_PYTHON_DOWNLOADS</span><span class="o">=</span><span class="m">0</span>
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># 先只装第三方依赖：只要 pyproject.toml 和 uv.lock 不变，这一层就走缓存，改业务代码不会重装依赖</span>
+<span class="k">RUN</span><span class="w"> </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.cache/uv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>bind,source<span class="o">=</span>uv.lock,target<span class="o">=</span>uv.lock<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>bind,source<span class="o">=</span>pyproject.toml,target<span class="o">=</span>pyproject.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>uv<span class="w"> </span>sync<span class="w"> </span>--locked<span class="w"> </span>--no-install-project<span class="w"> </span>--no-dev
+
+<span class="c"># 再装项目本身。--no-editable：代码直接装进虚拟环境，运行阶段不需要 src 目录</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>/app
+<span class="k">RUN</span><span class="w"> </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.cache/uv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>uv<span class="w"> </span>sync<span class="w"> </span>--locked<span class="w"> </span>--no-dev<span class="w"> </span>--no-editable
+
+<span class="c"># ============ 运行阶段：只包含运行所需的文件 ============</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim-trixie</span>
+
+<span class="c"># 用非 root 用户运行：即使应用被攻破，攻击者也拿不到容器内的 root 权限</span>
+<span class="k">RUN</span><span class="w"> </span>groupadd<span class="w"> </span>--system<span class="w"> </span>app<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>useradd<span class="w"> </span>--system<span class="w"> </span>--gid<span class="w"> </span>app<span class="w"> </span>--no-create-home<span class="w"> </span>app
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>--chown<span class="o">=</span>app:app<span class="w"> </span>/app/.venv<span class="w"> </span>/app/.venv
+<span class="c"># 数据库迁移需要的文件（迁移作为单独的任务执行，见 docker-compose.yml）</span>
+<span class="k">COPY</span><span class="w"> </span>--chown<span class="o">=</span>app:app<span class="w"> </span>alembic.ini<span class="w"> </span>./
+<span class="k">COPY</span><span class="w"> </span>--chown<span class="o">=</span>app:app<span class="w"> </span>migrations<span class="w"> </span>./migrations
+
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/app/.venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span>
+
+<span class="k">USER</span><span class="w"> </span><span class="s">app</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8000</span>
+
+<span class="c"># 运行阶段没有 pyproject.toml，读不到 [tool.fastapi] entrypoint，所以这里显式指定</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fastapi&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--entrypoint&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;my_service.main:app&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--host&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>第一行 <code># syntax=docker/dockerfile:1</code> 指定使用最新的 Dockerfile 1.x 语法，后面用到的 <code>RUN --mount</code> 依赖它。</p>
+<h3 id="22-两阶段产物流向">2.2. 两阶段产物流向</h3>
+<p>构建阶段负责"装"，运行阶段只负责"跑"。运行镜像从构建阶段拿走的只有 <code>.venv</code> 一个目录，另外从构建上下文直接复制迁移文件：</p>
+<pre class="mermaid"><code>graph LR
+    subgraph ctx["构建上下文"]
+        lock["uv.lock + pyproject.toml"]
+        src["src/ 等全部代码"]
+        mig["alembic.ini + migrations/"]
+    end
+
+    subgraph builder["构建阶段 uv:0.11-python3.12-trixie-slim"]
+        dep["依赖层: uv sync --no-install-project"]
+        proj["项目层: uv sync --no-editable"]
+        venv["/app/.venv"]
+        dep --&gt; proj --&gt; venv
+    end
+
+    subgraph runtime["运行阶段 python:3.12-slim-trixie"]
+        rvenv["/app/.venv"]
+        rmig["/app/alembic.ini + /app/migrations"]
+    end
+
+    lock --&gt;|"bind mount"| dep
+    src --&gt;|"COPY"| proj
+    venv --&gt;|"COPY --from=builder"| rvenv
+    mig --&gt;|"COPY"| rmig</code></pre>
+<p>构建阶段里的 uv 工具、构建缓存、<code>src/</code> 源码目录都留在构建阶段，不会进入最终镜像。</p>
+<h3 id="23-构建阶段基础镜像与环境变量">2.3. 构建阶段：基础镜像与环境变量</h3>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">ghcr.io/astral-sh/uv:0.11-python3.12-trixie-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+</code></pre></div>
+<p>这是 uv 官方发布的镜像：在 Debian trixie slim 上预装了 Python 3.12 和 uv 0.11。<code>AS builder</code> 给这个阶段命名，运行阶段用 <code>--from=builder</code> 引用它。</p>
+<div class="highlight"><pre><span></span><code><span class="k">ENV</span><span class="w"> </span><span class="nv">UV_COMPILE_BYTECODE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">UV_LINK_MODE</span><span class="o">=</span>copy<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">UV_PYTHON_DOWNLOADS</span><span class="o">=</span><span class="m">0</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>环境变量</th>
+<th>含义</th>
+<th>为什么这样设</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>UV_COMPILE_BYTECODE=1</code></td>
+<td>安装时把 <code>.py</code> 编译成 <code>.pyc</code> 字节码</td>
+<td>容器启动时不用再编译，启动更快</td>
+</tr>
+<tr>
+<td><code>UV_LINK_MODE=copy</code></td>
+<td>从缓存安装包时用复制，不用硬链接</td>
+<td>缓存在 cache mount 里，和 <code>/app/.venv</code> 不在同一个文件系统，无法硬链接；而且 cache mount 不会进入镜像，必须把文件真正复制到虚拟环境里</td>
+</tr>
+<tr>
+<td><code>UV_PYTHON_DOWNLOADS=0</code></td>
+<td>禁止 uv 自动下载 Python</td>
+<td>只用镜像自带的 Python，保证虚拟环境链接的是 <code>/usr/local/bin/python3</code>（见 2.7）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="24-依赖层bind-mount--cache-mount">2.4. 依赖层：bind mount + cache mount</h3>
+<div class="highlight"><pre><span></span><code><span class="k">RUN</span><span class="w"> </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.cache/uv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>bind,source<span class="o">=</span>uv.lock,target<span class="o">=</span>uv.lock<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>bind,source<span class="o">=</span>pyproject.toml,target<span class="o">=</span>pyproject.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>uv<span class="w"> </span>sync<span class="w"> </span>--locked<span class="w"> </span>--no-install-project<span class="w"> </span>--no-dev
+</code></pre></div>
+<p>这一步只安装第三方依赖，不安装项目本身。用到了两种 <code>RUN --mount</code>：</p>
+<table>
+<thead>
+<tr>
+<th>挂载</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type=bind</code>（uv.lock、pyproject.toml）</td>
+<td>把这两个文件临时挂进来，只在这条 <code>RUN</code> 执行期间可见，不会写入镜像层。只要这两个文件内容不变，这一层就命中缓存</td>
+</tr>
+<tr>
+<td><code>type=cache</code>（/root/.cache/uv）</td>
+<td>uv 的下载缓存在多次构建之间保留，不进入镜像。即使 <code>uv.lock</code> 变了需要重建这一层，已下载过的包也不用重新下载</td>
+</tr>
+</tbody>
+</table>
+<p><code>uv sync</code> 参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--locked</code></td>
+<td>严格按 <code>uv.lock</code> 安装；<code>uv.lock</code> 和 <code>pyproject.toml</code> 不一致时直接失败，保证镜像里的依赖版本和本地一致</td>
+</tr>
+<tr>
+<td><code>--no-install-project</code></td>
+<td>只装依赖，不装项目本身（此时还没有复制代码）</td>
+</tr>
+<tr>
+<td><code>--no-dev</code></td>
+<td>不装 <code>[dependency-groups] dev</code> 里的 pytest、ruff、mypy 等开发依赖</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么要把依赖单独成层？</strong></p>
+<p>《Docker入门指南》讲过：一旦某层缓存失效，后面所有层都要重建。如果直接 <code>COPY . .</code> 再安装依赖，任何一行业务代码的修改都会让依赖安装重跑一遍。</p>
+<p>把依赖安装放在 <code>COPY . /app</code> 之前，并且只依赖 <code>uv.lock</code> 和 <code>pyproject.toml</code>，日常改代码就只会让后面的项目层失效。</p>
+<p>对构建耗时的影响（示例项目的典型数据）：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>耗时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>首次构建（无缓存）</td>
+<td>约 2.5 分钟</td>
+</tr>
+<tr>
+<td>只改业务代码后重建</td>
+<td>约 7 秒</td>
+</tr>
+</tbody>
+</table>
+<h3 id="25-项目层copy-与---no-editable">2.5. 项目层：COPY 与 --no-editable</h3>
+<div class="highlight"><pre><span></span><code><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>/app
+<span class="k">RUN</span><span class="w"> </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.cache/uv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>uv<span class="w"> </span>sync<span class="w"> </span>--locked<span class="w"> </span>--no-dev<span class="w"> </span>--no-editable
+</code></pre></div>
+<p>先把代码复制进来（<code>.dockerignore</code> 已经排除了 <code>.venv</code>、<code>.env</code>、<code>tests</code> 等），再执行一次 <code>uv sync</code>。此时依赖已经装好，只会安装项目本身。</p>
+<p>关键是 <code>--no-editable</code>：</p>
+<table>
+<thead>
+<tr>
+<th>安装方式</th>
+<th>虚拟环境里装的是什么</th>
+<th>运行时是否需要 <code>src/</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>默认（editable，可编辑安装）</td>
+<td>一个指向 <code>src/</code> 目录的链接</td>
+<td>需要</td>
+</tr>
+<tr>
+<td><code>--no-editable</code></td>
+<td>把项目打包后完整装进 <code>.venv/lib/python3.12/site-packages/</code></td>
+<td>不需要</td>
+</tr>
+</tbody>
+</table>
+<p>本地开发用可编辑安装，改代码立即生效；镜像里用 <code>--no-editable</code>，项目代码成为虚拟环境的一部分，运行阶段只复制 <code>.venv</code> 就够了。</p>
+<p><code>[project.scripts]</code> 里声明的命令行入口（如 <code>my-service</code>）也会生成在 <code>.venv/bin/</code> 下。</p>
+<h3 id="26-运行阶段只复制运行所需">2.6. 运行阶段：只复制运行所需</h3>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim-trixie</span>
+
+<span class="k">RUN</span><span class="w"> </span>groupadd<span class="w"> </span>--system<span class="w"> </span>app<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>useradd<span class="w"> </span>--system<span class="w"> </span>--gid<span class="w"> </span>app<span class="w"> </span>--no-create-home<span class="w"> </span>app
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>--chown<span class="o">=</span>app:app<span class="w"> </span>/app/.venv<span class="w"> </span>/app/.venv
+<span class="k">COPY</span><span class="w"> </span>--chown<span class="o">=</span>app:app<span class="w"> </span>alembic.ini<span class="w"> </span>./
+<span class="k">COPY</span><span class="w"> </span>--chown<span class="o">=</span>app:app<span class="w"> </span>migrations<span class="w"> </span>./migrations
+
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/app/.venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span>
+
+<span class="k">USER</span><span class="w"> </span><span class="s">app</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8000</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FROM python:3.12-slim-trixie</code></td>
+<td>Docker 官方 Python 精简镜像，不含 uv 和构建工具</td>
+</tr>
+<tr>
+<td><code>COPY --from=builder ... /app/.venv</code></td>
+<td>从构建阶段只拿虚拟环境</td>
+</tr>
+<tr>
+<td><code>COPY alembic.ini</code>、<code>COPY migrations</code></td>
+<td>迁移任务需要这两样（迁移不是 Python 包的一部分，不在 <code>.venv</code> 里）</td>
+</tr>
+<tr>
+<td><code>ENV PATH="/app/.venv/bin:$PATH"</code></td>
+<td>让 <code>fastapi</code>、<code>alembic</code>、<code>my-service</code>、<code>python</code> 直接指向虚拟环境里的版本，相当于"激活"虚拟环境</td>
+</tr>
+<tr>
+<td><code>EXPOSE 8000</code></td>
+<td>声明容器监听 8000 端口（只是声明，发布端口靠 <code>-p</code> 或 compose 的 <code>ports</code>）</td>
+</tr>
+</tbody>
+</table>
+<p>非 root 和 <code>PYTHONUNBUFFERED</code> 见第 3 章。</p>
+<h3 id="27-两阶段的-python-路径必须一致">2.7. 两阶段的 Python 路径必须一致</h3>
+<p>多阶段构建复制虚拟环境，有一个容易忽略的前提：<strong>虚拟环境不是自包含的</strong>。</p>
+<p><code>.venv/bin/python</code> 只是一个指向基础解释器的链接，<code>.venv/pyvenv.cfg</code> 里也记录了基础解释器所在的目录。虚拟环境被复制到运行阶段后，链接指向的路径必须在运行镜像里同样存在，否则 <code>python</code> 根本启动不了。</p>
+<p>两个镜像的解释器位置如下（补丁版本会随镜像更新而变化）：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>镜像</th>
+<th><code>python3</code> 路径</th>
+<th>补丁版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构建</td>
+<td><code>ghcr.io/astral-sh/uv:0.11-python3.12-trixie-slim</code></td>
+<td><code>/usr/local/bin/python3</code></td>
+<td>3.12.13</td>
+</tr>
+<tr>
+<td>运行</td>
+<td><code>python:3.12-slim-trixie</code></td>
+<td><code>/usr/local/bin/python3</code></td>
+<td>3.12.16</td>
+</tr>
+</tbody>
+</table>
+<p>路径一致，虚拟环境可以直接使用。补丁版本不同不影响：同为 3.12，安装的包对应的是 <code>python3.12</code> 目录和 3.12 的 ABI。</p>
+<p>选基础镜像时要注意：</p>
+<ul>
+<li>两个阶段用<strong>相同的 Python 小版本</strong>（这里都是 3.12）和<strong>相同的发行版</strong>（这里都是 Debian trixie），避免 C 扩展依赖的系统库不一致。</li>
+<li>两个阶段的虚拟环境路径也要一致（都在 <code>/app/.venv</code>）。<code>.venv/bin/</code> 下的命令行脚本，第一行写的是虚拟环境 Python 的绝对路径。</li>
+<li>这也是设置 <code>UV_PYTHON_DOWNLOADS=0</code> 的原因：如果 uv 自己下载了一份 Python 放在别的目录，虚拟环境就会链接到那里，运行镜像里没有这份 Python。</li>
+</ul>
+<h2 id="3-运行时细节">3. 运行时细节</h2>
+<h3 id="31-非-root-运行">3.1. 非 root 运行</h3>
+<p>容器默认以 root 运行。应用一旦被攻破，攻击者就拿到容器内的 root 权限，后续利用内核或挂载漏洞的空间更大。</p>
+<div class="highlight"><pre><span></span><code><span class="k">RUN</span><span class="w"> </span>groupadd<span class="w"> </span>--system<span class="w"> </span>app<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>useradd<span class="w"> </span>--system<span class="w"> </span>--gid<span class="w"> </span>app<span class="w"> </span>--no-create-home<span class="w"> </span>app
+...
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>--chown<span class="o">=</span>app:app<span class="w"> </span>/app/.venv<span class="w"> </span>/app/.venv
+<span class="k">COPY</span><span class="w"> </span>--chown<span class="o">=</span>app:app<span class="w"> </span>alembic.ini<span class="w"> </span>./
+<span class="k">COPY</span><span class="w"> </span>--chown<span class="o">=</span>app:app<span class="w"> </span>migrations<span class="w"> </span>./migrations
+...
+<span class="k">USER</span><span class="w"> </span><span class="s">app</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>groupadd --system app</code></td>
+<td>创建系统组 <code>app</code>（系统组的 gid 在系统保留范围内）</td>
+</tr>
+<tr>
+<td><code>useradd --system --gid app</code></td>
+<td>创建系统用户 <code>app</code>，归属 <code>app</code> 组</td>
+</tr>
+<tr>
+<td><code>--no-create-home</code></td>
+<td>不创建家目录，服务账号用不到</td>
+</tr>
+<tr>
+<td><code>COPY --chown=app:app</code></td>
+<td>复制时直接设置文件属主。比复制后再 <code>RUN chown -R</code> 好：后者会把所有文件再写一遍，多出一个同样大小的层</td>
+</tr>
+<tr>
+<td><code>USER app</code></td>
+<td>之后的指令和容器运行进程都以 <code>app</code> 身份执行</td>
+</tr>
+</tbody>
+</table>
+<p>在容器内检查，运行后会输出：</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>app<span class="w"> </span>id
+<span class="c1"># uid=999(app) gid=999(app) ...</span>
+
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>app<span class="w"> </span>ls<span class="w"> </span>-A<span class="w"> </span>/app
+<span class="c1"># .venv  alembic.ini  migrations</span>
+</code></pre></div>
+<p><code>/app</code> 下只有虚拟环境和迁移文件，没有 <code>src/</code>、<code>tests/</code>、<code>pyproject.toml</code>。</p>
+<h3 id="32-cmd-的-exec-形式与优雅停机">3.2. CMD 的 exec 形式与优雅停机</h3>
+<div class="highlight"><pre><span></span><code><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fastapi&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--entrypoint&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;my_service.main:app&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--host&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>CMD 有两种写法：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>示例</th>
+<th>实际执行</th>
+<th>PID 1 是谁</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exec 形式（JSON 数组）</td>
+<td><code>CMD ["fastapi", "run", ...]</code></td>
+<td>直接执行 <code>fastapi</code></td>
+<td>应用进程</td>
+</tr>
+<tr>
+<td>shell 形式（字符串）</td>
+<td><code>CMD fastapi run ...</code></td>
+<td><code>/bin/sh -c "fastapi run ..."</code></td>
+<td><code>sh</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>docker stop</code> 会向容器的 PID 1 发送 <code>SIGTERM</code>，等待一段时间（默认 10 秒）后仍未退出就发送 <code>SIGKILL</code> 强杀。</p>
+<ul>
+<li>exec 形式：应用就是 PID 1，直接收到 <code>SIGTERM</code>，执行 FastAPI lifespan 里的关闭逻辑（释放数据库连接池），然后正常退出。</li>
+<li>shell 形式：<code>sh</code> 是 PID 1，它不会把信号转发给子进程。应用收不到 <code>SIGTERM</code>，只能等 10 秒后被强杀，关闭逻辑不会执行。</li>
+</ul>
+<p>项目的 lifespan 关闭逻辑：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@asynccontextmanager</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">lifespan</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+    <span class="o">...</span>
+    <span class="k">yield</span>
+
+    <span class="c1"># 关闭：释放连接池中的所有连接</span>
+    <span class="k">await</span> <span class="n">engine</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;app_shutdown&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>停止容器时，日志会依次输出：</p>
+<div class="highlight"><pre><span></span><code>app_shutdown
+Application shutdown complete.
+Finished server process [1]
+</code></pre></div>
+<p><code>[1]</code> 说明服务进程的 PID 就是 1。</p>
+<h3 id="33-pythonunbuffered1">3.3. PYTHONUNBUFFERED=1</h3>
+<p>Python 的标准输出写到管道（而不是终端）时，默认是块缓冲：攒够一定数量才真正写出去。容器里的 stdout 正是管道。</p>
+<p>不设置时会出现两个问题：</p>
+<ul>
+<li><code>docker logs</code> 看到的日志有延迟。</li>
+<li>进程崩溃时，缓冲区里还没写出的最后几条日志直接丢失，而这几条往往是排查问题最需要的。</li>
+</ul>
+<p>设置 <code>PYTHONUNBUFFERED=1</code> 后，每条日志立即输出。</p>
+<h3 id="34-坑fastapi-run-找不到入口">3.4. 坑：fastapi run 找不到入口</h3>
+<p>如果在 <code>pyproject.toml</code> 里配置了入口，本地直接 <code>fastapi run</code> 就能启动：</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.fastapi]</span>
+<span class="n">entrypoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_service.main:app&quot;</span>
+</code></pre></div>
+<p>现象：Dockerfile 的 CMD 如果也只写 <code>fastapi run</code>，容器启动后报错：</p>
+<div class="highlight"><pre><span></span><code>Could not find a default file to run, please provide an explicit path
+</code></pre></div>
+<p>原因：<code>fastapi run</code> 从当前目录的 <code>pyproject.toml</code> 读取 <code>[tool.fastapi] entrypoint</code>，而运行镜像里只有 <code>.venv</code>、<code>alembic.ini</code>、<code>migrations</code>，没有 <code>pyproject.toml</code>。</p>
+<p>解决：在 CMD 里显式指定入口。</p>
+<div class="highlight"><pre><span></span><code><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;fastapi&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--entrypoint&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;my_service.main:app&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--host&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p><code>--host 0.0.0.0</code> 也是必须的：只监听 <code>127.0.0.1</code> 的话，容器外（包括端口映射）都访问不到。</p>
+<blockquote>
+<p>这类问题的共同原因是：多阶段构建精简了运行镜像，本地开发时隐式依赖的文件在镜像里不存在。写完 Dockerfile 后，要以运行镜像的实际内容为准检查启动命令。</p>
+</blockquote>
+<h3 id="35-slim-镜像没有-curl用-python-做健康检查">3.5. slim 镜像没有 curl：用 Python 做健康检查</h3>
+<p>很多健康检查示例写的是 <code>curl -f http://localhost:8000/...</code>。<code>python:3.12-slim-trixie</code> 里没有 <code>curl</code>，为了健康检查专门装一个也不划算。</p>
+<p>镜像里一定有 Python，用标准库 <code>urllib</code> 就能发请求：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;python&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-c&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;import</span><span class="nv"> </span><span class="s">urllib.request;</span><span class="nv"> </span><span class="s">urllib.request.urlopen(&#39;http://127.0.0.1:8000/readyz&#39;,</span><span class="nv"> </span><span class="s">timeout=3)&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p><code>urlopen</code> 在连接失败、超时或返回 4xx/5xx（如 <code>/readyz</code> 在数据库不可用时返回的 503）时都会抛出异常，Python 以非 0 状态码退出，Docker 就判定该次检查失败。</p>
+<p>项目提供两个健康检查接口：</p>
+<table>
+<thead>
+<tr>
+<th>接口</th>
+<th>用途</th>
+<th>检查内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/healthz</code></td>
+<td>存活检查</td>
+<td>进程能响应就返回 200，不检查外部依赖</td>
+</tr>
+<tr>
+<td><code>/readyz</code></td>
+<td>就绪检查</td>
+<td>执行 <code>SELECT 1</code>，数据库可用返回 200，否则 503；内部超时 2 秒</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-compose-编排逐段解析">4. Compose 编排逐段解析</h2>
+<h3 id="41-完整-docker-composeyml">4.1. 完整 docker-compose.yml</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">postgres</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:17-alpine</span>
+<span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-service-postgres</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="w">      </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span><span class="w">   </span><span class="c1"># 仅本地开发用，与 .env.example 一致</span>
+<span class="w">      </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_service</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;5432:5432&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pgdata:/var/lib/postgresql/data</span><span class="w">   </span><span class="c1"># 数据持久化，删掉容器数据也还在</span>
+<span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD-SHELL&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;pg_isready</span><span class="nv"> </span><span class="s">-h</span><span class="nv"> </span><span class="s">127.0.0.1</span><span class="nv"> </span><span class="s">-U</span><span class="nv"> </span><span class="s">postgres</span><span class="nv"> </span><span class="s">-d</span><span class="nv"> </span><span class="s">my_service&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
+<span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3s</span>
+<span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+
+<span class="w">  </span><span class="c1"># ---------- 以下服务只在 --profile app 时启动，日常开发 docker compose up -d 仍只起数据库 ----------</span>
+<span class="w">  </span><span class="nt">migrate</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">profiles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;app&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-service:local</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;alembic&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;upgrade&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;head&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;app-env</span>
+<span class="w">      </span><span class="nt">APP_ENV</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+<span class="w">      </span><span class="c1"># 容器之间用服务名 postgres 访问，不是 localhost</span>
+<span class="w">      </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql+asyncpg://postgres:postgres@postgres:5432/my_service</span>
+<span class="w">      </span><span class="c1"># 从宿主机的 .env 或环境变量读取；未设置时直接报错，不会用空密钥启动</span>
+<span class="w">      </span><span class="nt">JWT_SECRET_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JWT_SECRET_KEY:?请在 .env 中设置 JWT_SECRET_KEY}</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">postgres</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
+
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">profiles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;app&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-service:local</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="nv">*app-env</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8080:8000&quot;</span><span class="w">   </span><span class="c1"># 宿主机用 8080，避免和本地 fastapi dev 的 8000 冲突</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">migrate</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_completed_successfully</span><span class="w">   </span><span class="c1"># 迁移成功后才启动应用</span>
+<span class="w">    </span><span class="nt">healthcheck</span><span class="p">:</span>
+<span class="w">      </span><span class="c1"># 镜像里没有 curl，用 Python 自带的 urllib 请求就绪接口</span>
+<span class="w">      </span><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;python&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;-c&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;import</span><span class="nv"> </span><span class="s">urllib.request;</span><span class="nv"> </span><span class="s">urllib.request.urlopen(&#39;http://127.0.0.1:8000/readyz&#39;,</span><span class="nv"> </span><span class="s">timeout=3)&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="nt">interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10s</span>
+<span class="w">      </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5s</span>
+<span class="w">      </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">      </span><span class="nt">start_period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10s</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pgdata</span><span class="p">:</span>
+</code></pre></div>
+<p>三个服务：</p>
+<table>
+<thead>
+<tr>
+<th>服务</th>
+<th>镜像</th>
+<th>作用</th>
+<th>运行方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>postgres</code></td>
+<td><code>postgres:17-alpine</code></td>
+<td>数据库</td>
+<td>常驻</td>
+</tr>
+<tr>
+<td><code>migrate</code></td>
+<td><code>my-service:local</code>（由 <code>build: .</code> 构建）</td>
+<td>执行 <code>alembic upgrade head</code></td>
+<td>执行完退出</td>
+</tr>
+<tr>
+<td><code>app</code></td>
+<td><code>my-service:local</code>（复用同一个镜像）</td>
+<td>应用服务</td>
+<td>常驻</td>
+</tr>
+</tbody>
+</table>
+<p><code>migrate</code> 同时写了 <code>build: .</code> 和 <code>image: my-service:local</code>，表示构建当前目录的 Dockerfile，并把结果命名为 <code>my-service:local</code>。<code>app</code> 只写 <code>image</code>，直接复用这个镜像，只是用 <code>command</code> 换了启动命令。迁移和应用用同一个镜像，保证迁移脚本和代码版本一致。</p>
+<h3 id="42-healthcheck-参数">4.2. healthcheck 参数</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>postgres</th>
+<th>app</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>test</code></td>
+<td>检查命令，退出码 0 为成功</td>
+<td><code>pg_isready ...</code></td>
+<td><code>python -c "...urlopen..."</code></td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>两次检查的间隔</td>
+<td>5s</td>
+<td>10s</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>单次检查超过这个时间算失败</td>
+<td>3s</td>
+<td>5s</td>
+</tr>
+<tr>
+<td><code>retries</code></td>
+<td>连续失败多少次判定为 unhealthy</td>
+<td>10</td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>start_period</code></td>
+<td>启动宽限期，这段时间内的失败不计入 retries</td>
+<td>未设置</td>
+<td>10s</td>
+</tr>
+</tbody>
+</table>
+<p><code>test</code> 的两种写法：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>执行方式</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>["CMD", "可执行文件", "参数", ...]</code></td>
+<td>直接执行，不经过 shell</td>
+<td>命令和参数都固定（app 的写法）</td>
+</tr>
+<tr>
+<td><code>["CMD-SHELL", "命令字符串"]</code></td>
+<td>交给容器内的 <code>/bin/sh -c</code> 执行</td>
+<td>需要 shell 语法，或习惯写成一整行（postgres 的写法）</td>
+</tr>
+</tbody>
+</table>
+<p>app 的检查命令里 <code>timeout=3</code> 小于 healthcheck 的 <code>timeout: 5s</code>，请求超时会先在 Python 里报错退出，而不是被 Docker 强行中止。</p>
+<h3 id="43-postgrespg_isready-必须加--h-127001">4.3. postgres：pg_isready 必须加 -h 127.0.0.1</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">test</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;CMD-SHELL&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;pg_isready</span><span class="nv"> </span><span class="s">-h</span><span class="nv"> </span><span class="s">127.0.0.1</span><span class="nv"> </span><span class="s">-U</span><span class="nv"> </span><span class="s">postgres</span><span class="nv"> </span><span class="s">-d</span><span class="nv"> </span><span class="s">my_service&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>PostgreSQL 官方镜像在<strong>首次初始化</strong>数据目录时，会先启动一个只监听 Unix socket 的临时实例，用来创建用户、数据库、执行初始化脚本；完成后关闭临时实例，再启动监听 TCP 的正式实例。</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>检查走的通道</th>
+<th>首次初始化时的表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pg_isready -U postgres</code></td>
+<td>Unix socket</td>
+<td>临时实例一起来就成功，过早显示 healthy，但其他容器这时还连不上</td>
+</tr>
+<tr>
+<td><code>pg_isready -h 127.0.0.1 -U postgres</code></td>
+<td>TCP</td>
+<td>正式实例开始监听 TCP 后才成功，和其他容器的连接方式一致</td>
+</tr>
+</tbody>
+</table>
+<p><code>migrate</code> 依赖 postgres 的 healthy 状态启动，如果 healthy 来得太早，迁移会因为连不上数据库而失败。</p>
+<h3 id="44-depends_on数据库就绪--迁移成功--启动应用">4.4. depends_on：数据库就绪 → 迁移成功 → 启动应用</h3>
+<p>默认的 <code>depends_on</code> 只保证启动顺序，不等待依赖真正可用。加上 <code>condition</code> 后可以指定等待条件：</p>
+<table>
+<thead>
+<tr>
+<th>condition</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>service_started</code></td>
+<td>依赖的容器已启动（默认行为）</td>
+</tr>
+<tr>
+<td><code>service_healthy</code></td>
+<td>依赖的容器健康检查通过</td>
+</tr>
+<tr>
+<td><code>service_completed_successfully</code></td>
+<td>依赖的容器运行结束且退出码为 0</td>
+</tr>
+</tbody>
+</table>
+<p>项目的配置：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">migrate</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">postgres</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
+
+<span class="nt">app</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">migrate</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_completed_successfully</span>
+</code></pre></div>
+<p>启动顺序：</p>
+<pre class="mermaid"><code>graph LR
+    pg["postgres 启动"] --&gt; pgh{"pg_isready 通过?"}
+    pgh --&gt;|"否，每 5s 重试"| pgh
+    pgh --&gt;|"是：service_healthy"| mig["migrate: alembic upgrade head"]
+    mig --&gt; migok{"退出码为 0?"}
+    migok --&gt;|"否"| stop["app 不启动"]
+    migok --&gt;|"是：service_completed_successfully"| app["app 启动"]
+    app --&gt; apph{"/readyz 返回 200?"}
+    apph --&gt;|"是"| healthy["app healthy"]</code></pre>
+<p>迁移失败时 <code>app</code> 不会启动，避免新代码跑在旧表结构上。</p>
+<h3 id="45-profiles日常只起数据库">4.5. profiles：日常只起数据库</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">migrate</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">profiles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;app&quot;</span><span class="p p-Indicator">]</span>
+<span class="nt">app</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">profiles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;app&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>带 <code>profiles</code> 的服务默认不启动，只有命令行指定了对应 profile 才启动；没写 <code>profiles</code> 的服务（postgres）总是启动。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>启动的服务</th>
+<th>场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker compose up -d</code></td>
+<td>postgres</td>
+<td>日常开发：数据库在容器里，应用在本地 <code>fastapi dev</code> 运行</td>
+</tr>
+<tr>
+<td><code>docker compose --profile app up -d --build</code></td>
+<td>postgres、migrate、app</td>
+<td>本地以生产形态验证整套服务</td>
+</tr>
+</tbody>
+</table>
+<p>一个 compose 文件同时满足两种用法，不用维护两份配置。</p>
+<h3 id="46-必填插值与-env">4.6. 必填插值与 .env</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">JWT_SECRET_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JWT_SECRET_KEY:?请在 .env 中设置 JWT_SECRET_KEY}</span>
+</code></pre></div>
+<p><code>${VAR:?提示信息}</code> 是必填插值：变量未设置或为空时，compose 直接报错退出并显示提示信息，不会用空密钥启动应用。</p>
+<p>常用插值写法：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>变量未设置或为空时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>${VAR}</code></td>
+<td>替换为空字符串</td>
+</tr>
+<tr>
+<td><code>${VAR:-默认值}</code></td>
+<td>使用默认值</td>
+</tr>
+<tr>
+<td><code>${VAR:?提示信息}</code></td>
+<td>报错退出</td>
+</tr>
+</tbody>
+</table>
+<p>变量的来源：compose 会自动读取<strong>项目目录下的 <code>.env</code> 文件</strong>用于插值，宿主机的环境变量也可以提供。如果本地开发已经在 <code>.env</code> 里配置了 <code>JWT_SECRET_KEY</code>，compose 可以直接复用，不需要再复制一份。</p>
+<blockquote>
+<p>注意：项目目录的 <code>.env</code> 只用于 compose 文件里的 <code>${...}</code> 插值，不会自动注入到容器中。容器里能看到哪些变量，由 <code>environment</code> 或 <code>env_file</code> 决定。这里正是通过 <code>environment</code> 把插值结果传给容器。</p>
+</blockquote>
+<h3 id="47-yaml-锚点复用环境变量">4.7. YAML 锚点复用环境变量</h3>
+<p><code>migrate</code> 和 <code>app</code> 需要完全相同的环境变量。项目用 YAML 锚点避免重复：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">migrate</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;app-env</span><span class="w">        </span><span class="c1"># &amp;app-env：给这个映射起名</span>
+<span class="w">    </span><span class="nt">APP_ENV</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+<span class="w">    </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql+asyncpg://postgres:postgres@postgres:5432/my_service</span>
+<span class="w">    </span><span class="nt">JWT_SECRET_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${JWT_SECRET_KEY:?请在 .env 中设置 JWT_SECRET_KEY}</span>
+
+<span class="nt">app</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="nv">*app-env</span><span class="w">        </span><span class="c1"># *app-env：引用上面的内容</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&amp;名称</code></td>
+<td>定义锚点</td>
+</tr>
+<tr>
+<td><code>*名称</code></td>
+<td>引用锚点，等同于把锚点处的内容原样复制过来</td>
+</tr>
+</tbody>
+</table>
+<p>锚点是 YAML 本身的语法，不是 compose 特有的功能。改配置时只改一处，两个服务不会不一致。</p>
+<h3 id="48-网络端口与-app_env">4.8. 网络、端口与 APP_ENV</h3>
+<div class="highlight"><pre><span></span><code><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgresql+asyncpg://postgres:postgres@postgres:5432/my_service</span>
+</code></pre></div>
+<p>compose 会为项目创建一个默认网络，所有服务都在这个网络里，可以<strong>用服务名互相访问</strong>。容器里的 <code>localhost</code> 指容器自己，所以数据库地址要写服务名 <code>postgres</code>，不是 <code>localhost</code>。</p>
+<table>
+<thead>
+<tr>
+<th>访问方</th>
+<th>数据库地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>宿主机上本地运行的应用</td>
+<td><code>localhost:5432</code>（通过 postgres 的 <code>ports</code> 映射）</td>
+</tr>
+<tr>
+<td>compose 里的 migrate、app 容器</td>
+<td><code>postgres:5432</code>（服务名）</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8080:8000&quot;</span>
+</code></pre></div>
+<p>容器内应用监听 8000，映射到宿主机 8080。本地开发时 <code>fastapi dev</code> 已经占用了宿主机 8000，用 8080 可以让两者同时运行。</p>
+<div class="highlight"><pre><span></span><code><span class="nt">APP_ENV</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prod</span>
+</code></pre></div>
+<p>容器以生产配置运行：日志为 JSON 格式，<code>/docs</code>、<code>/redoc</code>、<code>/openapi.json</code> 关闭。项目中的实现：</p>
+<div class="highlight"><pre><span></span><code><span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
+    <span class="o">...</span>
+    <span class="c1"># 生产环境不暴露接口文档</span>
+    <span class="n">docs_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/docs&quot;</span><span class="p">,</span>
+    <span class="n">redoc_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/redoc&quot;</span><span class="p">,</span>
+    <span class="n">openapi_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/openapi.json&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<h2 id="5-运行与验证">5. 运行与验证</h2>
+<h3 id="51-启动与查看状态">5.1. 启动与查看状态</h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>--profile<span class="w"> </span>app<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--build
+docker<span class="w"> </span>compose<span class="w"> </span>--profile<span class="w"> </span>app<span class="w"> </span>ps<span class="w"> </span>-a
+</code></pre></div>
+<p><code>ps</code> 加 <code>-a</code> 才能看到已经退出的 migrate。正常启动后的状态：</p>
+<table>
+<thead>
+<tr>
+<th>服务</th>
+<th>状态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app</code></td>
+<td><code>Up (healthy)</code></td>
+<td>健康检查通过</td>
+</tr>
+<tr>
+<td><code>migrate</code></td>
+<td><code>Exited (0)</code></td>
+<td>迁移完成后正常退出，这是预期状态</td>
+</tr>
+<tr>
+<td><code>postgres</code></td>
+<td><code>Up (healthy)</code></td>
+<td>健康检查通过</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-接口验证">5.2. 接口验证</h3>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>localhost:8080/readyz
+<span class="c1"># 200</span>
+
+curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>localhost:8080/docs
+<span class="c1"># 404</span>
+</code></pre></div>
+<p><code>/readyz</code> 返回 200，说明应用和数据库都正常；<code>/docs</code> 返回 404，说明 <code>APP_ENV=prod</code> 生效，接口文档已关闭。</p>
+<h3 id="53-在容器中执行管理命令">5.3. 在容器中执行管理命令</h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>app<span class="w"> </span>my-service<span class="w"> </span>create-user<span class="w"> </span>&lt;用户名&gt;
+</code></pre></div>
+<p><code>my-service</code> 是 <code>pyproject.toml</code> 里 <code>[project.scripts]</code> 声明的命令行入口，安装在 <code>/app/.venv/bin/</code> 下。<code>PATH</code> 已包含这个目录，可以直接执行，并且使用的是和应用相同的环境变量和数据库连接。</p>
+<p>迁移可以重复执行：再次运行 migrate 时，Alembic 会跳过已经执行过的版本。所以每次 <code>up</code> 都运行一遍 migrate 是安全的。</p>
+<h3 id="54-停止与数据卷">5.4. 停止与数据卷</h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>--profile<span class="w"> </span>app<span class="w"> </span>down
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>删除的内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker compose --profile app down</code></td>
+<td>容器、默认网络</td>
+</tr>
+<tr>
+<td><code>docker compose --profile app down -v</code></td>
+<td>容器、默认网络，<strong>以及命名卷 <code>pgdata</code></strong>（数据库数据全部丢失）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>不要加 <code>-v</code></strong>，除非确实想清空数据库。<code>down</code> 命令同样要加 <code>--profile app</code>，否则不会处理 migrate 和 app。</p>
+<h2 id="6-数据库迁移作为一次性任务">6. 数据库迁移作为一次性任务</h2>
+<p>项目没有在应用启动时（比如 lifespan 里或启动脚本里）执行迁移，而是单独作为一次性任务（compose 里的 <code>migrate</code> 服务）。</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>应用启动时执行迁移</td>
+<td>多副本部署时，多个实例会同时执行迁移，可能互相冲突；迁移耗时会拖慢启动、导致健康检查超时；应用运行用户还需要有修改表结构的权限</td>
+</tr>
+<tr>
+<td>一次性任务执行迁移</td>
+<td>只执行一次；失败时应用不会启动（<code>service_completed_successfully</code>）；迁移和应用的职责分开</td>
+</tr>
+</tbody>
+</table>
+<p>迁移任务和应用使用同一个镜像，只是启动命令不同：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">migrate</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-service:local</span>
+<span class="w">  </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;alembic&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;upgrade&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;head&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>这也是运行镜像里要保留 <code>alembic.ini</code> 和 <code>migrations/</code> 的原因。</p>
+<h2 id="7-部署到-kubernetes-的要点">7. 部署到 Kubernetes 的要点</h2>
+<p>compose 里的做法可以直接对应到 Kubernetes：</p>
+<table>
+<thead>
+<tr>
+<th>事项</th>
+<th>做法</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据库迁移</td>
+<td>部署前用 Job 或 initContainer 执行 <code>alembic upgrade head</code></td>
+<td>对应 compose 的 migrate 服务，不在应用启动时执行</td>
+</tr>
+<tr>
+<td>密钥</td>
+<td><code>JWT_SECRET_KEY</code>、<code>DATABASE_URL</code> 放在 Secret 中，以环境变量注入</td>
+<td>密钥不写进镜像和部署清单</td>
+</tr>
+<tr>
+<td>存活探针</td>
+<td><code>livenessProbe</code> → <code>GET /healthz</code></td>
+<td>只检查进程本身。如果检查数据库，数据库故障时所有 Pod 都会被重启，于事无补</td>
+</tr>
+<tr>
+<td>就绪探针</td>
+<td><code>readinessProbe</code> → <code>GET /readyz</code>，<code>timeoutSeconds</code> ≥ 3</td>
+<td><code>/readyz</code> 内部数据库检查超时为 2 秒，探针默认超时只有 1 秒，不够用</td>
+</tr>
+<tr>
+<td>扩容</td>
+<td>每个 Pod 运行一个进程，通过增加副本数扩容</td>
+<td>进程数交给 K8s 管理，资源限制和故障恢复都以 Pod 为单位</td>
+</tr>
+<tr>
+<td>镜像标签</td>
+<td>使用 git commit hash</td>
+<td>每个镜像对应唯一的代码版本，回滚时直接切回旧标签</td>
+</tr>
+</tbody>
+</table>
+<p>两种探针的区别：</p>
+<table>
+<thead>
+<tr>
+<th>探针</th>
+<th>失败后 K8s 的动作</th>
+<th>对应接口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>livenessProbe</code> 存活探针</td>
+<td>重启容器</td>
+<td><code>/healthz</code></td>
+</tr>
+<tr>
+<td><code>readinessProbe</code> 就绪探针</td>
+<td>从 Service 中摘除，不再分配流量，但不重启</td>
+<td><code>/readyz</code></td>
+</tr>
+</tbody>
+</table>
+<p>探针配置示例（只列关键字段）：</p>
+<div class="highlight"><pre><span></span><code><span class="nt">livenessProbe</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/healthz</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8000</span>
+<span class="nt">readinessProbe</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">httpGet</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/readyz</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8000</span>
+<span class="w">  </span><span class="nt">timeoutSeconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+</code></pre></div>
+<h2 id="8-镜像体积与优化方向">8. 镜像体积与优化方向</h2>
+<p>按本文 Dockerfile 构建出的镜像约 <strong>394MB</strong>。</p>
+<p>用 <code>fastapi[standard]</code> 安装 FastAPI 时，除了 FastAPI 本身，还会附带 <code>fastapi-cli</code>、<code>fastapi-cloud-cli</code> 等额外依赖，这是体积的主要来源。</p>
+<p>以下是可以尝试的优化思路（效果需结合项目实际评估）：</p>
+<table>
+<thead>
+<tr>
+<th>思路</th>
+<th>说明</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不用 <code>fastapi[standard]</code></td>
+<td>改为 <code>fastapi</code> + <code>uvicorn[standard]</code> 等实际用到的依赖</td>
+<td><code>fastapi run</code> 命令来自 <code>fastapi-cli</code>，CMD 需要改为直接用 <code>uvicorn</code> 启动</td>
+</tr>
+<tr>
+<td>分析各层体积</td>
+<td>用 <code>docker history &lt;镜像&gt;</code> 或 dive 等工具查看每层大小，找出最大的依赖</td>
+<td>需要逐个评估依赖是否可以去掉</td>
+</tr>
+<tr>
+<td>更换更小的基础镜像</td>
+<td>如 distroless 类镜像</td>
+<td>要保证两个阶段的 Python 路径一致（见 2.7）；没有 shell，排查问题和 <code>CMD-SHELL</code> 类检查都会受影响</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>不建议为了体积换成 alpine：alpine 使用 musl libc，很多 Python 包没有现成的 musl 二进制包，可能需要在构建时编译，构建更慢，问题也更难排查。</p>
+</blockquote>
+<h2 id="9-小结">9. 小结</h2>
+<ol>
+<li><strong>多阶段构建：</strong> 构建阶段用 uv 生成虚拟环境，运行阶段只复制 <code>.venv</code>、<code>alembic.ini</code>、<code>migrations</code>。</li>
+<li><strong>依赖单独成层：</strong> 用 bind mount 挂载 <code>uv.lock</code>、<code>pyproject.toml</code> 安装依赖，再复制代码安装项目。只改代码时重建约 7 秒，首次构建约 2.5 分钟。</li>
+<li><strong><code>--no-editable</code>：</strong> 项目代码装进虚拟环境，运行镜像不需要 <code>src/</code>。</li>
+<li><strong>Python 路径一致：</strong> 虚拟环境链接基础解释器，两个阶段的 <code>python3</code> 都在 <code>/usr/local/bin/python3</code>。</li>
+<li><strong>非 root 运行：</strong> <code>useradd --system</code> + <code>COPY --chown</code> + <code>USER app</code>。</li>
+<li><strong>exec 形式的 CMD：</strong> 应用是 PID 1，能收到 <code>SIGTERM</code> 并执行关闭逻辑；<code>PYTHONUNBUFFERED=1</code> 保证日志不丢。</li>
+<li><strong>运行镜像里没有的文件不能依赖：</strong> 没有 <code>pyproject.toml</code>，所以要显式写 <code>--entrypoint</code>；没有 <code>curl</code>，所以用 Python 的 <code>urllib</code> 做健康检查。</li>
+<li><strong>compose 启动顺序：</strong> <code>service_healthy</code> + <code>service_completed_successfully</code> 实现数据库就绪 → 迁移成功 → 启动应用；<code>pg_isready</code> 要加 <code>-h 127.0.0.1</code>。</li>
+<li><strong>compose 配置技巧：</strong> <code>profiles</code> 区分日常开发和完整运行；<code>${VAR:?}</code> 让必填变量缺失时报错；YAML 锚点复用环境变量；容器间用服务名访问。</li>
+<li><strong>迁移是一次性任务：</strong> 不在应用启动时执行；K8s 中用 Job 或 initContainer。</li>
+<li><strong>K8s 探针：</strong> liveness → <code>/healthz</code>，readiness → <code>/readyz</code> 且 <code>timeoutSeconds</code> ≥ 3。</li>
+<li><strong>停止时不要加 <code>-v</code>：</strong> 否则数据卷会被删除。</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

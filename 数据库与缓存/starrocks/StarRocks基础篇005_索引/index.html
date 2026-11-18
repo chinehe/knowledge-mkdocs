@@ -1,0 +1,3568 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/starrocks/StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87005_%E7%B4%A2%E5%BC%95/">
+      
+      
+        <link rel="prev" href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87004_%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9/">
+      
+      
+        <link rel="next" href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87006_%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>🌿表设计 索引 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-索引概述" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🌿表设计 索引
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Python/python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库与缓存
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    StarRocks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    StarRocks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87001_%E5%88%9D%E8%AF%86StarRocks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌱初识StarRocks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87002_%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌱快速开始
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87001_%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A7%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 概览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 表类型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 数据分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87004_%E6%95%B0%E6%8D%AE%E5%8E%8B%E7%BC%A9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 数据压缩
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 索引
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 索引
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-索引概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 索引概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-排序键与前缀索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 排序键与前缀索引
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 排序键与前缀索引">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-各表类型如何使用排序键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 各表类型如何使用排序键
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-前缀字段的规则" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 前缀字段的规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-如何设计排序键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 如何设计排序键
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-修改排序键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. 修改排序键
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-判断前缀索引是否生效" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6. 判断前缀索引是否生效
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-其他内置索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 其他内置索引
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 其他内置索引">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-ordinal-索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Ordinal 索引
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-zonemap-索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. ZoneMap 索引
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-bitmap-索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Bitmap 索引
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Bitmap 索引">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-什么时候适合用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 什么时候适合用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-自适应选择是否使用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 自适应选择是否使用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-优势与适用范围" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 优势与适用范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-基本操作" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. 基本操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-性能测试结论" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. 性能测试结论
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-bloom-filter-索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Bloom filter 索引
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Bloom filter 索引">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-使用说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 使用说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-创建查看与修改" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 创建、查看与修改
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-n-gram-bloom-filter-索引beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. N-gram bloom filter 索引（Beta）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. N-gram bloom filter 索引（Beta）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-使用说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. 使用说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-创建查看与修改" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 创建、查看与修改
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-能加速的查询" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. 能加速的查询
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-全文倒排索引beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 全文倒排索引（Beta）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 全文倒排索引（Beta）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-创建" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 创建
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-查看与删除" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. 查看与删除
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-用全文倒排索引加速查询" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4. 用全文倒排索引加速查询
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-验证是否加速" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5. 验证是否加速
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-builtin-倒排索引v41-起" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6. Builtin 倒排索引（v4.1 起）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-向量索引beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 向量索引（Beta）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 向量索引（Beta）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-前提条件" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 前提条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-创建" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. 创建
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-查看与删除" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4. 查看与删除
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-用向量索引做近似搜索" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5. 用向量索引做近似搜索
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#86-调优与验证" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6. 调优与验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-如何选择" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 如何选择
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87006_%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌿表设计 行列混存
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-索引概述" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 索引概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-排序键与前缀索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 排序键与前缀索引
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 排序键与前缀索引">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-各表类型如何使用排序键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 各表类型如何使用排序键
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-前缀字段的规则" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 前缀字段的规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-如何设计排序键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. 如何设计排序键
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-修改排序键" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. 修改排序键
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-判断前缀索引是否生效" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6. 判断前缀索引是否生效
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-其他内置索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 其他内置索引
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 其他内置索引">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-ordinal-索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Ordinal 索引
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-zonemap-索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. ZoneMap 索引
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-bitmap-索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Bitmap 索引
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Bitmap 索引">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-什么时候适合用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 什么时候适合用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-自适应选择是否使用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 自适应选择是否使用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-优势与适用范围" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 优势与适用范围
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-基本操作" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. 基本操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-性能测试结论" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. 性能测试结论
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-bloom-filter-索引" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Bloom filter 索引
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Bloom filter 索引">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-使用说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 使用说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-创建查看与修改" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 创建、查看与修改
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-n-gram-bloom-filter-索引beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. N-gram bloom filter 索引（Beta）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. N-gram bloom filter 索引（Beta）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-使用说明" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. 使用说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-创建查看与修改" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 创建、查看与修改
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-能加速的查询" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. 能加速的查询
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-全文倒排索引beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 全文倒排索引（Beta）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 全文倒排索引（Beta）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-创建" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 创建
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-查看与删除" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. 查看与删除
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-用全文倒排索引加速查询" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4. 用全文倒排索引加速查询
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-验证是否加速" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5. 验证是否加速
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-builtin-倒排索引v41-起" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.6. Builtin 倒排索引（v4.1 起）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-向量索引beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 向量索引（Beta）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 向量索引（Beta）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-原理" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-前提条件" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 前提条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-创建" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3. 创建
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-查看与删除" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4. 查看与删除
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-用向量索引做近似搜索" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5. 用向量索引做近似搜索
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#86-调优与验证" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6. 调优与验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-如何选择" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 如何选择
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    数据库与缓存
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../StarRocks%E5%85%A5%E9%97%A8%E7%AF%87001_%E5%88%9D%E8%AF%86StarRocks/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    StarRocks
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>🌿表设计 索引</h1>
+
+<p><a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87003_%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/">基础篇003</a> 把数据切开、摆放到了各个 Tablet 上。这一篇关注查询怎么在 Tablet 里<strong>快速找到需要的那些行</strong>：先讲排序键和前缀索引，它们决定了最常用的过滤条件能不能少扫数据；再讲排序键管不到的过滤条件该用哪种索引。</p>
+<blockquote>
+<p>本文内容整理自 StarRocks 官方文档：<a href="https://docs.starrocks.io/zh/docs/table_design/indexes/">索引</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/indexes/Prefix_index_sort_key/">前缀索引和排序键</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/indexes/Bitmap_index/">Bitmap 索引</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/indexes/Bloomfilter_index/">Bloom filter 索引</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/indexes/Ngram_Bloom_Filter_Index/">N-gram bloom filter 索引</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/indexes/inverted_index/">全文倒排索引</a>、<a href="https://docs.starrocks.io/zh/docs/table_design/indexes/vector_index/">向量索引</a>。</p>
+</blockquote>
+<h2 id="1-索引概述">1. 索引概述</h2>
+<p>索引能帮查询快速定位满足条件的数据：如果表在某些列上建了索引，查询又用得上这些索引，就不用扫描全表，只读一部分数据就能找到目标行。</p>
+<p>StarRocks 的索引分两大类：</p>
+<ul>
+<li><strong>内置索引</strong>：StarRocks 自动创建，包括前缀索引、Ordinal 索引、ZoneMap 索引；</li>
+<li><strong>手动创建的索引</strong>：查询条件中的列不是前缀字段时，根据数据和查询特点手动创建，包括 Bitmap 索引、Bloom filter 索引、N-gram bloom filter 索引、全文倒排索引、向量索引。</li>
+</ul>
+<pre class="mermaid"><code>flowchart TB
+    IDX["StarRocks 索引"] --&gt; BUILTIN["内置索引（自动创建）"]
+    IDX --&gt; MANUAL["手动创建的索引"]
+    BUILTIN --&gt; PRE["前缀索引"]
+    BUILTIN --&gt; ORD["Ordinal 索引"]
+    BUILTIN --&gt; ZONE["ZoneMap 索引"]
+    MANUAL --&gt; BM["Bitmap 索引"]
+    MANUAL --&gt; BF["Bloom filter 索引"]
+    MANUAL --&gt; NG["N-gram bloom filter 索引"]
+    MANUAL --&gt; GIN["全文倒排索引"]
+    MANUAL --&gt; VEC["向量索引"]</code></pre>
+<table>
+<thead>
+<tr>
+<th>索引</th>
+<th>类别</th>
+<th>解决什么问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前缀索引</td>
+<td>内置</td>
+<td>过滤条件命中排序键前缀时，快速定位数据</td>
+</tr>
+<tr>
+<td>Ordinal 索引</td>
+<td>内置</td>
+<td>通过行号找到列数据页的物理地址</td>
+</tr>
+<tr>
+<td>ZoneMap 索引</td>
+<td>内置</td>
+<td>按数据块的最大最小值等统计信息，整块跳过数据</td>
+</tr>
+<tr>
+<td>Bitmap 索引</td>
+<td>手动</td>
+<td>较高基数列的查询、多个低基数列的组合查询</td>
+</tr>
+<tr>
+<td>Bloom filter 索引</td>
+<td>手动</td>
+<td>高基数列（如 ID）的 <code>=</code>、<code>IN</code> 查询</td>
+</tr>
+<tr>
+<td>N-gram bloom filter 索引</td>
+<td>手动（Beta）</td>
+<td>加速 <code>LIKE</code> 和 <code>ngram_search</code> 类函数</td>
+</tr>
+<tr>
+<td>全文倒排索引</td>
+<td>手动（Beta）</td>
+<td>按关键词全文检索</td>
+</tr>
+<tr>
+<td>向量索引</td>
+<td>手动（Beta）</td>
+<td>近似最近邻搜索（ANNS）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-排序键与前缀索引">2. 排序键与前缀索引</h2>
+<h3 id="21-原理">2.1. 原理</h3>
+<p>建表时可以指定一个或多个列构成<strong>排序键（Sort Key）</strong>，表中的数据行按排序键排序后再落盘存储。</p>
+<p>数据写入时还会<strong>自动生成前缀索引</strong>：数据按排序键排好序后，每 1024 行构成一个逻辑数据块（Data Block），前缀索引表中为每个数据块存一个索引项，内容是<strong>该块第一行数据的排序列组成的前缀</strong>。</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph IDX["前缀索引表（稀疏）"]
+        I1["块 1 首行前缀"]
+        I2["块 2 首行前缀"]
+        I3["块 3 首行前缀"]
+    end
+    subgraph DATA["按排序键有序存储的数据"]
+        B1["数据块 1&lt;br/&gt;1024 行"]
+        B2["数据块 2&lt;br/&gt;1024 行"]
+        B3["数据块 3&lt;br/&gt;1024 行"]
+    end
+    I1 --&gt; B1
+    I2 --&gt; B2
+    I3 --&gt; B3</code></pre>
+<p>有了"数据有序 + 稀疏索引"这两层结构，查询时就能用二分查找快速跳过不符合条件的数据块。前缀索引是<strong>稀疏索引</strong>，大小至少比数据量小 1024 倍，一般可以全量缓存在内存里。</p>
+<blockquote>
+<p>排序键不是传统数据库的二级索引。它决定的是数据在文件里的<strong>物理顺序</strong>，前缀索引只是建立在这个顺序之上的稀疏目录。所以一张表只有一个前缀索引。</p>
+</blockquote>
+<h3 id="22-各表类型如何使用排序键">2.2. 各表类型如何使用排序键</h3>
+<p>v3.0 起主键表支持用 <code>ORDER BY</code> 定义排序键，v3.3 起明细表、聚合表和更新表也支持。四种表类型处理数据和排序的顺序不同：</p>
+<table>
+<thead>
+<tr>
+<th>表类型</th>
+<th>数据如何排序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>明细表</td>
+<td>按 <code>ORDER BY</code> 排序，排序键可以是任意列的组合。同时指定 <code>ORDER BY</code> 和 <code>DUPLICATE KEY</code> 时，<code>DUPLICATE KEY</code> 不生效</td>
+</tr>
+<tr>
+<td>聚合表</td>
+<td>先按 <code>AGGREGATE KEY</code> 聚合，再按 <code>ORDER BY</code> 排序。两者的列需一致，顺序可以不同</td>
+</tr>
+<tr>
+<td>更新表</td>
+<td>先按 <code>UNIQUE KEY</code> 做 REPLACE，再按 <code>ORDER BY</code> 排序。两者的列需一致，顺序可以不同</td>
+</tr>
+<tr>
+<td>主键表</td>
+<td>先按 <code>PRIMARY KEY</code> 做 REPLACE，再按 <code>ORDER BY</code> 排序</td>
+</tr>
+</tbody>
+</table>
+<p>前缀索引的来源：表通过 <code>ORDER BY</code> 指定了排序键，就按排序键构建前缀索引；没有指定，就按 Key 列构建。建表后可以用 <code>SHOW CREATE TABLE</code> 返回结果中的 <code>ORDER BY</code> 子句查看排序列和它们的顺序。</p>
+<h3 id="23-前缀字段的规则">2.3. 前缀字段的规则</h3>
+<p>前缀索引项不一定包含排序键的全部列，它受两条限制：</p>
+<ul>
+<li><strong>前缀字段不超过 3 个，前缀索引项最长 36 字节</strong>，超出部分被截断；</li>
+<li><strong>CHAR、VARCHAR、STRING 类型的列只能出现一次，并且只能在末尾</strong>。遇到字符串类型的列，截断后就不再往后取。</li>
+</ul>
+<p><strong>例 1</strong>：下表排序键为 <code>uid</code>、<code>name</code>。</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_access</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">uid</span><span class="w">         </span><span class="nb">int</span><span class="p">,</span>
+<span class="w">    </span><span class="n">name</span><span class="w">        </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span>
+<span class="w">    </span><span class="n">age</span><span class="w">         </span><span class="nb">int</span><span class="p">,</span>
+<span class="w">    </span><span class="n">phone</span><span class="w">       </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span>
+<span class="w">    </span><span class="n">last_access</span><span class="w"> </span><span class="n">datetime</span><span class="p">,</span>
+<span class="w">    </span><span class="n">credits</span><span class="w">     </span><span class="n">double</span>
+<span class="p">)</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+</code></pre></div>
+<p>前缀索引项 = <code>uid</code>（4 字节）+ <code>name</code>（只取前 32 字节），刚好 36 字节，前缀字段为 <code>uid</code> 和 <code>name</code>。</p>
+<p><strong>例 2</strong>：另一张表 <code>user_access2</code> 的前三列 <code>name varchar(20)</code>、<code>uid int</code>、<code>last_access datetime</code> 为排序列。前缀索引以 VARCHAR 类型的 <code>name</code> 开头，取完 <code>name</code>（20 字节）就直接截断，即使还没到 36 字节也不再往后取。所以前缀字段只有 <code>name</code>。</p>
+<h3 id="24-如何设计排序键">2.4. 如何设计排序键</h3>
+<p><strong>排序列不宜过多</strong>：一般 3 个，建议不超过 4 个。排序列过多并不能提升查询性能，反而会增加导入时的排序开销。</p>
+<p><strong>选择排序列和排序列顺序</strong>，按以下优先级考虑：</p>
+<ol>
+<li>
+<p><strong>选经常作为查询过滤条件的列</strong>。多个排序列时，按作为过滤条件的频率排列，最常用的放最前面。以上面的 <code>user_access</code>（前缀字段 <code>uid</code>、<code>name</code>）为例：</p>
+<table>
+<thead>
+<tr>
+<th>查询</th>
+<th>能否利用前缀索引</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WHERE uid = 123 AND name = 'Jane Smith'</code></td>
+<td>包含全部前缀，充分利用，效果最好</td>
+</tr>
+<tr>
+<td><code>WHERE uid = 123</code></td>
+<td>包含部分前缀，可以利用</td>
+</tr>
+<tr>
+<td><code>WHERE name = 'Jane Smith'</code></td>
+<td>不包含前缀，无法利用</td>
+</tr>
+</tbody>
+</table>
+<p>过滤条件只要包含前缀就能用上前缀索引，但包含的前缀越短，效果越弱。</p>
+</li>
+<li>
+<p><strong>过滤频率差不多时，看列的基数</strong>：</p>
+<ul>
+<li>基数较高的列，过滤掉的数据更多；基数过低的列（比如布尔类型）过滤效果不好。</li>
+<li>不过实际业务中，基于基数稍低的列过滤往往更频繁。如果经常按高基数列、甚至唯一列过滤，这类查询其实更偏向 OLTP 的点查，而不是 OLAP 的分析查询。</li>
+<li>还要考虑压缩：如果低基数列和高基数列谁前谁后对查询影响不大，<strong>把低基数列放前面</strong>，排序后低基数列的压缩率会高很多。</li>
+</ul>
+</li>
+</ol>
+<p><strong>建表时的注意事项</strong>：</p>
+<ul>
+<li>排序列的数据类型：主键表支持数值（整型、布尔）、字符串、时间日期；明细表、聚合表、更新表支持数值（整型、布尔、Decimal）、字符串、时间日期。BITMAP、HLL 类型不能作排序列。</li>
+<li>聚合表和更新表中，排序列必须定义在其他列之前。</li>
+<li>排序键在建表语句中出现的次序，就是数据存储时多重排序的次序。</li>
+</ul>
+<h3 id="25-修改排序键">2.5. 修改排序键</h3>
+<p>业务的查询特点变了，查询条件经常用前缀字段之外的列，现有前缀索引就过滤不了数据，查询性能可能下降。这时有两种办法：</p>
+<ul>
+<li>
+<p><strong>修改排序键</strong>：v3.0 起支持修改主键表的排序键，v3.3 起支持修改明细表、聚合表和更新表的排序键。明细表和主键表的排序键可以是任意列的组合；聚合表和更新表的排序键必须包含全部 Key 列，但顺序可以不同。</p>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">k2</span><span class="p">,</span><span class="w"> </span><span class="n">k1</span><span class="p">;</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>建同步物化视图</strong>：基于该表建一个同步物化视图，用其他常用的过滤列构建前缀索引。代价是增加存储空间。</p>
+</li>
+</ul>
+<h3 id="26-判断前缀索引是否生效">2.6. 判断前缀索引是否生效</h3>
+<p>执行查询后，在 Query Profile 的 scan 节点中查看 <code>ShortKeyFilterRows</code> 等指标，就能知道前缀索引是否生效以及过滤了多少行。</p>
+<h2 id="3-其他内置索引">3. 其他内置索引</h2>
+<h3 id="31-ordinal-索引">3.1. Ordinal 索引</h3>
+<p>StarRocks 底层是列式存储，每一列的数据以 <strong>Data Page</strong> 为单位分块存储，每个 Data Page 一般是 64 × 1024 字节（<code>data_page_size = 64 * 1024</code>）。每个 Data Page 都对应一条 Ordinal 索引项，记录该页的起始行号等信息。</p>
+<p>这样就可以<strong>通过行号找到列 Data Page 的物理地址</strong>。其他索引查找数据时，最终都要通过 Ordinal 索引找到列 Data Page 的位置。</p>
+<h3 id="32-zonemap-索引">3.2. ZoneMap 索引</h3>
+<p>ZoneMap 索引存储每块数据的统计信息：Min（最小值）、Max（最大值）、HasNull（是否有空值）、HasNotNull（是否不全为空）。查询时，StarRocks 根据这些统计信息快速判断哪些数据块可以整块跳过，减少扫描的数据量。</p>
+<p>"每块"数据有两种粒度，对应两种 ZoneMap 索引：一种存每个 <strong>Segment</strong> 的统计信息，另一种存每个列的每个 <strong>Data Page</strong> 的统计信息。</p>
+<h2 id="4-bitmap-索引">4. Bitmap 索引</h2>
+<h3 id="41-原理">4.1. 原理</h3>
+<p>Bitmap 索引用位图（bitmap）建索引。位图是一个 bit 数组，每个 bit 对应表中的一行，取值 0 或 1，表示这一行是否等于某个列值。</p>
+<p>一张表只有一个前缀索引，如果查询的过滤条件不包含前缀索引的前缀，就可以给过滤列建 Bitmap 索引来提高查询效率。</p>
+<h3 id="42-什么时候适合用">4.2. 什么时候适合用</h3>
+<p>选择 Bitmap 索引，首先考虑<strong>列的基数</strong>和<strong>对查询的过滤效果</strong>。和普遍印象相反，Bitmap 索引适合：</p>
+<ul>
+<li><strong>较高基数列的查询</strong>；</li>
+<li><strong>多个低基数列的组合查询</strong>。</li>
+</ul>
+<p>这两种情况下 Bitmap 索引的过滤效果好，至少能过滤掉 999/1000 的数据，从而少读很多 Page。如果是<strong>单个低基数列的查询</strong>，过滤效果不好：要读的行很多，而且散落在大量 Page 中。</p>
+<p>评估过滤效果时，要看加载数据的开销。StarRocks 底层以 Page（默认 64K）为单位组织和加载数据，开销主要是从磁盘加载 Page 的 I/O 时间，以及 Page 解压缩和解码的时间。行被过滤掉了，但它所在的 Page 还是要读，就省不下多少开销。</p>
+<p>基数也不是越高越好，Bitmap 索引还有三项额外开销要权衡：</p>
+<ul>
+<li><strong>磁盘空间</strong>：基数过高时，索引占用较多磁盘空间；</li>
+<li><strong>导入性能</strong>：导入时要构建 Bitmap 索引，导入频繁时会受影响；</li>
+<li><strong>查询时加载索引</strong>：查询只按需加载 Bitmap 索引，加载量约为"查询条件涉及的列值数量 / 基数 × Bitmap 索引大小"，这个值越大开销越大。</li>
+</ul>
+<p>所以官方建议结合实际数据和查询做性能测试，权衡过滤效果和这些额外开销。好在 StarRocks 会自适应地决定是否使用 Bitmap 索引（见下一节），建了不合适的索引，查询也不会因此明显变慢。</p>
+<h3 id="43-自适应选择是否使用">4.3. 自适应选择是否使用</h3>
+<p>StarRocks 会根据列基数和查询自适应选择是否使用 Bitmap 索引：如果用了起不到过滤较多 Page 的效果，或者加载索引的开销较大，默认就不使用。</p>
+<p><strong>判断规则</strong>：一般来说，"查询条件涉及的列值数量 / 列的基数"越小，过滤效果越好。StarRocks 以 <code>bitmap_max_filter_ratio / 1000</code> 为阈值，只有当</p>
+<div class="highlight"><pre><span></span><code>过滤条件涉及的值的数量 / 列的基数  &lt;  bitmap_max_filter_ratio / 1000
+</code></pre></div>
+<p>时才使用 Bitmap 索引。<code>bitmap_max_filter_ratio</code> 默认为 1，取值范围 1～1000；设为 1000 表示只要列上有 Bitmap 索引就强制使用。</p>
+<p><strong>例子</strong>：表 <code>employees</code> 的 <code>gender</code> 列只有 <code>male</code>、<code>female</code> 两个值，<code>city</code> 列有 10000 个值。</p>
+<table>
+<thead>
+<tr>
+<th>查询</th>
+<th>计算</th>
+<th>是否使用 Bitmap 索引</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WHERE gender = 'male'</code></td>
+<td>1/2，大于 1/1000</td>
+<td>不使用</td>
+</tr>
+<tr>
+<td><code>WHERE gender = 'male' AND city IN ('北京', '上海')</code></td>
+<td>两列相乘：(1×2)/(2×10000)，小于 1/1000</td>
+<td>使用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="44-优势与适用范围">4.4. 优势与适用范围</h3>
+<p><strong>优势</strong>：</p>
+<ul>
+<li>能快速定位查询的列值所在的行号，适合点查或小范围查询；</li>
+<li>适合交并集运算（OR 和 AND），可以优化多维查询。</li>
+</ul>
+<p><strong>能优化的查询</strong>：等值 <code>=</code>、<code>[NOT] IN</code>、<code>&gt;</code>、<code>&gt;=</code>、<code>&lt;</code>、<code>&lt;=</code>、<code>IS NULL</code>。不适合优化 <code>!=</code> 和 <code>[NOT] LIKE</code>。</p>
+<p><strong>支持的列</strong>：主键表和明细表的所有列都能建 Bitmap 索引；聚合表和更新表只有 Key 列可以建。支持的数据类型：</p>
+<ul>
+<li>日期：DATE、DATETIME；</li>
+<li>数值：TINYINT、SMALLINT、INT、BIGINT、LARGEINT、DECIMAL、BOOLEAN；</li>
+<li>字符串：CHAR、STRING、VARCHAR；</li>
+<li>其他：HLL。</li>
+</ul>
+<h3 id="45-基本操作">4.5. 基本操作</h3>
+<p><strong>创建</strong>：建表时创建，或建表后用 <code>CREATE INDEX</code> 创建。同一张表的 Bitmap 索引不能重名；可以给多个列分别建，多个索引定义之间用逗号隔开。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- 建表时创建</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">lineorder_partial</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">lo_orderkey</span><span class="w">      </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w">     </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">lo_orderdate</span><span class="w">     </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w">     </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">lo_orderpriority</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">lo_quantity</span><span class="w">      </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w">     </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">lo_revenue</span><span class="w">       </span><span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span><span class="w">     </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">INDEX</span><span class="w"> </span><span class="n">lo_orderdate_index</span><span class="w"> </span><span class="p">(</span><span class="n">lo_orderdate</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">BITMAP</span>
+<span class="p">)</span>
+<span class="n">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">lo_orderkey</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">lo_orderkey</span><span class="p">)</span><span class="w"> </span><span class="n">BUCKETS</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- 建表后创建</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">lo_quantity_index</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">lineorder_partial</span><span class="w"> </span><span class="p">(</span><span class="n">lo_quantity</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">BITMAP</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>查看创建进度</strong>：创建 Bitmap 索引是<strong>异步</strong>的，用下面的命令查看进度，<code>State</code> 为 <code>FINISHED</code> 即创建成功。每张表同时只能进行一个 Schema Change 任务，前一个 Bitmap 索引没建完，不能创建新的。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="p">[</span><span class="k">FROM</span><span class="w"> </span><span class="n">db_name</span><span class="p">];</span>
+</code></pre></div>
+<p><strong>查看索引</strong>：只能看到已经创建完成的索引。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="k">INDEX</span><span class="p">[</span><span class="n">ES</span><span class="p">]</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">KEY</span><span class="p">[</span><span class="n">S</span><span class="p">]</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">[</span><span class="n">db_name</span><span class="p">.]</span><span class="k">table_name</span><span class="w"> </span><span class="p">[</span><span class="k">FROM</span><span class="w"> </span><span class="n">db_name</span><span class="p">];</span>
+</code></pre></div>
+<p><strong>删除索引</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">index_name</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="p">[</span><span class="n">db_name</span><span class="p">.]</span><span class="k">table_name</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>查看查询是否命中</strong>：看查询 Profile 中的 <code>BitmapIndexFilterRows</code> 字段。</p>
+<h3 id="46-性能测试结论">4.6. 性能测试结论</h3>
+<p>官方用 SSB 20G 的 <code>lineorder</code> 表（约 1.4 亿行）做了测试：一张表不建索引作对照，另一张表在 <code>lo_shipmode</code>（基数 7）、<code>lo_quantity</code>（50）、<code>lo_discount</code>（11）、<code>lo_orderdate</code>（2406）、<code>lo_tax</code>（9）、<code>lo_partkey</code>（60 万）上建 Bitmap 索引。这些索引占用的磁盘空间从 130M 到 601M 不等，<code>lo_partkey</code> 最大。</p>
+<p>测试中"强制使用"是在各 BE 的 <code>be.conf</code> 里设置 <code>bitmap_max_filter_ratio=1000</code> 并重启 BE；测试前关闭了 Page 缓存（BE 配置 <code>disable_storage_page_cache = true</code>）。Scan 耗时如下：</p>
+<table>
+<thead>
+<tr>
+<th>查询</th>
+<th>不建索引</th>
+<th>强制使用 Bitmap 索引</th>
+<th>默认（自适应）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单个低基数列 <code>lo_shipmode = "MAIL"</code></td>
+<td>约 0.91 秒</td>
+<td>约 2.08 秒，反而更慢</td>
+<td>不使用索引，约 0.91 秒</td>
+</tr>
+<tr>
+<td>多个低基数列组合 <code>lo_shipmode、lo_quantity、lo_discount、lo_tax</code></td>
+<td>约 1.76 秒</td>
+<td>约 0.68 秒</td>
+<td>使用索引，约 0.67 秒</td>
+</tr>
+<tr>
+<td>单个高基数列 <code>lo_partkey = 10000</code></td>
+<td>约 0.43 秒</td>
+<td>约 0.015 秒</td>
+<td>使用索引，约 0.014 秒</td>
+</tr>
+</tbody>
+</table>
+<p>几个结论：</p>
+<ul>
+<li><strong>单个低基数列</strong>：Bitmap 索引虽然把要读的行从 1.4 亿降到约 2000 万，但这些行随机散落在各个 Page，Page 一个都没少读（8795 → 8802），还额外付出了加载和使用索引的开销，所以更慢。自适应机制正确地没有使用索引。</li>
+<li><strong>多个低基数列组合</strong>：读取的 Page 减少了约 2/3（35168 → 11325），加载数据的时间大幅下降。</li>
+<li><strong>单个高基数列</strong>：只读了 225 个 Page，耗时从 0.43 秒降到 0.015 秒。</li>
+</ul>
+<h2 id="5-bloom-filter-索引">5. Bloom filter 索引</h2>
+<h3 id="51-原理">5.1. 原理</h3>
+<p>Bloom filter（布隆过滤器）索引能快速判断数据文件中<strong>是否可能</strong>包含要查询的数据，不包含就跳过，减少扫描量。它空间效率高，适合<strong>基数较高</strong>的列，比如 ID 列。</p>
+<p>查询条件命中前缀索引列时，StarRocks 会用前缀索引快速返回结果；但前缀索引长度有限，要快速查询一个非前缀索引列、且该列基数较高时，就可以给它建 Bloom filter 索引。</p>
+<p>例如在 <code>table1</code> 的 <code>column1</code> 上建了 Bloom filter 索引，执行 <code>SELECT xxx FROM table1 WHERE column1 = something;</code> 时：</p>
+<ul>
+<li>索引判断某个数据文件<strong>不存在</strong>目标数据，就跳过该文件；</li>
+<li>索引判断某个数据文件<strong>可能存在</strong>目标数据，就读取该文件确认。</li>
+</ul>
+<p>注意"可能存在"的判断有一定误判率，即<strong>假阳性概率</strong>（False Positive Probability）：判断某处包含目标数据，实际却不包含。但它不会漏判：判断为不存在的，一定不存在。</p>
+<h3 id="52-使用说明">5.2. 使用说明</h3>
+<ul>
+<li>主键表和明细表的所有列都能建 Bloom filter 索引；聚合表和更新表只有 Key 列可以建。</li>
+<li>支持的数据类型：<ul>
+<li>数值：SMALLINT、INT、BIGINT、LARGEINT；</li>
+<li>字符串：CHAR、STRING、VARCHAR；</li>
+<li>日期：DATE、DATETIME。</li>
+</ul>
+</li>
+<li><strong>只能加速包含 <code>IN</code> 和 <code>=</code> 过滤条件的查询</strong>，例如 <code>WHERE xxx IN (...)</code>、<code>WHERE column = xxx</code>。</li>
+<li>查看查询是否命中：看 Profile 中的 <code>BloomFilterFilterRows</code> 字段。</li>
+</ul>
+<h3 id="53-创建查看与修改">5.3. 创建、查看与修改</h3>
+<p><strong>创建</strong>：建表时在 <code>PROPERTIES</code> 中用 <code>bloom_filter_columns</code> 指定，多个列用逗号隔开。</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">table1</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">k1</span><span class="w"> </span><span class="nb">BIGINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">k2</span><span class="w"> </span><span class="n">LARGEINT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">v1</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">2048</span><span class="p">),</span>
+<span class="w">    </span><span class="n">v2</span><span class="w"> </span><span class="nb">SMALLINT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="ss">&quot;10&quot;</span>
+<span class="p">)</span>
+<span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">k2</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="w"> </span><span class="p">(</span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">k2</span><span class="p">)</span>
+<span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;bloom_filter_columns&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;k1,k2&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>查看</strong>：用 <code>SHOW CREATE TABLE table1;</code> 查看。</p>
+<p><strong>修改</strong>：用 <code>ALTER TABLE</code> 重新设置 <code>bloom_filter_columns</code>，实现增加、减少、删除索引：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- 增加索引列 v1</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">table1</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;bloom_filter_columns&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;k1,k2,v1&quot;</span><span class="p">);</span>
+<span class="c1">-- 去掉索引列 k2</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">table1</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;bloom_filter_columns&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;k1&quot;</span><span class="p">);</span>
+<span class="c1">-- 删除全部 Bloom filter 索引</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">table1</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;bloom_filter_columns&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>修改索引是异步操作，可以用 <code>SHOW ALTER TABLE</code> 查看进度。每张表同时只能进行一个修改索引的任务。</p>
+<h2 id="6-n-gram-bloom-filter-索引beta">6. N-gram bloom filter 索引（Beta）</h2>
+<h3 id="61-原理">6.1. 原理</h3>
+<p>N-gram bloom filter 索引是一种特殊的 Bloom filter 索引，通常用来加速 <code>LIKE</code> 查询，以及 <code>ngram_search</code> 和 <code>ngram_search_case_insensitive</code> 函数的计算。它只适用于字符串类型（STRING、CHAR、VARCHAR）的列。</p>
+<p>它和普通 Bloom filter 索引的区别在于：<strong>先把字符串切成固定长度的子串，再把子串写入 Bloom filter</strong>。比如列值 <code>Technical</code>：</p>
+<ul>
+<li>普通 Bloom filter 索引：把整个字符串 <code>Technical</code> 写入索引；</li>
+<li><code>gram_num</code> 为 4 的 N-gram bloom filter 索引：先切成 <code>"Tech"</code>、<code>"echn"</code>、<code>"chni"</code>、<code>"hnic"</code>、<code>"nica"</code>、<code>"ical"</code> 六个子串，再分别写入索引。</li>
+</ul>
+<h3 id="62-使用说明">6.2. 使用说明</h3>
+<ul>
+<li>明细表和主键表的所有字符串列都能建；聚合表和更新表只能在字符串类型的 Key 列上建；</li>
+<li>只能为 CHAR、STRING、VARCHAR 类型的列创建；</li>
+<li><strong>一个列只能建一种</strong>：Bloom filter 索引和 N-gram bloom filter 索引二选一；</li>
+<li>查看查询是否命中：看 Profile 中的 <code>BloomFilterFilterRows</code> 字段。</li>
+</ul>
+<h3 id="63-创建查看与修改">6.3. 创建、查看与修改</h3>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">test</span><span class="p">.</span><span class="n">table1</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">k1</span><span class="w"> </span><span class="nb">CHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="w">    </span><span class="n">k2</span><span class="w"> </span><span class="nb">CHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="w">    </span><span class="n">v1</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">SUM</span><span class="p">,</span>
+<span class="w">    </span><span class="k">INDEX</span><span class="w"> </span><span class="n">index_name</span><span class="w"> </span><span class="p">(</span><span class="n">k2</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">NGRAMBF</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;gram_num&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;4&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="ss">&quot;bloom_filter_fpp&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;0.05&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="p">)</span>
+<span class="k">AGGREGATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">k1</span><span class="p">,</span><span class="w"> </span><span class="n">k2</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">k1</span><span class="p">);</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>必填</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index_name</code></td>
+<td>是</td>
+<td>索引名，表内唯一</td>
+</tr>
+<tr>
+<td><code>column_name</code></td>
+<td>是</td>
+<td>建索引的列，只能指定一个，上例中是 <code>k2</code></td>
+</tr>
+<tr>
+<td><code>gram_num</code></td>
+<td>否</td>
+<td>分词后子串的长度，默认 2</td>
+</tr>
+<tr>
+<td><code>bloom_filter_fpp</code></td>
+<td>否</td>
+<td>Bloom filter 的误报率，范围 0.0001～0.05，默认 0.05。越小过滤效果越好，但存储开销越大</td>
+</tr>
+<tr>
+<td><code>case_sensitive</code></td>
+<td>否</td>
+<td>是否区分大小写，默认 <code>true</code></td>
+</tr>
+<tr>
+<td><code>COMMENT</code></td>
+<td>否</td>
+<td>索引注释</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1">-- 查看：索引是异步创建的，建好之后才能看到</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">table1</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">table1</span><span class="p">;</span>
+
+<span class="c1">-- 添加</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">table1</span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">new_index_name</span><span class="p">(</span><span class="n">k1</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">NGRAMBF</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;gram_num&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;4&quot;</span><span class="p">,</span>
+<span class="w">                                            </span><span class="ss">&quot;bloom_filter_fpp&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;0.05&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="c1">-- 删除</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">table1</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">new_index_name</span><span class="p">;</span>
+</code></pre></div>
+<p>修改索引是异步操作，可以用 <code>SHOW ALTER TABLE</code> 查看进度，每次只能运行一个修改索引的任务。</p>
+<h3 id="64-能加速的查询">6.4. 能加速的查询</h3>
+<ul>
+<li><strong><code>LIKE</code> 查询</strong>：只有 <code>gram_num</code> 小于被查询字符串的长度时才能加速。比如 <code>gram_num</code> 为 4，<code>LIKE "%abc"</code> 中的 <code>abc</code> 只有 3 个字符，无法加速；<code>LIKE "%abcd"</code>、<code>LIKE "%abcde%"</code> 可以加速。</li>
+<li><strong><code>ngram_search</code></strong>：函数作用的列建有 N-gram bloom filter 索引，且函数中指定的 <code>gram_num</code> 与索引的 <code>gram_num</code> 一致时，索引会自动过滤掉字符串相似度为 0 的数据，显著加快函数执行。</li>
+<li>
+<p><strong><code>ngram_search_case_insensitive</code></strong>：用法和 <code>ngram_search</code> 相同，但它不区分大小写，所以建索引时要把 <code>case_sensitive</code> 设为 <code>false</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">INDEX</span><span class="w"> </span><span class="n">index_name</span><span class="w"> </span><span class="p">(</span><span class="n">k2</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">NGRAMBF</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;gram_num&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;4&quot;</span><span class="p">,</span>
+<span class="w">                                     </span><span class="ss">&quot;bloom_filter_fpp&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;0.05&quot;</span><span class="p">,</span>
+<span class="w">                                     </span><span class="ss">&quot;case_sensitive&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;false&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+</code></pre></div>
+</li>
+</ul>
+<h2 id="7-全文倒排索引beta">7. 全文倒排索引（Beta）</h2>
+<h3 id="71-原理">7.1. 原理</h3>
+<p>全文倒排索引自 v3.3.0 起支持，主键表自 v4.0 起支持。它把文本拆成一个个词，为每个词建一个索引条目，记录这个词出现在数据文件的哪些行。</p>
+<p>比如行号 123 的数据是 <code>"hello world"</code>，分词后建出两个索引条目：<code>hello -&gt; 123</code>、<code>world -&gt; 123</code>。全文检索时，StarRocks 用搜索关键词查倒排索引，直接找到关键词出现的行号，大幅减少要扫描的行数。</p>
+<p>每个数据文件都包含基于索引列的全文倒排索引。v4.1 起，除了默认的 CLucene 实现，还提供 builtin（内置）实现，见 7.6 节。</p>
+<h3 id="72-创建">7.2. 创建</h3>
+<p>先开启 FE 配置项 <code>enable_experimental_gin</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">ADMIN</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">FRONTEND</span><span class="w"> </span><span class="n">CONFIG</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;enable_experimental_gin&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;true&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>为表创建全文倒排索引时，必须关闭该表的 <code>replicated_storage</code>：v4.0 及以上版本创建索引时会自动关闭；v4.0 之前的版本要手动把表属性 <code>replicated_storage</code> 设为 <code>false</code>。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- 建表时创建：在列 v 上建英文分词的全文倒排索引</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">v</span><span class="w"> </span><span class="n">STRING</span><span class="p">,</span>
+<span class="w">    </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">GIN</span><span class="p">(</span><span class="ss">&quot;parser&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;english&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="n">BUCKETS</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;replicated_storage&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;false&quot;</span><span class="p">);</span>
+
+<span class="c1">-- 建表后添加</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">GIN</span><span class="p">(</span><span class="s1">&#39;parser&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;english&#39;</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">GIN</span><span class="p">(</span><span class="s1">&#39;parser&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;english&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>索引列的数据类型必须是 CHAR、VARCHAR 或 STRING。<code>parser</code> 指定分词方法：</p>
+<table>
+<thead>
+<tr>
+<th>parser</th>
+<th>分词方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>none</code>（默认）</td>
+<td>不分词</td>
+<td>整个列值作为一个索引项</td>
+</tr>
+<tr>
+<td><code>english</code></td>
+<td>英文分词</td>
+<td>在非字母字符处分词，大写字母转成小写</td>
+</tr>
+<tr>
+<td><code>chinese</code></td>
+<td>中文分词</td>
+<td>使用 CLucene 的 CJK Analyzer</td>
+</tr>
+<tr>
+<td><code>standard</code></td>
+<td>多语言分词</td>
+<td>基于 Unicode 文本分段算法，适合大多数语言和中英文混合，大写字母转成小写</td>
+</tr>
+</tbody>
+</table>
+<h3 id="73-查看与删除">7.3. 查看与删除</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- 查看</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t</span><span class="err">\</span><span class="k">G</span>
+
+<span class="c1">-- 删除</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="74-用全文倒排索引加速查询">7.4. 用全文倒排索引加速查询</h3>
+<p>建好索引后，要确保系统变量 <code>enable_gin_filter</code> 已开启。能加速哪些查询，取决于索引列有没有分词。</p>
+<p><strong>索引列已分词</strong>（<code>parser</code> 为 <code>standard</code>、<code>english</code> 或 <code>chinese</code>）：只支持用 <code>MATCH</code>、<code>MATCH_ANY</code>、<code>MATCH_ALL</code> 谓词过滤，关键词必须是字符串字面量，不支持表达式：</p>
+<ul>
+<li><code>&lt;col_name&gt; (NOT) MATCH '%keyword%'</code>：匹配关键词，可以用 <code>%</code> 模糊匹配；</li>
+<li><code>&lt;col_name&gt; (NOT) MATCH_ANY 'keyword1, keyword2'</code>：包含任意一个关键词；</li>
+<li><code>&lt;col_name&gt; (NOT) MATCH_ALL 'keyword1, keyword2'</code>：同时包含所有关键词。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id1</span><span class="w">   </span><span class="nb">bigint</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w">   </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">INDEX</span><span class="w"> </span><span class="n">gin_english</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">GIN</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;parser&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;english&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;english index&#39;</span>
+<span class="p">)</span>
+<span class="n">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id1</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id1</span><span class="p">)</span>
+<span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;replicated_storage&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;false&quot;</span><span class="p">);</span>
+
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">VALUES</span>
+<span class="w">    </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;starrocks is a database&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;starrocks is a data warehouse&quot;</span><span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="k">MATCH</span><span class="w"> </span><span class="ss">&quot;starrocks&quot;</span><span class="p">;</span><span class="w">          </span><span class="c1">-- 包含 starrocks</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="k">MATCH</span><span class="w"> </span><span class="ss">&quot;data%&quot;</span><span class="p">;</span><span class="w">              </span><span class="c1">-- 包含以 data 开头的词</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="n">MATCH_ANY</span><span class="w"> </span><span class="ss">&quot;database data&quot;</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 包含 database 或 data</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="n">MATCH_ALL</span><span class="w"> </span><span class="ss">&quot;database data&quot;</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 同时包含 database 和 data</span>
+</code></pre></div>
+<p>几个容易踩的坑：</p>
+<ul>
+<li><strong>关键词必须是单词的一部分</strong>。<code>MATCH "star%"</code> 能匹配到 <code>starrocks</code>；<code>MATCH "starrocks "</code>（末尾带空格）匹配不到，因为分词后的词里没有空格。</li>
+<li><strong>关键词要用小写</strong>。英文分词和多语言分词在存储时会把大写转成小写，所以 <code>MATCH "BEST"</code> 查不到 <code>StarRocks is the BEST</code>，<code>MATCH "best"</code> 才能查到。</li>
+<li><strong>谓词必须能下推</strong>：<code>MATCH</code>、<code>MATCH_ANY</code>、<code>MATCH_ALL</code> 必须写在 <code>WHERE</code> 子句中，并作用于索引列。写在 <code>SELECT</code> 列表里（如 <code>SELECT value MATCH "test" FROM t_match</code>），或作用于没有索引的列，都会报错 <code>Match can only be used as a pushdown predicate on a column with GIN in a single query.</code></li>
+<li>对可为空的索引列，值为 <code>NULL</code> 的行不会出现在 <code>NOT MATCH</code>、<code>NOT MATCH_ANY</code>、<code>NOT MATCH_ALL</code> 的结果中。</li>
+</ul>
+<p><strong>索引列未分词</strong>（<code>'parser' = 'none'</code>）：以下下推谓词都能利用全文倒排索引过滤数据：</p>
+<ul>
+<li>表达式谓词：<code>(NOT) LIKE</code>、<code>(NOT) MATCH</code>、<code>(NOT) MATCH_ANY</code>、<code>(NOT) MATCH_ALL</code>。此时 <code>MATCH</code> 在语义上等同于 <code>LIKE</code>，并且两者只支持 <code>(NOT) &lt;col_name&gt; MATCH|LIKE '%keyword%'</code> 这种格式。<code>LIKE</code> 不符合这个格式时查询照常执行，但不会用全文倒排索引过滤。</li>
+<li>常规谓词：<code>==</code>、<code>!=</code>、<code>&lt;=</code>、<code>&gt;=</code>、<code>NOT IN</code>、<code>IN</code>、<code>IS NOT NULL</code>、<code>NOT NULL</code>。</li>
+</ul>
+<h3 id="75-验证是否加速">7.5. 验证是否加速</h3>
+<p>执行查询后，在 Query Profile 的 scan 节点中查看 <code>GinFilterRows</code>（用全文倒排索引过滤掉的行数）和 <code>GinFilter</code>（过滤耗时）。</p>
+<h3 id="76-builtin-倒排索引v41-起">7.6. Builtin 倒排索引（v4.1 起）</h3>
+<p>v4.1 起，StarRocks 提供 <strong>builtin</strong> 倒排索引实现，作为默认 CLucene 实现的补充。它是 StarRocks 原生的倒排索引，基于 bitmap 索引构建。</p>
+<table>
+<thead>
+<tr>
+<th>实现</th>
+<th>起始版本</th>
+<th>存算一体</th>
+<th>存算分离</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLucene（默认）</td>
+<td>v3.3.0</td>
+<td>支持</td>
+<td>不支持</td>
+<td>基于 CLucene 全文搜索库</td>
+</tr>
+<tr>
+<td>builtin</td>
+<td>v4.1.0</td>
+<td>支持</td>
+<td>支持</td>
+<td>StarRocks 原生实现</td>
+</tr>
+</tbody>
+</table>
+<p>创建索引时可以用 <code>imp_lib</code> 参数显式指定实现。不指定时按集群模式自动选择：存算一体集群默认用 CLucene，存算分离集群默认用 builtin（存算分离不支持 CLucene）。</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t_builtin</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id1</span><span class="w">   </span><span class="nb">bigint</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w">   </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">value</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">INDEX</span><span class="w"> </span><span class="n">gin_english</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">GIN</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;parser&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;english&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;imp_lib&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;builtin&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;builtin english index&#39;</span>
+<span class="p">)</span>
+<span class="n">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id1</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id1</span><span class="p">)</span>
+<span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;replicated_storage&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;false&quot;</span><span class="p">);</span>
+
+<span class="c1">-- 建表后添加</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_builtin</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">GIN</span><span class="p">(</span><span class="s1">&#39;parser&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;english&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;imp_lib&#39;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;builtin&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>builtin 实现还有两个专属参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dict_gram_num</code></td>
+<td><code>-1</code>（关闭）</td>
+<td>在倒排索引的字典上再建一层 n-gram 字典索引，加速通配符和子串查询</td>
+</tr>
+<tr>
+<td><code>lower_case</code></td>
+<td><code>true</code></td>
+<td>仅在 <code>"parser" = "english"</code> 时有效。<code>true</code> 时建索引和匹配都转成小写，匹配不区分大小写；<code>false</code> 时保留大小写，匹配区分大小写，用于区分 <code>Apple</code>、<code>apple</code>、<code>APPLE</code> 这类词</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>dict_gram_num</code> 的原理</strong>：设为 2 时，字典条目 <code>"starrocks"</code> 会被拆成 <code>"st"</code>、<code>"ta"</code>、<code>"ar"</code>、<code>"rr"</code>、<code>"ro"</code>、<code>"oc"</code>、<code>"ck"</code>、<code>"ks"</code>。执行 <code>MATCH '%rock%'</code> 时，查询串 <code>"rock"</code> 也拆成 <code>"ro"</code>、<code>"oc"</code>、<code>"ck"</code>，通过 n-gram 索引快速缩小候选字典条目，避免扫描整个字典。在不同值很多的列上效果尤其明显。</p>
+<p>取值建议：</p>
+<ul>
+<li>值小（如 2）：每个条目生成的 n-gram 多，索引更大，但对短查询模式过滤效果更好；</li>
+<li>值大（如 4）：n-gram 少，索引更小，但对短查询模式过滤效果差；</li>
+<li>查询多用短通配符（如 <code>%ab%</code>）时，用较小的值；</li>
+<li>查询串比 <code>dict_gram_num</code> 还短时，n-gram 索引用不上，会退化为全字典扫描。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t_gram</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id1</span><span class="w">      </span><span class="nb">bigint</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w">   </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">text_val</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_gram</span><span class="w"> </span><span class="p">(</span><span class="n">text_val</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">GIN</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="ss">&quot;parser&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;english&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;imp_lib&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;builtin&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;dict_gram_num&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;2&quot;</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;builtin index with ngram&#39;</span>
+<span class="p">)</span>
+<span class="n">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id1</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id1</span><span class="p">)</span>
+<span class="n">PROPERTIES</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;replicated_storage&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;false&quot;</span><span class="p">);</span>
+
+<span class="c1">-- 查询包含 &quot;rock&quot; 的行，n-gram 字典索引可以加速</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t_gram</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">text_val</span><span class="w"> </span><span class="k">MATCH</span><span class="w"> </span><span class="ss">&quot;%rock%&quot;</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="8-向量索引beta">8. 向量索引（Beta）</h2>
+<h3 id="81-原理">8.1. 原理</h3>
+<p>向量索引用来做<strong>近似最近邻搜索</strong>（ANNS），比如在一堆 embedding 向量里找和查询向量最相似的几个。目前 StarRocks 在 Segment 文件级别建向量索引：索引把每个搜索项映射到 Segment 文件中的行 ID，直接定位到数据行，不需要对每一行做暴力的向量距离计算。</p>
+<p>StarRocks 提供两种向量索引：</p>
+<ul>
+<li><strong>IVFPQ（倒排文件与乘积量化）</strong>：<ul>
+<li><strong>倒排文件</strong>：把数据集划分成多个簇，每个簇有一个质心，每个向量分配到最近的簇。搜索时只搜最近的几个簇，大大缩小范围；</li>
+<li><strong>乘积量化</strong>：把高维向量切成多个子向量，每个子向量量化到预定义集合中最近的点，在保持较高精度的同时降低存储和计算成本。</li>
+</ul>
+</li>
+<li><strong>HNSW（分层可导航小世界）</strong>：基于图的算法。它构建一个分层图，每层都是一个可导航小世界图，顶点是数据点，边表示相似性。高层顶点少、连接稀疏，用于快速全局搜索；低层包含所有顶点、连接密集，用于精确的局部搜索。搜索时从顶层快速找到近似区域，再逐层往下找到最近邻。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>IVFPQ</th>
+<th>HNSW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据压缩比</td>
+<td>高（约 1:0.15）</td>
+<td>低（约 1:0.8）</td>
+</tr>
+<tr>
+<td>排序</td>
+<td>索引只给出粗排结果，需要额外精排，计算量和延迟更高</td>
+<td>无需额外处理即可给出精确排序，计算成本和延迟更低</td>
+</tr>
+<tr>
+<td>存储成本</td>
+<td>低</td>
+<td>高</td>
+</tr>
+<tr>
+<td>召回率调整</td>
+<td>支持；召回率相近时计算成本更高</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>缓存策略</td>
+<td>可以调整索引块的缓存比例，平衡内存和延迟</td>
+<td>目前只支持整个文件缓存</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82-前提条件">8.2. 前提条件</h3>
+<ul>
+<li>每张表只支持一个向量索引；</li>
+<li>被索引的列必须是 <code>ARRAY&lt;FLOAT&gt; NOT NULL</code>；</li>
+<li>只有明细表和主键表支持向量索引。</li>
+</ul>
+<h3 id="83-创建">8.3. 创建</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- HNSW 向量索引</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">hnsw</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">     </span><span class="nb">BIGINT</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w">   </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">vector</span><span class="w"> </span><span class="nb">ARRAY</span><span class="o">&lt;</span><span class="nb">FLOAT</span><span class="o">&gt;</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">INDEX</span><span class="w"> </span><span class="n">hnsw_vector</span><span class="w"> </span><span class="p">(</span><span class="n">vector</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">VECTOR</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="ss">&quot;index_type&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;hnsw&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;dim&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;5&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;metric_type&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;l2_distance&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;is_vector_normed&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;false&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;M&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;16&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;efconstruction&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;40&quot;</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="n">BUCKETS</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- IVFPQ 向量索引</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">ivfpq</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">     </span><span class="nb">BIGINT</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w">   </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">vector</span><span class="w"> </span><span class="nb">ARRAY</span><span class="o">&lt;</span><span class="nb">FLOAT</span><span class="o">&gt;</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="k">INDEX</span><span class="w"> </span><span class="n">ivfpq_vector</span><span class="w"> </span><span class="p">(</span><span class="n">vector</span><span class="p">)</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">VECTOR</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="ss">&quot;index_type&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ivfpq&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;dim&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;5&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;metric_type&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;l2_distance&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;is_vector_normed&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;false&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;nbits&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;8&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;nlist&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;40&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="ss">&quot;M_IVFPQ&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;1&quot;</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">DUPLICATE</span><span class="w"> </span><span class="k">KEY</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="n">DISTRIBUTED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">HASH</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="n">BUCKETS</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
+<p>也可以用 <code>CREATE INDEX</code> 或 <code>ALTER TABLE ADD INDEX</code> 给已有的表添加向量索引：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">ivfpq_vector</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">ivfpq</span><span class="w"> </span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+<span class="k">USING</span><span class="w"> </span><span class="n">VECTOR</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="ss">&quot;index_type&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ivfpq&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;metric_type&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;l2_distance&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;is_vector_normed&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;false&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;dim&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;5&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;nlist&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;256&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;nbits&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;8&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="ss">&quot;M_IVFPQ&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;1&quot;</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><strong>通用参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>必填</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index_type</code></td>
+<td>是</td>
+<td>—</td>
+<td><code>hnsw</code> 或 <code>ivfpq</code></td>
+</tr>
+<tr>
+<td><code>dim</code></td>
+<td>是</td>
+<td>—</td>
+<td>向量维度，≥ 1。索引建好后，维度不符的向量会被拒绝导入</td>
+</tr>
+<tr>
+<td><code>metric_type</code></td>
+<td>是</td>
+<td>—</td>
+<td>距离度量：<code>l2_distance</code>（欧氏距离，越小越相似）、<code>cosine_similarity</code>（余弦相似度，越大越相似）、<code>inner_product</code>（内积，越大越相似，保留向量模长）</td>
+</tr>
+<tr>
+<td><code>is_vector_normed</code></td>
+<td>否</td>
+<td><code>false</code></td>
+<td>向量是否已归一化，仅 <code>cosine_similarity</code> 时生效。已归一化时距离在 [-1, 1]，且向量平方和必须为 1，否则报错</td>
+</tr>
+<tr>
+<td><code>index_build_threshold</code></td>
+<td>否</td>
+<td>10000</td>
+<td>写入行数低于该阈值时不建索引，查询回退到暴力检索。IVFPQ 还要求该值 ≥ <code>nlist</code></td>
+</tr>
+<tr>
+<td><code>index_build_mode</code></td>
+<td>否</td>
+<td><code>sync</code></td>
+<td>存算分离集群的建索引方式：<code>sync</code> 写入时同步建，导入延迟高；<code>async</code> 写入后由后台任务建，建好之前查询回退到暴力检索</td>
+</tr>
+</tbody>
+</table>
+<p><strong>HNSW 专属参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>M</code></td>
+<td>16</td>
+<td>建图时每个新元素建立的双向连接数，≥ 2。越大搜索效率越高，但建图和存储成本越高</td>
+</tr>
+<tr>
+<td><code>efconstruction</code></td>
+<td>40</td>
+<td>建图时候选列表的大小，≥ 1。越大图质量越好，但建图耗时越长</td>
+</tr>
+<tr>
+<td><code>efsearch</code></td>
+<td>40</td>
+<td>搜索时候选列表的大小。越大越准，但越慢。也可以在查询中指定</td>
+</tr>
+<tr>
+<td><code>quantizer</code></td>
+<td><code>flat</code></td>
+<td>量化器，用更小的索引换一定的召回率下降：<code>flat</code> 不量化；<code>sq4</code> 4-bit 标量量化，最小；<code>sq8</code> 8-bit 标量量化，推荐的压缩起点；<code>pq</code> 乘积量化，须配合 <code>m_pq</code></td>
+</tr>
+<tr>
+<td><code>m_pq</code></td>
+<td>—</td>
+<td>仅 <code>quantizer = pq</code> 时必填。子量化器数量，必须能整除 <code>dim</code>，典型值 4～32</td>
+</tr>
+<tr>
+<td><code>nbits_pq</code></td>
+<td>8</td>
+<td>仅 <code>quantizer = pq</code> 时可设。每个子量化器的位数，4～16</td>
+</tr>
+</tbody>
+</table>
+<p><strong>IVFPQ 专属参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nlist</code></td>
+<td>16</td>
+<td>簇（倒排列表）的数量，≥ 1。越大聚类越细，搜索越准但越复杂</td>
+</tr>
+<tr>
+<td><code>nbits</code></td>
+<td>8</td>
+<td>乘积量化使用的位数，目前只支持 8</td>
+</tr>
+<tr>
+<td><code>M_IVFPQ</code></td>
+<td>—</td>
+<td>必填。向量被切成的子向量数量，必须能整除 <code>dim</code></td>
+</tr>
+</tbody>
+</table>
+<p>存算分离集群用 <code>async</code> 模式时，可以查 <code>information_schema.partitions_meta</code> 的 <code>VISIBLE_VERSION</code>、<code>MIN_VI_BUILT_VERSION</code>、<code>MAX_VI_BUILT_VERSION</code> 看建索引进度：<code>MIN_VI_BUILT_VERSION</code> 等于 <code>VISIBLE_VERSION</code> 说明分区内所有 Tablet 的索引都已建好。另外，存算分离集群里用 <code>ALTER TABLE ADD INDEX</code> 加索引会重写现有数据，即使设了 <code>async</code>，也要等索引建完 Schema Change 才算完成。</p>
+<h3 id="84-查看与删除">8.4. 查看与删除</h3>
+<div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">hnsw</span><span class="err">\</span><span class="k">G</span>
+
+<span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">ivfpq_vector</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">ivfpq</span><span class="p">;</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">ivfpq</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">ivfpq_vector</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="85-用向量索引做近似搜索">8.5. 用向量索引做近似搜索</h3>
+<p><strong>查询要满足的条件</strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="o">&lt;</span><span class="n">vector_index_distance_func</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">dis</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="o">&lt;</span><span class="n">vector_index_distance_func</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">10</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="o">&lt;</span><span class="n">vector_index_distance_func</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li>
+<p><strong><code>ORDER BY</code></strong>：必须是 <code>ORDER BY &lt;距离函数&gt;(向量列, 常量数组)</code>，不能有其他排序列。常量数组必须是和索引 <code>dim</code> 匹配的 <code>ARRAY&lt;FLOAT&gt;</code>，向量列必须是建了索引的列。距离函数和排序方向要和 <code>metric_type</code> 对应：</p>
+<table>
+<thead>
+<tr>
+<th>metric_type</th>
+<th>距离函数</th>
+<th>排序方向</th>
+<th>范围谓词</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>l2_distance</code></td>
+<td><code>approx_l2_distance</code></td>
+<td><code>ASC</code></td>
+<td><code>&lt;= 常量</code></td>
+</tr>
+<tr>
+<td><code>cosine_similarity</code></td>
+<td><code>approx_cosine_similarity</code></td>
+<td><code>DESC</code></td>
+<td><code>&gt;= 常量</code></td>
+</tr>
+<tr>
+<td><code>inner_product</code></td>
+<td><code>approx_inner_product</code></td>
+<td><code>DESC</code></td>
+<td><code>&gt;= 常量</code>（常量可以为负数）</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>必须有 <code>LIMIT N</code></strong>。</p>
+</li>
+<li><strong>谓词</strong>：所有谓词都必须是距离函数表达式，用 <code>AND</code> 组合，比较方向和排序方向一致。距离函数的结果可以转成 FLOAT 或 DOUBLE，比如 <code>CAST(approx_l2_distance(v1, [1,2,3]) AS DOUBLE)</code>。</li>
+</ul>
+<p><strong>几种搜索方式</strong>（以 <code>test_hnsw</code> 表为例，它和上面的 <code>hnsw</code> 表结构相同，设置了 <code>"index_build_threshold" = "1"</code>，插入了几行 5 维向量）：</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- 近似搜索：命中向量索引，找 [1,1,1,1,1] 最近的 1 个向量</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">approx_l2_distance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">test_hnsw</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">approx_l2_distance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- 标量 + 向量联合搜索</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">approx_l2_distance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">test_hnsw</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">approx_l2_distance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- 范围搜索：score &lt; 40 的条件会下推到索引中</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">approx_l2_distance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span><span class="w"> </span><span class="n">score</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">test_hnsw</span>
+<span class="p">)</span><span class="w"> </span><span class="n">a</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">40</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">score</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- 精确计算：用不带 approx_ 的函数，忽略向量索引，直接算精确距离</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">l2_distance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">test_hnsw</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">l2_distance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="86-调优与验证">8.6. 调优与验证</h3>
+<p><strong>搜索参数</strong>：通过会话变量 <code>ann_params</code> 或 SQL Hint 传入。建议先在小数据集上调到满意的召回率和延迟，再用到大数据集上。</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- HNSW：调大 efsearch</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ SET_VAR (ann_params=&#39;{&quot;efsearch&quot;:&quot;256&quot;}&#39;) */</span>
+<span class="w">    </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">approx_l2_distance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">test_hnsw</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">approx_l2_distance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- IVFPQ</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="cm">/*+ SET_VAR (ann_params=&#39;{&quot;nprobe&quot;:&quot;256&quot;,&quot;max_codes&quot;:&quot;0&quot;,&quot;scan_table_threshold&quot;:&quot;0&quot;,&quot;polysemous_ht&quot;:&quot;0&quot;,&quot;range_search_confidence&quot;:&quot;0.1&quot;}&#39;) */</span>
+<span class="w">    </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">approx_l2_distance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">test_ivfpq</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">approx_l2_distance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">vector</span><span class="p">)</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>适用</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>efsearch</code></td>
+<td>HNSW</td>
+<td>40</td>
+<td>搜索时候选列表大小，越大越准越慢。查询中显式指定的值优先</td>
+</tr>
+<tr>
+<td><code>nprobe</code></td>
+<td>IVFPQ</td>
+<td>1</td>
+<td>搜索时检查的倒排列表数量，越大越准越慢</td>
+</tr>
+<tr>
+<td><code>max_codes</code></td>
+<td>IVFPQ</td>
+<td>0</td>
+<td>每个倒排列表最多检查的编码数</td>
+</tr>
+<tr>
+<td><code>scan_table_threshold</code></td>
+<td>IVFPQ</td>
+<td>0</td>
+<td>多义哈希参数：汉明距离低于该阈值的元素加入候选列表</td>
+</tr>
+<tr>
+<td><code>polysemous_ht</code></td>
+<td>IVFPQ</td>
+<td>0</td>
+<td>多义哈希参数：汉明距离低于该阈值的元素直接加入结果</td>
+</tr>
+<tr>
+<td><code>range_search_confidence</code></td>
+<td>IVFPQ</td>
+<td>0.1</td>
+<td>近似范围搜索的置信度，[0, 1]，设为 1 结果最准</td>
+</tr>
+</tbody>
+</table>
+<p><strong>候选数量与精排</strong>（会话变量）：</p>
+<ul>
+<li><code>k_factor</code>（默认 1）：每个 Segment 请求的候选数 = <code>LIMIT</code> × <code>k_factor</code>。调大能提高多个 Segment 合并后的召回率，但开销更大；</li>
+<li><code>enable_vector_index_refine</code>（默认 <code>false</code>）：对 IVFPQ，以及用了 <code>sq4</code>、<code>sq8</code>、<code>pq</code> 量化器的 HNSW 索引，用原始向量重新算精确距离并重排候选。对未量化的 HNSW（<code>quantizer = flat</code>）无效；</li>
+<li><code>pq_refine_factor</code>（默认 1）：开启精排的范围查询中，在 <code>k_factor</code> 基础上再放大候选数。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">SET</span><span class="w"> </span><span class="n">enable_vector_index_refine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">k_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">pq_refine_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+</code></pre></div>
+<p>候选倍率越大，召回率通常越高，但索引检索、I/O、距离计算的开销也越大。<code>EXPLAIN</code> 中的 <code>Refine: ON/OFF</code> 可以确认是否开启了精排。</p>
+<p><strong>计算召回率</strong>：用暴力检索的 topK 和近似检索的结果求交集，<code>Recall = TP / (TP + FN)</code>。比如近似检索 <code>LIMIT 5</code> 返回 8、9、7、5、1，暴力检索（<code>l2_distance</code>）返回 8、9、5、7、10，两者有 4 个相同，召回率为 4/5 = 80%。</p>
+<p><strong>验证是否命中</strong>：对查询执行 <code>EXPLAIN</code>，<code>OlapScanNode</code> 中出现 <code>VECTORINDEX: ON</code>，说明近似搜索用上了向量索引。</p>
+<h2 id="9-如何选择">9. 如何选择</h2>
+<p>按过滤条件的特点选择加速手段：</p>
+<pre class="mermaid"><code>flowchart TD
+    Q["查询的过滤条件"] --&gt; A{"是最常用的过滤列吗?"}
+    A --&gt;|是| SK["放进排序键&lt;br/&gt;利用前缀索引 + ZoneMap"]
+    A --&gt;|否| B{"过滤条件是什么样?"}
+    B --&gt;|"高基数列的 = / IN"| BF["Bloom filter 索引"]
+    B --&gt;|"较高基数列，或多个低基数列组合"| BM["Bitmap 索引"]
+    B --&gt;|"字符串 LIKE / ngram_search"| NG["N-gram bloom filter 索引"]
+    B --&gt;|"按关键词全文检索"| GIN["全文倒排索引"]
+    B --&gt;|"找最相似的向量"| VEC["向量索引"]</code></pre>
+<blockquote>
+<p>如果是按完整主键高并发地点查整行，索引帮助有限，这类场景用 <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87006_%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/">基础篇006 · 行列混存</a>。</p>
+</blockquote>
+<p>几个索引在支持范围上的差异，放在一起对比：</p>
+<table>
+<thead>
+<tr>
+<th>索引</th>
+<th>明细表 / 主键表</th>
+<th>聚合表 / 更新表</th>
+<th>支持的列类型</th>
+<th>加速的过滤条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bitmap</td>
+<td>所有列</td>
+<td>仅 Key 列</td>
+<td>日期、数值、字符串、HLL</td>
+<td><code>=</code>、<code>[NOT] IN</code>、范围比较、<code>IS NULL</code></td>
+</tr>
+<tr>
+<td>Bloom filter</td>
+<td>所有列</td>
+<td>仅 Key 列</td>
+<td>SMALLINT～LARGEINT、字符串、日期</td>
+<td><code>=</code>、<code>IN</code></td>
+</tr>
+<tr>
+<td>N-gram bloom filter</td>
+<td>所有字符串列</td>
+<td>仅字符串 Key 列</td>
+<td>CHAR、STRING、VARCHAR</td>
+<td><code>LIKE</code>、<code>ngram_search</code> 类函数</td>
+</tr>
+<tr>
+<td>全文倒排</td>
+<td>明细表支持；主键表 v4.0 起支持</td>
+<td>—</td>
+<td>CHAR、VARCHAR、STRING</td>
+<td><code>MATCH</code> 系列；不分词时还支持 <code>LIKE</code> 和常规谓词</td>
+</tr>
+<tr>
+<td>向量</td>
+<td>支持，每表一个</td>
+<td>不支持</td>
+<td><code>ARRAY&lt;FLOAT&gt; NOT NULL</code></td>
+<td>按距离函数 <code>ORDER BY ... LIMIT</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-小结">10. 小结</h2>
+<ul>
+<li><strong>排序键决定数据的物理顺序</strong>，前缀索引是建在这个顺序上的稀疏索引：每 1024 行一个索引项，前缀最多 3 个字段、36 字节，字符串列只能在末尾。最常用的过滤列放前面，排序列一般 3 个。</li>
+<li>Ordinal 索引负责按行号找到数据页，ZoneMap 索引按数据块的统计信息整块跳过数据，两者都自动生效。</li>
+<li>排序键管不到的过滤条件，按需手动建索引：高基数列等值查询用 <strong>Bloom filter</strong>；较高基数列或多个低基数列组合用 <strong>Bitmap</strong>（StarRocks 会自适应决定是否使用）；字符串模糊查询用 <strong>N-gram bloom filter</strong>；全文检索用<strong>全文倒排索引</strong>；向量相似度搜索用<strong>向量索引</strong>。</li>
+</ul>
+<p>索引解决的是"怎么少扫数据"。还有一类查询是按主键高并发地点查整行，列存天生不擅长，下一篇 <a href="../StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87006_%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/">基础篇006 · 行列混存</a> 讲 StarRocks 为它准备的存储方式。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

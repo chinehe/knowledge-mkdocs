@@ -1,0 +1,2421 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Python/engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87005_%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86pydantic-settings/">
+      
+      
+        <link rel="prev" href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87004_pytest%E5%BC%82%E6%AD%A5%E6%B5%8B%E8%AF%95%E5%AE%9E%E8%B7%B5/">
+      
+      
+        <link rel="next" href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87006_%E7%BB%93%E6%9E%84%E5%8C%96%E6%97%A5%E5%BF%97structlog/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>配置管理pydantic-settings - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-为什么要集中管理配置" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              配置管理pydantic-settings
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语言基础
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工程化
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    工程化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    企业级Web后端初始化路线图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87002_%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%B7%A5%E5%85%B7ruff%E4%B8%8Emypy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    代码质量工具ruff与mypy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87003_pre-commit%E6%8F%90%E4%BA%A4%E5%89%8D%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pre-commit提交前自动检查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87004_pytest%E5%BC%82%E6%AD%A5%E6%B5%8B%E8%AF%95%E5%AE%9E%E8%B7%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pytest异步测试实践
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置管理pydantic-settings
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置管理pydantic-settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-为什么要集中管理配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 为什么要集中管理配置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-basesettings-基本用法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. BaseSettings 基本用法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. BaseSettings 基本用法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-定义配置类" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 定义配置类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-字段名与环境变量的对应" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 字段名与环境变量的对应
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-读取优先级" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 读取优先级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-用类型做校验" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 用类型做校验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 用类型做校验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-校验失败时的报错" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 校验失败时的报错
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-secretstr保护敏感配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. SecretStr：保护敏感配置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. SecretStr：保护敏感配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-打印时自动打码" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 打印时自动打码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-对-secretstr-约束长度" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 对 SecretStr 约束长度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-field_validator校验-secretstr-的内容" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. field_validator：校验 SecretStr 的内容
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-派生属性" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 派生属性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-get_settings单例与测试覆盖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. get_settings()：单例与测试覆盖
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. get_settings()：单例与测试覆盖">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-用-lru_cache-做单例" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 用 lru_cache 做单例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-测试中覆盖配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 测试中覆盖配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-在-fastapi-依赖中注入" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. 在 FastAPI 依赖中注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-envexample-与常见坑" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. .env.example 与常见坑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. .env.example 与常见坑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-envexample-的写法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. .env.example 的写法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-坑改了-env-却不生效" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 坑：改了 .env 却不生效
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87006_%E7%BB%93%E6%9E%84%E5%8C%96%E6%97%A5%E5%BF%97structlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    结构化日志structlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI框架
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQLAlchemy
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-为什么要集中管理配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 为什么要集中管理配置
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-basesettings-基本用法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. BaseSettings 基本用法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. BaseSettings 基本用法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-定义配置类" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. 定义配置类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-字段名与环境变量的对应" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 字段名与环境变量的对应
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-读取优先级" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 读取优先级
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-用类型做校验" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 用类型做校验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 用类型做校验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-校验失败时的报错" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 校验失败时的报错
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-secretstr保护敏感配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. SecretStr：保护敏感配置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. SecretStr：保护敏感配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-打印时自动打码" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 打印时自动打码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-对-secretstr-约束长度" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 对 SecretStr 约束长度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-field_validator校验-secretstr-的内容" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. field_validator：校验 SecretStr 的内容
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-派生属性" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 派生属性
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-get_settings单例与测试覆盖" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. get_settings()：单例与测试覆盖
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. get_settings()：单例与测试覆盖">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-用-lru_cache-做单例" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 用 lru_cache 做单例
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-测试中覆盖配置" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 测试中覆盖配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-在-fastapi-依赖中注入" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. 在 FastAPI 依赖中注入
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-envexample-与常见坑" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. .env.example 与常见坑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. .env.example 与常见坑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-envexample-的写法" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. .env.example 的写法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-坑改了-env-却不生效" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 坑：改了 .env 却不生效
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Python
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    工程化
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>配置管理pydantic-settings</h1>
+
+<h2 id="1-为什么要集中管理配置">1. 为什么要集中管理配置</h2>
+<p>一个服务总有一批随环境变化的参数：数据库地址、密钥、日志级别、连接池大小等。最直接的写法是在用到的地方随手 <code>os.getenv</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;APP_DEBUG&quot;</span><span class="p">)</span>
+<span class="n">POOL_SIZE</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DATABASE_POOL_SIZE&quot;</span><span class="p">,</span> <span class="s2">&quot;10&quot;</span><span class="p">))</span>
+<span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DATABASE_URL&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>这种写法项目一大就会出问题：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>拼错变量名运行时才发现</td>
+<td><code>os.getenv("APP_DEBG")</code> 不会报错，只会安静地返回 <code>None</code>，直到某个分支执行到才暴露</td>
+</tr>
+<tr>
+<td>读到的全是字符串</td>
+<td><code>APP_DEBUG=false</code> 读出来是字符串 <code>"false"</code>，<code>bool("false")</code> 为 <code>True</code>，"关掉"调试反而打开了</td>
+</tr>
+<tr>
+<td>缺少必填项照样启动</td>
+<td>没配 <code>DATABASE_URL</code> 服务也能起来，第一次访问数据库才报错，问题从部署阶段拖到了线上请求</td>
+</tr>
+<tr>
+<td>散落在各处</td>
+<td>有哪些配置、默认值是什么、哪些是必填，只能全局搜索 <code>getenv</code> 才知道</td>
+</tr>
+</tbody>
+</table>
+<p>前两个问题可以直接验证：</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nv">APP_DEBUG</span><span class="o">=</span><span class="nb">false</span><span class="w"> </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import os; print(bool(os.getenv(&#39;APP_DEBUG&#39;)), repr(os.getenv(&#39;APP_DEBG&#39;)))&quot;</span>
+True<span class="w"> </span>None
+</code></pre></div>
+<p>目标是：<strong>所有配置集中定义在一个类里，带类型和约束；服务启动时一次性读取并校验，有任何不合法的配置直接启动失败。</strong> <code>pydantic-settings</code> 就是做这件事的库，它是 Pydantic 官方拆出来的配置管理包。</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>add<span class="w"> </span>pydantic-settings
+</code></pre></div>
+<h2 id="2-basesettings-基本用法">2. BaseSettings 基本用法</h2>
+<h3 id="21-定义配置类">2.1. 定义配置类</h3>
+<p>继承 <code>BaseSettings</code>，像写 Pydantic 模型一样声明字段。例如 <code>src/my_service/core/config.py</code>（简化版）：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Field</span><span class="p">,</span> <span class="n">SecretStr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic_settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseSettings</span><span class="p">,</span> <span class="n">SettingsConfigDict</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Settings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">SettingsConfigDict</span><span class="p">(</span><span class="n">env_file</span><span class="o">=</span><span class="s2">&quot;.env&quot;</span><span class="p">,</span> <span class="n">env_file_encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 应用</span>
+    <span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;my-service&quot;</span>
+    <span class="n">app_env</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;dev&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;prod&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;dev&quot;</span>
+    <span class="n">app_debug</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># 数据库</span>
+    <span class="n">database_url</span><span class="p">:</span> <span class="n">SecretStr</span>
+    <span class="n">database_pool_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<p><code>SettingsConfigDict</code> 中各项的含义：</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>env_file=".env"</code></td>
+<td>除了系统环境变量，还从 <code>.env</code> 文件读取。路径相对于<strong>当前工作目录</strong>，所以要在项目根目录下启动</td>
+</tr>
+<tr>
+<td><code>env_file_encoding="utf-8"</code></td>
+<td><code>.env</code> 的文件编码，注释里写中文时需要</td>
+</tr>
+<tr>
+<td><code>extra="ignore"</code></td>
+<td><code>.env</code> 里出现类中没有声明的变量时忽略。<code>BaseSettings</code> 默认是 <code>forbid</code>，会报 <code>Extra inputs are not permitted</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>extra="ignore"</code> 的实际意义：<code>.env</code> 往往会被 docker-compose 等其他工具共用，里面可能有不属于本应用的变量，不应该因此启动失败。</p>
+<h3 id="22-字段名与环境变量的对应">2.2. 字段名与环境变量的对应</h3>
+<p>字段名就是环境变量名，<strong>默认不区分大小写</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>对应的环境变量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app_env</code></td>
+<td><code>APP_ENV</code>（写成 <code>app_env</code> 也能识别）</td>
+</tr>
+<tr>
+<td><code>database_url</code></td>
+<td><code>DATABASE_URL</code></td>
+</tr>
+<tr>
+<td><code>database_pool_size</code></td>
+<td><code>DATABASE_POOL_SIZE</code></td>
+</tr>
+</tbody>
+</table>
+<p>环境变量的值都是字符串，pydantic-settings 会按字段类型转换：<code>"false"</code> 转成 <code>False</code>，<code>"10"</code> 转成 <code>10</code>；转换不了的值直接报错，例如 <code>APP_DEBUG=maybe</code>：</p>
+<div class="highlight"><pre><span></span><code>app_debug
+  Input should be a valid boolean, unable to interpret input [type=bool_parsing, input_value=&#39;maybe&#39;, input_type=str]
+</code></pre></div>
+<h3 id="23-读取优先级">2.3. 读取优先级</h3>
+<p>同一个配置可能同时出现在多个地方，优先级从高到低是：</p>
+<pre class="mermaid"><code>flowchart LR
+    A[系统环境变量] --&gt;|没有时| B[.env 文件] --&gt;|没有时| C[字段默认值]</code></pre>
+<p>在一个临时目录里放一份 <code>.env</code>（<code>DATABASE_POOL_SIZE=5</code>、<code>DATABASE_URL</code> 主机名为 <code>dotenv</code>），再分别用系统环境变量覆盖，结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>读到的 <code>database_url</code> 主机</th>
+<th><code>database_pool_size</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只有 <code>.env</code></td>
+<td><code>dotenv</code></td>
+<td><code>5</code>（来自 <code>.env</code>）</td>
+</tr>
+<tr>
+<td>额外导出 <code>DATABASE_URL=...@sysenv...</code>、<code>DATABASE_POOL_SIZE=7</code></td>
+<td><code>sysenv</code></td>
+<td><code>7</code>（系统环境变量胜出）</td>
+</tr>
+<tr>
+<td><code>.env</code> 和环境变量都不设 <code>DATABASE_POOL_SIZE</code></td>
+<td>—</td>
+<td><code>10</code>（默认值）</td>
+</tr>
+</tbody>
+</table>
+<p>这个优先级带来两个常见用法：</p>
+<ul>
+<li><strong>生产环境不放 <code>.env</code></strong>：配置和密钥由容器（<code>docker run -e</code>、compose 的 <code>environment</code>）或 K8s（ConfigMap / Secret）注入为环境变量，镜像里不带任何密钥。<code>.env</code> 只是本地开发的便利。</li>
+<li><strong>测试里覆盖配置</strong>：测试代码直接改 <code>os.environ</code>，就能盖过开发者本地 <code>.env</code> 里的值（见第 7.2 节）。</li>
+</ul>
+<h2 id="3-用类型做校验">3. 用类型做校验</h2>
+<p>配置类的类型注解本身就是校验规则。常用的几种写法：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal[...]</code></td>
+<td>限定只能取几个固定值</td>
+<td><code>app_env: Literal["dev", "test", "prod"] = "dev"</code></td>
+</tr>
+<tr>
+<td>不写默认值</td>
+<td>必填，缺了启动失败</td>
+<td><code>database_url: SecretStr</code></td>
+</tr>
+<tr>
+<td><code>Field(ge=..., le=...)</code></td>
+<td>约束数值范围</td>
+<td><code>database_pool_size: int = Field(default=10, ge=1)</code></td>
+</tr>
+<tr>
+<td><code>Field(min_length=...)</code></td>
+<td>约束长度</td>
+<td><code>jwt_secret_key: SecretStr = Field(min_length=32)</code></td>
+</tr>
+</tbody>
+</table>
+<p>完整的配置类字段：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Settings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">SettingsConfigDict</span><span class="p">(</span><span class="n">env_file</span><span class="o">=</span><span class="s2">&quot;.env&quot;</span><span class="p">,</span> <span class="n">env_file_encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 应用</span>
+    <span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;my-service&quot;</span>
+    <span class="n">app_env</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;dev&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;prod&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;dev&quot;</span>
+    <span class="n">app_debug</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># 日志</span>
+    <span class="n">log_level</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">,</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;INFO&quot;</span>
+
+    <span class="c1"># 数据库</span>
+    <span class="n">database_url</span><span class="p">:</span> <span class="n">SecretStr</span>
+    <span class="n">database_pool_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">database_max_overflow</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># 认证</span>
+    <span class="n">jwt_secret_key</span><span class="p">:</span> <span class="n">SecretStr</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+    <span class="n">access_token_expire_minutes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">refresh_token_expire_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="31-校验失败时的报错">3.1. 校验失败时的报错</h3>
+<p>不合法的配置会在 <code>Settings()</code> 实例化时抛出 <code>ValidationError</code>，错误信息会指出具体是哪个字段、为什么不合法：</p>
+<table>
+<thead>
+<tr>
+<th>错误配置</th>
+<th>报错信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>APP_ENV=staging</code></td>
+<td><code>Input should be 'dev', 'test' or 'prod'</code></td>
+</tr>
+<tr>
+<td>没有设置 <code>DATABASE_URL</code></td>
+<td><code>database_url Field required</code></td>
+</tr>
+<tr>
+<td><code>DATABASE_POOL_SIZE=0</code></td>
+<td><code>Input should be greater than or equal to 1</code></td>
+</tr>
+</tbody>
+</table>
+<p>完整的报错大致是这样：</p>
+<div class="highlight"><pre><span></span><code>pydantic_core._pydantic_core.ValidationError: 1 validation error for Settings
+database_pool_size
+  Input should be greater than or equal to 1 [type=greater_than_equal, input_value=&#39;0&#39;, input_type=str]
+</code></pre></div>
+<p>一次实例化会把<strong>所有</strong>不合法的字段一起列出来，不用改一个、启动一次、再发现下一个。</p>
+<h2 id="4-secretstr保护敏感配置">4. SecretStr：保护敏感配置</h2>
+<h3 id="41-打印时自动打码">4.1. 打印时自动打码</h3>
+<p>数据库连接串里有密码，JWT 密钥泄露后任何人都能伪造令牌。这类字段用 <code>SecretStr</code> 包装后，打印配置、写日志、出现在异常信息里时都只显示星号：</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">Settings</span><span class="p">())</span>
+<span class="n">app_name</span><span class="o">=</span><span class="s1">&#39;my-service&#39;</span> <span class="n">app_env</span><span class="o">=</span><span class="s1">&#39;dev&#39;</span> <span class="n">app_debug</span><span class="o">=</span><span class="kc">True</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;INFO&#39;</span>
+<span class="n">database_url</span><span class="o">=</span><span class="n">SecretStr</span><span class="p">(</span><span class="s1">&#39;**********&#39;</span><span class="p">)</span> <span class="n">database_pool_size</span><span class="o">=</span><span class="mi">5</span> <span class="n">database_max_overflow</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">jwt_secret_key</span><span class="o">=</span><span class="n">SecretStr</span><span class="p">(</span><span class="s1">&#39;**********&#39;</span><span class="p">)</span> <span class="n">access_token_expire_minutes</span><span class="o">=</span><span class="mi">15</span> <span class="n">refresh_token_expire_days</span><span class="o">=</span><span class="mi">7</span>
+</code></pre></div>
+<p>真正需要明文的地方显式调用 <code>.get_secret_value()</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/db/session.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_engine</span><span class="p">(</span><span class="n">settings</span><span class="p">:</span> <span class="n">Settings</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncEngine</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">create_async_engine</span><span class="p">(</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">database_url</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">(),</span>
+        <span class="n">pool_size</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">database_pool_size</span><span class="p">,</span>
+        <span class="n">max_overflow</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">database_max_overflow</span><span class="p">,</span>
+        <span class="o">...</span>
+    <span class="p">)</span>
+</code></pre></div>
+<p><code>.get_secret_value()</code> 调用点就是明文出现的全部位置，代码审查时搜这个方法名即可。</p>
+<h3 id="42-对-secretstr-约束长度">4.2. 对 SecretStr 约束长度</h3>
+<p><code>Field(min_length=32)</code> 对 <code>SecretStr</code> 同样生效，校验的是明文的长度。设置 <code>JWT_SECRET_KEY=short</code> 时：</p>
+<div class="highlight"><pre><span></span><code>jwt_secret_key
+  Value should have at least 32 items after validation, not 5
+</code></pre></div>
+<p>这样能在启动时拦住"随手写了个 <code>secret</code>"之类的弱密钥。</p>
+<h2 id="5-field_validator校验-secretstr-的内容">5. field_validator：校验 SecretStr 的内容</h2>
+<p><code>Literal</code>、<code>Field</code> 能表达的规则有限。像"数据库连接串必须是合法的 PostgreSQL URL"这种规则，用 <code>field_validator</code> 自己写：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">PostgresDsn</span><span class="p">,</span> <span class="n">SecretStr</span><span class="p">,</span> <span class="n">field_validator</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Settings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
+    <span class="n">database_url</span><span class="p">:</span> <span class="n">SecretStr</span>
+
+    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;database_url&quot;</span><span class="p">)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_database_url</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">SecretStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SecretStr</span><span class="p">:</span>
+        <span class="n">PostgresDsn</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">v</span>
+</code></pre></div>
+<p>要点：</p>
+<table>
+<thead>
+<tr>
+<th>要点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>为什么不直接把类型写成 <code>PostgresDsn</code></td>
+<td>那样打印时会露出密码；保留 <code>SecretStr</code> 类型，只借用 <code>PostgresDsn</code> 做校验</td>
+</tr>
+<tr>
+<td>校验逻辑</td>
+<td>先取明文，构造一次 <code>PostgresDsn(...)</code>，不合法时它会抛出校验错误，Pydantic 会把它当作这个字段的错误报告</td>
+</tr>
+<tr>
+<td>返回值</td>
+<td>原样返回 <code>v</code>，字段的值和类型都不变</td>
+</tr>
+<tr>
+<td><code>@classmethod</code></td>
+<td><code>field_validator</code> 要求写成类方法，装饰器顺序是 <code>field_validator</code> 在外</td>
+</tr>
+</tbody>
+</table>
+<p>设置 <code>DATABASE_URL=mysql://x</code> 时：</p>
+<div class="highlight"><pre><span></span><code>URL scheme should be &#39;postgres&#39;, &#39;postgresql&#39;, &#39;postgresql+asyncpg&#39;, ...
+</code></pre></div>
+<p><code>postgresql+asyncpg</code> 这种带驱动名的写法在允许列表里，所以 SQLAlchemy 异步引擎用的连接串可以直接通过校验。</p>
+<h2 id="6-派生属性">6. 派生属性</h2>
+<p>有些值是由其他配置推导出来的，不需要单独配置。用 <code>@property</code> 定义即可：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Settings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
+    <span class="n">app_env</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;dev&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;prod&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;dev&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_prod</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app_env</span> <span class="o">==</span> <span class="s2">&quot;prod&quot;</span>
+</code></pre></div>
+<p>使用时不再到处写 <code>settings.app_env == "prod"</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/my_service/main.py</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">app_name</span><span class="p">,</span>
+    <span class="n">debug</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">app_debug</span><span class="p">,</span>
+    <span class="c1"># 生产环境不暴露接口文档</span>
+    <span class="n">docs_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/docs&quot;</span><span class="p">,</span>
+    <span class="n">redoc_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/redoc&quot;</span><span class="p">,</span>
+    <span class="n">openapi_url</span><span class="o">=</span><span class="kc">None</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">is_prod</span> <span class="k">else</span> <span class="s2">&quot;/openapi.json&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><code>@property</code> 不是字段，不会被当成环境变量去读取，也不会出现在打印结果里。</p>
+<h2 id="7-get_settings单例与测试覆盖">7. get_settings()：单例与测试覆盖</h2>
+<h3 id="71-用-lru_cache-做单例">7.1. 用 lru_cache 做单例</h3>
+<p>每次 <code>Settings()</code> 都会重新读环境变量和 <code>.env</code> 并校验一遍。整个进程里只需要一份，用 <code>functools.lru_cache</code> 包一个函数：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+
+
+<span class="nd">@lru_cache</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_settings</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Settings</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">Settings</span><span class="p">()</span>
+</code></pre></div>
+<ul>
+<li>第一次调用时创建并缓存，之后每次返回同一个对象。</li>
+<li>各模块统一调用 <code>get_settings()</code>，不在模块顶层写 <code>settings = Settings()</code>。顶层实例化会在 <code>import</code> 时就读取配置，测试来不及覆盖。</li>
+</ul>
+<h3 id="72-测试中覆盖配置">7.2. 测试中覆盖配置</h3>
+<p>测试需要连独立的测试库、使用固定的密钥。做法是：先改 <code>os.environ</code>（系统环境变量优先级高于 <code>.env</code>），再调用 <code>get_settings.cache_clear()</code> 清掉缓存，下次调用就会按新的环境变量重新加载。<code>tests/conftest.py</code> 中的写法：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_url</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.core.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Settings</span><span class="p">,</span> <span class="n">get_settings</span>
+
+<span class="c1"># ---------- 测试环境配置：必须在创建 app 之前完成 ----------</span>
+<span class="c1"># 环境变量优先级高于 .env，这里覆盖的值会生效</span>
+<span class="n">_dev_url</span> <span class="o">=</span> <span class="n">make_url</span><span class="p">(</span><span class="n">Settings</span><span class="p">()</span><span class="o">.</span><span class="n">database_url</span><span class="o">.</span><span class="n">get_secret_value</span><span class="p">())</span>
+<span class="n">TEST_DATABASE_URL</span> <span class="o">=</span> <span class="n">_dev_url</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_dev_url</span><span class="o">.</span><span class="n">database</span><span class="si">}</span><span class="s2">_test&quot;</span><span class="p">)</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;APP_ENV&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DATABASE_URL&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TEST_DATABASE_URL</span><span class="o">.</span><span class="n">render_as_string</span><span class="p">(</span><span class="n">hide_password</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;JWT_SECRET_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;test-secret-key-only-for-tests-0123456789&quot;</span>
+<span class="n">get_settings</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
+</code></pre></div>
+<ul>
+<li>测试库地址由开发库地址推导：库名加 <code>_test</code> 后缀，避免测试清表时误伤开发数据。</li>
+<li>这段代码放在 <code>conftest.py</code> 顶层，在任何 fixture 创建 app 之前执行。</li>
+<li>测试用的 <code>JWT_SECRET_KEY</code> 同样要满足 <code>min_length=32</code>。</li>
+</ul>
+<h3 id="73-在-fastapi-依赖中注入">7.3. 在 FastAPI 依赖中注入</h3>
+<p>路由层不直接调用 <code>get_settings()</code>，而是把它作为依赖注入，例如 <code>src/my_service/api/deps.py</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">Depends</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.core.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">Settings</span><span class="p">,</span> <span class="n">get_settings</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_auth_service</span><span class="p">(</span>
+    <span class="n">session</span><span class="p">:</span> <span class="n">DbSession</span><span class="p">,</span> <span class="n">settings</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Settings</span><span class="p">,</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_settings</span><span class="p">)]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AuthService</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">AuthService</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
+</code></pre></div>
+<p>这样写有两个好处：</p>
+<table>
+<thead>
+<tr>
+<th>好处</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>依赖显式</td>
+<td><code>AuthService</code> 通过参数拿到配置，不在内部偷偷读全局状态，单元测试时可以直接传入一个 <code>Settings</code> 实例</td>
+</tr>
+<tr>
+<td>便于覆盖</td>
+<td>FastAPI 支持 <code>app.dependency_overrides[get_settings] = lambda: Settings(...)</code>，可以只为某个测试替换配置</td>
+</tr>
+</tbody>
+</table>
+<p><code>get_settings</code> 已经被 <code>lru_cache</code> 缓存，作为依赖每个请求调用一次也只是取缓存，没有额外开销。</p>
+<h2 id="8-envexample-与常见坑">8. .env.example 与常见坑</h2>
+<h3 id="81-envexample-的写法">8.1. .env.example 的写法</h3>
+<p><code>.env</code> 里有本地密码和密钥，必须加入 <code>.gitignore</code>。仓库里提交一份 <code>.env.example</code> 作为模板，列出所有配置项和示例值：</p>
+<div class="highlight"><pre><span></span><code><span class="nv">APP_ENV</span><span class="o">=</span>dev
+<span class="nv">APP_DEBUG</span><span class="o">=</span><span class="nb">true</span>
+<span class="nv">DATABASE_URL</span><span class="o">=</span>postgresql+asyncpg://postgres:postgres@localhost:5432/my_service
+
+<span class="nv">LOG_LEVEL</span><span class="o">=</span>INFO
+<span class="nv">DATABASE_POOL_SIZE</span><span class="o">=</span><span class="m">10</span>
+
+<span class="c1"># 生成方式：uv run python -c &#39;import secrets; print(secrets.token_urlsafe(48))&#39;</span>
+<span class="nv">JWT_SECRET_KEY</span><span class="o">=</span>
+<span class="nv">ACCESS_TOKEN_EXPIRE_MINUTES</span><span class="o">=</span><span class="m">15</span>
+<span class="nv">REFRESH_TOKEN_EXPIRE_DAYS</span><span class="o">=</span><span class="m">7</span>
+</code></pre></div>
+<p>新同事的使用方式：</p>
+<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;import secrets; print(secrets.token_urlsafe(48))&#39;</span><span class="w">   </span><span class="c1"># 把输出填入 JWT_SECRET_KEY</span>
+</code></pre></div>
+<p>写法上的约定：</p>
+<ul>
+<li><strong>密钥留空</strong>，并在上方注释写明生成命令。不要放一个"看起来能用"的示例密钥，否则很容易被原样带到生产。</li>
+<li>留空的 <code>JWT_SECRET_KEY=</code> 会被读成空字符串，触发 <code>min_length=32</code> 校验失败。忘记生成密钥时服务起不来，而不是带着弱密钥运行。</li>
+<li>新增配置项时同步更新 <code>.env.example</code>，它就是配置项的文档。</li>
+</ul>
+<h3 id="82-坑改了-env-却不生效">8.2. 坑：改了 .env 却不生效</h3>
+<p>现象：在 <code>.env</code> 里改了 <code>DATABASE_URL</code>，重启服务后连的还是旧地址。</p>
+<p>原因：系统环境变量优先级高于 <code>.env</code>。如果当前终端里已经存在 <code>DATABASE_URL</code>（例如 IDE 按项目配置给集成终端注入了环境变量，或者之前手动 <code>export</code> 过），<code>.env</code> 里的值就会被盖住。只要终端里有这个变量，改 <code>.env</code> 就没有效果。</p>
+<p>排查和解决：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. 看看当前终端里是否已经有这个变量</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$DATABASE_URL</span>
+env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;^(APP_|DATABASE_|JWT_)&#39;</span>
+
+<span class="c1"># 2. 临时去掉它，让 .env 生效</span>
+<span class="nb">unset</span><span class="w"> </span>DATABASE_URL
+
+<span class="c1"># 3. 或者只在单条命令里去掉</span>
+env<span class="w"> </span>-u<span class="w"> </span>DATABASE_URL<span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>my-service<span class="w"> </span>...
+</code></pre></div>
+<p>也可以新开一个不带注入变量的终端。如果是 IDE 注入的，去 IDE 的终端 / 运行配置里删掉对应的环境变量，否则每次新开集成终端都会再注入一次。</p>
+<h2 id="9-小结">9. 小结</h2>
+<ul>
+<li>到处 <code>os.getenv</code> 的问题是：拼错名字不报错、值全是字符串、缺必填项也能启动。集中到一个 <code>BaseSettings</code> 类里，启动时一次性校验。</li>
+<li>字段名对应同名环境变量，不区分大小写；读取优先级是 <strong>系统环境变量 &gt; <code>.env</code> &gt; 默认值</strong>。生产靠容器 / K8s 注入环境变量，测试靠改 <code>os.environ</code> 覆盖。</li>
+<li>用类型表达规则：<code>Literal</code> 限定取值，不写默认值即必填，<code>Field(ge=..., min_length=...)</code> 约束范围和长度；复杂规则用 <code>field_validator</code>。</li>
+<li>敏感配置用 <code>SecretStr</code>，打印时显示 <code>**********</code>，需要明文时显式 <code>.get_secret_value()</code>。</li>
+<li><code>@lru_cache</code> 的 <code>get_settings()</code> 提供单例；测试中改环境变量后 <code>cache_clear()</code> 重新加载；FastAPI 里用 <code>Depends(get_settings)</code> 注入。</li>
+<li>提交 <code>.env.example</code>，密钥留空并注明生成命令；改 <code>.env</code> 不生效时，先 <code>echo $变量名</code> 检查终端里是否已有同名环境变量。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

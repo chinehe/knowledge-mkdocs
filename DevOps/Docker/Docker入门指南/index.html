@@ -11,10 +11,10 @@
         <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/">
       
       
-        <link rel="prev" href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/starrocks/StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87002_%E8%A1%A8%E7%B1%BB%E5%9E%8B/">
+        <link rel="prev" href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/starrocks/StarRocks%E5%9F%BA%E7%A1%80%E7%AF%87006_%E8%A1%8C%E5%88%97%E6%B7%B7%E5%AD%98/">
       
       
-        <link rel="next" href="../../../about/">
+        <link rel="next" href="../Docker%E5%AE%9E%E6%88%98_Python%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96%E4%B8%8E%E9%83%A8%E7%BD%B2/">
       
       
         
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-docker" class="md-skip">
+        <a href="#1-docker概述" class="md-skip">
           Skip to content
         </a>
       
@@ -950,7 +950,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#11-docker" class="md-nav__link">
+  <a href="#11-什么是docker" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.1. 什么是Docker？
@@ -961,7 +961,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#12-docker" class="md-nav__link">
+  <a href="#12-可以用docker做什么" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.2. 可以用Docker做什么？
@@ -973,7 +973,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#121" class="md-nav__link">
+  <a href="#121-快速持续交付" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.2.1. 快速、持续交付
@@ -984,7 +984,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#122" class="md-nav__link">
+  <a href="#122-响应式部署与拓展" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.2.2. 响应式部署与拓展
@@ -995,7 +995,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#123" class="md-nav__link">
+  <a href="#123-在同一台硬件上运行多个工作负载" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.2.3. 在同一台硬件上运行多个工作负载
@@ -1011,7 +1011,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#13-docker" class="md-nav__link">
+  <a href="#13-安装docker" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.3. 安装Docker
@@ -1022,7 +1022,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#14" class="md-nav__link">
+  <a href="#14-底层技术" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.4. 底层技术
@@ -1036,6 +1036,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Docker%E5%AE%9E%E6%88%98_Python%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96%E4%B8%8E%E9%83%A8%E7%BD%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python服务容器化与部署
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1110,7 +1138,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#11-docker" class="md-nav__link">
+  <a href="#11-什么是docker" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.1. 什么是Docker？
@@ -1121,7 +1149,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#12-docker" class="md-nav__link">
+  <a href="#12-可以用docker做什么" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.2. 可以用Docker做什么？
@@ -1133,7 +1161,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#121" class="md-nav__link">
+  <a href="#121-快速持续交付" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.2.1. 快速、持续交付
@@ -1144,7 +1172,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#122" class="md-nav__link">
+  <a href="#122-响应式部署与拓展" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.2.2. 响应式部署与拓展
@@ -1155,7 +1183,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#123" class="md-nav__link">
+  <a href="#123-在同一台硬件上运行多个工作负载" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.2.3. 在同一台硬件上运行多个工作负载
@@ -1171,7 +1199,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#13-docker" class="md-nav__link">
+  <a href="#13-安装docker" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.3. 安装Docker
@@ -1182,7 +1210,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#14" class="md-nav__link">
+  <a href="#14-底层技术" class="md-nav__link">
     <span class="md-ellipsis">
       
         1.4. 底层技术
@@ -1298,8 +1326,8 @@
 <li>文章基于官方文档<a href="https://docs.docker.com/get-started/">Get started</a>编写，所以基本可以不用担心其正确性。</li>
 <li>文章内容基本源自上述的官方文档，但对其顺序和讲解方式做了全面的调整，使其更适合国内开发者阅读。</li>
 </ul>
-<h1 id="1-docker">1. Docker概述</h1>
-<h2 id="11-docker">1.1. 什么是Docker？</h2>
+<h1 id="1-docker概述">1. Docker概述</h1>
+<h2 id="11-什么是docker">1.1. 什么是Docker？</h2>
 <p>Docker是一个用于开发、发布和运行应用程序的开放平台。使我们能够将应用与基础设施分离，从而快速交付软件。通过Docker，我们可以像管理应用程序一样管理基础设施。</p>
 <p>使用Docker，可以大幅缩短从编写代码到生产发布之间的耗时。</p>
 <hr />
@@ -1330,8 +1358,8 @@
 <p><strong>生产部署：</strong>将应用程序作为容器部署到生产环境，支持容器编排服务，可以跨越不同基础设施（本地数据中心、云服务或混合环境）。</p>
 </li>
 </ul>
-<h2 id="12-docker">1.2. 可以用Docker做什么？</h2>
-<h3 id="121">1.2.1. 快速、持续交付</h3>
+<h2 id="12-可以用docker做什么">1.2. 可以用Docker做什么？</h2>
+<h3 id="121-快速持续交付">1.2.1. 快速、持续交付</h3>
 <p>Docker使用本地容器为应用程序和服务提供服务，让开发者在一个标准化的环境中工作，从而优化开发生命周期。非常适合持续集成和持续交付（CI/CD）工作流。</p>
 <p>示例场景：</p>
 <ol>
@@ -1340,27 +1368,25 @@
 <li>发现BUG后，开发者在开发环境中修复BUG，并重新部署到测试环境中进行测试和验证。</li>
 <li>测试完成后，将修复后的镜像推送到生产环境，即可完成修复方案的交付。</li>
 </ol>
-<h3 id="122">1.2.2. 响应式部署与拓展</h3>
+<h3 id="122-响应式部署与拓展">1.2.2. 响应式部署与拓展</h3>
 <p>Docker基于容器，具备高度的可移植性。</p>
 <p>Docker容器可以在开发者本地笔记本上运行，也可以在数据中心、云服务、或混合环境的物理机或虚拟机上运行。</p>
 <p>Docker的可移植性和轻量性，可以非常方便地动态管理工作负载，开发者可以根据业务需求几乎实时地拓展或关闭应用和服务。</p>
-<h3 id="123">1.2.3. 在同一台硬件上运行多个工作负载</h3>
+<h3 id="123-在同一台硬件上运行多个工作负载">1.2.3. 在同一台硬件上运行多个工作负载</h3>
 <p>Docker是轻量且快速的，它提供了一种可行的、经济的方案来替代虚拟机。</p>
 <p>Docker非常适合高密度环境以及需要使用更少资源来做更多工作的中小型部署.</p>
-<h2 id="13-docker">1.3. 安装Docker</h2>
+<h2 id="13-安装docker">1.3. 安装Docker</h2>
 <p>安装docker非常简单，我这里就不去赘述了~</p>
 <p>可以参考官网：<a href="https://docs.docker.com/get-started/get-docker/">Get Docker</a></p>
-<h2 id="14">1.4. 底层技术</h2>
+<h2 id="14-底层技术">1.4. 底层技术</h2>
 <p>Docker使用Go语言编写，利用了Linux内核中多种特性来实现其功能。</p>
 <p>Docker使用一种名为<code>namespace</code>命名空间的技术，来提供隔离的工作空间（也就是容器）。当运行容器时，Docker会为其创建一组<code>namespace</code>命名空间。</p>
 <p>这些命名空间为容器提供了一层隔离，容器运行在一个独立的命名空间中，其访问受限于该命名空间。</p>
-<h1 id="2-docker">2. Docker架构</h1>
+<h1 id="2-docker架构">2. Docker架构</h1>
 <p>Docker采用客户端-服务器架构。Docker客户端与Docker守护进程通信，后者负责构建、运行和分发Docker容器等繁重工作。</p>
 <p>Docker客户端和守护进程可以运行在同一套系统上，也可以使用Docker客户端连接远程的Docker守护进程。Docker客户端和守护进程通过REST API、Unix套接字或者网络接口进行通信。</p>
 <p>还有一个Docker客户端是Docker Compose，它让我们可以处理由一组容器组成的应用程序。</p>
-<p><strong>Docker架构图：</strong></p>
-<p><img alt="image-20260113171600013" src="../../.public//image-20260113171600013.png" /></p>
-<p><strong>图中元素讲解：</strong></p>
+<p><strong>架构中各组件说明：</strong></p>
 <ul>
 <li>
 <p><strong>Client 客户端</strong>：用户与 Docker 交互的入口，通过命令行或 API 发送指令给 Docker Daemon。<code>docker</code> 命令使用 Docker API，Docker 客户端可以与多个守护进程通信。</p>
@@ -1407,10 +1433,10 @@
 <li>若本地无对应镜像，Docker daemon 会自动从 Registry 拉取。</li>
 <li>用户可将本地镜像推送到 Registry，供他人使用。</li>
 </ol>
-<h1 id="3-docker">3. Docker核心概念</h1>
+<h1 id="3-docker核心概念">3. Docker核心概念</h1>
 <p>本章节将介绍几乎所有的Docker相关的核心概念。</p>
 <p>如果实在不理解也没有关系，随着学习的深入，自然而然地就能够理解了~</p>
-<h2 id="31-container">3.1. Container 容器</h2>
+<h2 id="31-container-容器">3.1. Container 容器</h2>
 <p>Container容器是Docker中最核心的概念：</p>
 <p><strong>Container容器是Docker中基于Image镜像创建的可执行应用程序实例，它将应用及其所有依赖打包在一个轻量级、可移植的运行环境中。</strong></p>
 <p><strong>核心特点：</strong></p>
@@ -1429,7 +1455,7 @@
 <li>虚拟机是一个拥有内核、硬件驱动、程序和应用程序的完整操作系统。如果使用虚拟机来隔离单个应用程序，将是一笔很大的开销。</li>
 <li>容器是一个独立进程，包含运行所需的所有文件。如果运行多个容器，他们共享一个内核，这样就能在更少的基础设施上运行更多的应用。</li>
 </ul>
-<h2 id="32-image">3.2. Image 镜像</h2>
+<h2 id="32-image-镜像">3.2. Image 镜像</h2>
 <p><strong>Image 镜像是只读的容器模板</strong>，包含了运行应用程序所需的所有文件、依赖库、环境变量和配置信息。</p>
 <p>Image 镜像作为容器运行的基础模板，确保应用环境的一致性和可移植性，支持快速构建和部署应用程序。</p>
 <p><strong>核心特点：</strong></p>
@@ -1447,7 +1473,7 @@
 </blockquote>
 <p><strong>镜像拓展：</strong></p>
 <p>镜像的分层存储和不可变特性，使得我们可以拓展现有镜像：比如要开发一个Python应用，可以从Python镜像开始，添加额外的层（layer）来安装应用的依赖并添加代码。这样就可以专注于应用，而不是Python本身。</p>
-<h2 id="33-layer">3.3. Layer 层</h2>
+<h2 id="33-layer-层">3.3. Layer 层</h2>
 <p>上文中提过，容器镜像是由多层layer组成的，而这些层一旦形成，就不可变。</p>
 <p>镜像中的每一<strong>Layer 层</strong>都包含一组文件系统的变更（添加、删除或修改）。</p>
 <p>理论上一个镜像：</p>
@@ -1473,7 +1499,7 @@
 <li>容器启东市，其根目录设置为该统一目录的位置，使用<code>chroot</code></li>
 </ol>
 <p>当创建联合文件系统时，处理镜像的层外，还会专门为运行中的容器创建一个目录。这使得容器能够进行文件系统更改，同时保持原镜像的层不变。这使得我们可以从同一个底层镜像运行多个容器。</p>
-<h2 id="34-registry">3.4. Registry 注册表</h2>
+<h2 id="34-registry-注册表">3.4. Registry 注册表</h2>
 <p>Registry 注册表是<strong>集中存储和分发Docker镜像</strong>的地方，允许用户推送、拉取和管理容器镜像。</p>
 <p><strong>核心特点：</strong></p>
 <ul>
@@ -1557,7 +1583,7 @@
 <li><strong>协同工作</strong>：Compose File 可以引用 Dockerfile 来构建自定义镜像</li>
 <li><strong>生命周期不同：</strong>Dockerfile 用于构建阶段，Compose File 用于运行阶段</li>
 </ul>
-<h2 id="37-volumebind-mount">3.7 Volume卷、Bind Mount 绑定挂载</h2>
+<h2 id="37-volume卷bind-mount-绑定挂载">3.7 Volume卷、Bind Mount 绑定挂载</h2>
 <blockquote>
 <p>容器启动时，使用镜像提供的文件和配置。每个容器都会创建、修改和删除数据，且不会影响其他容器。当容器被删除时，这些文件的变更也被删除。</p>
 <p>虽然容器这种临时性很好，但在想持久保存数据时却是个问题。比如，重启数据库容器时，肯定不希望从一个空数据开始，那么文件如何持久保存呢？</p>
@@ -1629,7 +1655,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="38-image-tag">3.8 Image Tag镜像标签</h2>
+<h2 id="38-image-tag镜像标签">3.8 Image Tag镜像标签</h2>
 <p>使用不带标签的基本构建命令时，没有指定镜像名称，默认会输出镜像ID。比如：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>.
 <span class="o">[</span>+<span class="o">]</span><span class="w"> </span>Building<span class="w"> </span><span class="m">3</span>.5s<span class="w"> </span><span class="o">(</span><span class="m">11</span>/11<span class="o">)</span><span class="w"> </span>FINISHED<span class="w">                                       </span>docker:desktop-linux
@@ -1671,8 +1697,8 @@
 <li><code>docker/welcome-to-docker</code>：等同于 <code>docker.io/docker/welcome-to-docker:latest</code> </li>
 <li><code>ghcr.io/dockersamples/example-voting-app-vote:pr-311</code>。</li>
 </ul>
-<h1 id="4">4. 基本操作</h1>
-<h2 id="41">4.1. 拉取与推送镜像</h2>
+<h1 id="4-基本操作">4. 基本操作</h1>
+<h2 id="41-拉取与推送镜像">4.1. 拉取与推送镜像</h2>
 <ol>
 <li>拉取镜像：从注册表拉取镜像到本地。</li>
 </ol>
@@ -1683,8 +1709,8 @@
 </ol>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>push
 </code></pre></div>
-<h2 id="42">4.2. 镜像构建</h2>
-<h3 id="421">4.2.1. 构建镜像</h3>
+<h2 id="42-镜像构建">4.2. 镜像构建</h2>
+<h3 id="421-构建镜像">4.2.1. 构建镜像</h3>
 <p>大多数情况下，镜像是通过Dockerfile构建的，最基本的构建命令如下：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>.
 </code></pre></div>
@@ -1715,14 +1741,14 @@
 <p>根据输出的镜像ID，可以使用下面的命令来启动容器：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>sha256:9924dfd9350407b3df01d1a0e1033b1e543523ce7d5d5e2c83a724480ebe8f00
 </code></pre></div>
-<h3 id="422">4.2.2. 镜像标签</h3>
+<h3 id="422-镜像标签">4.2.2. 镜像标签</h3>
 <p>要在构建过程中给镜像打标签，可以使用<code>-t</code>或<code>--tag</code>参数：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>my-username/my-image<span class="w"> </span>.
 </code></pre></div>
 <p>要给一个已经构建好的镜像添加新的标签，可以使用<code>docker image tag</code>命令：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>image<span class="w"> </span>tag<span class="w"> </span>my-username/my-image<span class="w"> </span>another-username/another-image:v1
 </code></pre></div>
-<h3 id="423">4.2.3. 使用构建缓存</h3>
+<h3 id="423-使用构建缓存">4.2.3. 使用构建缓存</h3>
 <p>当运行<code>docker build</code>命令构建新的镜像时，Docker会执行Dockerfile中的每条命令，按照顺序为每个命令创建一个层。对于每个命令，Docker会检查是否可以复用之前构建的指令。如果发现你之前已经执行过类似的命令，Docker就不会重新执行，而是直接使用缓存的结果。这样，构建过程就会更快更高效，可以节省宝贵的时间和资源。</p>
 <p>为了最大化缓存使用率并避免资源你急且耗时的重建，就有必要了解缓存失效的工作原理。</p>
 <p>一下是一些可能导致缓存失效的情况：</p>
@@ -1732,7 +1758,7 @@
 <li>一旦一个层失效，后续的所有层都会失效。如果前面的任意层失效，包括基础镜像或中间层，Docker会确保后续依赖它的层也失效。这样可以保证构建过程的同步，防止不一致。</li>
 </ul>
 <p>在编写或编辑Dockerfile是，注意不必要的缓存未命中，可以确保构建运行尽可能的快和高效。</p>
-<h3 id="424">4.2.4. 多阶段构建</h3>
+<h3 id="424-多阶段构建">4.2.4. 多阶段构建</h3>
 <p>传统构建过程中，所有构建指令按照顺序执行，且在一个构建容器中执行：下载依赖、编译代码和打包应用程序。所有这些层最终都会形成最终镜像。这种方法有效，但是会是的镜像体积庞大，增加不必要的负担，增加安全风险。</p>
 <p>这时候多阶段构建就派上用场了。</p>
 <p>多阶段构建会在你的Dockerfile中引入多个阶段，每个阶段都有特定的用途。可以把它想象成能同时在多个不同环境中运行构建的不同部分。通过将构建环境与最终运行环境分离，你可以显著缩小镜像大小和共计面。这对依赖较大的构建应用非常有利。</p>
@@ -1759,14 +1785,90 @@
 <li>构建阶段使用包含编译应用所需的构建工具的基础进行镜像。包含安装构建工具、复制源代码和执行构建命令。</li>
 <li>最后阶段使用一个适合运行应用的较小的基础镜像。他从构建阶段复制编译出来的成果（如JAR文件）。最后，它定义了运行时配置用于启动应用程序。</li>
 </ol>
-<h2 id="43">4.3. 运行容器</h2>
-<h3 id="431">4.3.1. 启动容器</h3>
+<h3 id="425-dockerignore">4.2.5. .dockerignore</h3>
+<p>执行<code>docker build .</code>时，<code>.</code>指定的目录就是<strong>构建上下文</strong>。构建开始时，Docker会先把整个构建上下文发送给构建器（4.2.1输出中的<code>load build context</code>、<code>transferring context</code>就是这一步），Dockerfile中<code>COPY . /app</code>复制的也是构建上下文中的文件。</p>
+<p>如果不加限制，项目目录下的所有文件，包括Git历史、本地虚拟环境、各种缓存和密钥文件，都会被发送给构建器，并可能通过<code>COPY</code>进入镜像。</p>
+<p>在构建上下文的根目录放一个<code>.dockerignore</code>文件，可以把不需要的文件排除在构建上下文之外：</p>
+<ul>
+<li>构建更快：需要传输的上下文更小，无关文件的变化也不会让<code>COPY</code>层的缓存失效。</li>
+<li>镜像更小：本地虚拟环境、缓存等不会被复制进镜像。</li>
+<li>更安全：避免<code>.env</code>等敏感文件进入镜像。</li>
+</ul>
+<p><code>.dockerignore</code>的语法与<code>.gitignore</code>类似：每行一个匹配模式，<code>#</code>开头为注释；<code>**</code>匹配任意层级的目录，如<code>**/__pycache__</code>；<code>!</code>开头表示取反，把前面排除的文件重新包含进来，如<code>!.env.example</code>。</p>
+<blockquote>
+<p><strong>必须排除<code>.env</code>：</strong></p>
+<p><code>.env</code>中通常存放数据库密码、密钥等敏感配置。如果没有排除，<code>COPY . /app</code>会把它打进镜像层，任何能拉取这个镜像的人都能读到其中的密钥（即使后面的指令删除了这个文件，它仍然保留在之前的层里）。配置应该在运行容器时通过环境变量注入（见4.3.3.2），而不是写进镜像。</p>
+</blockquote>
+<p>以一个Python Web服务的<code>.dockerignore</code>为例：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 不进入镜像构建上下文的文件：既让构建更快，也防止敏感文件被打进镜像</span>
+.git
+.venv
+.env
+.env.*
+!.env.example
+**/__pycache__
+.mypy_cache
+.ruff_cache
+.pytest_cache
+.coverage
+htmlcov
+.idea
+.vscode
+.DS_Store
+tests
+</code></pre></div>
+<p>每类文件排除的原因：</p>
+<ul>
+<li><code>.git</code>：Git历史，体积可能很大，运行时用不到。</li>
+<li><code>.venv</code>：本地虚拟环境，与宿主机平台（如macOS）绑定，放进Linux镜像也无法使用。镜像中的依赖由Dockerfile中的<code>uv sync</code>重新安装。</li>
+<li><code>.env</code>、<code>.env.*</code>、<code>!.env.example</code>：排除所有环境配置文件，防止密钥进入镜像；<code>.env.example</code>是不含真实密钥的配置模板，用<code>!</code>重新包含进来。</li>
+<li><code>**/__pycache__</code>、<code>.mypy_cache</code>、<code>.ruff_cache</code>、<code>.pytest_cache</code>、<code>.coverage</code>、<code>htmlcov</code>：Python字节码、类型检查、代码检查、测试和覆盖率产生的缓存与报告。它们是本地开发的产物，镜像中不需要，而且经常变化，会让<code>COPY</code>层的缓存频繁失效。</li>
+<li><code>.idea</code>、<code>.vscode</code>、<code>.DS_Store</code>：编辑器配置和macOS系统文件。</li>
+<li><code>tests</code>：测试代码只在开发环境和CI中运行，生产镜像不需要。</li>
+</ul>
+<h3 id="426-构建时挂载run---mount">4.2.6. 构建时挂载（RUN --mount）</h3>
+<p>4.3.5中介绍的<code>docker run --mount</code>是运行时挂载，作用于运行中的容器。Dockerfile中的<code>RUN</code>指令也支持<code>--mount</code>参数，这是BuildKit提供的构建时挂载：只在执行这一条<code>RUN</code>指令期间挂载，指令执行完就卸载，挂载的内容不会留在镜像层里。</p>
+<p>使用构建时挂载，需要在Dockerfile首行声明语法版本：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># syntax=docker/dockerfile:1</span>
+</code></pre></div>
+<p>常用的挂载类型有两种：</p>
+<ul>
+<li><code>type=cache</code>：挂载一个由构建器管理的缓存目录，它在多次构建之间保留。适合存放包管理器的下载缓存，如<code>--mount=type=cache,target=/root/.cache/uv</code>。即使依赖层失效需要重新安装，没有变化的包也可以直接从缓存中取，不用重新下载。</li>
+<li><code>type=bind</code>：把构建上下文中的文件或目录临时挂载进来，而不用<code>COPY</code>，如<code>--mount=type=bind,source=uv.lock,target=uv.lock</code>。这一层只用到挂载的文件，它的缓存也只受这些文件变化的影响。</li>
+</ul>
+<p>以一个使用uv管理依赖的Python项目为例，Dockerfile中安装依赖的部分如下：</p>
+<div class="highlight"><pre><span></span><code><span class="c"># syntax=docker/dockerfile:1</span>
+
+<span class="k">FROM</span><span class="w"> </span><span class="s">ghcr.io/astral-sh/uv:0.11-python3.12-trixie-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># 先只装第三方依赖：只要 pyproject.toml 和 uv.lock 不变，这一层就走缓存，改业务代码不会重装依赖</span>
+<span class="k">RUN</span><span class="w"> </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.cache/uv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>bind,source<span class="o">=</span>uv.lock,target<span class="o">=</span>uv.lock<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>bind,source<span class="o">=</span>pyproject.toml,target<span class="o">=</span>pyproject.toml<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>uv<span class="w"> </span>sync<span class="w"> </span>--locked<span class="w"> </span>--no-install-project<span class="w"> </span>--no-dev
+
+<span class="c"># 再装项目本身</span>
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>/app
+<span class="k">RUN</span><span class="w"> </span>--mount<span class="o">=</span><span class="nv">type</span><span class="o">=</span>cache,target<span class="o">=</span>/root/.cache/uv<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>uv<span class="w"> </span>sync<span class="w"> </span>--locked<span class="w"> </span>--no-dev<span class="w"> </span>--no-editable
+</code></pre></div>
+<ol>
+<li>第一条<code>RUN</code>通过<code>type=bind</code>挂载<code>pyproject.toml</code>和<code>uv.lock</code>，只用这两个文件安装第三方依赖（<code>--no-install-project</code>表示不安装项目本身）。这一层的缓存只受这两个依赖文件影响，修改业务代码不会触发依赖重装。</li>
+<li>两条<code>RUN</code>都通过<code>type=cache</code>挂载了uv的缓存目录<code>/root/.cache/uv</code>。依赖文件变化导致依赖层失效时，uv可以复用之前下载过的包，只下载新增或变化的部分。</li>
+<li>业务代码在依赖安装之后才<code>COPY</code>进来，代码变化只会让后面的层失效。</li>
+</ol>
+<blockquote>
+<p>完整的Python项目容器化实战见<a href="../Docker%E5%AE%9E%E6%88%98_Python%E6%9C%8D%E5%8A%A1%E5%AE%B9%E5%99%A8%E5%8C%96%E4%B8%8E%E9%83%A8%E7%BD%B2/">Docker实战：Python服务容器化与部署</a>。</p>
+</blockquote>
+<h2 id="43-运行容器">4.3. 运行容器</h2>
+<h3 id="431-启动容器">4.3.1. 启动容器</h3>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run
 </code></pre></div>
-<h3 id="432">4.3.2. 发布与暴露端口</h3>
+<h3 id="432-发布与暴露端口">4.3.2. 发布与暴露端口</h3>
 <p>容器会为应用的每个组件提供独立的进程。每个组件（React前端、Python API、PLSQL数据库）运行在自己的沙箱环境中，与主机上的一切完全隔离。这种隔离对安全和依赖管理非常有帮助，但是也一位置无法直接访问它们。比如，无法在浏览器中访问网页应用。</p>
 <p>这时就需要发布端口了。</p>
-<h4 id="4321">4.3.2.1. 发布端口</h4>
+<h4 id="4321-发布端口">4.3.2.1. 发布端口</h4>
 <p>发布端口是通过设置转发规则，突破网络隔离。比如，可以指定主机<code>8080</code>端口的请求应该转发到容器的<code>80</code>端口。</p>
 <p>发布端口是在容器创建时使用<code>docker run</code>的<code>-p</code>或<code>--pulish</code>参数进行的，语法如下：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span>HOST_PORT:CONTAINER_PORT<span class="w"> </span>nginx
@@ -1782,7 +1884,7 @@
 <blockquote>
 <p>端口发布时，默认会发布到所有网络接口。这意味着任何到达主机的流量都可以访问已发布的应用程序。注意不要发布数据库或其他的敏感信息。</p>
 </blockquote>
-<h4 id="4322">4.3.2.2. 发布临时端口</h4>
+<h4 id="4322-发布临时端口">4.3.2.2. 发布临时端口</h4>
 <p>有时候，可能只想发布端口，而不在乎使用哪个主机端口。这时，可以让Docker帮你选端口。只需要省略<code>HOST_PORT</code>配置即可。</p>
 <p>比如，下面的示例将容器80端口发布到主机的临时端口上：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">80</span><span class="w"> </span>nginx
@@ -1792,24 +1894,24 @@
 CONTAINER<span class="w"> </span>ID<span class="w"> </span>IMAGE<span class="w"> </span>COMMAND<span class="w">                                </span>CREATED<span class="w">           </span>STATUS<span class="w">              </span>PORTS<span class="w">                               </span>NAMES
 a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2">&quot;/docker-entrypoint.â¦&quot;</span><span class="w"> </span><span class="m">4</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w"> </span>Up<span class="w"> </span><span class="m">3</span><span class="w"> </span>seconds<span class="w">  </span><span class="m">0</span>.0.0.0:54772-&gt;80/tcp<span class="w"> </span>romantic_williamson
 </code></pre></div>
-<h4 id="4323">4.3.2.3. 发布全部端口</h4>
+<h4 id="4323-发布全部端口">4.3.2.3. 发布全部端口</h4>
 <p>创建容器镜像时，可以使用<code>EXPOSE</code>命令指定打包好应用程序将要使用的端口。这些端口不会默认发布。</p>
 <p>使用<code>-P</code>或<code>--pulish-all</code>参数，可以自动将所有暴露端口发布到临时端口。这在像避免开发或测试环境端口冲突时非常有用。</p>
 <p>下面的示例中，将发布由镜像配置的所有暴露端口：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-P<span class="w"> </span>nginx
 </code></pre></div>
-<h3 id="433">4.3.3. 覆盖容器默认值</h3>
+<h3 id="433-覆盖容器默认值">4.3.3. 覆盖容器默认值</h3>
 <p>Docker容器启动时，会执行一个应用程序或命令。容器通过镜像配置获取该可执行文件（脚本或文件）。容器使用默认配置时通常会正常运行，但有时我们可能需要修改这些默认配置，以使容器按照想要的方式运行。</p>
 <p>比如，如果现在有一个数据库容器在标准端口监听，而我们想运行统一数据库容器的新实例，就需要修改新容器监听的端口设置，以避免与现有容器冲突。</p>
 <p>比如，有时候程序可能需要更多的资源来处理繁重的负载，就需要增加容器的可用内存。</p>
 <p>再比如，可能需要设置环境变量以提供程序正常运行所需的具体配置细节。</p>
 <p><code>docker run</code>命令提供了一种强大的方式来覆盖这些默认配置，该命令提供多个参数以实时自定义容器行为。</p>
-<h4 id="4331">4.3.3.1. 覆盖网络端口</h4>
+<h4 id="4331-覆盖网络端口">4.3.3.1. 覆盖网络端口</h4>
 <p>上文已经提过，可以使用<code>-p</code>参数将容器端口发布到主机端口。</p>
 <p>比如：</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-p<span class="w"> </span>HOST_PORT:CONTAINER_PORT<span class="w"> </span>postgres
 </code></pre></div>
-<h4 id="4332">4.3.3.2. 设置环境变量</h4>
+<h4 id="4332-设置环境变量">4.3.3.2. 设置环境变量</h4>
 <p>使用<code>-e</code>参数可以设置环境变量。</p>
 <p>比如：</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span><span class="nv">foo</span><span class="o">=</span>bar<span class="w"> </span>postgres<span class="w"> </span>env
@@ -1822,7 +1924,7 @@ a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2
 <p>要使用<code>.env</code>文件，可以使用<code>--env-file</code>参数，比如：</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--env-file<span class="w"> </span>.env<span class="w"> </span>postgres<span class="w"> </span>env
 </code></pre></div>
-<h4 id="4333">4.3.3.3. 限制容器资源消耗</h4>
+<h4 id="4333-限制容器资源消耗">4.3.3.3. 限制容器资源消耗</h4>
 <p>使用<code>--memory</code>和<code>--cups</code>参数可以限制容器占用多少CPU和内存。</p>
 <p>比如，可以为<code>Python API</code>容器设置内存限制，以防止它在主机上占用过多的资源：</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>secret<span class="w"> </span>--memory<span class="o">=</span><span class="s2">&quot;512m&quot;</span><span class="w"> </span>--cpus<span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="w"> </span>postgres
@@ -1831,10 +1933,10 @@ a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2
 <blockquote>
 <p>可以使用<code>docker stats</code>命令来监控运行容器的实时资源使用情况。者有助于了解分配的资源是否足够和是否需要调整。</p>
 </blockquote>
-<h3 id="434">4.3.4. 持久化容器数据</h3>
+<h3 id="434-持久化容器数据">4.3.4. 持久化容器数据</h3>
 <p>容器启动时，使用镜像提供的文件和配置。每个容器都会创建、修改和删除数据，且不会影响其他容器。当容器被删除时，这些文件的变更也被删除。</p>
 <p>虽然容器这种临时性很好，但在想持久保存数据时却是个问题。比如，重启数据库容器时，肯定不希望从一个空数据开始，那么文件如何持久保存呢？</p>
-<h4 id="4341">4.3.4.1. 容器卷</h4>
+<h4 id="4341-容器卷">4.3.4.1. 容器卷</h4>
 <p>卷时一种个存储机制，能够将数据持久化到容器的生命周期之外。可以把它想象成一个快捷方式或符号链接（从容器内部到外部）。</p>
 <p>比如，创建一个名为log-data的卷：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>log-data
@@ -1848,7 +1950,7 @@ a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2
 <p><strong>使用卷共享文件：</strong></p>
 <p>可以将同一个卷绑定到多个容器上，以便在容器间共享文件。这在日志聚合、数据管道或者其他时间驱动应用中可能很有帮助。</p>
 </blockquote>
-<h4 id="4342">4.3.4.2. 管理卷</h4>
+<h4 id="4342-管理卷">4.3.4.2. 管理卷</h4>
 <p>卷的生命周期在容器的生命周期之外，且根据使用的数据和应用类型，其规模可能相当大。</p>
 <p>以下命令有助于管理卷：</p>
 <ul>
@@ -1856,16 +1958,16 @@ a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2
 <li><code>docker volume rm &lt;volume-name-or-id&gt;</code>：删除指定卷（仅在卷未连接任何容器时有效）</li>
 <li><code>docker volume prune</code>：移除所有未使用的卷。</li>
 </ul>
-<h3 id="435">4.3.5. 与容器共享本地文件</h3>
+<h3 id="435-与容器共享本地文件">4.3.5. 与容器共享本地文件</h3>
 <p>每个容器都具备运行所需的一切，无需依赖主机上预装的依赖。</p>
 <p>由于容器是孤立运行的，对宿主机和其他容器影响极小。这种隔离带来了一个巨大的好处：容器最大限度地减小了与主机系统及其他容器的冲突。然而这种隔离也意味着容器默认无法直接访问主机上的数据。</p>
 <p>比如一个场景：有一个网络应用容器，需要访问主机系统文件中的配置。该文件可能包含敏感数据，如数据库凭证或API秘钥。直接在容器镜像中存储此类敏感信息存在安全风险，尤其是镜像共享过程中。</p>
 <p>为了应对这一问题，docker提供了存储选项，弥补容器隔离与主机数据之间的差距。</p>
 <p>Docker提供两种主要的存储方式，用于持久化数据和在主机与容器之间共享数据：卷和绑定挂载（bind mounts）。</p>
-<h4 id="4351">4.3.5.1. 卷与绑定挂载</h4>
+<h4 id="4351-卷与绑定挂载">4.3.5.1. 卷与绑定挂载</h4>
 <p>如果想确保容器内部生成或修改的数据即使在容器停止后依然存在，应该选择使用卷。</p>
 <p>如果主机系统上有特定的文件或目录，要直接与容器共享，比如配置文件或开发代码，应该使用绑定挂载。这就像在主机和容器之间打开了一个直接的门户以便分享。绑定挂载非常适用于开发环境，因为主机和容器之间需要实时文件访问和共享。</p>
-<h4 id="4352">4.3.5.2. 与容器共享本机文件</h4>
+<h4 id="4352-与容器共享本机文件">4.3.5.2. 与容器共享本机文件</h4>
 <p>使用<code>docker run</code>命令的<code>-v</code>（或者<code>--volume</code>）和<code>--mount</code>参数，都可以在主机和Docker容器之间共享文件和目录。</p>
 <p>但是它们在行为和使用上存在一些差异。</p>
 <p><code>-v</code>参数更加简单，也更方便用于基本的卷或绑定挂载操作。如果使用<code>-v</code>（或者<code>--volume</code>）时主机目录不存在，会自动创建一个目录。</p>
@@ -1879,7 +1981,7 @@ a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2
 <blockquote>
 <p>Docker 建议使用 <code>--mount</code> 语法代替 <code>-v</code>。它能更好地控制挂载过程，避免目录缺失带来的潜在问题。</p>
 </blockquote>
-<h4 id="4353-docker">4.3.5.3. Docker访问主机的文件权限</h4>
+<h4 id="4353-docker访问主机的文件权限">4.3.5.3. Docker访问主机的文件权限</h4>
 <p>使用绑定挂载时，需要确保Docker拥有访问主机目录的必要权限。要授予读写权限，可以在容器创建时使用<code>:ro</code>只读标志，或者使用<code>:rw</code>（读写）标志与<code>-v</code>或<code>--mount</code>一起搭配使用。</p>
 <p>比如下面的命令授予读写访问权限：</p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-v<span class="w"> </span>HOST-DIRECTORY:/CONTAINER-DIRECTORY:rw<span class="w"> </span>nginx
@@ -1889,7 +1991,7 @@ a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2
 <p><strong>同步文件共享：</strong></p>
 <p>随着代码库的扩大，传统文件共享方式（如绑定挂载）可能变得低效或缓慢，尤其是在需要频繁访问文件的开发环境中。同步文件共享(Synchronized file shares)通过利用同步文件系统缓存来提升绑定挂载的性能。这种优化确保了主机与虚拟机（VM）这这件的文件访问快速高效。</p>
 </blockquote>
-<h2 id="44">4.4. 多容器应用</h2>
+<h2 id="44-多容器应用">4.4. 多容器应用</h2>
 <p>启动单一容器应用非常简单。例如，执行特定数据处理任务的 Python 脚本运行在带有所有依赖的容器中。同样，一个 Node.js 应用服务于静态网站，且 API 端点较小，可以有效地容器化，包含所有必要的库和依赖。然而，随着应用规模的扩大，将它们作为单独容器管理变得越来越困难。</p>
 <p>想象一下，Python 脚本需要连接到数据库的数据处理。突然之间，你不仅要管理脚本，还要管理同一容器内的数据库服务器。如果脚本需要用户登录，你就需要认证机制，这会进一步增加容器体积。</p>
 <p>容器的一个最佳实践是，每个容器都应该做好一件事。虽然有例外，但避免让一个容器同时做多项任务。</p>
@@ -1912,7 +2014,7 @@ a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2
 <li>只要在 Docker Compose 文件里设置环境变量就很容易。</li>
 </ul>
 <p>通过利用 Docker Compose 运行多容器设置，你可以构建以模块化、可扩展性和一致性为核心的复杂应用。</p>
-<h1 id="5-docker">5. Docker工作坊（完整实例）</h1>
+<h1 id="5-docker工作坊完整实例">5. Docker工作坊（完整实例）</h1>
 <p>本章节参考官网<a href="https://docs.docker.com/get-started/workshop/">Docker workshop</a>，提供了一个Docker使用的完整实例。</p>
 <p>对前面所学的概念和操作进行实践，将大大有助于对Docker相关概念的理解。</p>
 <p><strong>先决条件：</strong> </p>
@@ -1921,9 +2023,9 @@ a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2
 <li>安装了Git</li>
 <li>安装了IDE，这里推荐使用Visual Studio Code。</li>
 </ul>
-<h2 id="51">5.1. 容器化应用</h2>
+<h2 id="51-容器化应用">5.1. 容器化应用</h2>
 <p>第一步，我们需要将普通的应用代码，转换成容器。</p>
-<h3 id="511">5.1.1. 克隆应用代码</h3>
+<h3 id="511-克隆应用代码">5.1.1. 克隆应用代码</h3>
 <p>将指定的代码仓库克隆到本机上。</p>
 <ol>
 <li>clone代码（使用官网示例代码）</li>
@@ -1941,7 +2043,7 @@ a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2
 │<span class="w"> </span>├──<span class="w"> </span>src/
 │<span class="w"> </span>└──<span class="w"> </span>yarn.lock
 </code></pre></div>
-<h3 id="512">5.1.2. 构建应用镜像</h3>
+<h3 id="512-构建应用镜像">5.1.2. 构建应用镜像</h3>
 <p>要构建应用镜像，需要使用Dockerfile。Docker使用Dockerfile来构建容器镜像。</p>
 <ol>
 <li>在getting-started-app目录下，创建<code>Dockerfile</code>文件，并写入以下内容：</li>
@@ -1997,7 +2099,7 @@ a527355c9c53<span class="w"> </span>nginx<span class="w"> </span><span class="s2
 IMAGE<span class="w">                                     </span>ID<span class="w">             </span>DISK<span class="w"> </span>USAGE<span class="w">   </span>CONTENT<span class="w"> </span>SIZE<span class="w">   </span>EXTRA
 getting-started:latest<span class="w">                    </span>9f8f22455b09<span class="w">   </span>391MB<span class="w">        </span>0B<span class="w">   </span>
 </code></pre></div>
-<h3 id="513">5.1.3. 启动应用容器</h3>
+<h3 id="513-启动应用容器">5.1.3. 启动应用容器</h3>
 <p>现在已经有了镜像，可以用 <code>docker run</code> 命令在容器中运行应用。</p>
 <ol>
 <li>用 <code>docker run</code> 命令运行你的容器：</li>
@@ -2011,14 +2113,13 @@ getting-started:latest<span class="w">                    </span>9f8f22455b09<sp
 <p>getting-started：镜像的名称（标签）。</p>
 </li>
 <li>
-<p>启动完成后，打开浏览器 <a href="http://localhost:3000/">http://localhost:3000</a>，就可以看到运行的应用：</p>
+<p>启动完成后，打开浏览器 <a href="http://localhost:3000/">http://localhost:3000</a>，就可以看到运行的应用。</p>
+</li>
+<li>
+<p>试试添加几个条目，看看效果是否如你所愿。</p>
 </li>
 </ul>
-<p><img alt="Empty todo list" src="../../.public/todo-list-empty.png" /></p>
-<ol>
-<li>试试添加几个条目，看看效果是否如你所愿。</li>
-</ol>
-<h3 id="514">5.1.4. 容器检查</h3>
+<h3 id="514-容器检查">5.1.4. 容器检查</h3>
 <p>现在，已经成功启动了getting-started容器。</p>
 <p>要查看容器，可以使用CLI或者Docker Desktop 的图形界面。</p>
 <p><strong>CLI：</strong></p>
@@ -2028,11 +2129,9 @@ getting-started:latest<span class="w">                    </span>9f8f22455b09<sp
 <div class="highlight"><pre><span></span><code>CONTAINER<span class="w"> </span>ID<span class="w"> </span>IMAGE<span class="w">                   </span>COMMAND<span class="w">                </span>CREATED<span class="w">       </span>STATUS<span class="w">       </span>PORTS<span class="w">           </span>NAMES
 e0790b5b51a8<span class="w"> </span>getting-started<span class="w"> </span><span class="s2">&quot;docker-entrypoint.s…&quot;</span><span class="w"> </span><span class="m">6</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w"> </span>Up<span class="w"> </span><span class="m">6</span><span class="w"> </span>minutes<span class="w"> </span><span class="m">127</span>.0.0.1:3000-&gt;3000/tcp<span class="w">   </span>kind_ganguly
 </code></pre></div>
-<p><strong>Docker Desktop 图形界面:</strong></p>
-<p><img alt="image-20260116112701919" src="../../.public//image-20260116112701919.png" /></p>
-<h2 id="52">5.2. 更新应用</h2>
+<h2 id="52-更新应用">5.2. 更新应用</h2>
 <p>第二步，我们演示如何更新源代码并启动新容器。</p>
-<h3 id="521">5.2.1. 更新代码</h3>
+<h3 id="521-更新代码">5.2.1. 更新代码</h3>
 <ol>
 <li>在 <code>src/static/js/app.js</code> 文件中，更新第 56 行以使用新的空文本。</li>
 </ol>
@@ -2052,7 +2151,7 @@ e0790b5b51a8<span class="w"> </span>getting-started<span class="w"> </span><span
 <span class="c1"># docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint gallant_khorana (cc54ea74a73270723245328108ec25ecf1f8b69e4d6c164b2e02a57198f81820): Bind for 127.0.0.1:3000 failed: port is already allocated</span>
 </code></pre></div>
 <p>最后一步报错，是因为旧容器已经在使用主机的3000端口了，机器上只有一个进程（包括容器）能监听某个端口。要解决这个问题，需要移除旧容器。</p>
-<h3 id="522">5.2.2. 移除旧容器</h3>
+<h3 id="522-移除旧容器">5.2.2. 移除旧容器</h3>
 <ol>
 <li>移除旧容器前，需要先停止它。</li>
 </ol>
@@ -2073,7 +2172,7 @@ docker<span class="w"> </span>stop<span class="w"> </span>e0790b5b51a8
 <blockquote>
 <p>通过在 <code>docker rm</code> 命令中添加 <code>force</code> 选项，可以在一个命令中停止并移除容器。例如： <code>docker rm -f &lt;the-container-id&gt;</code> </p>
 </blockquote>
-<h3 id="523">5.2.3. 启动新容器</h3>
+<h3 id="523-启动新容器">5.2.3. 启动新容器</h3>
 <ol>
 <li>启动新容器</li>
 </ol>
@@ -2082,7 +2181,7 @@ docker<span class="w"> </span>stop<span class="w"> </span>e0790b5b51a8
 <ol>
 <li>刷新浏览器，就能看到更新后的文本。</li>
 </ol>
-<h2 id="53">5.3. 分享应用</h2>
+<h2 id="53-分享应用">5.3. 分享应用</h2>
 <p>在前面的步骤中，我们已经创建好了Docker镜像，现在可以将它分享出去了。</p>
 <p>分享Docker镜像需要使用Docker注册表，而Docker Hub是默认的全球最大的注册表，所以我们将已有的镜像分享到Docker Hub上。</p>
 <ol>
@@ -2107,20 +2206,19 @@ docker<span class="w"> </span>stop<span class="w"> </span>e0790b5b51a8
 <ol>
 <li>等待推送完成，就能在Docker Hub中看到镜像了。</li>
 </ol>
-<p><img alt="image-20260116135220885" src="../../.public//image-20260116135220885.png" /></p>
-<h2 id="54">5.4 持久化数据库</h2>
+<h2 id="54-持久化数据库">5.4 持久化数据库</h2>
 <p>如果多次尝试从镜像启动容器（删除旧容器），你会发现每次新启动的应用的待办列表都是空的。这是因为容器每次都是从镜像开始的，虽然容器可以创建、更新和删除文件，但当容器被移除时，这些数据文件变更也会丢失。</p>
 <p>另外，容器间是隔离的，彼此不能访问对方的文件系统，即使两个容器可能是从同一个镜像创建的。</p>
 <p>这也就是我们上文中说说过的持久化和文件共享的内容。</p>
 <p>这一步，我们将尝试使用卷来持久化数据库数据。</p>
-<h3 id="541">5.4.1. 要持久化的数据</h3>
+<h3 id="541-要持久化的数据">5.4.1. 要持久化的数据</h3>
 <p>默认情况下，上面的应用将数据存储在SQLite数据库中，位于容器文件系统的<code>/etc/todos/todo.db</code>路径。</p>
 <blockquote>
 <p>不知道SQLite也没有关系，只需要知道它是一个小型关系型数据库就可以了。</p>
 <p>SQLite将所有数据存储在一个文件中。</p>
 </blockquote>
 <p>数据库文件是一个单一文件。如果将上一个容器的数据库文件持久化到主机上，并在启动下一个容器时，指定其使用该持久化文件。这样就可以实现持久化。</p>
-<h3 id="542">5.4.2. 创建卷并启动容器</h3>
+<h3 id="542-创建卷并启动容器">5.4.2. 创建卷并启动容器</h3>
 <p>Docker 完全管理卷，包括磁盘上的存储位置。你只需要记住卷名。</p>
 <ol>
 <li>创建<code>todo-db</code>卷</li>
@@ -2142,14 +2240,15 @@ docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </spa
 <div class="highlight"><pre><span></span><code><span class="c1"># 卷挂载</span>
 docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </span><span class="m">127</span>.0.0.1:3000:3000<span class="w"> </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>volume,src<span class="o">=</span>todo-db,target<span class="o">=</span>/etc/todos<span class="w"> </span>getting-started
 </code></pre></div>
-<h3 id="543">5.4.3. 验证持久化</h3>
+<h3 id="543-验证持久化">5.4.3. 验证持久化</h3>
 <p>现在我们来验证一下是否实现了持久化。</p>
 <ol>
-<li>打开网址 <a href="http://localhost:3000/">http://localhost:3000</a>并设置一些事项。</li>
-</ol>
-<p><img alt="image-20260116143020802" src="../../.public//image-20260116143020802.png" /></p>
-<ol>
-<li>停止并移除旧容器</li>
+<li>
+<p>打开网址 <a href="http://localhost:3000/">http://localhost:3000</a>并设置一些事项。</p>
+</li>
+<li>
+<p>停止并移除旧容器</p>
+</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="c1"># 查看运行中的容器</span>
 docker<span class="w"> </span>ps
@@ -2166,8 +2265,7 @@ docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </s
 <ol>
 <li>打开网址 <a href="http://localhost:3000/">http://localhost:3000</a>并检查事项是否存在。</li>
 </ol>
-<p><img alt="image-20260116143146267" src="../../.public//image-20260116143146267.png" /></p>
-<h3 id="544">5.4.4. 查看卷</h3>
+<h3 id="544-查看卷">5.4.4. 查看卷</h3>
 <p>在上面的操作中，我们并没有设置卷在主机的路径，那么Docker将数据存在哪里了呢？</p>
 <p>可以使用下面的命令查看：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>volume<span class="w"> </span>inspect<span class="w"> </span>todo-db
@@ -2187,7 +2285,7 @@ docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </s
 </code></pre></div>
 <p><code>Mountpoint</code>是数据在磁盘上的实际位置。</p>
 <p>注意，在大多数机器上，你需要有 root 权限才能从主机访问该目录。</p>
-<h2 id="55">5.5. 使用绑定挂载</h2>
+<h2 id="55-使用绑定挂载">5.5. 使用绑定挂载</h2>
 <p>上一步中，我们使用卷来持久化数据库中的数据。当用作一个持久化应用数据的地方时，使用卷是一个很好的选择。</p>
 <p>还有另外一种挂载方式：绑定挂载。</p>
 <p>绑定挂载将主机文件系统中的一个目录共享给容器。在开发应用程序是，可以使用绑定挂载将源代码挂载到容器中。容器会在保存文件时，实时监测到代码的变更。这样在容器中运行应用时，能够建东文件系统的变化并自动做出响应。</p>
@@ -2195,7 +2293,7 @@ docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </s
 <blockquote>
 <p>大多数其他语言和框架也有类似的工具。</p>
 </blockquote>
-<h3 id="551-volume-vs-bind-mount">5.5.1. volume卷 vs bind mount绑定挂载</h3>
+<h3 id="551-volume卷-vs-bind-mount绑定挂载">5.5.1. volume卷 vs bind mount绑定挂载</h3>
 <p>使用<code>--mount</code>命名卷和绑定挂载的示例：</p>
 <ul>
 <li>卷：<code>type=volume,src=my-volume,target=/usr/local/data</code></li>
@@ -2228,7 +2326,7 @@ docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </s
 </tr>
 </tbody>
 </table>
-<h3 id="552">5.5.2. 尝试绑定挂载</h3>
+<h3 id="552-尝试绑定挂载">5.5.2. 尝试绑定挂载</h3>
 <ol>
 <li>进入项目目录</li>
 </ol>
@@ -2275,7 +2373,7 @@ Dockerfile<span class="w">  </span>README.md<span class="w">  </span>package.jso
 <li>用 <code>Ctrl</code> + <code>D</code> 停止交互式容器会话。</li>
 </ol>
 <p>上述过程展示了文件如何在主机和容器之间共享，以及变更如何立即反映在双方之间。</p>
-<h3 id="553">5.5.3. 容器开发</h3>
+<h3 id="553-容器开发">5.5.3. 容器开发</h3>
 <p>本地开发环境中常用绑定挂载。优点是开发机器不需要安装所有构建工具和环境。只需一个 docker run 命令，Docker 就能拉取依赖和工具。</p>
 <p>下面将样式如何运行一个带有绑定挂载的开发容器，该容器能实现以下功能：</p>
 <ul>
@@ -2346,10 +2444,9 @@ Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> 
 +<span class="w"> </span><span class="o">{</span>submitting<span class="w"> </span>?<span class="w"> </span><span class="s1">&#39;Adding...&#39;</span><span class="w"> </span>:<span class="w"> </span><span class="s1">&#39;Add&#39;</span><span class="o">}</span>
 </code></pre></div>
 <ol>
-<li>刷新浏览器，可以看到页面更新了。</li>
-</ol>
-<p><img alt="image-20260116152739702" src="../../.public//image-20260116152739702.png" /></p>
-<ol>
+<li>
+<p>刷新浏览器，可以看到页面更新了。</p>
+</li>
 <li>
 <p>如果你想做的其他改动，可以随时修改。每次你做更改并保存文件时，由于绑定挂载，这些更改都会反映在容器里。当 Nodemon 检测到变化时，它会自动在容器内重启应用。</p>
 </li>
@@ -2359,7 +2456,7 @@ Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> 
 </ol>
 <div class="highlight"><pre><span></span><code><span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>getting-started<span class="w"> </span>.
 </code></pre></div>
-<h2 id="56">5.6. 多容器应用</h2>
+<h2 id="56-多容器应用">5.6. 多容器应用</h2>
 <p>上面的示例中，我们都在使用单一容器应用。</p>
 <p>现在如果想把MySQL加入应用栈。MySQL运行在哪里？是安装在同一个容器里，还是分开运行在不同的容器里。</p>
 <p>一般来说，每个容器都应该只做一件事情。以下是分开运行容器的一些理由：</p>
@@ -2370,11 +2467,11 @@ Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> 
 <li>运行多个进程需要进程管理器（容器只启动一个进程），这会增加容器启动和关闭的复杂性。</li>
 </ul>
 <p>所以，最好还是在多个容器中运行。</p>
-<h3 id="561">5.6.1. 容器网络</h3>
+<h3 id="561-容器网络">5.6.1. 容器网络</h3>
 <p>容器默认时孤立运行的，与同一台机器上的其他进程或容器完全隔离。</p>
 <p>那么，如何让一个容器与另一个容器通信呢？</p>
 <p>答案是建立网络：把两个容器放到同一个网络上，它们就可以互相通信了。</p>
-<h3 id="562-mysql">5.6.2. 启动MySQL</h3>
+<h3 id="562-启动mysql">5.6.2. 启动MySQL</h3>
 <p>把容器放置到网络上有两种方式：</p>
 <ul>
 <li>启动容器时分配网络。</li>
@@ -2427,7 +2524,7 @@ Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> 
 <div class="highlight"><pre><span></span><code>mysql&gt;<span class="w"> </span><span class="nb">exit</span>
 </code></pre></div>
 <p>现在，你拥有了一个<code>todos</code>数据库，并且随时可以使用。</p>
-<h3 id="563-mysql">5.6.3. 连接MySQL</h3>
+<h3 id="563-连接mysql">5.6.3. 连接MySQL</h3>
 <p>现在，我们应该怎么使用MySQL数据库呢？</p>
 <p>如果在同一个网络上运行另一个容器，怎么找到那个容器呢？每个容器都有自己的IP地址。</p>
 <p>为了回答上述问题并更好的理解容器网络，需要使用<code>nicolaka/netshoot</code>容器。它自带许多有用的工具，用于排查或调试网络问题。</p>
@@ -2465,7 +2562,7 @@ mysql.<span class="w">                  </span><span class="m">600</span><span c
 <ol>
 <li><code>Ctrl</code>+<code>D</code>退出Shell。</li>
 </ol>
-<h3 id="564-mysql">5.6.4 使用MySQL运行应用</h3>
+<h3 id="564-使用mysql运行应用">5.6.4 使用MySQL运行应用</h3>
 <p>Todo 应用支持设置一些环境变量来指定 MySQL 连接设置。它们是：</p>
 <ul>
 <li><code>MYSQL_HOST</code> - 运行中的 MySQL 服务器的主机名</li>
@@ -2524,10 +2621,10 @@ Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> 
 <span class="mi">3</span><span class="w"> </span><span class="k">rows</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="kt">set</span><span class="w"> </span><span class="p">(</span><span class="mf">0.00</span><span class="w"> </span><span class="n">sec</span><span class="p">)</span>
 </code></pre></div>
 <p>可以看到，数据库中确实有数据了。</p>
-<h2 id="57-docker-compose">5.7. 使用Docker Compose</h2>
+<h2 id="57-使用docker-compose">5.7. 使用Docker Compose</h2>
 <p>Docker Compose是一个帮助定义和分享多容器应用的工具。使用Compose时，就可以使用一个yaml文件来定义服务，只需要一个命令，就能全部启动或移除。</p>
 <p>使用Compose最大的优势是可以在文件中定义应用栈，将其放在项目仓库的根节点（这样就可以进行版本控制）。其他人只需要克隆仓库，然后使用Compose启动应用就可以了。</p>
-<h3 id="571-compose">5.7.1. 创建Compose文件</h3>
+<h3 id="571-创建compose文件">5.7.1. 创建Compose文件</h3>
 <p>在项目根目录下，创建<code>compose.yaml</code>文件：</p>
 <div class="highlight"><pre><span></span><code>├──<span class="w"> </span>getting-started-app/
 │<span class="w"> </span>├──<span class="w"> </span>Dockerfile
@@ -2538,7 +2635,7 @@ Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> 
 │<span class="w"> </span>├──<span class="w"> </span>src/
 │<span class="w"> </span>└──<span class="w"> </span>yarn.lock
 </code></pre></div>
-<h3 id="572">5.7.2. 定义应用服务</h3>
+<h3 id="572-定义应用服务">5.7.2. 定义应用服务</h3>
 <p>在上面的示例中，我们使用下面的命令来启动应用服务：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-dp<span class="w"> </span><span class="m">127</span>.0.0.1:3000:3000<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-w<span class="w"> </span>/app<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">:/app&quot;</span><span class="w"> </span><span class="se">\</span>
@@ -2610,7 +2707,7 @@ Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> 
 <span class="w">      </span><span class="nt">MYSQL_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret</span>
 <span class="w">      </span><span class="nt">MYSQL_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">todos</span>
 </code></pre></div>
-<h3 id="573-mysql">5.7.3. 定义MySQL服务</h3>
+<h3 id="573-定义mysql服务">5.7.3. 定义MySQL服务</h3>
 <p>上文中，我们使用以下的命令来定义MySQL服务：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--network<span class="w"> </span>todo-app<span class="w"> </span>--network-alias<span class="w"> </span>mysql<span class="w"> </span><span class="se">\</span>
@@ -2688,7 +2785,7 @@ Listening<span class="w"> </span>on<span class="w"> </span>port<span class="w"> 
 <span class="nt">volumes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">todo-mysql-data</span><span class="p">:</span>
 </code></pre></div>
-<h3 id="574">5.7.4. 运行应用栈</h3>
+<h3 id="574-运行应用栈">5.7.4. 运行应用栈</h3>
 <p>上面，我们创建并编写完成了<code>compose.yaml</code>文件。现在可以启动应用程序了：</p>
 <ol>
 <li>确保没有其他容器副本运行。</li>
@@ -2731,12 +2828,11 @@ app_1<span class="w">    </span><span class="p">|</span><span class="w"> </span>
 <ol>
 <li>浏览器 <a href="http://localhost:3000/">http://localhost:3000</a> 查看</li>
 </ol>
-<h3 id="575">5.7.5. 查看应用栈</h3>
+<h3 id="575-查看应用栈">5.7.5. 查看应用栈</h3>
 <p>在Docker Desktop的仪表盘中，会有一个叫<code>getting-started-app</code>的组。这是Docker Compose的项目名称，用来将容器分组在一起。默认情况下，项目名称也就是<code>compose.yaml</code>文件所在的目录名称。</p>
-<p><img alt="image-20260116180129682" src="../../.public//image-20260116180129682.png" /></p>
 <p>如果你展开这个组，就能看到在<code>compose.yaml</code>文件中定义的两个容器。</p>
 <p>这些名称也更加具有辨识性，因为它们遵循 <code>&lt;service-name&gt;-&lt;replica-number&gt;</code> 模式。可以很容易看出来哪个容器是应用，哪个是 mysql 数据库。</p>
-<h3 id="576">5.7.6. 全部移除</h3>
+<h3 id="576-全部移除">5.7.6. 全部移除</h3>
 <p>当你准备移除所有时，只需运行 docker <code>compose down</code>，或者在 Docker 桌面仪表盘中移除整个应用即可。</p>
 <div class="highlight"><pre><span></span><code>administrator@administratordeMacBook-Air<span class="w"> </span>getting-started-app<span class="w"> </span>%<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>down
 <span class="o">[</span>+<span class="o">]</span><span class="w"> </span>down<span class="w"> </span><span class="m">3</span>/3
@@ -2749,8 +2845,8 @@ app_1<span class="w">    </span><span class="p">|</span><span class="w"> </span>
 <p>默认情况下，当你运行<code>docker compose down</code>时，compose 文件中的命名卷不会被移除。如果你想移除这些卷，你需要添加 <code>--volumes</code> 标志。</p>
 <p>删除应用栈时，Docker Desktop 仪表盘不会移除卷。</p>
 </blockquote>
-<h2 id="58">5.8. 镜像构建最佳实践</h2>
-<h3 id="581">5.8.1. 镜像分层</h3>
+<h2 id="58-镜像构建最佳实践">5.8. 镜像构建最佳实践</h2>
+<h3 id="581-镜像分层">5.8.1. 镜像分层</h3>
 <p>使用<code>docker image history</code>命令，可以看到镜像中每个层的创建命令。</p>
 <p>比如：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>image<span class="w"> </span><span class="nb">history</span><span class="w"> </span>getting-started
@@ -2776,7 +2872,7 @@ app_1<span class="w">    </span><span class="p">|</span><span class="w"> </span>
 <p>在上面的输出中，有几条线被截断了，使用<code>--no-trunc</code>选项，可以看到完整的输出：</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>image<span class="w"> </span><span class="nb">history</span><span class="w"> </span>--no-trunc<span class="w"> </span>getting-started
 </code></pre></div>
-<h3 id="582">5.8.2. 层缓存</h3>
+<h3 id="582-层缓存">5.8.2. 层缓存</h3>
 <p>通过上述的操作，我们看到了镜像分层。如何减少容器镜像的构建时间，是一个很重要的课题。</p>
 <blockquote>
 <p>一旦镜像的一个层发生变化，所有下游的层也必须重建。</p>
@@ -2818,7 +2914,7 @@ app_1<span class="w">    </span><span class="p">|</span><span class="w"> </span>
 </code></pre></div>
 <p>有几个步骤使用了之前缓存的镜像层！</p>
 <p>有没有发现，构建速度快了很多？推送和拉取这个镜像以及镜像更新也会变快很多！</p>
-<h3 id="583">5.8.3. 多阶段构建</h3>
+<h3 id="583-多阶段构建">5.8.3. 多阶段构建</h3>
 <p>多阶段构建是一种及其强大的工具，可以帮助我们使用多阶段去构建镜像。</p>
 <p>优势如下：</p>
 <ul>

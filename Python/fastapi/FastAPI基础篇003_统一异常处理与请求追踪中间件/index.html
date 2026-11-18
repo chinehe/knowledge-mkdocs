@@ -1,0 +1,3423 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://chinehe.github.io/knowledge-mkdocs/Python/fastapi/FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87003_%E7%BB%9F%E4%B8%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E4%B8%8E%E8%AF%B7%E6%B1%82%E8%BF%BD%E8%B8%AA%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+      
+      
+        <link rel="prev" href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87002_%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8EBearer%E8%AE%A4%E8%AF%81/">
+      
+      
+        <link rel="next" href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87004_%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>统一异常处理与请求追踪中间件 - ChineHe Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-问题fastapi-默认的错误响应" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="ChineHe Knowledge" class="md-header__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ChineHe Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              统一异常处理与请求追踪中间件
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-tabs__link">
+          
+  
+  
+  计算机与网络
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-tabs__link">
+          
+  
+  
+  Golang
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  Python
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-tabs__link">
+          
+  
+  
+  AI
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-tabs__link">
+          
+  
+  
+  数据库与缓存
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-tabs__link">
+          
+  
+  
+  DevOps
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="ChineHe Knowledge" class="md-nav__button md-logo" aria-label="ChineHe Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ChineHe Knowledge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Computer%26Network/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机与网络
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../Golang/golang/Golang%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%AF%87001_Golang%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Golang
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语言基础
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../engineering/Python%E5%B7%A5%E7%A8%8B%E5%8C%96%E7%AF%87001_%E4%BB%8E%E9%9B%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BC%81%E4%B8%9A%E7%BA%A7Web%E5%90%8E%E7%AB%AF%E8%B7%AF%E7%BA%BF%E5%9B%BE/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工程化
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FastAPI框架
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FastAPI框架
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    应用入口、路由与项目分层
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87002_%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E4%B8%8EBearer%E8%AE%A4%E8%AF%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    依赖注入与Bearer认证
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    统一异常处理与请求追踪中间件
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    统一异常处理与请求追踪中间件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-问题fastapi-默认的错误响应" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 问题：FastAPI 默认的错误响应
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 问题：FastAPI 默认的错误响应">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-三种不同的错误格式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 三种不同的错误格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-校验错误会回显原始输入" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 校验错误会回显原始输入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-无法定位某一次请求" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 无法定位某一次请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-统一错误响应结构" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 统一错误响应结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 统一错误响应结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-errorresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. ErrorResponse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-常见错误码" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 常见错误码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-构造错误响应" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 构造错误响应
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-apperror-业务异常层次" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. AppError 业务异常层次
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. AppError 业务异常层次">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-基类用类属性声明-http-信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 基类：用类属性声明 HTTP 信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-子类只覆盖类属性" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 子类：只覆盖类属性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-service-层只管-raise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. service 层只管 raise
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-与-gin-的对比" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. 与 Gin 的对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-注册异常处理器" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 注册异常处理器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 注册异常处理器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-两个-httpexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 两个 HTTPException
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-定制-requestvalidationerror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 定制 RequestValidationError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-用状态码生成错误码" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 用状态码生成错误码
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-为什么不注册-exception_handlerexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 为什么不注册 exception_handler(Exception)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 为什么不注册 exception_handler(Exception)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-starlette-的中间件栈" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Starlette 的中间件栈
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-带来的两个问题" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 带来的两个问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-改为在中间件里兜底" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 改为在中间件里兜底
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-纯-asgi-请求上下文中间件" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 纯 ASGI 请求上下文中间件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 纯 ASGI 请求上下文中间件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-为什么不用-basehttpmiddleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 为什么不用 BaseHTTPMiddleware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-asgi-中间件的接口" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. ASGI 中间件的接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-包装-send注入-x-request-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 包装 send，注入 X-Request-ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-兜底未处理异常" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. 兜底未处理异常
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-request_id-的生成与传递" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. request_id 的生成与传递
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. request_id 的生成与传递">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-优先沿用上游校验后再用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 优先沿用上游，校验后再用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-绑定到上下文变量" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 绑定到上下文变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-响应头与响应体一致" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. 响应头与响应体一致
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-访问日志" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 访问日志
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 访问日志">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-在-finally-中记录" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 在 finally 中记录
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-禁用-uvicorn-自带的访问日志" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 禁用 uvicorn 自带的访问日志
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-注册与验证" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 注册与验证
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 注册与验证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-在-create_app-中注册" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. 在 create_app 中注册
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-演示脚本" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 演示脚本
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-演示结果" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 演示结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-raise_server_exceptions-参数" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. raise_server_exceptions 参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87004_%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    健康检查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../sqlalchemy/SQLAlchemy%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BC%82%E6%AD%A5%E5%BC%95%E6%93%8E%E3%80%81%E4%BC%9A%E8%AF%9D%E4%B8%8E%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQLAlchemy
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../ai/Agent%E5%BC%80%E5%8F%91/Agent%E5%BC%80%E5%8F%91001_%E4%BB%8E%E9%9B%B6%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AAAI%20Agent/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E7%BC%93%E5%AD%98/redis/Redis%E5%85%A5%E9%97%A8%E7%AF%87001_Redis%E7%AE%80%E4%BB%8B%E4%B8%8E%E7%89%B9%E6%80%A7/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库与缓存
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    
+  
+  
+  
+    <a href="../../../DevOps/Docker/Docker%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-问题fastapi-默认的错误响应" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 问题：FastAPI 默认的错误响应
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 问题：FastAPI 默认的错误响应">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-三种不同的错误格式" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. 三种不同的错误格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-校验错误会回显原始输入" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. 校验错误会回显原始输入
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-无法定位某一次请求" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. 无法定位某一次请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-统一错误响应结构" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 统一错误响应结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 统一错误响应结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-errorresponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. ErrorResponse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-常见错误码" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. 常见错误码
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-构造错误响应" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. 构造错误响应
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-apperror-业务异常层次" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. AppError 业务异常层次
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. AppError 业务异常层次">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-基类用类属性声明-http-信息" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. 基类：用类属性声明 HTTP 信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-子类只覆盖类属性" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. 子类：只覆盖类属性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-service-层只管-raise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. service 层只管 raise
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-与-gin-的对比" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4. 与 Gin 的对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-注册异常处理器" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 注册异常处理器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 注册异常处理器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-两个-httpexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. 两个 HTTPException
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-定制-requestvalidationerror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 定制 RequestValidationError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-用状态码生成错误码" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. 用状态码生成错误码
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-为什么不注册-exception_handlerexception" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 为什么不注册 exception_handler(Exception)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 为什么不注册 exception_handler(Exception)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-starlette-的中间件栈" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Starlette 的中间件栈
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-带来的两个问题" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. 带来的两个问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-改为在中间件里兜底" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. 改为在中间件里兜底
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-纯-asgi-请求上下文中间件" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 纯 ASGI 请求上下文中间件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 纯 ASGI 请求上下文中间件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-为什么不用-basehttpmiddleware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. 为什么不用 BaseHTTPMiddleware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-asgi-中间件的接口" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. ASGI 中间件的接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-包装-send注入-x-request-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. 包装 send，注入 X-Request-ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-兜底未处理异常" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. 兜底未处理异常
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-request_id-的生成与传递" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. request_id 的生成与传递
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. request_id 的生成与传递">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-优先沿用上游校验后再用" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. 优先沿用上游，校验后再用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-绑定到上下文变量" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. 绑定到上下文变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-响应头与响应体一致" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. 响应头与响应体一致
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-访问日志" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 访问日志
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 访问日志">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-在-finally-中记录" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1. 在 finally 中记录
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-禁用-uvicorn-自带的访问日志" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2. 禁用 uvicorn 自带的访问日志
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-注册与验证" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 注册与验证
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 注册与验证">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-在-create_app-中注册" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1. 在 create_app 中注册
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-演示脚本" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2. 演示脚本
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-演示结果" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3. 演示结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-raise_server_exceptions-参数" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.4. raise_server_exceptions 参数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-小结" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../python/%E5%9F%BA%E7%A1%80%E7%AF%87001_%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3Python%E8%AF%AD%E8%A8%80%E6%A6%82%E5%BF%B5%E3%80%81%E5%8E%86%E5%8F%B2%E3%80%81%E7%89%B9%E6%80%A7/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Python
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../FastAPI%E5%9F%BA%E7%A1%80%E7%AF%87001_%E5%BA%94%E7%94%A8%E5%85%A5%E5%8F%A3%E3%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E9%A1%B9%E7%9B%AE%E5%88%86%E5%B1%82/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    FastAPI框架
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>统一异常处理与请求追踪中间件</h1>
+
+<p>一个 Web 服务对外暴露的错误格式，是前端和调用方解析成本最高的部分。FastAPI 默认的错误响应有好几种形状，出了问题也很难在日志里找到"是哪一次请求出的错"。</p>
+<p>本文以一个 FastAPI 服务 <code>my_service</code>（FastAPI 0.163 + Starlette 1.10 + structlog 26）的代码为例，介绍如何做到两件事：</p>
+<ul>
+<li><strong>统一异常处理</strong>：所有错误（业务异常、路由不存在、参数校验失败、未处理异常）都返回同一种 JSON 结构。</li>
+<li><strong>请求追踪</strong>：每个请求分配一个 <code>request_id</code>，写进响应头、错误响应体和这次请求产生的所有日志。</li>
+</ul>
+<p>涉及的文件：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>core/exceptions.py</code></td>
+<td>错误响应结构 <code>ErrorResponse</code>、业务异常 <code>AppError</code> 及子类、异常处理器注册</td>
+</tr>
+<tr>
+<td><code>core/middleware.py</code></td>
+<td>纯 ASGI 中间件 <code>RequestContextMiddleware</code>：分配 request_id、访问日志、兜底未处理异常</td>
+</tr>
+<tr>
+<td><code>core/logging.py</code></td>
+<td>structlog 配置，合并上下文变量、禁用 uvicorn 自带访问日志</td>
+</tr>
+<tr>
+<td><code>main.py</code></td>
+<td>在 <code>create_app()</code> 里注册处理器和中间件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-问题fastapi-默认的错误响应">1. 问题：FastAPI 默认的错误响应</h2>
+<h3 id="11-三种不同的错误格式">1.1. 三种不同的错误格式</h3>
+<p>请求一个什么都不配置的 <code>FastAPI()</code>，结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>状态码</th>
+<th>Content-Type</th>
+<th>响应体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路由不存在 <code>GET /not-exist</code></td>
+<td>404</td>
+<td><code>application/json</code></td>
+<td><code>{"detail":"Not Found"}</code></td>
+</tr>
+<tr>
+<td>参数校验失败 <code>GET /items/abc</code></td>
+<td>422</td>
+<td><code>application/json</code></td>
+<td><code>{"detail":[{"type":"int_parsing","loc":["path","item_id"],"msg":"...","input":"abc"}]}</code></td>
+</tr>
+<tr>
+<td>未处理异常 <code>raise RuntimeError</code></td>
+<td>500</td>
+<td><code>text/plain</code></td>
+<td><code>Internal Server Error</code></td>
+</tr>
+</tbody>
+</table>
+<p>前端要分别处理三种情况：<code>detail</code> 有时是字符串、有时是数组，500 甚至不是 JSON。业务层自己抛的错误如果再用 <code>HTTPException(detail=...)</code>，又会和上面混在一起，没有机器可读的错误码可供分支判断。</p>
+<h3 id="12-校验错误会回显原始输入">1.2. 校验错误会回显原始输入</h3>
+<p>默认的 422 响应里有一个 <code>input</code> 字段，原样返回用户提交的值。对登录接口来说，这意味着密码会出现在响应里：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Login</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;detail&quot;</span><span class="p">:[{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;string_too_short&quot;</span><span class="p">,</span><span class="nt">&quot;loc&quot;</span><span class="p">:[</span><span class="s2">&quot;body&quot;</span><span class="p">,</span><span class="s2">&quot;password&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;msg&quot;</span><span class="p">:</span><span class="s2">&quot;String should have at least 8 characters&quot;</span><span class="p">,</span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="s2">&quot;123&quot;</span><span class="p">,</span><span class="nt">&quot;ctx&quot;</span><span class="p">:{</span><span class="nt">&quot;min_length&quot;</span><span class="p">:</span><span class="mi">8</span><span class="p">}}]}</span>
+</code></pre></div>
+<p>响应体经常会被网关、前端监控或日志平台记录下来，密码就跟着泄露到这些地方。</p>
+<h3 id="13-无法定位某一次请求">1.3. 无法定位某一次请求</h3>
+<p>用户反馈"刚才报错了"，后端日志里只有一堆按时间排列的记录，并发请求的日志交织在一起，分不清哪几行属于出错的那次请求。需要一个贯穿整个请求的标识：</p>
+<ul>
+<li>响应头里返回给调用方（<code>X-Request-ID</code>）；</li>
+<li>错误响应体里也带上，方便用户截图反馈；</li>
+<li>这次请求内打印的每一条日志都自动带上。</li>
+</ul>
+<h2 id="2-统一错误响应结构">2. 统一错误响应结构</h2>
+<h3 id="21-errorresponse">2.1. ErrorResponse</h3>
+<p>所有错误响应都使用同一个 Pydantic 模型：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ErrorResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">code</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># 机器可读的错误码，调用方据此做分支判断</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># 人可读的错误描述</span>
+    <span class="n">request_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 排查问题时，用它在日志里搜索这次请求</span>
+    <span class="n">details</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 补充信息，如参数校验失败的字段列表</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>给谁看</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>code</code></td>
+<td>程序</td>
+<td>稳定的字符串错误码，前端用 <code>if (err.code === "not_found")</code> 做分支，不依赖文案</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>人</td>
+<td>可直接展示给用户的描述，如 <code>"用户名已存在"</code>，文案可以随时改</td>
+</tr>
+<tr>
+<td><code>request_id</code></td>
+<td>运维/开发</td>
+<td>与响应头 <code>X-Request-ID</code> 相同，拿着它去日志里搜索</td>
+</tr>
+<tr>
+<td><code>details</code></td>
+<td>程序</td>
+<td>结构不固定的补充信息，校验失败时是字段错误列表，业务异常可以放出错的 ID</td>
+</tr>
+</tbody>
+</table>
+<p>一个完整的错误响应：</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;not_found&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;用户不存在&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;request_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6e894181b3814d7b8fad8257d1b7c786&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">}</span>
+</code></pre></div>
+<h3 id="22-常见错误码">2.2. 常见错误码</h3>
+<table>
+<thead>
+<tr>
+<th>HTTP 状态码</th>
+<th>code</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td><code>bad_request</code></td>
+<td><code>AppError</code> 基类默认值</td>
+</tr>
+<tr>
+<td>401</td>
+<td><code>unauthorized</code></td>
+<td><code>UnauthorizedError</code>（登录失败、令牌无效）</td>
+</tr>
+<tr>
+<td>404</td>
+<td><code>not_found</code></td>
+<td><code>NotFoundError</code>，或框架的路由不存在</td>
+</tr>
+<tr>
+<td>405</td>
+<td><code>method_not_allowed</code></td>
+<td>框架的请求方法不允许</td>
+</tr>
+<tr>
+<td>409</td>
+<td><code>conflict</code></td>
+<td><code>ConflictError</code>（如用户名已存在）</td>
+</tr>
+<tr>
+<td>422</td>
+<td><code>validation_error</code></td>
+<td>请求参数校验失败</td>
+</tr>
+<tr>
+<td>500</td>
+<td><code>internal_error</code></td>
+<td>中间件兜底的未处理异常</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-构造错误响应">2.3. 构造错误响应</h3>
+<p>所有处理器都通过同一个函数生成响应，<code>request_id</code> 从 structlog 的上下文变量里取（第 7 节说明它是怎么放进去的）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">build_error_response</span><span class="p">(</span>
+    <span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">details</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">headers</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONResponse</span><span class="p">:</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">ErrorResponse</span><span class="p">(</span>
+        <span class="n">code</span><span class="o">=</span><span class="n">code</span><span class="p">,</span>
+        <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">,</span>
+        <span class="n">request_id</span><span class="o">=</span><span class="n">structlog</span><span class="o">.</span><span class="n">contextvars</span><span class="o">.</span><span class="n">get_contextvars</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;request_id&quot;</span><span class="p">),</span>
+        <span class="n">details</span><span class="o">=</span><span class="n">details</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="n">status_code</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">body</span><span class="o">.</span><span class="n">model_dump</span><span class="p">(),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="3-apperror-业务异常层次">3. AppError 业务异常层次</h2>
+<h3 id="31-基类用类属性声明-http-信息">3.1. 基类：用类属性声明 HTTP 信息</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AppError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;业务异常基类。在 service 层抛出，由全局处理器转成统一的错误响应。&quot;&quot;&quot;</span>
+
+    <span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span>
+    <span class="n">code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;bad_request&quot;</span>
+    <span class="n">headers</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># 需要额外返回的响应头</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">details</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">details</span> <span class="o">=</span> <span class="n">details</span>
+</code></pre></div>
+<p>设计要点：</p>
+<table>
+<thead>
+<tr>
+<th>成员</th>
+<th>级别</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>status_code</code>、<code>code</code></td>
+<td>类属性</td>
+<td>同一种异常的状态码和错误码是固定的，写在类上，抛出时不用重复传</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>类属性，<code>ClassVar</code></td>
+<td>字典是可变对象，作为类属性默认值时要标注 <code>ClassVar</code>，表明它是类级别共享的常量而不是实例字段（ruff 的 <code>RUF012</code> 规则会检查这一点）</td>
+</tr>
+<tr>
+<td><code>message</code>、<code>details</code></td>
+<td>实例属性</td>
+<td>每次抛出时不同，通过构造函数传入；<code>details</code> 用关键字参数，避免和 message 位置混淆</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-子类只覆盖类属性">3.2. 子类：只覆盖类属性</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">UnauthorizedError</span><span class="p">(</span><span class="n">AppError</span><span class="p">):</span>
+    <span class="n">status_code</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_401_UNAUTHORIZED</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;unauthorized&quot;</span>
+    <span class="c1"># HTTP 规范要求 401 响应带上该头，告诉客户端用哪种方式认证</span>
+    <span class="n">headers</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;WWW-Authenticate&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer&quot;</span><span class="p">}</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">NotFoundError</span><span class="p">(</span><span class="n">AppError</span><span class="p">):</span>
+    <span class="n">status_code</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_404_NOT_FOUND</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;not_found&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ConflictError</span><span class="p">(</span><span class="n">AppError</span><span class="p">):</span>
+    <span class="n">status_code</span> <span class="o">=</span> <span class="n">status</span><span class="o">.</span><span class="n">HTTP_409_CONFLICT</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;conflict&quot;</span>
+</code></pre></div>
+<p>新增一种业务错误只需要再写一个三行的子类。</p>
+<h3 id="33-service-层只管-raise">3.3. service 层只管 raise</h3>
+<p>service 层不导入任何 FastAPI 的东西，也不关心状态码，只表达"发生了什么"：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">UserService</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">UserCreate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">User</span><span class="p">:</span>
+        <span class="k">if</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_by_username</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">username</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ConflictError</span><span class="p">(</span><span class="s2">&quot;用户名已存在&quot;</span><span class="p">)</span>
+
+        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">password_hash</span><span class="o">=</span><span class="n">hash_password</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">password</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">except</span> <span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># 两个请求同时创建同一用户名时，上面的检查可能都通过，由数据库唯一约束兜底</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">ConflictError</span><span class="p">(</span><span class="s2">&quot;用户名已存在&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+        <span class="k">return</span> <span class="n">user</span>
+</code></pre></div>
+<p>异常转换成 HTTP 响应只在一个地方完成：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">exception_handler</span><span class="p">(</span><span class="n">AppError</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle_app_error</span><span class="p">(</span><span class="n">_</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="n">AppError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONResponse</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">build_error_response</span><span class="p">(</span>
+        <span class="n">exc</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">exc</span><span class="o">.</span><span class="n">code</span><span class="p">,</span> <span class="n">exc</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">details</span><span class="o">=</span><span class="n">exc</span><span class="o">.</span><span class="n">details</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">exc</span><span class="o">.</span><span class="n">headers</span>
+    <span class="p">)</span>
+</code></pre></div>
+<p>处理器注册在基类 <code>AppError</code> 上，Starlette 按异常类的 MRO 查找处理器，所以所有子类都会被它处理。</p>
+<h3 id="34-与-gin-的对比">3.4. 与 Gin 的对比</h3>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>Gin</th>
+<th>FastAPI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>业务错误的传递</td>
+<td><code>c.Error(err)</code> 追加到 <code>c.Errors</code>，再 <code>return</code></td>
+<td>直接 <code>raise</code>，调用栈自动展开</td>
+</tr>
+<tr>
+<td>统一转换</td>
+<td>错误中间件在 <code>c.Next()</code> 之后检查 <code>c.Errors.Last()</code>，用 <code>errors.As</code> 判断类型</td>
+<td><code>app.exception_handler(类型)</code> 注册处理器，按异常类查找</td>
+</tr>
+<tr>
+<td>自定义错误类型</td>
+<td>结构体实现 <code>error</code> 接口，状态码作为字段</td>
+<td>继承 <code>AppError</code>，状态码作为类属性</td>
+</tr>
+<tr>
+<td>panic/未处理异常</td>
+<td><code>gin.Recovery()</code> 中间件</td>
+<td>自己写中间件兜底（见第 5、6 节）</td>
+</tr>
+</tbody>
+</table>
+<p>Python 有异常机制，handler 和 service 里不需要层层 <code>if err != nil { return }</code>，在最深处 <code>raise</code> 即可。</p>
+<h2 id="4-注册异常处理器">4. 注册异常处理器</h2>
+<h3 id="41-两个-httpexception">4.1. 两个 HTTPException</h3>
+<p>FastAPI 里有两个同名的类：</p>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th>谁会抛出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>starlette.exceptions.HTTPException</code></td>
+<td>Starlette 路由层：路由不存在（404）、请求方法不允许（405）</td>
+</tr>
+<tr>
+<td><code>fastapi.HTTPException</code></td>
+<td>业务代码手动 <code>raise HTTPException(...)</code>；它是前者的子类</td>
+</tr>
+</tbody>
+</table>
+<p>处理器必须注册在 <strong>Starlette 的 HTTPException</strong> 上。如果注册在 <code>fastapi.HTTPException</code> 上，只能处理手动抛出的那部分，框架抛出的 404/405 仍然走默认处理器。例如：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPException</span>  <span class="c1"># 注意：这是 fastapi 的子类</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">exception_handler</span><span class="p">(</span><span class="n">HTTPException</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">h</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="n">exc</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;custom&quot;</span><span class="p">})</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>请求</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>手动 <code>raise HTTPException(403)</code></td>
+<td><code>{"code":"custom"}</code></td>
+</tr>
+<tr>
+<td><code>GET /nope</code>（路由不存在）</td>
+<td><code>{"detail":"Not Found"}</code>，没被捕获</td>
+</tr>
+<tr>
+<td><code>POST /x</code>（方法不允许）</td>
+<td><code>{"detail":"Method Not Allowed"}</code>，没被捕获</td>
+</tr>
+</tbody>
+</table>
+<p>正确的写法：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">starlette.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPException</span> <span class="k">as</span> <span class="n">StarletteHTTPException</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">exception_handler</span><span class="p">(</span><span class="n">StarletteHTTPException</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle_http_error</span><span class="p">(</span><span class="n">_</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="n">StarletteHTTPException</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONResponse</span><span class="p">:</span>
+    <span class="c1"># 框架抛出的 HTTP 错误，如路由不存在（404）、请求方法不允许（405）</span>
+    <span class="k">return</span> <span class="n">build_error_response</span><span class="p">(</span>
+        <span class="n">exc</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span>
+        <span class="n">_code_from_status</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">status_code</span><span class="p">),</span>
+        <span class="n">exc</span><span class="o">.</span><span class="n">detail</span><span class="p">,</span>
+        <span class="n">headers</span><span class="o">=</span><span class="n">exc</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div>
+<h3 id="42-定制-requestvalidationerror">4.2. 定制 RequestValidationError</h3>
+<p>请求参数（路径、查询、请求体）校验失败时，FastAPI 抛出 <code>RequestValidationError</code>。<code>exc.errors()</code> 里每一项包含 <code>type</code>、<code>loc</code>、<code>msg</code>、<code>input</code>，可能还有 <code>ctx</code>、<code>url</code>。处理器只挑出三个字段：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">exception_handler</span><span class="p">(</span><span class="n">RequestValidationError</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle_validation_error</span><span class="p">(</span><span class="n">_</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="n">RequestValidationError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONResponse</span><span class="p">:</span>
+    <span class="c1"># 只返回字段位置、原因和类型，不回显用户提交的原始值（可能含密码等敏感信息）</span>
+    <span class="n">details</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;loc&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="s2">&quot;loc&quot;</span><span class="p">]),</span> <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;msg&quot;</span><span class="p">],</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]}</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">exc</span><span class="o">.</span><span class="n">errors</span><span class="p">()</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">build_error_response</span><span class="p">(</span>
+        <span class="n">status</span><span class="o">.</span><span class="n">HTTP_422_UNPROCESSABLE_CONTENT</span><span class="p">,</span>
+        <span class="s2">&quot;validation_error&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;请求参数校验失败&quot;</span><span class="p">,</span>
+        <span class="n">details</span><span class="o">=</span><span class="n">details</span><span class="p">,</span>
+    <span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>示例</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>loc</code></td>
+<td><code>["path","item_id"]</code>、<code>["body","password"]</code></td>
+<td>出错字段的位置，前端可据此把错误标到对应输入框</td>
+</tr>
+<tr>
+<td><code>msg</code></td>
+<td><code>Input should be a valid integer, ...</code></td>
+<td>错误原因</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>int_parsing</code>、<code>string_too_short</code></td>
+<td>稳定的错误类型，可用来做前端本地化文案</td>
+</tr>
+<tr>
+<td>~~<code>input</code>~~</td>
+<td>~~<code>"123"</code>~~</td>
+<td>丢弃，避免回显密码</td>
+</tr>
+</tbody>
+</table>
+<p><code>loc</code> 原本是元组，<code>list()</code> 转一下，序列化结果一样，类型上更明确。</p>
+<h3 id="43-用状态码生成错误码">4.3. 用状态码生成错误码</h3>
+<p><code>StarletteHTTPException</code> 只有状态码和 <code>detail</code>，没有业务错误码。可以用标准库 <code>http.HTTPStatus</code> 的短语自动生成：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">http</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTTPStatus</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_code_from_status</span><span class="p">(</span><span class="n">status_code</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;404 -&gt; &quot;not_found&quot;，405 -&gt; &quot;method_not_allowed&quot;。&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HTTPStatus</span><span class="p">(</span><span class="n">status_code</span><span class="p">)</span><span class="o">.</span><span class="n">phrase</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;http_error&quot;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th><code>HTTPStatus(code).phrase</code></th>
+<th>生成的 code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td><code>bad_request</code></td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td><code>unauthorized</code></td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found</td>
+<td><code>not_found</code></td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed</td>
+<td><code>method_not_allowed</code></td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict</td>
+<td><code>conflict</code></td>
+</tr>
+<tr>
+<td>499（非标准）</td>
+<td>抛出 <code>ValueError</code></td>
+<td><code>http_error</code>（兜底）</td>
+</tr>
+</tbody>
+</table>
+<p>这样手动抛出的 <code>HTTPException(409)</code> 和 <code>ConflictError</code> 得到的错误码一致。422 和 500 不走这条路径：校验错误固定用 <code>validation_error</code>，未处理异常由中间件固定返回 <code>internal_error</code>（<code>HTTPStatus</code> 生成的会是 <code>unprocessable_entity</code> 和 <code>internal_server_error</code>）。</p>
+<h2 id="5-为什么不注册-exception_handlerexception">5. 为什么不注册 exception_handler(Exception)</h2>
+<p>很多教程会写一个"万能"处理器兜底所有异常：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">exception_handler</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle_all</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">JSONResponse</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;internal_error&quot;</span><span class="p">})</span>
+</code></pre></div>
+<p>本文不这样做，而是在请求中间件里兜底。原因要从中间件栈说起。</p>
+<h3 id="51-starlette-的中间件栈">5.1. Starlette 的中间件栈</h3>
+<p>FastAPI 构建应用时，按下面的顺序把各层包起来（外层先执行）：</p>
+<pre class="mermaid"><code>flowchart TB
+    Client([客户端 / uvicorn]) --&gt; SEM
+    SEM["ServerErrorMiddleware&lt;br/&gt;处理 Exception / 500 的处理器在这一层执行"] --&gt; RCM
+    RCM["用户中间件&lt;br/&gt;RequestContextMiddleware&lt;br/&gt;分配 request_id、注入响应头、兜底异常"] --&gt; EM
+    EM["ExceptionMiddleware&lt;br/&gt;AppError / HTTPException / RequestValidationError 处理器"] --&gt; R
+    R["路由 &amp; 路径操作函数"]</code></pre>
+<p>打印 <code>app.middleware_stack</code> 会输出：<code>ServerErrorMiddleware → ExceptionTelemetryMiddleware → 用户中间件 → ExceptionMiddleware → AsyncExitStackMiddleware → APIRouter</code>，中间两个是 FastAPI 内部的层，图中省略。</p>
+<p>关键点：<code>exception_handler(Exception)</code>（以及 <code>exception_handler(500)</code>）比较特殊，不放在 <code>ExceptionMiddleware</code> 里，而是交给<strong>最外层</strong>的 <code>ServerErrorMiddleware</code>。其他处理器（<code>AppError</code>、<code>HTTPException</code>、校验错误）都在 <code>ExceptionMiddleware</code> 里，位于用户中间件<strong>内侧</strong>。</p>
+<h3 id="52-带来的两个问题">5.2. 带来的两个问题</h3>
+<p><code>ServerErrorMiddleware</code> 的源码（Starlette 1.10，有删减）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="o">...</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">_send</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">run_in_threadpool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">debug_response</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">handler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_response</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>  <span class="c1"># 默认的纯文本 500</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">handler</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>  <span class="c1"># 注册的 Exception 处理器</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">response_started</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>  <span class="c1"># 用的是最外层的原始 send</span>
+
+        <span class="c1"># We always continue to raise the exception.</span>
+        <span class="k">raise</span> <span class="n">exc</span>
+</code></pre></div>
+<p><strong>问题一：响应里没有 X-Request-ID。</strong> 处理器生成的 500 响应用最外层的 <code>send</code> 发出，不经过用户中间件包装过的 <code>send</code>，自然不会被注入 <code>X-Request-ID</code>。而且此时用户中间件的 <code>with bound_contextvars(...)</code> 已经退出，<code>build_error_response</code> 从上下文变量里取到的 <code>request_id</code> 也是 <code>None</code>。用一个只注入响应头、不兜底的中间件请求，结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>请求</th>
+<th>状态码</th>
+<th><code>X-Request-ID</code> 头</th>
+<th>响应体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正常的 <code>GET /ok</code></td>
+<td>200</td>
+<td><code>rid-1</code></td>
+<td>-</td>
+</tr>
+<tr>
+<td>抛 <code>RuntimeError</code> 的 <code>GET /boom</code></td>
+<td>500</td>
+<td>无</td>
+<td><code>{"code":"internal_error",...,"request_id":null,...}</code></td>
+</tr>
+</tbody>
+</table>
+<p>最需要 request_id 去查日志的 500 错误，偏偏拿不到它。</p>
+<p><strong>问题二：异常还会继续抛出。</strong> 源码最后的 <code>raise exc</code> 让异常继续传给服务器，uvicorn 收到后会再打印一遍 <code>Exception in ASGI application</code> 和堆栈。如果自己的处理器里已经记录过日志，同一个错误就会出现两份堆栈。</p>
+<h3 id="53-改为在中间件里兜底">5.3. 改为在中间件里兜底</h3>
+<p>既然用户中间件位于 <code>ServerErrorMiddleware</code> 内侧、<code>ExceptionMiddleware</code> 外侧，那么：</p>
+<ul>
+<li><code>AppError</code>、<code>HTTPException</code>、校验错误在内层就被处理器转成了响应，不会到达中间件；</li>
+<li>只有真正"没人处理"的异常会从内层冒出来，正好由中间件捕获；</li>
+<li>中间件里生成的 500 响应用的是包装过的 <code>send</code>，同样会注入 <code>X-Request-ID</code>；</li>
+<li>中间件吞掉异常、不再往外抛，<code>ServerErrorMiddleware</code> 和 uvicorn 都感知不到，堆栈只由中间件记录一次。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>兜底位置</th>
+<th>X-Request-ID 头</th>
+<th>响应体 request_id</th>
+<th>堆栈打印次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>exception_handler(Exception)</code></td>
+<td>无</td>
+<td><code>null</code></td>
+<td>自己记录 + uvicorn 再打印</td>
+</tr>
+<tr>
+<td><code>RequestContextMiddleware</code></td>
+<td>有</td>
+<td>与响应头一致</td>
+<td>一次（<code>unhandled_exception</code> 日志）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-纯-asgi-请求上下文中间件">6. 纯 ASGI 请求上下文中间件</h2>
+<h3 id="61-为什么不用-basehttpmiddleware">6.1. 为什么不用 BaseHTTPMiddleware</h3>
+<p>Starlette 提供了写起来更简单的 <code>BaseHTTPMiddleware</code>（FastAPI 的 <code>@app.middleware("http")</code> 也基于它）：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">middleware</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">add_request_id</span><span class="p">(</span><span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">call_next</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">call_next</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;X-Request-ID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;...&quot;</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div>
+<p>本文没有用它，原因如下：</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>BaseHTTPMiddleware</th>
+<th>纯 ASGI 中间件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>写法</td>
+<td><code>dispatch(request, call_next)</code>，拿到完整的 <code>Response</code> 对象</td>
+<td><code>__call__(scope, receive, send)</code>，处理原始 ASGI 消息</td>
+</tr>
+<tr>
+<td>流式响应（SSE）</td>
+<td>支持不好；LLM 应用等场景常用 SSE 推送模型输出</td>
+<td>只转发消息，不影响流式输出</td>
+</tr>
+<tr>
+<td>contextvars</td>
+<td>有已知的传递问题：<code>call_next</code> 在单独的任务里运行下游应用，下游对上下文变量的修改传不回中间件</td>
+<td>直接 <code>await self.app(...)</code>，下游与中间件在同一个任务里</td>
+</tr>
+<tr>
+<td>代码量</td>
+<td>少</td>
+<td>稍多，需要理解 ASGI 消息</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-asgi-中间件的接口">6.2. ASGI 中间件的接口</h3>
+<p>一个 ASGI 应用就是一个异步可调用对象，签名是 <code>(scope, receive, send)</code>。中间件把下一层 <code>app</code> 包起来，自己也实现同样的签名：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">starlette.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ASGIApp</span><span class="p">,</span> <span class="n">Message</span><span class="p">,</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">Send</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RequestContextMiddleware</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">:</span> <span class="n">ASGIApp</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;http&quot;</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="o">...</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scope</code></td>
+<td>连接信息字典：<code>type</code>（<code>http</code> / <code>websocket</code> / <code>lifespan</code>）、<code>method</code>、<code>path</code>、<code>headers</code> 等</td>
+</tr>
+<tr>
+<td><code>receive</code></td>
+<td>读取请求消息（请求体）的协程函数</td>
+</tr>
+<tr>
+<td><code>send</code></td>
+<td>发送响应消息的协程函数</td>
+</tr>
+</tbody>
+</table>
+<p><code>scope["type"]</code> 不是 <code>http</code> 时（<code>lifespan</code> 启停事件、<code>websocket</code> 连接）直接放行，否则后面读 <code>scope["method"]</code> 会出错。</p>
+<h3 id="63-包装-send注入-x-request-id">6.3. 包装 send，注入 X-Request-ID</h3>
+<p>一个 HTTP 响应由多条消息组成：先是一条 <code>http.response.start</code>（含状态码和响应头），然后是一条或多条 <code>http.response.body</code>。中间件不改响应体，只需拦截第一条：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">send_with_request_id</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">nonlocal</span> <span class="n">status_code</span><span class="p">,</span> <span class="n">response_started</span>
+    <span class="k">if</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;http.response.start&quot;</span><span class="p">:</span>
+        <span class="n">response_started</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">status_code</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span>
+        <span class="n">MutableHeaders</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="n">message</span><span class="p">)[</span><span class="n">REQUEST_ID_HEADER</span><span class="p">]</span> <span class="o">=</span> <span class="n">request_id</span>
+    <span class="k">await</span> <span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><code>status_code</code>：记下来给访问日志用；</li>
+<li><code>response_started</code>：记录响应头是否已经发出，兜底异常时要判断；</li>
+<li><code>MutableHeaders(scope=message)</code>：Starlette 的工具类，直接修改 <code>message["headers"]</code> 这个字节元组列表，不用自己拼 <code>(b"x-request-id", b"...")</code>。</li>
+</ul>
+<p>流式响应会发出很多条 <code>http.response.body</code>，中间件只是原样转发，不会把它们缓冲起来。</p>
+<h3 id="64-兜底未处理异常">6.4. 兜底未处理异常</h3>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">structlog</span><span class="o">.</span><span class="n">contextvars</span><span class="o">.</span><span class="n">bound_contextvars</span><span class="p">(</span><span class="n">request_id</span><span class="o">=</span><span class="n">request_id</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send_with_request_id</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;unhandled_exception&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response_started</span><span class="p">:</span>
+            <span class="k">raise</span>  <span class="c1"># 响应已开始发送，无法再改成 500，交给服务器断开连接</span>
+        <span class="c1"># 不把异常细节返回给调用方，细节只记在日志里</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">build_error_response</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="s2">&quot;internal_error&quot;</span><span class="p">,</span> <span class="s2">&quot;服务器内部错误&quot;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">response</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send_with_request_id</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="o">...</span>  <span class="c1"># 访问日志，见第 8 节</span>
+</code></pre></div>
+<pre class="mermaid"><code>flowchart TB
+    A[内层抛出未处理异常] --&gt; B["log.exception('unhandled_exception')&lt;br/&gt;记录完整堆栈，自动带 request_id"]
+    B --&gt; C{响应头已经发出？}
+    C -- 否 --&gt; D["返回 500 internal_error&lt;br/&gt;message 固定为'服务器内部错误'"]
+    C -- 是 --&gt; E["raise&lt;br/&gt;交给服务器断开连接"]</code></pre>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>处理</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>响应还没开始发送</td>
+<td>返回 500 <code>internal_error</code></td>
+<td>状态码还能改；响应体只给固定文案，异常信息（可能含 SQL、路径、密钥）只写日志</td>
+</tr>
+<tr>
+<td>响应已开始发送（如 SSE 推到一半）</td>
+<td><code>raise</code></td>
+<td>状态码和部分内容已经发给客户端，没法再改成 500，只能让服务器断开连接，客户端能感知到响应不完整</td>
+</tr>
+</tbody>
+</table>
+<p><code>log.exception</code> 等价于 <code>log.error(..., exc_info=True)</code>，会把堆栈一起输出。生产环境下 <code>core/logging.py</code> 用 <code>ExceptionDictTransformer(show_locals=False)</code> 把堆栈转成 JSON，且不输出局部变量，避免密码、token 写进日志。</p>
+<h2 id="7-request_id-的生成与传递">7. request_id 的生成与传递</h2>
+<h3 id="71-优先沿用上游校验后再用">7.1. 优先沿用上游，校验后再用</h3>
+<div class="highlight"><pre><span></span><code><span class="n">REQUEST_ID_HEADER</span> <span class="o">=</span> <span class="s2">&quot;X-Request-ID&quot;</span>
+<span class="c1"># 只接受安全字符，防止调用方通过请求头往日志里注入换行等内容</span>
+<span class="n">_VALID_REQUEST_ID</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[A-Za-z0-9._-]{1,64}&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_or_create_request_id</span><span class="p">(</span><span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;优先沿用上游（网关、前端）传来的 X-Request-ID，便于跨服务追踪。&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;headers&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">&quot;x-request-id&quot;</span><span class="p">:</span>
+            <span class="n">candidate</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_VALID_REQUEST_ID</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">candidate</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">candidate</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>细节</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>沿用上游</td>
+<td>网关或前端已经生成了 ID 时，后端沿用同一个，一次调用链路上所有服务的日志可以用同一个 ID 串起来</td>
+</tr>
+<tr>
+<td><code>b"x-request-id"</code></td>
+<td>ASGI 规范里 <code>scope["headers"]</code> 的名字是小写字节串，直接比较即可</td>
+</tr>
+<tr>
+<td><code>latin-1</code> 解码</td>
+<td>HTTP 头按字节传输，<code>latin-1</code> 能把任意字节一对一解码，不会抛异常</td>
+</tr>
+<tr>
+<td><code>fullmatch</code></td>
+<td>必须整个字符串匹配；用 <code>match</code> 或 <code>search</code> 时，<code>abc\n伪造的日志行</code> 前半段合法就会被放过</td>
+</tr>
+<tr>
+<td>字符集与长度</td>
+<td>只允许字母、数字和 <code>. _ -</code>，最长 64；挡住换行（伪造日志行）、超长值（撑爆日志）</td>
+</tr>
+<tr>
+<td>不合法就丢弃</td>
+<td>不报错，直接生成新的 <code>uuid4().hex</code>（32 位十六进制，不带连字符）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-绑定到上下文变量">7.2. 绑定到上下文变量</h3>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">structlog</span><span class="o">.</span><span class="n">contextvars</span><span class="o">.</span><span class="n">bound_contextvars</span><span class="p">(</span><span class="n">request_id</span><span class="o">=</span><span class="n">request_id</span><span class="p">):</span>
+    <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send_with_request_id</span><span class="p">)</span>
+</code></pre></div>
+<p><code>bound_contextvars</code> 把 <code>request_id</code> 放进 <code>contextvars</code>，<code>with</code> 退出时自动恢复。配合 <code>core/logging.py</code> 处理链里的 <code>merge_contextvars</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="n">shared_processors</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Processor</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">structlog</span><span class="o">.</span><span class="n">contextvars</span><span class="o">.</span><span class="n">merge_contextvars</span><span class="p">,</span>  <span class="c1"># 合并上下文变量，如request_id</span>
+    <span class="o">...</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>这个请求内任何地方打印的日志（service、repository、甚至通过标准库 logging 输出的第三方库日志）都会自动带上 <code>request_id</code>，业务代码不用层层传参。<code>contextvars</code> 是按异步任务隔离的，并发请求之间互不干扰。</p>
+<h3 id="73-响应头与响应体一致">7.3. 响应头与响应体一致</h3>
+<p><code>build_error_response</code> 也从上下文变量里取 <code>request_id</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="n">request_id</span><span class="o">=</span><span class="n">structlog</span><span class="o">.</span><span class="n">contextvars</span><span class="o">.</span><span class="n">get_contextvars</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;request_id&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><code>ExceptionMiddleware</code> 里的处理器和中间件兜底的 500 都在 <code>with</code> 块内执行，取到的值和注入响应头的是同一个。可以用测试断言这一点：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_unknown_route_uses_unified_error_format</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/not-exist&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">body</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;not_found&quot;</span>
+    <span class="k">assert</span> <span class="n">body</span><span class="p">[</span><span class="s2">&quot;request_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;x-request-id&quot;</span><span class="p">]</span>
+</code></pre></div>
+<h2 id="8-访问日志">8. 访问日志</h2>
+<h3 id="81-在-finally-中记录">8.1. 在 finally 中记录</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 探针每隔几秒请求一次，记录访问日志只会刷屏</span>
+<span class="n">_SKIP_ACCESS_LOG_PATHS</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="s2">&quot;/healthz&quot;</span><span class="p">,</span> <span class="s2">&quot;/readyz&quot;</span><span class="p">})</span>
+
+<span class="o">...</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="o">...</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_SKIP_ACCESS_LOG_PATHS</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;http_request&quot;</span><span class="p">,</span>
+                <span class="n">method</span><span class="o">=</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;method&quot;</span><span class="p">],</span>
+                <span class="n">path</span><span class="o">=</span><span class="n">scope</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">],</span>
+                <span class="n">status</span><span class="o">=</span><span class="n">status_code</span><span class="p">,</span>
+                <span class="n">duration_ms</span><span class="o">=</span><span class="nb">round</span><span class="p">((</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>来源</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>method</code>、<code>path</code></td>
+<td><code>scope</code></td>
+<td>请求方法和路径，<code>scope["path"]</code> 不含查询字符串</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>包装的 <code>send</code> 里记录的 <code>message["status"]</code></td>
+<td>初始值为 500：响应头没能发出时，日志里记为 500</td>
+</tr>
+<tr>
+<td><code>duration_ms</code></td>
+<td><code>time.perf_counter()</code> 差值</td>
+<td><code>perf_counter</code> 是单调时钟，不受系统时间调整影响，适合测耗时</td>
+</tr>
+<tr>
+<td><code>request_id</code></td>
+<td>上下文变量</td>
+<td><code>finally</code> 仍在 <code>with</code> 块内，自动带上</td>
+</tr>
+</tbody>
+</table>
+<p>放在 <code>finally</code> 里，正常返回、业务异常、未处理异常三种情况都会记录一条。开发环境下的输出：</p>
+<div class="highlight"><pre><span></span><code>[info     ] http_request   [my_service.core.middleware] duration_ms=1.61 method=GET path=/demo/items/1 request_id=ac73d1a0dc524ad4bf84b7afc684bd13 status=200
+</code></pre></div>
+<h3 id="82-禁用-uvicorn-自带的访问日志">8.2. 禁用 uvicorn 自带的访问日志</h3>
+<p>uvicorn 默认也会打印一行访问日志，但它没有 request_id 和耗时。保留它会让每个请求出现两条访问日志，所以在 <code>setup_logging</code> 里关掉：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 访问日志改由 RequestContextMiddleware 输出（带 request_id 和耗时），</span>
+<span class="c1"># 关掉 uvicorn 自带的，避免重复</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;uvicorn.access&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+<h2 id="9-注册与验证">9. 注册与验证</h2>
+<h3 id="91-在-create_app-中注册">9.1. 在 create_app 中注册</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_app</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">FastAPI</span><span class="p">:</span>
+    <span class="n">settings</span> <span class="o">=</span> <span class="n">get_settings</span><span class="p">()</span>
+    <span class="n">setup_logging</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+    <span class="n">register_exception_handlers</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">RequestContextMiddleware</span><span class="p">)</span>
+
+    <span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">health</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">api_router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/api/v1&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">app</span>
+</code></pre></div>
+<p><code>register_exception_handlers</code> 把三个处理器挂到 <code>app</code> 上；<code>add_middleware</code> 只是登记，真正的中间件栈在第一次请求时才构建，位置固定在 <code>ServerErrorMiddleware</code> 和 <code>ExceptionMiddleware</code> 之间，与调用顺序无关。</p>
+<h3 id="92-演示脚本">9.2. 演示脚本</h3>
+<p>在 <code>create_app()</code> 返回的应用上临时加两个演示路由，用 <code>TestClient</code> 请求：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.core.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">NotFoundError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_service.main</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_app</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">create_app</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/demo/items/</span><span class="si">{item_id}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">item</span><span class="p">(</span><span class="n">item_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">item_id</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">NotFoundError</span><span class="p">(</span><span class="s2">&quot;物品不存在&quot;</span><span class="p">,</span> <span class="n">details</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;item_id&quot;</span><span class="p">:</span> <span class="n">item_id</span><span class="p">})</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">item_id</span><span class="p">}</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/demo/boom&quot;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">boom</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;secret internal detail&quot;</span><span class="p">)</span>
+
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">raise_server_exceptions</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/demo/items/1&quot;</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/demo/items/0&quot;</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/demo/items/abc&quot;</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/demo/boom&quot;</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/not-exist&quot;</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/healthz&quot;</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/healthz&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;X-Request-ID&quot;</span><span class="p">:</span> <span class="s2">&quot;from-gateway-123&quot;</span><span class="p">}),</span>
+    <span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/healthz&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;X-Request-ID&quot;</span><span class="p">:</span> <span class="s2">&quot;bad</span><span class="se">\n</span><span class="s2">value&quot;</span><span class="p">}),</span>
+<span class="p">]:</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;x-request-id&quot;</span><span class="p">),</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>
+<p>没有进入 <code>with TestClient(...)</code>，所以不会触发 lifespan、不连数据库，上面这些路由也都用不到数据库。</p>
+<h3 id="93-演示结果">9.3. 演示结果</h3>
+<table>
+<thead>
+<tr>
+<th>请求</th>
+<th>状态码</th>
+<th>响应</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /demo/items/1</code></td>
+<td>200</td>
+<td><code>{"id":1}</code></td>
+<td>正常请求，响应头也有 32 位 <code>X-Request-ID</code></td>
+</tr>
+<tr>
+<td><code>GET /demo/items/0</code></td>
+<td>404</td>
+<td><code>{"code":"not_found","message":"物品不存在","request_id":"263a...","details":{"item_id":0}}</code></td>
+<td>业务异常 <code>NotFoundError</code></td>
+</tr>
+<tr>
+<td><code>GET /demo/items/abc</code></td>
+<td>422</td>
+<td><code>{"code":"validation_error","message":"请求参数校验失败",...,"details":[{"loc":["path","item_id"],"msg":"Input should be a valid integer, unable to parse string as an integer","type":"int_parsing"}]}</code></td>
+<td>没有 <code>input</code> 字段</td>
+</tr>
+<tr>
+<td><code>GET /demo/boom</code></td>
+<td>500</td>
+<td><code>{"code":"internal_error","message":"服务器内部错误","request_id":"28ad...","details":null}</code></td>
+<td>不含 <code>secret internal detail</code></td>
+</tr>
+<tr>
+<td><code>GET /not-exist</code></td>
+<td>404</td>
+<td><code>{"code":"not_found","message":"Not Found",...}</code></td>
+<td>框架的路由不存在</td>
+</tr>
+<tr>
+<td><code>POST /healthz</code></td>
+<td>405</td>
+<td><code>{"code":"method_not_allowed","message":"Method Not Allowed",...}</code></td>
+<td>框架的方法不允许</td>
+</tr>
+<tr>
+<td><code>GET /healthz</code> + <code>X-Request-ID: from-gateway-123</code></td>
+<td>200</td>
+<td>响应头 <code>X-Request-ID: from-gateway-123</code></td>
+<td>上游 ID 原样返回</td>
+</tr>
+<tr>
+<td><code>GET /healthz</code> + <code>X-Request-ID: bad\nvalue</code></td>
+<td>200</td>
+<td>响应头是新生成的 32 位 ID</td>
+<td>含换行，被丢弃</td>
+</tr>
+</tbody>
+</table>
+<p>所有错误响应体里的 <code>request_id</code> 都和响应头相同。<code>/demo/boom</code> 那次请求在日志里留下一条带堆栈的错误记录，<code>request_id</code> 与响应相同：</p>
+<div class="highlight"><pre><span></span><code>[error    ] unhandled_exception            [my_service.core.middleware] request_id=eb83ed604d574a03928868ae92718864
+（下面是完整堆栈，开发环境由 ConsoleRenderer 渲染成彩色表格，此处省略）
+</code></pre></div>
+<h3 id="94-raise_server_exceptions-参数">9.4. raise_server_exceptions 参数</h3>
+<p><code>TestClient</code> 默认 <code>raise_server_exceptions=True</code>：异常一路传到 <code>ServerErrorMiddleware</code> 后被重新抛出（见 5.2 节的 <code>raise exc</code>），<code>TestClient</code> 会把它抛进测试代码，拿不到 500 响应。</p>
+<table>
+<thead>
+<tr>
+<th>应用</th>
+<th><code>TestClient(app)</code></th>
+<th><code>TestClient(app, raise_server_exceptions=False)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>默认 <code>FastAPI()</code>，路由抛 <code>RuntimeError</code></td>
+<td>测试代码里抛出 <code>RuntimeError</code></td>
+<td>得到 500 纯文本响应</td>
+</tr>
+<tr>
+<td>注册了 <code>exception_handler(Exception)</code></td>
+<td>处理器执行后仍抛出 <code>RuntimeError</code></td>
+<td>得到处理器返回的 500</td>
+</tr>
+<tr>
+<td>本文的写法（中间件兜底）</td>
+<td>得到 500 <code>internal_error</code></td>
+<td>得到 500 <code>internal_error</code></td>
+</tr>
+</tbody>
+</table>
+<p>本文的中间件吞掉了异常，所以两种写法都能拿到响应。演示脚本仍然加上这个参数，即使兜底逻辑出了问题，脚本也能打印出响应而不是在半路中断。用 <code>httpx.ASGITransport</code> 写的 pytest 测试里，<code>test_unhandled_exception_returns_500_without_details</code> 能直接断言 500，也说明异常没有传出中间件：</p>
+<div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_unhandled_exception_returns_500_without_details</span><span class="p">(</span>
+    <span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">AsyncClient</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/boom&quot;</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">boom</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;secret internal detail&quot;</span><span class="p">)</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/boom&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">500</span>
+    <span class="k">assert</span> <span class="n">resp</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;internal_error&quot;</span>
+    <span class="k">assert</span> <span class="s2">&quot;secret internal detail&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">text</span>
+</code></pre></div>
+<h2 id="10-小结">10. 小结</h2>
+<table>
+<thead>
+<tr>
+<th>要点</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>统一格式</td>
+<td>所有错误都是 <code>ErrorResponse</code>：<code>code</code> 给程序分支、<code>message</code> 给人看、<code>request_id</code> 查日志、<code>details</code> 放补充信息</td>
+</tr>
+<tr>
+<td>业务异常</td>
+<td><code>AppError</code> 基类用类属性声明 <code>status_code</code>、<code>code</code>、<code>headers</code>（可变的用 <code>ClassVar</code>），子类只覆盖类属性；service 层只 <code>raise</code></td>
+</tr>
+<tr>
+<td>框架异常</td>
+<td>处理器注册在 <code>starlette.exceptions.HTTPException</code> 上，才能接住路由层的 404/405；错误码用 <code>HTTPStatus(code).phrase</code> 生成，未知状态码兜底 <code>http_error</code></td>
+</tr>
+<tr>
+<td>校验错误</td>
+<td>只返回 <code>loc</code>/<code>msg</code>/<code>type</code>，丢弃 <code>input</code>，避免回显密码</td>
+</tr>
+<tr>
+<td>未处理异常</td>
+<td>不注册 <code>exception_handler(Exception)</code>（它在最外层执行，响应不经过用户中间件，异常还会继续抛出）；在请求中间件里 <code>log.exception</code> 后返回 500，响应已开始发送时只能 <code>raise</code></td>
+</tr>
+<tr>
+<td>中间件</td>
+<td>纯 ASGI 写法，非 http 直接放行；包装 <code>send</code> 拦截 <code>http.response.start</code>，用 <code>MutableHeaders</code> 注入 <code>X-Request-ID</code>；对 SSE 等流式响应友好</td>
+</tr>
+<tr>
+<td>request_id</td>
+<td>优先沿用上游，<code>fullmatch</code> 校验 <code>[A-Za-z0-9._-]{1,64}</code> 防日志注入，否则 <code>uuid4().hex</code>；<code>bound_contextvars</code> 绑定后本请求所有日志自动带上</td>
+</tr>
+<tr>
+<td>访问日志</td>
+<td><code>finally</code> 中记录 <code>method</code>/<code>path</code>/<code>status</code>/<code>duration_ms</code>，跳过健康检查探针，禁用 <code>uvicorn.access</code> 避免重复</td>
+</tr>
+</tbody>
+</table>
+<p>和 Gin 相比，FastAPI 没有现成的 <code>Recovery()</code> 和请求 ID 中间件，需要自己组合异常处理器和 ASGI 中间件。弄清 Starlette 中间件栈里各层的位置，就能判断每种异常该在哪一层处理。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.path", "navigation.prune", "toc.follow", "navigation.top", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
